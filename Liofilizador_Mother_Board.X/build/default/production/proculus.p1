@@ -1,0 +1,1494 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"225 ./global.h
+[s S1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
+"250
+[s S3 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S3 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work ]
+"248
+[u S2 `uc 1 `S3 1 ]
+[n S2 . bits . ]
+"270
+[s S4 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S4 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico ]
+"286
+[s S5 :1 `uc 1 ]
+[n S5 . flag_main_loop_WDT ]
+"291
+[s S6 `ui 1 `uc 1 `uc 1 `uc 1 ]
+[n S6 . milisegundo segundo minuto hora ]
+[v F2574 `(v ~T0 @X0 1 tf1`ul ]
+"187 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18.h
+[v __delay `JF2574 ~T0 @X0 0 e ]
+[p i __delay ]
+"38 ./usart.h
+[v _USART_put_int `(v ~T0 @X0 0 ef1`ui ]
+"37
+[v _USART_putc `(v ~T0 @X0 0 ef1`uc ]
+"19 ./timedate.h
+[v _my_delay_ms `(v ~T0 @X0 0 ef1`l ]
+"2057 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
+[s S84 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S84 . TRISD0 TRISD1 TRISD2 TRISD3 TRISD4 TRISD5 TRISD6 TRISD7 ]
+"2067
+[s S85 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S85 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
+"2056
+[u S83 `S84 1 `S85 1 ]
+[n S83 . . . ]
+"2078
+[v _TRISDbits `VS83 ~T0 @X0 0 e@3989 ]
+"541
+[s S35 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S35 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
+"551
+[s S36 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S36 . PSP0 PSP1 PSP2 PSP3 PSP4 PSP5 PSP6 PSP7 ]
+"561
+[s S37 :5 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S37 . . P1B P1C P1D ]
+"567
+[s S38 :7 `uc 1 :1 `uc 1 ]
+[n S38 . . SS2 ]
+"540
+[u S34 `S35 1 `S36 1 `S37 1 `S38 1 ]
+[n S34 . . . . . ]
+"572
+[v _PORTDbits `VS34 ~T0 @X0 0 e@3971 ]
+"11 proculus.c
+[v _usart_buffer `Vuc ~T0 @X0 -> 0 `x e ]
+"72 ./proculus.h
+[s S7 `ui 1 `uc 1 `uc 1 `ui 1 `uc 1 `ui -> 15 `i `uc 1 `uc 1 `uc 1 ]
+[n S7 . header size function vp length dado page button status ]
+"44 ./usart.h
+[v _USART_input_buffer `(uc ~T0 @X0 0 ef ]
+"5 ./util.h
+[v _bcd2str `(v ~T0 @X0 0 ef2`uc`*uc ]
+"33 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h
+[v _strcpy `(*uc ~T0 @X0 0 ef2`*uc`*Cuc ]
+"36
+[v _strcat `(*uc ~T0 @X0 0 ef2`*uc`*Cuc ]
+"6 ./util.h
+[v _str2bcd `(uc ~T0 @X0 0 ef1`*uc ]
+"54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h
+[v _strlen `(ui ~T0 @X0 0 ef1`*Cuc ]
+"8 ./util.h
+[v _my_pow `(i ~T0 @X0 0 ef2`i`i ]
+"20 ./global.h
+[p x OSC = INTIO67 ]
+"21
+[p x FCMEN = OFF ]
+"22
+[p x IESO = OFF ]
+"25
+[p x PWRT = ON ]
+"26
+[p x BOREN = SBORDIS ]
+"27
+[p x BORV = 3 ]
+"30
+[p x WDT = ON ]
+"31
+[p x WDTPS = 16384 ]
+"34
+[p x CCP2MX = PORTC ]
+"35
+[p x PBADEN = ON ]
+"36
+[p x LPT1OSC = OFF ]
+"37
+[p x MCLRE = ON ]
+"40
+[p x STVREN = ON ]
+"41
+[p x LVP = OFF ]
+"42
+[p x XINST = OFF ]
+"45
+[p x CP0 = OFF ]
+"46
+[p x CP1 = OFF ]
+"47
+[p x CP2 = OFF ]
+"48
+[p x CP3 = OFF ]
+"51
+[p x CPB = OFF ]
+"52
+[p x CPD = OFF ]
+"55
+[p x WRT0 = OFF ]
+"56
+[p x WRT1 = OFF ]
+"57
+[p x WRT2 = OFF ]
+"58
+[p x WRT3 = OFF ]
+"61
+[p x WRTC = OFF ]
+"62
+[p x WRTB = OFF ]
+"63
+[p x WRTD = OFF ]
+"66
+[p x EBTR0 = OFF ]
+"67
+[p x EBTR1 = OFF ]
+"68
+[p x EBTR2 = OFF ]
+"69
+[p x EBTR3 = OFF ]
+"72
+[p x EBTRB = OFF ]
+"234
+[v _statusgen `S1 ~T0 @X0 1 e ]
+"259
+[v _statuspower `S2 ~T0 @X0 1 e ]
+"277
+[v _statusgen1 `S4 ~T0 @X0 1 e ]
+"288
+[v _statusWDT `S5 ~T0 @X0 1 e ]
+"298
+[v _rtc `VS6 ~T0 @X0 1 e ]
+"56 ./proculus.h
+[v _TrendColor `Ci ~T0 @X0 -> 13 `i e ]
+[i _TrendColor
+:U ..
+-> 0 `i
+-> 14823 `i
+-> 27501 `i
+-> 30720 `i
+-> -> 39459 `ui `i
+-> -> 63488 `ui `i
+-> -> 64480 `ui `i
+-> -> 64503 `ui `i
+-> -> 54592 `ui `i
+-> 992 `i
+-> 2016 `i
+-> 2047 `i
+-> -> 63519 `ui `i
+..
+]
+"54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
+[; <" PORTA equ 0F80h ;# ">
+"191
+[; <" PORTB equ 0F81h ;# ">
+"362
+[; <" PORTC equ 0F82h ;# ">
+"537
+[; <" PORTD equ 0F83h ;# ">
+"679
+[; <" PORTE equ 0F84h ;# ">
+"882
+[; <" LATA equ 0F89h ;# ">
+"994
+[; <" LATB equ 0F8Ah ;# ">
+"1106
+[; <" LATC equ 0F8Bh ;# ">
+"1218
+[; <" LATD equ 0F8Ch ;# ">
+"1330
+[; <" LATE equ 0F8Dh ;# ">
+"1382
+[; <" TRISA equ 0F92h ;# ">
+"1387
+[; <" DDRA equ 0F92h ;# ">
+"1604
+[; <" TRISB equ 0F93h ;# ">
+"1609
+[; <" DDRB equ 0F93h ;# ">
+"1826
+[; <" TRISC equ 0F94h ;# ">
+"1831
+[; <" DDRC equ 0F94h ;# ">
+"2048
+[; <" TRISD equ 0F95h ;# ">
+"2053
+[; <" DDRD equ 0F95h ;# ">
+"2270
+[; <" TRISE equ 0F96h ;# ">
+"2275
+[; <" DDRE equ 0F96h ;# ">
+"2434
+[; <" OSCTUNE equ 0F9Bh ;# ">
+"2499
+[; <" PIE1 equ 0F9Dh ;# ">
+"2576
+[; <" PIR1 equ 0F9Eh ;# ">
+"2653
+[; <" IPR1 equ 0F9Fh ;# ">
+"2730
+[; <" PIE2 equ 0FA0h ;# ">
+"2796
+[; <" PIR2 equ 0FA1h ;# ">
+"2862
+[; <" IPR2 equ 0FA2h ;# ">
+"2928
+[; <" EECON1 equ 0FA6h ;# ">
+"2994
+[; <" EECON2 equ 0FA7h ;# ">
+"3001
+[; <" EEDATA equ 0FA8h ;# ">
+"3008
+[; <" EEADR equ 0FA9h ;# ">
+"3015
+[; <" EEADRH equ 0FAAh ;# ">
+"3022
+[; <" RCSTA equ 0FABh ;# ">
+"3027
+[; <" RCSTA1 equ 0FABh ;# ">
+"3232
+[; <" TXSTA equ 0FACh ;# ">
+"3237
+[; <" TXSTA1 equ 0FACh ;# ">
+"3488
+[; <" TXREG equ 0FADh ;# ">
+"3493
+[; <" TXREG1 equ 0FADh ;# ">
+"3500
+[; <" RCREG equ 0FAEh ;# ">
+"3505
+[; <" RCREG1 equ 0FAEh ;# ">
+"3512
+[; <" SPBRG equ 0FAFh ;# ">
+"3517
+[; <" SPBRG1 equ 0FAFh ;# ">
+"3524
+[; <" SPBRGH equ 0FB0h ;# ">
+"3531
+[; <" T3CON equ 0FB1h ;# ">
+"3643
+[; <" TMR3 equ 0FB2h ;# ">
+"3650
+[; <" TMR3L equ 0FB2h ;# ">
+"3657
+[; <" TMR3H equ 0FB3h ;# ">
+"3664
+[; <" CMCON equ 0FB4h ;# ">
+"3754
+[; <" CVRCON equ 0FB5h ;# ">
+"3833
+[; <" ECCP1AS equ 0FB6h ;# ">
+"3915
+[; <" PWM1CON equ 0FB7h ;# ">
+"3985
+[; <" BAUDCON equ 0FB8h ;# ">
+"3990
+[; <" BAUDCTL equ 0FB8h ;# ">
+"4157
+[; <" CCP2CON equ 0FBAh ;# ">
+"4236
+[; <" CCPR2 equ 0FBBh ;# ">
+"4243
+[; <" CCPR2L equ 0FBBh ;# ">
+"4250
+[; <" CCPR2H equ 0FBCh ;# ">
+"4257
+[; <" CCP1CON equ 0FBDh ;# ">
+"4354
+[; <" CCPR1 equ 0FBEh ;# ">
+"4361
+[; <" CCPR1L equ 0FBEh ;# ">
+"4368
+[; <" CCPR1H equ 0FBFh ;# ">
+"4375
+[; <" ADCON2 equ 0FC0h ;# ">
+"4446
+[; <" ADCON1 equ 0FC1h ;# ">
+"4531
+[; <" ADCON0 equ 0FC2h ;# ">
+"4650
+[; <" ADRES equ 0FC3h ;# ">
+"4657
+[; <" ADRESL equ 0FC3h ;# ">
+"4664
+[; <" ADRESH equ 0FC4h ;# ">
+"4671
+[; <" SSPCON2 equ 0FC5h ;# ">
+"4733
+[; <" SSPCON1 equ 0FC6h ;# ">
+"4803
+[; <" SSPSTAT equ 0FC7h ;# ">
+"5024
+[; <" SSPADD equ 0FC8h ;# ">
+"5031
+[; <" SSPBUF equ 0FC9h ;# ">
+"5038
+[; <" T2CON equ 0FCAh ;# ">
+"5109
+[; <" PR2 equ 0FCBh ;# ">
+"5114
+[; <" MEMCON equ 0FCBh ;# ">
+"5219
+[; <" TMR2 equ 0FCCh ;# ">
+"5226
+[; <" T1CON equ 0FCDh ;# ">
+"5329
+[; <" TMR1 equ 0FCEh ;# ">
+"5336
+[; <" TMR1L equ 0FCEh ;# ">
+"5343
+[; <" TMR1H equ 0FCFh ;# ">
+"5350
+[; <" RCON equ 0FD0h ;# ">
+"5483
+[; <" WDTCON equ 0FD1h ;# ">
+"5511
+[; <" HLVDCON equ 0FD2h ;# ">
+"5516
+[; <" LVDCON equ 0FD2h ;# ">
+"5781
+[; <" OSCCON equ 0FD3h ;# ">
+"5858
+[; <" T0CON equ 0FD5h ;# ">
+"5935
+[; <" TMR0 equ 0FD6h ;# ">
+"5942
+[; <" TMR0L equ 0FD6h ;# ">
+"5949
+[; <" TMR0H equ 0FD7h ;# ">
+"5956
+[; <" STATUS equ 0FD8h ;# ">
+"6027
+[; <" FSR2 equ 0FD9h ;# ">
+"6034
+[; <" FSR2L equ 0FD9h ;# ">
+"6041
+[; <" FSR2H equ 0FDAh ;# ">
+"6048
+[; <" PLUSW2 equ 0FDBh ;# ">
+"6055
+[; <" PREINC2 equ 0FDCh ;# ">
+"6062
+[; <" POSTDEC2 equ 0FDDh ;# ">
+"6069
+[; <" POSTINC2 equ 0FDEh ;# ">
+"6076
+[; <" INDF2 equ 0FDFh ;# ">
+"6083
+[; <" BSR equ 0FE0h ;# ">
+"6090
+[; <" FSR1 equ 0FE1h ;# ">
+"6097
+[; <" FSR1L equ 0FE1h ;# ">
+"6104
+[; <" FSR1H equ 0FE2h ;# ">
+"6111
+[; <" PLUSW1 equ 0FE3h ;# ">
+"6118
+[; <" PREINC1 equ 0FE4h ;# ">
+"6125
+[; <" POSTDEC1 equ 0FE5h ;# ">
+"6132
+[; <" POSTINC1 equ 0FE6h ;# ">
+"6139
+[; <" INDF1 equ 0FE7h ;# ">
+"6146
+[; <" WREG equ 0FE8h ;# ">
+"6158
+[; <" FSR0 equ 0FE9h ;# ">
+"6165
+[; <" FSR0L equ 0FE9h ;# ">
+"6172
+[; <" FSR0H equ 0FEAh ;# ">
+"6179
+[; <" PLUSW0 equ 0FEBh ;# ">
+"6186
+[; <" PREINC0 equ 0FECh ;# ">
+"6193
+[; <" POSTDEC0 equ 0FEDh ;# ">
+"6200
+[; <" POSTINC0 equ 0FEEh ;# ">
+"6207
+[; <" INDF0 equ 0FEFh ;# ">
+"6214
+[; <" INTCON3 equ 0FF0h ;# ">
+"6306
+[; <" INTCON2 equ 0FF1h ;# ">
+"6376
+[; <" INTCON equ 0FF2h ;# ">
+"6493
+[; <" PROD equ 0FF3h ;# ">
+"6500
+[; <" PRODL equ 0FF3h ;# ">
+"6507
+[; <" PRODH equ 0FF4h ;# ">
+"6514
+[; <" TABLAT equ 0FF5h ;# ">
+"6523
+[; <" TBLPTR equ 0FF6h ;# ">
+"6530
+[; <" TBLPTRL equ 0FF6h ;# ">
+"6537
+[; <" TBLPTRH equ 0FF7h ;# ">
+"6544
+[; <" TBLPTRU equ 0FF8h ;# ">
+"6553
+[; <" PCLAT equ 0FF9h ;# ">
+"6560
+[; <" PC equ 0FF9h ;# ">
+"6567
+[; <" PCL equ 0FF9h ;# ">
+"6574
+[; <" PCLATH equ 0FFAh ;# ">
+"6581
+[; <" PCLATU equ 0FFBh ;# ">
+"6588
+[; <" STKPTR equ 0FFCh ;# ">
+"6694
+[; <" TOS equ 0FFDh ;# ">
+"6701
+[; <" TOSL equ 0FFDh ;# ">
+"6708
+[; <" TOSH equ 0FFEh ;# ">
+"6715
+[; <" TOSU equ 0FFFh ;# ">
+"12 proculus.c
+[v _tempodecorrido `Vui ~T0 @X0 1 e ]
+"16
+[v _PROCULUS_REG_Write `(v ~T0 @X0 1 ef2`*uc`uc ]
+{
+[e :U _PROCULUS_REG_Write ]
+[v _vetor `*uc ~T0 @X0 1 r1 ]
+[v _size `uc ~T0 @X0 1 r2 ]
+[f ]
+"17
+[v _i `uc ~T0 @X0 1 a ]
+"18
+[e ( __delay (1 -> * -> -> 32 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"19
+[e ( _USART_put_int (1 -> -> 23205 `i `ui ]
+"20
+[e ( _USART_putc (1 -> + -> 1 `i -> _size `i `uc ]
+"21
+[e ( _USART_putc (1 -> -> 128 `i `uc ]
+"22
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 290  ]
+[e :U 287 ]
+"23
+[e ( _USART_putc (1 *U + _vetor * -> _i `ux -> -> # *U _vetor `ui `ux ]
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 290 ]
+[e $ < -> _i `i -> _size `i 287  ]
+[e :U 288 ]
+}
+"24
+[e ( _my_delay_ms (1 -> -> 1 `i `l ]
+"25
+[e :UE 286 ]
+}
+"30
+[v _PROCULUS_REG_Read `(v ~T0 @X0 1 ef3`uc`uc`*uc ]
+{
+[e :U _PROCULUS_REG_Read ]
+[v _reg `uc ~T0 @X0 1 r1 ]
+[v _size `uc ~T0 @X0 1 r2 ]
+[v _retorno `*uc ~T0 @X0 1 r3 ]
+[f ]
+"31
+[v _i `uc ~T0 @X0 1 a ]
+"32
+[v _tempo `ui ~T0 @X0 1 a ]
+"33
+[e $ ! ! != -> . _statusgen1 3 `i -> 0 `i 292  ]
+[e ( __delay (1 -> * -> -> 32 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[e :U 292 ]
+"34
+[e ( _USART_put_int (1 -> -> 23205 `i `ui ]
+"35
+[e ( _USART_putc (1 -> + -> 2 `i -> _size `i `uc ]
+"36
+[e ( _USART_putc (1 -> -> 129 `i `uc ]
+"37
+[e ( _USART_putc (1 _reg ]
+"38
+[e ( _USART_putc (1 _size ]
+"41
+[e = . . _TRISDbits 1 4 -> -> 0 `i `uc ]
+"42
+[e = . . _PORTDbits 0 4 -> -> 1 `i `uc ]
+"44
+[e = _tempo -> -> 0 `i `ui ]
+"45
+[e $U 293  ]
+[e :U 294 ]
+"46
+{
+"47
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+"48
+[e $ ! != -> . _statusgen 0 `i -> 0 `i 296  ]
+"49
+{
+"50
+[e = . _statusgen 0 -> -> 0 `i `uc ]
+"51
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 300  ]
+[e :U 297 ]
+"52
+{
+"53
+[e = *U &U *U + _retorno * -> _i `ux -> -> # *U _retorno `ui `ux *U + &U _usart_buffer * -> -> + -> 6 `i -> _i `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux ]
+"54
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 300 ]
+[e $ < -> _i `i -> _size `i 297  ]
+[e :U 298 ]
+}
+"55
+[e $U 295  ]
+"56
+}
+[e :U 296 ]
+"57
+[e ++ _tempo -> -> 1 `i `ui ]
+"58
+}
+[e :U 293 ]
+"45
+[e $ < _tempo -> -> 400 `i `ui 294  ]
+[e :U 295 ]
+"60
+[e = . . _PORTDbits 0 4 -> -> 0 `i `uc ]
+"62
+[e ( _my_delay_ms (1 -> -> 1 `i `l ]
+"64
+[e :UE 291 ]
+}
+"69
+[v _PROCULUS_VP_Write `(v ~T0 @X0 1 ef3`ui`*uc`uc ]
+{
+[e :U _PROCULUS_VP_Write ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[v _vetor `*uc ~T0 @X0 1 r2 ]
+[v _size `uc ~T0 @X0 1 r3 ]
+[f ]
+"70
+[v _i `uc ~T0 @X0 1 a ]
+"71
+[e $ ! ! != -> . _statusgen1 3 `i -> 0 `i 302  ]
+[e ( __delay (1 -> * -> -> 32 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[e :U 302 ]
+"72
+[e ( _USART_put_int (1 -> -> 23205 `i `ui ]
+"73
+[e ( _USART_putc (1 -> + -> 3 `i -> _size `i `uc ]
+"74
+[e ( _USART_putc (1 -> -> 130 `i `uc ]
+"75
+[e ( _USART_put_int (1 _vp ]
+"76
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 306  ]
+[e :U 303 ]
+"77
+[e ( _USART_putc (1 -> *U + _vetor * -> _i `ux -> -> # *U _vetor `ui `ux `uc ]
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 306 ]
+[e $ < -> _i `i -> _size `i 303  ]
+[e :U 304 ]
+}
+"78
+[e ( _USART_putc (1 -> -> 0 `i `uc ]
+"79
+[e ( _my_delay_ms (1 -> -> 1 `i `l ]
+"81
+[e :UE 301 ]
+}
+"84
+[v _PROCULUS_VP_Read `(v ~T0 @X0 1 ef3`ui`*uc`uc ]
+{
+[e :U _PROCULUS_VP_Read ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[v _vetor `*uc ~T0 @X0 1 r2 ]
+[v _size `uc ~T0 @X0 1 r3 ]
+[f ]
+"85
+[v _i `uc ~T0 @X0 1 a ]
+"86
+[v _tempo `ui ~T0 @X0 1 a ]
+"87
+[v _proculus `S7 ~T0 @X0 1 a ]
+"91
+[e ( __delay (1 -> * -> -> 32 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"92
+[e ( _USART_put_int (1 -> -> 23205 `i `ui ]
+"93
+[e ( _USART_putc (1 -> -> 4 `i `uc ]
+"94
+[e ( _USART_putc (1 -> -> 131 `i `uc ]
+"95
+[e ( _USART_put_int (1 _vp ]
+"96
+[e ( _USART_putc (1 -> >> -> _size `i -> 1 `i `uc ]
+"97
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+"102
+[e = _tempo -> -> 0 `i `ui ]
+"103
+[e $U 308  ]
+[e :U 309 ]
+"104
+{
+"105
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+"106
+[e $ ! != -> . _statusgen 0 `i -> 0 `i 311  ]
+"107
+{
+"108
+[e = . _statusgen 0 -> -> 0 `i `uc ]
+"109
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 315  ]
+[e :U 312 ]
+"110
+{
+"111
+[e = *U &U *U + _vetor * -> _i `ux -> -> # *U _vetor `ui `ux -> *U + &U _usart_buffer * -> -> + -> 7 `i -> _i `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
+"112
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 315 ]
+[e $ < -> _i `i -> _size `i 312  ]
+[e :U 313 ]
+}
+"113
+[e $U 310  ]
+"114
+}
+[e :U 311 ]
+"115
+[e ++ _tempo -> -> 1 `i `ui ]
+"116
+}
+[e :U 308 ]
+"103
+[e $ < _tempo -> -> 400 `i `ui 309  ]
+[e :U 310 ]
+"117
+[e ( _my_delay_ms (1 -> -> 1 `i `l ]
+"118
+[e :UE 307 ]
+}
+"121
+[v _PROCULUS_Control_Activation `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _PROCULUS_Control_Activation ]
+[v _value `uc ~T0 @X0 1 r1 ]
+[f ]
+"122
+[e ( _my_delay_ms (1 -> -> 500 `i `l ]
+"123
+[e ( _USART_put_int (1 -> -> 23205 `i `ui ]
+"124
+[e ( _USART_putc (1 -> -> 3 `i `uc ]
+"125
+[e ( _USART_putc (1 -> -> 128 `i `uc ]
+"126
+[e ( _USART_putc (1 -> -> 79 `i `uc ]
+"127
+[e ( _USART_putc (1 -> _value `uc ]
+"128
+[e ( _my_delay_ms (1 -> -> 500 `i `l ]
+"129
+[e :UE 316 ]
+}
+"131
+[v _PROCULUS_Popup `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _PROCULUS_Popup ]
+[v _value `uc ~T0 @X0 1 r1 ]
+[f ]
+"132
+[e ( _PROCULUS_Control_Activation (1 _value ]
+"133
+[e :UE 317 ]
+}
+"137
+[v _PROCULUS_Read_RTC `(v ~T0 @X0 1 ef2`*uc`*uc ]
+{
+[e :U _PROCULUS_Read_RTC ]
+[v _date `*uc ~T0 @X0 1 r1 ]
+[v _time `*uc ~T0 @X0 1 r2 ]
+[f ]
+"138
+[v _i `uc ~T0 @X0 1 a ]
+"139
+[v _retorno `uc ~T0 @X0 -> 10 `i a ]
+"140
+[v _year `uc ~T0 @X0 -> 3 `i a ]
+[v _month `uc ~T0 @X0 -> 3 `i a ]
+[v _day `uc ~T0 @X0 -> 3 `i a ]
+[v _hour `uc ~T0 @X0 -> 3 `i a ]
+[v _minute `uc ~T0 @X0 -> 3 `i a ]
+[v _second `uc ~T0 @X0 -> 3 `i a ]
+"143
+[e ( _USART_put_int (1 -> -> 23205 `i `ui ]
+"144
+[e ( _USART_putc (1 -> -> 3 `i `uc ]
+"145
+[e ( _USART_putc (1 -> -> 129 `i `uc ]
+"146
+[e ( _USART_putc (1 -> -> 32 `i `uc ]
+"147
+[e ( _USART_putc (1 -> -> 7 `i `uc ]
+"150
+[e $ ! != -> ( _USART_input_buffer ..  `i -> 0 `i 319  ]
+"151
+{
+"152
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 10 `i 320  ]
+[e $U 321  ]
+[e :U 320 ]
+"153
+[e = *U + &U _retorno * -> _i `ux -> -> # *U &U _retorno `ui `ux -> *U + &U _usart_buffer * -> -> + -> 6 `i -> _i `i `uc `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 10 `i 320  ]
+[e :U 321 ]
+}
+"154
+}
+[e :U 319 ]
+"156
+[e ( _bcd2str (2 , *U + &U _retorno * -> -> -> 0 `i `ui `ux -> -> # *U &U _retorno `ui `ux &U _year ]
+"157
+[e ( _bcd2str (2 , *U + &U _retorno * -> -> -> 1 `i `ui `ux -> -> # *U &U _retorno `ui `ux &U _month ]
+"158
+[e ( _bcd2str (2 , *U + &U _retorno * -> -> -> 2 `i `ui `ux -> -> # *U &U _retorno `ui `ux &U _day ]
+"160
+[e ( _strcpy (2 , _date :s 1C ]
+"161
+[e ( _strcat (2 , _date -> &U _day `*Cuc ]
+"162
+[e ( _strcat (2 , _date :s 2C ]
+"163
+[e ( _strcat (2 , _date -> &U _month `*Cuc ]
+"164
+[e ( _strcat (2 , _date :s 3C ]
+"165
+[e ( _strcat (2 , _date -> &U _year `*Cuc ]
+"167
+[e ( _bcd2str (2 , *U + &U _retorno * -> -> -> 4 `i `ui `ux -> -> # *U &U _retorno `ui `ux &U _hour ]
+"168
+[e ( _bcd2str (2 , *U + &U _retorno * -> -> -> 5 `i `ui `ux -> -> # *U &U _retorno `ui `ux &U _minute ]
+"169
+[e ( _bcd2str (2 , *U + &U _retorno * -> -> -> 6 `i `ui `ux -> -> # *U &U _retorno `ui `ux &U _second ]
+"171
+[e ( _strcpy (2 , _time :s 4C ]
+"172
+[e ( _strcat (2 , _time -> &U _hour `*Cuc ]
+"173
+[e ( _strcat (2 , _time :s 5C ]
+"174
+[e ( _strcat (2 , _time -> &U _minute `*Cuc ]
+"175
+[e ( _strcat (2 , _time :s 6C ]
+"176
+[e ( _strcat (2 , _time -> &U _second `*Cuc ]
+"178
+[e ( _my_delay_ms (1 -> -> 1 `i `l ]
+"179
+[e :UE 318 ]
+}
+"181
+[v _PROCULUS_Write_RTC `(v ~T0 @X0 1 ef2`*uc`*uc ]
+{
+[e :U _PROCULUS_Write_RTC ]
+[v _date `*uc ~T0 @X0 1 r1 ]
+[v _time `*uc ~T0 @X0 1 r2 ]
+[f ]
+"182
+[v _year `uc ~T0 @X0 -> 3 `i a ]
+[v _month `uc ~T0 @X0 -> 3 `i a ]
+[v _day `uc ~T0 @X0 -> 3 `i a ]
+[v _hour `uc ~T0 @X0 -> 3 `i a ]
+[v _minute `uc ~T0 @X0 -> 3 `i a ]
+[v _second `uc ~T0 @X0 -> 3 `i a ]
+"184
+[e = *U + &U _year * -> -> -> 0 `i `ui `ux -> -> # *U &U _year `ui `ux *U + _date * -> -> 6 `i `x -> -> # *U _date `i `x ]
+"185
+[e = *U + &U _year * -> -> -> 1 `i `ui `ux -> -> # *U &U _year `ui `ux *U + _date * -> -> 7 `i `x -> -> # *U _date `i `x ]
+"186
+[e = *U + &U _year * -> -> -> 2 `i `ui `ux -> -> # *U &U _year `ui `ux -> -> 0 `i `uc ]
+"188
+[e = *U + &U _month * -> -> -> 0 `i `ui `ux -> -> # *U &U _month `ui `ux *U + _date * -> -> 3 `i `x -> -> # *U _date `i `x ]
+"189
+[e = *U + &U _month * -> -> -> 1 `i `ui `ux -> -> # *U &U _month `ui `ux *U + _date * -> -> 4 `i `x -> -> # *U _date `i `x ]
+"190
+[e = *U + &U _month * -> -> -> 2 `i `ui `ux -> -> # *U &U _month `ui `ux -> -> 0 `i `uc ]
+"192
+[e = *U + &U _day * -> -> -> 0 `i `ui `ux -> -> # *U &U _day `ui `ux *U + _date * -> -> 0 `i `x -> -> # *U _date `i `x ]
+"193
+[e = *U + &U _day * -> -> -> 1 `i `ui `ux -> -> # *U &U _day `ui `ux *U + _date * -> -> 1 `i `x -> -> # *U _date `i `x ]
+"194
+[e = *U + &U _day * -> -> -> 2 `i `ui `ux -> -> # *U &U _day `ui `ux -> -> 0 `i `uc ]
+"196
+[e = *U + &U _hour * -> -> -> 0 `i `ui `ux -> -> # *U &U _hour `ui `ux *U + _time * -> -> 0 `i `x -> -> # *U _time `i `x ]
+"197
+[e = *U + &U _hour * -> -> -> 1 `i `ui `ux -> -> # *U &U _hour `ui `ux *U + _time * -> -> 1 `i `x -> -> # *U _time `i `x ]
+"198
+[e = *U + &U _hour * -> -> -> 2 `i `ui `ux -> -> # *U &U _hour `ui `ux -> -> 0 `i `uc ]
+"200
+[e = *U + &U _minute * -> -> -> 0 `i `ui `ux -> -> # *U &U _minute `ui `ux *U + _time * -> -> 3 `i `x -> -> # *U _time `i `x ]
+"201
+[e = *U + &U _minute * -> -> -> 1 `i `ui `ux -> -> # *U &U _minute `ui `ux *U + _time * -> -> 4 `i `x -> -> # *U _time `i `x ]
+"202
+[e = *U + &U _minute * -> -> -> 2 `i `ui `ux -> -> # *U &U _minute `ui `ux -> -> 0 `i `uc ]
+"204
+[e = *U + &U _second * -> -> -> 0 `i `ui `ux -> -> # *U &U _second `ui `ux *U + _time * -> -> 6 `i `x -> -> # *U _time `i `x ]
+"205
+[e = *U + &U _second * -> -> -> 1 `i `ui `ux -> -> # *U &U _second `ui `ux *U + _time * -> -> 7 `i `x -> -> # *U _time `i `x ]
+"206
+[e = *U + &U _second * -> -> -> 2 `i `ui `ux -> -> # *U &U _second `ui `ux -> -> 0 `i `uc ]
+"208
+[e ( _USART_put_int (1 -> -> 23205 `i `ui ]
+"209
+[e ( _USART_putc (1 -> -> 10 `i `uc ]
+"210
+[e ( _USART_putc (1 -> -> 128 `i `uc ]
+"211
+[e ( _USART_putc (1 -> -> 31 `i `uc ]
+"212
+[e ( _USART_putc (1 -> -> 90 `i `uc ]
+"213
+[e ( _USART_putc (1 -> ( _str2bcd (1 &U _year `uc ]
+"214
+[e ( _USART_putc (1 -> ( _str2bcd (1 &U _month `uc ]
+"215
+[e ( _USART_putc (1 -> ( _str2bcd (1 &U _day `uc ]
+"216
+[e ( _USART_putc (1 -> -> 1 `i `uc ]
+"217
+[e ( _USART_putc (1 -> ( _str2bcd (1 &U _hour `uc ]
+"218
+[e ( _USART_putc (1 -> ( _str2bcd (1 &U _minute `uc ]
+"219
+[e ( _USART_putc (1 -> ( _str2bcd (1 &U _second `uc ]
+"220
+[e :UE 323 ]
+}
+"236
+[v _PROCULUS_VP_Write_Byte `(v ~T0 @X0 1 ef2`ui`uc ]
+{
+[e :U _PROCULUS_VP_Write_Byte ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[v _value `uc ~T0 @X0 1 r2 ]
+[f ]
+"237
+[v _vetor `uc ~T0 @X0 -> -> 1 `i `ux a ]
+"238
+[e = *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux _value ]
+"239
+[e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 1 `i `uc ]
+"240
+[e ( _my_delay_ms (1 -> -> 1 `i `l ]
+"241
+[e :UE 324 ]
+}
+"242
+[v _PROCULUS_VP_Read_Byte `(uc ~T0 @X0 1 ef1`ui ]
+{
+[e :U _PROCULUS_VP_Read_Byte ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[f ]
+"243
+[v _vetor `uc ~T0 @X0 -> -> 1 `i `ux a ]
+"244
+[e ( _PROCULUS_VP_Read (3 , , _vp &U _vetor -> -> 1 `i `uc ]
+"245
+[e ) -> *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux `uc ]
+[e $UE 325  ]
+"246
+[e :UE 325 ]
+}
+"251
+[v _PROCULUS_VP_Write_UInt16 `(v ~T0 @X0 1 ef2`ui`ui ]
+{
+[e :U _PROCULUS_VP_Write_UInt16 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[v _value `ui ~T0 @X0 1 r2 ]
+[f ]
+"252
+[v _vetor `uc ~T0 @X0 -> 2 `i a ]
+"253
+[v _pt `*uc ~T0 @X0 1 a ]
+"254
+[e = _pt -> &U _value `*uc ]
+"255
+[e = *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> _value `uc ]
+"256
+[e = *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> >> _value -> 8 `i `uc ]
+"257
+[e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 2 `i `uc ]
+"258
+[e :UE 326 ]
+}
+"260
+[v _PROCULUS_VP_Read_UInt16 `(ui ~T0 @X0 1 ef1`ui ]
+{
+[e :U _PROCULUS_VP_Read_UInt16 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[f ]
+"261
+[v _vetor `uc ~T0 @X0 -> 2 `i a ]
+"262
+[e ( _PROCULUS_VP_Read (3 , , _vp &U _vetor -> -> 2 `i `uc ]
+"263
+[e ) + << -> *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux `ui -> 8 `i -> *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux `ui ]
+[e $UE 327  ]
+"264
+[e :UE 327 ]
+}
+"269
+[v _PROCULUS_VP_Write_Int16 `(v ~T0 @X0 1 ef2`ui`i ]
+{
+[e :U _PROCULUS_VP_Write_Int16 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[v _value `i ~T0 @X0 1 r2 ]
+[f ]
+"270
+[v _vetor `uc ~T0 @X0 -> 2 `i a ]
+"271
+[v _pt `*uc ~T0 @X0 1 a ]
+"272
+[e = _pt -> &U _value `*uc ]
+"273
+[e = *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> >> _value -> 8 `i `uc ]
+"274
+[e = *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> _value `uc ]
+"275
+[e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 2 `i `uc ]
+"276
+[e :UE 328 ]
+}
+"277
+[v _PROCULUS_VP_Read_Int16 `(ui ~T0 @X0 1 ef1`i ]
+{
+[e :U _PROCULUS_VP_Read_Int16 ]
+[v _vp `i ~T0 @X0 1 r1 ]
+[f ]
+"278
+[v _vetor `uc ~T0 @X0 -> 2 `i a ]
+"279
+[e ( _PROCULUS_VP_Read (3 , , -> _vp `ui &U _vetor -> -> 2 `i `uc ]
+"280
+[e ) -> + << -> *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux `i -> 8 `i -> *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux `i `ui ]
+[e $UE 329  ]
+"281
+[e :UE 329 ]
+}
+"291
+[v _PROCULUS_VP_Write_Long32 `(v ~T0 @X0 1 ef2`ui`ul ]
+{
+[e :U _PROCULUS_VP_Write_Long32 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[v _value `ul ~T0 @X0 1 r2 ]
+[f ]
+"292
+[v _vetor `uc ~T0 @X0 -> 4 `i a ]
+"293
+[v _pt `*uc ~T0 @X0 1 a ]
+"294
+[e = _pt -> &U _value `*uc ]
+"295
+[e = *U + &U _vetor * -> -> -> 3 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x `uc ]
+"296
+[e = *U + &U _vetor * -> -> -> 2 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x `uc ]
+"297
+[e = *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x `uc ]
+"298
+[e = *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x `uc ]
+"299
+[e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 4 `i `uc ]
+"300
+[e :UE 330 ]
+}
+"303
+[v _PROCULUS_VP_Read_Long32 `(l ~T0 @X0 1 ef1`ui ]
+{
+[e :U _PROCULUS_VP_Read_Long32 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[f ]
+"304
+[v _vetor `uc ~T0 @X0 -> 4 `i a ]
+"305
+[v _retorno `l ~T0 @X0 1 a ]
+[e = _retorno -> -> 1234 `i `l ]
+"306
+[e ( _PROCULUS_VP_Read (3 , , _vp &U _vetor -> -> 4 `i `uc ]
+"315
+[e ) _retorno ]
+[e $UE 331  ]
+"316
+[e :UE 331 ]
+}
+"326
+[v _PROCULUS_VP_Write_Float24 `(v ~T0 @X0 1 ef2`ui`f ]
+{
+[e :U _PROCULUS_VP_Write_Float24 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[v _value `f ~T0 @X0 1 r2 ]
+[f ]
+"327
+[v _vetor `uc ~T0 @X0 -> 4 `i a ]
+"328
+[v _pt `*uc ~T0 @X0 1 a ]
+"329
+[e = _pt -> &U _value `*uc ]
+"330
+[e = *U + &U _vetor * -> -> -> 2 `i `ui `ux -> -> # *U &U _vetor `ui `ux *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
+"331
+[e = *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
+"332
+[e = *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
+"333
+[e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 3 `i `uc ]
+"334
+[e :UE 332 ]
+}
+"335
+[v _PROCULUS_VP_Read_Float24 `(f ~T0 @X0 1 ef1`ui ]
+{
+[e :U _PROCULUS_VP_Read_Float24 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[f ]
+"336
+[v _vetor `uc ~T0 @X0 -> 4 `i a ]
+"337
+[e ( _PROCULUS_VP_Read (3 , , _vp &U _vetor -> -> 4 `i `uc ]
+"339
+[e ) -> -> 1234 `i `f ]
+[e $UE 333  ]
+"340
+[e :UE 333 ]
+}
+"343
+[v _PROCULUS_VP_Write_Float32 `(v ~T0 @X0 1 ef2`ui`f ]
+{
+[e :U _PROCULUS_VP_Write_Float32 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[v _value `f ~T0 @X0 1 r2 ]
+[f ]
+"344
+[v _vetor `uc ~T0 @X0 -> 4 `i a ]
+"345
+[v _pt `*uc ~T0 @X0 1 a ]
+"346
+[e = _pt -> &U _value `*uc ]
+"347
+[e = *U + &U _vetor * -> -> -> 3 `i `ui `ux -> -> # *U &U _vetor `ui `ux *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
+"348
+[e = *U + &U _vetor * -> -> -> 2 `i `ui `ux -> -> # *U &U _vetor `ui `ux *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
+"349
+[e = *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
+"350
+[e = *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
+"351
+[e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 4 `i `uc ]
+"352
+[e :UE 334 ]
+}
+"353
+[v _PROCULUS_VP_Read_Float32 `(f ~T0 @X0 1 ef1`ui ]
+{
+[e :U _PROCULUS_VP_Read_Float32 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[f ]
+"354
+[v _vetor `uc ~T0 @X0 -> 4 `i a ]
+"355
+[e ( _PROCULUS_VP_Read (3 , , _vp &U _vetor -> -> 4 `i `uc ]
+"357
+[e ) -> -> 1234 `i `f ]
+[e $UE 335  ]
+"358
+[e :UE 335 ]
+}
+"365
+[v _PROCULUS_VP_Write_Double24 `(v ~T0 @X0 1 ef2`ui`d ]
+{
+[e :U _PROCULUS_VP_Write_Double24 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[v _value `d ~T0 @X0 1 r2 ]
+[f ]
+"366
+[v _vetor `uc ~T0 @X0 -> 3 `i a ]
+"367
+[v _pnt `*uc ~T0 @X0 1 a ]
+"369
+[e = _pnt -> &U _value `*uc ]
+"370
+[e = *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux *U ++ _pnt * -> -> 1 `i `x -> -> # *U _pnt `i `x ]
+"371
+[e = *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux *U ++ _pnt * -> -> 1 `i `x -> -> # *U _pnt `i `x ]
+"372
+[e = *U + &U _vetor * -> -> -> 2 `i `ui `ux -> -> # *U &U _vetor `ui `ux *U ++ _pnt * -> -> 1 `i `x -> -> # *U _pnt `i `x ]
+"373
+[e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 3 `i `uc ]
+"374
+[e :UE 336 ]
+}
+"375
+[v _PROCULUS_VP_Read_Double24 `(d ~T0 @X0 1 ef1`ui ]
+{
+[e :U _PROCULUS_VP_Read_Double24 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[f ]
+"376
+[v _vetor `uc ~T0 @X0 -> 3 `i a ]
+"377
+[e ( _PROCULUS_VP_Read (3 , , _vp &U _vetor -> -> 3 `i `uc ]
+"379
+[e ) -> -> 1234 `i `d ]
+[e $UE 337  ]
+"380
+[e :UE 337 ]
+}
+"384
+[v _PROCULUS_VP_Write_Double32 `(v ~T0 @X0 1 ef2`ui`d ]
+{
+[e :U _PROCULUS_VP_Write_Double32 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[v _value `d ~T0 @X0 1 r2 ]
+[f ]
+"385
+[v _vetor `d ~T0 @X0 -> 4 `i a ]
+"392
+[e ( _PROCULUS_VP_Write (3 , , _vp -> &U _vetor `*uc -> -> 4 `i `uc ]
+"393
+[e :UE 338 ]
+}
+"394
+[v _PROCULUS_VP_Read_Double32 `(d ~T0 @X0 1 ef1`ui ]
+{
+[e :U _PROCULUS_VP_Read_Double32 ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[f ]
+"395
+[v _vetor `uc ~T0 @X0 -> 4 `i a ]
+"396
+[e ( _PROCULUS_VP_Read (3 , , _vp &U _vetor -> -> 4 `i `uc ]
+"398
+[e ) -> -> 1234 `i `d ]
+[e $UE 339  ]
+"399
+[e :UE 339 ]
+}
+"404
+[v _PROCULUS_VP_Write_String `(v ~T0 @X0 1 ef2`ui`*uc ]
+{
+[e :U _PROCULUS_VP_Write_String ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[v _text `*uc ~T0 @X0 1 r2 ]
+[f ]
+"405
+[e ( _PROCULUS_VP_Write (3 , , _vp _text -> + ( _strlen (1 -> _text `*Cuc -> -> 1 `i `ui `uc ]
+"406
+[e :UE 340 ]
+}
+"408
+[v _PROCULUS_VP_Read_String `(v ~T0 @X0 1 ef2`ui`*uc ]
+{
+[e :U _PROCULUS_VP_Read_String ]
+[v _vp `ui ~T0 @X0 1 r1 ]
+[v _text `*uc ~T0 @X0 1 r2 ]
+[f ]
+"409
+[e ( _PROCULUS_VP_Read (3 , , _vp _text -> -> 30 `i `uc ]
+"410
+[e :UE 341 ]
+}
+"417
+[v _PROCULUS_Read_Version `(uc ~T0 @X0 1 ef ]
+{
+[e :U _PROCULUS_Read_Version ]
+[f ]
+"418
+[v _retorno `uc ~T0 @X0 -> 2 `i a ]
+"419
+[e ( _PROCULUS_REG_Read (3 , , -> -> 0 `i `uc -> -> 2 `i `uc &U _retorno ]
+"420
+[e ) *U + &U _retorno * -> -> -> 0 `i `ui `ux -> -> # *U &U _retorno `ui `ux ]
+[e $UE 342  ]
+"421
+[e :UE 342 ]
+}
+"423
+[v _PROCULUS_Buzzer `(v ~T0 @X0 1 ef1`ui ]
+{
+[e :U _PROCULUS_Buzzer ]
+[v _time_ms_x_10 `ui ~T0 @X0 1 r1 ]
+[f ]
+"424
+[v _vetor `uc ~T0 @X0 -> 2 `i a ]
+"425
+[e =/ _time_ms_x_10 -> -> 10 `i `ui ]
+"426
+[e = *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> -> 2 `i `uc ]
+"427
+[e = *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> _time_ms_x_10 `uc ]
+"428
+[e ( _PROCULUS_REG_Write (2 , &U _vetor -> -> 2 `i `uc ]
+"429
+[e :UE 343 ]
+}
+"440
+[v _PROCULUS_Reset `(v ~T0 @X0 1 ef ]
+{
+[e :U _PROCULUS_Reset ]
+[f ]
+"441
+[v _vetor `uc ~T0 @X0 -> 3 `i a ]
+"442
+[e = *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> -> 238 `i `uc ]
+"443
+[e = *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> -> 90 `i `uc ]
+"444
+[e = *U + &U _vetor * -> -> -> 2 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> -> 165 `i `uc ]
+"445
+[e ( _PROCULUS_REG_Write (2 , &U _vetor -> -> 3 `i `uc ]
+"446
+[e :UE 344 ]
+}
+"452
+[v _PROCULUS_Show_Screen `(v ~T0 @X0 1 ef1`ui ]
+{
+[e :U _PROCULUS_Show_Screen ]
+[v _screen `ui ~T0 @X0 1 r1 ]
+[f ]
+"453
+[v _vetor `uc ~T0 @X0 -> 3 `i a ]
+"454
+[e = *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> -> 3 `i `uc ]
+"455
+[e = *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> -> >> _screen -> 8 `i `uc `uc ]
+"456
+[e = *U + &U _vetor * -> -> -> 2 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> -> _screen `uc `uc ]
+"457
+[e ( _PROCULUS_REG_Write (2 , &U _vetor -> -> 3 `i `uc ]
+"458
+[e :UE 345 ]
+}
+"474
+[v _PROCULUS_Buffer_to_Proculus `(v ~T0 @X0 1 ef1`*S7 ]
+{
+[e :U _PROCULUS_Buffer_to_Proculus ]
+[v _proculus `*S7 ~T0 @X0 1 r1 ]
+[f ]
+"475
+[v _i `uc ~T0 @X0 1 a ]
+"476
+[e = . *U _proculus 0 -> + << -> *U + &U _usart_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
+"477
+[e = . *U _proculus 1 *U + &U _usart_buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux ]
+"478
+[e = . *U _proculus 2 *U + &U _usart_buffer * -> -> -> 3 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux ]
+"479
+[e = . *U _proculus 3 -> + << -> *U + &U _usart_buffer * -> -> -> 4 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 5 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
+"480
+[e = . *U _proculus 4 *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux ]
+"481
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 350  ]
+[e :U 347 ]
+"482
+[e = *U + &U . *U _proculus 5 * -> _i `ux -> -> # *U &U . *U _proculus 5 `ui `ux -> *U + &U _usart_buffer * -> -> + -> 7 `i -> _i `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `ui ]
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 350 ]
+[e $ <= -> _i `i -> . *U _proculus 1 `i 347  ]
+[e :U 348 ]
+}
+"483
+[e = . *U _proculus 6 *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux ]
+"484
+[e = . *U _proculus 7 -> & >> -> *U + &U _usart_buffer * -> -> -> 8 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 4 `i -> 15 `i `uc ]
+"485
+[e = . *U _proculus 8 -> & -> *U + &U _usart_buffer * -> -> -> 8 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 15 `i `uc ]
+"486
+[e :UE 346 ]
+}
+"493
+[v _PROCULUS_OK `(v ~T0 @X0 1 ef ]
+{
+[e :U _PROCULUS_OK ]
+[f ]
+"494
+[e ( _PROCULUS_Buzzer (1 -> -> 100 `i `ui ]
+"495
+[e ( _my_delay_ms (1 -> -> 100 `i `l ]
+"496
+[e ( _PROCULUS_Buzzer (1 -> -> 100 `i `ui ]
+"497
+[e ( _my_delay_ms (1 -> -> 100 `i `l ]
+"498
+[e ( _PROCULUS_Buzzer (1 -> -> 100 `i `ui ]
+"499
+[e :UE 351 ]
+}
+"502
+[v _PROCULUS_NOK `(v ~T0 @X0 1 ef ]
+{
+[e :U _PROCULUS_NOK ]
+[f ]
+"503
+[e ( _PROCULUS_Buzzer (1 -> -> 300 `i `ui ]
+"504
+[e ( _my_delay_ms (1 -> -> 100 `i `l ]
+"505
+[e :UE 352 ]
+}
+"519
+[v _PROCULUS_Get_Page `(ui ~T0 @X0 1 ef ]
+"520
+{
+[e :U _PROCULUS_Get_Page ]
+[f ]
+"521
+[v _i `i ~T0 @X0 1 a ]
+"522
+[v _retorno `Vui ~T0 @X0 1 a ]
+[e = _retorno -> -> 0 `i `ui ]
+"523
+[e ( _USART_put_int (1 -> -> 23205 `i `ui ]
+"524
+[e ( _USART_putc (1 -> -> 3 `i `uc ]
+"525
+[e ( _USART_putc (1 -> -> 129 `i `uc ]
+"526
+[e ( _USART_putc (1 -> -> 3 `i `uc ]
+"527
+[e ( _USART_putc (1 -> -> 2 `i `uc ]
+"528
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 1000 `i 354  ]
+[e $U 355  ]
+[e :U 354 ]
+"529
+{
+"530
+[e $ ! != -> . _statusgen 0 `i -> 0 `i 357  ]
+"531
+{
+"532
+[e = . _statusgen 0 -> -> 0 `i `uc ]
+"533
+[e = _retorno -> + << -> *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
+"534
+[e $U 355  ]
+"535
+}
+[e :U 357 ]
+"536
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"537
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 1000 `i 354  ]
+[e :U 355 ]
+}
+"538
+[e ( _my_delay_ms (1 -> -> 1 `i `l ]
+"539
+[e ) _retorno ]
+[e $UE 353  ]
+"540
+[e :UE 353 ]
+}
+"563
+[v _PROCULUS_TPFLAG_Write `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _PROCULUS_TPFLAG_Write ]
+[v _value `uc ~T0 @X0 1 r1 ]
+[f ]
+"564
+[v _vetor `uc ~T0 @X0 -> 3 `i a ]
+"565
+[e = *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> -> 5 `i `uc ]
+"566
+[e = *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> _value `uc ]
+"567
+[e ( _PROCULUS_REG_Write (2 , &U _vetor -> -> 2 `i `uc ]
+"570
+[e :UE 358 ]
+}
+"573
+[v _PROCULUS_TPFLAG_Read `(uc ~T0 @X0 1 ef ]
+{
+[e :U _PROCULUS_TPFLAG_Read ]
+[f ]
+"574
+[v _retorno `uc ~T0 @X0 -> 10 `i a ]
+"575
+[e ( _PROCULUS_REG_Read (3 , , -> -> 5 `i `uc -> -> 1 `i `uc &U _retorno ]
+"576
+[e ) -> *U + &U _retorno * -> -> -> 0 `i `ui `ux -> -> # *U &U _retorno `ui `ux `uc ]
+[e $UE 359  ]
+"579
+[e :UE 359 ]
+}
+"582
+[v _PROCULUS_graphic_plot `(v ~T0 @X0 1 ef2`uc`ui ]
+{
+[e :U _PROCULUS_graphic_plot ]
+[v _lcd_channel `uc ~T0 @X0 1 r1 ]
+[v _value `ui ~T0 @X0 1 r2 ]
+[f ]
+"583
+[v _channel `uc ~T0 @X0 1 a ]
+"584
+[e $ ! && >= -> _lcd_channel `i -> 1 `i <= -> _lcd_channel `i -> 8 `i 361  ]
+"585
+{
+"586
+[e = _channel -> ( _my_pow (2 , -> 2 `i - -> _lcd_channel `i -> 1 `i `uc ]
+"587
+[e ( _USART_put_int (1 -> -> 23205 `i `ui ]
+"588
+[e ( _USART_putc (1 -> -> 4 `i `uc ]
+"589
+[e ( _USART_putc (1 -> -> 132 `i `uc ]
+"590
+[e ( _USART_putc (1 -> _channel `uc ]
+"591
+[e ( _USART_put_int (1 + -> -> 1150 `i `ui _value ]
+"592
+}
+[e :U 361 ]
+"593
+[e :UE 360 ]
+}
+"595
+[v _PROCULUS_Clear_Line_Graphic `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _PROCULUS_Clear_Line_Graphic ]
+[v _channel `uc ~T0 @X0 1 r1 ]
+[f ]
+"596
+[v _buffer `uc ~T0 @X0 -> 2 `i a ]
+"597
+[e = *U + &U _buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _buffer `ui `ux -> -> 235 `i `uc ]
+"598
+[e = *U + &U _buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _buffer `ui `ux -> + -> 85 `i -> _channel `i `uc ]
+"599
+[e ( _PROCULUS_REG_Write (2 , &U _buffer -> -> 3 `i `uc ]
+"600
+[e :UE 362 ]
+}
+[a 5C 58 0 ]
+[a 6C 58 0 ]
+[a 2C 47 0 ]
+[a 3C 47 0 ]
+[a 1C 0 ]
+[a 4C 0 ]

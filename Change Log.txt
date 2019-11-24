@@ -1,0 +1,51 @@
+Tarefas a serem feitas (em ordem de prioridade)
+
+
+..........Ruido no vacuo ao ligar condensador.
+..........Padronizar cores do grafico.
+.........."Placa não conectada" e "Sem sensor" para vacuo e pt100.
+..........Recuperar grafico apos blackout.
+
+
+Versão 1.0.8
+Rotina de Grafico Concluida
+Invertida logica de leitura da placa Vacuo (0=tensao, 1=Vacuo)
+
+Versão 1.0.7 Beta
+Padronizando cores de grafico.
+Contador de repique do vacuo.
+
+Versão 1.0.6
+..........Tentando rodar 13 graficos com 8 simultaneos       
+
+Versao 1.0.5
+OK........Icones de alarmes setados antes de exibir a tela.
+OK........Setado tempo de Processo antes de exibir a tela.
+OK........Corrigido Scroll do prompt.
+OK........Contagem de reset das placas.
+
+Versao 1.0.4
+OK........Versionamento automatico
+
+Versao 1.0.3 
+(IGNORADO)
+
+Versão 1.0.2
+OK........Variaveis Globais Voltimetro, Condensador e Vacuometro não estavam sendo alimentadas.
+
+
+Versão 1.0.1
+OK........Agilizar leitura de sensores.
+OK........Questão do salvamento e execução das tarefas de aquecimento.
+OK........Colocar versao de software do display.
+
+Versão 1.0.0
+
+OK........Cuidar do reset da placa PT100 na leitura e/ou escrita de EEPROM externa.
+OK........DataLog e Aquecimento estão desligando com Blackout.
+OK........Quando houver Blackout deve voltar na pagina inicial.
+OK........Salvar Status de botoes para toda modificação, Salvar tempo de 10 em 10 minutos, enviar wekup de 30 em 30 segundos.
+OK........Padrobizar Sonorização.
+OK........Versão das placas filha juntamente com identificador de modelo.
+
+
