@@ -628,9 +628,10 @@ void main(void)
                             static int canal=0;
                             flag_proculus_hs=TRUE;
                             
+                            /*
                             for(canal=0;canal<14;canal++)
                                 PROCULUS_VP_Write_UInt16(1000+canal,*mapa.entrada[canal]*mapa.fator[canal]);      
-                            
+                            */
 
                             for(trendvp=0x0310;trendvp<0x031D;trendvp++)
                                   {	
