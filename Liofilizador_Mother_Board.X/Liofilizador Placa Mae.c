@@ -256,6 +256,88 @@ void main(void)
      
      
      
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     /*
+     while(1)
+          {
+             asm("CLRWDT");
+             //------------INTERPRETA COMANDO DO MICROCOMPUTADOR--------------------                 
+             if(flag_usart_rx)
+                { 
+                 flag_usart_rx=0;
+                 USART_put_int(0x1234);
+                //Comando_Protocolo_Serial(); 
+                }                    
+
+             //----------------INTERPRETA COMANDO DO DISPLAY----------------
+             if(flag_usart_rx)
+                {
+                flag_usart_rx=0; 
+                USART_put_int(0x5678);
+                //Comando_Display();
+                }//flag_usart_rx           
+          }
+     
+     */
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
      //------------------------------------------------------------------------- 
      statuspower.bits=EEPROM_Read_Byte(16);
      if(statuspower.bits==0) 
@@ -729,18 +811,19 @@ void main(void)
                  __delay_ms(50);
                  USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
                  USART_putc(0xCD);USART_putc(0xCD);
-                 for(unsigned int tempo=0; tempo<50; tempo++)
+                 for(unsigned int tempo=0; tempo<500; tempo++)
                      {
                      if(flag_usart_rx==TRUE) break;
                      __delay_ms(1);
                      }            
                  
 
-                 //------------INTERPRETA COMANDO DO MICROCOMPUTADOR--------------------
+                 //------------INTERPRETA COMANDO DO MICROCOMPUTADOR--------------------                 
                  if(flag_usart_rx)
                     { 
                     Comando_Protocolo_Serial(); 
                     }                    
+                  
                  //----------------INTERPRETA COMANDO DO DISPLAY----------------
                  if(flag_usart_rx)
                     { 

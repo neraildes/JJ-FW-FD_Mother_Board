@@ -1,1 +1,4 @@
-build/default/production\adc.p1: adc.c global.h adc.h
+build/default/production/adc.p1:  \
+adc.c  \
+global.h  \
+adc.h 
