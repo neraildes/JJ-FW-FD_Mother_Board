@@ -92,11 +92,16 @@ struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
         unsigned flagSendDataFix :1;
-        unsigned flag_proculus_hs :1;
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
 }statusgen1;
-# 286 "./global.h"
+
+
+
+
+
+
+
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -5427,7 +5432,7 @@ volatile unsigned int tempodecorrido;
 
 void PROCULUS_REG_Write(unsigned char *vetor, unsigned char size){
      unsigned char i;
-     _delay((unsigned long)((32)*(32000000/4000.0)));
+
      USART_put_int(0x5AA5);
      USART_putc((unsigned char)(1+size));
      USART_putc(0x80);
@@ -5442,7 +5447,7 @@ void PROCULUS_REG_Write(unsigned char *vetor, unsigned char size){
 void PROCULUS_REG_Read(unsigned char reg, unsigned char size, unsigned char *retorno){
      unsigned char i;
      unsigned int tempo;
-     if(!statusgen1.flag_proculus_hs) _delay((unsigned long)((32)*(32000000/4000.0)));
+
      USART_put_int(0x5AA5);
      USART_putc((unsigned char)(2+size));
      USART_putc(0x81);
@@ -5480,7 +5485,7 @@ void PROCULUS_REG_Read(unsigned char reg, unsigned char size, unsigned char *ret
 
 void PROCULUS_VP_Write(unsigned int vp,char *vetor,char size){
      unsigned char i;
-     if(!statusgen1.flag_proculus_hs) _delay((unsigned long)((32)*(32000000/4000.0)));
+
      USART_put_int(0x5AA5);
      USART_putc((unsigned char)(3+size));
      USART_putc(0x82);
@@ -5500,13 +5505,13 @@ void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size){
 
 
 
-     _delay((unsigned long)((32)*(32000000/4000.0)));
+
      USART_put_int(0x5AA5);
      USART_putc(4);
      USART_putc(0x83);
      USART_put_int(vp);
      USART_putc((unsigned char)(size>>1));
-     _delay((unsigned long)((50)*(32000000/4000000.0)));
+
 
 
 

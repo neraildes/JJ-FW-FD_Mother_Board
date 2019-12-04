@@ -13,14 +13,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S271 . bits . ]
 "270
 [; ;./global.h: 270: struct{
-[s S273 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S273 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico ]
-"286
-[; ;./global.h: 286: struct{
+[s S273 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S273 . flag_save_time flag_wakeup flagSendDataFix flag_Vacuo_estava_ligado flag_generico ]
+"284
+[; ;./global.h: 284: struct{
 [s S274 :1 `uc 1 ]
 [n S274 . flag_main_loop_WDT ]
-"291
-[; ;./global.h: 291: typedef struct{
+"289
+[; ;./global.h: 289: typedef struct{
 [s S275 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S275 . milisegundo segundo minuto hora ]
 "14 ./I2C.h
@@ -525,14 +525,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "259
 [; ;./global.h: 259:       } statuspower;
 [v _statuspower `S271 ~T0 @X0 1 e ]
-"277
-[; ;./global.h: 277: }statusgen1;
+"276
+[; ;./global.h: 276: }statusgen1;
 [v _statusgen1 `S273 ~T0 @X0 1 e ]
-"288
-[; ;./global.h: 288: }statusWDT;
+"286
+[; ;./global.h: 286: }statusWDT;
 [v _statusWDT `S274 ~T0 @X0 1 e ]
-"298
-[; ;./global.h: 298: volatile t_rtc rtc;
+"296
+[; ;./global.h: 296: volatile t_rtc rtc;
 [v _rtc `VS275 ~T0 @X0 1 e ]
 "11 EEPROM_24C1025.c
 [; ;EEPROM_24C1025.c: 11: void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,

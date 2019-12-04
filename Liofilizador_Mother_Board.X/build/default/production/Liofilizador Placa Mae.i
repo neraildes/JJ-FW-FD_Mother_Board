@@ -5227,11 +5227,16 @@ struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
         unsigned flagSendDataFix :1;
-        unsigned flag_proculus_hs :1;
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
 }statusgen1;
-# 286 "./global.h"
+
+
+
+
+
+
+
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -5844,7 +5849,7 @@ void main(void)
      My_ADC_init();
      I2C_Master_Init(100000);
      my_delay_ms_CLRWDT(500);
-# 342 "Liofilizador Placa Mae.c"
+# 340 "Liofilizador Placa Mae.c"
      statuspower.bits=EEPROM_Read_Byte(16);
      if(statuspower.bits==0)
        {
@@ -6028,315 +6033,293 @@ void main(void)
 
 
 
-        while(1)
-             {
-             statusWDT.flag_main_loop_WDT=1;
+     while(1)
+          {
+          statusWDT.flag_main_loop_WDT=1;
 
-             Buffer_Manager();
+          Buffer_Manager();
 
 
-             if(delaycheckscreen>1000)
+          if(delaycheckscreen>1000)
+            {
+            delaycheckscreen=0;
+            pagina = PROCULUS_Get_Page();
+            if(pagina!=paginamemo)
                {
-               delaycheckscreen=0;
-               pagina = Captura_Pagina();
-               if(pagina!=paginamemo)
-                  {
-                  paginamemo=pagina;
-                  }
+               paginamemo=pagina;
                }
+            }
 
 
-             escalonamento++;
-             if(escalonamento>3)escalonamento=0;
-             escalonamento=3;
-             switch(escalonamento)
+            if(rtc.milisegundo<2) if(pagina!=25) Exibe_Hora_Data(0);
+            if(statuspower.flag_time_process==1) SaveBlackoutStatusRuning();
+            Exibe_Tempo_de_Processo();
+            Icones_de_alarmes();
+
+
+
+            Gerenciador_de_Senha();
+            Gerenciador_de_Senha_Global();
+
+
+
+            global_datalog();
+            global_condensador();
+            global_vacuo();
+            global_aquecimento();
+
+            if(memo_statuspower!=statuspower.bits)
+              {
+              PROCULUS_OK();
+              SaveBlackoutStatus();
+              memo_statuspower=statuspower.bits;
+              }
+
+             if((processo_segundo==0) || (processo_segundo==30))
+               {
+               if(statusgen1.flag_wakeup==1)
+                 {
+                 statusgen1.flag_wakeup=0;
+                 AcordaFilha();
+                 }
+               }
+             else
+               {
+               statusgen1.flag_wakeup=1;
+               }
+             Check_And_Send_Capture_Datalog();
+             showTotalReset();
+
+
+             ShowSensorRealTimeHS();
+
+
+
+
+             switch(pagina)
                    {
-                   case 3:
-
-                          if(rtc.milisegundo<2) if(pagina!=25) Exibe_Hora_Data(0);
-                          if(statuspower.flag_time_process==1) SaveBlackoutStatusRuning();
-                          Exibe_Tempo_de_Processo();
-                          Icones_de_alarmes();
-                   case 2:
-                          Gerenciador_de_Senha();
-                          Gerenciador_de_Senha_Global();
-                   case 1:
-                          global_datalog();
-                          global_condensador();
-                          global_vacuo();
-                          global_aquecimento();
 
 
-                          if(memo_statuspower!=statuspower.bits)
-                            {
-                            PROCULUS_OK();
-                            SaveBlackoutStatus();
-                            memo_statuspower=statuspower.bits;
-                            }
 
-                   case 0:
-                          if((processo_segundo==0) || (processo_segundo==30))
+
+
+
+                   case 19:
+                   case 21:
+
+
+                            for(char i=0; i<10; i++)
+                                {
+
+                                if(PROCULUS_VP_Read_UInt16(7+i)==1)
+                                   {
+                                   PROCULUS_VP_Write_UInt16(7+i,0);
+                                   Index_Sel_Rec=i;
+                                   if(Index_Sel_Rec<=4)
+                                      {
+                                      returnToScreen=19;
+                                      PROCULUS_Show_Screen(27);
+                                      }
+                                   else
+                                      {
+                                      returnToScreen=21;
+                                      PROCULUS_Show_Screen(28);
+                                      }
+                                   }
+                                }
+                           pagina_19();
+                           break;
+                   case 23:
+                           if(PROCULUS_VP_Read_UInt16(1)==1)
                               {
-                              if(statusgen1.flag_wakeup==1)
-                                 {
-                                 statusgen1.flag_wakeup=0;
-                                 AcordaFilha();
-                                 }
+                              PROCULUS_VP_Write_UInt16(1,0);
+                              pagina_23();
                               }
-                          else
+                           break;
+
+                   case 25:
+                          if(maincnt==0)
+                             {
+                             Exibe_Hora_Data(1);
+                             maincnt++;
+                             }
+                           if(PROCULUS_VP_Read_UInt16(174)==1)
                               {
-                              statusgen1.flag_wakeup=1;
+                              PROCULUS_VP_Write_UInt16(174,0);
+                              pagina_25();
                               }
-                          Check_And_Send_Capture_Datalog();
-
-                          ShowSensorRealTimeHS();
-
-                          showTotalReset();
-                   }
-
-
-
-
-            switch(pagina)
-                  {
-
-
-
-
-
-
-                  case 19:
-                  case 21:
-
-
-                           for(char i=0; i<10; i++)
+                           break;
+                   case 27:
+                   case 28:
+                           for(Index_Receita=0;Index_Receita<8;Index_Receita++)
                                {
-
-                               if(PROCULUS_VP_Read_UInt16(7+i)==1)
+                               if(PROCULUS_VP_Read_UInt16(0x0020+Index_Receita)==1)
                                   {
-                                  PROCULUS_VP_Write_UInt16(7+i,0);
-                                  Index_Sel_Rec=i;
-                                  if(Index_Sel_Rec<=4)
-                                     {
-                                     returnToScreen=19;
-                                     PROCULUS_Show_Screen(27);
-                                     }
-                                  else
-                                     {
-                                     returnToScreen=21;
-                                     PROCULUS_Show_Screen(28);
-                                     }
+                                  PROCULUS_VP_Write_UInt16(0x0020+Index_Receita,0);
+                                  PROCULUS_Show_Screen(returnToScreen);
+                                  Carrega_Tupla_Receita(Index_Receita, &receita);
+                                  Set_Receita(Index_Sel_Rec,1);
                                   }
                                }
-                          pagina_19();
-                          break;
-                  case 23:
-                          if(PROCULUS_VP_Read_UInt16(1)==1)
-                             {
-                             PROCULUS_VP_Write_UInt16(1,0);
-                             pagina_23();
-                             }
-                          break;
 
-                  case 25:
-                         if(maincnt==0)
-                            {
-                            Exibe_Hora_Data(1);
-                            maincnt++;
-                            }
-                          if(PROCULUS_VP_Read_UInt16(174)==1)
-                             {
-                             PROCULUS_VP_Write_UInt16(174,0);
-                             pagina_25();
-                             }
-                          break;
-                  case 27:
-                  case 28:
-                          for(Index_Receita=0;Index_Receita<8;Index_Receita++)
-                              {
-                              if(PROCULUS_VP_Read_UInt16(0x0020+Index_Receita)==1)
-                                 {
-                                 PROCULUS_VP_Write_UInt16(0x0020+Index_Receita,0);
-                                 PROCULUS_Show_Screen(returnToScreen);
-                                 Carrega_Tupla_Receita(Index_Receita, &receita);
-                                 Set_Receita(Index_Sel_Rec,1);
-                                 }
-                              }
-
-                              if(PROCULUS_VP_Read_UInt16(17)==1)
-                                 {
-                                 PROCULUS_VP_Write_UInt16(17,0);
-                                 PROCULUS_Show_Screen(returnToScreen);
-                                 }
-
-                              if(PROCULUS_VP_Read_UInt16(18)==1)
-                                 {
-                                 PROCULUS_VP_Write_UInt16(18,0);
-                                 receita.histerese=0;
-                                 strcpy(receita.nome,"");
-                                 receita.potenciaOFF=0;
-                                 receita.potenciaON=0;
-                                 receita.setpoint=0;
-                                 Set_Receita(Index_Sel_Rec,0);
-                                 PROCULUS_Show_Screen(returnToScreen);
-                                 }
-
-                          break;
-
-                  case 29:
-                          if(PROCULUS_VP_Read_UInt16(175)==1)
-                             {
-                             PROCULUS_VP_Write_UInt16(175,0);
-                             pagina_29();
-                             }
-                          break;
-                  case 31:
-                          {
-
-
-                          unsigned long dica;
-
-                          dica=~(senha_atual^0xAABBCCDD);
-
-                          ultoa(dica,texto,16);
-
-                          PROCULUS_VP_Write_String(1660,texto);
-                          my_delay_ms_TMR1(500);
-                          }
-                          if(PROCULUS_VP_Read_UInt16(386)==1)
-                             {
-                             PROCULUS_VP_Write_UInt16(386,0);
-                             pagina_31();
-                             }
-                          break;
-                  case 35:
-                            {
-                            int tv;
-                            char total;
-                            static int canal=0;
-                            statusgen1.flag_proculus_hs=1;
-
-
-
-
-
-
-                            for(trendvp=0x0310;trendvp<0x031D;trendvp++)
+                               if(PROCULUS_VP_Read_UInt16(17)==1)
                                   {
-          icone=trendvp-0x0310;
-                                  if(PROCULUS_VP_Read_UInt16(trendvp)==14)
-                                          {
-            canal=MenorCanalLivre();
-                                          if(canal<8)
-                                             {
-                                             PROCULUS_VP_Write_UInt16(0x310+icone,icone+1);
-                                             PROCULUS_VP_Write_UInt16((canal*10+1789),(canal<<8)|(0x0001));
-                                             PROCULUS_VP_Write_UInt16((canal*10+1787),TrendColor[icone]);
-
-
-            mapa.canal[canal]=canal;
-            mapa.icone[canal]=icone+1;
-            mapa.vpIcone[icone]=icone+1;
-            mapa.cor[canal]=TrendColor[icone];
-               mapa.fator[canal]=1.0;
-               mapa.entrada[canal]=&leitura[(icone<3)?(icone):((icone)+1)];
-
-               mapa.fator[canal]=1.0;
-
-                                             if(icone==0)mapa.fator[canal]=0.4546;
-                                             if(icone==1)mapa.fator[canal]=0.05;
-
-
-
-
-                                             TrendCurveFuncao(2);
-                                             }
-                                          else
-                                             {
-                                             PROCULUS_VP_Write_UInt16((canal*10+1789),(canal<<8)|(0x0A00));
-                                             PROCULUS_VP_Write_UInt16((canal*10+1787),0xFFFF);
-                                             PROCULUS_VP_Write_UInt16(trendvp,-1);
-                                             }
-                                          }
-                                     else
-                                      if((PROCULUS_VP_Read_UInt16(trendvp)>=15)&&(PROCULUS_VP_Read_UInt16(trendvp)<=30))
-                                          {
-                                          char canal_aleatorio, canal_sequencial;
-
-            canal_sequencial=buscaIndex(mapa.icone,icone+1);
-            canal_aleatorio=mapa.icone[icone]-1;
-
-                                          PROCULUS_VP_Write_UInt16(trendvp,-1);
-                                          PROCULUS_VP_Write_UInt16((canal_sequencial*10+1789),0x0A00);
-                                          PROCULUS_VP_Write_UInt16((canal_sequencial*10+1787),0xFFFF);
-
-            mapa.entrada[canal_sequencial]=((void*)0);
-                                          mapa.canal[canal_sequencial]=0X0A;
-                                          mapa.icone[canal_sequencial]=-1;
-                                          mapa.vpIcone[icone]=-1;
-                                          mapa.cor[canal_sequencial]=0xFFFF;
-               mapa.fator[canal_sequencial]=0.0;
-
-
-                                          TrendCurveFuncao(2);
-                                          }
+                                  PROCULUS_VP_Write_UInt16(17,0);
+                                  PROCULUS_Show_Screen(returnToScreen);
                                   }
 
+                               if(PROCULUS_VP_Read_UInt16(18)==1)
+                                  {
+                                  PROCULUS_VP_Write_UInt16(18,0);
+                                  receita.histerese=0;
+                                  strcpy(receita.nome,"");
+                                  receita.potenciaOFF=0;
+                                  receita.potenciaON=0;
+                                  receita.setpoint=0;
+                                  Set_Receita(Index_Sel_Rec,0);
+                                  PROCULUS_Show_Screen(returnToScreen);
+                                  }
 
+                           break;
 
-
-
-
-                            statusgen1.flag_proculus_hs=0;
-                            break;
-                            }
-                  case 47:
-                          Atualizar_Lista_de_Receitas();
-
-                          for(Index_Receita=0;Index_Receita<8;Index_Receita++)
+                   case 29:
+                           if(PROCULUS_VP_Read_UInt16(175)==1)
                               {
-
-                              if(PROCULUS_VP_Read_UInt16(0x0020+Index_Receita)==1)
-                                 {
-                                 PROCULUS_VP_Write_UInt16(0x0020+Index_Receita,0);
-                                 pagina_47();
-                                 break;
-                                 }
+                              PROCULUS_VP_Write_UInt16(175,0);
+                              pagina_29();
                               }
-
-                          break;
-                  case 49:
-                          {
-                          pagina_49();
-                          }
-                          break;
-                  }
+                           break;
+                   case 31:
+                           {
 
 
+                           unsigned long dica;
 
-                 _delay((unsigned long)((50)*(32000000/4000.0)));
-                 USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
-                 USART_putc(0xCD);USART_putc(0xCD);
-                 for(unsigned int tempo=0; tempo<500; tempo++)
+                           dica=~(senha_atual^0xAABBCCDD);
+
+                           ultoa(dica,texto,16);
+
+                           PROCULUS_VP_Write_String(1660,texto);
+                           my_delay_ms_TMR1(500);
+                           }
+                           if(PROCULUS_VP_Read_UInt16(386)==1)
+                              {
+                              PROCULUS_VP_Write_UInt16(386,0);
+                              pagina_31();
+                              }
+                           break;
+                   case 35:
+                             {
+                             int tv;
+                             char total;
+                             static int canal=0;
+
+                             for(trendvp=0x0310;trendvp<0x031D;trendvp++)
+                                   {
+                                   icone=trendvp-0x0310;
+                                   if(PROCULUS_VP_Read_UInt16(trendvp)==14)
+                                           {
+                                           canal=MenorCanalLivre();
+                                           if(canal<8)
+                                              {
+                                              PROCULUS_VP_Write_UInt16(0x310+icone,icone+1);
+                                              PROCULUS_VP_Write_UInt16((canal*10+1789),(canal<<8)|(0x0001));
+                                              PROCULUS_VP_Write_UInt16((canal*10+1787),TrendColor[icone]);
+
+
+                                              mapa.canal[canal]=canal;
+                                              mapa.icone[canal]=icone+1;
+                                              mapa.vpIcone[icone]=icone+1;
+                                              mapa.cor[canal]=TrendColor[icone];
+                                              mapa.fator[canal]=1.0;
+                                              mapa.entrada[canal]=&leitura[(icone<3)?(icone):((icone)+1)];
+
+                                              mapa.fator[canal]=1.0;
+
+                                              if(icone==0)mapa.fator[canal]=0.4546;
+                                              if(icone==1)mapa.fator[canal]=0.05;
+
+
+
+
+                                              TrendCurveFuncao(2);
+                                              }
+                                           else
+                                              {
+                                              PROCULUS_VP_Write_UInt16((canal*10+1789),(canal<<8)|(0x0A00));
+                                              PROCULUS_VP_Write_UInt16((canal*10+1787),0xFFFF);
+                                              PROCULUS_VP_Write_UInt16(trendvp,-1);
+                                              }
+                                           }
+                                      else
+                                       if((PROCULUS_VP_Read_UInt16(trendvp)>=15)&&(PROCULUS_VP_Read_UInt16(trendvp)<=30))
+                                           {
+                                           char canal_aleatorio, canal_sequencial;
+
+                                           canal_sequencial=buscaIndex(mapa.icone,icone+1);
+                                           canal_aleatorio=mapa.icone[icone]-1;
+
+                                           PROCULUS_VP_Write_UInt16(trendvp,-1);
+                                           PROCULUS_VP_Write_UInt16((canal_sequencial*10+1789),0x0A00);
+                                           PROCULUS_VP_Write_UInt16((canal_sequencial*10+1787),0xFFFF);
+
+                                           mapa.entrada[canal_sequencial]=((void*)0);
+                                           mapa.canal[canal_sequencial]=0X0A;
+                                           mapa.icone[canal_sequencial]=-1;
+                                           mapa.vpIcone[icone]=-1;
+                                           mapa.cor[canal_sequencial]=0xFFFF;
+                                           mapa.fator[canal_sequencial]=0.0;
+
+
+                                           TrendCurveFuncao(2);
+                                           }
+                                   }
+                             break;
+                             }
+                   case 47:
+                           Atualizar_Lista_de_Receitas();
+
+                           for(Index_Receita=0;Index_Receita<8;Index_Receita++)
+                               {
+
+                               if(PROCULUS_VP_Read_UInt16(0x0020+Index_Receita)==1)
+                                  {
+                                  PROCULUS_VP_Write_UInt16(0x0020+Index_Receita,0);
+                                  pagina_47();
+                                  break;
+                                  }
+                               }
+
+                           break;
+                   case 49:
+                           {
+                           pagina_49();
+                           }
+                           break;
+                   }
+
+                  _delay((unsigned long)((50)*(32000000/4000.0)));
+                  USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
+                  USART_putc(0xCD);USART_putc(0xCD);
+
+                  for(unsigned int tempo=0; tempo<500; tempo++)
+                      {
+                      if(statusgen.flag_usart_rx==1) break;
+                      _delay((unsigned long)((1)*(32000000/4000.0)));
+                      }
+
+
+
+                  if(statusgen.flag_usart_rx)
                      {
-                     if(statusgen.flag_usart_rx==1) break;
-                     _delay((unsigned long)((1)*(32000000/4000.0)));
+                     Comando_Protocolo_Serial();
                      }
 
 
-
-                 if(statusgen.flag_usart_rx)
-                    {
-                    Comando_Protocolo_Serial();
-                    }
-
-
-                 if(statusgen.flag_usart_rx)
-                    {
-                    Comando_Display();
-                    }
-
-
+                  if(statusgen.flag_usart_rx)
+                     {
+                     Comando_Display();
+                     }
 
             }
 
@@ -6493,7 +6476,7 @@ int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
     }
     return 0;
 }
-# 998 "Liofilizador Placa Mae.c"
+# 974 "Liofilizador Placa Mae.c"
 void ShowSensorRealTimeHS(void)
      {
      char bb[3];
@@ -6506,6 +6489,7 @@ void ShowSensorRealTimeHS(void)
 
 
 
+     my_delay_ms(50);
      for(tupla=0;tupla<(totalboard*2);tupla++)
         {
         SlaveBoard = (tupla / 2)+1;
@@ -6518,7 +6502,7 @@ void ShowSensorRealTimeHS(void)
 
 
      my_delay_ms(50);
-     statusgen1.flag_proculus_hs=1;
+
      for(tupla=0;tupla<(totalboard*2);tupla++)
         {
         switch(tupla)
@@ -6551,10 +6535,8 @@ void ShowSensorRealTimeHS(void)
                   break;
               }
         }
-      statusgen1.flag_proculus_hs=0;
-
      }
-# 1067 "Liofilizador Placa Mae.c"
+# 1042 "Liofilizador Placa Mae.c"
 void Carrega_Tupla_Receita(char index, t_receita *receita){
      unsigned int addeeprom;
 
@@ -6600,7 +6582,7 @@ void Exibe_Receita(int index){
      texto[8]=0;
      PROCULUS_VP_Write_String(vp+4,texto);
 }
-# 1130 "Liofilizador Placa Mae.c"
+# 1105 "Liofilizador Placa Mae.c"
 void DataBaseBackupMain(unsigned char tupla)
       {
       unsigned int vp;
@@ -6621,7 +6603,7 @@ void DataBaseBackupMain(unsigned char tupla)
       EEPROM_Write_Integer(addEEPROM+16,PROCULUS_VP_Read_UInt16(vp+11));
 
       }
-# 1167 "Liofilizador Placa Mae.c"
+# 1142 "Liofilizador Placa Mae.c"
  void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
       {
       char CanalAD;
@@ -6701,7 +6683,7 @@ void DataBaseBackupMain(unsigned char tupla)
          PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
          }
 }
-# 1254 "Liofilizador Placa Mae.c"
+# 1229 "Liofilizador Placa Mae.c"
 void save_datalog(unsigned int add){
      char index;
      char bb[3];
@@ -6718,7 +6700,7 @@ void save_datalog(unsigned int add){
             }
          }
 }
-# 1279 "Liofilizador Placa Mae.c"
+# 1254 "Liofilizador Placa Mae.c"
  void ShowAndSetSlaveParameters(unsigned char tupla)
       {
       unsigned char CanalAD;
@@ -6750,7 +6732,7 @@ void save_datalog(unsigned int add){
       PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
 
       }
-# 1319 "Liofilizador Placa Mae.c"
+# 1294 "Liofilizador Placa Mae.c"
 void Send_to_PC(unsigned char size){
 
 
@@ -6759,7 +6741,7 @@ void Send_to_PC(unsigned char size){
      USART_putc(usart_protocol.origem);
      USART_putc(usart_protocol.command);
      USART_putc(size);
-# 1337 "Liofilizador Placa Mae.c"
+# 1312 "Liofilizador Placa Mae.c"
 }
 
 
@@ -6791,7 +6773,7 @@ void Decodify_Command(void){
     ((char *)&add_24LCxxxx)[0]=(usart_protocol.value[4]);
 
     switch(usart_protocol.command){
-# 1399 "Liofilizador Placa Mae.c"
+# 1374 "Liofilizador Placa Mae.c"
         case 0x08:
              EEPROM_Write_Byte(usart_protocol.value[0],
                                usart_protocol.value[1]);
@@ -6920,13 +6902,13 @@ void Decodify_Command(void){
              Send_to_PC(3);
              SEND_REPLY_OK();
              break;
-# 1610 "Liofilizador Placa Mae.c"
+# 1585 "Liofilizador Placa Mae.c"
         case 0X21:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
              Send_to_PC(3);
              SEND_REPLY_OK();
-# 1657 "Liofilizador Placa Mae.c"
+# 1632 "Liofilizador Placa Mae.c"
     }
 }
 
@@ -7539,7 +7521,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2277 "Liofilizador Placa Mae.c"
+# 2252 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -7692,7 +7674,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2437 "Liofilizador Placa Mae.c"
+# 2412 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {

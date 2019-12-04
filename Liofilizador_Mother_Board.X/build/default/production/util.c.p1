@@ -13,14 +13,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S10 . bits . ]
 "270
 [; ;./global.h: 270: struct{
-[s S12 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S12 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico ]
-"286
-[; ;./global.h: 286: struct{
+[s S12 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S12 . flag_save_time flag_wakeup flagSendDataFix flag_Vacuo_estava_ligado flag_generico ]
+"284
+[; ;./global.h: 284: struct{
 [s S13 :1 `uc 1 ]
 [n S13 . flag_main_loop_WDT ]
-"291
-[; ;./global.h: 291: typedef struct{
+"289
+[; ;./global.h: 289: typedef struct{
 [s S14 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S14 . milisegundo segundo minuto hora ]
 "14 util.c.c
@@ -113,14 +113,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "259
 [; ;./global.h: 259:       } statuspower;
 [v _statuspower `S10 ~T0 @X0 1 e ]
-"277
-[; ;./global.h: 277: }statusgen1;
+"276
+[; ;./global.h: 276: }statusgen1;
 [v _statusgen1 `S12 ~T0 @X0 1 e ]
-"288
-[; ;./global.h: 288: }statusWDT;
+"286
+[; ;./global.h: 286: }statusWDT;
 [v _statusWDT `S13 ~T0 @X0 1 e ]
-"298
-[; ;./global.h: 298: volatile t_rtc rtc;
+"296
+[; ;./global.h: 296: volatile t_rtc rtc;
 [v _rtc `VS14 ~T0 @X0 1 e ]
 "56 ./proculus.h
 [; ;./proculus.h: 56: const int TrendColor[13]={
@@ -566,9 +566,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "20
 [; ;util.c.c: 20:         char textolocal[30];
 [v _textolocal `uc ~T0 @X0 -> 30 `i a ]
-"21
-[; ;util.c.c: 21:         statusgen1.flag_proculus_hs=1;
-[e = . _statusgen1 3 -> -> 1 `i `uc ]
 "22
 [; ;util.c.c: 22:         if(vpPrint<=2420)
 [e $ ! <= _vpPrint -> -> 2420 `i `ui 283  ]
@@ -624,9 +621,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;util.c.c: 40:           }
 }
 [e :U 284 ]
-"41
-[; ;util.c.c: 41:         statusgen1.flag_proculus_hs=0;
-[e = . _statusgen1 3 -> -> 0 `i `uc ]
 "42
 [; ;util.c.c: 42:    }
 [e :UE 282 ]

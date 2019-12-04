@@ -452,11 +452,16 @@ struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
         unsigned flagSendDataFix :1;
-        unsigned flag_proculus_hs :1;
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
 }statusgen1;
-# 286 "./global.h"
+
+
+
+
+
+
+
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -4932,7 +4937,7 @@ extern unsigned int vpPrint;
    void print(char *texto){
         unsigned int vp_roll;
         char textolocal[30];
-        statusgen1.flag_proculus_hs=1;
+
         if(vpPrint<=2420)
           {
 
@@ -4952,7 +4957,7 @@ extern unsigned int vpPrint;
           PROCULUS_VP_Write_String(2420, texto);
 
           }
-        statusgen1.flag_proculus_hs=0;
+
    }
 
 void clear_screen(void){

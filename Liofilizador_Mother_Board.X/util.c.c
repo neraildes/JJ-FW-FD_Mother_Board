@@ -18,7 +18,7 @@ extern unsigned int vpPrint;
    void print(char *texto){ 
         unsigned int vp_roll;
         char textolocal[30];       
-        flag_proculus_hs=TRUE;
+        
         if(vpPrint<=2420)
           { 
           
@@ -38,7 +38,7 @@ extern unsigned int vpPrint;
           PROCULUS_VP_Write_String(2420, texto);
           
           }  
-        flag_proculus_hs=FALSE;
+        
    }
    
 void clear_screen(void){
