@@ -162,7 +162,7 @@ char trendExist;
 int  trendvp=0x0310;
 char icone ; 
 
-char escalonamento;
+
 unsigned char nabucodonozor=0;
 
 unsigned int vpPrint=2000;
@@ -540,53 +540,51 @@ void main(void)
                }              
              
              //-----------------------------------------------------------------
-             escalonamento++;
-             if(escalonamento>3)escalonamento=0;
-             escalonamento=3;
-             switch(escalonamento)
-                   {
-                   case 3:                                                                       
 
-                          if(rtc.milisegundo<2) if(pagina!=25) Exibe_Hora_Data(FALSE); //Exibe data e hora sem segundos
-                          if(flag_time_process==TRUE) SaveBlackoutStatusRuning(); //Salva status e tempo de processo a cada 10 minutos
-                          Exibe_Tempo_de_Processo();
-                          Icones_de_alarmes();    
-                   case 2:
-                          Gerenciador_de_Senha();  //Habilita acesso global por 30 segundos
-                          Gerenciador_de_Senha_Global(); //Libera Senha Global eternamente                       
-                   case 1: 
-                          global_datalog(); // LEITURA DOS SENSORES                        
-                          global_condensador();            
-                          global_vacuo();
-                          global_aquecimento();
-                          
-                          //BILD Ligar no SAC para Taisa.
-                          if(memo_statuspower!=statuspower.bits) 
-                            { 
-                            PROCULUS_OK();  
-                            SaveBlackoutStatus();
-                            memo_statuspower=statuspower.bits;
-                            }                          
-                          
-                   case 0:
-                          if((processo_segundo==0) || (processo_segundo==30))
-                              { 
-                              if(flag_wakeup==1)
-                                 {
-                                 flag_wakeup=0; 
-                                 AcordaFilha(); 
-                                 }        
-                              }
-                          else
-                              {
-                              flag_wakeup=1;
-                              }                  
-                          Check_And_Send_Capture_Datalog();
-                          //------------------CODIGO RAPIDO---------------------
-                          ShowSensorRealTimeHS();                          
-                          //----------------------------------------------------  
-                          showTotalReset();
-                   } 
+                if(rtc.milisegundo<2) if(pagina!=25) Exibe_Hora_Data(FALSE); //Exibe data e hora sem segundos
+                if(flag_time_process==TRUE) SaveBlackoutStatusRuning(); //Salva status e tempo de processo a cada 10 minutos
+                Exibe_Tempo_de_Processo();
+                Icones_de_alarmes();    
+
+                Gerenciador_de_Senha();  //Habilita acesso global por 30 segundos
+                Gerenciador_de_Senha_Global(); //Libera Senha Global eternamente                       
+
+                global_datalog(); // LEITURA DOS SENSORES
+                __delay_ms(32);                 
+                global_vacuo();
+                __delay_ms(32);
+                global_condensador();
+                __delay_ms(32);
+                global_aquecimento();
+                __delay_ms(32);
+
+                //BILD Ligar no SAC para Taisa.
+                if(memo_statuspower!=statuspower.bits) 
+                  { 
+                  PROCULUS_OK();  
+                  SaveBlackoutStatus();
+                  memo_statuspower=statuspower.bits;
+                  }                          
+
+
+                if((processo_segundo==0) || (processo_segundo==30))
+                    { 
+                    if(flag_wakeup==1)
+                       {
+                       flag_wakeup=0; 
+                       AcordaFilha(); 
+                       }        
+                    }
+                else
+                    {
+                    flag_wakeup=1;
+                    }                  
+                Check_And_Send_Capture_Datalog();
+                //------------------CODIGO RAPIDO---------------------
+                ShowSensorRealTimeHS();                          
+                //----------------------------------------------------  
+                showTotalReset();
+
                           
 
 
