@@ -6259,8 +6259,8 @@ void main(void)
 
                mapa.fator[canal]=1.0;
 
-                                             if(icone==0)mapa.fator[canal]=0.4546;
-                                             if(icone==1)mapa.fator[canal]=0.05;
+                                             if(icone==0)mapa.fator[canal]=1.0;
+                                             if(icone==1)mapa.fator[canal]=1.0;
 
 
 
@@ -6411,105 +6411,49 @@ unsigned char countboard()
 
 int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
 {
-    static float tsn00=0;
-    static float tmp00=0;
-    static float tmp01=0;
-    static float tmp02=0;
-    static float tmp03=0;
-    static float tmp04=0;
-    static float tmp05=0;
-    static float tmp06=0;
-    static float tmp07=0;
-    static float tmp08=0;
-    static float tmp09=0;
  switch(destino)
        {
        case 0:
              break;
        case 1:if(buffer[0]==0)
-                    {
-                    tsn00+=0.0628;
-                    if(tsn00>6.28)tsn00=0;
-                 return sinf(tsn00)*100+2200;
-                    }
+                        return 100;
               else
-        return 16000;
-           break;
+   return 200;
+       break;
        case 2:if(buffer[0]==0)
-                 return -150;
-              else
-        return -1;
-           break;
-       case 3:if(buffer[0]==0)
-                    {
-                    tmp00+=0.01256;
-                    if(tmp00>6.28)tmp00=0;
-                 return sinf(tmp00)*500;
-                    }
-              else
-                    {
-                    tmp01+=0.0314;
-                    if(tmp01>6.28)tmp01=0;
-                 return 50;
-                    }
-           break;
-       case 4:if(buffer[0]==0)
-                    {
-                    tmp02+=0.0209334;
-                    if(tmp02>6.28)tmp02=0;
-                 return 100;
-                    }
-              else
-                    {
-                    tmp03+=0.0157;
-                    if(tmp03>6.28)tmp03=0;
-                 return 150;
-                    }
-           break;
-       case 5:if(buffer[0]==0)
-                    {
-                    tmp04+=0.01256;
-                    if(tmp04>6.28)tmp04=0;
-                 return 200;
-                    }
-              else
-                    {
-                    tmp05+=0.0104667;
-                    if(tmp05>6.28)tmp05=0;
-                 return 250;
-                    }
-           break;
-       case 6:if(buffer[0]==0)
-                    {
-                    tmp06+=0.00897143;
-                    if(tmp06>6.28)tmp06=0;
                  return 300;
-                    }
               else
-                    {
-                    tmp07+=0.00785;
-                    if(tmp07>6.28)tmp07=0;
-                 return 350;
-                    }
-           break;
+   return -1;
+       break;
+       case 3:if(buffer[0]==0)
+                        return 400;
+                else
+                        return 500;
+         break;
+       case 4:if(buffer[0]==0)
+                        return 600;
+                else
+                        return 700;
+         break;
+       case 5:if(buffer[0]==0)
+                        return 800;
+                else
+                        return 900;
+         break;
+       case 6:if(buffer[0]==0)
+                        return 1100;
+                else
+                        return 500;
+         break;
        case 7:if(buffer[0]==0)
-                    {
-                    tmp08+=0.0069778;
-                    if(tmp08>6.28)tmp08=0;
-                 return 400;
-                    }
-              else
-                    {
-                    tmp09+=0.00628;
-                    if(tmp09>6.28)tmp09=0;
-                 return 450;
-                    }
-           break;
-
+                        return 1200;
+                else
+                        return 1300;
+         break;
     }
     return 0;
 }
-# 996 "Liofilizador Placa Mae.c"
+# 940 "Liofilizador Placa Mae.c"
 void ShowSensorRealTimeHS(void)
      {
      char bb[3];
@@ -6527,7 +6471,7 @@ void ShowSensorRealTimeHS(void)
         SlaveBoard = (tupla / 2)+1;
         canal = tupla % 2;
         bb[0]=canal;
-        leitura[tupla]=Send_To_Slave(SlaveBoard, 0X1A, 1, bb);
+        leitura[tupla]=Send_To_Slave_EMULA(SlaveBoard, 0X1A, 1, bb);
         flag_array_slave_WDT[SlaveBoard]=1;
         }
 
@@ -6570,7 +6514,7 @@ void ShowSensorRealTimeHS(void)
       statusgen1.flag_proculus_hs=0;
 
      }
-# 1065 "Liofilizador Placa Mae.c"
+# 1009 "Liofilizador Placa Mae.c"
 void Carrega_Tupla_Receita(char index, t_receita *receita){
      unsigned int addeeprom;
 
@@ -6616,7 +6560,7 @@ void Exibe_Receita(int index){
      texto[8]=0;
      PROCULUS_VP_Write_String(vp+4,texto);
 }
-# 1128 "Liofilizador Placa Mae.c"
+# 1072 "Liofilizador Placa Mae.c"
 void DataBaseBackupMain(unsigned char tupla)
       {
       unsigned int vp;
@@ -6637,7 +6581,7 @@ void DataBaseBackupMain(unsigned char tupla)
       EEPROM_Write_Integer(addEEPROM+16,PROCULUS_VP_Read_UInt16(vp+11));
 
       }
-# 1165 "Liofilizador Placa Mae.c"
+# 1109 "Liofilizador Placa Mae.c"
  void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
       {
       char CanalAD;
@@ -6717,7 +6661,7 @@ void DataBaseBackupMain(unsigned char tupla)
          PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
          }
 }
-# 1252 "Liofilizador Placa Mae.c"
+# 1196 "Liofilizador Placa Mae.c"
 void save_datalog(unsigned int add){
      char index;
      char bb[3];
@@ -6734,7 +6678,7 @@ void save_datalog(unsigned int add){
             }
          }
 }
-# 1277 "Liofilizador Placa Mae.c"
+# 1221 "Liofilizador Placa Mae.c"
  void ShowAndSetSlaveParameters(unsigned char tupla)
       {
       unsigned char CanalAD;
@@ -6766,7 +6710,7 @@ void save_datalog(unsigned int add){
       PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
 
       }
-# 1317 "Liofilizador Placa Mae.c"
+# 1261 "Liofilizador Placa Mae.c"
 void Send_to_PC(unsigned char size){
 
 
@@ -6775,7 +6719,7 @@ void Send_to_PC(unsigned char size){
      USART_putc(usart_protocol.origem);
      USART_putc(usart_protocol.command);
      USART_putc(size);
-# 1335 "Liofilizador Placa Mae.c"
+# 1279 "Liofilizador Placa Mae.c"
 }
 
 
@@ -6807,7 +6751,7 @@ void Decodify_Command(void){
     ((char *)&add_24LCxxxx)[0]=(usart_protocol.value[4]);
 
     switch(usart_protocol.command){
-# 1397 "Liofilizador Placa Mae.c"
+# 1341 "Liofilizador Placa Mae.c"
         case 0x08:
              EEPROM_Write_Byte(usart_protocol.value[0],
                                usart_protocol.value[1]);
@@ -6936,13 +6880,13 @@ void Decodify_Command(void){
              Send_to_PC(3);
              SEND_REPLY_OK();
              break;
-# 1608 "Liofilizador Placa Mae.c"
+# 1552 "Liofilizador Placa Mae.c"
         case 0X21:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
              Send_to_PC(3);
              SEND_REPLY_OK();
-# 1655 "Liofilizador Placa Mae.c"
+# 1599 "Liofilizador Placa Mae.c"
     }
 }
 
@@ -7555,7 +7499,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2275 "Liofilizador Placa Mae.c"
+# 2219 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -7708,7 +7652,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2435 "Liofilizador Placa Mae.c"
+# 2379 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
@@ -8286,8 +8230,8 @@ void TrendCurveFuncao(char funcao){
                                  {
                                  mapa.entrada[mapa.canal[index]]=&leitura[(mapa.icone[mapa.canal[index]]-1<3)?(mapa.icone[mapa.canal[index]]-1):((mapa.icone[mapa.canal[index]]-1)+1)];
                                  mapa.fator[mapa.canal[index]]=1.0;
-                                 if(mapa.canal[index]==0)mapa.fator[mapa.canal[index]]=0.4546;
-                                 if(mapa.canal[index]==1)mapa.fator[mapa.canal[index]]=0.05;
+                                 if(mapa.canal[index]==0)mapa.fator[mapa.canal[index]]=1.0;
+                                 if(mapa.canal[index]==1)mapa.fator[mapa.canal[index]]=1.0;
                                  }
                               }
 

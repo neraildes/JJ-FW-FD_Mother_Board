@@ -43,8 +43,8 @@
 #define PPCOR   1787
 
 #define FATOR_PADRAO 1.0
-#define FATOR_TENSAO 0.4546
-#define FATOR_VACUO  0.05
+#define FATOR_TENSAO 1.0 //0.4546
+#define FATOR_VACUO  1.0 //0.05
 
 //------------------------------------------------------------------------------
 const char *boardtype[5]={"Mother Board",
@@ -887,101 +887,45 @@ unsigned char countboard()
 
 int  Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
 {
-    static float tsn00=0;
-    static float tmp00=0;
-    static float tmp01=0;
-    static float tmp02=0;
-    static float tmp03=0;
-    static float tmp04=0;
-    static float tmp05=0;
-    static float tmp06=0;
-    static float tmp07=0;
-    static float tmp08=0;
-    static float tmp09=0;
 	switch(destino)
 	      {
 	      case 0://printf("Erro no código. Endereco zero é da placa mae!");
 	      	     break;
-	      case 1:if(buffer[0]==0) 
-                    {
-                    tsn00+=0.0628;
-                    if(tsn00>6.28)tsn00=0;
-	                return sin(tsn00)*100+2200;  //VOLTIMETRO
-                    }
+	      case 1:if(buffer[0]==0)                    
+                        return 100;  //VOLTIMETRO                    
 	             else
-				    return 16000; //VACUO  
-		         break;
+			return 200; //VACUO  
+		     break;
 	      case 2:if(buffer[0]==0)
-	                return -150;   //CONDENSADOR
+	                return 300;   //CONDENSADOR
 	             else
-				    return -1;   
-		         break;
-	      case 3:if(buffer[0]==0) 
-                    { 
-                    tmp00+=0.01256;
-                    if(tmp00>6.28)tmp00=0;
-	                return sin(tmp00)*500;
-                    }
-	             else 
-                    { 
-                    tmp01+=0.0314;
-                    if(tmp01>6.28)tmp01=0;
-	                return 50;//sin(tmp01)*500;
-                    }				       
-		         break;
-	      case 4:if(buffer[0]==0) 
-                    { 
-                    tmp02+=0.0209334;
-                    if(tmp02>6.28)tmp02=0;
-	                return 100;//sin(tmp02)*500;
-                    }
-	             else
-                    { 
-                    tmp03+=0.0157;
-                    if(tmp03>6.28)tmp03=0;
-	                return 150;//sin(tmp03)*500;
-                    }   
-		         break;
-	      case 5:if(buffer[0]==0)
-                    { 
-                    tmp04+=0.01256;
-                    if(tmp04>6.28)tmp04=0;
-	                return 200;//sin(tmp04)*500;
-                    }
-	             else
-                    { 
-                    tmp05+=0.0104667;
-                    if(tmp05>6.28)tmp05=0;
-	                return 250;//sin(tmp05)*500;
-                    }  
-		         break;
-	      case 6:if(buffer[0]==0)
-                    { 
-                    tmp06+=0.00897143;
-                    if(tmp06>6.28)tmp06=0;
-	                return 300;//sin(tmp06)*500;
-                    }
-	             else
-                    { 
-                    tmp07+=0.00785;
-                    if(tmp07>6.28)tmp07=0;
-	                return 350;//sin(tmp07)*500;
-                    }   
-		         break;
-	      case 7:if(buffer[0]==0)
-                    { 
-                    tmp08+=0.0069778;
-                    if(tmp08>6.28)tmp08=0;
-	                return 400;//sin(tmp08)*500;
-                    }
-	             else
-                    { 
-                    tmp09+=0.00628;
-                    if(tmp09>6.28)tmp09=0;
-	                return 450;//sin(tmp09)*500;
-                    }   
-		         break;	
-	  		 				 				 				 				 			 				 				 				 	
+			return -1;   
+		     break;
+	      case 3:if(buffer[0]==0)                      
+                        return 400;                    
+	               else                    
+                        return 500;//sin(tmp01)*500;                    				       
+		       break;
+	      case 4:if(buffer[0]==0)                      
+                        return 600;                   
+	               else                    
+                        return 700;//sin(tmp01)*500;                    				       
+		       break;
+	      case 5:if(buffer[0]==0)                      
+                        return 800;                    
+	               else                    
+                        return 900;//sin(tmp01)*500;                    				       
+		       break;
+	      case 6:if(buffer[0]==0)                      
+                        return 1100;                    
+	               else                    
+                        return 500;//sin(tmp01)*500;                    				       
+		       break;
+	      case 7:if(buffer[0]==0)                      
+                        return 1200;                    
+	               else                    
+                        return 1300;//sin(tmp01)*500;                    				       
+		       break;	  		 				 				 				 				 			 				 				 				 	
 		  }
     return 0;
 }
@@ -1010,7 +954,7 @@ void ShowSensorRealTimeHS(void)
         SlaveBoard  = (tupla / 2)+1; 
         canal = tupla % 2;
         bb[0]=canal; 
-        leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_READ_ANALOG, 1, bb);
+        leitura[tupla]=Send_To_Slave_EMULA(SlaveBoard, COMMAND_READ_ANALOG, 1, bb);
         flag_array_slave_WDT[SlaveBoard]=TRUE;
         }
      
