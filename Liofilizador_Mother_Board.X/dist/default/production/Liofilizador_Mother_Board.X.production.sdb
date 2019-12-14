@@ -307,19 +307,19 @@
 [v _USART_put_string USART_put_string `(v  1 e 1 0 ]
 "18 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _print print `(v  1 e 1 0 ]
-"44
+"51
 [v _clear_screen clear_screen `(v  1 e 1 0 ]
-"50
+"57
 [v _bcd2str bcd2str `(v  1 e 1 0 ]
-"56
-[v _str2bcd str2bcd `(uc  1 e 1 0 ]
 "63
+[v _str2bcd str2bcd `(uc  1 e 1 0 ]
+"70
 [v _itoa itoa `(*.39uc  1 e 2 0 ]
-"106
+"113
 [v _reverse reverse `(*.39uc  1 e 2 0 ]
-"129
+"136
 [v _ultoa ultoa `(*.39uc  1 e 2 0 ]
-"161
+"168
 [v _my_pow my_pow `(i  1 e 2 0 ]
 [s S24 . 1 `uc 1 flag_usart_rx 1 0 :1:0 
 `uc 1 flag_usart_error 1 0 :1:1 
@@ -330,7 +330,7 @@
 `uc 1 flag_capture_datalog 1 0 :1:6 
 `uc 1 flag_edit_temperatura 1 0 :1:7 
 ]
-"234 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X/global.h
+"238 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X/global.h
 [v _statusgen statusgen `S24  1 e 1 0 ]
 [s S33 . 1 `uc 1 flag_global_datalog 1 0 :1:0 
 `uc 1 flag_global_aquecimento 1 0 :1:1 
@@ -339,7 +339,7 @@
 `uc 1 flag_time_process 1 0 :1:4 
 `uc 1 flag_call_work 1 0 :1:5 
 ]
-"259
+"263
 [u S40 . 1 `uc 1 bits 1 0 `S33 1 . 1 0 ]
 [v _statuspower statuspower `S40  1 e 1 0 ]
 [s S43 . 1 `uc 1 flag_save_time 1 0 :1:0 
@@ -349,16 +349,16 @@
 `uc 1 flag_Vacuo_estava_ligado 1 0 :1:4 
 `uc 1 flag_generico 1 0 :1:5 
 ]
-"277
+"281
 [v _statusgen1 statusgen1 `S43  1 e 1 0 ]
 [s S50 . 1 `uc 1 flag_main_loop_WDT 1 0 :1:0 
 ]
-"288
+"292
 [v _statusWDT statusWDT `S50  1 e 1 0 ]
 [s S52 . 5 `ui 1 milisegundo 2 0 `uc 1 segundo 1 2 `uc 1 minuto 1 3 `uc 1 hora 1 4 ]
-"298
+"302
 [v _rtc rtc `VES52  1 e 5 0 ]
-"56 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X/proculus.h
+"76 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X/proculus.h
 [v _TrendColor TrendColor `C[13]i  1 e 26 0 ]
 [s S968 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
@@ -467,20 +467,20 @@
 [v _TRISDbits TRISDbits `VES826  1 e 1 @3989 ]
 "2268
 [v _TRISE TRISE `VEuc  1 e 1 @3990 ]
-[s S2197 . 1 `uc 1 TUN 1 0 :5:0 
+[s S2198 . 1 `uc 1 TUN 1 0 :5:0 
 `uc 1 . 1 0 :1:5 
 `uc 1 PLLEN 1 0 :1:6 
 `uc 1 INTSRC 1 0 :1:7 
 ]
 "2452
-[s S2202 . 1 `uc 1 TUN0 1 0 :1:0 
+[s S2203 . 1 `uc 1 TUN0 1 0 :1:0 
 `uc 1 TUN1 1 0 :1:1 
 `uc 1 TUN2 1 0 :1:2 
 `uc 1 TUN3 1 0 :1:3 
 `uc 1 TUN4 1 0 :1:4 
 ]
-[u S2208 . 1 `S2197 1 . 1 0 `S2202 1 . 1 0 ]
-[v _OSCTUNEbits OSCTUNEbits `VES2208  1 e 1 @3995 ]
+[u S2209 . 1 `S2198 1 . 1 0 `S2203 1 . 1 0 ]
+[v _OSCTUNEbits OSCTUNEbits `VES2209  1 e 1 @3995 ]
 [s S180 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
@@ -513,7 +513,7 @@
 ]
 [u S163 . 1 `S150 1 . 1 0 `S159 1 . 1 0 ]
 [v _PIR1bits PIR1bits `VES163  1 e 1 @3998 ]
-[s S2338 . 1 `uc 1 TMR1IP 1 0 :1:0 
+[s S2339 . 1 `uc 1 TMR1IP 1 0 :1:0 
 `uc 1 TMR2IP 1 0 :1:1 
 `uc 1 CCP1IP 1 0 :1:2 
 `uc 1 SSPIP 1 0 :1:3 
@@ -523,12 +523,12 @@
 `uc 1 PSPIP 1 0 :1:7 
 ]
 "2673
-[s S2347 . 1 `uc 1 . 1 0 :4:0 
+[s S2348 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IP 1 0 :1:4 
 `uc 1 RC1IP 1 0 :1:5 
 ]
-[u S2351 . 1 `S2338 1 . 1 0 `S2347 1 . 1 0 ]
-[v _IPR1bits IPR1bits `VES2351  1 e 1 @3999 ]
+[u S2352 . 1 `S2339 1 . 1 0 `S2348 1 . 1 0 ]
+[v _IPR1bits IPR1bits `VES2352  1 e 1 @3999 ]
 [s S609 . 1 `uc 1 RD 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
@@ -705,23 +705,23 @@
 [v _TMR1L TMR1L `VEuc  1 e 1 @4046 ]
 "5341
 [v _TMR1H TMR1H `VEuc  1 e 1 @4047 ]
-[s S2167 . 1 `uc 1 SCS 1 0 :2:0 
+[s S2168 . 1 `uc 1 SCS 1 0 :2:0 
 `uc 1 IOFS 1 0 :1:2 
 `uc 1 OSTS 1 0 :1:3 
 `uc 1 IRCF 1 0 :3:4 
 `uc 1 IDLEN 1 0 :1:7 
 ]
 "5801
-[s S2173 . 1 `uc 1 SCS0 1 0 :1:0 
+[s S2174 . 1 `uc 1 SCS0 1 0 :1:0 
 `uc 1 SCS1 1 0 :1:1 
 `uc 1 . 1 0 :2:2 
 `uc 1 IRCF0 1 0 :1:4 
 `uc 1 IRCF1 1 0 :1:5 
 `uc 1 IRCF2 1 0 :1:6 
 ]
-[u S2180 . 1 `S2167 1 . 1 0 `S2173 1 . 1 0 ]
-[v _OSCCONbits OSCCONbits `VES2180  1 e 1 @4051 ]
-[s S2228 . 1 `uc 1 T0PS 1 0 :3:0 
+[u S2181 . 1 `S2168 1 . 1 0 `S2174 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES2181  1 e 1 @4051 ]
+[s S2229 . 1 `uc 1 T0PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -729,21 +729,21 @@
 `uc 1 TMR0ON 1 0 :1:7 
 ]
 "5878
-[s S2235 . 1 `uc 1 T0PS0 1 0 :1:0 
+[s S2236 . 1 `uc 1 T0PS0 1 0 :1:0 
 `uc 1 T0PS1 1 0 :1:1 
 `uc 1 T0PS2 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
 `uc 1 T016BIT 1 0 :1:6 
 ]
-[u S2241 . 1 `S2228 1 . 1 0 `S2235 1 . 1 0 ]
-[v _T0CONbits T0CONbits `VES2241  1 e 1 @4053 ]
+[u S2242 . 1 `S2229 1 . 1 0 `S2236 1 . 1 0 ]
+[v _T0CONbits T0CONbits `VES2242  1 e 1 @4053 ]
 "5933
 [v _TMR0 TMR0 `VEus  1 e 2 @4054 ]
-[s S2258 . 1 `uc 1 . 1 0 :7:0 
+[s S2259 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 NOT_RBPU 1 0 :1:7 
 ]
 "6329
-[s S2261 . 1 `uc 1 RBIP 1 0 :1:0 
+[s S2262 . 1 `uc 1 RBIP 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 TMR0IP 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -752,11 +752,11 @@
 `uc 1 INTEDG0 1 0 :1:6 
 `uc 1 nRBPU 1 0 :1:7 
 ]
-[s S2270 . 1 `uc 1 . 1 0 :7:0 
+[s S2271 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 RBPU 1 0 :1:7 
 ]
-[u S2273 . 1 `S2258 1 . 1 0 `S2261 1 . 1 0 `S2270 1 . 1 0 ]
-[v _INTCON2bits INTCON2bits `VES2273  1 e 1 @4081 ]
+[u S2274 . 1 `S2259 1 . 1 0 `S2262 1 . 1 0 `S2271 1 . 1 0 ]
+[v _INTCON2bits INTCON2bits `VES2274  1 e 1 @4081 ]
 [s S101 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
@@ -848,16 +848,16 @@
 [s S1285 . 40 `ui 1 header 2 0 `uc 1 size 1 2 `uc 1 function 1 3 `ui 1 vp 2 4 `uc 1 length 1 6 `[15]ui 1 dado 30 7 `uc 1 page 1 37 `uc 1 button 1 38 `uc 1 status 1 39 ]
 "103
 [v _proculus proculus `S1285  1 e 40 0 ]
-[s S2135 . 17 `uc 1 plataforma 1 0 `i 1 setpoint 2 1 `uc 1 tempoON 1 3 `uc 1 tempoOFF 1 4 `uc 1 histerese 1 5 `[9]uc 1 receita 9 6 `ui 1 status 2 15 ]
+[s S2136 . 17 `uc 1 plataforma 1 0 `i 1 setpoint 2 1 `uc 1 tempoON 1 3 `uc 1 tempoOFF 1 4 `uc 1 histerese 1 5 `[9]uc 1 receita 9 6 `ui 1 status 2 15 ]
 "104
-[v _liofilizador liofilizador `[10]S2135  1 e 170 0 ]
-[s S2143 . 17 `i 1 setpoint 2 0 `ui 1 potenciaON 2 2 `ui 1 potenciaOFF 2 4 `uc 1 histerese 1 6 `[10]uc 1 nome 10 7 ]
+[v _liofilizador liofilizador `[10]S2136  1 e 170 0 ]
+[s S2144 . 17 `i 1 setpoint 2 0 `ui 1 potenciaON 2 2 `ui 1 potenciaOFF 2 4 `uc 1 histerese 1 6 `[10]uc 1 nome 10 7 ]
 "105
-[v _receita receita `S2143  1 e 17 0 ]
-[s S2149 . 20 `[10]uc 1 date 10 0 `[10]uc 1 time 10 10 ]
+[v _receita receita `S2144  1 e 17 0 ]
+[s S2150 . 20 `[10]uc 1 date 10 0 `[10]uc 1 time 10 10 ]
 "106
-[s S2152 . 48 `S2149 1 inicio 20 0 `ui 1 start_add 2 20 `S2149 1 fim 20 22 `ui 1 end_add 2 42 `ui 1 amostra 2 44 `ui 1 pontos 2 46 ]
-[v _processo processo `S2152  1 e 48 0 ]
+[s S2153 . 48 `S2150 1 inicio 20 0 `ui 1 start_add 2 20 `S2150 1 fim 20 22 `ui 1 end_add 2 42 `ui 1 amostra 2 44 `ui 1 pontos 2 46 ]
+[v _processo processo `S2153  1 e 48 0 ]
 "110
 [v _texto texto `[74]uc  1 e 74 0 ]
 "111
@@ -916,9 +916,9 @@
 [v _memo_statuspower memo_statuspower `uc  1 e 1 0 ]
 "174
 [v _delay_condensador delay_condensador `VEuc  1 e 1 0 ]
-[s S2159 . 165 `[15]*.39i 1 entrada 30 0 `[15]f 1 fator 60 30 `[15]uc 1 canal 15 90 `[15]uc 1 icone 15 105 `[15]uc 1 vpIcone 15 120 `[15]i 1 cor 30 135 ]
+[s S2160 . 165 `[15]*.39i 1 entrada 30 0 `[15]f 1 fator 60 30 `[15]uc 1 canal 15 90 `[15]uc 1 icone 15 105 `[15]uc 1 vpIcone 15 120 `[15]i 1 cor 30 135 ]
 "178
-[v _mapa mapa `S2159  1 e 165 0 ]
+[v _mapa mapa `S2160  1 e 165 0 ]
 "181
 [v _main main `(v  1 e 1 0 ]
 {
@@ -928,7 +928,7 @@
 "689
 [v main@dica dica `ul  1 a 4 133 ]
 "604
-[v main@i_2914 i `uc  1 a 1 143 ]
+[v main@i_2915 i `uc  1 a 1 143 ]
 "812
 [v main@tempo tempo `ui  1 a 2 141 ]
 "399
@@ -939,22 +939,22 @@
 [v main@canal canal `i  1 s 2 canal ]
 "835
 } 0
-"129 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+"136 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _ultoa ultoa `(*.39uc  1 e 2 0 ]
 {
-"130
+"137
 [v ultoa@temp temp `[33]uc  1 a 33 32 ]
-"133
+"140
 [v ultoa@temp_loc temp_loc `i  1 a 2 69 ]
-"134
+"141
 [v ultoa@digit digit `i  1 a 2 67 ]
-"135
+"142
 [v ultoa@str_loc str_loc `i  1 a 2 65 ]
-"129
+"136
 [v ultoa@num num `ul  1 p 4 24 ]
 [v ultoa@str str `*.39uc  1 p 2 28 ]
 [v ultoa@radix radix `i  1 p 2 30 ]
-"157
+"164
 } 0
 "7 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\llmod.c
 [v ___llmod __llmod `(ul  1 e 4 0 ]
@@ -977,12 +977,12 @@
 [v showTotalReset@placa placa `uc  1 a 1 71 ]
 "3045
 } 0
-"44 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+"51 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _clear_screen clear_screen `(v  1 e 1 0 ]
 {
-"45
+"52
 [v clear_screen@i i `ui  1 a 2 32 ]
-"48
+"55
 } 0
 "18 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\timedate.c
 [v _my_delay_ms_TMR1 my_delay_ms_TMR1 `(v  1 e 1 0 ]
@@ -1176,7 +1176,7 @@
 [v print@vp_roll vp_roll `ui  1 a 2 66 ]
 "18
 [v print@texto texto `*.35uc  1 p 2 34 ]
-"42
+"49
 } 0
 "29 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\timedate.c
 [v _my_delay_ms_CLRWDT my_delay_ms_CLRWDT `(v  1 e 1 0 ]
@@ -1187,33 +1187,33 @@
 [v my_delay_ms_CLRWDT@time time `l  1 p 4 11 ]
 "36
 } 0
-"63 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+"70 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _itoa itoa `(*.39uc  1 e 2 0 ]
 {
-"87
+"94
 [v itoa@rem rem `i  1 a 2 35 ]
-"65
+"72
 [v itoa@i i `i  1 a 2 37 ]
-"66
+"73
 [v itoa@isNegative isNegative `uc  1 a 1 34 ]
-"63
+"70
 [v itoa@num num `i  1 p 2 26 ]
 [v itoa@str str `*.39uc  1 p 2 28 ]
 [v itoa@base base `i  1 p 2 30 ]
-"102
+"109
 } 0
-"106
+"113
 [v _reverse reverse `(*.39uc  1 e 2 0 ]
 {
-"109
+"116
 [v reverse@j j `i  1 a 2 24 ]
 [v reverse@i i `i  1 a 2 22 ]
 [v reverse@c c `i  1 a 2 20 ]
-"108
+"115
 [v reverse@length length `i  1 a 2 18 ]
-"106
+"113
 [v reverse@s s `*.39uc  1 p 2 15 ]
-"118
+"125
 } 0
 "7 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
@@ -1369,9 +1369,9 @@
 {
 "2556
 [v Formatar_Lista_de_Receitas@i i `uc  1 a 1 53 ]
-[s S2143 . 17 `i 1 setpoint 2 0 `ui 1 potenciaON 2 2 `ui 1 potenciaOFF 2 4 `uc 1 histerese 1 6 `[10]uc 1 nome 10 7 ]
+[s S2144 . 17 `i 1 setpoint 2 0 `ui 1 potenciaON 2 2 `ui 1 potenciaOFF 2 4 `uc 1 histerese 1 6 `[10]uc 1 nome 10 7 ]
 "2555
-[v Formatar_Lista_de_Receitas@receita receita `S2143  1 a 17 54 ]
+[v Formatar_Lista_de_Receitas@receita receita `S2144  1 a 17 54 ]
 "2566
 } 0
 "2611
@@ -1457,14 +1457,14 @@
 [v PROCULUS_Read_RTC@time time `*.30uc  1 p 1 30 ]
 "179
 } 0
-"50 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+"57 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _bcd2str bcd2str `(v  1 e 1 0 ]
 {
 [v bcd2str@valor valor `uc  1 a 1 wreg ]
 [v bcd2str@valor valor `uc  1 a 1 wreg ]
 [v bcd2str@dado dado `*.30uc  1 p 1 11 ]
 [v bcd2str@valor valor `uc  1 a 1 12 ]
-"54
+"61
 } 0
 "106 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\usart.c
 [v _USART_input_buffer USART_input_buffer `(uc  1 e 1 0 ]
@@ -1631,7 +1631,7 @@
 {
 [v EEPROM_24C1025_Read_Buffer@chip_add chip_add `uc  1 a 1 wreg ]
 "95
-[v EEPROM_24C1025_Read_Buffer@cnt_2046 cnt `uc  1 a 1 26 ]
+[v EEPROM_24C1025_Read_Buffer@cnt_2047 cnt `uc  1 a 1 26 ]
 "77
 [v EEPROM_24C1025_Read_Buffer@ctrl ctrl `uc  1 a 1 29 ]
 "76
@@ -1731,14 +1731,14 @@
 [v _pagina_49 pagina_49 `(v  1 e 1 0 ]
 {
 "2001
-[v pagina_49@i_3123 i `uc  1 a 1 62 ]
+[v pagina_49@i_3124 i `uc  1 a 1 62 ]
 "2000
-[v pagina_49@i_3122 i `uc  1 a 1 61 ]
+[v pagina_49@i_3123 i `uc  1 a 1 61 ]
 "1985
 [v pagina_49@i i `uc  1 a 1 60 ]
-[s S2135 . 17 `uc 1 plataforma 1 0 `i 1 setpoint 2 1 `uc 1 tempoON 1 3 `uc 1 tempoOFF 1 4 `uc 1 histerese 1 5 `[9]uc 1 receita 9 6 `ui 1 status 2 15 ]
+[s S2136 . 17 `uc 1 plataforma 1 0 `i 1 setpoint 2 1 `uc 1 tempoON 1 3 `uc 1 tempoOFF 1 4 `uc 1 histerese 1 5 `[9]uc 1 receita 9 6 `ui 1 status 2 15 ]
 "1925
-[v pagina_49@liofilizador liofilizador `S2135  1 a 17 63 ]
+[v pagina_49@liofilizador liofilizador `S2136  1 a 17 63 ]
 "2016
 } 0
 "1221
@@ -1767,8 +1767,8 @@
 [v Grava_Receita@addeeprom addeeprom `ui  1 a 2 51 ]
 "1022
 [v Grava_Receita@index index `uc  1 a 1 wreg ]
-[s S2143 . 17 `i 1 setpoint 2 0 `ui 1 potenciaON 2 2 `ui 1 potenciaOFF 2 4 `uc 1 histerese 1 6 `[10]uc 1 nome 10 7 ]
-[v Grava_Receita@receita receita `*.39S2143  1 p 2 46 ]
+[s S2144 . 17 `i 1 setpoint 2 0 `ui 1 potenciaON 2 2 `ui 1 potenciaOFF 2 4 `uc 1 histerese 1 6 `[10]uc 1 nome 10 7 ]
+[v Grava_Receita@receita receita `*.39S2144  1 p 2 46 ]
 "1026
 [v Grava_Receita@index index `uc  1 a 1 50 ]
 "1033
@@ -1794,9 +1794,9 @@
 "2019
 [v _pagina_47 pagina_47 `(v  1 e 1 0 ]
 {
-[s S2143 . 17 `i 1 setpoint 2 0 `ui 1 potenciaON 2 2 `ui 1 potenciaOFF 2 4 `uc 1 histerese 1 6 `[10]uc 1 nome 10 7 ]
+[s S2144 . 17 `i 1 setpoint 2 0 `ui 1 potenciaON 2 2 `ui 1 potenciaOFF 2 4 `uc 1 histerese 1 6 `[10]uc 1 nome 10 7 ]
 "2020
-[v pagina_47@receita receita `S2143  1 a 17 35 ]
+[v pagina_47@receita receita `S2144  1 a 17 35 ]
 "2041
 } 0
 "452 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
@@ -1816,8 +1816,8 @@
 [v Carrega_Tupla_Receita@addeeprom addeeprom `ui  1 a 2 30 ]
 "1009
 [v Carrega_Tupla_Receita@index index `uc  1 a 1 wreg ]
-[s S2143 . 17 `i 1 setpoint 2 0 `ui 1 potenciaON 2 2 `ui 1 potenciaOFF 2 4 `uc 1 histerese 1 6 `[10]uc 1 nome 10 7 ]
-[v Carrega_Tupla_Receita@receita receita `*.39S2143  1 p 2 25 ]
+[s S2144 . 17 `i 1 setpoint 2 0 `ui 1 potenciaON 2 2 `ui 1 potenciaOFF 2 4 `uc 1 histerese 1 6 `[10]uc 1 nome 10 7 ]
+[v Carrega_Tupla_Receita@receita receita `*.39S2144  1 p 2 25 ]
 "1012
 [v Carrega_Tupla_Receita@index index `uc  1 a 1 29 ]
 "1020
@@ -1917,11 +1917,11 @@
 [v PROCULUS_Write_RTC@time time `*.30uc  1 p 1 15 ]
 "220
 } 0
-"56 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+"63 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _str2bcd str2bcd `(uc  1 e 1 0 ]
 {
 [v str2bcd@value value `*.30uc  1 p 1 11 ]
-"58
+"65
 } 0
 "2187 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 [v _pagina_23 pagina_23 `(v  1 e 1 0 ]
@@ -1937,9 +1937,9 @@
 [v _pagina_19 pagina_19 `(v  1 e 1 0 ]
 {
 "2168
-[v pagina_19@i_3146 i `uc  1 a 1 75 ]
+[v pagina_19@i_3147 i `uc  1 a 1 75 ]
 "2113
-[v pagina_19@i_3139 i `uc  1 a 1 74 ]
+[v pagina_19@i_3140 i `uc  1 a 1 74 ]
 "2087
 [v pagina_19@i i `uc  1 a 1 73 ]
 "2160
@@ -2092,8 +2092,8 @@
 [v SaveLiofilizadorOnMemory@addEEPROM addEEPROM `uc  1 a 1 50 ]
 "1109
 [v SaveLiofilizadorOnMemory@index index `uc  1 a 1 wreg ]
-[s S2135 . 17 `uc 1 plataforma 1 0 `i 1 setpoint 2 1 `uc 1 tempoON 1 3 `uc 1 tempoOFF 1 4 `uc 1 histerese 1 5 `[9]uc 1 receita 9 6 `ui 1 status 2 15 ]
-[v SaveLiofilizadorOnMemory@liofilizador liofilizador `*.39S2135  1 p 2 46 ]
+[s S2136 . 17 `uc 1 plataforma 1 0 `i 1 setpoint 2 1 `uc 1 tempoON 1 3 `uc 1 tempoOFF 1 4 `uc 1 histerese 1 5 `[9]uc 1 receita 9 6 `ui 1 status 2 15 ]
+[v SaveLiofilizadorOnMemory@liofilizador liofilizador `*.39S2136  1 p 2 46 ]
 "1113
 [v SaveLiofilizadorOnMemory@index index `uc  1 a 1 49 ]
 "1124
@@ -2255,17 +2255,17 @@
 "8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S3604 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S3605 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S3609 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
-[u S3612 . 4 `l 1 i 4 0 `d 1 f 4 0 `S3604 1 fAsBytes 4 0 `S3609 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S3612  1 a 4 44 ]
+[s S3610 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
+[u S3613 . 4 `l 1 i 4 0 `d 1 f 4 0 `S3605 1 fAsBytes 4 0 `S3610 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S3613  1 a 4 44 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 40 ]
-[s S3680 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S3681 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S3683 . 2 `s 1 i 2 0 `us 1 n 2 0 `S3680 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S3683  1 a 2 48 ]
+[u S3684 . 2 `s 1 i 2 0 `us 1 n 2 0 `S3681 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S3684  1 a 2 48 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 39 ]
 "11
@@ -2282,7 +2282,7 @@
 {
 [v Send_To_Slave@destino destino `uc  1 a 1 wreg ]
 "867
-[v Send_To_Slave@contador_2938 contador `i  1 a 2 23 ]
+[v Send_To_Slave@contador_2939 contador `i  1 a 2 23 ]
 "853
 [v Send_To_Slave@retorno retorno `i  1 a 2 21 ]
 "854
@@ -2309,17 +2309,17 @@
 [v PROCULUS_graphic_plot@lcd_channel lcd_channel `uc  1 a 1 63 ]
 "593
 } 0
-"161 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+"168 C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _my_pow my_pow `(i  1 e 2 0 ]
 {
-"172
+"179
 [v my_pow@i i `uc  1 a 1 37 ]
-"162
+"169
 [v my_pow@resposta resposta `i  1 a 2 38 ]
-"161
+"168
 [v my_pow@rad rad `i  1 p 2 26 ]
 [v my_pow@exp exp `i  1 p 2 28 ]
-"178
+"185
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -2367,7 +2367,7 @@
 [v _Captura_Pagina Captura_Pagina `(ui  1 e 2 0 ]
 {
 "2730
-[v Captura_Pagina@i_3224 i `uc  1 a 1 45 ]
+[v Captura_Pagina@i_3225 i `uc  1 a 1 45 ]
 "2726
 [v Captura_Pagina@i i `uc  1 a 1 44 ]
 "2720

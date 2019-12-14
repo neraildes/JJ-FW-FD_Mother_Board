@@ -369,7 +369,7 @@ typedef uint32_t uint_fast32_t;
 # 4 "util.c.c" 2
 
 # 1 "./global.h" 1
-# 20 "./global.h"
+# 24 "./global.h"
 #pragma config OSC = INTIO67
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
@@ -423,7 +423,7 @@ typedef uint32_t uint_fast32_t;
 
 
 #pragma config EBTRB = OFF
-# 225 "./global.h"
+# 229 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -434,7 +434,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 248 "./global.h"
+# 252 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -447,7 +447,7 @@ union {
 
              };
       } statuspower;
-# 270 "./global.h"
+# 274 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -456,7 +456,7 @@ struct{
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
 }statusgen1;
-# 286 "./global.h"
+# 290 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -488,22 +488,27 @@ char *ultoa(unsigned long num, char *str, int radix);
 # 6 "util.c.c" 2
 
 # 1 "./proculus.h" 1
-# 56 "./proculus.h"
-const int TrendColor[13]={
-                          0x0000,
-                          0x39E7,
-                          0x6B6D,
-                          0x7800,
-                          0x9A23,
-                          0xF800,
-                          0xFBE0,
-                          0xFBF7,
-                          0xD540,
-                          0x03E0,
-                          0x07E0,
-                          0x07FF,
-                          0xF81F
-                          };
+# 76 "./proculus.h"
+    const int TrendColor[13]={
+                              0xF800,
+                              0x03E0,
+                              0x001F,
+                              0x0000,
+                              0x39E7,
+                              0x6B6D,
+                              0x7800,
+                              0x9A23,
+                              0xFBE0,
+                              0xFBF7,
+                              0xD540,
+                              0x07E0,
+                              0xF81F
+                              };
+
+
+
+
+
 
 typedef struct {
     unsigned int header;
@@ -4933,7 +4938,14 @@ extern unsigned int vpPrint;
         unsigned int vp_roll;
         char textolocal[30];
         statusgen1.flag_proculus_hs=1;
-        if(vpPrint<=2420)
+
+
+           const int MAXVP = 2270;
+
+
+
+
+        if(vpPrint<=MAXVP)
           {
 
           PROCULUS_VP_Write_String(vpPrint,texto);
@@ -4942,14 +4954,14 @@ extern unsigned int vpPrint;
           }
         else
           {
-          for(vp_roll=2000;vp_roll<=2420;vp_roll+=30)
+          for(vp_roll=2000;vp_roll<=MAXVP;vp_roll+=30)
              {
              strcpy(textolocal,"");
              PROCULUS_VP_Read_String(vp_roll+30, textolocal);
              PROCULUS_VP_Write_String(vp_roll, textolocal);
              }
 
-          PROCULUS_VP_Write_String(2420, texto);
+          PROCULUS_VP_Write_String(MAXVP, texto);
 
           }
         statusgen1.flag_proculus_hs=0;
@@ -5030,7 +5042,7 @@ char * reverse( char * s )
         }
     return s;
 }
-# 129 "util.c.c"
+# 136 "util.c.c"
 char *ultoa(unsigned long num, char *str, int radix) {
     char temp[33];
 

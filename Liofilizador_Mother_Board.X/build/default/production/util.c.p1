@@ -1,39 +1,39 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"225 ./global.h
-[; ;./global.h: 225: struct {
+"229 ./global.h
+[; ;./global.h: 229: struct {
 [s S9 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S9 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"250
-[; ;./global.h: 250:       struct {
+"254
+[; ;./global.h: 254:       struct {
 [s S11 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S11 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work ]
-"248
-[; ;./global.h: 248: union {
+"252
+[; ;./global.h: 252: union {
 [u S10 `uc 1 `S11 1 ]
 [n S10 . bits . ]
-"270
-[; ;./global.h: 270: struct{
+"274
+[; ;./global.h: 274: struct{
 [s S12 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S12 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico ]
-"286
-[; ;./global.h: 286: struct{
+"290
+[; ;./global.h: 290: struct{
 [s S13 :1 `uc 1 ]
 [n S13 . flag_main_loop_WDT ]
-"291
-[; ;./global.h: 291: typedef struct{
+"295
+[; ;./global.h: 295: typedef struct{
 [s S14 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S14 . milisegundo segundo minuto hora ]
 "14 util.c.c
 [; ;util.c.c: 14: extern unsigned int vpPrint;
 [v _vpPrint `ui ~T0 @X0 0 e ]
-"147 ./proculus.h
-[; ;./proculus.h: 147: void PROCULUS_VP_Write_String(unsigned int vp, char *text);
+"172 ./proculus.h
+[; ;./proculus.h: 172: void PROCULUS_VP_Write_String(unsigned int vp, char *text);
 [v _PROCULUS_VP_Write_String `(v ~T0 @X0 0 ef2`ui`*uc ]
 "33 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h: 33: char *strcpy (char *restrict, const char *restrict);
 [v _strcpy `(*uc ~T0 @X0 0 ef2`*uc`*Cuc ]
-"148 ./proculus.h
-[; ;./proculus.h: 148: void PROCULUS_VP_Read_String(unsigned int vp, char *text);
+"173 ./proculus.h
+[; ;./proculus.h: 173: void PROCULUS_VP_Read_String(unsigned int vp, char *text);
 [v _PROCULUS_VP_Read_String `(v ~T0 @X0 0 ef2`ui`*uc ]
 "11 ./util.h
 [; ;./util.h: 11: char * reverse( char * s );
@@ -41,104 +41,104 @@ Version 4.0 HI-TECH Software Intermediate Code
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h: 54: size_t strlen (const char *);
 [v _strlen `(ui ~T0 @X0 0 ef1`*Cuc ]
-"20 ./global.h
+"24 ./global.h
 [p x OSC = INTIO67 ]
-"21
-[p x FCMEN = OFF ]
-"22
-[p x IESO = OFF ]
 "25
-[p x PWRT = ON ]
+[p x FCMEN = OFF ]
 "26
-[p x BOREN = SBORDIS ]
-"27
-[p x BORV = 3 ]
+[p x IESO = OFF ]
+"29
+[p x PWRT = ON ]
 "30
-[p x WDT = ON ]
+[p x BOREN = SBORDIS ]
 "31
-[p x WDTPS = 16384 ]
+[p x BORV = 3 ]
 "34
-[p x CCP2MX = PORTC ]
+[p x WDT = ON ]
 "35
+[p x WDTPS = 16384 ]
+"38
+[p x CCP2MX = PORTC ]
+"39
 [p x PBADEN = ON ]
-"36
-[p x LPT1OSC = OFF ]
-"37
-[p x MCLRE = ON ]
 "40
-[p x STVREN = ON ]
+[p x LPT1OSC = OFF ]
 "41
-[p x LVP = OFF ]
-"42
-[p x XINST = OFF ]
+[p x MCLRE = ON ]
+"44
+[p x STVREN = ON ]
 "45
-[p x CP0 = OFF ]
+[p x LVP = OFF ]
 "46
+[p x XINST = OFF ]
+"49
+[p x CP0 = OFF ]
+"50
 [p x CP1 = OFF ]
-"47
-[p x CP2 = OFF ]
-"48
-[p x CP3 = OFF ]
 "51
-[p x CPB = OFF ]
+[p x CP2 = OFF ]
 "52
-[p x CPD = OFF ]
+[p x CP3 = OFF ]
 "55
-[p x WRT0 = OFF ]
+[p x CPB = OFF ]
 "56
+[p x CPD = OFF ]
+"59
+[p x WRT0 = OFF ]
+"60
 [p x WRT1 = OFF ]
-"57
-[p x WRT2 = OFF ]
-"58
-[p x WRT3 = OFF ]
 "61
-[p x WRTC = OFF ]
+[p x WRT2 = OFF ]
 "62
-[p x WRTB = OFF ]
-"63
-[p x WRTD = OFF ]
+[p x WRT3 = OFF ]
+"65
+[p x WRTC = OFF ]
 "66
-[p x EBTR0 = OFF ]
+[p x WRTB = OFF ]
 "67
+[p x WRTD = OFF ]
+"70
+[p x EBTR0 = OFF ]
+"71
 [p x EBTR1 = OFF ]
-"68
-[p x EBTR2 = OFF ]
-"69
-[p x EBTR3 = OFF ]
 "72
+[p x EBTR2 = OFF ]
+"73
+[p x EBTR3 = OFF ]
+"76
 [p x EBTRB = OFF ]
-"234
-[; ;./global.h: 234: } statusgen ;
+"238
+[; ;./global.h: 238: } statusgen ;
 [v _statusgen `S9 ~T0 @X0 1 e ]
-"259
-[; ;./global.h: 259:       } statuspower;
+"263
+[; ;./global.h: 263:       } statuspower;
 [v _statuspower `S10 ~T0 @X0 1 e ]
-"277
-[; ;./global.h: 277: }statusgen1;
+"281
+[; ;./global.h: 281: }statusgen1;
 [v _statusgen1 `S12 ~T0 @X0 1 e ]
-"288
-[; ;./global.h: 288: }statusWDT;
+"292
+[; ;./global.h: 292: }statusWDT;
 [v _statusWDT `S13 ~T0 @X0 1 e ]
-"298
-[; ;./global.h: 298: volatile t_rtc rtc;
+"302
+[; ;./global.h: 302: volatile t_rtc rtc;
 [v _rtc `VS14 ~T0 @X0 1 e ]
-"56 ./proculus.h
-[; ;./proculus.h: 56: const int TrendColor[13]={
+"76 ./proculus.h
+[; ;./proculus.h: 76:     const int TrendColor[13]={
 [v _TrendColor `Ci ~T0 @X0 -> 13 `i e ]
 [i _TrendColor
 :U ..
+-> -> 63488 `ui `i
+-> 992 `i
+-> 31 `i
 -> 0 `i
 -> 14823 `i
 -> 27501 `i
 -> 30720 `i
 -> -> 39459 `ui `i
--> -> 63488 `ui `i
 -> -> 64480 `ui `i
 -> -> 64503 `ui `i
 -> -> 54592 `ui `i
--> 992 `i
 -> 2016 `i
--> 2047 `i
 -> -> 63519 `ui `i
 ..
 ]
@@ -569,295 +569,301 @@ Version 4.0 HI-TECH Software Intermediate Code
 "21
 [; ;util.c.c: 21:         statusgen1.flag_proculus_hs=1;
 [e = . _statusgen1 3 -> -> 1 `i `uc ]
-"22
-[; ;util.c.c: 22:         if(vpPrint<=2420)
-[e $ ! <= _vpPrint -> -> 2420 `i `ui 283  ]
-"23
-[; ;util.c.c: 23:           {
-{
-"25
-[; ;util.c.c: 25:           PROCULUS_VP_Write_String(vpPrint,texto);
-[e ( _PROCULUS_VP_Write_String (2 , _vpPrint _texto ]
-"27
-[; ;util.c.c: 27:           vpPrint+=30;
-[e =+ _vpPrint -> -> 30 `i `ui ]
-"28
-[; ;util.c.c: 28:           }
-}
-[e $U 284  ]
+"24
+[; ;util.c.c: 24:            const int MAXVP = 2270;
+[v F3151 `Ci ~T0 @X0 1 s MAXVP ]
+[i F3151
+-> 2270 `i
+]
 "29
-[; ;util.c.c: 29:         else
-[e :U 283 ]
+[; ;util.c.c: 29:         if(vpPrint<=MAXVP)
+[e $ ! <= _vpPrint -> F3151 `ui 283  ]
 "30
 [; ;util.c.c: 30:           {
 {
-"31
-[; ;util.c.c: 31:           for(vp_roll=2000;vp_roll<=2420;vp_roll+=30)
+"32
+[; ;util.c.c: 32:           PROCULUS_VP_Write_String(vpPrint,texto);
+[e ( _PROCULUS_VP_Write_String (2 , _vpPrint _texto ]
+"34
+[; ;util.c.c: 34:           vpPrint+=30;
+[e =+ _vpPrint -> -> 30 `i `ui ]
+"35
+[; ;util.c.c: 35:           }
+}
+[e $U 284  ]
+"36
+[; ;util.c.c: 36:         else
+[e :U 283 ]
+"37
+[; ;util.c.c: 37:           {
+{
+"38
+[; ;util.c.c: 38:           for(vp_roll=2000;vp_roll<=MAXVP;vp_roll+=30)
 {
 [e = _vp_roll -> -> 2000 `i `ui ]
-[e $ <= _vp_roll -> -> 2420 `i `ui 285  ]
+[e $ <= _vp_roll -> F3151 `ui 285  ]
 [e $U 286  ]
 [e :U 285 ]
-"32
-[; ;util.c.c: 32:              {
+"39
+[; ;util.c.c: 39:              {
 {
-"33
-[; ;util.c.c: 33:              strcpy(textolocal,"");
+"40
+[; ;util.c.c: 40:              strcpy(textolocal,"");
 [e ( _strcpy (2 , &U _textolocal :s 1C ]
-"34
-[; ;util.c.c: 34:              PROCULUS_VP_Read_String(vp_roll+30, textolocal);
+"41
+[; ;util.c.c: 41:              PROCULUS_VP_Read_String(vp_roll+30, textolocal);
 [e ( _PROCULUS_VP_Read_String (2 , + _vp_roll -> -> 30 `i `ui &U _textolocal ]
-"35
-[; ;util.c.c: 35:              PROCULUS_VP_Write_String(vp_roll, textolocal);
+"42
+[; ;util.c.c: 42:              PROCULUS_VP_Write_String(vp_roll, textolocal);
 [e ( _PROCULUS_VP_Write_String (2 , _vp_roll &U _textolocal ]
-"36
-[; ;util.c.c: 36:              }
+"43
+[; ;util.c.c: 43:              }
 }
 [e =+ _vp_roll -> -> 30 `i `ui ]
-[e $ <= _vp_roll -> -> 2420 `i `ui 285  ]
+[e $ <= _vp_roll -> F3151 `ui 285  ]
 [e :U 286 ]
 }
-"38
-[; ;util.c.c: 38:           PROCULUS_VP_Write_String(2420, texto);
-[e ( _PROCULUS_VP_Write_String (2 , -> -> 2420 `i `ui _texto ]
-"40
-[; ;util.c.c: 40:           }
+"45
+[; ;util.c.c: 45:           PROCULUS_VP_Write_String(MAXVP, texto);
+[e ( _PROCULUS_VP_Write_String (2 , -> F3151 `ui _texto ]
+"47
+[; ;util.c.c: 47:           }
 }
 [e :U 284 ]
-"41
-[; ;util.c.c: 41:         statusgen1.flag_proculus_hs=0;
+"48
+[; ;util.c.c: 48:         statusgen1.flag_proculus_hs=0;
 [e = . _statusgen1 3 -> -> 0 `i `uc ]
-"42
-[; ;util.c.c: 42:    }
+"49
+[; ;util.c.c: 49:    }
 [e :UE 282 ]
 }
-"44
-[; ;util.c.c: 44: void clear_screen(void){
+"51
+[; ;util.c.c: 51: void clear_screen(void){
 [v _clear_screen `(v ~T0 @X0 1 ef ]
 {
 [e :U _clear_screen ]
 [f ]
-"45
-[; ;util.c.c: 45:     for(unsigned int i=2000;i<=2420;i+=30)
+"52
+[; ;util.c.c: 52:     for(unsigned int i=2000;i<=2420;i+=30)
 {
 [v _i `ui ~T0 @X0 1 a ]
 [e = _i -> -> 2000 `i `ui ]
 [e $ <= _i -> -> 2420 `i `ui 289  ]
 [e $U 290  ]
 [e :U 289 ]
-"46
-[; ;util.c.c: 46:         PROCULUS_VP_Write_String(i," ");
+"53
+[; ;util.c.c: 53:         PROCULUS_VP_Write_String(i," ");
 [e ( _PROCULUS_VP_Write_String (2 , _i :s 2C ]
 [e =+ _i -> -> 30 `i `ui ]
 [e $ <= _i -> -> 2420 `i `ui 289  ]
 [e :U 290 ]
 }
-"47
-[; ;util.c.c: 47:     vpPrint=2000;
+"54
+[; ;util.c.c: 54:     vpPrint=2000;
 [e = _vpPrint -> -> 2000 `i `ui ]
-"48
-[; ;util.c.c: 48: }
+"55
+[; ;util.c.c: 55: }
 [e :UE 288 ]
 }
-"50
-[; ;util.c.c: 50: void bcd2str(char valor, char *dado){
+"57
+[; ;util.c.c: 57: void bcd2str(char valor, char *dado){
 [v _bcd2str `(v ~T0 @X0 1 ef2`uc`*uc ]
 {
 [e :U _bcd2str ]
 [v _valor `uc ~T0 @X0 1 r1 ]
 [v _dado `*uc ~T0 @X0 1 r2 ]
 [f ]
-"51
-[; ;util.c.c: 51:      dado[0]=((valor>>4)+0x30);
+"58
+[; ;util.c.c: 58:      dado[0]=((valor>>4)+0x30);
 [e = *U + _dado * -> -> 0 `i `x -> -> # *U _dado `i `x -> + >> -> _valor `i -> 4 `i -> 48 `i `uc ]
-"52
-[; ;util.c.c: 52:      dado[1]=((0x0F&valor)+0x30);
+"59
+[; ;util.c.c: 59:      dado[1]=((0x0F&valor)+0x30);
 [e = *U + _dado * -> -> 1 `i `x -> -> # *U _dado `i `x -> + & -> 15 `i -> _valor `i -> 48 `i `uc ]
-"53
-[; ;util.c.c: 53:      dado[2]=0;
+"60
+[; ;util.c.c: 60:      dado[2]=0;
 [e = *U + _dado * -> -> 2 `i `x -> -> # *U _dado `i `x -> -> 0 `i `uc ]
-"54
-[; ;util.c.c: 54:      }
+"61
+[; ;util.c.c: 61:      }
 [e :UE 292 ]
 }
-"56
-[; ;util.c.c: 56: char str2bcd(char *value){
+"63
+[; ;util.c.c: 63: char str2bcd(char *value){
 [v _str2bcd `(uc ~T0 @X0 1 ef1`*uc ]
 {
 [e :U _str2bcd ]
 [v _value `*uc ~T0 @X0 1 r1 ]
 [f ]
-"57
-[; ;util.c.c: 57:      return ((value[0]<<4)|(0x0F & (value[1])));
+"64
+[; ;util.c.c: 64:      return ((value[0]<<4)|(0x0F & (value[1])));
 [e ) -> | << -> *U + _value * -> -> 0 `i `x -> -> # *U _value `i `x `i -> 4 `i & -> 15 `i -> *U + _value * -> -> 1 `i `x -> -> # *U _value `i `x `i `uc ]
 [e $UE 293  ]
-"58
-[; ;util.c.c: 58: }
+"65
+[; ;util.c.c: 65: }
 [e :UE 293 ]
 }
-"63
-[; ;util.c.c: 63: char* itoa(int num, char* str, int base)
+"70
+[; ;util.c.c: 70: char* itoa(int num, char* str, int base)
 [v _itoa `(*uc ~T0 @X0 1 ef3`i`*uc`i ]
-"64
-[; ;util.c.c: 64: {
+"71
+[; ;util.c.c: 71: {
 {
 [e :U _itoa ]
-"63
-[; ;util.c.c: 63: char* itoa(int num, char* str, int base)
+"70
+[; ;util.c.c: 70: char* itoa(int num, char* str, int base)
 [v _num `i ~T0 @X0 1 r1 ]
 [v _str `*uc ~T0 @X0 1 r2 ]
 [v _base `i ~T0 @X0 1 r3 ]
-"64
-[; ;util.c.c: 64: {
+"71
+[; ;util.c.c: 71: {
 [f ]
-"65
-[; ;util.c.c: 65:     int i = 0;
+"72
+[; ;util.c.c: 72:     int i = 0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-"66
-[; ;util.c.c: 66:     char isNegative = 0;
+"73
+[; ;util.c.c: 73:     char isNegative = 0;
 [v _isNegative `uc ~T0 @X0 1 a ]
 [e = _isNegative -> -> 0 `i `uc ]
-"69
-[; ;util.c.c: 69:     if (num == 0)
+"76
+[; ;util.c.c: 76:     if (num == 0)
 [e $ ! == _num -> 0 `i 295  ]
-"70
-[; ;util.c.c: 70:     {
+"77
+[; ;util.c.c: 77:     {
 {
-"71
-[; ;util.c.c: 71:         str[i++] = '0';
+"78
+[; ;util.c.c: 78:         str[i++] = '0';
 [e = *U + _str * -> ++ _i -> 1 `i `x -> -> # *U _str `i `x -> -> 48 `ui `uc ]
-"72
-[; ;util.c.c: 72:         str[i] = '\0';
+"79
+[; ;util.c.c: 79:         str[i] = '\0';
 [e = *U + _str * -> _i `x -> -> # *U _str `i `x -> -> 0 `ui `uc ]
-"73
-[; ;util.c.c: 73:         return str;
+"80
+[; ;util.c.c: 80:         return str;
 [e ) _str ]
 [e $UE 294  ]
-"74
-[; ;util.c.c: 74:     }
+"81
+[; ;util.c.c: 81:     }
 }
 [e :U 295 ]
-"78
-[; ;util.c.c: 78:     if (num < 0 && base == 10)
-[e $ ! && < _num -> 0 `i == _base -> 10 `i 296  ]
-"79
-[; ;util.c.c: 79:     {
-{
-"80
-[; ;util.c.c: 80:         isNegative = 1;
-[e = _isNegative -> -> 1 `i `uc ]
-"81
-[; ;util.c.c: 81:         num = -num;
-[e = _num -U _num ]
-"82
-[; ;util.c.c: 82:     }
-}
-[e :U 296 ]
 "85
-[; ;util.c.c: 85:     while (num != 0)
-[e $U 297  ]
-[e :U 298 ]
+[; ;util.c.c: 85:     if (num < 0 && base == 10)
+[e $ ! && < _num -> 0 `i == _base -> 10 `i 296  ]
 "86
 [; ;util.c.c: 86:     {
 {
 "87
-[; ;util.c.c: 87:         int rem = num % base;
+[; ;util.c.c: 87:         isNegative = 1;
+[e = _isNegative -> -> 1 `i `uc ]
+"88
+[; ;util.c.c: 88:         num = -num;
+[e = _num -U _num ]
+"89
+[; ;util.c.c: 89:     }
+}
+[e :U 296 ]
+"92
+[; ;util.c.c: 92:     while (num != 0)
+[e $U 297  ]
+[e :U 298 ]
+"93
+[; ;util.c.c: 93:     {
+{
+"94
+[; ;util.c.c: 94:         int rem = num % base;
 [v _rem `i ~T0 @X0 1 a ]
 [e = _rem % _num _base ]
-"88
-[; ;util.c.c: 88:         str[i++] = (rem > 9)? (rem-10) + 'a' : rem + '0';
+"95
+[; ;util.c.c: 95:         str[i++] = (rem > 9)? (rem-10) + 'a' : rem + '0';
 [e = *U + _str * -> ++ _i -> 1 `i `x -> -> # *U _str `i `x -> ? > _rem -> 9 `i : + -> - _rem -> 10 `i `ui -> 97 `ui + -> _rem `ui -> 48 `ui `uc ]
-"89
-[; ;util.c.c: 89:         num = num/base;
+"96
+[; ;util.c.c: 96:         num = num/base;
 [e = _num / _num _base ]
-"90
-[; ;util.c.c: 90:     }
+"97
+[; ;util.c.c: 97:     }
 }
 [e :U 297 ]
-"85
-[; ;util.c.c: 85:     while (num != 0)
+"92
+[; ;util.c.c: 92:     while (num != 0)
 [e $ != _num -> 0 `i 298  ]
 [e :U 299 ]
-"93
-[; ;util.c.c: 93:     if (isNegative)
+"100
+[; ;util.c.c: 100:     if (isNegative)
 [e $ ! != -> _isNegative `i -> 0 `i 300  ]
-"94
-[; ;util.c.c: 94:         str[i++] = '-';
+"101
+[; ;util.c.c: 101:         str[i++] = '-';
 [e = *U + _str * -> ++ _i -> 1 `i `x -> -> # *U _str `i `x -> -> 45 `ui `uc ]
 [e :U 300 ]
-"96
-[; ;util.c.c: 96:     str[i] = '\0';
+"103
+[; ;util.c.c: 103:     str[i] = '\0';
 [e = *U + _str * -> _i `x -> -> # *U _str `i `x -> -> 0 `ui `uc ]
-"99
-[; ;util.c.c: 99:     reverse(str);
+"106
+[; ;util.c.c: 106:     reverse(str);
 [e ( _reverse (1 _str ]
-"101
-[; ;util.c.c: 101:     return str;
+"108
+[; ;util.c.c: 108:     return str;
 [e ) _str ]
 [e $UE 294  ]
-"102
-[; ;util.c.c: 102: }
+"109
+[; ;util.c.c: 109: }
 [e :UE 294 ]
 }
-"106
-[; ;util.c.c: 106: char * reverse( char * s )
+"113
+[; ;util.c.c: 113: char * reverse( char * s )
 [v _reverse `(*uc ~T0 @X0 1 ef1`*uc ]
-"107
-[; ;util.c.c: 107: {
+"114
+[; ;util.c.c: 114: {
 {
 [e :U _reverse ]
-"106
-[; ;util.c.c: 106: char * reverse( char * s )
+"113
+[; ;util.c.c: 113: char * reverse( char * s )
 [v _s `*uc ~T0 @X0 1 r1 ]
-"107
-[; ;util.c.c: 107: {
+"114
+[; ;util.c.c: 114: {
 [f ]
-"108
-[; ;util.c.c: 108:     int length = strlen(s) ;
+"115
+[; ;util.c.c: 115:     int length = strlen(s) ;
 [v _length `i ~T0 @X0 1 a ]
 [e = _length -> ( _strlen (1 -> _s `*Cuc `i ]
-"109
-[; ;util.c.c: 109:     int c, i, j;
+"116
+[; ;util.c.c: 116:     int c, i, j;
 [v _c `i ~T0 @X0 1 a ]
 [v _i `i ~T0 @X0 1 a ]
 [v _j `i ~T0 @X0 1 a ]
-"111
-[; ;util.c.c: 111:     for (i=0, j=length-1; i<j; i++, j--)
+"118
+[; ;util.c.c: 118:     for (i=0, j=length-1; i<j; i++, j--)
 {
 [e ; = _i -> 0 `i = _j - _length -> 1 `i ]
 [e $U 305  ]
 [e :U 302 ]
-"112
-[; ;util.c.c: 112:         {
+"119
+[; ;util.c.c: 119:         {
 {
-"113
-[; ;util.c.c: 113:         c=s[i];
+"120
+[; ;util.c.c: 120:         c=s[i];
 [e = _c -> *U + _s * -> _i `x -> -> # *U _s `i `x `i ]
-"114
-[; ;util.c.c: 114:         s[i]=s[j];
+"121
+[; ;util.c.c: 121:         s[i]=s[j];
 [e = *U + _s * -> _i `x -> -> # *U _s `i `x *U + _s * -> _j `x -> -> # *U _s `i `x ]
-"115
-[; ;util.c.c: 115:         s[j]=c;
+"122
+[; ;util.c.c: 122:         s[j]=c;
 [e = *U + _s * -> _j `x -> -> # *U _s `i `x -> _c `uc ]
-"116
-[; ;util.c.c: 116:         }
+"123
+[; ;util.c.c: 123:         }
 }
 [e ; ++ _i -> 1 `i -- _j -> 1 `i ]
 [e :U 305 ]
 [e $ < _i _j 302  ]
 [e :U 303 ]
 }
-"117
-[; ;util.c.c: 117:     return s;
+"124
+[; ;util.c.c: 124:     return s;
 [e ) _s ]
 [e $UE 301  ]
-"118
-[; ;util.c.c: 118: }
+"125
+[; ;util.c.c: 125: }
 [e :UE 301 ]
 }
-"129
-[; ;util.c.c: 129: char *ultoa(unsigned long num, char *str, int radix) {
+"136
+[; ;util.c.c: 136: char *ultoa(unsigned long num, char *str, int radix) {
 [v _ultoa `(*uc ~T0 @X0 1 ef3`ul`*uc`i ]
 {
 [e :U _ultoa ]
@@ -865,152 +871,152 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _str `*uc ~T0 @X0 1 r2 ]
 [v _radix `i ~T0 @X0 1 r3 ]
 [f ]
-"130
-[; ;util.c.c: 130:     char temp[33];
+"137
+[; ;util.c.c: 137:     char temp[33];
 [v _temp `uc ~T0 @X0 -> 33 `i a ]
-"133
-[; ;util.c.c: 133:     int temp_loc = 0;
+"140
+[; ;util.c.c: 140:     int temp_loc = 0;
 [v _temp_loc `i ~T0 @X0 1 a ]
 [e = _temp_loc -> 0 `i ]
-"134
-[; ;util.c.c: 134:     int digit;
+"141
+[; ;util.c.c: 141:     int digit;
 [v _digit `i ~T0 @X0 1 a ]
-"135
-[; ;util.c.c: 135:     int str_loc = 0;
+"142
+[; ;util.c.c: 142:     int str_loc = 0;
 [v _str_loc `i ~T0 @X0 1 a ]
 [e = _str_loc -> 0 `i ]
-"138
-[; ;util.c.c: 138:     do {
+"145
+[; ;util.c.c: 145:     do {
 [e :U 309 ]
 {
-"139
-[; ;util.c.c: 139:         digit = (unsigned long)num % radix;
+"146
+[; ;util.c.c: 146:         digit = (unsigned long)num % radix;
 [e = _digit -> % _num -> -> _radix `l `ul `i ]
-"140
-[; ;util.c.c: 140:         if (digit < 10)
+"147
+[; ;util.c.c: 147:         if (digit < 10)
 [e $ ! < _digit -> 10 `i 310  ]
-"141
-[; ;util.c.c: 141:             temp[temp_loc++] = digit + '0';
+"148
+[; ;util.c.c: 148:             temp[temp_loc++] = digit + '0';
 [e = *U + &U _temp * -> -> ++ _temp_loc -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + -> _digit `ui -> 48 `ui `uc ]
 [e $U 311  ]
-"142
-[; ;util.c.c: 142:         else
+"149
+[; ;util.c.c: 149:         else
 [e :U 310 ]
-"143
-[; ;util.c.c: 143:             temp[temp_loc++] = digit - 10 + 'A';
+"150
+[; ;util.c.c: 150:             temp[temp_loc++] = digit - 10 + 'A';
 [e = *U + &U _temp * -> -> ++ _temp_loc -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + -> - _digit -> 10 `i `ui -> 65 `ui `uc ]
 [e :U 311 ]
-"144
-[; ;util.c.c: 144:                         num = (unsigned long)num /radix;
+"151
+[; ;util.c.c: 151:                         num = (unsigned long)num /radix;
 [e = _num / _num -> -> _radix `l `ul ]
-"145
-[; ;util.c.c: 145:     } while ((unsigned long)num > 0);
+"152
+[; ;util.c.c: 152:     } while ((unsigned long)num > 0);
 }
 [e $ > _num -> -> -> 0 `i `l `ul 309  ]
 [e :U 308 ]
-"147
-[; ;util.c.c: 147:     temp_loc--;
+"154
+[; ;util.c.c: 154:     temp_loc--;
 [e -- _temp_loc -> 1 `i ]
-"151
-[; ;util.c.c: 151:     while ( temp_loc >=0 ) {
+"158
+[; ;util.c.c: 158:     while ( temp_loc >=0 ) {
 [e $U 312  ]
 [e :U 313 ]
 {
-"152
-[; ;util.c.c: 152:         str[str_loc++] = temp[temp_loc--];
+"159
+[; ;util.c.c: 159:         str[str_loc++] = temp[temp_loc--];
 [e = *U + _str * -> ++ _str_loc -> 1 `i `x -> -> # *U _str `i `x *U + &U _temp * -> -> -- _temp_loc -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux ]
-"153
-[; ;util.c.c: 153:     }
+"160
+[; ;util.c.c: 160:     }
 }
 [e :U 312 ]
-"151
-[; ;util.c.c: 151:     while ( temp_loc >=0 ) {
+"158
+[; ;util.c.c: 158:     while ( temp_loc >=0 ) {
 [e $ >= _temp_loc -> 0 `i 313  ]
 [e :U 314 ]
-"154
-[; ;util.c.c: 154:     str[str_loc] = 0;
+"161
+[; ;util.c.c: 161:     str[str_loc] = 0;
 [e = *U + _str * -> _str_loc `x -> -> # *U _str `i `x -> -> 0 `i `uc ]
-"156
-[; ;util.c.c: 156:     return str;
+"163
+[; ;util.c.c: 163:     return str;
 [e ) _str ]
 [e $UE 306  ]
-"157
-[; ;util.c.c: 157: }
+"164
+[; ;util.c.c: 164: }
 [e :UE 306 ]
 }
-"161
-[; ;util.c.c: 161: int my_pow(int rad, int exp){
+"168
+[; ;util.c.c: 168: int my_pow(int rad, int exp){
 [v _my_pow `(i ~T0 @X0 1 ef2`i`i ]
 {
 [e :U _my_pow ]
 [v _rad `i ~T0 @X0 1 r1 ]
 [v _exp `i ~T0 @X0 1 r2 ]
 [f ]
-"162
-[; ;util.c.c: 162:     int resposta;
+"169
+[; ;util.c.c: 169:     int resposta;
 [v _resposta `i ~T0 @X0 1 a ]
-"163
-[; ;util.c.c: 163:     if(exp==0)
+"170
+[; ;util.c.c: 170:     if(exp==0)
 [e $ ! == _exp -> 0 `i 316  ]
-"164
-[; ;util.c.c: 164:        resposta=1;
+"171
+[; ;util.c.c: 171:        resposta=1;
 [e = _resposta -> 1 `i ]
 [e $U 317  ]
-"165
-[; ;util.c.c: 165:     else if(exp==1)
+"172
+[; ;util.c.c: 172:     else if(exp==1)
 [e :U 316 ]
 [e $ ! == _exp -> 1 `i 318  ]
-"166
-[; ;util.c.c: 166:            {
+"173
+[; ;util.c.c: 173:            {
 {
-"167
-[; ;util.c.c: 167:            resposta=rad;
+"174
+[; ;util.c.c: 174:            resposta=rad;
 [e = _resposta _rad ]
-"168
-[; ;util.c.c: 168:            }
+"175
+[; ;util.c.c: 175:            }
 }
 [e $U 319  ]
-"169
-[; ;util.c.c: 169:     else
+"176
+[; ;util.c.c: 176:     else
 [e :U 318 ]
-"170
-[; ;util.c.c: 170:        {
+"177
+[; ;util.c.c: 177:        {
 {
-"171
-[; ;util.c.c: 171:        resposta=rad;
+"178
+[; ;util.c.c: 178:        resposta=rad;
 [e = _resposta _rad ]
-"172
-[; ;util.c.c: 172:        for(char i=0;i<exp-1;i++)
+"179
+[; ;util.c.c: 179:        for(char i=0;i<exp-1;i++)
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
 [e $U 323  ]
 [e :U 320 ]
-"173
-[; ;util.c.c: 173:           {
+"180
+[; ;util.c.c: 180:           {
 {
-"174
-[; ;util.c.c: 174:           resposta*=rad;
+"181
+[; ;util.c.c: 181:           resposta*=rad;
 [e =* _resposta _rad ]
-"175
-[; ;util.c.c: 175:           }
+"182
+[; ;util.c.c: 182:           }
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e :U 323 ]
 [e $ < -> _i `i - _exp -> 1 `i 320  ]
 [e :U 321 ]
 }
-"176
-[; ;util.c.c: 176:        }
+"183
+[; ;util.c.c: 183:        }
 }
 [e :U 319 ]
 [e :U 317 ]
-"177
-[; ;util.c.c: 177:     return resposta;
+"184
+[; ;util.c.c: 184:     return resposta;
 [e ) _resposta ]
 [e $UE 315  ]
-"178
-[; ;util.c.c: 178: }
+"185
+[; ;util.c.c: 185: }
 [e :UE 315 ]
 }
 [a 2C 32 0 ]

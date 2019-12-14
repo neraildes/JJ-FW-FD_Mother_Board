@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\Dell\AppData\Local\Temp\sk5s.o
+$C:\Users\Dell\AppData\Local\Temp\sc9g.o
 idloc IDLOC 0 200000 200000 8 1
 init CODE 0 2D0 2D0 4 1
 reset_vec CODE 0 0 0 4 1
@@ -180,7 +180,7 @@ text143 CODE 0 6ABA 6ABA 1A 1
 text144 CODE 0 6BBA 6BBA A 1
 bssBIGRAM BIGRAM 1 4AA 4AA 1BC 1
 bssCOMRAM COMRAM 1 61 61 E 1
-mediumconst MEDIUMCONST 0 FC8A FC8A 376 1
+mediumconst MEDIUMCONST 0 FC88 FC88 378 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
@@ -200,11 +200,11 @@ BANK7 700-7FF 1
 BANK8 800-8FF 1
 BANK9 900-9FF 1
 CONST 4-17 1
-CONST 6BD2-FC89 1
+CONST 6BD2-FC87 1
 STACK 666-F7F 1
-SMALLCONST 6BD2-FC89 1
+SMALLCONST 6BD2-FC87 1
 CODE 4-17 1
-CODE 6BD2-FC89 1
+CODE 6BD2-FC87 1
 BANK10 A00-AFF 1
 BANK11 B00-BFF 1
 BANK12 C00-CFF 1
@@ -218,7 +218,7 @@ BIGRAM 3EC-3FF 1
 BIGRAM 666-F7F 1
 COMRAM 72-7F 1
 EEDATA F00000-F003FF 1
-MEDIUMCONST 6BD2-FC89 1
+MEDIUMCONST 6BD2-FC87 1
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -233,7 +233,7 @@ MEDIUMCONST 6BD2-FC89 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Liofilizador_Mother_Board.X.production.o
-18 intcodelo CODE >40672:C:\Users\Dell\AppData\Local\Temp\sk5s.s
+18 intcodelo CODE >40679:C:\Users\Dell\AppData\Local\Temp\sc9g.s
 18 intcodelo CODE >70:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\isr.c
 36 intcodelo CODE >74:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\isr.c
 3A intcodelo CODE >76:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\isr.c
@@ -443,19 +443,19 @@ FC intcodelo CODE >128:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofiliz
 6962 text134 CODE >39:C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\Umul16.c
 696A text134 CODE >52:C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\Umul16.c
 6972 text134 CODE >53:C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\Umul16.c
-55F6 text133 CODE >161:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-55F6 text133 CODE >163:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-55FE text133 CODE >164:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5608 text133 CODE >165:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5610 text133 CODE >167:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5618 text133 CODE >168:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-561A text133 CODE >169:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-561A text133 CODE >171:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5622 text133 CODE >172:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5628 text133 CODE >174:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5644 text133 CODE >175:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5678 text133 CODE >177:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5680 text133 CODE >178:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+55F6 text133 CODE >168:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+55F6 text133 CODE >170:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+55FE text133 CODE >171:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5608 text133 CODE >172:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5610 text133 CODE >174:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5618 text133 CODE >175:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+561A text133 CODE >176:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+561A text133 CODE >178:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5622 text133 CODE >179:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5628 text133 CODE >181:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5644 text133 CODE >182:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5678 text133 CODE >184:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5680 text133 CODE >185:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 5E1C text132 CODE >582:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
 5E1E text132 CODE >584:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
 5E2A text132 CODE >586:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
@@ -967,9 +967,9 @@ FC intcodelo CODE >128:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofiliz
 4B96 text96 CODE >2207:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 4B9C text96 CODE >2208:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 4BA0 text96 CODE >2210:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
-69BC text95 CODE >56:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-69BC text95 CODE >57:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-69DE text95 CODE >58:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+69BC text95 CODE >63:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+69BC text95 CODE >64:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+69DE text95 CODE >65:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 3B78 text94 CODE >181:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
 3B78 text94 CODE >184:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
 3B86 text94 CODE >185:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
@@ -1554,11 +1554,11 @@ FC intcodelo CODE >128:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofiliz
 643A text53 CODE >118:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\usart.c
 6446 text53 CODE >119:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\usart.c
 6448 text53 CODE >120:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\usart.c
-66E6 text52 CODE >50:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-66E8 text52 CODE >51:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-66F6 text52 CODE >52:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-6708 text52 CODE >53:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-6716 text52 CODE >54:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+66E6 text52 CODE >57:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+66E8 text52 CODE >58:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+66F6 text52 CODE >59:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+6708 text52 CODE >60:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+6716 text52 CODE >61:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 34DC text51 CODE >137:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
 34DC text51 CODE >143:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
 34E8 text51 CODE >144:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
@@ -1877,31 +1877,31 @@ FC intcodelo CODE >128:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofiliz
 5AEC text27 CODE >32:C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\awmod.c
 5AF4 text27 CODE >33:C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\awmod.c
 5AFC text27 CODE >34:C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\awmod.c
-54DE text26 CODE >106:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-54DE text26 CODE >108:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-54F2 text26 CODE >111:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5508 text26 CODE >113:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-551E text26 CODE >114:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-553A text26 CODE >115:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-554A text26 CODE >116:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-4210 text25 CODE >63:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-4210 text25 CODE >65:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-4218 text25 CODE >66:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-421C text25 CODE >69:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-4224 text25 CODE >71:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-4234 text25 CODE >72:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-4246 text25 CODE >78:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-4254 text25 CODE >80:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-4258 text25 CODE >81:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-4262 text25 CODE >87:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-427E text25 CODE >88:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-42B2 text25 CODE >89:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-42CE text25 CODE >85:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-42D6 text25 CODE >93:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-42DC text25 CODE >94:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-42F0 text25 CODE >96:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-4300 text25 CODE >99:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-430C text25 CODE >102:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+54DE text26 CODE >113:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+54DE text26 CODE >115:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+54F2 text26 CODE >118:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5508 text26 CODE >120:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+551E text26 CODE >121:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+553A text26 CODE >122:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+554A text26 CODE >123:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+4210 text25 CODE >70:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+4210 text25 CODE >72:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+4218 text25 CODE >73:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+421C text25 CODE >76:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+4224 text25 CODE >78:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+4234 text25 CODE >79:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+4246 text25 CODE >85:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+4254 text25 CODE >87:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+4258 text25 CODE >88:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+4262 text25 CODE >94:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+427E text25 CODE >95:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+42B2 text25 CODE >96:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+42CE text25 CODE >92:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+42D6 text25 CODE >100:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+42DC text25 CODE >101:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+42F0 text25 CODE >103:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+4300 text25 CODE >106:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+430C text25 CODE >109:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 60AE text24 CODE >29:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\timedate.c
 60AE text24 CODE >31:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\timedate.c
 60C0 text24 CODE >33:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\timedate.c
@@ -1909,18 +1909,18 @@ FC intcodelo CODE >128:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofiliz
 60D2 text24 CODE >35:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\timedate.c
 50C0 text23 CODE >18:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 50C0 text23 CODE >21:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-50C4 text23 CODE >22:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-50D2 text23 CODE >25:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-50E6 text23 CODE >27:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-50F0 text23 CODE >28:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-50F2 text23 CODE >31:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-50FA text23 CODE >33:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-510C text23 CODE >34:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5122 text23 CODE >35:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5134 text23 CODE >36:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5148 text23 CODE >38:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-515C text23 CODE >41:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-5160 text23 CODE >42:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+50C4 text23 CODE >29:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+50D2 text23 CODE >32:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+50E6 text23 CODE >34:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+50F0 text23 CODE >35:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+50F2 text23 CODE >38:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+50FA text23 CODE >40:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+510C text23 CODE >41:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5122 text23 CODE >42:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5134 text23 CODE >43:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5148 text23 CODE >45:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+515C text23 CODE >48:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+5160 text23 CODE >49:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 2B90 text22 CODE >3048:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 2B90 text22 CODE >3054:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 2BA6 text22 CODE >3055:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
@@ -2208,11 +2208,11 @@ FC intcodelo CODE >128:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofiliz
 5E88 text5 CODE >22:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\timedate.c
 5E98 text5 CODE >23:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\timedate.c
 5EA0 text5 CODE >24:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\timedate.c
-6488 text4 CODE >44:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-6488 text4 CODE >45:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-6490 text4 CODE >46:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-64B8 text4 CODE >47:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-64C2 text4 CODE >48:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+6488 text4 CODE >51:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+6488 text4 CODE >52:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+6490 text4 CODE >53:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+64B8 text4 CODE >54:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+64C2 text4 CODE >55:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 25BE text3 CODE >3002:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 25BE text3 CODE >3003:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 25C2 text3 CODE >3004:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
@@ -2259,21 +2259,21 @@ FC intcodelo CODE >128:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofiliz
 5C2C text2 CODE >23:C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\llmod.c
 5C2C text2 CODE >24:C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\llmod.c
 5C3C text2 CODE >25:C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\llmod.c
-430E text1 CODE >129:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-430E text1 CODE >133:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-4316 text1 CODE >135:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-431E text1 CODE >139:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-434C text1 CODE >140:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-435C text1 CODE >141:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-4370 text1 CODE >143:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-437E text1 CODE >144:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-43B4 text1 CODE >145:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-43C0 text1 CODE >147:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-43C6 text1 CODE >151:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-43C8 text1 CODE >152:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-43EA text1 CODE >151:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-43EE text1 CODE >154:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
-43FE text1 CODE >157:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+430E text1 CODE >136:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+430E text1 CODE >140:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+4316 text1 CODE >142:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+431E text1 CODE >146:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+434C text1 CODE >147:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+435C text1 CODE >148:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+4370 text1 CODE >150:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+437E text1 CODE >151:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+43B4 text1 CODE >152:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+43C0 text1 CODE >154:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+43C6 text1 CODE >158:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+43C8 text1 CODE >159:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+43EA text1 CODE >158:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+43EE text1 CODE >161:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+43FE text1 CODE >164:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 2D4 text0 CODE >181:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 2D4 text0 CODE >183:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 2E8 text0 CODE >185:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
@@ -2569,99 +2569,99 @@ FF4 text0 CODE >791:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizado
 10F2 text0 CODE >822:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 10F6 text0 CODE >826:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 10FC text0 CODE >828:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
-4A1E cinit CODE >4807:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A1E cinit CODE >4809:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A1E cinit CODE >4812:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A1E cinit CODE >5067:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A20 cinit CODE >5068:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A22 cinit CODE >5069:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A24 cinit CODE >5070:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A26 cinit CODE >5071:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A28 cinit CODE >5072:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A2A cinit CODE >5073:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A2E cinit CODE >5074:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A32 cinit CODE >5075:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A32 cinit CODE >5076:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A34 cinit CODE >5077:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A38 cinit CODE >5078:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A3A cinit CODE >5079:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A3C cinit CODE >5080:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A3E cinit CODE >5084:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A40 cinit CODE >5085:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A42 cinit CODE >5086:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A44 cinit CODE >5087:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A46 cinit CODE >5088:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A48 cinit CODE >5089:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A4A cinit CODE >5090:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A4E cinit CODE >5091:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A52 cinit CODE >5092:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A52 cinit CODE >5093:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A54 cinit CODE >5094:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A58 cinit CODE >5095:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A5A cinit CODE >5096:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A5C cinit CODE >5097:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A5E cinit CODE >5101:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A60 cinit CODE >5102:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A62 cinit CODE >5103:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A64 cinit CODE >5104:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A66 cinit CODE >5105:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A68 cinit CODE >5106:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A6A cinit CODE >5107:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A6C cinit CODE >5108:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A70 cinit CODE >5109:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A72 cinit CODE >5110:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A76 cinit CODE >5114:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A7A cinit CODE >5115:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A7E cinit CODE >5116:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A7E cinit CODE >5117:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A80 cinit CODE >5118:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A82 cinit CODE >5119:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A84 cinit CODE >5120:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A86 cinit CODE >5121:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A88 cinit CODE >5122:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A8A cinit CODE >5125:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A8E cinit CODE >5126:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A90 cinit CODE >5127:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A90 cinit CODE >5128:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A92 cinit CODE >5129:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A94 cinit CODE >5130:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A96 cinit CODE >5133:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A9A cinit CODE >5134:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A9C cinit CODE >5135:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A9C cinit CODE >5136:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4A9E cinit CODE >5137:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AA0 cinit CODE >5138:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AA2 cinit CODE >5141:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AA6 cinit CODE >5142:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AA8 cinit CODE >5143:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AA8 cinit CODE >5144:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AAA cinit CODE >5145:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AAC cinit CODE >5146:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AAE cinit CODE >5149:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AB2 cinit CODE >5150:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AB4 cinit CODE >5151:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AB4 cinit CODE >5152:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AB6 cinit CODE >5153:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AB8 cinit CODE >5154:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4ABA cinit CODE >5157:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4ABE cinit CODE >5158:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AC0 cinit CODE >5159:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AC0 cinit CODE >5160:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AC2 cinit CODE >5161:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AC4 cinit CODE >5162:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AC6 cinit CODE >5165:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4ACA cinit CODE >5166:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4ACC cinit CODE >5167:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4ACC cinit CODE >5168:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4ACE cinit CODE >5169:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AD0 cinit CODE >5170:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AD2 cinit CODE >5176:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AD2 cinit CODE >5178:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AD4 cinit CODE >5179:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AD6 cinit CODE >5181:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4AD8 cinit CODE >5182:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4ADA cinit CODE >5183:C:\Users\Dell\AppData\Local\Temp\sk5s.s
-4ADC cinit CODE >5184:C:\Users\Dell\AppData\Local\Temp\sk5s.s
+4A1E cinit CODE >4814:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A1E cinit CODE >4816:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A1E cinit CODE >4819:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A1E cinit CODE >5074:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A20 cinit CODE >5075:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A22 cinit CODE >5076:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A24 cinit CODE >5077:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A26 cinit CODE >5078:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A28 cinit CODE >5079:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A2A cinit CODE >5080:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A2E cinit CODE >5081:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A32 cinit CODE >5082:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A32 cinit CODE >5083:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A34 cinit CODE >5084:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A38 cinit CODE >5085:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A3A cinit CODE >5086:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A3C cinit CODE >5087:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A3E cinit CODE >5091:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A40 cinit CODE >5092:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A42 cinit CODE >5093:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A44 cinit CODE >5094:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A46 cinit CODE >5095:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A48 cinit CODE >5096:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A4A cinit CODE >5097:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A4E cinit CODE >5098:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A52 cinit CODE >5099:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A52 cinit CODE >5100:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A54 cinit CODE >5101:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A58 cinit CODE >5102:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A5A cinit CODE >5103:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A5C cinit CODE >5104:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A5E cinit CODE >5108:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A60 cinit CODE >5109:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A62 cinit CODE >5110:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A64 cinit CODE >5111:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A66 cinit CODE >5112:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A68 cinit CODE >5113:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A6A cinit CODE >5114:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A6C cinit CODE >5115:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A70 cinit CODE >5116:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A72 cinit CODE >5117:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A76 cinit CODE >5121:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A7A cinit CODE >5122:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A7E cinit CODE >5123:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A7E cinit CODE >5124:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A80 cinit CODE >5125:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A82 cinit CODE >5126:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A84 cinit CODE >5127:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A86 cinit CODE >5128:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A88 cinit CODE >5129:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A8A cinit CODE >5132:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A8E cinit CODE >5133:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A90 cinit CODE >5134:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A90 cinit CODE >5135:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A92 cinit CODE >5136:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A94 cinit CODE >5137:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A96 cinit CODE >5140:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A9A cinit CODE >5141:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A9C cinit CODE >5142:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A9C cinit CODE >5143:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4A9E cinit CODE >5144:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AA0 cinit CODE >5145:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AA2 cinit CODE >5148:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AA6 cinit CODE >5149:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AA8 cinit CODE >5150:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AA8 cinit CODE >5151:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AAA cinit CODE >5152:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AAC cinit CODE >5153:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AAE cinit CODE >5156:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AB2 cinit CODE >5157:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AB4 cinit CODE >5158:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AB4 cinit CODE >5159:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AB6 cinit CODE >5160:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AB8 cinit CODE >5161:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4ABA cinit CODE >5164:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4ABE cinit CODE >5165:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AC0 cinit CODE >5166:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AC0 cinit CODE >5167:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AC2 cinit CODE >5168:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AC4 cinit CODE >5169:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AC6 cinit CODE >5172:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4ACA cinit CODE >5173:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4ACC cinit CODE >5174:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4ACC cinit CODE >5175:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4ACE cinit CODE >5176:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AD0 cinit CODE >5177:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AD2 cinit CODE >5183:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AD2 cinit CODE >5185:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AD4 cinit CODE >5186:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AD6 cinit CODE >5188:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4AD8 cinit CODE >5189:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4ADA cinit CODE >5190:C:\Users\Dell\AppData\Local\Temp\sc9g.s
+4ADC cinit CODE >5191:C:\Users\Dell\AppData\Local\Temp\sc9g.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -2681,7 +2681,7 @@ __size_of_bcd2str 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.
 __LdataBANK0 0 0 ABS 0 dataBANK0 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __LdataBANK1 0 0 ABS 0 dataBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
 SaveLiofilizadorOnMemory@index 32 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-__Lmediumconst FC8A 0 MEDIUMCONST 0 mediumconst dist/default/production\Liofilizador_Mother_Board.X.production.o
+__Lmediumconst FC88 0 MEDIUMCONST 0 mediumconst dist/default/production\Liofilizador_Mother_Board.X.production.o
 _Delay_Led_Tmr0 1B0 0 BANK1 1 bssBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __Hspace_0 30000E 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __Hspace_1 666 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -2706,7 +2706,7 @@ __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\Liofilizador_Mother_Boar
 PROCULUS_TPFLAG_Write@value 1D 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 PROCULUS_TPFLAG_Write@vetor 1A 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_EEPROM_Read_String 664E 0 CODE 0 text101 dist/default/production\Liofilizador_Mother_Board.X.production.o
-__mediumconst FC8A 0 MEDIUMCONST 0 mediumconst C:\Users\Dell\AppData\Local\Temp\sk5s.o
+__mediumconst FC88 0 MEDIUMCONST 0 mediumconst C:\Users\Dell\AppData\Local\Temp\sc9g.o
 ShowStaticValueGrid@bb 28 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ShowStaticValueGrid@vp 2C 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 Exibe_Receita@vp 2A 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -2741,17 +2741,17 @@ _LATB F8A 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.producti
 _RBIF 7F90 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 _RCIE 7CED 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 _TMR0 FD6 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\Dell\AppData\Local\Temp\sk5s.o
+___sp 0 0 STACK 2 stack C:\Users\Dell\AppData\Local\Temp\sc9g.o
 _itoa 4210 0 CODE 0 text25 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _main 2D4 0 CODE 0 text0 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _mapa 200 0 BANK2 1 bssBANK2 dist/default/production\Liofilizador_Mother_Board.X.production.o
 btemp 71 0 COMRAM 1 temp dist/default/production\Liofilizador_Mother_Board.X.production.o
 EEPROM_24C1025_Write_Str@mem_add F 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-Send_To_Slave@contador_2938 18 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
+Send_To_Slave@contador_2939 18 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 isr@i B 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 _Delay_Led_Memory 1B6 0 BANK1 1 bssBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __HbssBIGRAM 0 0 ABS 0 bssBIGRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-start 2D0 0 CODE 0 init C:\Users\Dell\AppData\Local\Temp\sk5s.o
+start 2D0 0 CODE 0 init C:\Users\Dell\AppData\Local\Temp\sc9g.o
 Captura_Pagina@retorno 2B 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___flmul@aexp 27 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___flmul@bexp 28 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -2763,7 +2763,7 @@ __size_of___awmod 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.
 __size_of___flmul 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of___fltol 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 ?_Send_To_Slave_EMULA C 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-Captura_Pagina@i_3224 2E 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
+Captura_Pagina@i_3225 2E 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_itoa 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_main 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of___lbdiv 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -2840,11 +2840,11 @@ __end_of_Contagem_Tempo_de_Processo 6060 0 CODE 0 text9 dist/default/production\
 USART_put_string@vetor D 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_buscaIndex 6998 0 CODE 0 text15 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _PROCULUS_TPFLAG_Read 6B30 0 CODE 0 text42 dist/default/production\Liofilizador_Mother_Board.X.production.o
-__accesstop 80 0 ABS 0 - C:\Users\Dell\AppData\Local\Temp\sk5s.o
-intlevel0 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\sk5s.o
-intlevel1 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\sk5s.o
-intlevel2 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\sk5s.o
-intlevel3 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\sk5s.o
+__accesstop 80 0 ABS 0 - C:\Users\Dell\AppData\Local\Temp\sc9g.o
+intlevel0 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\sc9g.o
+intlevel1 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\sc9g.o
+intlevel2 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\sc9g.o
+intlevel3 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\sc9g.o
 __end_of_Exibe_Receita 3FFA 0 CODE 0 text81 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __ptext100 3364 0 CODE 0 text100 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __ptext101 6618 0 CODE 0 text101 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -2955,8 +2955,8 @@ _ADCON1 FC1 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.produc
 USART_input_buffer@time D 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 USART_putc@value C 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___awdiv@dividend C 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-___inthi_sp 0 0 STACK 2 stack C:\Users\Dell\AppData\Local\Temp\sk5s.o
-___intlo_sp 0 0 STACK 2 stack C:\Users\Dell\AppData\Local\Temp\sk5s.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\Dell\AppData\Local\Temp\sc9g.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\Dell\AppData\Local\Temp\sc9g.o
 __size_of_PROCULUS_graphic_plot 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_PROCULUS_OK 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3246,7 +3246,7 @@ __Htext6 0 0 ABS 0 text6 dist/default/production\Liofilizador_Mother_Board.X.pro
 __Htext7 0 0 ABS 0 text7 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __Htext8 0 0 ABS 0 text8 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __Htext9 0 0 ABS 0 text9 dist/default/production\Liofilizador_Mother_Board.X.production.o
-_main$2922 189 0 BANK1 1 cstackBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
+_main$2923 189 0 BANK1 1 cstackBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___lwdiv@counter 10 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 I2C_Master_Write@d D 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __Hbank10 0 0 ABS 0 bank10 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3259,7 +3259,7 @@ __size_of___xxtofl 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\Liofilizador_Mother_Board.X.production.o
 __Hbigram 0 0 ABS 0 bigram dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_PROCULUS_Buzzer 677C 0 CODE 0 text122 dist/default/production\Liofilizador_Mother_Board.X.production.o
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Dell\AppData\Local\Temp\sk5s.o
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Dell\AppData\Local\Temp\sc9g.o
 showTotalReset@placa 48 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 showTotalReset@valor 49 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_Comando_Display 5794 0 CODE 0 text76 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3410,7 +3410,7 @@ _Incrementa_Contador_de_Repique_do_Vacuo 65AC 0 CODE 0 text8 dist/default/produc
 reverse@length 13 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 pagina_25@date 23 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 pagina_25@time 2D 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-EEPROM_24C1025_Read_Buffer@cnt_2046 1B 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
+EEPROM_24C1025_Read_Buffer@cnt_2047 1B 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 _USART_put_buffer 6838 0 CODE 0 text57 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_PROCULUS_VP_Write_Long32 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 Exibe_Receita@addeeprom 28 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3427,8 +3427,8 @@ ultoa@temp 21 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mothe
 USART_input_buffer@result F 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_SaveLiofilizadorOnMemory 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_EEPROM_24C1025_Read_Byte 67DC 0 CODE 0 text66 dist/default/production\Liofilizador_Mother_Board.X.production.o
-pagina_19@i_3139 4B 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-pagina_19@i_3146 4C 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
+pagina_19@i_3140 4B 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
+pagina_19@i_3147 4C 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 _PROCULUS_Buzzer 674A 0 CODE 0 text122 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _PROCULUS_OK 6198 0 CODE 0 text109 dist/default/production\Liofilizador_Mother_Board.X.production.o
 PROCULUS_REG_Read@tempo 1A 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3777,8 +3777,8 @@ __size_of_global_datalog 0 0 ABS 0 - dist/default/production\Liofilizador_Mother
 EEPROM_Write_Byte@last_GIE 2A 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 save_datalog@index 49 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 _USART_put_string 5818 0 CODE 0 text60 dist/default/production\Liofilizador_Mother_Board.X.production.o
-stackhi F7F 0 ABS 0 - C:\Users\Dell\AppData\Local\Temp\sk5s.o
-stacklo 666 0 ABS 0 - C:\Users\Dell\AppData\Local\Temp\sk5s.o
+stackhi F7F 0 ABS 0 - C:\Users\Dell\AppData\Local\Temp\sc9g.o
+stacklo 666 0 ABS 0 - C:\Users\Dell\AppData\Local\Temp\sc9g.o
 EEPROM_Read_Long32@addr 10 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_Formatar_Banco_de_Dados 46C0 0 CODE 0 text111 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _vpPrint FE 0 BANK0 1 dataBANK0 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3874,7 +3874,7 @@ __size_of_clear_screen 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_B
 ShowSensorRealTimeHS@SlaveBoard 2D 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 Gerenciador_de_Senha@senha 3B 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __Hreset_vec 4 0 CODE 0 reset_vec dist/default/production\Liofilizador_Mother_Board.X.production.o
-main@i_2914 18F 0 BANK1 1 cstackBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
+main@i_2915 18F 0 BANK1 1 cstackBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_Check_And_Send_Capture_Datalog 6B1C 0 CODE 0 text126 dist/default/production\Liofilizador_Mother_Board.X.production.o
 DataBaseBackupMain@vp 32 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 _Icones_de_alarmes 5682 0 CODE 0 text36 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4014,7 +4014,7 @@ my_delay_ms@time C 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_
 __size_of_Upload_Data_to_Slave 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_SaveBlackoutStatusRuning 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_EEPROM_24C1025_Write_Buffer 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
-__ramtop 1000 0 RAM 0 ramtop C:\Users\Dell\AppData\Local\Temp\sk5s.o
+__ramtop 1000 0 RAM 0 ramtop C:\Users\Dell\AppData\Local\Temp\sc9g.o
 _PROCULUS_graphic_plot 5E1C 0 CODE 0 text132 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _my_delay_ms_CLRWDT 60AE 0 CODE 0 text24 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _Carrega_Tupla_Receita 487E 0 CODE 0 text84 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4039,7 +4039,7 @@ __size_of_PROCULUS_REG_Read 0 0 ABS 0 - dist/default/production\Liofilizador_Mot
 Formatar_Banco_de_Dados@total 34 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___fltol@sign1 3B 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_Formatar_Dados_de_Seguranca 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
-_itoa$1958 21 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
+_itoa$1959 21 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __CFG_WDT$ON 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_PROCULUS_Write_RTC 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 _Atualizar_Lista_de_Receitas 6AEC 0 CODE 0 text80 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4054,10 +4054,10 @@ __size_of_PROCULUS_NOK 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_B
 _Carregar_Status_da_Senha_Global 599E 0 CODE 0 text135 dist/default/production\Liofilizador_Mother_Board.X.production.o
 ?_PROCULUS_VP_Read_Double32 1F 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 _str2bcd 69BC 0 CODE 0 text95 dist/default/production\Liofilizador_Mother_Board.X.production.o
-_TrendColor FC8B 0 MEDIUMCONST 0 mediumconst dist/default/production\Liofilizador_Mother_Board.X.production.o
+_TrendColor FC89 0 MEDIUMCONST 0 mediumconst dist/default/production\Liofilizador_Mother_Board.X.production.o
 SaveLiofilizadorOnMemory@addEEPROM 33 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 _ShowMessage 5298 0 CODE 0 text103 dist/default/production\Liofilizador_Mother_Board.X.production.o
-_TrendCurveFuncao$3260 38 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
+_TrendCurveFuncao$3261 38 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 pagina_31@nova_senha 59 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_Upload_Data_to_Slave 2B90 0 CODE 0 text99 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_Gerenciador_de_Senha_Global 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4134,7 +4134,7 @@ _TXSTAbits FAC 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.pro
 Global_Aquecimento_Switch@buffer 22 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 PROCULUS_VP_Read_Double32@vp 1F 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 _senhavetor F0 0 BANK0 1 bssBANK0 dist/default/production\Liofilizador_Mother_Board.X.production.o
-__pmediumconst FC8A 0 MEDIUMCONST 0 mediumconst dist/default/production\Liofilizador_Mother_Board.X.production.o
+__pmediumconst FC88 0 MEDIUMCONST 0 mediumconst dist/default/production\Liofilizador_Mother_Board.X.production.o
 _SSPCON1 FC6 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 _SSPCON2 FC5 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 _SSPSTAT FC7 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4147,8 +4147,8 @@ __end_of_EEPROM_Read_Integer 6682 0 CODE 0 text102 dist/default/production\Liofi
 __CFG_BOREN$SBORDIS 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___lbmod@rem F 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 bcd2str@valor D 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-pagina_49@i_3122 3E 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-pagina_49@i_3123 3F 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
+pagina_49@i_3123 3E 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
+pagina_49@i_3124 3F 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___llmod@counter 14 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_PROCULUS_Popup 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __CFG_PWRT$ON 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4274,7 +4274,7 @@ __initialization 4A1E 0 CODE 0 cinit dist/default/production\Liofilizador_Mother
 TrendCurveFuncao@figura 3A 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 _EEPROM_Read_Buffer 677C 0 CODE 0 text19 dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___xxtofl@sign 14 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-__end_of_TrendColor FCA5 0 MEDIUMCONST 0 mediumconst dist/default/production\Liofilizador_Mother_Board.X.production.o
+__end_of_TrendColor FCA3 0 MEDIUMCONST 0 mediumconst dist/default/production\Liofilizador_Mother_Board.X.production.o
 __pbssBANK0 80 0 BANK0 1 bssBANK0 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __pbssBANK1 192 0 BANK1 1 bssBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __pbssBANK2 200 0 BANK2 1 bssBANK2 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4295,6 +4295,7 @@ _cntAbandona A5 0 BANK0 1 bssBANK0 dist/default/production\Liofilizador_Mother_B
 _boardtype F4 0 BANK0 1 dataBANK0 dist/default/production\Liofilizador_Mother_Board.X.production.o
 PROCULUS_REG_Read@retorno 16 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_save_datalog 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
+__end_ofprint@MAXVP FCA5 0 MEDIUMCONST 0 mediumconst dist/default/production\Liofilizador_Mother_Board.X.production.o
 __Lifardata 0 0 CODE 0 ifardata dist/default/production\Liofilizador_Mother_Board.X.production.o
 _Check_And_Send_Capture_Datalog 6B04 0 CODE 0 text126 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _Send_To_Slave 46C0 0 CODE 0 text131 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4350,7 +4351,7 @@ bssBANK2 1 200 200 F5 1
 bssBANK3 1 300 300 EC 1
 bssBANK4 1 400 400 AA 1
 bssBIGRAM 1 4AA 4AA 1BC 1
-mediumconst 0 FC8A FC8A 376 1
+mediumconst 0 FC88 FC88 378 1
 config 0 300000 300000 E 1
 # OTES Section
 # This section contains data of all the note-psects.  The beginning of the section

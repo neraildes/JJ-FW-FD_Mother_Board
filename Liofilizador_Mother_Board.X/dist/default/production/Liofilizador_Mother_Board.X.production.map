@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v2.10\pic\dat\en_msgs.txt \
   -cs -h+dist/default/production\Liofilizador_Mother_Board.X.production.sym \
   --cmf=dist/default/production\Liofilizador_Mother_Board.X.production.cmf \
-  -z -Q18F4620 -oC:\Users\Dell\AppData\Local\Temp\sk5s.2 \
+  -z -Q18F4620 -oC:\Users\Dell\AppData\Local\Temp\sc9g.2 \
   --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/Liofilizador_Mother_Board.X.production.map -E1 \
   -ver=XC8 --acfsm=1493 -ASTACK=0666h-0F7Fh -pstack=STACK -ACODE=00h-0FFFFh \
@@ -27,7 +27,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Dell\AppData\Local\Temp\sk5s.o \
+  C:\Users\Dell\AppData\Local\Temp\sc9g.o \
   dist/default/production\Liofilizador_Mother_Board.X.production.o 
 
 Object code version is 3.11
@@ -40,7 +40,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Dell\AppData\Local\Temp\sk5s.o
+C:\Users\Dell\AppData\Local\Temp\sc9g.o
                 init                                2D0      2D0        4        C       0
                 reset_vec                             0        0        4        0       0
                 idloc                            200000   200000        8   200000       0
@@ -48,7 +48,7 @@ C:\Users\Dell\AppData\Local\Temp\sk5s.o
 dist/default/production\Liofilizador_Mother_Board.X.production.o
                 intcodelo                            18       18      2B8        C       0
                 temp                                 71       71        1        1       1
-                mediumconst                        FC8A     FC8A      376     7E45       0
+                mediumconst                        FC88     FC88      378     7E44       0
                 text144                            6BBA     6BBA        A        C       0
                 text143                            6ABA     6ABA       1A        C       0
                 text142                            6B82     6B82        E        C       0
@@ -373,7 +373,7 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   SMALLCONST     
 
         CLASS   MEDIUMCONST    
-                mediumconst                        FC8A     FC8A      376         0
+                mediumconst                        FC88     FC88      378         0
 
         CLASS   COMRAM         
                 temp                                 71       71        1         1
@@ -453,7 +453,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
                 bssBANK3                       000300  0000EC  0003EC       300       1  BANK3   
                 bssBANK4                       000400  0000AA  0004AA       400       1  BANK4   
                 bssBIGRAM                      0004AA  0001BC  000666       4AA       1  BIGRAM  
-                mediumconst                    00FC8A  000376  010000      7E45       0  MEDIUMCO
+                mediumconst                    00FC88  000378  010000      7E44       0  MEDIUMCO
                 idloc                          200000  000008  200008    200000       0  IDLOC   
                 config                         300000  00000E  30000E    300000       0  CONFIG  
 
@@ -480,18 +480,18 @@ UNUSED ADDRESS RANGES
                          0003EC-0003FF               14
                          000666-000F7F              91A
         CODE             000004-000017               14
-                         006BD2-00FC89             90B8
+                         006BD2-00FC87             90B6
         COMRAM           000072-00007F                E
         CONST            000004-000017               14
-                         006BD2-00FC89             90B8
+                         006BD2-00FC87             90B6
         EEDATA           F00000-F003FF              400
-        MEDIUMCONST      006BD2-00FC89             90B8
+        MEDIUMCONST      006BD2-00FC87             90B6
         RAM              0001F3-0001FF                D
                          0002F5-0002FF                B
                          0003EC-0003FF               14
                          000666-000F7F              100
         SFR              000F80-000FFF               80
-        SMALLCONST       006BD2-00FC89              100
+        SMALLCONST       006BD2-00FC87              100
         STACK            000666-000F7F              91A
 
                                   Symbol Table
@@ -521,7 +521,7 @@ Atualizar_Lista_de_Receitas@i                     cstackCOMRAM 00002C
 Buffer_Manager@i                                  cstackCOMRAM 000011
 Buffer_Manager@j                                  cstackCOMRAM 000010
 Captura_Pagina@i                                  cstackCOMRAM 00002D
-Captura_Pagina@i_3224                             cstackCOMRAM 00002E
+Captura_Pagina@i_3225                             cstackCOMRAM 00002E
 Captura_Pagina@pagina                             cstackCOMRAM 000021
 Captura_Pagina@retorno                            cstackCOMRAM 00002B
 Carrega_Tupla_Receita@addeeprom                   cstackCOMRAM 00001F
@@ -548,7 +548,7 @@ EEPROM_24C1025_Fill_All@i                         cstackBANK1  000181
 EEPROM_24C1025_Fill_All@page                      cstackBANK1  000182
 EEPROM_24C1025_Fill_All@value                     cstackCOMRAM 000021
 EEPROM_24C1025_Read_Buffer@chip_add               cstackCOMRAM 00001C
-EEPROM_24C1025_Read_Buffer@cnt_2046               cstackCOMRAM 00001B
+EEPROM_24C1025_Read_Buffer@cnt_2047               cstackCOMRAM 00001B
 EEPROM_24C1025_Read_Buffer@ctrl                   cstackCOMRAM 00001E
 EEPROM_24C1025_Read_Buffer@data                   cstackCOMRAM 000017
 EEPROM_24C1025_Read_Buffer@mem_add                cstackCOMRAM 000012
@@ -716,7 +716,7 @@ SaveLiofilizadorOnMemory@index                    cstackCOMRAM 000032
 SaveLiofilizadorOnMemory@liofilizador             cstackCOMRAM 00002F
 Send_To_Slave@buffer                              cstackCOMRAM 000011
 Send_To_Slave@comando                             cstackCOMRAM 00000F
-Send_To_Slave@contador_2938                       cstackCOMRAM 000018
+Send_To_Slave@contador_2939                       cstackCOMRAM 000018
 Send_To_Slave@destino                             cstackCOMRAM 000015
 Send_To_Slave@i                                   cstackCOMRAM 00001A
 Send_To_Slave@retorno                             cstackCOMRAM 000016
@@ -936,9 +936,9 @@ _TRISDbits                                        (abs)        000F95
 _TRISE                                            (abs)        000F96
 _TXREG                                            (abs)        000FAD
 _TXSTAbits                                        (abs)        000FAC
-_TrendColor                                       mediumconst  00FC8B
+_TrendColor                                       mediumconst  00FC89
 _TrendCurveFuncao                                 text17       001104
-_TrendCurveFuncao$3260                            cstackCOMRAM 000038
+_TrendCurveFuncao$3261                            cstackCOMRAM 000038
 _USART_init                                       text16       00591E
 _USART_input_buffer                               text53       00640C
 _USART_put_buffer                                 text57       006838
@@ -1266,7 +1266,7 @@ __Lintentry                                       intentry     000000
 __Lintret                                         intret       000000
 __Lintsave_regs                                   intsave_regs 000000
 __Lirdata                                         irdata       000000
-__Lmediumconst                                    mediumconst  00FC8A
+__Lmediumconst                                    mediumconst  00FC88
 __LnvFARRAM                                       nvFARRAM     000000
 __Lnvbit                                          nvbit        000000
 __Lnvrram                                         nvrram       000000
@@ -1594,7 +1594,7 @@ __end_of_ShowHardwareInfo                         text22       002D54
 __end_of_ShowMessage                              text103      00532C
 __end_of_ShowSensorRealTimeHS                     text20       0025BE
 __end_of_ShowStaticValueGrid                      text100      0034DC
-__end_of_TrendColor                               mediumconst  00FCA5
+__end_of_TrendColor                               mediumconst  00FCA3
 __end_of_TrendCurveFuncao                         text17       001688
 __end_of_USART_init                               text16       00599E
 __end_of_USART_input_buffer                       text53       00644A
@@ -1648,8 +1648,9 @@ __end_of_strcat                                   text104      006902
 __end_of_strcpy                                   text112      005F1E
 __end_of_strlen                                   text106      00630A
 __end_of_ultoa                                    text1        004400
+__end_ofprint@MAXVP                               mediumconst  00FCA5
 __initialization                                  cinit        004A1E
-__mediumconst                                     mediumconst  00FC8A
+__mediumconst                                     mediumconst  00FC88
 __pbssBANK0                                       bssBANK0     000080
 __pbssBANK1                                       bssBANK1     000192
 __pbssBANK2                                       bssBANK2     000200
@@ -1667,7 +1668,7 @@ __pidataBANK0                                     idataBANK0   006B90
 __pidataBANK1                                     idataBANK1   006BCC
 __pidataCOMRAM                                    idataCOMRAM  006BD0
 __pintcodelo                                      intcodelo    000018
-__pmediumconst                                    mediumconst  00FC8A
+__pmediumconst                                    mediumconst  00FC88
 __ptext0                                          text0        0002D4
 __ptext1                                          text1        00430E
 __ptext10                                         text10       006060
@@ -1983,11 +1984,11 @@ _icone                                            bssCOMRAM    000065
 _index                                            bssBANK0     000084
 _isr                                              intcodelo    000018
 _itoa                                             text25       004210
-_itoa$1958                                        cstackCOMRAM 000021
+_itoa$1959                                        cstackCOMRAM 000021
 _leitura                                          bssBANK1     0001C0
 _liofilizador                                     bssBANK4     000400
 _main                                             text0        0002D4
-_main$2922                                        cstackBANK1  000189
+_main$2923                                        cstackBANK1  000189
 _maincnt                                          bssBANK1     0001BC
 _mapa                                             bssBANK2     000200
 _memo_statuspower                                 bssBANK1     0001B8
@@ -2073,7 +2074,7 @@ main@canal_aleatorio                              cstackBANK1  000184
 main@canal_sequencial                             cstackBANK1  000191
 main@dica                                         cstackBANK1  000185
 main@i                                            cstackBANK1  000190
-main@i_2914                                       cstackBANK1  00018F
+main@i_2915                                       cstackBANK1  00018F
 main@reset                                        cstackBANK1  00018B
 main@tempo                                        cstackBANK1  00018D
 my_delay_ms@i                                     cstackCOMRAM 000011
@@ -2087,8 +2088,8 @@ my_pow@i                                          cstackCOMRAM 000026
 my_pow@rad                                        cstackCOMRAM 00001B
 my_pow@resposta                                   cstackCOMRAM 000027
 pagina_19@i                                       cstackCOMRAM 00004A
-pagina_19@i_3139                                  cstackCOMRAM 00004B
-pagina_19@i_3146                                  cstackCOMRAM 00004C
+pagina_19@i_3140                                  cstackCOMRAM 00004B
+pagina_19@i_3147                                  cstackCOMRAM 00004C
 pagina_19@inicio                                  cstackCOMRAM 000049
 pagina_25@date                                    cstackCOMRAM 000023
 pagina_25@time                                    cstackCOMRAM 00002D
@@ -2097,8 +2098,8 @@ pagina_31@nova_senha                              cstackCOMRAM 000059
 pagina_31@senhavetor                              cstackCOMRAM 000055
 pagina_47@receita                                 cstackCOMRAM 000024
 pagina_49@i                                       cstackCOMRAM 00003D
-pagina_49@i_3122                                  cstackCOMRAM 00003E
-pagina_49@i_3123                                  cstackCOMRAM 00003F
+pagina_49@i_3123                                  cstackCOMRAM 00003E
+pagina_49@i_3124                                  cstackCOMRAM 00003F
 pagina_49@liofilizador                            cstackCOMRAM 000040
 print@texto                                       cstackCOMRAM 000023
 print@textolocal                                  cstackCOMRAM 000025
@@ -2250,7 +2251,7 @@ Total ram usage:       18 bytes
 
  *************** function _ultoa *****************
  Defined at:
-		line 129 in file "util.c.c"
+		line 136 in file "util.c.c"
  Parameters:    Size  Location     Type
   num             4   24[COMRAM] unsigned long 
   str             2   28[COMRAM] PTR unsigned char 
@@ -2361,7 +2362,7 @@ Total ram usage:        6 bytes
 
  *************** function _clear_screen *****************
  Defined at:
-		line 44 in file "util.c.c"
+		line 51 in file "util.c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3062,7 +3063,7 @@ Total ram usage:        9 bytes
 
  *************** function _itoa *****************
  Defined at:
-		line 63 in file "util.c.c"
+		line 70 in file "util.c.c"
  Parameters:    Size  Location     Type
   num             2   26[COMRAM] int 
   str             2   28[COMRAM] PTR unsigned char 
@@ -3100,7 +3101,7 @@ Total ram usage:       13 bytes
 
  *************** function _reverse *****************
  Defined at:
-		line 106 in file "util.c.c"
+		line 113 in file "util.c.c"
  Parameters:    Size  Location     Type
   s               2   15[COMRAM] PTR unsigned char 
 		 -> memory_test@txt(30), texto(74), buffer(74), 
@@ -3954,7 +3955,7 @@ Total ram usage:       31 bytes
 
  *************** function _bcd2str *****************
  Defined at:
-		line 50 in file "util.c.c"
+		line 57 in file "util.c.c"
  Parameters:    Size  Location     Type
   valor           1    wreg     unsigned char 
   dado            1   11[COMRAM] PTR unsigned char 
@@ -5483,7 +5484,7 @@ Total ram usage:       20 bytes
 
  *************** function _str2bcd *****************
  Defined at:
-		line 56 in file "util.c.c"
+		line 63 in file "util.c.c"
  Parameters:    Size  Location     Type
   value           1   11[COMRAM] PTR unsigned char 
 		 -> PROCULUS_Write_RTC@second(3), PROCULUS_Write_RTC@minute(3), PROCULUS_Write_RTC@hour(3), PROCULUS_Write_RTC@day(3), 
@@ -6969,7 +6970,7 @@ Total ram usage:        4 bytes
 
  *************** function _my_pow *****************
  Defined at:
-		line 161 in file "util.c.c"
+		line 168 in file "util.c.c"
  Parameters:    Size  Location     Type
   rad             2   26[COMRAM] int 
   exp             2   28[COMRAM] int 
@@ -7596,7 +7597,8 @@ C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\lbdiv.c estima
 
 shared
 		__initialization		CODE           	4A1E	0000	181
-		_TrendColor    		MEDIUMCONST    	FC8B	0000	27
+		print@MAXVP    		MEDIUMCONST    	0000	0000	0
+		_TrendColor    		MEDIUMCONST    	FC89	0000	27
 
 shared estimated size: 208
 

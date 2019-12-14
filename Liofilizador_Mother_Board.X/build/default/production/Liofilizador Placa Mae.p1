@@ -1,34 +1,34 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"225 ./global.h
-[; ;./global.h: 225: struct {
+"229 ./global.h
+[; ;./global.h: 229: struct {
 [s S277 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S277 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"250
-[; ;./global.h: 250:       struct {
+"254
+[; ;./global.h: 254:       struct {
 [s S279 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S279 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work ]
-"248
-[; ;./global.h: 248: union {
+"252
+[; ;./global.h: 252: union {
 [u S278 `uc 1 `S279 1 ]
 [n S278 . bits . ]
-"270
-[; ;./global.h: 270: struct{
+"274
+[; ;./global.h: 274: struct{
 [s S280 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S280 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico ]
-"286
-[; ;./global.h: 286: struct{
+"290
+[; ;./global.h: 290: struct{
 [s S281 :1 `uc 1 ]
 [n S281 . flag_main_loop_WDT ]
-"291
-[; ;./global.h: 291: typedef struct{
+"295
+[; ;./global.h: 295: typedef struct{
 [s S282 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S282 . milisegundo segundo minuto hora ]
 "22 ./protocolo.h
 [; ;./protocolo.h: 22: typedef struct {
 [s S291 `i 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc -> 74 `i ]
 [n S291 . header origem destino command size value ]
-"72 ./proculus.h
-[; ;./proculus.h: 72: typedef struct {
+"97 ./proculus.h
+[; ;./proculus.h: 97: typedef struct {
 [s S289 `ui 1 `uc 1 `uc 1 `ui 1 `uc 1 `ui -> 15 `i `uc 1 `uc 1 `uc 1 ]
 [n S289 . header size function vp length dado page button status ]
 "24 ./Liofilizador Placa Mae.h
@@ -263,8 +263,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7 ./util.h
 [; ;./util.h: 7: void clear_screen(void);
 [v _clear_screen `(v ~T0 @X0 0 ef ]
-"158 ./proculus.h
-[; ;./proculus.h: 158: void PROCULUS_Show_Screen(unsigned int screen);
+"183 ./proculus.h
+[; ;./proculus.h: 183: void PROCULUS_Show_Screen(unsigned int screen);
 [v _PROCULUS_Show_Screen `(v ~T0 @X0 0 ef1`ui ]
 "17 ./eeprom.h
 [; ;./eeprom.h: 17: int EEPROM_Read_Integer(unsigned int addr);
@@ -301,8 +301,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4 ./util.h
 [; ;./util.h: 4: void print(char *texto);
 [v _print `(v ~T0 @X0 0 ef1`*uc ]
-"148 ./proculus.h
-[; ;./proculus.h: 148: void PROCULUS_VP_Read_String(unsigned int vp, char *text);
+"173 ./proculus.h
+[; ;./proculus.h: 173: void PROCULUS_VP_Read_String(unsigned int vp, char *text);
 [v _PROCULUS_VP_Read_String `(v ~T0 @X0 0 ef2`ui`*uc ]
 "33 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h: 33: char *strcpy (char *restrict, const char *restrict);
@@ -313,8 +313,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "123 ./Liofilizador Placa Mae.h
 [; ;./Liofilizador Placa Mae.h: 123: void ShowHardwareInfo(void);
 [v _ShowHardwareInfo `(v ~T0 @X0 0 ef ]
-"116 ./proculus.h
-[; ;./proculus.h: 116: void PROCULUS_VP_Write_UInt16(unsigned int vp, unsigned int value);
+"141 ./proculus.h
+[; ;./proculus.h: 141: void PROCULUS_VP_Write_UInt16(unsigned int vp, unsigned int value);
 [v _PROCULUS_VP_Write_UInt16 `(v ~T0 @X0 0 ef2`ui`ui ]
 "118 ./Liofilizador Placa Mae.h
 [; ;./Liofilizador Placa Mae.h: 118: void Contagem_Tempo_de_Processo(char value);
@@ -410,8 +410,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "187 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18.h
 [v __delay `JF2424 ~T0 @X0 0 e ]
 [p i __delay ]
-"165 ./proculus.h
-[; ;./proculus.h: 165: void PROCULUS_OK(void);
+"190 ./proculus.h
+[; ;./proculus.h: 190: void PROCULUS_OK(void);
 [v _PROCULUS_OK `(v ~T0 @X0 0 ef ]
 "111 ./Liofilizador Placa Mae.h
 [; ;./Liofilizador Placa Mae.h: 111: void SaveBlackoutStatus(void);
@@ -425,8 +425,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "75
 [; ;./Liofilizador Placa Mae.h: 75: void showTotalReset(void);
 [v _showTotalReset `(v ~T0 @X0 0 ef ]
-"117 ./proculus.h
-[; ;./proculus.h: 117: unsigned int PROCULUS_VP_Read_UInt16(unsigned int vp);
+"142 ./proculus.h
+[; ;./proculus.h: 142: unsigned int PROCULUS_VP_Read_UInt16(unsigned int vp);
 [v _PROCULUS_VP_Read_UInt16 `(ui ~T0 @X0 0 ef1`ui ]
 "161 ./Liofilizador Placa Mae.h
 [; ;./Liofilizador Placa Mae.h: 161: void pagina_19(void);
@@ -449,8 +449,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "12 ./util.h
 [; ;./util.h: 12: char *ultoa(unsigned long num, char *str, int radix);
 [v _ultoa `(*uc ~T0 @X0 0 ef3`ul`*uc`i ]
-"147 ./proculus.h
-[; ;./proculus.h: 147: void PROCULUS_VP_Write_String(unsigned int vp, char *text);
+"172 ./proculus.h
+[; ;./proculus.h: 172: void PROCULUS_VP_Write_String(unsigned int vp, char *text);
 [v _PROCULUS_VP_Write_String `(v ~T0 @X0 0 ef2`ui`*uc ]
 "20 ./timedate.h
 [; ;./timedate.h: 20: void my_delay_ms_TMR1(long time);
@@ -494,8 +494,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "29
 [; ;./eeprom.h: 29: void EEPROM_Write_String(unsigned int addr,char *dado);
 [v _EEPROM_Write_String `(v ~T0 @X0 0 ef2`ui`*uc ]
-"174 ./proculus.h
-[; ;./proculus.h: 174: void PROCULUS_graphic_plot(unsigned char lcd_channel, unsigned int value);
+"199 ./proculus.h
+[; ;./proculus.h: 199: void PROCULUS_graphic_plot(unsigned char lcd_channel, unsigned int value);
 [v _PROCULUS_graphic_plot `(v ~T0 @X0 0 ef2`uc`ui ]
 "35 ./usart.h
 [; ;./usart.h: 35: void USART_to_Protocol(t_usart_protocol *usart_protocol);
@@ -542,47 +542,47 @@ Version 4.0 HI-TECH Software Intermediate Code
 "35 ./EEPROM_24C1025.h
 [; ;./EEPROM_24C1025.h: 35: void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned char value);
 [v _EEPROM_24C1025_Fill_All `(v ~T0 @X0 0 ef2`uc`uc ]
-"157 ./proculus.h
-[; ;./proculus.h: 157: void PROCULUS_Buzzer(unsigned int time_ms_x_10);
+"182 ./proculus.h
+[; ;./proculus.h: 182: void PROCULUS_Buzzer(unsigned int time_ms_x_10);
 [v _PROCULUS_Buzzer `(v ~T0 @X0 0 ef1`ui ]
 "171 ./Liofilizador Placa Mae.h
 [; ;./Liofilizador Placa Mae.h: 171: void Incrementa_Contador_de_Repique_do_Vacuo();
 [v _Incrementa_Contador_de_Repique_do_Vacuo `(v ~T0 @X0 0 e? ]
-"172 ./proculus.h
-[; ;./proculus.h: 172: void PROCULUS_Popup(char value);
+"197 ./proculus.h
+[; ;./proculus.h: 197: void PROCULUS_Popup(char value);
 [v _PROCULUS_Popup `(v ~T0 @X0 0 ef1`uc ]
-"163
-[; ;./proculus.h: 163: void PROCULUS_Buffer_to_Proculus(t_proculus *proculus);
+"188
+[; ;./proculus.h: 188: void PROCULUS_Buffer_to_Proculus(t_proculus *proculus);
 [v _PROCULUS_Buffer_to_Proculus `(v ~T0 @X0 0 ef1`*S289 ]
 "160 ./Liofilizador Placa Mae.h
 [; ;./Liofilizador Placa Mae.h: 160: void pagina_15(void);
 [v _pagina_15 `(v ~T0 @X0 0 ef ]
-"166 ./proculus.h
-[; ;./proculus.h: 166: void PROCULUS_NOK(void);
+"191 ./proculus.h
+[; ;./proculus.h: 191: void PROCULUS_NOK(void);
 [v _PROCULUS_NOK `(v ~T0 @X0 0 ef ]
-"97
-[; ;./proculus.h: 97: void PROCULUS_Write_RTC(char *date, char *time);
+"122
+[; ;./proculus.h: 122: void PROCULUS_Write_RTC(char *date, char *time);
 [v _PROCULUS_Write_RTC `(v ~T0 @X0 0 ef2`*uc`*uc ]
-"144
-[; ;./proculus.h: 144: double PROCULUS_VP_Read_Double32(unsigned int vp);
+"169
+[; ;./proculus.h: 169: double PROCULUS_VP_Read_Double32(unsigned int vp);
 [v _PROCULUS_VP_Read_Double32 `(d ~T0 @X0 0 ef1`ui ]
-"103
-[; ;./proculus.h: 103: void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size);
+"128
+[; ;./proculus.h: 128: void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size);
 [v _PROCULUS_VP_Read `(v ~T0 @X0 0 ef3`ui`*uc`uc ]
-"127
-[; ;./proculus.h: 127: void PROCULUS_VP_Write_Long32(unsigned int vp, unsigned long value);
+"152
+[; ;./proculus.h: 152: void PROCULUS_VP_Write_Long32(unsigned int vp, unsigned long value);
 [v _PROCULUS_VP_Write_Long32 `(v ~T0 @X0 0 ef2`ui`ul ]
-"96
-[; ;./proculus.h: 96: void PROCULUS_Read_RTC(char *date, char *time);
+"121
+[; ;./proculus.h: 121: void PROCULUS_Read_RTC(char *date, char *time);
 [v _PROCULUS_Read_RTC `(v ~T0 @X0 0 ef2`*uc`*uc ]
-"160
-[; ;./proculus.h: 160: char PROCULUS_TPFLAG_Read(void);
+"185
+[; ;./proculus.h: 185: char PROCULUS_TPFLAG_Read(void);
 [v _PROCULUS_TPFLAG_Read `(uc ~T0 @X0 0 ef ]
-"161
-[; ;./proculus.h: 161: void PROCULUS_TPFLAG_Write(char value);
+"186
+[; ;./proculus.h: 186: void PROCULUS_TPFLAG_Write(char value);
 [v _PROCULUS_TPFLAG_Write `(v ~T0 @X0 0 ef1`uc ]
-"170
-[; ;./proculus.h: 170: unsigned int PROCULUS_Get_Page(void);
+"195
+[; ;./proculus.h: 195: unsigned int PROCULUS_Get_Page(void);
 [v _PROCULUS_Get_Page `(ui ~T0 @X0 0 ef ]
 "10 ./util.h
 [; ;./util.h: 10: char* itoa(int num, char* str, int base);
@@ -1004,104 +1004,104 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6715
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 6715: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"20 ./global.h
+"24 ./global.h
 [p x OSC = INTIO67 ]
-"21
-[p x FCMEN = OFF ]
-"22
-[p x IESO = OFF ]
 "25
-[p x PWRT = ON ]
+[p x FCMEN = OFF ]
 "26
-[p x BOREN = SBORDIS ]
-"27
-[p x BORV = 3 ]
+[p x IESO = OFF ]
+"29
+[p x PWRT = ON ]
 "30
-[p x WDT = ON ]
+[p x BOREN = SBORDIS ]
 "31
-[p x WDTPS = 16384 ]
+[p x BORV = 3 ]
 "34
-[p x CCP2MX = PORTC ]
+[p x WDT = ON ]
 "35
+[p x WDTPS = 16384 ]
+"38
+[p x CCP2MX = PORTC ]
+"39
 [p x PBADEN = ON ]
-"36
-[p x LPT1OSC = OFF ]
-"37
-[p x MCLRE = ON ]
 "40
-[p x STVREN = ON ]
+[p x LPT1OSC = OFF ]
 "41
-[p x LVP = OFF ]
-"42
-[p x XINST = OFF ]
+[p x MCLRE = ON ]
+"44
+[p x STVREN = ON ]
 "45
-[p x CP0 = OFF ]
+[p x LVP = OFF ]
 "46
+[p x XINST = OFF ]
+"49
+[p x CP0 = OFF ]
+"50
 [p x CP1 = OFF ]
-"47
-[p x CP2 = OFF ]
-"48
-[p x CP3 = OFF ]
 "51
-[p x CPB = OFF ]
+[p x CP2 = OFF ]
 "52
-[p x CPD = OFF ]
+[p x CP3 = OFF ]
 "55
-[p x WRT0 = OFF ]
+[p x CPB = OFF ]
 "56
+[p x CPD = OFF ]
+"59
+[p x WRT0 = OFF ]
+"60
 [p x WRT1 = OFF ]
-"57
-[p x WRT2 = OFF ]
-"58
-[p x WRT3 = OFF ]
 "61
-[p x WRTC = OFF ]
+[p x WRT2 = OFF ]
 "62
-[p x WRTB = OFF ]
-"63
-[p x WRTD = OFF ]
+[p x WRT3 = OFF ]
+"65
+[p x WRTC = OFF ]
 "66
-[p x EBTR0 = OFF ]
+[p x WRTB = OFF ]
 "67
+[p x WRTD = OFF ]
+"70
+[p x EBTR0 = OFF ]
+"71
 [p x EBTR1 = OFF ]
-"68
-[p x EBTR2 = OFF ]
-"69
-[p x EBTR3 = OFF ]
 "72
+[p x EBTR2 = OFF ]
+"73
+[p x EBTR3 = OFF ]
+"76
 [p x EBTRB = OFF ]
-"234
-[; ;./global.h: 234: } statusgen ;
+"238
+[; ;./global.h: 238: } statusgen ;
 [v _statusgen `S277 ~T0 @X0 1 e ]
-"259
-[; ;./global.h: 259:       } statuspower;
+"263
+[; ;./global.h: 263:       } statuspower;
 [v _statuspower `S278 ~T0 @X0 1 e ]
-"277
-[; ;./global.h: 277: }statusgen1;
+"281
+[; ;./global.h: 281: }statusgen1;
 [v _statusgen1 `S280 ~T0 @X0 1 e ]
-"288
-[; ;./global.h: 288: }statusWDT;
+"292
+[; ;./global.h: 292: }statusWDT;
 [v _statusWDT `S281 ~T0 @X0 1 e ]
-"298
-[; ;./global.h: 298: volatile t_rtc rtc;
+"302
+[; ;./global.h: 302: volatile t_rtc rtc;
 [v _rtc `VS282 ~T0 @X0 1 e ]
-"56 ./proculus.h
-[; ;./proculus.h: 56: const int TrendColor[13]={
+"76 ./proculus.h
+[; ;./proculus.h: 76:     const int TrendColor[13]={
 [v _TrendColor `Ci ~T0 @X0 -> 13 `i e ]
 [i _TrendColor
 :U ..
+-> -> 63488 `ui `i
+-> 992 `i
+-> 31 `i
 -> 0 `i
 -> 14823 `i
 -> 27501 `i
 -> 30720 `i
 -> -> 39459 `ui `i
--> -> 63488 `ui `i
 -> -> 64480 `ui `i
 -> -> 64503 `ui `i
 -> -> 54592 `ui `i
--> 992 `i
 -> 2016 `i
--> 2047 `i
 -> -> 63519 `ui `i
 ..
 ]
