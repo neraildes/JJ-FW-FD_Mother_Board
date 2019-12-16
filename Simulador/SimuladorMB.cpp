@@ -6,6 +6,10 @@
 #include <string.h>
 
 
+#define Display_8_Polegadas
+//#define Display_5_Polegadas
+
+
 #define PPCANAL 1789
 #define PPCOR   1787
 
@@ -27,6 +31,25 @@
 #define FATOR_VACUO  1.0 //0.05
 
 #define saltaIndice4(arg1) (arg1<3)?(arg1):((arg1)+1)
+
+
+
+//==========================================================================================
+union{
+	char bits;
+	struct{
+		 unsigned flag_senha_liberada :1;
+		 unsigned bit1 :1;
+		 unsigned bit2 :1;
+		 unsigned bit3 :1;
+		 unsigned bit4 :1;
+		 unsigned bit5 :1;
+		 unsigned bit6 :1;
+		 unsigned bit7 :1;
+	     };  
+}memo;
+
+#define flag_senha_liberada memo.flag_senha_liberada
 
 
 //------------------------------------------------------------------------------
@@ -71,6 +94,15 @@ enum cores {none=-1,
 	       AZUL,
 	       ROXO
            };
+           
+#define SALVO_COM_SUCESSO        0x51 
+#define ACESSO_NEGADO            0x52
+#define SENHA_INVALIDA           0X20 
+#define SENHAS_DIFERENTES        0X21
+#define SENHA_CADASTRADA_SUCESSO 0x22
+#define SENHA_ZERO_INVALIDA      0x23
+#define OP_REALIZADA_COM_SUCESSO 0x60 
+#define DESEJA_ENCERRAR_PROCESSO 0x42           
 
 
 const char iconePIC[13][13]={
@@ -109,6 +141,7 @@ void ShowSensorRealTimeHS(void);
 void my_delay_ms(int value);
 void show_on_display();
 void showEEPROM();
+void PROCULUS_Popup(char tipo);
 
 
 
@@ -185,16 +218,17 @@ int main()
   Sonda=444;  
   totalboard=7;  
   
-  srand(time(NULL));  
+  //srand(time(NULL));  
   TrendCurveFuncao(FORMAT);
-  ShowSensorRealTimeHS();  
+  ShowSensorRealTimeHS(); 
+  flag_senha_liberada=0; 
   
     for(i=0;i<13;i++) mapa.entrada[i]=NULL; 
    
     do{ 
 
 
-  
+        (flag_senha_liberada==1)?printf("Liberado\n"):printf("Protegido\n");
     	printf("=============================================================================================================================================================\n");
 		printf(" FIGURA  |        CORES         |       VP       | vpIcone |      COR      |    CANAL    | Value  |  icone  |  canal |   cor   |  valor  | fator |   total  |\n");
 		for(cnt=0;cnt<13;cnt++)	
@@ -246,7 +280,7 @@ int main()
     	
     	
     	
-        printf("\n[99]Exit    [33]Load   [44]Save   [55]Format\n");		
+        printf("\n[99]Exit    [33]Load   [44]Save   [55]Format  [66]toggleSenha\n");
 		
 		 
 		//click=rand() % 13;
@@ -257,74 +291,105 @@ int main()
         if(click==33){TrendCurveFuncao(LOAD);system("cls");continue;}
         if(click==44){TrendCurveFuncao(SAVE);system("cls");continue;}
         if(click==55){TrendCurveFuncao(FORMAT);system("cls");continue;}
-		                    
-                            for(trendvp=0x0310;trendvp<0x031D;trendvp++)
+        if(click==66){if(flag_senha_liberada==1)flag_senha_liberada=0;else flag_senha_liberada=1;}
+       
+        
+        
+                               for(trendvp=0x0310;trendvp<0x031D;trendvp++)
                                   {	
-								  icone=trendvp-0x0310;					  								  
+                                  icone=trendvp-0x0310;	
+								  				  								  
                                   if(PROCULUS_VP_Read_UInt16(trendvp)==14)
-                                          {                                          
-										  canal=MenorCanalLivre();
-                                          if(canal<8)
-                                             { 											                                                                 
-                                             PROCULUS_VP_Write_UInt16(0x310+icone,icone+1); //Colore o quadrado com uma cor fixa                                           
-                                             PROCULUS_VP_Write_UInt16((canal*10+PPCANAL),(canal<<8)|(0x0001)); //Seta um canal para um dos 13 icones
-                                             PROCULUS_VP_Write_UInt16((canal*10+PPCOR),TrendColor[icone]);     //Seta uma cor de linha do grafico											                                             
-                                             //TrendCurveFuncao(SAVE); //Salva os icones acionados
-                                             //TrendCurveFuncao(LOAD);
-											 //PROCULUS_Clear_Line_Graphic(icone);
-											 
-											 
-											 
-											 mapa.canal[canal]=canal;   //Seleciona um Canal
-											 mapa.icone[canal]=icone+1;              //Registra qual icone está sendo tratado
-											 mapa.vpIcone[icone]=icone+1;
-											 mapa.cor[canal]=TrendColor[icone];
-										     mapa.fator[canal]=1.0;
-										     mapa.entrada[canal]=&leitura[saltaIndice4(icone)];    //Aponta para uma leitura
-										     
-										    mapa.fator[canal]=1.0;                  //Fator Padrão
-                                            if(icone==0)mapa.fator[canal]=FATOR_TENSAO;      //Fator para Tensão
-                                            if(icone==1)mapa.fator[canal]=FATOR_VACUO;      //Fator para Vacuo
-                                      
-                                            
-											 //PROCULUS_VP_Write_UInt16(1000+canal,*mapa.entrada[canal]*mapa.fator[canal]);      
-                                             
-                                             } 
+                                          {
+                                          printf("\nicone %d",icone);
+                                          getch();   
+										                                         	
+                                          if(flag_senha_liberada)
+                                               {
+                                               #ifdef Display_8_Polegadas
+                                               canal=MenorCanalLivre();
+                                               #else
+                                               canal=icone;
+                                               #endif
+
+                                               if(canal<8)
+                                                  { 											                                                                 
+                                                  PROCULUS_VP_Write_UInt16(0x310+icone,icone+1); //Colore o quadrado com uma cor fixa                                           
+                                                  PROCULUS_VP_Write_UInt16((canal*10+PPCANAL),(canal<<8)|(0x0001)); //Seta um canal para um dos 13 icones
+                                                  PROCULUS_VP_Write_UInt16((canal*10+PPCOR),TrendColor[icone]);     //Seta uma cor de linha do grafico											                                             
+
+
+                                                  mapa.canal[canal]=canal;   //Seleciona um Canal
+                                                  mapa.icone[canal]=icone+1;              //Registra qual icone está sendo tratado
+                                                  mapa.vpIcone[icone]=icone+1;
+                                                  mapa.cor[canal]=TrendColor[icone];
+                                                  mapa.fator[canal]=1.0;
+                                                  mapa.entrada[canal]=&leitura[saltaIndice4(icone)];    //Aponta para uma leitura
+
+                                                  mapa.fator[canal]=FATOR_PADRAO;                  //Fator Padrão
+
+                                                  if(icone==0)mapa.fator[canal]=FATOR_TENSAO;      //Fator para Tensão
+                                                  if(icone==1)mapa.fator[canal]=FATOR_VACUO;      //Fator para Vacuo
+
+
+                                                  //PROCULUS_Clear_Line_Graphic(icone);
+                                                                                              //PROCULUS_VP_Write_UInt16(1000+canal,*mapa.entrada[canal]*mapa.fator[canal]);      
+                                                  TrendCurveFuncao(SAVE); //Salva os icones acionados
+                                                  } 
+                                               else
+                                                  {	
+                                                  PROCULUS_VP_Write_UInt16((canal*10+PPCANAL),(canal<<8)|(0x0A00)); //Canal
+                                                  PROCULUS_VP_Write_UInt16((canal*10+PPCOR),0xFFFF);//Cor                                               
+                                                  PROCULUS_VP_Write_UInt16(trendvp,-1);  
+                                                  }
+                                               }
                                           else
-                                             {	
-                                             PROCULUS_VP_Write_UInt16((canal*10+PPCANAL),(canal<<8)|(0x0A00)); //Canal
-                                             PROCULUS_VP_Write_UInt16((canal*10+PPCOR),0xFFFF);//Cor                                               
-                                             PROCULUS_VP_Write_UInt16(trendvp,-1);  
-                                             }
+                                               {
+                                               PROCULUS_VP_Write_UInt16(trendvp,-1);
+                                               PROCULUS_Popup(ACESSO_NEGADO);
+                                               }
                                           }
                                      else 
                                       if((PROCULUS_VP_Read_UInt16(trendvp)>=15)&&(PROCULUS_VP_Read_UInt16(trendvp)<=30))
-                                          {	
-                                          char canal_aleatorio, canal_sequencial;
+                                          {
+                                          if(flag_senha_liberada)
+                                               {
+                                               char canal_aleatorio, canal_sequencial;
 
-										  canal_sequencial=buscaIndex(mapa.icone,icone+1);
-										  canal_aleatorio=mapa.icone[icone]-1; 	                                       //canal para lista aleatoria
-										  
-                                          PROCULUS_VP_Write_UInt16(trendvp,-1);                            //Apaga o quadrado colorido do display 
-                                          PROCULUS_VP_Write_UInt16((canal_sequencial*10+PPCANAL),0x0A00);  //Libera o canal utilizado
-                                          PROCULUS_VP_Write_UInt16((canal_sequencial*10+PPCOR),0xFFFF);               //Torna a cor padrao do canal em branco 
-                                          PROCULUS_VP_Write_UInt16(1000+icone,0x0000);                     //Debug - Este comando devera ser apagado
-                                          
-										  mapa.entrada[canal_sequencial]=NULL;                             //Torna a entrada do canal NULL  
-                                          mapa.canal[canal_sequencial]=0X0A;                               //Seleciona um Canal
-                                          mapa.icone[canal_sequencial]=-1;                                 //Registra qual icone está sendo tratado
-                                          mapa.vpIcone[icone]=-1;                                          //Desliga ícone aleatorio
-                                          mapa.cor[canal_sequencial]=0xFFFF;                               //Desliga a Cor           
-									      mapa.fator[canal_sequencial]=0.0;                                //Fator padrão para Temperatura
+                                               canal_sequencial=buscaIndex(mapa.icone,icone+1);
+                                               canal_aleatorio=mapa.icone[icone]-1; 	                           //canal para lista aleatoria                                         
 
-										  //PROCULUS_Clear_Line_Graphic(canal+1);               //Apaga a Linha desenhada  										                      
-                                          //TrendCurveFuncao(SAVE);								//Salva as alterações		                                  
+                                               PROCULUS_VP_Write_UInt16(trendvp,-1);                            //Apaga o quadrado colorido do display 
+                                               PROCULUS_VP_Write_UInt16((canal_sequencial*10+PPCANAL),0x0A00);  //Libera o canal utilizado
+                                               PROCULUS_VP_Write_UInt16((canal_sequencial*10+PPCOR),0xFFFF);               //Torna a cor padrao do canal em branco 
+
+                                                                                       mapa.entrada[canal_sequencial]=NULL;                             //Torna a entrada do canal NULL  
+                                               mapa.canal[canal_sequencial]=0X0A;                               //Seleciona um Canal
+                                               mapa.icone[canal_sequencial]=-1;                                 //Registra qual icone está sendo tratado
+                                               mapa.vpIcone[icone]=-1;                                          //Desliga ícone aleatorio
+                                               mapa.cor[canal_sequencial]=0xFFFF;                               //Desliga a Cor           
+                                                                                   mapa.fator[canal_sequencial]=0.0;                                //Fator padrão para Temperatura
+
+                                                                                       //PROCULUS_Clear_Line_Graphic(canal+1);               //Apaga a Linha desenhada  										                      
+                                               TrendCurveFuncao(SAVE);								//Salva as alterações		                                  
+                                               }
+                                          else
+                                               {
+                                               PROCULUS_Popup(ACESSO_NEGADO);
+                                            
+                                            
+                                               #ifdef Display_8_Polegadas 
+                                               PROCULUS_VP_Write_UInt16(trendvp,mapa.vpIcone[icone]);
+                                               #else
+                                               PROCULUS_VP_Write_UInt16(trendvp,mapa.icone[icone]);
+                                               #endif
+                                               
+                                               
+                                               }
                                           }                                  
                                   }	
-                                  
-                                  
-                                                                    
-                                  
+        
+              
 
 		if(click==99) break;						  	 
         save_datalog(0);
@@ -704,6 +769,15 @@ int  Send_To_Slave(char destino, char comando, char size, char * buffer)
     return 0;
 }
  
+
+void PROCULUS_Popup(char tipo){
+	 switch(tipo){
+	 	case ACESSO_NEGADO:
+	 	     printf("Acesso Negado");	 	     
+	 	     break;
+	 }
+	 getch();
+}
 
 
 

@@ -764,6 +764,7 @@ void main(void)
                                                }
                                           else
                                                {
+                                               PROCULUS_NOK();
                                                PROCULUS_VP_Write_UInt16(trendvp,-1);
                                                PROCULUS_Popup(ACESSO_NEGADO);
                                                }
@@ -794,8 +795,13 @@ void main(void)
                                                }
                                           else
                                                {
+                                               PROCULUS_NOK();
                                                PROCULUS_Popup(ACESSO_NEGADO);
-                                               PROCULUS_VP_Write_UInt16(trendvp,icone-14);
+                                               #ifdef Display_8_Polegadas 
+                                               PROCULUS_VP_Write_UInt16(trendvp,mapa.vpIcone[icone]);
+                                               #else
+                                               PROCULUS_VP_Write_UInt16(trendvp,mapa.icone[icone]);
+                                               #endif                                            
                                                }
                                           }                                  
                                   }	
