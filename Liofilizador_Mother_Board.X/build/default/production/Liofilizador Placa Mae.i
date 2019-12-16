@@ -6165,6 +6165,11 @@ void main(void)
                             Exibe_Hora_Data(1);
                             maincnt++;
                             }
+                          if(PROCULUS_VP_Read_UInt16(152)==1)
+                             {
+                             PROCULUS_VP_Write_UInt16(152,0);
+                             Exibe_Hora_Data(1);
+                             }
                           if(PROCULUS_VP_Read_UInt16(174)==1)
                              {
                              PROCULUS_VP_Write_UInt16(174,0);
@@ -6217,7 +6222,7 @@ void main(void)
 
                           unsigned long dica;
 
-                          dica=~(senha_atual^0xAABBCCDD);
+                          dica=~(senha_atual^0xE4BA2F10);
 
                           ultoa(dica,texto,16);
 
@@ -6244,62 +6249,83 @@ void main(void)
 
                             for(trendvp=0x0310;trendvp<0x031D;trendvp++)
                                   {
-          icone=trendvp-0x0310;
+                                  icone=trendvp-0x0310;
                                   if(PROCULUS_VP_Read_UInt16(trendvp)==14)
                                           {
-            canal=MenorCanalLivre();
-                                          if(canal<8)
-                                             {
-                                             PROCULUS_VP_Write_UInt16(0x310+icone,icone+1);
-                                             PROCULUS_VP_Write_UInt16((canal*10+1789),(canal<<8)|(0x0001));
-                                             PROCULUS_VP_Write_UInt16((canal*10+1787),TrendColor[icone]);
-
-
-            mapa.canal[canal]=canal;
-            mapa.icone[canal]=icone+1;
-            mapa.vpIcone[icone]=icone+1;
-            mapa.cor[canal]=TrendColor[icone];
-               mapa.fator[canal]=1.0;
-               mapa.entrada[canal]=&leitura[(icone<3)?(icone):((icone)+1)];
-
-               mapa.fator[canal]=1.0;
-
-                                             if(icone==0)mapa.fator[canal]=1.0;
-                                             if(icone==1)mapa.fator[canal]=1.0;
+                                          if(flag_senha_liberada)
+                                               {
 
 
 
+                                               canal=icone;
 
-                                             TrendCurveFuncao(2);
-                                             }
+
+                                               if(canal<8)
+                                                  {
+                                                  PROCULUS_VP_Write_UInt16(0x310+icone,icone+1);
+                                                  PROCULUS_VP_Write_UInt16((canal*10+1789),(canal<<8)|(0x0001));
+                                                  PROCULUS_VP_Write_UInt16((canal*10+1787),TrendColor[icone]);
+
+
+                                                  mapa.canal[canal]=canal;
+                                                  mapa.icone[canal]=icone+1;
+                                                  mapa.vpIcone[icone]=icone+1;
+                                                  mapa.cor[canal]=TrendColor[icone];
+                                                  mapa.fator[canal]=1.0;
+                                                  mapa.entrada[canal]=&leitura[(icone<3)?(icone):((icone)+1)];
+
+                                                  mapa.fator[canal]=1.0;
+
+                                                  if(icone==0)mapa.fator[canal]=1.0;
+                                                  if(icone==1)mapa.fator[canal]=1.0;
+
+
+
+
+                                                  TrendCurveFuncao(2);
+                                                  }
+                                               else
+                                                  {
+                                                  PROCULUS_VP_Write_UInt16((canal*10+1789),(canal<<8)|(0x0A00));
+                                                  PROCULUS_VP_Write_UInt16((canal*10+1787),0xFFFF);
+                                                  PROCULUS_VP_Write_UInt16(trendvp,-1);
+                                                  }
+                                               }
                                           else
-                                             {
-                                             PROCULUS_VP_Write_UInt16((canal*10+1789),(canal<<8)|(0x0A00));
-                                             PROCULUS_VP_Write_UInt16((canal*10+1787),0xFFFF);
-                                             PROCULUS_VP_Write_UInt16(trendvp,-1);
-                                             }
+                                               {
+                                               PROCULUS_VP_Write_UInt16(trendvp,-1);
+                                               PROCULUS_Popup(0x52);
+                                               }
                                           }
                                      else
                                       if((PROCULUS_VP_Read_UInt16(trendvp)>=15)&&(PROCULUS_VP_Read_UInt16(trendvp)<=30))
                                           {
-                                          char canal_aleatorio, canal_sequencial;
+                                          if(flag_senha_liberada)
+                                               {
+                                               char canal_aleatorio, canal_sequencial;
 
-            canal_sequencial=buscaIndex(mapa.icone,icone+1);
-            canal_aleatorio=mapa.icone[icone]-1;
+                                               canal_sequencial=buscaIndex(mapa.icone,icone+1);
+                                               canal_aleatorio=mapa.icone[icone]-1;
 
-                                          PROCULUS_VP_Write_UInt16(trendvp,-1);
-                                          PROCULUS_VP_Write_UInt16((canal_sequencial*10+1789),0x0A00);
-                                          PROCULUS_VP_Write_UInt16((canal_sequencial*10+1787),0xFFFF);
+                                               PROCULUS_VP_Write_UInt16(trendvp,-1);
+                                               PROCULUS_VP_Write_UInt16((canal_sequencial*10+1789),0x0A00);
+                                               PROCULUS_VP_Write_UInt16((canal_sequencial*10+1787),0xFFFF);
 
-            mapa.entrada[canal_sequencial]=((void*)0);
-                                          mapa.canal[canal_sequencial]=0X0A;
-                                          mapa.icone[canal_sequencial]=-1;
-                                          mapa.vpIcone[icone]=-1;
-                                          mapa.cor[canal_sequencial]=0xFFFF;
-               mapa.fator[canal_sequencial]=0.0;
+                                                                                       mapa.entrada[canal_sequencial]=((void*)0);
+                                               mapa.canal[canal_sequencial]=0X0A;
+                                               mapa.icone[canal_sequencial]=-1;
+                                               mapa.vpIcone[icone]=-1;
+                                               mapa.cor[canal_sequencial]=0xFFFF;
+                                                                                   mapa.fator[canal_sequencial]=0.0;
 
 
-                                          TrendCurveFuncao(2);
+                                               TrendCurveFuncao(2);
+                                               }
+                                          else
+                                               {
+                                               PROCULUS_Popup(0x52);
+                                               PROCULUS_VP_Write_UInt16(trendvp,icone-14);
+                                               }
                                           }
                                   }
 
@@ -6458,7 +6484,7 @@ int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
     }
     return 0;
 }
-# 940 "Liofilizador Placa Mae.c"
+# 966 "Liofilizador Placa Mae.c"
 void ShowSensorRealTimeHS(void)
      {
      char bb[3];
@@ -6519,7 +6545,7 @@ void ShowSensorRealTimeHS(void)
       statusgen1.flag_proculus_hs=0;
 
      }
-# 1009 "Liofilizador Placa Mae.c"
+# 1035 "Liofilizador Placa Mae.c"
 void Carrega_Tupla_Receita(char index, t_receita *receita){
      unsigned int addeeprom;
 
@@ -6565,7 +6591,7 @@ void Exibe_Receita(int index){
      texto[8]=0;
      PROCULUS_VP_Write_String(vp+4,texto);
 }
-# 1072 "Liofilizador Placa Mae.c"
+# 1098 "Liofilizador Placa Mae.c"
 void DataBaseBackupMain(unsigned char tupla)
       {
       unsigned int vp;
@@ -6586,7 +6612,7 @@ void DataBaseBackupMain(unsigned char tupla)
       EEPROM_Write_Integer(addEEPROM+16,PROCULUS_VP_Read_UInt16(vp+11));
 
       }
-# 1109 "Liofilizador Placa Mae.c"
+# 1135 "Liofilizador Placa Mae.c"
  void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
       {
       char CanalAD;
@@ -6666,7 +6692,7 @@ void DataBaseBackupMain(unsigned char tupla)
          PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
          }
 }
-# 1196 "Liofilizador Placa Mae.c"
+# 1222 "Liofilizador Placa Mae.c"
 void save_datalog(unsigned int add){
      char index;
      char bb[3];
@@ -6683,7 +6709,7 @@ void save_datalog(unsigned int add){
             }
          }
 }
-# 1221 "Liofilizador Placa Mae.c"
+# 1247 "Liofilizador Placa Mae.c"
  void ShowAndSetSlaveParameters(unsigned char tupla)
       {
       unsigned char CanalAD;
@@ -6715,7 +6741,7 @@ void save_datalog(unsigned int add){
       PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
 
       }
-# 1261 "Liofilizador Placa Mae.c"
+# 1287 "Liofilizador Placa Mae.c"
 void Send_to_PC(unsigned char size){
 
 
@@ -6724,7 +6750,7 @@ void Send_to_PC(unsigned char size){
      USART_putc(usart_protocol.origem);
      USART_putc(usart_protocol.command);
      USART_putc(size);
-# 1279 "Liofilizador Placa Mae.c"
+# 1305 "Liofilizador Placa Mae.c"
 }
 
 
@@ -6756,7 +6782,7 @@ void Decodify_Command(void){
     ((char *)&add_24LCxxxx)[0]=(usart_protocol.value[4]);
 
     switch(usart_protocol.command){
-# 1341 "Liofilizador Placa Mae.c"
+# 1367 "Liofilizador Placa Mae.c"
         case 0x08:
              EEPROM_Write_Byte(usart_protocol.value[0],
                                usart_protocol.value[1]);
@@ -6885,13 +6911,13 @@ void Decodify_Command(void){
              Send_to_PC(3);
              SEND_REPLY_OK();
              break;
-# 1552 "Liofilizador Placa Mae.c"
+# 1578 "Liofilizador Placa Mae.c"
         case 0X21:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
              Send_to_PC(3);
              SEND_REPLY_OK();
-# 1599 "Liofilizador Placa Mae.c"
+# 1625 "Liofilizador Placa Mae.c"
     }
 }
 
@@ -7504,7 +7530,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2219 "Liofilizador Placa Mae.c"
+# 2245 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -7657,7 +7683,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2379 "Liofilizador Placa Mae.c"
+# 2405 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
