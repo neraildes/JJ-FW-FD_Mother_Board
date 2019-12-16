@@ -4469,16 +4469,11 @@ struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
         unsigned flagSendDataFix :1;
+        unsigned flag_proculus_hs :1;
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
 }statusgen1;
-
-
-
-
-
-
-
+# 290 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;

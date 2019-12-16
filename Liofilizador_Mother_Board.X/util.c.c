@@ -18,10 +18,6 @@ extern unsigned int vpPrint;
    void print(char *texto){ 
         unsigned int vp_roll;
         char textolocal[30];       
-<<<<<<< HEAD
-        
-        if(vpPrint<=2420)
-=======
         flag_proculus_hs=TRUE;
         
         #ifdef Display_5_Polegadas
@@ -31,7 +27,6 @@ extern unsigned int vpPrint;
         #endif       
         
         if(vpPrint<=MAXVP)
->>>>>>> v1.0.10
           { 
           
           PROCULUS_VP_Write_String(vpPrint,texto);
@@ -50,7 +45,7 @@ extern unsigned int vpPrint;
           PROCULUS_VP_Write_String(MAXVP, texto);
           
           }  
-        
+        flag_proculus_hs=FALSE;
    }
    
 void clear_screen(void){

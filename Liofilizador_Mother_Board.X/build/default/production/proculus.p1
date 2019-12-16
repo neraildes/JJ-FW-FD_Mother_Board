@@ -13,16 +13,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S2 . bits . ]
 "274
 [; ;./global.h: 274: struct{
-[s S4 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S4 . flag_save_time flag_wakeup flagSendDataFix flag_Vacuo_estava_ligado flag_generico ]
-"288
-[; ;./global.h: 288: struct{
+[s S4 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S4 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico ]
+"290
+[; ;./global.h: 290: struct{
 [s S5 :1 `uc 1 ]
 [n S5 . flag_main_loop_WDT ]
-"293
-[; ;./global.h: 293: typedef struct{
+"295
+[; ;./global.h: 295: typedef struct{
 [s S6 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S6 . milisegundo segundo minuto hora ]
+[v F2574 `(v ~T0 @X0 1 tf1`ul ]
+"187 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18.h
+[v __delay `JF2574 ~T0 @X0 0 e ]
+[p i __delay ]
 "38 ./usart.h
 [; ;./usart.h: 38: void USART_put_int(unsigned int value);
 [v _USART_put_int `(v ~T0 @X0 0 ef1`ui ]
@@ -70,10 +74,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "572
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 572: extern volatile PORTDbits_t PORTDbits __attribute__((address(0xF83)));
 [v _PORTDbits `VS34 ~T0 @X0 0 e@3971 ]
-[v F2573 `(v ~T0 @X0 1 tf1`ul ]
-"187 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18.h
-[v __delay `JF2573 ~T0 @X0 0 e ]
-[p i __delay ]
 "11 proculus.c
 [; ;proculus.c: 11: extern volatile unsigned char usart_buffer[74];
 [v _usart_buffer `Vuc ~T0 @X0 -> 0 `x e ]
@@ -174,14 +174,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "263
 [; ;./global.h: 263:       } statuspower;
 [v _statuspower `S2 ~T0 @X0 1 e ]
-"280
-[; ;./global.h: 280: }statusgen1;
+"281
+[; ;./global.h: 281: }statusgen1;
 [v _statusgen1 `S4 ~T0 @X0 1 e ]
-"290
-[; ;./global.h: 290: }statusWDT;
+"292
+[; ;./global.h: 292: }statusWDT;
 [v _statusWDT `S5 ~T0 @X0 1 e ]
-"300
-[; ;./global.h: 300: volatile t_rtc rtc;
+"302
+[; ;./global.h: 302: volatile t_rtc rtc;
 [v _rtc `VS6 ~T0 @X0 1 e ]
 "76 ./proculus.h
 [; ;./proculus.h: 76:     const int TrendColor[13]={
@@ -628,6 +628,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "17
 [; ;proculus.c: 17:      unsigned char i;
 [v _i `uc ~T0 @X0 1 a ]
+"18
+[; ;proculus.c: 18:      _delay((unsigned long)((32)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 32 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "19
 [; ;proculus.c: 19:      USART_put_int(0x5AA5);
 [e ( _USART_put_int (1 -> -> 23205 `i `ui ]
@@ -673,6 +676,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "32
 [; ;proculus.c: 32:      unsigned int tempo;
 [v _tempo `ui ~T0 @X0 1 a ]
+"33
+[; ;proculus.c: 33:      if(!statusgen1.flag_proculus_hs) _delay((unsigned long)((32)*(32000000/4000.0)));
+[e $ ! ! != -> . _statusgen1 3 `i -> 0 `i 292  ]
+[e ( __delay (1 -> * -> -> 32 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[e :U 292 ]
 "34
 [; ;proculus.c: 34:      USART_put_int(0x5AA5);
 [e ( _USART_put_int (1 -> -> 23205 `i `ui ]
@@ -699,8 +707,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _tempo -> -> 0 `i `ui ]
 "45
 [; ;proculus.c: 45:      while(tempo<400)
-[e $U 292  ]
-[e :U 293 ]
+[e $U 293  ]
+[e :U 294 ]
 "46
 [; ;proculus.c: 46:            {
 {
@@ -709,7 +717,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
 "48
 [; ;proculus.c: 48:            if(statusgen.flag_usart_rx)
-[e $ ! != -> . _statusgen 0 `i -> 0 `i 295  ]
+[e $ ! != -> . _statusgen 0 `i -> 0 `i 296  ]
 "49
 [; ;proculus.c: 49:               {
 {
@@ -720,8 +728,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;proculus.c: 51:               for(i=0;i<size;i++)
 {
 [e = _i -> -> 0 `i `uc ]
-[e $U 299  ]
-[e :U 296 ]
+[e $U 300  ]
+[e :U 297 ]
 "52
 [; ;proculus.c: 52:                  {
 {
@@ -732,28 +740,28 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;proculus.c: 54:                  }
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e :U 299 ]
-[e $ < -> _i `i -> _size `i 296  ]
-[e :U 297 ]
+[e :U 300 ]
+[e $ < -> _i `i -> _size `i 297  ]
+[e :U 298 ]
 }
 "55
 [; ;proculus.c: 55:               break;
-[e $U 294  ]
+[e $U 295  ]
 "56
 [; ;proculus.c: 56:               }
 }
-[e :U 295 ]
+[e :U 296 ]
 "57
 [; ;proculus.c: 57:            tempo++;
 [e ++ _tempo -> -> 1 `i `ui ]
 "58
 [; ;proculus.c: 58:            }
 }
-[e :U 292 ]
+[e :U 293 ]
 "45
 [; ;proculus.c: 45:      while(tempo<400)
-[e $ < _tempo -> -> 400 `i `ui 293  ]
-[e :U 294 ]
+[e $ < _tempo -> -> 400 `i `ui 294  ]
+[e :U 295 ]
 "60
 [; ;proculus.c: 60:      PORTDbits.RD4=0;
 [e = . . _PORTDbits 0 4 -> -> 0 `i `uc ]
@@ -776,6 +784,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "70
 [; ;proculus.c: 70:      unsigned char i;
 [v _i `uc ~T0 @X0 1 a ]
+"71
+[; ;proculus.c: 71:      if(!statusgen1.flag_proculus_hs) _delay((unsigned long)((32)*(32000000/4000.0)));
+[e $ ! ! != -> . _statusgen1 3 `i -> 0 `i 302  ]
+[e ( __delay (1 -> * -> -> 32 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[e :U 302 ]
 "72
 [; ;proculus.c: 72:      USART_put_int(0x5AA5);
 [e ( _USART_put_int (1 -> -> 23205 `i `ui ]
@@ -792,15 +805,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;proculus.c: 76:      for(i=0;i<size;i++)
 {
 [e = _i -> -> 0 `i `uc ]
-[e $U 304  ]
-[e :U 301 ]
+[e $U 306  ]
+[e :U 303 ]
 "77
 [; ;proculus.c: 77:         USART_putc(vetor[i]);
 [e ( _USART_putc (1 -> *U + _vetor * -> _i `ux -> -> # *U _vetor `ui `ux `uc ]
 [e ++ _i -> -> 1 `i `uc ]
+[e :U 306 ]
+[e $ < -> _i `i -> _size `i 303  ]
 [e :U 304 ]
-[e $ < -> _i `i -> _size `i 301  ]
-[e :U 302 ]
 }
 "78
 [; ;proculus.c: 78:      USART_putc(0);
@@ -810,7 +823,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _my_delay_ms (1 -> -> 1 `i `l ]
 "81
 [; ;proculus.c: 81: }
-[e :UE 300 ]
+[e :UE 301 ]
 }
 "84
 [; ;proculus.c: 84: void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size){
@@ -830,6 +843,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "87
 [; ;proculus.c: 87:      t_proculus proculus;
 [v _proculus `S7 ~T0 @X0 1 a ]
+"91
+[; ;proculus.c: 91:      _delay((unsigned long)((32)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 32 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "92
 [; ;proculus.c: 92:      USART_put_int(0x5AA5);
 [e ( _USART_put_int (1 -> -> 23205 `i `ui ]
@@ -845,13 +861,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 "96
 [; ;proculus.c: 96:      USART_putc((unsigned char)(size>>1));
 [e ( _USART_putc (1 -> >> -> _size `i -> 1 `i `uc ]
+"97
+[; ;proculus.c: 97:      _delay((unsigned long)((50)*(32000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
 "102
 [; ;proculus.c: 102:      tempo=0;
 [e = _tempo -> -> 0 `i `ui ]
 "103
 [; ;proculus.c: 103:      while(tempo<400)
-[e $U 306  ]
-[e :U 307 ]
+[e $U 308  ]
+[e :U 309 ]
 "104
 [; ;proculus.c: 104:            {
 {
@@ -860,7 +879,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
 "106
 [; ;proculus.c: 106:            if(statusgen.flag_usart_rx)
-[e $ ! != -> . _statusgen 0 `i -> 0 `i 309  ]
+[e $ ! != -> . _statusgen 0 `i -> 0 `i 311  ]
 "107
 [; ;proculus.c: 107:               {
 {
@@ -871,8 +890,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;proculus.c: 109:               for(i=0;i<size;i++)
 {
 [e = _i -> -> 0 `i `uc ]
-[e $U 313  ]
-[e :U 310 ]
+[e $U 315  ]
+[e :U 312 ]
 "110
 [; ;proculus.c: 110:                  {
 {
@@ -883,34 +902,34 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;proculus.c: 112:                  }
 }
 [e ++ _i -> -> 1 `i `uc ]
+[e :U 315 ]
+[e $ < -> _i `i -> _size `i 312  ]
 [e :U 313 ]
-[e $ < -> _i `i -> _size `i 310  ]
-[e :U 311 ]
 }
 "113
 [; ;proculus.c: 113:               break;
-[e $U 308  ]
+[e $U 310  ]
 "114
 [; ;proculus.c: 114:               }
 }
-[e :U 309 ]
+[e :U 311 ]
 "115
 [; ;proculus.c: 115:            tempo++;
 [e ++ _tempo -> -> 1 `i `ui ]
 "116
 [; ;proculus.c: 116:            }
 }
-[e :U 306 ]
+[e :U 308 ]
 "103
 [; ;proculus.c: 103:      while(tempo<400)
-[e $ < _tempo -> -> 400 `i `ui 307  ]
-[e :U 308 ]
+[e $ < _tempo -> -> 400 `i `ui 309  ]
+[e :U 310 ]
 "117
 [; ;proculus.c: 117:     my_delay_ms(1);
 [e ( _my_delay_ms (1 -> -> 1 `i `l ]
 "118
 [; ;proculus.c: 118: }
-[e :UE 305 ]
+[e :UE 307 ]
 }
 "121
 [; ;proculus.c: 121: void PROCULUS_Control_Activation(char value){
@@ -942,7 +961,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _my_delay_ms (1 -> -> 500 `i `l ]
 "129
 [; ;proculus.c: 129: }
-[e :UE 314 ]
+[e :UE 316 ]
 }
 "131
 [; ;proculus.c: 131: void PROCULUS_Popup(char value){
@@ -956,7 +975,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_Control_Activation (1 _value ]
 "133
 [; ;proculus.c: 133: }
-[e :UE 315 ]
+[e :UE 317 ]
 }
 "137
 [; ;proculus.c: 137: void PROCULUS_Read_RTC(char *date,char *time){
@@ -997,7 +1016,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _USART_putc (1 -> -> 7 `i `uc ]
 "150
 [; ;proculus.c: 150:      if(USART_input_buffer())
-[e $ ! != -> ( _USART_input_buffer ..  `i -> 0 `i 317  ]
+[e $ ! != -> ( _USART_input_buffer ..  `i -> 0 `i 319  ]
 "151
 [; ;proculus.c: 151:         {
 {
@@ -1005,20 +1024,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;proculus.c: 152:         for(i=0;i<10;i++)
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 10 `i 318  ]
-[e $U 319  ]
-[e :U 318 ]
+[e $ < -> _i `i -> 10 `i 320  ]
+[e $U 321  ]
+[e :U 320 ]
 "153
 [; ;proculus.c: 153:             retorno[i] = usart_buffer[(unsigned char)(6+i)];
 [e = *U + &U _retorno * -> _i `ux -> -> # *U &U _retorno `ui `ux -> *U + &U _usart_buffer * -> -> + -> 6 `i -> _i `i `uc `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 10 `i 318  ]
-[e :U 319 ]
+[e $ < -> _i `i -> 10 `i 320  ]
+[e :U 321 ]
 }
 "154
 [; ;proculus.c: 154:         }
 }
-[e :U 317 ]
+[e :U 319 ]
 "156
 [; ;proculus.c: 156:         bcd2str(retorno[0],year);
 [e ( _bcd2str (2 , *U + &U _retorno * -> -> -> 0 `i `ui `ux -> -> # *U &U _retorno `ui `ux &U _year ]
@@ -1078,7 +1097,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _my_delay_ms (1 -> -> 1 `i `l ]
 "179
 [; ;proculus.c: 179: }
-[e :UE 316 ]
+[e :UE 318 ]
 }
 "181
 [; ;proculus.c: 181: void PROCULUS_Write_RTC(char *date, char *time){
@@ -1188,7 +1207,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _USART_putc (1 -> ( _str2bcd (1 &U _second `uc ]
 "220
 [; ;proculus.c: 220: }
-[e :UE 321 ]
+[e :UE 323 ]
 }
 "236
 [; ;proculus.c: 236: void PROCULUS_VP_Write_Byte(unsigned int vp,char value){
@@ -1212,7 +1231,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _my_delay_ms (1 -> -> 1 `i `l ]
 "241
 [; ;proculus.c: 241: }
-[e :UE 322 ]
+[e :UE 324 ]
 }
 "242
 [; ;proculus.c: 242: unsigned char PROCULUS_VP_Read_Byte(unsigned int vp){
@@ -1230,10 +1249,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "245
 [; ;proculus.c: 245:      return vetor[0];
 [e ) -> *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux `uc ]
-[e $UE 323  ]
+[e $UE 325  ]
 "246
 [; ;proculus.c: 246: }
-[e :UE 323 ]
+[e :UE 325 ]
 }
 "251
 [; ;proculus.c: 251: void PROCULUS_VP_Write_UInt16(unsigned int vp, unsigned int value){
@@ -1263,7 +1282,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 2 `i `uc ]
 "258
 [; ;proculus.c: 258: }
-[e :UE 324 ]
+[e :UE 326 ]
 }
 "260
 [; ;proculus.c: 260: unsigned int PROCULUS_VP_Read_UInt16(unsigned int vp){
@@ -1281,10 +1300,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "263
 [; ;proculus.c: 263:      return (((unsigned int)vetor[0]<<8)+vetor[1]);
 [e ) + << -> *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux `ui -> 8 `i -> *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux `ui ]
-[e $UE 325  ]
+[e $UE 327  ]
 "264
 [; ;proculus.c: 264: }
-[e :UE 325 ]
+[e :UE 327 ]
 }
 "269
 [; ;proculus.c: 269: void PROCULUS_VP_Write_Int16(unsigned int vp, int value){
@@ -1314,7 +1333,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 2 `i `uc ]
 "276
 [; ;proculus.c: 276: }
-[e :UE 326 ]
+[e :UE 328 ]
 }
 "277
 [; ;proculus.c: 277: unsigned int PROCULUS_VP_Read_Int16(int vp){
@@ -1332,10 +1351,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "280
 [; ;proculus.c: 280:      return (int)((vetor[0]<<8)+vetor[1]);
 [e ) -> + << -> *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux `i -> 8 `i -> *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux `i `ui ]
-[e $UE 327  ]
+[e $UE 329  ]
 "281
 [; ;proculus.c: 281: }
-[e :UE 327 ]
+[e :UE 329 ]
 }
 "291
 [; ;proculus.c: 291: void PROCULUS_VP_Write_Long32(unsigned int vp, unsigned long value){
@@ -1371,7 +1390,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 4 `i `uc ]
 "300
 [; ;proculus.c: 300: }
-[e :UE 328 ]
+[e :UE 330 ]
 }
 "303
 [; ;proculus.c: 303: long PROCULUS_VP_Read_Long32(unsigned int vp){
@@ -1393,10 +1412,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "315
 [; ;proculus.c: 315:      return retorno;
 [e ) _retorno ]
-[e $UE 329  ]
+[e $UE 331  ]
 "316
 [; ;proculus.c: 316: }
-[e :UE 329 ]
+[e :UE 331 ]
 }
 "326
 [; ;proculus.c: 326: void PROCULUS_VP_Write_Float24(unsigned int vp, float value){
@@ -1429,7 +1448,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 3 `i `uc ]
 "334
 [; ;proculus.c: 334: }
-[e :UE 330 ]
+[e :UE 332 ]
 }
 "335
 [; ;proculus.c: 335:  float PROCULUS_VP_Read_Float24(unsigned int vp){
@@ -1447,10 +1466,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "339
 [; ;proculus.c: 339:      return 1234;
 [e ) -> -> 1234 `i `f ]
-[e $UE 331  ]
+[e $UE 333  ]
 "340
 [; ;proculus.c: 340: }
-[e :UE 331 ]
+[e :UE 333 ]
 }
 "343
 [; ;proculus.c: 343: void PROCULUS_VP_Write_Float32(unsigned int vp, float value){
@@ -1486,7 +1505,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 4 `i `uc ]
 "352
 [; ;proculus.c: 352: }
-[e :UE 332 ]
+[e :UE 334 ]
 }
 "353
 [; ;proculus.c: 353:  float PROCULUS_VP_Read_Float32(unsigned int vp){
@@ -1504,10 +1523,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "357
 [; ;proculus.c: 357:      return 1234;
 [e ) -> -> 1234 `i `f ]
-[e $UE 333  ]
+[e $UE 335  ]
 "358
 [; ;proculus.c: 358: }
-[e :UE 333 ]
+[e :UE 335 ]
 }
 "365
 [; ;proculus.c: 365: void PROCULUS_VP_Write_Double24(unsigned int vp, double value){
@@ -1540,7 +1559,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_VP_Write (3 , , _vp &U _vetor -> -> 3 `i `uc ]
 "374
 [; ;proculus.c: 374: }
-[e :UE 334 ]
+[e :UE 336 ]
 }
 "375
 [; ;proculus.c: 375: double PROCULUS_VP_Read_Double24(unsigned int vp){
@@ -1558,10 +1577,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "379
 [; ;proculus.c: 379:      return 1234;
 [e ) -> -> 1234 `i `d ]
-[e $UE 335  ]
+[e $UE 337  ]
 "380
 [; ;proculus.c: 380: }
-[e :UE 335 ]
+[e :UE 337 ]
 }
 "384
 [; ;proculus.c: 384: void PROCULUS_VP_Write_Double32(unsigned int vp, double value){
@@ -1579,7 +1598,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_VP_Write (3 , , _vp -> &U _vetor `*uc -> -> 4 `i `uc ]
 "393
 [; ;proculus.c: 393: }
-[e :UE 336 ]
+[e :UE 338 ]
 }
 "394
 [; ;proculus.c: 394: double PROCULUS_VP_Read_Double32(unsigned int vp){
@@ -1597,10 +1616,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "398
 [; ;proculus.c: 398:      return 1234;
 [e ) -> -> 1234 `i `d ]
-[e $UE 337  ]
+[e $UE 339  ]
 "399
 [; ;proculus.c: 399: }
-[e :UE 337 ]
+[e :UE 339 ]
 }
 "404
 [; ;proculus.c: 404: void PROCULUS_VP_Write_String(unsigned int vp,char *text){
@@ -1615,7 +1634,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_VP_Write (3 , , _vp _text -> + ( _strlen (1 -> _text `*Cuc -> -> 1 `i `ui `uc ]
 "406
 [; ;proculus.c: 406: }
-[e :UE 338 ]
+[e :UE 340 ]
 }
 "408
 [; ;proculus.c: 408: void PROCULUS_VP_Read_String(unsigned int vp,char *text){
@@ -1630,7 +1649,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_VP_Read (3 , , _vp _text -> -> 30 `i `uc ]
 "410
 [; ;proculus.c: 410: }
-[e :UE 339 ]
+[e :UE 341 ]
 }
 "417
 [; ;proculus.c: 417: unsigned char PROCULUS_Read_Version(void){
@@ -1647,10 +1666,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "420
 [; ;proculus.c: 420:     return retorno[0];
 [e ) *U + &U _retorno * -> -> -> 0 `i `ui `ux -> -> # *U &U _retorno `ui `ux ]
-[e $UE 340  ]
+[e $UE 342  ]
 "421
 [; ;proculus.c: 421: }
-[e :UE 340 ]
+[e :UE 342 ]
 }
 "423
 [; ;proculus.c: 423: void PROCULUS_Buzzer(unsigned int time_ms_x_10){
@@ -1676,7 +1695,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_REG_Write (2 , &U _vetor -> -> 2 `i `uc ]
 "429
 [; ;proculus.c: 429: }
-[e :UE 341 ]
+[e :UE 343 ]
 }
 "440
 [; ;proculus.c: 440: void PROCULUS_Reset(void){
@@ -1701,7 +1720,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_REG_Write (2 , &U _vetor -> -> 3 `i `uc ]
 "446
 [; ;proculus.c: 446: }
-[e :UE 342 ]
+[e :UE 344 ]
 }
 "452
 [; ;proculus.c: 452: void PROCULUS_Show_Screen(unsigned int screen){
@@ -1727,7 +1746,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_REG_Write (2 , &U _vetor -> -> 3 `i `uc ]
 "458
 [; ;proculus.c: 458: }
-[e :UE 343 ]
+[e :UE 345 ]
 }
 "474
 [; ;proculus.c: 474: void PROCULUS_Buffer_to_Proculus(t_proculus *proculus){
@@ -1758,15 +1777,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;proculus.c: 481:      for (i=0;i<=proculus->size;i++)
 {
 [e = _i -> -> 0 `i `uc ]
-[e $U 348  ]
-[e :U 345 ]
+[e $U 350  ]
+[e :U 347 ]
 "482
 [; ;proculus.c: 482:      proculus->dado[i] = usart_buffer[7+i];
 [e = *U + &U . *U _proculus 5 * -> _i `ux -> -> # *U &U . *U _proculus 5 `ui `ux -> *U + &U _usart_buffer * -> -> + -> 7 `i -> _i `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `ui ]
 [e ++ _i -> -> 1 `i `uc ]
+[e :U 350 ]
+[e $ <= -> _i `i -> . *U _proculus 1 `i 347  ]
 [e :U 348 ]
-[e $ <= -> _i `i -> . *U _proculus 1 `i 345  ]
-[e :U 346 ]
 }
 "483
 [; ;proculus.c: 483:      proculus->page = usart_buffer[7];
@@ -1779,7 +1798,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . *U _proculus 8 -> & -> *U + &U _usart_buffer * -> -> -> 8 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 15 `i `uc ]
 "486
 [; ;proculus.c: 486: }
-[e :UE 344 ]
+[e :UE 346 ]
 }
 "493
 [; ;proculus.c: 493: void PROCULUS_OK(void){
@@ -1804,7 +1823,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_Buzzer (1 -> -> 100 `i `ui ]
 "499
 [; ;proculus.c: 499: }
-[e :UE 349 ]
+[e :UE 351 ]
 }
 "502
 [; ;proculus.c: 502: void PROCULUS_NOK(void){
@@ -1820,7 +1839,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _my_delay_ms (1 -> -> 100 `i `l ]
 "505
 [; ;proculus.c: 505: }
-[e :UE 350 ]
+[e :UE 352 ]
 }
 "519
 [; ;proculus.c: 519: unsigned int PROCULUS_Get_Page(void)
@@ -1856,15 +1875,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;proculus.c: 528:      for(i=0;i<1000;i++)
 {
 [e = _i -> 0 `i ]
-[e $ < _i -> 1000 `i 352  ]
-[e $U 353  ]
-[e :U 352 ]
+[e $ < _i -> 1000 `i 354  ]
+[e $U 355  ]
+[e :U 354 ]
 "529
 [; ;proculus.c: 529:          {
 {
 "530
 [; ;proculus.c: 530:            if(statusgen.flag_usart_rx)
-[e $ ! != -> . _statusgen 0 `i -> 0 `i 355  ]
+[e $ ! != -> . _statusgen 0 `i -> 0 `i 357  ]
 "531
 [; ;proculus.c: 531:            {
 {
@@ -1876,11 +1895,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _retorno -> + << -> *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
 "534
 [; ;proculus.c: 534:            break;
-[e $U 353  ]
+[e $U 355  ]
 "535
 [; ;proculus.c: 535:            }
 }
-[e :U 355 ]
+[e :U 357 ]
 "536
 [; ;proculus.c: 536:            _delay((unsigned long)((1)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
@@ -1888,8 +1907,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;proculus.c: 537:          }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 1000 `i 352  ]
-[e :U 353 ]
+[e $ < _i -> 1000 `i 354  ]
+[e :U 355 ]
 }
 "538
 [; ;proculus.c: 538:      my_delay_ms(1);
@@ -1897,10 +1916,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "539
 [; ;proculus.c: 539:      return retorno;
 [e ) _retorno ]
-[e $UE 351  ]
+[e $UE 353  ]
 "540
 [; ;proculus.c: 540:      }
-[e :UE 351 ]
+[e :UE 353 ]
 }
 "563
 [; ;proculus.c: 563: void PROCULUS_TPFLAG_Write(char value){
@@ -1923,7 +1942,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_REG_Write (2 , &U _vetor -> -> 2 `i `uc ]
 "570
 [; ;proculus.c: 570: }
-[e :UE 356 ]
+[e :UE 358 ]
 }
 "573
 [; ;proculus.c: 573: char PROCULUS_TPFLAG_Read(void){
@@ -1940,10 +1959,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "576
 [; ;proculus.c: 576:      return retorno[0];
 [e ) -> *U + &U _retorno * -> -> -> 0 `i `ui `ux -> -> # *U &U _retorno `ui `ux `uc ]
-[e $UE 357  ]
+[e $UE 359  ]
 "579
 [; ;proculus.c: 579: }
-[e :UE 357 ]
+[e :UE 359 ]
 }
 "582
 [; ;proculus.c: 582: void PROCULUS_graphic_plot(unsigned char lcd_channel, unsigned int value){
@@ -1958,7 +1977,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _channel `uc ~T0 @X0 1 a ]
 "584
 [; ;proculus.c: 584:      if((lcd_channel>=1)&&(lcd_channel<=8))
-[e $ ! && >= -> _lcd_channel `i -> 1 `i <= -> _lcd_channel `i -> 8 `i 359  ]
+[e $ ! && >= -> _lcd_channel `i -> 1 `i <= -> _lcd_channel `i -> 8 `i 361  ]
 "585
 [; ;proculus.c: 585:        {
 {
@@ -1983,10 +2002,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "592
 [; ;proculus.c: 592:        }
 }
-[e :U 359 ]
+[e :U 361 ]
 "593
 [; ;proculus.c: 593: }
-[e :UE 358 ]
+[e :UE 360 ]
 }
 "595
 [; ;proculus.c: 595: void PROCULUS_Clear_Line_Graphic(char channel){
@@ -2009,7 +2028,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_REG_Write (2 , &U _buffer -> -> 3 `i `uc ]
 "600
 [; ;proculus.c: 600: }
-[e :UE 360 ]
+[e :UE 362 ]
 }
 [a 5C 58 0 ]
 [a 6C 58 0 ]

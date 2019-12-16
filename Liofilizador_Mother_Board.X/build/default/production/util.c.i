@@ -1,4 +1,4 @@
-# 1 "EEPROM_24C1025.c"
+# 1 "util.c.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,25 +6,13 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "EEPROM_24C1025.c" 2
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
-# 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
-extern const char __xc8_OPTIM_SPEED;
-
-extern double __fpnormalize(double);
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\xc8debug.h" 1 3
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdlib.h" 1 3
+# 1 "util.c.c" 2
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\string.h" 1 3
 
 
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\musl_xc8.h" 1 3
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdlib.h" 2 3
+# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\string.h" 2 3
 
 
 
@@ -32,17 +20,74 @@ extern double __fpnormalize(double);
 
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\features.h" 1 3
-# 10 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdlib.h" 2 3
-# 21 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdlib.h" 3
+# 10 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\string.h" 2 3
+# 25 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\string.h" 3
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
-# 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long int wchar_t;
 # 122 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
 typedef unsigned size_t;
 # 168 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
 typedef __int24 int24_t;
 # 204 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
 typedef __uint24 uint24_t;
+# 411 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct __locale_struct * locale_t;
+# 25 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\string.h" 2 3
+
+
+void *memcpy (void *restrict, const void *restrict, size_t);
+void *memmove (void *, const void *, size_t);
+void *memset (void *, int, size_t);
+int memcmp (const void *, const void *, size_t);
+void *memchr (const void *, int, size_t);
+
+char *strcpy (char *restrict, const char *restrict);
+char *strncpy (char *restrict, const char *restrict, size_t);
+
+char *strcat (char *restrict, const char *restrict);
+char *strncat (char *restrict, const char *restrict, size_t);
+
+int strcmp (const char *, const char *);
+int strncmp (const char *, const char *, size_t);
+
+int strcoll (const char *, const char *);
+size_t strxfrm (char *restrict, const char *restrict, size_t);
+
+char *strchr (const char *, int);
+char *strrchr (const char *, int);
+
+size_t strcspn (const char *, const char *);
+size_t strspn (const char *, const char *);
+char *strpbrk (const char *, const char *);
+char *strstr (const char *, const char *);
+char *strtok (char *restrict, const char *restrict);
+
+size_t strlen (const char *);
+
+char *strerror (int);
+# 65 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\string.h" 3
+char *strtok_r (char *restrict, const char *restrict, char **restrict);
+int strerror_r (int, char *, size_t);
+char *stpcpy(char *restrict, const char *restrict);
+char *stpncpy(char *restrict, const char *restrict, size_t);
+size_t strnlen (const char *, size_t);
+char *strdup (const char *);
+char *strndup (const char *, size_t);
+char *strsignal(int);
+char *strerror_l (int, locale_t);
+int strcoll_l (const char *, const char *, locale_t);
+size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
+
+
+
+
+void *memccpy (void *restrict, const void *restrict, int, size_t);
+# 1 "util.c.c" 2
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdlib.h" 1 3
+# 21 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdlib.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long int wchar_t;
 # 21 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdlib.h" 2 3
 
 
@@ -96,7 +141,138 @@ uldiv_t uldiv (unsigned long, unsigned long);
 
 
 size_t __ctype_get_mb_cur_max(void);
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\xc8debug.h" 2 3
+# 2 "util.c.c" 2
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 1 3
+# 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
+
+
+
+
+
+typedef void * va_list[1];
+
+
+
+
+typedef void * __isoc_va_list[1];
+# 137 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long ssize_t;
+# 246 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long off_t;
+# 399 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct _IO_FILE FILE;
+# 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 2 3
+# 52 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 3
+typedef union _G_fpos64_t {
+ char __opaque[16];
+ double __align;
+} fpos_t;
+
+extern FILE *const stdin;
+extern FILE *const stdout;
+extern FILE *const stderr;
+
+
+
+
+
+FILE *fopen(const char *restrict, const char *restrict);
+FILE *freopen(const char *restrict, const char *restrict, FILE *restrict);
+int fclose(FILE *);
+
+int remove(const char *);
+int rename(const char *, const char *);
+
+int feof(FILE *);
+int ferror(FILE *);
+int fflush(FILE *);
+void clearerr(FILE *);
+
+int fseek(FILE *, long, int);
+long ftell(FILE *);
+void rewind(FILE *);
+
+int fgetpos(FILE *restrict, fpos_t *restrict);
+int fsetpos(FILE *, const fpos_t *);
+
+size_t fread(void *restrict, size_t, size_t, FILE *restrict);
+size_t fwrite(const void *restrict, size_t, size_t, FILE *restrict);
+
+int fgetc(FILE *);
+int getc(FILE *);
+int getchar(void);
+int ungetc(int, FILE *);
+
+int fputc(int, FILE *);
+int putc(int, FILE *);
+int putchar(int);
+
+char *fgets(char *restrict, int, FILE *restrict);
+
+char *gets(char *);
+
+
+int fputs(const char *restrict, FILE *restrict);
+int puts(const char *);
+
+#pragma printf_check(printf) const
+#pragma printf_check(vprintf) const
+#pragma printf_check(sprintf) const
+#pragma printf_check(snprintf) const
+#pragma printf_check(vsprintf) const
+#pragma printf_check(vsnprintf) const
+
+int printf(const char *restrict, ...);
+int fprintf(FILE *restrict, const char *restrict, ...);
+int sprintf(char *restrict, const char *restrict, ...);
+int snprintf(char *restrict, size_t, const char *restrict, ...);
+
+int vprintf(const char *restrict, __isoc_va_list);
+int vfprintf(FILE *restrict, const char *restrict, __isoc_va_list);
+int vsprintf(char *restrict, const char *restrict, __isoc_va_list);
+int vsnprintf(char *restrict, size_t, const char *restrict, __isoc_va_list);
+
+int scanf(const char *restrict, ...);
+int fscanf(FILE *restrict, const char *restrict, ...);
+int sscanf(const char *restrict, const char *restrict, ...);
+int vscanf(const char *restrict, __isoc_va_list);
+int vfscanf(FILE *restrict, const char *restrict, __isoc_va_list);
+int vsscanf(const char *restrict, const char *restrict, __isoc_va_list);
+
+void perror(const char *);
+
+int setvbuf(FILE *restrict, char *restrict, int, size_t);
+void setbuf(FILE *restrict, char *restrict);
+
+char *tmpnam(char *);
+FILE *tmpfile(void);
+
+
+
+
+FILE *fmemopen(void *restrict, size_t, const char *restrict);
+FILE *open_memstream(char **, size_t *);
+FILE *fdopen(int, const char *);
+FILE *popen(const char *, const char *);
+int pclose(FILE *);
+int fileno(FILE *);
+int fseeko(FILE *, off_t, int);
+off_t ftello(FILE *);
+int dprintf(int, const char *restrict, ...);
+int vdprintf(int, const char *restrict, __isoc_va_list);
+void flockfile(FILE *);
+int ftrylockfile(FILE *);
+void funlockfile(FILE *);
+int getc_unlocked(FILE *);
+int getchar_unlocked(void);
+int putc_unlocked(int, FILE *);
+int putchar_unlocked(int);
+ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict);
+ssize_t getline(char **restrict, size_t *restrict, FILE *restrict);
+int renameat(int, const char *, int, const char *);
+char *ctermid(char *);
 
 
 
@@ -104,7 +280,355 @@ size_t __ctype_get_mb_cur_max(void);
 
 
 
+char *tempnam(const char *, const char *);
+# 3 "util.c.c" 2
 
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 1 3
+# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 127 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uintptr_t;
+# 142 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long intptr_t;
+# 158 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef signed char int8_t;
+
+
+
+
+typedef short int16_t;
+# 173 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long int32_t;
+
+
+
+
+
+typedef long long int64_t;
+# 188 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long intmax_t;
+
+
+
+
+
+typedef unsigned char uint8_t;
+
+
+
+
+typedef unsigned short uint16_t;
+# 209 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uint32_t;
+
+
+
+
+
+typedef unsigned long long uint64_t;
+# 229 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long long uintmax_t;
+# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
+
+
+typedef int8_t int_fast8_t;
+
+typedef int64_t int_fast64_t;
+
+
+typedef int8_t int_least8_t;
+typedef int16_t int_least16_t;
+
+typedef int24_t int_least24_t;
+
+typedef int32_t int_least32_t;
+
+typedef int64_t int_least64_t;
+
+
+typedef uint8_t uint_fast8_t;
+
+typedef uint64_t uint_fast64_t;
+
+
+typedef uint8_t uint_least8_t;
+typedef uint16_t uint_least16_t;
+
+typedef uint24_t uint_least24_t;
+
+typedef uint32_t uint_least32_t;
+
+typedef uint64_t uint_least64_t;
+# 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/stdint.h" 1 3
+typedef int32_t int_fast16_t;
+typedef int32_t int_fast32_t;
+typedef uint32_t uint_fast16_t;
+typedef uint32_t uint_fast32_t;
+# 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
+# 4 "util.c.c" 2
+
+# 1 "./global.h" 1
+# 24 "./global.h"
+#pragma config OSC = INTIO67
+#pragma config FCMEN = OFF
+#pragma config IESO = OFF
+
+
+#pragma config PWRT = ON
+#pragma config BOREN = SBORDIS
+#pragma config BORV = 3
+
+
+#pragma config WDT = ON
+#pragma config WDTPS = 16384
+
+
+#pragma config CCP2MX = PORTC
+#pragma config PBADEN = ON
+#pragma config LPT1OSC = OFF
+#pragma config MCLRE = ON
+
+
+#pragma config STVREN = ON
+#pragma config LVP = OFF
+#pragma config XINST = OFF
+
+
+#pragma config CP0 = OFF
+#pragma config CP1 = OFF
+#pragma config CP2 = OFF
+#pragma config CP3 = OFF
+
+
+#pragma config CPB = OFF
+#pragma config CPD = OFF
+
+
+#pragma config WRT0 = OFF
+#pragma config WRT1 = OFF
+#pragma config WRT2 = OFF
+#pragma config WRT3 = OFF
+
+
+#pragma config WRTC = OFF
+#pragma config WRTB = OFF
+#pragma config WRTD = OFF
+
+
+#pragma config EBTR0 = OFF
+#pragma config EBTR1 = OFF
+#pragma config EBTR2 = OFF
+#pragma config EBTR3 = OFF
+
+
+#pragma config EBTRB = OFF
+# 229 "./global.h"
+struct {
+    unsigned flag_usart_rx : 1 ;
+    unsigned flag_usart_error : 1 ;
+    unsigned flag_power_off : 1 ;
+    unsigned flag_led_tmr0 : 1 ;
+    unsigned flag_led_usart : 1 ;
+    unsigned flag_led_memory : 1 ;
+    unsigned flag_capture_datalog : 1 ;
+    unsigned flag_edit_temperatura: 1 ;
+} statusgen ;
+# 252 "./global.h"
+union {
+      unsigned char bits;
+      struct {
+             unsigned flag_global_datalog : 1 ;
+             unsigned flag_global_aquecimento : 1 ;
+             unsigned flag_global_condensador : 1 ;
+             unsigned flag_global_vacuo : 1 ;
+             unsigned flag_time_process : 1 ;
+             unsigned flag_call_work : 1 ;
+
+             };
+      } statuspower;
+# 274 "./global.h"
+struct{
+        unsigned flag_save_time :1;
+        unsigned flag_wakeup :1;
+        unsigned flagSendDataFix :1;
+        unsigned flag_proculus_hs :1;
+        unsigned flag_Vacuo_estava_ligado :1;
+        unsigned flag_generico :1;
+}statusgen1;
+# 290 "./global.h"
+struct{
+        unsigned flag_main_loop_WDT :1;
+}statusWDT;
+
+
+typedef struct{
+    unsigned int milisegundo;
+    unsigned char segundo;
+    unsigned char minuto;
+    unsigned char hora;
+}t_rtc;
+
+volatile t_rtc rtc;
+# 5 "util.c.c" 2
+
+# 1 "./util.h" 1
+
+
+
+void print(char *texto);
+void bcd2str(char valor, char *dado);
+char str2bcd(char *value);
+void clear_screen(void);
+int my_pow(int rad, int exp);
+
+char* itoa(int num, char* str, int base);
+char * reverse( char * s );
+char *ultoa(unsigned long num, char *str, int radix);
+# 6 "util.c.c" 2
+
+# 1 "./proculus.h" 1
+# 76 "./proculus.h"
+    const int TrendColor[13]={
+                              0xF800,
+                              0x03E0,
+                              0x001F,
+                              0x0000,
+                              0x39E7,
+                              0x6B6D,
+                              0x7800,
+                              0x9A23,
+                              0xFBE0,
+                              0xFBF7,
+                              0xD540,
+                              0x07E0,
+                              0xF81F
+                              };
+
+
+
+
+
+
+typedef struct {
+    unsigned int header;
+    unsigned char size;
+    unsigned char function;
+    unsigned int vp;
+    unsigned char length;
+    unsigned int dado[15];
+    unsigned char page;
+    unsigned char button;
+    unsigned char status;
+    }t_proculus;
+
+
+typedef struct{
+              unsigned char plataforma;
+              unsigned int temperaturaatual;
+              unsigned int setpoint;
+              unsigned char tempoON;
+              unsigned char tempoOFF;
+              } t_visaogeral;
+
+
+void PROCULUS_REG_Write(unsigned char *vetor, unsigned char size);
+void PROCULUS_REG_Read(unsigned char reg, unsigned char size, unsigned char *retorno);
+void PROCULUS_Read_RTC(char *date, char *time);
+void PROCULUS_Write_RTC(char *date, char *time);
+void PROCULUS_Control_Activation(char value);
+
+void PROCULUS_VP_Write(unsigned int vp,char *vetor,char size);
+
+
+void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size);
+
+
+
+
+
+
+
+void PROCULUS_VP_Write_Byte(unsigned int vp,char value);
+unsigned char PROCULUS_VP_Read_Byte(unsigned int vp);
+
+
+
+void PROCULUS_VP_Write_UInt16(unsigned int vp, unsigned int value);
+unsigned int PROCULUS_VP_Read_UInt16(unsigned int vp);
+
+
+
+void PROCULUS_VP_Write_Int16(unsigned int vp, int value);
+unsigned int PROCULUS_VP_Read_Int16(int vp);
+
+
+
+long PROCULUS_VP_Read_Long32(unsigned int vp);
+void PROCULUS_VP_Write_Long32(unsigned int vp, unsigned long value);
+
+
+
+void PROCULUS_VP_Write_Float24(unsigned int vp, float value);
+float PROCULUS_VP_Read_Float24(unsigned int vp);
+
+void PROCULUS_VP_Write_Float32(unsigned int vp, float value);
+float PROCULUS_VP_Read_Float32(unsigned int vp);
+
+
+
+
+void PROCULUS_VP_Write_Double24(unsigned int vp, double value);
+double PROCULUS_VP_Read_Double24(unsigned int vp);
+
+void PROCULUS_VP_Write_Double32(unsigned int vp, double value);
+double PROCULUS_VP_Read_Double32(unsigned int vp);
+
+
+void PROCULUS_VP_Write_String(unsigned int vp, char *text);
+void PROCULUS_VP_Read_String(unsigned int vp, char *text);
+
+
+
+
+
+
+
+unsigned char PROCULUS_Read_Version(void);
+void PROCULUS_Buzzer(unsigned int time_ms_x_10);
+void PROCULUS_Show_Screen(unsigned int screen);
+void PROCULUS_Reset(void);
+char PROCULUS_TPFLAG_Read(void);
+void PROCULUS_TPFLAG_Write(char value);
+
+void PROCULUS_Buffer_to_Proculus(t_proculus *proculus);
+
+void PROCULUS_OK(void);
+void PROCULUS_NOK(void);
+
+void PROCULUS_Delay(unsigned int tempo_ms);
+
+unsigned int PROCULUS_Get_Page(void);
+
+void PROCULUS_Popup(char value);
+
+void PROCULUS_graphic_plot(unsigned char lcd_channel, unsigned int value);
+
+void PROCULUS_Clear_Line_Graphic(char channel);
+# 7 "util.c.c" 2
+
+# 1 "./usart.h" 1
+# 19 "./usart.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
+# 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
+extern const char __xc8_OPTIM_SPEED;
+
+extern double __fpnormalize(double);
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\xc8debug.h" 1 3
+# 12 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\xc8debug.h" 3
 #pragma intrinsic(__builtin_software_breakpoint)
 extern void __builtin_software_breakpoint(void);
 # 23 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
@@ -4376,437 +4900,196 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 1 "EEPROM_24C1025.c" 2
-
-
-# 1 "./util.h" 1
-
-
-
-void print(char *texto);
-void bcd2str(char valor, char *dado);
-char str2bcd(char *value);
-void clear_screen(void);
-int my_pow(int rad, int exp);
-
-char* itoa(int num, char* str, int base);
-char * reverse( char * s );
-char *ultoa(unsigned long num, char *str, int radix);
-# 3 "EEPROM_24C1025.c" 2
-
-# 1 "./global.h" 1
-# 24 "./global.h"
-#pragma config OSC = INTIO67
-#pragma config FCMEN = OFF
-#pragma config IESO = OFF
-
-
-#pragma config PWRT = ON
-#pragma config BOREN = SBORDIS
-#pragma config BORV = 3
-
-
-#pragma config WDT = ON
-#pragma config WDTPS = 16384
-
-
-#pragma config CCP2MX = PORTC
-#pragma config PBADEN = ON
-#pragma config LPT1OSC = OFF
-#pragma config MCLRE = ON
-
-
-#pragma config STVREN = ON
-#pragma config LVP = OFF
-#pragma config XINST = OFF
-
-
-#pragma config CP0 = OFF
-#pragma config CP1 = OFF
-#pragma config CP2 = OFF
-#pragma config CP3 = OFF
-
-
-#pragma config CPB = OFF
-#pragma config CPD = OFF
-
-
-#pragma config WRT0 = OFF
-#pragma config WRT1 = OFF
-#pragma config WRT2 = OFF
-#pragma config WRT3 = OFF
-
-
-#pragma config WRTC = OFF
-#pragma config WRTB = OFF
-#pragma config WRTD = OFF
-
-
-#pragma config EBTR0 = OFF
-#pragma config EBTR1 = OFF
-#pragma config EBTR2 = OFF
-#pragma config EBTR3 = OFF
-
-
-#pragma config EBTRB = OFF
-# 229 "./global.h"
-struct {
-    unsigned flag_usart_rx : 1 ;
-    unsigned flag_usart_error : 1 ;
-    unsigned flag_power_off : 1 ;
-    unsigned flag_led_tmr0 : 1 ;
-    unsigned flag_led_usart : 1 ;
-    unsigned flag_led_memory : 1 ;
-    unsigned flag_capture_datalog : 1 ;
-    unsigned flag_edit_temperatura: 1 ;
-} statusgen ;
-# 252 "./global.h"
-union {
-      unsigned char bits;
-      struct {
-             unsigned flag_global_datalog : 1 ;
-             unsigned flag_global_aquecimento : 1 ;
-             unsigned flag_global_condensador : 1 ;
-             unsigned flag_global_vacuo : 1 ;
-             unsigned flag_time_process : 1 ;
-             unsigned flag_call_work : 1 ;
-
-             };
-      } statuspower;
-# 274 "./global.h"
-struct{
-        unsigned flag_save_time :1;
-        unsigned flag_wakeup :1;
-        unsigned flagSendDataFix :1;
-        unsigned flag_proculus_hs :1;
-        unsigned flag_Vacuo_estava_ligado :1;
-        unsigned flag_generico :1;
-}statusgen1;
-# 290 "./global.h"
-struct{
-        unsigned flag_main_loop_WDT :1;
-}statusWDT;
-
-
-typedef struct{
-    unsigned int milisegundo;
-    unsigned char segundo;
-    unsigned char minuto;
-    unsigned char hora;
-}t_rtc;
-
-volatile t_rtc rtc;
-# 4 "EEPROM_24C1025.c" 2
-
-# 1 "./I2C.h" 1
-# 11 "./I2C.h"
-void I2C_Master_Init(const unsigned long c);
-void I2C_Slave_Init(short address);
-void I2C_Master_Wait(void);
-void I2C_Master_Start(void);
-void I2C_Master_RepeatedStart(void);
-void I2C_Master_Stop(void);
-void I2C_Master_Write(unsigned d);
-unsigned short I2C_Master_Read(unsigned short a);
-# 5 "EEPROM_24C1025.c" 2
-
-# 1 "./EEPROM_24C1025.h" 1
-# 16 "./EEPROM_24C1025.h"
-void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
-                                  unsigned long mem_add,
-                                 unsigned char sizedata,
-                                            char *data);
-
-void EEPROM_24C1025_Read_Buffer(unsigned char chip_add,
-                                 unsigned long mem_add,
-                                unsigned char sizedata,
-                                           char *data);
-
-void EEPROM_24C1025_Read_Str(unsigned char chip_add, unsigned long mem_add,char *texto);
-void EEPROM_24C1025_Write_Str(unsigned char chip_add, unsigned long mem_add,char *data);
-
-
-void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char *data);
-unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem_add);
-void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, char *data);
-unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_add);
-
-void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned char value);
-# 6 "EEPROM_24C1025.c" 2
+# 20 "./usart.h" 2
+# 1 "./protocolo.h" 1
+# 22 "./protocolo.h"
+typedef struct {
+        int header;
+        char origem;
+        char destino;
+        char command;
+        char size;
+        char value[74];
+} t_usart_protocol;
+# 21 "./usart.h" 2
+# 35 "./usart.h"
+void USART_to_Protocol(t_usart_protocol *usart_protocol);
+void USART_init(unsigned long baudrate);
+void USART_putc(unsigned char value);
+void USART_put_int(unsigned int value);
+void USART_put_sint(int value);
+void USART_put_float24(float value);
+void USART_put_long(unsigned long value);
+void USART_put_string(char *vetor);
+void USART_put_buffer(char *vetor, char size);
+unsigned char USART_input_buffer(void);
+# 8 "util.c.c" 2
 
 
 
 
 
-void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
-                                 unsigned long mem_add,
-                                 unsigned char sizedata,
-                                 char *data)
-     {
-     unsigned char range=0;
-     unsigned char ctrl;
-     unsigned char count;
 
-     if(mem_add>0x1FFFF) return;
+extern unsigned int vpPrint;
 
-     if(mem_add>0xFFFF) range=0x08; else range=0x00;
-     ctrl=chip_add;
-     ctrl<<=1;
-     ctrl |= 0xA0;
-     ctrl |= range;
 
-     I2C_Master_Start();
-     I2C_Master_Write(ctrl);
-     I2C_Master_Write(((char *)&mem_add)[1]);
-     I2C_Master_Write(((char *)&mem_add)[0]);
-     for(count=0;count<(sizedata-1);count++)
+
+   void print(char *texto){
+        unsigned int vp_roll;
+        char textolocal[30];
+        statusgen1.flag_proculus_hs=1;
+
+
+           const int MAXVP = 2270;
+
+
+
+
+        if(vpPrint<=MAXVP)
           {
-          if(mem_add>0x1FFFF) return;
-          if((mem_add+1)%128==0)
-            {
-            I2C_Master_Write(*data);
-            I2C_Master_Stop();
 
-            _delay((unsigned long)((5)*(32000000/4000.0)));
-            mem_add++;
-            data++;
-            if(mem_add>0xFFFF) range=0x08; else range=0x00;
-            ctrl=chip_add;
-            ctrl<<=1;
-            ctrl |= 0xA0;
-            ctrl |= range;
+          PROCULUS_VP_Write_String(vpPrint,texto);
 
-            I2C_Master_Start();
-            I2C_Master_Write(ctrl);
-            I2C_Master_Write(((char *)&mem_add)[1]);
-            I2C_Master_Write(((char *)&mem_add)[0]);
-            }
-          else
-            {
-            I2C_Master_Write(*data);
-            data++;
-            mem_add++;
-            }
-     }
-     I2C_Master_Write(*data);
-     I2C_Master_Stop();
-     _delay((unsigned long)((650)*(32000000/4000000.0)));
-}
-
-
-
-
-
-void EEPROM_24C1025_Read_Buffer(unsigned char chip_add,
-                                unsigned long mem_add,
-                                unsigned char sizedata,
-                                char *data)
-     {
-     unsigned char cnt=0;
-     unsigned char range=0;
-     unsigned char ctrl;
-
-     if(mem_add>0x1FFFF) return;
-
-     if(mem_add>0xFFFF) range=0x08; else range=0x00;
-     ctrl=chip_add;
-     ctrl<<=1;
-     ctrl |= 0xA0;
-     ctrl |= 0b00000001;
-     ctrl |= range;
-
-     I2C_Master_Start();
-     I2C_Master_Write(ctrl & 0xFE);
-     I2C_Master_Write(((char *)&mem_add)[1]);
-     I2C_Master_Write(((char *)&mem_add)[0]);
-     I2C_Master_RepeatedStart();
-     I2C_Master_Write(ctrl);
-
-     for(char cnt=0;cnt<(sizedata);cnt++)
-        {
-           if(mem_add>0x1FFFF) break;
-           if((mem_add+1)%128==0)
-             {
-             (*data)=I2C_Master_Read(0);
-             I2C_Master_Stop();
-
-             _delay((unsigned long)((5)*(32000000/4000.0)));
-             mem_add++;
-             data++;
-             if(mem_add>0xFFFF) range=0x08; else range=0x00;
-             ctrl=chip_add;
-             ctrl<<=1;
-             ctrl |= 0xA0;
-             ctrl |= 0b00000001;
-             ctrl |= range;
-
-             I2C_Master_Start();
-             I2C_Master_Write(ctrl & 0xFE);
-             I2C_Master_Write(((char *)&mem_add)[1]);
-             I2C_Master_Write(((char *)&mem_add)[0]);
-             I2C_Master_RepeatedStart();
-             I2C_Master_Write(ctrl);
-             }
-           else
-             {
-             (*data)=I2C_Master_Read(1);
-             data++;
-             mem_add++;
-             }
-        }
-        I2C_Master_Read(0);
-        I2C_Master_Stop();
-        _delay((unsigned long)((650)*(32000000/4000000.0)));
-}
-
-
-
-
-
-void EEPROM_24C1025_Write_Str(unsigned char chip_add, unsigned long mem_add,char *data){
-     unsigned char range=0;
-     unsigned char ctrl;
-
-     if(mem_add>0x1FFFF) return;
-
-     if(mem_add>0xFFFF) range=0x08; else range=0x00;
-     ctrl=chip_add;
-     ctrl<<=1;
-     ctrl |= 0xA0;
-     ctrl |= range;
-
-     I2C_Master_Start();
-     I2C_Master_Write(ctrl);
-     I2C_Master_Write(((char *)&mem_add)[1]);
-     I2C_Master_Write(((char *)&mem_add)[0]);
-     while(*data)
+          vpPrint+=30;
+          }
+        else
           {
-          if(mem_add>0x1FFFF) return;
-          if((mem_add+1)%128==0)
-            {
-            I2C_Master_Write(*data);
-            I2C_Master_Stop();
+          for(vp_roll=2000;vp_roll<=MAXVP;vp_roll+=30)
+             {
+             strcpy(textolocal,"");
+             PROCULUS_VP_Read_String(vp_roll+30, textolocal);
+             PROCULUS_VP_Write_String(vp_roll, textolocal);
+             }
 
-            _delay((unsigned long)((5)*(32000000/4000.0)));
-            mem_add++;
-            data++;
-            if(mem_add>0xFFFF) range=0x08; else range=0x00;
-            ctrl=chip_add;
-            ctrl<<=1;
-            ctrl |= 0xA0;
-            ctrl |= range;
+          PROCULUS_VP_Write_String(MAXVP, texto);
 
-            I2C_Master_Start();
-            I2C_Master_Write(ctrl);
-            I2C_Master_Write(((char *)&mem_add)[1]);
-            I2C_Master_Write(((char *)&mem_add)[0]);
-            }
-          else
-            {
-            I2C_Master_Write(*data);
-            data++;
-            mem_add++;
-            }
+          }
+        statusgen1.flag_proculus_hs=0;
+   }
+
+void clear_screen(void){
+    for(unsigned int i=2000;i<=2420;i+=30)
+        PROCULUS_VP_Write_String(i," ");
+    vpPrint=2000;
+}
+
+void bcd2str(char valor, char *dado){
+     dado[0]=((valor>>4)+0x30);
+     dado[1]=((0x0F&valor)+0x30);
+     dado[2]=0;
      }
-     I2C_Master_Write(0);
-     I2C_Master_Stop();
-     _delay((unsigned long)((650)*(32000000/4000000.0)));
 
+char str2bcd(char *value){
+     return ((value[0]<<4)|(0x0F & (value[1])));
 }
 
 
 
 
-void EEPROM_24C1025_Read_Str(unsigned char chip_add, unsigned long mem_add,char *texto){
-     unsigned char cnt=0;
-     unsigned char range=0;
-     unsigned char ctrl;
+char* itoa(int num, char* str, int base)
+{
+    int i = 0;
+    char isNegative = 0;
 
-     if(mem_add>0x1FFFF) return;
 
-     if(mem_add>0xFFFF) range=0x08; else range=0x00;
-     ctrl=chip_add;
-     ctrl<<=1;
-     ctrl |= 0xA0;
-     ctrl |= 0b00000001;
-     ctrl |= range;
+    if (num == 0)
+    {
+        str[i++] = '0';
+        str[i] = '\0';
+        return str;
+    }
 
-     I2C_Master_Start();
-     I2C_Master_Write(ctrl & 0xFE);
-     I2C_Master_Write(((char *)&mem_add)[1]);
-     I2C_Master_Write(((char *)&mem_add)[0]);
-     I2C_Master_RepeatedStart();
-     I2C_Master_Write(ctrl);
 
-     cnt=0;
-     do{
-           if(mem_add>0x1FFFF) break;
-           if((mem_add+1)%128==0)
-             {
-             (*texto)=I2C_Master_Read(0);
-             I2C_Master_Stop();
 
-             _delay((unsigned long)((5)*(32000000/4000.0)));
-             mem_add++;
-             texto++;
-             if(mem_add>0xFFFF) range=0x08; else range=0x00;
-             ctrl=chip_add;
-             ctrl<<=1;
-             ctrl |= 0xA0;
-             ctrl |= 0b00000001;
-             ctrl |= range;
+    if (num < 0 && base == 10)
+    {
+        isNegative = 1;
+        num = -num;
+    }
 
-             I2C_Master_Start();
-             I2C_Master_Write(ctrl & 0xFE);
-             I2C_Master_Write(((char *)&mem_add)[1]);
-             I2C_Master_Write(((char *)&mem_add)[0]);
-             I2C_Master_RepeatedStart();
-             I2C_Master_Write(ctrl);
-             }
-           else
-             {
-             (*texto)=I2C_Master_Read(1);
-             if((*texto)==0)break;
-             texto++;
-             mem_add++;
-             }
-       }while((cnt++)<64);
 
-     I2C_Master_Read(0);
-     I2C_Master_Stop();
-     _delay((unsigned long)((650)*(32000000/4000000.0)));
-}
-# 262 "EEPROM_24C1025.c"
-void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char *data){
-     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 1, data);
+    while (num != 0)
+    {
+        int rem = num % base;
+        str[i++] = (rem > 9)? (rem-10) + 'a' : rem + '0';
+        num = num/base;
+    }
+
+
+    if (isNegative)
+        str[i++] = '-';
+
+    str[i] = '\0';
+
+
+    reverse(str);
+
+    return str;
 }
 
 
-unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem_add){
-    char *data;
-    EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 1, data);
-    return *data;
-}
 
-void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, char *data){
-     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 2, data);
-}
+char * reverse( char * s )
+{
+    int length = strlen(s) ;
+    int c, i, j;
 
-
-unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_add){
-    char data[2];
-    EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 2, data);
-    return (data[0]<<8)+data[1];
-}
-
-
-void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned char value){
-     char buffer[128];
-     unsigned char i;
-     unsigned int page=0;
-     for(i=0;i<128;i++) buffer[i]=value;
-     for(page=0;page<1024;page++)
+    for (i=0, j=length-1; i<j; i++, j--)
         {
-        EEPROM_24C1025_Write_Buffer(chip_add, (page*128), 128, buffer);
+        c=s[i];
+        s[i]=s[j];
+        s[j]=c;
         }
+    return s;
+}
+# 136 "util.c.c"
+char *ultoa(unsigned long num, char *str, int radix) {
+    char temp[33];
+
+
+    int temp_loc = 0;
+    int digit;
+    int str_loc = 0;
+
+
+    do {
+        digit = (unsigned long)num % radix;
+        if (digit < 10)
+            temp[temp_loc++] = digit + '0';
+        else
+            temp[temp_loc++] = digit - 10 + 'A';
+                        num = (unsigned long)num /radix;
+    } while ((unsigned long)num > 0);
+
+    temp_loc--;
+
+
+
+    while ( temp_loc >=0 ) {
+        str[str_loc++] = temp[temp_loc--];
+    }
+    str[str_loc] = 0;
+
+    return str;
+}
+
+
+
+int my_pow(int rad, int exp){
+    int resposta;
+    if(exp==0)
+       resposta=1;
+    else if(exp==1)
+           {
+           resposta=rad;
+           }
+    else
+       {
+       resposta=rad;
+       for(char i=0;i<exp-1;i++)
+          {
+          resposta*=rad;
+          }
+       }
+    return resposta;
 }

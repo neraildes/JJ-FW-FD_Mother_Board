@@ -275,6 +275,7 @@ struct{
         unsigned flag_save_time           :1;
         unsigned flag_wakeup              :1;
         unsigned flagSendDataFix          :1;
+        unsigned flag_proculus_hs         :1;  
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico            :1;
 }statusgen1;
@@ -282,6 +283,7 @@ struct{
 #define flag_save_time           statusgen1.flag_save_time
 #define flag_wakeup              statusgen1.flag_wakeup
 #define flagSendDataFix          statusgen1.flagSendDataFix
+#define flag_proculus_hs         statusgen1.flag_proculus_hs
 #define flag_Vacuo_estava_ligado statusgen1.flag_Vacuo_estava_ligado
 #define flag_generico            statusgen1.flag_generico
 //------------------------------------------------------------------------------
