@@ -43,8 +43,8 @@
 #define PPCOR   1787
 
 #define FATOR_PADRAO 1.0
-#define FATOR_TENSAO 0.4546
-#define FATOR_VACUO  0.05
+#define FATOR_TENSAO 1.0 //0.4546
+#define FATOR_VACUO  1.0 //0.05
 
 //------------------------------------------------------------------------------
 const char *boardtype[5]={"Mother Board",
@@ -162,7 +162,7 @@ char trendExist;
 int  trendvp=0x0310;
 char icone ; 
 
-char escalonamento;
+
 unsigned char nabucodonozor=0;
 
 unsigned int vpPrint=2000;
@@ -581,6 +581,7 @@ void main(void)
              ShowSensorRealTimeHS();                          
                        //----------------------------------------------------  
              
+<<<<<<< HEAD
 
              //=================AJUSTA O CONTADOR DE ACORDO COM A PÁGINA=============
              switch(pagina)
@@ -681,6 +682,55 @@ void main(void)
                            #define KEY 0xAABBCCDD    
 
                            unsigned long dica;
+=======
+             //-----------------------------------------------------------------
+
+                if(rtc.milisegundo<2) if(pagina!=25) Exibe_Hora_Data(FALSE); //Exibe data e hora sem segundos
+                if(flag_time_process==TRUE) SaveBlackoutStatusRuning(); //Salva status e tempo de processo a cada 10 minutos
+                Exibe_Tempo_de_Processo();
+                Icones_de_alarmes();    
+
+                Gerenciador_de_Senha();  //Habilita acesso global por 30 segundos
+                Gerenciador_de_Senha_Global(); //Libera Senha Global eternamente                       
+
+                global_datalog(); // LEITURA DOS SENSORES
+                __delay_ms(32);                 
+                global_vacuo();
+                __delay_ms(32);
+                global_condensador();
+                __delay_ms(32);
+                global_aquecimento();
+                __delay_ms(32);
+
+                //BILD Ligar no SAC para Taisa.
+                if(memo_statuspower!=statuspower.bits) 
+                  { 
+                  PROCULUS_OK();  
+                  SaveBlackoutStatus();
+                  memo_statuspower=statuspower.bits;
+                  }                          
+
+
+                if((processo_segundo==0) || (processo_segundo==30))
+                    { 
+                    if(flag_wakeup==1)
+                       {
+                       flag_wakeup=0; 
+                       AcordaFilha(); 
+                       }        
+                    }
+                else
+                    {
+                    flag_wakeup=1;
+                    }                  
+                Check_And_Send_Capture_Datalog();
+                //------------------CODIGO RAPIDO---------------------
+                ShowSensorRealTimeHS();                          
+                //----------------------------------------------------  
+                showTotalReset();
+
+                          
+>>>>>>> v1.0.10
 
                            dica=~(senha_atual^KEY);
 
@@ -769,6 +819,7 @@ void main(void)
                            for(Index_Receita=0;Index_Receita<8;Index_Receita++)        
                                {
                                //flag_main_loop_WDT=1;
+<<<<<<< HEAD
                                if(PROCULUS_VP_Read_UInt16(0x0020+Index_Receita)==1)
                                   {
                                   PROCULUS_VP_Write_UInt16(0x0020+Index_Receita,0);                                 
@@ -784,6 +835,251 @@ void main(void)
                            }
                            break;
                    }//switch pagina
+=======
+                               if(PROCULUS_VP_Read_UInt16(7+i)==1)
+                                  { 
+                                  PROCULUS_VP_Write_UInt16(7+i,0);
+                                  Index_Sel_Rec=i;
+                                  if(Index_Sel_Rec<=4)
+                                     { 
+                                     returnToScreen=19;
+                                     PROCULUS_Show_Screen(27);
+                                     }
+                                  else
+                                     { 
+                                     returnToScreen=21; 
+                                     PROCULUS_Show_Screen(28);                                     
+                                     }
+                                  }
+                               }
+                          pagina_19();
+                          break;
+                  case 23:// Página de parâmetros de segurança                                       
+                          if(PROCULUS_VP_Read_UInt16(1)==1)
+                             { 
+                             PROCULUS_VP_Write_UInt16(1,0);
+                             pagina_23(); //Salva Parametros
+                             }                                                            
+                          break;                        
+
+                  case 25: // Ajuste de data e hora
+                         if(maincnt==0)
+                            {
+                            Exibe_Hora_Data(TRUE);
+                            maincnt++;
+                            }
+                          if(PROCULUS_VP_Read_UInt16(152)==1)
+                             { 
+                             PROCULUS_VP_Write_UInt16(152,0);
+                             Exibe_Hora_Data(TRUE);
+                             }                                                     
+                          if(PROCULUS_VP_Read_UInt16(174)==1)
+                             { 
+                             PROCULUS_VP_Write_UInt16(174,0);
+                             pagina_25(); //Salva Data e Hora
+                             } 
+                          break; 
+                  case 27:
+                  case 28://Selecao de Receita- Pagina 1
+                          for(Index_Receita=0;Index_Receita<8;Index_Receita++)        
+                              {
+                              if(PROCULUS_VP_Read_UInt16(0x0020+Index_Receita)==1) //Selecionou algo
+                                 {
+                                 PROCULUS_VP_Write_UInt16(0x0020+Index_Receita,0); //Desabilita pra não entrar de  
+                                 PROCULUS_Show_Screen(returnToScreen);
+                                 Carrega_Tupla_Receita(Index_Receita, &receita);
+                                 Set_Receita(Index_Sel_Rec,TRUE); // Index_Sel_Rec                                 
+                                 }                               
+                              }                        
+
+                              if(PROCULUS_VP_Read_UInt16(17)==1) //Menu ESC
+                                 {
+                                 PROCULUS_VP_Write_UInt16(17,0);
+                                 PROCULUS_Show_Screen(returnToScreen);
+                                 }   
+                          
+                              if(PROCULUS_VP_Read_UInt16(18)==1) //Menu Excluir
+                                 {
+                                 PROCULUS_VP_Write_UInt16(18,0);
+                                 receita.histerese=0;
+                                 strcpy(receita.nome,"");
+                                 receita.potenciaOFF=0;
+                                 receita.potenciaON=0;
+                                 receita.setpoint=0;
+                                 Set_Receita(Index_Sel_Rec,FALSE); // In
+                                 PROCULUS_Show_Screen(returnToScreen);
+                                 }                           
+                          
+                          break;
+
+                  case 29: // Ajuste de tempo de captura de datalog
+                          if(PROCULUS_VP_Read_UInt16(175)==1)
+                             { 
+                             PROCULUS_VP_Write_UInt16(175,0);
+                             pagina_29(); 
+                             }  
+                          break;
+                  case 31: //Troca de Senha
+                          {
+                          #define KEY 0xE4BA2F10 
+                             
+                          unsigned long dica;
+                          
+                          dica=~(senha_atual^KEY);
+                          
+                          ultoa(dica,texto,16);                          
+                         
+                          PROCULUS_VP_Write_String(1660,texto);
+                          my_delay_ms_TMR1(500);
+                          }
+                          if(PROCULUS_VP_Read_UInt16(386)==1)
+                             { 
+                             PROCULUS_VP_Write_UInt16(386,0);
+                             pagina_31(); 
+                             }             
+                          break;                          
+                  case 35:// Seleciona cor da linha do grafico. Imprimindo cores correspondentes.
+                            {   
+                            int tv;                            
+                            char total;
+                            static int canal=0;
+                            flag_proculus_hs=TRUE;
+                            
+                            /*
+                            for(canal=0;canal<14;canal++)
+                                PROCULUS_VP_Write_UInt16(1000+canal,*mapa.entrada[canal]*mapa.fator[canal]);      
+                            */
+
+                            for(trendvp=0x0310;trendvp<0x031D;trendvp++)
+                                  {	
+                                  icone=trendvp-0x0310;					  								  
+                                  if(PROCULUS_VP_Read_UInt16(trendvp)==14)
+                                          {
+                                          if(flag_senha_liberada)
+                                               {
+                                               #ifdef Display_8_Polegadas
+                                               canal=MenorCanalLivre();
+                                               #else
+                                               canal=icone;
+                                               #endif
+
+                                               if(canal<8)
+                                                  { 											                                                                 
+                                                  PROCULUS_VP_Write_UInt16(0x310+icone,icone+1); //Colore o quadrado com uma cor fixa                                           
+                                                  PROCULUS_VP_Write_UInt16((canal*10+PPCANAL),(canal<<8)|(0x0001)); //Seta um canal para um dos 13 icones
+                                                  PROCULUS_VP_Write_UInt16((canal*10+PPCOR),TrendColor[icone]);     //Seta uma cor de linha do grafico											                                             
+
+
+                                                  mapa.canal[canal]=canal;   //Seleciona um Canal
+                                                  mapa.icone[canal]=icone+1;              //Registra qual icone está sendo tratado
+                                                  mapa.vpIcone[icone]=icone+1;
+                                                  mapa.cor[canal]=TrendColor[icone];
+                                                  mapa.fator[canal]=1.0;
+                                                  mapa.entrada[canal]=&leitura[saltaIndice4(icone)];    //Aponta para uma leitura
+
+                                                  mapa.fator[canal]=FATOR_PADRAO;                  //Fator Padrão
+
+                                                  if(icone==0)mapa.fator[canal]=FATOR_TENSAO;      //Fator para Tensão
+                                                  if(icone==1)mapa.fator[canal]=FATOR_VACUO;      //Fator para Vacuo
+
+
+                                                  //PROCULUS_Clear_Line_Graphic(icone);
+                                                                                              //PROCULUS_VP_Write_UInt16(1000+canal,*mapa.entrada[canal]*mapa.fator[canal]);      
+                                                  TrendCurveFuncao(SAVE); //Salva os icones acionados
+                                                  } 
+                                               else
+                                                  {	
+                                                  PROCULUS_VP_Write_UInt16((canal*10+PPCANAL),(canal<<8)|(0x0A00)); //Canal
+                                                  PROCULUS_VP_Write_UInt16((canal*10+PPCOR),0xFFFF);//Cor                                               
+                                                  PROCULUS_VP_Write_UInt16(trendvp,-1);  
+                                                  }
+                                               }
+                                          else
+                                               {
+                                               PROCULUS_NOK();
+                                               PROCULUS_VP_Write_UInt16(trendvp,-1);
+                                               PROCULUS_Popup(ACESSO_NEGADO);
+                                               }
+                                          }
+                                     else 
+                                      if((PROCULUS_VP_Read_UInt16(trendvp)>=15)&&(PROCULUS_VP_Read_UInt16(trendvp)<=30))
+                                          {
+                                          if(flag_senha_liberada)
+                                               {
+                                               char canal_aleatorio, canal_sequencial;
+
+                                               canal_sequencial=buscaIndex(mapa.icone,icone+1);
+                                               canal_aleatorio=mapa.icone[icone]-1; 	                           //canal para lista aleatoria                                         
+
+                                               PROCULUS_VP_Write_UInt16(trendvp,-1);                            //Apaga o quadrado colorido do display 
+                                               PROCULUS_VP_Write_UInt16((canal_sequencial*10+PPCANAL),0x0A00);  //Libera o canal utilizado
+                                               PROCULUS_VP_Write_UInt16((canal_sequencial*10+PPCOR),0xFFFF);               //Torna a cor padrao do canal em branco 
+
+                                                                                       mapa.entrada[canal_sequencial]=NULL;                             //Torna a entrada do canal NULL  
+                                               mapa.canal[canal_sequencial]=0X0A;                               //Seleciona um Canal
+                                               mapa.icone[canal_sequencial]=-1;                                 //Registra qual icone está sendo tratado
+                                               mapa.vpIcone[icone]=-1;                                          //Desliga ícone aleatorio
+                                               mapa.cor[canal_sequencial]=0xFFFF;                               //Desliga a Cor           
+                                                                                   mapa.fator[canal_sequencial]=0.0;                                //Fator padrão para Temperatura
+
+                                                                                       //PROCULUS_Clear_Line_Graphic(canal+1);               //Apaga a Linha desenhada  										                      
+                                               TrendCurveFuncao(SAVE);								//Salva as alterações		                                  
+                                               }
+                                          else
+                                               {
+                                               PROCULUS_NOK();
+                                               PROCULUS_Popup(ACESSO_NEGADO);
+                                               #ifdef Display_8_Polegadas 
+                                               PROCULUS_VP_Write_UInt16(trendvp,mapa.vpIcone[icone]);
+                                               #else
+                                               PROCULUS_VP_Write_UInt16(trendvp,mapa.icone[icone]);
+                                               #endif                                            
+                                               }
+                                          }                                  
+                                  }	
+                                  
+                                  
+	
+
+
+                            
+                            flag_proculus_hs=FALSE;                            
+                            break;
+                            }
+                  case 47: //Lista de Receitas
+                          Atualizar_Lista_de_Receitas();
+
+                          for(Index_Receita=0;Index_Receita<8;Index_Receita++)        
+                              {
+                              //flag_main_loop_WDT=1;
+                              if(PROCULUS_VP_Read_UInt16(0x0020+Index_Receita)==1)
+                                 {
+                                 PROCULUS_VP_Write_UInt16(0x0020+Index_Receita,0);                                 
+                                 pagina_47();                                 
+                                 break;
+                                 }                               
+                              }                             
+                                                     
+                          break;  
+                  case 49: //Edicao de receita
+                          {
+                          pagina_49();                    
+                          }
+                          break;
+                  }//switch pagina
+
+                 
+            
+                 __delay_ms(50);
+                 USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
+                 USART_putc(0xCD);USART_putc(0xCD);
+                 for(unsigned int tempo=0; tempo<500; tempo++)
+                     {
+                     if(flag_usart_rx==TRUE) break;
+                     __delay_ms(1);
+                     }            
+                 
+>>>>>>> v1.0.10
 
                   __delay_ms(50);
                   USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
@@ -865,101 +1161,45 @@ unsigned char countboard()
 
 int  Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
 {
-    static float tsn00=0;
-    static float tmp00=0;
-    static float tmp01=0;
-    static float tmp02=0;
-    static float tmp03=0;
-    static float tmp04=0;
-    static float tmp05=0;
-    static float tmp06=0;
-    static float tmp07=0;
-    static float tmp08=0;
-    static float tmp09=0;
 	switch(destino)
 	      {
 	      case 0://printf("Erro no código. Endereco zero é da placa mae!");
 	      	     break;
-	      case 1:if(buffer[0]==0) 
-                    {
-                    tsn00+=0.0628;
-                    if(tsn00>6.28)tsn00=0;
-	                return sin(tsn00)*100+2200;  //VOLTIMETRO
-                    }
+	      case 1:if(buffer[0]==0)                    
+                        return 100;  //VOLTIMETRO                    
 	             else
-				    return 16000; //VACUO  
-		         break;
+			return 200; //VACUO  
+		     break;
 	      case 2:if(buffer[0]==0)
-	                return -150;   //CONDENSADOR
+	                return 300;   //CONDENSADOR
 	             else
-				    return -1;   
-		         break;
-	      case 3:if(buffer[0]==0) 
-                    { 
-                    tmp00+=0.01256;
-                    if(tmp00>6.28)tmp00=0;
-	                return sin(tmp00)*500;
-                    }
-	             else 
-                    { 
-                    tmp01+=0.0314;
-                    if(tmp01>6.28)tmp01=0;
-	                return 50;//sin(tmp01)*500;
-                    }				       
-		         break;
-	      case 4:if(buffer[0]==0) 
-                    { 
-                    tmp02+=0.0209334;
-                    if(tmp02>6.28)tmp02=0;
-	                return 100;//sin(tmp02)*500;
-                    }
-	             else
-                    { 
-                    tmp03+=0.0157;
-                    if(tmp03>6.28)tmp03=0;
-	                return 150;//sin(tmp03)*500;
-                    }   
-		         break;
-	      case 5:if(buffer[0]==0)
-                    { 
-                    tmp04+=0.01256;
-                    if(tmp04>6.28)tmp04=0;
-	                return 200;//sin(tmp04)*500;
-                    }
-	             else
-                    { 
-                    tmp05+=0.0104667;
-                    if(tmp05>6.28)tmp05=0;
-	                return 250;//sin(tmp05)*500;
-                    }  
-		         break;
-	      case 6:if(buffer[0]==0)
-                    { 
-                    tmp06+=0.00897143;
-                    if(tmp06>6.28)tmp06=0;
-	                return 300;//sin(tmp06)*500;
-                    }
-	             else
-                    { 
-                    tmp07+=0.00785;
-                    if(tmp07>6.28)tmp07=0;
-	                return 350;//sin(tmp07)*500;
-                    }   
-		         break;
-	      case 7:if(buffer[0]==0)
-                    { 
-                    tmp08+=0.0069778;
-                    if(tmp08>6.28)tmp08=0;
-	                return 400;//sin(tmp08)*500;
-                    }
-	             else
-                    { 
-                    tmp09+=0.00628;
-                    if(tmp09>6.28)tmp09=0;
-	                return 450;//sin(tmp09)*500;
-                    }   
-		         break;	
-	  		 				 				 				 				 			 				 				 				 	
+			return -1;   
+		     break;
+	      case 3:if(buffer[0]==0)                      
+                        return 400;                    
+	               else                    
+                        return 500;//sin(tmp01)*500;                    				       
+		       break;
+	      case 4:if(buffer[0]==0)                      
+                        return 600;                   
+	               else                    
+                        return 700;//sin(tmp01)*500;                    				       
+		       break;
+	      case 5:if(buffer[0]==0)                      
+                        return 800;                    
+	               else                    
+                        return 900;//sin(tmp01)*500;                    				       
+		       break;
+	      case 6:if(buffer[0]==0)                      
+                        return 1100;                    
+	               else                    
+                        return 500;//sin(tmp01)*500;                    				       
+		       break;
+	      case 7:if(buffer[0]==0)                      
+                        return 1200;                    
+	               else                    
+                        return 1300;//sin(tmp01)*500;                    				       
+		       break;	  		 				 				 				 				 			 				 				 				 	
 		  }
     return 0;
 }
@@ -989,7 +1229,7 @@ void ShowSensorRealTimeHS(void)
         SlaveBoard  = (tupla / 2)+1; 
         canal = tupla % 2;
         bb[0]=canal; 
-        leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_READ_ANALOG, 1, bb);
+        leitura[tupla]=Send_To_Slave_EMULA(SlaveBoard, COMMAND_READ_ANALOG, 1, bb);
         flag_array_slave_WDT[SlaveBoard]=TRUE;
         }
      

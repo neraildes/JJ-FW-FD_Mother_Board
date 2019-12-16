@@ -18,8 +18,20 @@ extern unsigned int vpPrint;
    void print(char *texto){ 
         unsigned int vp_roll;
         char textolocal[30];       
+<<<<<<< HEAD
         
         if(vpPrint<=2420)
+=======
+        flag_proculus_hs=TRUE;
+        
+        #ifdef Display_5_Polegadas
+           const int MAXVP =  2270;
+        #else
+           const int MAXVP =  2420;
+        #endif       
+        
+        if(vpPrint<=MAXVP)
+>>>>>>> v1.0.10
           { 
           
           PROCULUS_VP_Write_String(vpPrint,texto);
@@ -28,14 +40,14 @@ extern unsigned int vpPrint;
           }
         else
           {
-          for(vp_roll=2000;vp_roll<=2420;vp_roll+=30)
+          for(vp_roll=2000;vp_roll<=MAXVP;vp_roll+=30)
              {
              strcpy(textolocal,""); 
              PROCULUS_VP_Read_String(vp_roll+30, textolocal);
              PROCULUS_VP_Write_String(vp_roll, textolocal);             
              }
           
-          PROCULUS_VP_Write_String(2420, texto);
+          PROCULUS_VP_Write_String(MAXVP, texto);
           
           }  
         

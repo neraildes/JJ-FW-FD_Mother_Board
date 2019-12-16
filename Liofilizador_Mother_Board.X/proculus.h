@@ -53,22 +53,47 @@
 #define DELAY_PROCULUS __delay_ms(32)
 
 
-const int TrendColor[13]={
-                          0x0000, //Preto
-                          0x39E7, //Cinza escuro
-                          0x6B6D, //Cinza claro
-                          0x7800, //Marron Escuro
-                          0x9A23, //Marron Claro
-                          0xF800, //Vermelho vivo
-                          0xFBE0, //Laranja
-                          0xFBF7, //Rosa
-                          0xD540, //Amarelo Escuro
-                          0x03E0, //Verde Escuro
-                          0x07E0, //Verde Claro
-                          0x07FF, //Azul Piscina
-                          0xF81F  //Roxo
-                          };
+#ifdef Display_8_Polegadas
+    const int TrendColor[13]={
+                              0x0000, //Preto
+                              0x39E7, //Cinza escuro
+                              0x6B6D, //Cinza claro
+                              0x7800, //Marron Escuro
+                              0x9A23, //Marron Claro
+                              0xF800, //Vermelho vivo
+                              0xFBE0, //Laranja
+                              0xFBF7, //Rosa
+                              0xD540, //Amarelo Escuro
+                              0x03E0, //Verde Escuro
+                              0x07E0, //Verde Claro
+                              0x001F, //Azul 
+                              0xF81F  //Roxo
+                              };
+#endif
 
+    
+#ifdef Display_5_Polegadas
+    const int TrendColor[13]={
+                              0xF800, //Vermelho vivo
+                              0x03E0, //Verde Escuro
+                              0x001F, //Azul                              
+                              0x0000, //Preto
+                              0x39E7, //Cinza escuro
+                              0x6B6D, //Cinza claro
+                              0x7800, //Marron Escuro
+                              0x9A23, //Marron Claro                              
+                              0xFBE0, //Laranja
+                              0xFBF7, //Rosa
+                              0xD540, //Amarelo Escuro                              
+                              0x07E0, //Verde Claro                              
+                              0xF81F  //Roxo
+                              };
+#endif    
+    
+    
+    
+    
+    
 typedef struct {
     unsigned int  header;
     unsigned char size;

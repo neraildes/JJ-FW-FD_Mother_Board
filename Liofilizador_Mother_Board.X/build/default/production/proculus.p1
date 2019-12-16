@@ -1,26 +1,26 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"225 ./global.h
-[; ;./global.h: 225: struct {
+"229 ./global.h
+[; ;./global.h: 229: struct {
 [s S1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S1 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"250
-[; ;./global.h: 250:       struct {
+"254
+[; ;./global.h: 254:       struct {
 [s S3 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S3 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work ]
-"248
-[; ;./global.h: 248: union {
+"252
+[; ;./global.h: 252: union {
 [u S2 `uc 1 `S3 1 ]
 [n S2 . bits . ]
-"270
-[; ;./global.h: 270: struct{
+"274
+[; ;./global.h: 274: struct{
 [s S4 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S4 . flag_save_time flag_wakeup flagSendDataFix flag_Vacuo_estava_ligado flag_generico ]
-"284
-[; ;./global.h: 284: struct{
+"288
+[; ;./global.h: 288: struct{
 [s S5 :1 `uc 1 ]
 [n S5 . flag_main_loop_WDT ]
-"289
-[; ;./global.h: 289: typedef struct{
+"293
+[; ;./global.h: 293: typedef struct{
 [s S6 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S6 . milisegundo segundo minuto hora ]
 "38 ./usart.h
@@ -77,8 +77,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "11 proculus.c
 [; ;proculus.c: 11: extern volatile unsigned char usart_buffer[74];
 [v _usart_buffer `Vuc ~T0 @X0 -> 0 `x e ]
-"72 ./proculus.h
-[; ;./proculus.h: 72: typedef struct {
+"97 ./proculus.h
+[; ;./proculus.h: 97: typedef struct {
 [s S7 `ui 1 `uc 1 `uc 1 `ui 1 `uc 1 `ui -> 15 `i `uc 1 `uc 1 `uc 1 ]
 [n S7 . header size function vp length dado page button status ]
 "44 ./usart.h
@@ -102,104 +102,104 @@ Version 4.0 HI-TECH Software Intermediate Code
 "8 ./util.h
 [; ;./util.h: 8: int my_pow(int rad, int exp);
 [v _my_pow `(i ~T0 @X0 0 ef2`i`i ]
-"20 ./global.h
+"24 ./global.h
 [p x OSC = INTIO67 ]
-"21
-[p x FCMEN = OFF ]
-"22
-[p x IESO = OFF ]
 "25
-[p x PWRT = ON ]
+[p x FCMEN = OFF ]
 "26
-[p x BOREN = SBORDIS ]
-"27
-[p x BORV = 3 ]
+[p x IESO = OFF ]
+"29
+[p x PWRT = ON ]
 "30
-[p x WDT = ON ]
+[p x BOREN = SBORDIS ]
 "31
-[p x WDTPS = 16384 ]
+[p x BORV = 3 ]
 "34
-[p x CCP2MX = PORTC ]
+[p x WDT = ON ]
 "35
+[p x WDTPS = 16384 ]
+"38
+[p x CCP2MX = PORTC ]
+"39
 [p x PBADEN = ON ]
-"36
-[p x LPT1OSC = OFF ]
-"37
-[p x MCLRE = ON ]
 "40
-[p x STVREN = ON ]
+[p x LPT1OSC = OFF ]
 "41
-[p x LVP = OFF ]
-"42
-[p x XINST = OFF ]
+[p x MCLRE = ON ]
+"44
+[p x STVREN = ON ]
 "45
-[p x CP0 = OFF ]
+[p x LVP = OFF ]
 "46
+[p x XINST = OFF ]
+"49
+[p x CP0 = OFF ]
+"50
 [p x CP1 = OFF ]
-"47
-[p x CP2 = OFF ]
-"48
-[p x CP3 = OFF ]
 "51
-[p x CPB = OFF ]
+[p x CP2 = OFF ]
 "52
-[p x CPD = OFF ]
+[p x CP3 = OFF ]
 "55
-[p x WRT0 = OFF ]
+[p x CPB = OFF ]
 "56
+[p x CPD = OFF ]
+"59
+[p x WRT0 = OFF ]
+"60
 [p x WRT1 = OFF ]
-"57
-[p x WRT2 = OFF ]
-"58
-[p x WRT3 = OFF ]
 "61
-[p x WRTC = OFF ]
+[p x WRT2 = OFF ]
 "62
-[p x WRTB = OFF ]
-"63
-[p x WRTD = OFF ]
+[p x WRT3 = OFF ]
+"65
+[p x WRTC = OFF ]
 "66
-[p x EBTR0 = OFF ]
+[p x WRTB = OFF ]
 "67
+[p x WRTD = OFF ]
+"70
+[p x EBTR0 = OFF ]
+"71
 [p x EBTR1 = OFF ]
-"68
-[p x EBTR2 = OFF ]
-"69
-[p x EBTR3 = OFF ]
 "72
+[p x EBTR2 = OFF ]
+"73
+[p x EBTR3 = OFF ]
+"76
 [p x EBTRB = OFF ]
-"234
-[; ;./global.h: 234: } statusgen ;
+"238
+[; ;./global.h: 238: } statusgen ;
 [v _statusgen `S1 ~T0 @X0 1 e ]
-"259
-[; ;./global.h: 259:       } statuspower;
+"263
+[; ;./global.h: 263:       } statuspower;
 [v _statuspower `S2 ~T0 @X0 1 e ]
-"276
-[; ;./global.h: 276: }statusgen1;
+"280
+[; ;./global.h: 280: }statusgen1;
 [v _statusgen1 `S4 ~T0 @X0 1 e ]
-"286
-[; ;./global.h: 286: }statusWDT;
+"290
+[; ;./global.h: 290: }statusWDT;
 [v _statusWDT `S5 ~T0 @X0 1 e ]
-"296
-[; ;./global.h: 296: volatile t_rtc rtc;
+"300
+[; ;./global.h: 300: volatile t_rtc rtc;
 [v _rtc `VS6 ~T0 @X0 1 e ]
-"56 ./proculus.h
-[; ;./proculus.h: 56: const int TrendColor[13]={
+"76 ./proculus.h
+[; ;./proculus.h: 76:     const int TrendColor[13]={
 [v _TrendColor `Ci ~T0 @X0 -> 13 `i e ]
 [i _TrendColor
 :U ..
+-> -> 63488 `ui `i
+-> 992 `i
+-> 31 `i
 -> 0 `i
 -> 14823 `i
 -> 27501 `i
 -> 30720 `i
 -> -> 39459 `ui `i
--> -> 63488 `ui `i
 -> -> 64480 `ui `i
 -> -> 64503 `ui `i
 -> -> 54592 `ui `i
--> 992 `i
 -> 2016 `i
--> 2047 `i
 -> -> 63519 `ui `i
 ..
 ]

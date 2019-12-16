@@ -4380,7 +4380,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 2 "adc.c" 2
 
 # 1 "./global.h" 1
-# 20 "./global.h"
+# 24 "./global.h"
 #pragma config OSC = INTIO67
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
@@ -4434,7 +4434,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 
 
 #pragma config EBTRB = OFF
-# 225 "./global.h"
+# 229 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -4445,7 +4445,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 248 "./global.h"
+# 252 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -4458,7 +4458,7 @@ union {
 
              };
       } statuspower;
-# 270 "./global.h"
+# 274 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
