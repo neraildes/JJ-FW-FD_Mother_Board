@@ -1,39 +1,42 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"229 ./global.h
-[; ;./global.h: 229: struct {
+"225 ./global.h
+[; ;./global.h: 225: struct {
 [s S9 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S9 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"254
-[; ;./global.h: 254:       struct {
+"250
+[; ;./global.h: 250:       struct {
 [s S11 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S11 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work ]
-"252
-[; ;./global.h: 252: union {
+"248
+[; ;./global.h: 248: union {
 [u S10 `uc 1 `S11 1 ]
 [n S10 . bits . ]
-"274
-[; ;./global.h: 274: struct{
+"270
+[; ;./global.h: 270: struct{
 [s S12 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S12 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico ]
-"290
-[; ;./global.h: 290: struct{
+"286
+[; ;./global.h: 286: struct{
 [s S13 :1 `uc 1 ]
 [n S13 . flag_main_loop_WDT ]
-"295
-[; ;./global.h: 295: typedef struct{
+"291
+[; ;./global.h: 291: typedef struct{
 [s S14 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S14 . milisegundo segundo minuto hora ]
-"14 util.c.c
+"15 util.c.c
+[; ;util.c.c: 15: extern int Tamanho_Display;
+[v _Tamanho_Display `i ~T0 @X0 0 e ]
+"14
 [; ;util.c.c: 14: extern unsigned int vpPrint;
 [v _vpPrint `ui ~T0 @X0 0 e ]
-"172 ./proculus.h
-[; ;./proculus.h: 172: void PROCULUS_VP_Write_String(unsigned int vp, char *text);
+"131 ./proculus.h
+[; ;./proculus.h: 131: void PROCULUS_VP_Write_String(unsigned int vp, char *text);
 [v _PROCULUS_VP_Write_String `(v ~T0 @X0 0 ef2`ui`*uc ]
 "33 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h: 33: char *strcpy (char *restrict, const char *restrict);
 [v _strcpy `(*uc ~T0 @X0 0 ef2`*uc`*Cuc ]
-"173 ./proculus.h
-[; ;./proculus.h: 173: void PROCULUS_VP_Read_String(unsigned int vp, char *text);
+"132 ./proculus.h
+[; ;./proculus.h: 132: void PROCULUS_VP_Read_String(unsigned int vp, char *text);
 [v _PROCULUS_VP_Read_String `(v ~T0 @X0 0 ef2`ui`*uc ]
 "11 ./util.h
 [; ;./util.h: 11: char * reverse( char * s );
@@ -41,107 +44,87 @@ Version 4.0 HI-TECH Software Intermediate Code
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h: 54: size_t strlen (const char *);
 [v _strlen `(ui ~T0 @X0 0 ef1`*Cuc ]
-"24 ./global.h
+"20 ./global.h
 [p x OSC = INTIO67 ]
-"25
+"21
 [p x FCMEN = OFF ]
-"26
+"22
 [p x IESO = OFF ]
-"29
+"25
 [p x PWRT = ON ]
-"30
+"26
 [p x BOREN = SBORDIS ]
-"31
+"27
 [p x BORV = 3 ]
-"34
+"30
 [p x WDT = ON ]
-"35
+"31
 [p x WDTPS = 16384 ]
-"38
+"34
 [p x CCP2MX = PORTC ]
-"39
+"35
 [p x PBADEN = ON ]
-"40
+"36
 [p x LPT1OSC = OFF ]
-"41
+"37
 [p x MCLRE = ON ]
-"44
+"40
 [p x STVREN = ON ]
-"45
+"41
 [p x LVP = OFF ]
-"46
+"42
 [p x XINST = OFF ]
-"49
+"45
 [p x CP0 = OFF ]
-"50
+"46
 [p x CP1 = OFF ]
-"51
+"47
 [p x CP2 = OFF ]
-"52
+"48
 [p x CP3 = OFF ]
-"55
+"51
 [p x CPB = OFF ]
-"56
+"52
 [p x CPD = OFF ]
-"59
+"55
 [p x WRT0 = OFF ]
-"60
+"56
 [p x WRT1 = OFF ]
-"61
+"57
 [p x WRT2 = OFF ]
-"62
+"58
 [p x WRT3 = OFF ]
-"65
+"61
 [p x WRTC = OFF ]
-"66
+"62
 [p x WRTB = OFF ]
-"67
+"63
 [p x WRTD = OFF ]
-"70
+"66
 [p x EBTR0 = OFF ]
-"71
+"67
 [p x EBTR1 = OFF ]
-"72
+"68
 [p x EBTR2 = OFF ]
-"73
+"69
 [p x EBTR3 = OFF ]
-"76
+"72
 [p x EBTRB = OFF ]
-"238
-[; ;./global.h: 238: } statusgen ;
+"234
+[; ;./global.h: 234: } statusgen ;
 [v _statusgen `S9 ~T0 @X0 1 e ]
-"263
-[; ;./global.h: 263:       } statuspower;
+"259
+[; ;./global.h: 259:       } statuspower;
 [v _statuspower `S10 ~T0 @X0 1 e ]
-"281
-[; ;./global.h: 281: }statusgen1;
+"277
+[; ;./global.h: 277: }statusgen1;
 [v _statusgen1 `S12 ~T0 @X0 1 e ]
-"292
-[; ;./global.h: 292: }statusWDT;
+"288
+[; ;./global.h: 288: }statusWDT;
 [v _statusWDT `S13 ~T0 @X0 1 e ]
-"302
-[; ;./global.h: 302: volatile t_rtc rtc;
+"298
+[; ;./global.h: 298: volatile t_rtc rtc;
 [v _rtc `VS14 ~T0 @X0 1 e ]
-"76 ./proculus.h
-[; ;./proculus.h: 76:     const int TrendColor[13]={
-[v _TrendColor `Ci ~T0 @X0 -> 13 `i e ]
-[i _TrendColor
-:U ..
--> -> 63488 `ui `i
--> 992 `i
--> 31 `i
--> 0 `i
--> 14823 `i
--> 27501 `i
--> 30720 `i
--> -> 39459 `ui `i
--> -> 64480 `ui `i
--> -> 64503 `ui `i
--> -> 54592 `ui `i
--> 2016 `i
--> -> 63519 `ui `i
-..
-]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -553,31 +536,38 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6715
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 6715: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"18 util.c.c
-[; ;util.c.c: 18:    void print(char *texto){
+"19 util.c.c
+[; ;util.c.c: 19:    void print(char *texto){
 [v _print `(v ~T0 @X0 1 ef1`*uc ]
 {
 [e :U _print ]
 [v _texto `*uc ~T0 @X0 1 r1 ]
 [f ]
-"19
-[; ;util.c.c: 19:         unsigned int vp_roll;
-[v _vp_roll `ui ~T0 @X0 1 a ]
 "20
-[; ;util.c.c: 20:         char textolocal[30];
-[v _textolocal `uc ~T0 @X0 -> 30 `i a ]
+[; ;util.c.c: 20:         unsigned int vp_roll;
+[v _vp_roll `ui ~T0 @X0 1 a ]
 "21
-[; ;util.c.c: 21:         statusgen1.flag_proculus_hs=1;
+[; ;util.c.c: 21:         char textolocal[30];
+[v _textolocal `uc ~T0 @X0 -> 30 `i a ]
+"22
+[; ;util.c.c: 22:         int MAXVP;
+[v _MAXVP `i ~T0 @X0 1 a ]
+"23
+[; ;util.c.c: 23:         statusgen1.flag_proculus_hs=1;
 [e = . _statusgen1 3 -> -> 1 `i `uc ]
-"24
-[; ;util.c.c: 24:            const int MAXVP = 2270;
-[v F3151 `Ci ~T0 @X0 1 s MAXVP ]
-[i F3151
--> 2270 `i
-]
+"25
+[; ;util.c.c: 25:         if(Tamanho_Display==50) MAXVP = 2270;
+[e $ ! == _Tamanho_Display -> 50 `i 283  ]
+[e = _MAXVP -> 2270 `i ]
+[e :U 283 ]
+"26
+[; ;util.c.c: 26:         if(Tamanho_Display==80) MAXVP = 2420;
+[e $ ! == _Tamanho_Display -> 80 `i 284  ]
+[e = _MAXVP -> 2420 `i ]
+[e :U 284 ]
 "29
 [; ;util.c.c: 29:         if(vpPrint<=MAXVP)
-[e $ ! <= _vpPrint -> F3151 `ui 283  ]
+[e $ ! <= _vpPrint -> _MAXVP `ui 285  ]
 "30
 [; ;util.c.c: 30:           {
 {
@@ -590,10 +580,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "35
 [; ;util.c.c: 35:           }
 }
-[e $U 284  ]
+[e $U 286  ]
 "36
 [; ;util.c.c: 36:         else
-[e :U 283 ]
+[e :U 285 ]
 "37
 [; ;util.c.c: 37:           {
 {
@@ -601,9 +591,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;util.c.c: 38:           for(vp_roll=2000;vp_roll<=MAXVP;vp_roll+=30)
 {
 [e = _vp_roll -> -> 2000 `i `ui ]
-[e $ <= _vp_roll -> F3151 `ui 285  ]
-[e $U 286  ]
-[e :U 285 ]
+[e $U 290  ]
+[e :U 287 ]
 "39
 [; ;util.c.c: 39:              {
 {
@@ -620,16 +609,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;util.c.c: 43:              }
 }
 [e =+ _vp_roll -> -> 30 `i `ui ]
-[e $ <= _vp_roll -> F3151 `ui 285  ]
-[e :U 286 ]
+[e :U 290 ]
+[e $ <= _vp_roll -> _MAXVP `ui 287  ]
+[e :U 288 ]
 }
 "45
 [; ;util.c.c: 45:           PROCULUS_VP_Write_String(MAXVP, texto);
-[e ( _PROCULUS_VP_Write_String (2 , -> F3151 `ui _texto ]
+[e ( _PROCULUS_VP_Write_String (2 , -> _MAXVP `ui _texto ]
 "47
 [; ;util.c.c: 47:           }
 }
-[e :U 284 ]
+[e :U 286 ]
 "48
 [; ;util.c.c: 48:         statusgen1.flag_proculus_hs=0;
 [e = . _statusgen1 3 -> -> 0 `i `uc ]
@@ -648,22 +638,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [v _i `ui ~T0 @X0 1 a ]
 [e = _i -> -> 2000 `i `ui ]
-[e $ <= _i -> -> 2420 `i `ui 289  ]
-[e $U 290  ]
-[e :U 289 ]
+[e $ <= _i -> -> 2420 `i `ui 292  ]
+[e $U 293  ]
+[e :U 292 ]
 "53
 [; ;util.c.c: 53:         PROCULUS_VP_Write_String(i," ");
 [e ( _PROCULUS_VP_Write_String (2 , _i :s 2C ]
 [e =+ _i -> -> 30 `i `ui ]
-[e $ <= _i -> -> 2420 `i `ui 289  ]
-[e :U 290 ]
+[e $ <= _i -> -> 2420 `i `ui 292  ]
+[e :U 293 ]
 }
 "54
 [; ;util.c.c: 54:     vpPrint=2000;
 [e = _vpPrint -> -> 2000 `i `ui ]
 "55
 [; ;util.c.c: 55: }
-[e :UE 288 ]
+[e :UE 291 ]
 }
 "57
 [; ;util.c.c: 57: void bcd2str(char valor, char *dado){
@@ -684,7 +674,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = *U + _dado * -> -> 2 `i `x -> -> # *U _dado `i `x -> -> 0 `i `uc ]
 "61
 [; ;util.c.c: 61:      }
-[e :UE 292 ]
+[e :UE 295 ]
 }
 "63
 [; ;util.c.c: 63: char str2bcd(char *value){
@@ -696,10 +686,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "64
 [; ;util.c.c: 64:      return ((value[0]<<4)|(0x0F & (value[1])));
 [e ) -> | << -> *U + _value * -> -> 0 `i `x -> -> # *U _value `i `x `i -> 4 `i & -> 15 `i -> *U + _value * -> -> 1 `i `x -> -> # *U _value `i `x `i `uc ]
-[e $UE 293  ]
+[e $UE 296  ]
 "65
 [; ;util.c.c: 65: }
-[e :UE 293 ]
+[e :UE 296 ]
 }
 "70
 [; ;util.c.c: 70: char* itoa(int num, char* str, int base)
@@ -726,7 +716,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _isNegative -> -> 0 `i `uc ]
 "76
 [; ;util.c.c: 76:     if (num == 0)
-[e $ ! == _num -> 0 `i 295  ]
+[e $ ! == _num -> 0 `i 298  ]
 "77
 [; ;util.c.c: 77:     {
 {
@@ -739,14 +729,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "80
 [; ;util.c.c: 80:         return str;
 [e ) _str ]
-[e $UE 294  ]
+[e $UE 297  ]
 "81
 [; ;util.c.c: 81:     }
 }
-[e :U 295 ]
+[e :U 298 ]
 "85
 [; ;util.c.c: 85:     if (num < 0 && base == 10)
-[e $ ! && < _num -> 0 `i == _base -> 10 `i 296  ]
+[e $ ! && < _num -> 0 `i == _base -> 10 `i 299  ]
 "86
 [; ;util.c.c: 86:     {
 {
@@ -759,11 +749,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "89
 [; ;util.c.c: 89:     }
 }
-[e :U 296 ]
+[e :U 299 ]
 "92
 [; ;util.c.c: 92:     while (num != 0)
-[e $U 297  ]
-[e :U 298 ]
+[e $U 300  ]
+[e :U 301 ]
 "93
 [; ;util.c.c: 93:     {
 {
@@ -780,18 +770,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 "97
 [; ;util.c.c: 97:     }
 }
-[e :U 297 ]
+[e :U 300 ]
 "92
 [; ;util.c.c: 92:     while (num != 0)
-[e $ != _num -> 0 `i 298  ]
-[e :U 299 ]
+[e $ != _num -> 0 `i 301  ]
+[e :U 302 ]
 "100
 [; ;util.c.c: 100:     if (isNegative)
-[e $ ! != -> _isNegative `i -> 0 `i 300  ]
+[e $ ! != -> _isNegative `i -> 0 `i 303  ]
 "101
 [; ;util.c.c: 101:         str[i++] = '-';
 [e = *U + _str * -> ++ _i -> 1 `i `x -> -> # *U _str `i `x -> -> 45 `ui `uc ]
-[e :U 300 ]
+[e :U 303 ]
 "103
 [; ;util.c.c: 103:     str[i] = '\0';
 [e = *U + _str * -> _i `x -> -> # *U _str `i `x -> -> 0 `ui `uc ]
@@ -801,10 +791,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "108
 [; ;util.c.c: 108:     return str;
 [e ) _str ]
-[e $UE 294  ]
+[e $UE 297  ]
 "109
 [; ;util.c.c: 109: }
-[e :UE 294 ]
+[e :UE 297 ]
 }
 "113
 [; ;util.c.c: 113: char * reverse( char * s )
@@ -832,8 +822,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;util.c.c: 118:     for (i=0, j=length-1; i<j; i++, j--)
 {
 [e ; = _i -> 0 `i = _j - _length -> 1 `i ]
-[e $U 305  ]
-[e :U 302 ]
+[e $U 308  ]
+[e :U 305 ]
 "119
 [; ;util.c.c: 119:         {
 {
@@ -850,17 +840,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;util.c.c: 123:         }
 }
 [e ; ++ _i -> 1 `i -- _j -> 1 `i ]
-[e :U 305 ]
-[e $ < _i _j 302  ]
-[e :U 303 ]
+[e :U 308 ]
+[e $ < _i _j 305  ]
+[e :U 306 ]
 }
 "124
 [; ;util.c.c: 124:     return s;
 [e ) _s ]
-[e $UE 301  ]
+[e $UE 304  ]
 "125
 [; ;util.c.c: 125: }
-[e :UE 301 ]
+[e :UE 304 ]
 }
 "136
 [; ;util.c.c: 136: char *ultoa(unsigned long num, char *str, int radix) {
@@ -887,40 +877,40 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _str_loc -> 0 `i ]
 "145
 [; ;util.c.c: 145:     do {
-[e :U 309 ]
+[e :U 312 ]
 {
 "146
 [; ;util.c.c: 146:         digit = (unsigned long)num % radix;
 [e = _digit -> % _num -> -> _radix `l `ul `i ]
 "147
 [; ;util.c.c: 147:         if (digit < 10)
-[e $ ! < _digit -> 10 `i 310  ]
+[e $ ! < _digit -> 10 `i 313  ]
 "148
 [; ;util.c.c: 148:             temp[temp_loc++] = digit + '0';
 [e = *U + &U _temp * -> -> ++ _temp_loc -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + -> _digit `ui -> 48 `ui `uc ]
-[e $U 311  ]
+[e $U 314  ]
 "149
 [; ;util.c.c: 149:         else
-[e :U 310 ]
+[e :U 313 ]
 "150
 [; ;util.c.c: 150:             temp[temp_loc++] = digit - 10 + 'A';
 [e = *U + &U _temp * -> -> ++ _temp_loc -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + -> - _digit -> 10 `i `ui -> 65 `ui `uc ]
-[e :U 311 ]
+[e :U 314 ]
 "151
 [; ;util.c.c: 151:                         num = (unsigned long)num /radix;
 [e = _num / _num -> -> _radix `l `ul ]
 "152
 [; ;util.c.c: 152:     } while ((unsigned long)num > 0);
 }
-[e $ > _num -> -> -> 0 `i `l `ul 309  ]
-[e :U 308 ]
+[e $ > _num -> -> -> 0 `i `l `ul 312  ]
+[e :U 311 ]
 "154
 [; ;util.c.c: 154:     temp_loc--;
 [e -- _temp_loc -> 1 `i ]
 "158
 [; ;util.c.c: 158:     while ( temp_loc >=0 ) {
-[e $U 312  ]
-[e :U 313 ]
+[e $U 315  ]
+[e :U 316 ]
 {
 "159
 [; ;util.c.c: 159:         str[str_loc++] = temp[temp_loc--];
@@ -928,21 +918,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "160
 [; ;util.c.c: 160:     }
 }
-[e :U 312 ]
+[e :U 315 ]
 "158
 [; ;util.c.c: 158:     while ( temp_loc >=0 ) {
-[e $ >= _temp_loc -> 0 `i 313  ]
-[e :U 314 ]
+[e $ >= _temp_loc -> 0 `i 316  ]
+[e :U 317 ]
 "161
 [; ;util.c.c: 161:     str[str_loc] = 0;
 [e = *U + _str * -> _str_loc `x -> -> # *U _str `i `x -> -> 0 `i `uc ]
 "163
 [; ;util.c.c: 163:     return str;
 [e ) _str ]
-[e $UE 306  ]
+[e $UE 309  ]
 "164
 [; ;util.c.c: 164: }
-[e :UE 306 ]
+[e :UE 309 ]
 }
 "168
 [; ;util.c.c: 168: int my_pow(int rad, int exp){
@@ -957,15 +947,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _resposta `i ~T0 @X0 1 a ]
 "170
 [; ;util.c.c: 170:     if(exp==0)
-[e $ ! == _exp -> 0 `i 316  ]
+[e $ ! == _exp -> 0 `i 319  ]
 "171
 [; ;util.c.c: 171:        resposta=1;
 [e = _resposta -> 1 `i ]
-[e $U 317  ]
+[e $U 320  ]
 "172
 [; ;util.c.c: 172:     else if(exp==1)
-[e :U 316 ]
-[e $ ! == _exp -> 1 `i 318  ]
+[e :U 319 ]
+[e $ ! == _exp -> 1 `i 321  ]
 "173
 [; ;util.c.c: 173:            {
 {
@@ -975,10 +965,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "175
 [; ;util.c.c: 175:            }
 }
-[e $U 319  ]
+[e $U 322  ]
 "176
 [; ;util.c.c: 176:     else
-[e :U 318 ]
+[e :U 321 ]
 "177
 [; ;util.c.c: 177:        {
 {
@@ -990,8 +980,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $U 323  ]
-[e :U 320 ]
+[e $U 326  ]
+[e :U 323 ]
 "180
 [; ;util.c.c: 180:           {
 {
@@ -1002,22 +992,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;util.c.c: 182:           }
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e :U 323 ]
-[e $ < -> _i `i - _exp -> 1 `i 320  ]
-[e :U 321 ]
+[e :U 326 ]
+[e $ < -> _i `i - _exp -> 1 `i 323  ]
+[e :U 324 ]
 }
 "183
 [; ;util.c.c: 183:        }
 }
-[e :U 319 ]
-[e :U 317 ]
+[e :U 322 ]
+[e :U 320 ]
 "184
 [; ;util.c.c: 184:     return resposta;
 [e ) _resposta ]
-[e $UE 315  ]
+[e $UE 318  ]
 "185
 [; ;util.c.c: 185: }
-[e :UE 315 ]
+[e :UE 318 ]
 }
 [a 2C 32 0 ]
 [a 1C 0 ]

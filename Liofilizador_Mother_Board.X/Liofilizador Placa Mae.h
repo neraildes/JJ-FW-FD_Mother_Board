@@ -166,9 +166,10 @@ void pagina_31(void);  //Captura de Datalog, alteração de valor
 void pagina_47(void);  //Receita Lista
 void pagina_49(void);  //Receita Edição
 
-char MenorCanalLivre();
+char MenorCanalLivre(void);
 
-void Incrementa_Contador_de_Repique_do_Vacuo();
+void Incrementa_Contador_de_Repique_do_Vacuo(void);
+void Carregar_Display_Schematic_Color(void);
 
 #endif	/* LIOFILIZADOR_PLACA_MAE_H */
 

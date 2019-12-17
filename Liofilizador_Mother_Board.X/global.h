@@ -11,10 +11,6 @@
 #define GLOBAL_H
 
 
-#define Display_5_Polegadas
-//#define Display_8_Polegadas
-
-
 #if (defined __18F4620)
         // PIC18F4620 Configuration Bit Settings
 

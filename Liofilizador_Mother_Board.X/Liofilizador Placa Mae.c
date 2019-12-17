@@ -174,6 +174,8 @@ unsigned char memo_statuspower;
 volatile unsigned char delay_condensador;
 
 int index;
+int Tamanho_Display;
+int TrendColor[13];
 
 T_mapa mapa;
 
@@ -377,8 +379,28 @@ void main(void)
      INTCONbits.GIE=1;
 #endif     
      
-     //-----------------------------------------------------------------------
-   
+     //-------------------------------------------------------------------------
+     
+     if(EEPROM_Read_Byte(OFFSET_EEPROM)==0xFF)
+       {         
+       print("Formatando memoria principal..."); 
+       Formatar_Banco_de_Dados(0,10);
+       Formatar_Lista_de_Receitas();
+       Formatar_Dados_de_Seguranca();
+       Formatar_Datalog();
+       flag_senha_global_liberada=FALSE;
+       flag_senha_liberada=FALSE;
+       Gravar_Status_da_Senha_Global();
+       EEPROM_Write_Byte(16,0);// statuspower (byte de status)
+       EEPROM_Write_Integer(0x09,10); // Valor inicial do tempo de captura de log
+       EEPROM_Write_Long32(11,123456);//Valor inicial da senha do administrador         
+       TrendCurveFuncao(FORMAT); 
+       EEPROM_Write_Byte(17,0);//processo_Hora
+       EEPROM_Write_Byte(18,0);//processo_Min;uto       
+       }   
+     RecallBlackoutStatus();          
+     TrendCurveFuncao(LOAD);     
+     
      
      //======================== INFORMAÇÕES INICIAIS ===========================
      my_delay_ms_CLRWDT(300); 
@@ -411,28 +433,6 @@ void main(void)
      flag_global_aquecimento=0; 
      Contagem_Tempo_de_Processo(FALSE);
      
-     //-------------------------------------------------------------------------
-     if(EEPROM_Read_Byte(OFFSET_EEPROM)==0xFF)
-       {         
-       print("Formatando memoria principal..."); 
-       Formatar_Banco_de_Dados(0,10);
-       Formatar_Lista_de_Receitas();
-       Formatar_Dados_de_Seguranca();
-       Formatar_Datalog();
-       flag_senha_global_liberada=FALSE;
-       flag_senha_liberada=FALSE;
-       Gravar_Status_da_Senha_Global();
-       EEPROM_Write_Byte(16,0);// statuspower (byte de status)
-       EEPROM_Write_Integer(0x09,10); // Valor inicial do tempo de captura de log
-       EEPROM_Write_Long32(11,123456);//Valor inicial da senha do administrador  
-       TrendCurveFuncao(FORMAT); 
-       EEPROM_Write_Byte(17,0);//processo_Hora
-       EEPROM_Write_Byte(18,0);//processo_Minuto       
-       }   
-     RecallBlackoutStatus();
-     TrendCurveFuncao(LOAD);
-     
-
      //-------------------------------------------------------------------------
      if(statuspower.bits!=0)
         { 
@@ -471,6 +471,7 @@ void main(void)
                           INICIALIZAÇAO DOS PARAMETROS
      -------------------------------------------------------------------------a*/
      Carregar_Parametros_de_Seguranca();
+     Carregar_Display_Schematic_Color();
      Carregar_tempo_de_datalog();
      //-------------------------------------------------------------------------
 
@@ -725,11 +726,9 @@ void main(void)
                                           {
                                           if(flag_senha_liberada)
                                                {
-                                               #ifdef Display_8_Polegadas
-                                               canal=MenorCanalLivre();
-                                               #else
-                                               canal=icone;
-                                               #endif
+
+                                               if(Tamanho_Display==50)canal=icone;
+                                               if(Tamanho_Display==80)canal=MenorCanalLivre();
 
                                                if(canal<8)
                                                   { 											                                                                 
@@ -796,12 +795,9 @@ void main(void)
                                           else
                                                {
                                                PROCULUS_NOK();
-                                               PROCULUS_Popup(ACESSO_NEGADO);
-                                               #ifdef Display_8_Polegadas 
-                                               PROCULUS_VP_Write_UInt16(trendvp,mapa.vpIcone[icone]);
-                                               #else
-                                               PROCULUS_VP_Write_UInt16(trendvp,mapa.icone[icone]);
-                                               #endif                                            
+                                               PROCULUS_Popup(ACESSO_NEGADO);                                               
+                                               if(Tamanho_Display==50)PROCULUS_VP_Write_UInt16(trendvp,mapa.icone[icone]); 
+                                               if(Tamanho_Display==80)PROCULUS_VP_Write_UInt16(trendvp,mapa.vpIcone[icone]);                                                                         
                                                }
                                           }                                  
                                   }	
@@ -949,9 +945,9 @@ int  Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
                         return 900;//sin(tmp01)*500;                    				       
 		       break;
 	      case 6:if(buffer[0]==0)                      
-                        return 1100;                    
+                        return 1000;                    
 	               else                    
-                        return 500;//sin(tmp01)*500;                    				       
+                        return 1100;//sin(tmp01)*500;                    				       
 		       break;
 	      case 7:if(buffer[0]==0)                      
                         return 1200;                    
@@ -2224,11 +2220,15 @@ void pagina_23(void)
         Seg_Vacuo=PROCULUS_VP_Read_UInt16(211);
         Seg_Aq_cond=PROCULUS_VP_Read_UInt16(212);
         Seg_Aq_vacuo=PROCULUS_VP_Read_UInt16(213); 
+        Tamanho_Display=PROCULUS_VP_Read_UInt16(214);
 
         EEPROM_Write_Integer(0x01,Seg_Condensador);
         EEPROM_Write_Integer(0x03,Seg_Vacuo);                         
         EEPROM_Write_Integer(0x05,Seg_Aq_cond);
         EEPROM_Write_Integer(0x07,Seg_Aq_vacuo);
+        EEPROM_Write_Integer(0xFA,Tamanho_Display);
+        TrendCurveFuncao(LOAD);
+        //Carregar_Display_Schematic_Color();
         PROCULUS_Popup(SALVO_COM_SUCESSO);
         PROCULUS_OK();
         Carregar_Parametros_de_Seguranca();
@@ -2601,20 +2601,21 @@ void Carregar_Parametros_de_Seguranca(void){
      Seg_Condensador=EEPROM_Read_Integer(0x01);
      Seg_Vacuo=EEPROM_Read_Integer(0x03);
      Seg_Aq_cond=EEPROM_Read_Integer(0x05);
-     Seg_Aq_vacuo=EEPROM_Read_Integer(0x07);  
+     Seg_Aq_vacuo=EEPROM_Read_Integer(0x07);     
      PROCULUS_VP_Write_UInt16(210,Seg_Condensador); // Segurança Condensador
      PROCULUS_VP_Write_UInt16(211,Seg_Vacuo); // Segurança Vacuo
      PROCULUS_VP_Write_UInt16(212,Seg_Aq_cond); // Seguranca aquec. cond.
-     PROCULUS_VP_Write_UInt16(213,Seg_Aq_vacuo); // Seguranca aquec. Vacuo  
+     PROCULUS_VP_Write_UInt16(213,Seg_Aq_vacuo); // Seguranca aquec. Vacuo 
      
      PROCULUS_VP_Write_UInt16(172,EEPROM_Read_Integer(0x09)); //Tempo de captura do grafico       
 }
 
 void Formatar_Dados_de_Seguranca(void){
      EEPROM_Write_Integer(0x01,-150);    //Condensador
-     EEPROM_Write_Integer(0x03,10000);    //Vacuo
-     EEPROM_Write_Integer(0x05,-150);      //Condensador aquecimento
+     EEPROM_Write_Integer(0x03,10000);   //Vacuo
+     EEPROM_Write_Integer(0x05,-150);    //Condensador aquecimento
      EEPROM_Write_Integer(0x07,8000);    //Vacuo aquecimento
+     EEPROM_Write_Integer(0xFA,50);      //Resolucao padrao do display
 }
 
 void Carregar_Status_da_Senha_Global(void){
@@ -2904,6 +2905,7 @@ void TrendCurveFuncao(char funcao){
      char canal;
      int  cor;
      char i, index;
+     Carregar_Display_Schematic_Color();
      switch(funcao)
            {
            case FORMAT:
@@ -3171,3 +3173,56 @@ void Incrementa_Contador_de_Repique_do_Vacuo(){
        }
 }
 
+
+void Carregar_Display_Schematic_Color(){
+     
+     Tamanho_Display=EEPROM_Read_Integer(0xFA);     
+     PROCULUS_VP_Write_UInt16(214,Tamanho_Display);
+     
+     if(Tamanho_Display==50){               
+          TrendColor[0] =0xF800; //Vermelho vivo
+          TrendColor[1] =0x03E0; //Verde Escuro
+          TrendColor[2] =0x001F; //Azul                              
+          TrendColor[3] =0xFFFF; //BRANCO
+          TrendColor[4] =0xFFFF; //BRANCO
+          TrendColor[5] =0xFFFF; //BRANCO
+          TrendColor[6] =0xFFFF; //BRANCO
+          TrendColor[7] =0xFFFF; //BRANCO
+          TrendColor[8] =0xFFFF; //BRANCO
+          TrendColor[9] =0xFFFF; //BRANCO
+          TrendColor[10]=0xFFFF; //BRANCO
+          TrendColor[11]=0xFFFF; //BRANCO
+          TrendColor[12]=0xFFFF; //BRANCO
+     }
+     else if(Tamanho_Display==80){             
+          TrendColor[0] =0x0000; //Preto
+          TrendColor[1] =0x39E7; //Cinza escuro
+          TrendColor[2] =0x6B6D; //Cinza claro
+          TrendColor[3] =0x7800; //Marron Escuro
+          TrendColor[4] =0x9A23; //Marron Claro
+          TrendColor[5] =0xF800; //Vermelho vivo
+          TrendColor[6] =0xFBE0; //Laranja
+          TrendColor[7] =0xFBF7; //Rosa
+          TrendColor[8] =0xD540; //Amarelo Escuro
+          TrendColor[9] =0x03E0; //Verde Escuro
+          TrendColor[10]=0x07E0; //Verde Claro
+          TrendColor[11]=0x001F; //Azul 
+          TrendColor[12]=0xF81F; //Roxo
+          }                     
+     else {
+          TrendColor[0] =0xFFFF; //BRANCO
+          TrendColor[1] =0xFFFF; //BRANCO
+          TrendColor[2] =0xFFFF; //BRANCO                          
+          TrendColor[3] =0xFFFF; //BRANCO
+          TrendColor[4] =0xFFFF; //BRANCO
+          TrendColor[5] =0xFFFF; //BRANCO
+          TrendColor[6] =0xFFFF; //BRANCO
+          TrendColor[7] =0xFFFF; //BRANCO
+          TrendColor[8] =0xFFFF; //BRANCO
+          TrendColor[9] =0xFFFF; //BRANCO
+          TrendColor[10]=0xFFFF; //BRANCO
+          TrendColor[11]=0xFFFF; //BRANCO
+          TrendColor[12]=0xFFFF; //BRANCO          
+          
+          }     
+}

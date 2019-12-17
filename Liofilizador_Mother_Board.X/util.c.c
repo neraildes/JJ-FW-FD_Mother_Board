@@ -11,20 +11,20 @@
 //extern volatile unsigned int  tempocaptura; //variavel de captura de dados para memoria datalog
 //extern volatile unsigned int  tempocapturaconstante; //variavel de memoria
    
-extern unsigned int vpPrint;   
+extern unsigned int vpPrint;  
+extern int Tamanho_Display;
 
    
    
    void print(char *texto){ 
         unsigned int vp_roll;
-        char textolocal[30];       
+        char textolocal[30];   
+        int MAXVP;
         flag_proculus_hs=TRUE;
         
-        #ifdef Display_5_Polegadas
-           const int MAXVP =  2270;
-        #else
-           const int MAXVP =  2420;
-        #endif       
+        if(Tamanho_Display==50) MAXVP =  2270;
+        if(Tamanho_Display==80) MAXVP =  2420;
+   
         
         if(vpPrint<=MAXVP)
           { 

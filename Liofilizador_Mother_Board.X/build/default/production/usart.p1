@@ -1,26 +1,26 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"229 ./global.h
-[; ;./global.h: 229: struct {
+"225 ./global.h
+[; ;./global.h: 225: struct {
 [s S270 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S270 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"254
-[; ;./global.h: 254:       struct {
+"250
+[; ;./global.h: 250:       struct {
 [s S272 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S272 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work ]
-"252
-[; ;./global.h: 252: union {
+"248
+[; ;./global.h: 248: union {
 [u S271 `uc 1 `S272 1 ]
 [n S271 . bits . ]
-"274
-[; ;./global.h: 274: struct{
+"270
+[; ;./global.h: 270: struct{
 [s S273 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S273 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico ]
-"290
-[; ;./global.h: 290: struct{
+"286
+[; ;./global.h: 286: struct{
 [s S274 :1 `uc 1 ]
 [n S274 . flag_main_loop_WDT ]
-"295
-[; ;./global.h: 295: typedef struct{
+"291
+[; ;./global.h: 291: typedef struct{
 [s S275 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S275 . milisegundo segundo minuto hora ]
 "3031 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
@@ -567,107 +567,87 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6715
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 6715: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"24 ./global.h
+"20 ./global.h
 [p x OSC = INTIO67 ]
-"25
+"21
 [p x FCMEN = OFF ]
-"26
+"22
 [p x IESO = OFF ]
-"29
+"25
 [p x PWRT = ON ]
-"30
+"26
 [p x BOREN = SBORDIS ]
-"31
+"27
 [p x BORV = 3 ]
-"34
+"30
 [p x WDT = ON ]
-"35
+"31
 [p x WDTPS = 16384 ]
-"38
+"34
 [p x CCP2MX = PORTC ]
-"39
+"35
 [p x PBADEN = ON ]
-"40
+"36
 [p x LPT1OSC = OFF ]
-"41
+"37
 [p x MCLRE = ON ]
-"44
+"40
 [p x STVREN = ON ]
-"45
+"41
 [p x LVP = OFF ]
-"46
+"42
 [p x XINST = OFF ]
-"49
+"45
 [p x CP0 = OFF ]
-"50
+"46
 [p x CP1 = OFF ]
-"51
+"47
 [p x CP2 = OFF ]
-"52
+"48
 [p x CP3 = OFF ]
-"55
+"51
 [p x CPB = OFF ]
-"56
+"52
 [p x CPD = OFF ]
-"59
+"55
 [p x WRT0 = OFF ]
-"60
+"56
 [p x WRT1 = OFF ]
-"61
+"57
 [p x WRT2 = OFF ]
-"62
+"58
 [p x WRT3 = OFF ]
-"65
+"61
 [p x WRTC = OFF ]
-"66
+"62
 [p x WRTB = OFF ]
-"67
+"63
 [p x WRTD = OFF ]
-"70
+"66
 [p x EBTR0 = OFF ]
-"71
+"67
 [p x EBTR1 = OFF ]
-"72
+"68
 [p x EBTR2 = OFF ]
-"73
+"69
 [p x EBTR3 = OFF ]
-"76
+"72
 [p x EBTRB = OFF ]
-"238
-[; ;./global.h: 238: } statusgen ;
+"234
+[; ;./global.h: 234: } statusgen ;
 [v _statusgen `S270 ~T0 @X0 1 e ]
-"263
-[; ;./global.h: 263:       } statuspower;
+"259
+[; ;./global.h: 259:       } statuspower;
 [v _statuspower `S271 ~T0 @X0 1 e ]
-"281
-[; ;./global.h: 281: }statusgen1;
+"277
+[; ;./global.h: 277: }statusgen1;
 [v _statusgen1 `S273 ~T0 @X0 1 e ]
-"292
-[; ;./global.h: 292: }statusWDT;
+"288
+[; ;./global.h: 288: }statusWDT;
 [v _statusWDT `S274 ~T0 @X0 1 e ]
-"302
-[; ;./global.h: 302: volatile t_rtc rtc;
+"298
+[; ;./global.h: 298: volatile t_rtc rtc;
 [v _rtc `VS275 ~T0 @X0 1 e ]
-"76 ./proculus.h
-[; ;./proculus.h: 76:     const int TrendColor[13]={
-[v _TrendColor `Ci ~T0 @X0 -> 13 `i e ]
-[i _TrendColor
-:U ..
--> -> 63488 `ui `i
--> 992 `i
--> 31 `i
--> 0 `i
--> 14823 `i
--> 27501 `i
--> 30720 `i
--> -> 39459 `ui `i
--> -> 64480 `ui `i
--> -> 64503 `ui `i
--> -> 54592 `ui `i
--> 2016 `i
--> -> 63519 `ui `i
-..
-]
 "17 usart.c
 [; ;usart.c: 17: void USART_init(unsigned long baudrate)
 [v _USART_init `(v ~T0 @X0 1 ef1`ul ]

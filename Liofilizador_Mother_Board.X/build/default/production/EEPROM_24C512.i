@@ -243,7 +243,7 @@ struct tm *getdate (const char *);
 # 3 "EEPROM_24C512.c" 2
 
 # 1 "./global.h" 1
-# 24 "./global.h"
+# 20 "./global.h"
 #pragma config OSC = INTIO67
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
@@ -297,7 +297,7 @@ struct tm *getdate (const char *);
 
 
 #pragma config EBTRB = OFF
-# 229 "./global.h"
+# 225 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -308,7 +308,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 252 "./global.h"
+# 248 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -321,7 +321,7 @@ union {
 
              };
       } statuspower;
-# 274 "./global.h"
+# 270 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -330,7 +330,7 @@ struct{
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
 }statusgen1;
-# 290 "./global.h"
+# 286 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;

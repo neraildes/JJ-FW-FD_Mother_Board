@@ -5150,7 +5150,7 @@ double yn(int, double);
 # 15 "Liofilizador Placa Mae.c" 2
 
 # 1 "./global.h" 1
-# 24 "./global.h"
+# 20 "./global.h"
 #pragma config OSC = INTIO67
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
@@ -5204,7 +5204,7 @@ double yn(int, double);
 
 
 #pragma config EBTRB = OFF
-# 229 "./global.h"
+# 225 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -5215,7 +5215,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 252 "./global.h"
+# 248 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -5228,7 +5228,7 @@ union {
 
              };
       } statuspower;
-# 274 "./global.h"
+# 270 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -5237,7 +5237,7 @@ struct{
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
 }statusgen1;
-# 290 "./global.h"
+# 286 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -5411,36 +5411,16 @@ void pagina_31(void);
 void pagina_47(void);
 void pagina_49(void);
 
-char MenorCanalLivre();
+char MenorCanalLivre(void);
 
-void Incrementa_Contador_de_Repique_do_Vacuo();
+void Incrementa_Contador_de_Repique_do_Vacuo(void);
+void Carregar_Display_Schematic_Color(void);
 # 17 "Liofilizador Placa Mae.c" 2
 
 # 1 "./isr.h" 1
 # 13 "./isr.h"
 # 1 "./proculus.h" 1
-# 76 "./proculus.h"
-    const int TrendColor[13]={
-                              0xF800,
-                              0x03E0,
-                              0x001F,
-                              0x0000,
-                              0x39E7,
-                              0x6B6D,
-                              0x7800,
-                              0x9A23,
-                              0xFBE0,
-                              0xFBF7,
-                              0xD540,
-                              0x07E0,
-                              0xF81F
-                              };
-
-
-
-
-
-
+# 56 "./proculus.h"
 typedef struct {
     unsigned int header;
     unsigned char size;
@@ -5790,6 +5770,8 @@ unsigned char memo_statuspower;
 volatile unsigned char delay_condensador;
 
 int index;
+int Tamanho_Display;
+int TrendColor[13];
 
 T_mapa mapa;
 
@@ -5867,7 +5849,7 @@ void main(void)
      My_ADC_init();
      I2C_Master_Init(100000);
      my_delay_ms_CLRWDT(500);
-# 342 "Liofilizador Placa Mae.c"
+# 344 "Liofilizador Placa Mae.c"
      statuspower.bits=EEPROM_Read_Byte(16);
      if(statuspower.bits==0)
        {
@@ -5908,6 +5890,26 @@ void main(void)
 
 
 
+     if(EEPROM_Read_Byte(52)==0xFF)
+       {
+       print("Formatando memoria principal...");
+       Formatar_Banco_de_Dados(0,10);
+       Formatar_Lista_de_Receitas();
+       Formatar_Dados_de_Seguranca();
+       Formatar_Datalog();
+       flag_senha_global_liberada=0;
+       flag_senha_liberada=0;
+       Gravar_Status_da_Senha_Global();
+       EEPROM_Write_Byte(16,0);
+       EEPROM_Write_Integer(0x09,10);
+       EEPROM_Write_Long32(11,123456);
+       TrendCurveFuncao(0);
+       EEPROM_Write_Byte(17,0);
+       EEPROM_Write_Byte(18,0);
+       }
+     RecallBlackoutStatus();
+     TrendCurveFuncao(1);
+
 
 
      my_delay_ms_CLRWDT(300);
@@ -5939,28 +5941,6 @@ void main(void)
      statuspower.flag_global_vacuo=0;
      statuspower.flag_global_aquecimento=0;
      Contagem_Tempo_de_Processo(0);
-
-
-     if(EEPROM_Read_Byte(52)==0xFF)
-       {
-       print("Formatando memoria principal...");
-       Formatar_Banco_de_Dados(0,10);
-       Formatar_Lista_de_Receitas();
-       Formatar_Dados_de_Seguranca();
-       Formatar_Datalog();
-       flag_senha_global_liberada=0;
-       flag_senha_liberada=0;
-       Gravar_Status_da_Senha_Global();
-       EEPROM_Write_Byte(16,0);
-       EEPROM_Write_Integer(0x09,10);
-       EEPROM_Write_Long32(11,123456);
-       TrendCurveFuncao(0);
-       EEPROM_Write_Byte(17,0);
-       EEPROM_Write_Byte(18,0);
-       }
-     RecallBlackoutStatus();
-     TrendCurveFuncao(1);
-
 
 
      if(statuspower.bits!=0)
@@ -6000,6 +5980,7 @@ void main(void)
 
 
      Carregar_Parametros_de_Seguranca();
+     Carregar_Display_Schematic_Color();
      Carregar_tempo_de_datalog();
 
 
@@ -6255,10 +6236,8 @@ void main(void)
                                           if(flag_senha_liberada)
                                                {
 
-
-
-                                               canal=icone;
-
+                                               if(Tamanho_Display==50)canal=icone;
+                                               if(Tamanho_Display==80)canal=MenorCanalLivre();
 
                                                if(canal<8)
                                                   {
@@ -6326,11 +6305,8 @@ void main(void)
                                                {
                                                PROCULUS_NOK();
                                                PROCULUS_Popup(0x52);
-
-
-
-                                               PROCULUS_VP_Write_UInt16(trendvp,mapa.icone[icone]);
-
+                                               if(Tamanho_Display==50)PROCULUS_VP_Write_UInt16(trendvp,mapa.icone[icone]);
+                                               if(Tamanho_Display==80)PROCULUS_VP_Write_UInt16(trendvp,mapa.vpIcone[icone]);
                                                }
                                           }
                                   }
@@ -6478,9 +6454,9 @@ int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
                         return 900;
          break;
        case 6:if(buffer[0]==0)
-                        return 1100;
+                        return 1000;
                 else
-                        return 500;
+                        return 1100;
          break;
        case 7:if(buffer[0]==0)
                         return 1200;
@@ -6490,7 +6466,7 @@ int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
     }
     return 0;
 }
-# 972 "Liofilizador Placa Mae.c"
+# 968 "Liofilizador Placa Mae.c"
 void ShowSensorRealTimeHS(void)
      {
      char bb[3];
@@ -6551,7 +6527,7 @@ void ShowSensorRealTimeHS(void)
       statusgen1.flag_proculus_hs=0;
 
      }
-# 1041 "Liofilizador Placa Mae.c"
+# 1037 "Liofilizador Placa Mae.c"
 void Carrega_Tupla_Receita(char index, t_receita *receita){
      unsigned int addeeprom;
 
@@ -6597,7 +6573,7 @@ void Exibe_Receita(int index){
      texto[8]=0;
      PROCULUS_VP_Write_String(vp+4,texto);
 }
-# 1104 "Liofilizador Placa Mae.c"
+# 1100 "Liofilizador Placa Mae.c"
 void DataBaseBackupMain(unsigned char tupla)
       {
       unsigned int vp;
@@ -6618,7 +6594,7 @@ void DataBaseBackupMain(unsigned char tupla)
       EEPROM_Write_Integer(addEEPROM+16,PROCULUS_VP_Read_UInt16(vp+11));
 
       }
-# 1141 "Liofilizador Placa Mae.c"
+# 1137 "Liofilizador Placa Mae.c"
  void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
       {
       char CanalAD;
@@ -6698,7 +6674,7 @@ void DataBaseBackupMain(unsigned char tupla)
          PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
          }
 }
-# 1228 "Liofilizador Placa Mae.c"
+# 1224 "Liofilizador Placa Mae.c"
 void save_datalog(unsigned int add){
      char index;
      char bb[3];
@@ -6715,7 +6691,7 @@ void save_datalog(unsigned int add){
             }
          }
 }
-# 1253 "Liofilizador Placa Mae.c"
+# 1249 "Liofilizador Placa Mae.c"
  void ShowAndSetSlaveParameters(unsigned char tupla)
       {
       unsigned char CanalAD;
@@ -6747,7 +6723,7 @@ void save_datalog(unsigned int add){
       PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
 
       }
-# 1293 "Liofilizador Placa Mae.c"
+# 1289 "Liofilizador Placa Mae.c"
 void Send_to_PC(unsigned char size){
 
 
@@ -6756,7 +6732,7 @@ void Send_to_PC(unsigned char size){
      USART_putc(usart_protocol.origem);
      USART_putc(usart_protocol.command);
      USART_putc(size);
-# 1311 "Liofilizador Placa Mae.c"
+# 1307 "Liofilizador Placa Mae.c"
 }
 
 
@@ -6788,7 +6764,7 @@ void Decodify_Command(void){
     ((char *)&add_24LCxxxx)[0]=(usart_protocol.value[4]);
 
     switch(usart_protocol.command){
-# 1373 "Liofilizador Placa Mae.c"
+# 1369 "Liofilizador Placa Mae.c"
         case 0x08:
              EEPROM_Write_Byte(usart_protocol.value[0],
                                usart_protocol.value[1]);
@@ -6917,13 +6893,13 @@ void Decodify_Command(void){
              Send_to_PC(3);
              SEND_REPLY_OK();
              break;
-# 1584 "Liofilizador Placa Mae.c"
+# 1580 "Liofilizador Placa Mae.c"
         case 0X21:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
              Send_to_PC(3);
              SEND_REPLY_OK();
-# 1631 "Liofilizador Placa Mae.c"
+# 1627 "Liofilizador Placa Mae.c"
     }
 }
 
@@ -7520,11 +7496,15 @@ void pagina_23(void)
         Seg_Vacuo=PROCULUS_VP_Read_UInt16(211);
         Seg_Aq_cond=PROCULUS_VP_Read_UInt16(212);
         Seg_Aq_vacuo=PROCULUS_VP_Read_UInt16(213);
+        Tamanho_Display=PROCULUS_VP_Read_UInt16(214);
 
         EEPROM_Write_Integer(0x01,Seg_Condensador);
         EEPROM_Write_Integer(0x03,Seg_Vacuo);
         EEPROM_Write_Integer(0x05,Seg_Aq_cond);
         EEPROM_Write_Integer(0x07,Seg_Aq_vacuo);
+        EEPROM_Write_Integer(0xFA,Tamanho_Display);
+        TrendCurveFuncao(1);
+
         PROCULUS_Popup(0x51);
         PROCULUS_OK();
         Carregar_Parametros_de_Seguranca();
@@ -7897,6 +7877,7 @@ void Formatar_Dados_de_Seguranca(void){
      EEPROM_Write_Integer(0x03,10000);
      EEPROM_Write_Integer(0x05,-150);
      EEPROM_Write_Integer(0x07,8000);
+     EEPROM_Write_Integer(0xFA,50);
 }
 
 void Carregar_Status_da_Senha_Global(void){
@@ -8186,6 +8167,7 @@ void TrendCurveFuncao(char funcao){
      char canal;
      int cor;
      char i, index;
+     Carregar_Display_Schematic_Color();
      switch(funcao)
            {
            case 0:
@@ -8451,4 +8433,58 @@ void Incrementa_Contador_de_Repique_do_Vacuo(){
        valor++;
        EEPROM_Write_Integer(0xE8,valor);
        }
+}
+
+
+void Carregar_Display_Schematic_Color(){
+
+     Tamanho_Display=EEPROM_Read_Integer(0xFA);
+     PROCULUS_VP_Write_UInt16(214,Tamanho_Display);
+
+     if(Tamanho_Display==50){
+          TrendColor[0] =0xF800;
+          TrendColor[1] =0x03E0;
+          TrendColor[2] =0x001F;
+          TrendColor[3] =0xFFFF;
+          TrendColor[4] =0xFFFF;
+          TrendColor[5] =0xFFFF;
+          TrendColor[6] =0xFFFF;
+          TrendColor[7] =0xFFFF;
+          TrendColor[8] =0xFFFF;
+          TrendColor[9] =0xFFFF;
+          TrendColor[10]=0xFFFF;
+          TrendColor[11]=0xFFFF;
+          TrendColor[12]=0xFFFF;
+     }
+     else if(Tamanho_Display==80){
+          TrendColor[0] =0x0000;
+          TrendColor[1] =0x39E7;
+          TrendColor[2] =0x6B6D;
+          TrendColor[3] =0x7800;
+          TrendColor[4] =0x9A23;
+          TrendColor[5] =0xF800;
+          TrendColor[6] =0xFBE0;
+          TrendColor[7] =0xFBF7;
+          TrendColor[8] =0xD540;
+          TrendColor[9] =0x03E0;
+          TrendColor[10]=0x07E0;
+          TrendColor[11]=0x001F;
+          TrendColor[12]=0xF81F;
+          }
+     else {
+          TrendColor[0] =0xFFFF;
+          TrendColor[1] =0xFFFF;
+          TrendColor[2] =0xFFFF;
+          TrendColor[3] =0xFFFF;
+          TrendColor[4] =0xFFFF;
+          TrendColor[5] =0xFFFF;
+          TrendColor[6] =0xFFFF;
+          TrendColor[7] =0xFFFF;
+          TrendColor[8] =0xFFFF;
+          TrendColor[9] =0xFFFF;
+          TrendColor[10]=0xFFFF;
+          TrendColor[11]=0xFFFF;
+          TrendColor[12]=0xFFFF;
+
+          }
 }

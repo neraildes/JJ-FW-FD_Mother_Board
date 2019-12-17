@@ -369,7 +369,7 @@ typedef uint32_t uint_fast32_t;
 # 4 "util.c.c" 2
 
 # 1 "./global.h" 1
-# 24 "./global.h"
+# 20 "./global.h"
 #pragma config OSC = INTIO67
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
@@ -423,7 +423,7 @@ typedef uint32_t uint_fast32_t;
 
 
 #pragma config EBTRB = OFF
-# 229 "./global.h"
+# 225 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -434,7 +434,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 252 "./global.h"
+# 248 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -447,7 +447,7 @@ union {
 
              };
       } statuspower;
-# 274 "./global.h"
+# 270 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -456,7 +456,7 @@ struct{
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
 }statusgen1;
-# 290 "./global.h"
+# 286 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -488,28 +488,7 @@ char *ultoa(unsigned long num, char *str, int radix);
 # 6 "util.c.c" 2
 
 # 1 "./proculus.h" 1
-# 76 "./proculus.h"
-    const int TrendColor[13]={
-                              0xF800,
-                              0x03E0,
-                              0x001F,
-                              0x0000,
-                              0x39E7,
-                              0x6B6D,
-                              0x7800,
-                              0x9A23,
-                              0xFBE0,
-                              0xFBF7,
-                              0xD540,
-                              0x07E0,
-                              0xF81F
-                              };
-
-
-
-
-
-
+# 56 "./proculus.h"
 typedef struct {
     unsigned int header;
     unsigned char size;
@@ -4931,18 +4910,18 @@ unsigned char USART_input_buffer(void);
 
 
 extern unsigned int vpPrint;
+extern int Tamanho_Display;
 
 
 
    void print(char *texto){
         unsigned int vp_roll;
         char textolocal[30];
+        int MAXVP;
         statusgen1.flag_proculus_hs=1;
 
-
-           const int MAXVP = 2270;
-
-
+        if(Tamanho_Display==50) MAXVP = 2270;
+        if(Tamanho_Display==80) MAXVP = 2420;
 
 
         if(vpPrint<=MAXVP)
