@@ -13,14 +13,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S278 . bits . ]
 "274
 [; ;./global.h: 274: struct{
-[s S280 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S280 . flag_save_time flag_wakeup flagSendDataFix flag_Vacuo_estava_ligado flag_generico ]
-"288
-[; ;./global.h: 288: struct{
+[s S280 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S280 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico ]
+"290
+[; ;./global.h: 290: struct{
 [s S281 :1 `uc 1 ]
 [n S281 . flag_main_loop_WDT ]
-"293
-[; ;./global.h: 293: typedef struct{
+"295
+[; ;./global.h: 295: typedef struct{
 [s S282 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S282 . milisegundo segundo minuto hora ]
 [v F2742 `(v ~T0 @X0 1 tf1`ul ]
@@ -510,14 +510,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "263
 [; ;./global.h: 263:       } statuspower;
 [v _statuspower `S278 ~T0 @X0 1 e ]
-"280
-[; ;./global.h: 280: }statusgen1;
+"281
+[; ;./global.h: 281: }statusgen1;
 [v _statusgen1 `S280 ~T0 @X0 1 e ]
-"290
-[; ;./global.h: 290: }statusWDT;
+"292
+[; ;./global.h: 292: }statusWDT;
 [v _statusWDT `S281 ~T0 @X0 1 e ]
-"300
-[; ;./global.h: 300: volatile t_rtc rtc;
+"302
+[; ;./global.h: 302: volatile t_rtc rtc;
 [v _rtc `VS282 ~T0 @X0 1 e ]
 "8 timedate.c
 [; ;timedate.c: 8: void my_delay_ms(long time){

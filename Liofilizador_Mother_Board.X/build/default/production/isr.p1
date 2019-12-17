@@ -13,14 +13,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S271 . bits . ]
 "274
 [; ;./global.h: 274: struct{
-[s S273 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S273 . flag_save_time flag_wakeup flagSendDataFix flag_Vacuo_estava_ligado flag_generico ]
-"288
-[; ;./global.h: 288: struct{
+[s S273 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S273 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico ]
+"290
+[; ;./global.h: 290: struct{
 [s S274 :1 `uc 1 ]
 [n S274 . flag_main_loop_WDT ]
-"293
-[; ;./global.h: 293: typedef struct{
+"295
+[; ;./global.h: 295: typedef struct{
 [s S275 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S275 . milisegundo segundo minuto hora ]
 [t ~ __interrupt . k ]
@@ -81,10 +81,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "10 isr.c
 [; ;isr.c: 10: extern volatile unsigned char usart_buffer[74];
 [v _usart_buffer `Vuc ~T0 @X0 -> 0 `x e ]
-[v F2612 `Vuc ~T0 @X0 -> 74 `i t ]
+[v F2613 `Vuc ~T0 @X0 -> 74 `i t ]
 "11
 [; ;isr.c: 11: extern volatile unsigned char usart_buffer_fila[6][74];
-[v _usart_buffer_fila `F2612 ~T0 @X0 -> 0 `x e ]
+[v _usart_buffer_fila `F2613 ~T0 @X0 -> 0 `x e ]
 "3498 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 3498: extern volatile unsigned char RCREG __attribute__((address(0xFAE)));
 [v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
@@ -702,14 +702,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "263
 [; ;./global.h: 263:       } statuspower;
 [v _statuspower `S271 ~T0 @X0 1 e ]
-"280
-[; ;./global.h: 280: }statusgen1;
+"281
+[; ;./global.h: 281: }statusgen1;
 [v _statusgen1 `S273 ~T0 @X0 1 e ]
-"290
-[; ;./global.h: 290: }statusWDT;
+"292
+[; ;./global.h: 292: }statusWDT;
 [v _statusWDT `S274 ~T0 @X0 1 e ]
-"300
-[; ;./global.h: 300: volatile t_rtc rtc;
+"302
+[; ;./global.h: 302: volatile t_rtc rtc;
 [v _rtc `VS275 ~T0 @X0 1 e ]
 "76 ./proculus.h
 [; ;./proculus.h: 76:     const int TrendColor[13]={
