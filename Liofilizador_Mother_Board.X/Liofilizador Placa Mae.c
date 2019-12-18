@@ -340,7 +340,7 @@ void main(void)
      
      
      
-     {//-----------TOTALIZADOR DE RESET-------------         
+     {//-----------------------TOTALIZADOR DE RESET-----------------------------
      unsigned int reset;    
      reset=EEPROM_Read_Integer(34);
      if(reset==0xFFFF)
@@ -352,25 +352,9 @@ void main(void)
      EEPROM_Write_Integer(34,reset);
      flag_Vacuo_estava_ligado=0;
      //PROCULUS_VP_Write_UInt16(0x6BBB,reset);
-     }
-     
-     
-     
-     
-     //---------------------------Tempo para Update-----------------------------
-#if ((defined __18F4620) || (defined __18F4525))     
-     INTCONbits.GIE=0;
-     POWER_ON();
-     UPDATE_ENABLE();
-     LATB=255;
-     //my_delay_ms_CLRWDT(3000); 
-     UPDATE_DISABLE();
-     LATB=0;
-     INTCONbits.GIE=1;
-#endif     
+     }//------------------------------------------------------------------------
      
      //-------------------------------------------------------------------------
-     
      if(EEPROM_Read_Byte(OFFSET_EEPROM)==0xFF)
        {         
        print("Formatando memoria principal..."); 
@@ -389,26 +373,12 @@ void main(void)
        EEPROM_Write_Byte(18,0);//processo_Min;uto       
        }   
      RecallBlackoutStatus(); 
-     TrendCurveFuncao(LOAD);     
-     
-     
+     TrendCurveFuncao(LOAD);
+     senha_atual=EEPROM_Read_Long32(11);
+     Carregar_Status_da_Senha_Global(); 
+     Carregar_Parametros_de_Seguranca();
+     Carregar_tempo_de_datalog();     
      //------------------------------------------------------------------------- 
-     
-//     if(statuspower.bits==0) 
-//       {
-//       clear_screen();
-//       PROCULUS_Show_Screen(0);  
-//       print("Tudo Desligado no StatusPower!");  
-//       my_delay_ms_CLRWDT(10000);       
-//       }
-//     else
-//       {
-//       clear_screen();
-//       PROCULUS_Show_Screen(0);       
-//       print("Algo Ligado no StatusPower!");  
-//       my_delay_ms_CLRWDT(10000);
-//       }     
-     
      
      //======================== INFORMAÇÕES INICIAIS ===========================
      my_delay_ms_CLRWDT(300); 
@@ -426,15 +396,6 @@ void main(void)
      ShowHardwareInfo();
      //-------------------------------------------------------------------------
           
-     //-------------------------------------------------------------------------
-     statuspower.bits=EEPROM_Read_Byte(16);
-     if(statuspower.bits!=0)
-        { 
-        print("Cond. de blackout encontrada!");
-        print("Aguardande...");
-        my_delay_ms_CLRWDT(15000);
-        print("Concluido.");
-        }
      //------------Valores Iniciais da tela Principal---------------------------
      print("Analisando dados...");  
      for(char i=0;i<15;i++)
@@ -442,54 +403,20 @@ void main(void)
         asm("CLRWDT"); 
         ShowStaticValueGrid(i);
         }    
-     //-----------------------Carrega valores de sensores-----------------------
-     
-     
-     
-     
      //------------------------Carrega Lista de Receita-------------------------
      for(char i=0;i<8;i++)
          {
          asm("CLRWDT");
          Exibe_Receita(i);
          }
-     //-------------------------------------------------------------------------
-     senha_atual=EEPROM_Read_Long32(11);
-     //-------------------------Carrega Status de Senha-------------------------
-     Carregar_Status_da_Senha_Global();     
-     
-     
-    //==========================================================================
+     //-----------PRIMEIRA LEITURA DO SENSOR EM BACKGROUND----------------------
      ShowSensorRealTimeHS();
-     /*-------------------------------------------------------------------------
-                          INICIALIZAÇAO DOS PARAMETROS
-     -------------------------------------------------------------------------a*/
-     Carregar_Parametros_de_Seguranca();
-//     Carregar_Display_Schematic_Color();
-     Carregar_tempo_de_datalog();
-     //-------------------------------------------------------------------------
 
-     
      //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
      //                       M  A  I  N      L  O  O  P
      //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
      Exibe_Tempo_de_Processo();
      Icones_de_alarmes();        
-//     if(statuspower.bits==0)
-//       {
-//       PROCULUS_Show_Screen(15);       
-//       }  
-//     else
-//       {
-//       print("Iniciando Liofilizador.");
-//       asm("CLRWDT");
-//       global_condensador();
-//       my_delay_ms(10000);
-//       global_vacuo();
-//       my_delay_ms(10000);
-//       global_aquecimento();
-//       PROCULUS_Show_Screen(15); 
-//       }  
      
      pagina=0;
      paginamemo=0;
@@ -3223,6 +3150,8 @@ void Ligar_Cargas_Compassadamente(){
      statuspower.bits=EEPROM_Read_Byte(16); 
      if(statuspower.bits!=0)
           {   
+          print("Cond. de blackout encontrada!");
+          print("Aguardande...");          
           print("Acionando Cargas, aguarde...");
           Contagem_Tempo_de_Processo(FALSE);
           PROCULUS_VP_Write_UInt16(0x02,flag_global_datalog);  //Valor inicial do botao Datalog
