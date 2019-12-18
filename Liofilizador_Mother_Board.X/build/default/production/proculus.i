@@ -5510,6 +5510,7 @@ void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size){
               }
            tempo++;
            }
+    if(size>4)*(&vetor[i])=0;
     my_delay_ms(1);
 }
 
@@ -5614,7 +5615,7 @@ void PROCULUS_Write_RTC(char *date, char *time){
      USART_putc(str2bcd(minute));
      USART_putc(str2bcd(second));
 }
-# 236 "proculus.c"
+# 237 "proculus.c"
 void PROCULUS_VP_Write_Byte(unsigned int vp,char value){
      char vetor[1];
      vetor[0]=value;
@@ -5661,7 +5662,7 @@ unsigned int PROCULUS_VP_Read_Int16(int vp){
      PROCULUS_VP_Read(vp,vetor,2);
      return (int)((vetor[0]<<8)+vetor[1]);
 }
-# 291 "proculus.c"
+# 292 "proculus.c"
 void PROCULUS_VP_Write_Long32(unsigned int vp, unsigned long value){
      char vetor[4];
      unsigned char *pt;
@@ -5678,10 +5679,10 @@ long PROCULUS_VP_Read_Long32(unsigned int vp){
      char vetor[4];
      long retorno=1234;
      PROCULUS_VP_Read(vp,vetor,4);
-# 315 "proculus.c"
+# 316 "proculus.c"
      return retorno;
 }
-# 326 "proculus.c"
+# 327 "proculus.c"
 void PROCULUS_VP_Write_Float24(unsigned int vp, float value){
      char vetor[4];
      char *pt;
@@ -5786,7 +5787,7 @@ void PROCULUS_Buzzer(unsigned int time_ms_x_10){
      vetor[1]=(unsigned char) time_ms_x_10;
      PROCULUS_REG_Write(vetor,2);
 }
-# 440 "proculus.c"
+# 441 "proculus.c"
 void PROCULUS_Reset(void){
      unsigned char vetor[3];
      vetor[0]=0xEE;
@@ -5806,7 +5807,7 @@ void PROCULUS_Show_Screen(unsigned int screen){
      vetor[2] = (char) screen;
      PROCULUS_REG_Write(vetor,3);
 }
-# 474 "proculus.c"
+# 475 "proculus.c"
 void PROCULUS_Buffer_to_Proculus(t_proculus *proculus){
      unsigned char i;
      proculus->header = (usart_buffer[0]<<8)+usart_buffer[1];
@@ -5839,7 +5840,7 @@ void PROCULUS_NOK(void){
      PROCULUS_Buzzer(300);
      my_delay_ms(100);
 }
-# 519 "proculus.c"
+# 520 "proculus.c"
 unsigned int PROCULUS_Get_Page(void)
      {
      int i;
@@ -5862,7 +5863,7 @@ unsigned int PROCULUS_Get_Page(void)
      my_delay_ms(1);
      return retorno;
      }
-# 563 "proculus.c"
+# 564 "proculus.c"
 void PROCULUS_TPFLAG_Write(char value){
     unsigned char vetor[3];
     vetor[0]=5;

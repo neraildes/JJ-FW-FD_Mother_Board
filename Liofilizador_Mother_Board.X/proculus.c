@@ -113,7 +113,8 @@ void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size){
               break;
               } 
            tempo++;
-           }      
+           } 
+    if(size>4)*(&vetor[i])=0;  //Se tiver mais de 4 bits, considerar como texto 
     my_delay_ms(TIME_AFTER_SEND_PROCULUS_COMMAND);
 }    
 

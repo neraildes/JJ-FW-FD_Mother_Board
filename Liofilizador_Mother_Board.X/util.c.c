@@ -18,7 +18,7 @@ extern int Tamanho_Display;
    
    void print(char *texto){ 
         unsigned int vp_roll;
-        char textolocal[30];   
+        char textolocal[73];   
         int MAXVP;
         flag_proculus_hs=TRUE;
         

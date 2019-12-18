@@ -47,17 +47,19 @@
 #define FATOR_VACUO  1.0 //0.05
 
 //------------------------------------------------------------------------------
-const char *boardtype[5]={"Mother Board",
+const char *boardtype[6]={"Mother Board",
                           "Vaccum Board",
                           "PT100 Board ",
                           "NTC Board   ",
-                          "Relay_Board "}; 
+                          "Relay_Board ",
+                          "Ethernet    "};
 
-#define Mother_Board 0
-#define Vaccum_Board 1
-#define PT100_Board  2
-#define NTC_Board    3 
-#define Relay_Board  4
+#define Mother_Board   0
+#define Vaccum_Board   1
+#define PT100_Board    2
+#define NTC_Board      3 
+#define Relay_Board    4
+#define Ethernet Board 5
 //------------------------------------------------------------------------------
 
 /*----------------------------------------------------------------------------*/
@@ -409,12 +411,12 @@ void main(void)
          asm("CLRWDT");
          Exibe_Receita(i);
          }
-     //-----------PRIMEIRA LEITURA DO SENSOR EM BACKGROUND----------------------
-     ShowSensorRealTimeHS();
 
      //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
      //                       M  A  I  N      L  O  O  P
      //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
+     //-----------PRIMEIRA LEITURA DO SENSOR EM BACKGROUND----------------------
+     ShowSensorRealTimeHS();
      Exibe_Tempo_de_Processo();
      Icones_de_alarmes();        
      
@@ -429,13 +431,12 @@ void main(void)
      Condensador=0;
 
      //--------timer 1----------
-     Exibe_Hora_Data(FALSE);
+     Exibe_Hora_Data(FALSE); //Exibe data e Hora sem os segundos (FALSE)
      rtc.milisegundo=0;
      rtc.segundo=0;
      processo_hora=EEPROM_Read_Byte(17);
      processo_minuto=EEPROM_Read_Byte(18);
-     processo_segundo=0;
-     memo_statuspower=statuspower.bits;
+     processo_segundo=0;     
      delay_condensador=0;
      
      //=========================================================================
@@ -901,7 +902,7 @@ void ShowSensorRealTimeHS(void)
         SlaveBoard  = (tupla / 2)+1; 
         canal = tupla % 2;
         bb[0]=canal; 
-        leitura[tupla]=Send_To_Slave_EMULA(SlaveBoard, COMMAND_READ_ANALOG, 1, bb);
+        leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_READ_ANALOG, 1, bb);
         flag_array_slave_WDT[SlaveBoard]=TRUE;
         }
      
@@ -2868,34 +2869,34 @@ void TrendCurveFuncao(char funcao){
                             }
                           }
                        
-					   //------------------------------------COR-------------------------------------
+                       //------------------------------------COR-------------------------------------
                        for(i=0;i<13;i++)   
                           {
                           if(mapa.canal[i]<8)	
                              {                            
-							 cor=TrendColor[mapa.icone[i]-1];								 
-							 }
-						  else
-						     {
-						     cor=0xFFFF;
-						     } 						     
-						  PROCULUS_VP_Write_UInt16((i*10+PPCOR),cor);
-						  mapa.cor[i]=cor; 		
-						  }
+			     cor=TrendColor[mapa.icone[i]-1];								 
+			     }
+			  else
+			     {
+			     cor=0xFFFF;
+			     } 						     
+			  PROCULUS_VP_Write_UInt16((i*10+PPCOR),cor);
+			  mapa.cor[i]=cor; 		
+			  }
                           
                        //--------------------------------------CANAL------------------------------------------
                        for(i=0;i<13;i++)
                           { 
                           canal=mapa.canal[i];
-						  if((canal>=0)&&(canal<=7))
-						     {
+			  if((canal>=0)&&(canal<=7))
+			     {
                              PROCULUS_VP_Write_UInt16((i*10+PPCANAL),(canal<<8)|(0x0001)); //Canal Associado                             						     	
-							 }
-						  else	 
-							 {							 
+		             }
+			  else	 
+		             {							 
                              PROCULUS_VP_Write_UInt16((i*10+PPCANAL),0x0A00); //Canal                             
-						     }
-					      }
+			     }
+			  }
 					      
                        
                        
@@ -2917,7 +2918,7 @@ void TrendCurveFuncao(char funcao){
                        for(i=0;i<14;i++)   
                            {
                            mapa.vpIcone[i]=PROCULUS_VP_Read_UInt16(0x0310+i);
-						   mapa.canal[i]=PROCULUS_VP_Read_UInt16(i*10+PPCANAL)>>8;	
+			   mapa.canal[i]=PROCULUS_VP_Read_UInt16(i*10+PPCANAL)>>8;	
                            }
                        EEPROM_Write_Buffer(19,&mapa.vpIcone[0],15);
                        EEPROM_Write_Buffer(0xEA,&mapa.icone[0],15);
@@ -3151,8 +3152,7 @@ void Ligar_Cargas_Compassadamente(){
      if(statuspower.bits!=0)
           {   
           print("Cond. de blackout encontrada!");
-          print("Aguardande...");          
-          print("Acionando Cargas, aguarde...");
+          print("Acionando Cargas, Aguarde...");
           Contagem_Tempo_de_Processo(FALSE);
           PROCULUS_VP_Write_UInt16(0x02,flag_global_datalog);  //Valor inicial do botao Datalog
           PROCULUS_VP_Write_UInt16(0x03,flag_global_condensador);  //Valor inicial do botao Condensador
@@ -3165,13 +3165,18 @@ void Ligar_Cargas_Compassadamente(){
           flag_global_aquecimento=0; 
 
           global_datalog();
+          print("1-Datalog.");
           my_delay_ms_CLRWDT(100);            
+          print("2-Condensador.");
           global_condensador();
           my_delay_ms_CLRWDT(10000);
+          print("3-Vacuo.");
           global_vacuo();     
           my_delay_ms_CLRWDT(10000);
-          global_aquecimento();   
-          my_delay_ms_CLRWDT(10000);     
+          print("4-Aquecimento");
+          global_aquecimento();                
+          my_delay_ms_CLRWDT(1000);
           }
+     memo_statuspower=statuspower.bits;
      PROCULUS_Show_Screen(15);
 }

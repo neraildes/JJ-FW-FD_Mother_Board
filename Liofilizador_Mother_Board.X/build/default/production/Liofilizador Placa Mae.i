@@ -5670,15 +5670,16 @@ int VOLTAGEM_read(char canal);
 # 1 "./versao.h" 1
 # 29 "Liofilizador Placa Mae.c" 2
 # 50 "Liofilizador Placa Mae.c"
-const char *boardtype[5]={"Mother Board",
+const char *boardtype[6]={"Mother Board",
                           "Vaccum Board",
                           "PT100 Board ",
                           "NTC Board   ",
-                          "Relay_Board "};
-# 64 "Liofilizador Placa Mae.c"
+                          "Relay_Board ",
+                          "Ethernet    "};
+# 66 "Liofilizador Placa Mae.c"
 volatile unsigned char usart_buffer[74];
 volatile unsigned char usart_buffer_fila[6][74];
-# 74 "Liofilizador Placa Mae.c"
+# 76 "Liofilizador Placa Mae.c"
 volatile unsigned int tempodecorrido ;
 volatile unsigned int tempocaptura ;
 volatile unsigned int tempocapturaconstante ;
@@ -5723,7 +5724,7 @@ char buffer[74];
 char maincnt;
 unsigned int pagina=15;
 unsigned int paginamemo=15;
-# 130 "Liofilizador Placa Mae.c"
+# 132 "Liofilizador Placa Mae.c"
 volatile unsigned char flag_senha_global_liberada;
 volatile unsigned char flag_senha_liberada;
 volatile unsigned char totalboard;
@@ -5850,7 +5851,7 @@ void main(void)
      My_ADC_init();
      I2C_Master_Init(100000);
      my_delay_ms_CLRWDT(500);
-# 343 "Liofilizador Placa Mae.c"
+# 345 "Liofilizador Placa Mae.c"
      {
      unsigned int reset;
      reset=EEPROM_Read_Integer(34);
@@ -5921,11 +5922,11 @@ void main(void)
          Exibe_Receita(i);
          }
 
+
+
+
+
      ShowSensorRealTimeHS();
-
-
-
-
      Exibe_Tempo_de_Processo();
      Icones_de_alarmes();
 
@@ -5946,7 +5947,6 @@ void main(void)
      processo_hora=EEPROM_Read_Byte(17);
      processo_minuto=EEPROM_Read_Byte(18);
      processo_segundo=0;
-     memo_statuspower=statuspower.bits;
      delay_condensador=0;
 
 
@@ -6387,7 +6387,7 @@ int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
     }
     return 0;
 }
-# 887 "Liofilizador Placa Mae.c"
+# 888 "Liofilizador Placa Mae.c"
 void ShowSensorRealTimeHS(void)
      {
      char bb[3];
@@ -6405,7 +6405,7 @@ void ShowSensorRealTimeHS(void)
         SlaveBoard = (tupla / 2)+1;
         canal = tupla % 2;
         bb[0]=canal;
-        leitura[tupla]=Send_To_Slave_EMULA(SlaveBoard, 0X1A, 1, bb);
+        leitura[tupla]=Send_To_Slave(SlaveBoard, 0X1A, 1, bb);
         flag_array_slave_WDT[SlaveBoard]=1;
         }
 
@@ -6448,7 +6448,7 @@ void ShowSensorRealTimeHS(void)
       statusgen1.flag_proculus_hs=0;
 
      }
-# 956 "Liofilizador Placa Mae.c"
+# 957 "Liofilizador Placa Mae.c"
 void Carrega_Tupla_Receita(char index, t_receita *receita){
      unsigned int addeeprom;
 
@@ -6494,7 +6494,7 @@ void Exibe_Receita(int index){
      texto[8]=0;
      PROCULUS_VP_Write_String(vp+4,texto);
 }
-# 1019 "Liofilizador Placa Mae.c"
+# 1020 "Liofilizador Placa Mae.c"
 void DataBaseBackupMain(unsigned char tupla)
       {
       unsigned int vp;
@@ -6515,7 +6515,7 @@ void DataBaseBackupMain(unsigned char tupla)
       EEPROM_Write_Integer(addEEPROM+16,PROCULUS_VP_Read_UInt16(vp+11));
 
       }
-# 1056 "Liofilizador Placa Mae.c"
+# 1057 "Liofilizador Placa Mae.c"
  void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
       {
       char CanalAD;
@@ -6595,7 +6595,7 @@ void DataBaseBackupMain(unsigned char tupla)
          PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
          }
 }
-# 1143 "Liofilizador Placa Mae.c"
+# 1144 "Liofilizador Placa Mae.c"
 void save_datalog(unsigned int add){
      char index;
      char bb[3];
@@ -6612,7 +6612,7 @@ void save_datalog(unsigned int add){
             }
          }
 }
-# 1168 "Liofilizador Placa Mae.c"
+# 1169 "Liofilizador Placa Mae.c"
  void ShowAndSetSlaveParameters(unsigned char tupla)
       {
       unsigned char CanalAD;
@@ -6644,7 +6644,7 @@ void save_datalog(unsigned int add){
       PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
 
       }
-# 1208 "Liofilizador Placa Mae.c"
+# 1209 "Liofilizador Placa Mae.c"
 void Send_to_PC(unsigned char size){
 
 
@@ -6653,7 +6653,7 @@ void Send_to_PC(unsigned char size){
      USART_putc(usart_protocol.origem);
      USART_putc(usart_protocol.command);
      USART_putc(size);
-# 1226 "Liofilizador Placa Mae.c"
+# 1227 "Liofilizador Placa Mae.c"
 }
 
 
@@ -6685,7 +6685,7 @@ void Decodify_Command(void){
     ((char *)&add_24LCxxxx)[0]=(usart_protocol.value[4]);
 
     switch(usart_protocol.command){
-# 1288 "Liofilizador Placa Mae.c"
+# 1289 "Liofilizador Placa Mae.c"
         case 0x08:
              EEPROM_Write_Byte(usart_protocol.value[0],
                                usart_protocol.value[1]);
@@ -6814,13 +6814,13 @@ void Decodify_Command(void){
              Send_to_PC(3);
              SEND_REPLY_OK();
              break;
-# 1499 "Liofilizador Placa Mae.c"
+# 1500 "Liofilizador Placa Mae.c"
         case 0X21:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
              Send_to_PC(3);
              SEND_REPLY_OK();
-# 1546 "Liofilizador Placa Mae.c"
+# 1547 "Liofilizador Placa Mae.c"
     }
 }
 
@@ -7437,7 +7437,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2170 "Liofilizador Placa Mae.c"
+# 2171 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -7590,7 +7590,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2330 "Liofilizador Placa Mae.c"
+# 2331 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
@@ -8139,27 +8139,27 @@ void TrendCurveFuncao(char funcao){
                              {
         cor=TrendColor[mapa.icone[i]-1];
         }
-        else
-           {
-           cor=0xFFFF;
-           }
-        PROCULUS_VP_Write_UInt16((i*10+1787),cor);
-        mapa.cor[i]=cor;
+     else
+        {
+        cor=0xFFFF;
         }
+     PROCULUS_VP_Write_UInt16((i*10+1787),cor);
+     mapa.cor[i]=cor;
+     }
 
 
                        for(i=0;i<13;i++)
                           {
                           canal=mapa.canal[i];
-        if((canal>=0)&&(canal<=7))
-           {
-                             PROCULUS_VP_Write_UInt16((i*10+1789),(canal<<8)|(0x0001));
-        }
-        else
+     if((canal>=0)&&(canal<=7))
         {
+                             PROCULUS_VP_Write_UInt16((i*10+1789),(canal<<8)|(0x0001));
+               }
+     else
+               {
                              PROCULUS_VP_Write_UInt16((i*10+1789),0x0A00);
-           }
-           }
+        }
+     }
 
 
 
@@ -8181,7 +8181,7 @@ void TrendCurveFuncao(char funcao){
                        for(i=0;i<14;i++)
                            {
                            mapa.vpIcone[i]=PROCULUS_VP_Read_UInt16(0x0310+i);
-         mapa.canal[i]=PROCULUS_VP_Read_UInt16(i*10+1789)>>8;
+      mapa.canal[i]=PROCULUS_VP_Read_UInt16(i*10+1789)>>8;
                            }
                        EEPROM_Write_Buffer(19,&mapa.vpIcone[0],15);
                        EEPROM_Write_Buffer(0xEA,&mapa.icone[0],15);
@@ -8415,8 +8415,7 @@ void Ligar_Cargas_Compassadamente(){
      if(statuspower.bits!=0)
           {
           print("Cond. de blackout encontrada!");
-          print("Aguardande...");
-          print("Acionando Cargas, aguarde...");
+          print("Acionando Cargas, Aguarde...");
           Contagem_Tempo_de_Processo(0);
           PROCULUS_VP_Write_UInt16(0x02,statuspower.flag_global_datalog);
           PROCULUS_VP_Write_UInt16(0x03,statuspower.flag_global_condensador);
@@ -8429,13 +8428,18 @@ void Ligar_Cargas_Compassadamente(){
           statuspower.flag_global_aquecimento=0;
 
           global_datalog();
+          print("1-Datalog.");
           my_delay_ms_CLRWDT(100);
+          print("2-Condensador.");
           global_condensador();
           my_delay_ms_CLRWDT(10000);
+          print("3-Vacuo.");
           global_vacuo();
           my_delay_ms_CLRWDT(10000);
+          print("4-Aquecimento");
           global_aquecimento();
-          my_delay_ms_CLRWDT(10000);
+          my_delay_ms_CLRWDT(1000);
           }
+     memo_statuspower=statuspower.bits;
      PROCULUS_Show_Screen(15);
 }
