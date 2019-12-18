@@ -340,16 +340,6 @@ void main(void)
      
      
      
-     //------------------------------------------------------------------------- 
-     statuspower.bits=EEPROM_Read_Byte(16);
-     if(statuspower.bits==0) 
-       {
-       clear_screen();
-       PROCULUS_Show_Screen(0);   
-       }  
-         
-     
-     
      {//-----------TOTALIZADOR DE RESET-------------         
      unsigned int reset;    
      reset=EEPROM_Read_Integer(34);
@@ -398,8 +388,26 @@ void main(void)
        EEPROM_Write_Byte(17,0);//processo_Hora
        EEPROM_Write_Byte(18,0);//processo_Min;uto       
        }   
-     RecallBlackoutStatus();          
+     RecallBlackoutStatus(); 
      TrendCurveFuncao(LOAD);     
+     
+     
+     //------------------------------------------------------------------------- 
+     
+//     if(statuspower.bits==0) 
+//       {
+//       clear_screen();
+//       PROCULUS_Show_Screen(0);  
+//       print("Tudo Desligado no StatusPower!");  
+//       my_delay_ms_CLRWDT(10000);       
+//       }
+//     else
+//       {
+//       clear_screen();
+//       PROCULUS_Show_Screen(0);       
+//       print("Algo Ligado no StatusPower!");  
+//       my_delay_ms_CLRWDT(10000);
+//       }     
      
      
      //======================== INFORMAÇÕES INICIAIS ===========================
@@ -414,26 +422,12 @@ void main(void)
      strcpy(texto,"* : Display      ");
      strcat(texto,buffer);
      print(texto);
-     my_delay_ms_CLRWDT(300);
-
-     
-     {
-     char i;    
+     my_delay_ms_CLRWDT(300);         
      ShowHardwareInfo();
-     
-     my_delay_ms_CLRWDT(1000);     
-     PROCULUS_VP_Write_UInt16(0x02,0);  //Valor inicial do botao Datalog
-     PROCULUS_VP_Write_UInt16(0x03,0);  //Valor inicial do botao Condensador
-     PROCULUS_VP_Write_UInt16(0x04,0);  //Valor inicial do botao Vacuo
-     PROCULUS_VP_Write_UInt16(0x05,0);  //Valor inicial do botao Aquecimento Global
-
-     flag_global_datalog=0;
-     flag_global_condensador=0;
-     flag_global_vacuo=0;     
-     flag_global_aquecimento=0; 
-     Contagem_Tempo_de_Processo(FALSE);
-     
      //-------------------------------------------------------------------------
+          
+     //-------------------------------------------------------------------------
+     statuspower.bits=EEPROM_Read_Byte(16);
      if(statuspower.bits!=0)
         { 
         print("Cond. de blackout encontrada!");
@@ -443,7 +437,7 @@ void main(void)
         }
      //------------Valores Iniciais da tela Principal---------------------------
      print("Analisando dados...");  
-     for(i=0;i<15;i++)
+     for(char i=0;i<15;i++)
         {
         asm("CLRWDT"); 
         ShowStaticValueGrid(i);
@@ -454,7 +448,7 @@ void main(void)
      
      
      //------------------------Carrega Lista de Receita-------------------------
-     for(i=0;i<8;i++)
+     for(char i=0;i<8;i++)
          {
          asm("CLRWDT");
          Exibe_Receita(i);
@@ -463,7 +457,7 @@ void main(void)
      senha_atual=EEPROM_Read_Long32(11);
      //-------------------------Carrega Status de Senha-------------------------
      Carregar_Status_da_Senha_Global();     
-     }
+     
      
     //==========================================================================
      ShowSensorRealTimeHS();
@@ -471,7 +465,7 @@ void main(void)
                           INICIALIZAÇAO DOS PARAMETROS
      -------------------------------------------------------------------------a*/
      Carregar_Parametros_de_Seguranca();
-     Carregar_Display_Schematic_Color();
+//     Carregar_Display_Schematic_Color();
      Carregar_tempo_de_datalog();
      //-------------------------------------------------------------------------
 
@@ -481,21 +475,21 @@ void main(void)
      //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
      Exibe_Tempo_de_Processo();
      Icones_de_alarmes();        
-     if(statuspower.bits==0)
-       {
-       PROCULUS_Show_Screen(15);       
-       }  
-     else
-       {
-       print("Iniciando Liofilizador.");
-       asm("CLRWDT");
-       global_condensador();
-       my_delay_ms(10000);
-       global_vacuo();
-       my_delay_ms(10000);
-       global_aquecimento();
-       PROCULUS_Show_Screen(15); 
-       }  
+//     if(statuspower.bits==0)
+//       {
+//       PROCULUS_Show_Screen(15);       
+//       }  
+//     else
+//       {
+//       print("Iniciando Liofilizador.");
+//       asm("CLRWDT");
+//       global_condensador();
+//       my_delay_ms(10000);
+//       global_vacuo();
+//       my_delay_ms(10000);
+//       global_aquecimento();
+//       PROCULUS_Show_Screen(15); 
+//       }  
      
      pagina=0;
      paginamemo=0;
@@ -520,9 +514,7 @@ void main(void)
      //=========================================================================
      //                              M A I N
      //=========================================================================
-
-     
-        
+        Ligar_Cargas_Compassadamente();
         while(1)
              {
              flag_main_loop_WDT=TRUE;
@@ -3225,4 +3217,32 @@ void Carregar_Display_Schematic_Color(){
           TrendColor[12]=0xFFFF; //BRANCO          
           
           }     
+}
+
+void Ligar_Cargas_Compassadamente(){
+     statuspower.bits=EEPROM_Read_Byte(16); 
+     if(statuspower.bits!=0)
+          {   
+          print("Acionando Cargas, aguarde...");
+          Contagem_Tempo_de_Processo(FALSE);
+          PROCULUS_VP_Write_UInt16(0x02,flag_global_datalog);  //Valor inicial do botao Datalog
+          PROCULUS_VP_Write_UInt16(0x03,flag_global_condensador);  //Valor inicial do botao Condensador
+          PROCULUS_VP_Write_UInt16(0x04,flag_global_vacuo);  //Valor inicial do botao Vacuo
+          PROCULUS_VP_Write_UInt16(0x05,flag_global_aquecimento);  //Valor inicial do botao Aquecimento Global
+
+          flag_global_datalog=0;
+          flag_global_condensador=0;
+          flag_global_vacuo=0;     
+          flag_global_aquecimento=0; 
+
+          global_datalog();
+          my_delay_ms_CLRWDT(100);            
+          global_condensador();
+          my_delay_ms_CLRWDT(10000);
+          global_vacuo();     
+          my_delay_ms_CLRWDT(10000);
+          global_aquecimento();   
+          my_delay_ms_CLRWDT(10000);     
+          }
+     PROCULUS_Show_Screen(15);
 }
