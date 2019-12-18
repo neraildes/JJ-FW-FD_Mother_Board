@@ -2983,8 +2983,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 904:         bb[0]=canal;
 [e = *U + &U _bb * -> -> -> 0 `i `ui `ux -> -> # *U &U _bb `ui `ux _canal ]
 "905
-[; ;Liofilizador Placa Mae.c: 905:         leitura[tupla]=Send_To_Slave(SlaveBoard, 0X1A, 1, bb);
-[e = *U + &U _leitura * -> _tupla `ux -> -> # *U &U _leitura `ui `ux ( _Send_To_Slave (4 , , , _SlaveBoard -> -> 26 `i `uc -> -> 1 `i `uc &U _bb ]
+[; ;Liofilizador Placa Mae.c: 905:         leitura[tupla]=Send_To_Slave_EMULA(SlaveBoard, 0X1A, 1, bb);
+[e = *U + &U _leitura * -> _tupla `ux -> -> # *U &U _leitura `ui `ux ( _Send_To_Slave_EMULA (4 , , , _SlaveBoard -> -> 26 `i `uc -> -> 1 `i `uc &U _bb ]
 "906
 [; ;Liofilizador Placa Mae.c: 906:         flag_array_slave_WDT[SlaveBoard]=1;
 [e = *U + &U _flag_array_slave_WDT * -> _SlaveBoard `ux -> -> # *U &U _flag_array_slave_WDT `ui `ux -> -> 1 `i `uc ]
@@ -7939,7 +7939,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 3011:      strcat(texto,"* : Mother Board ");
 [e ( _strcat (2 , &U _texto :s 55C ]
 "3012
-[; ;Liofilizador Placa Mae.c: 3012:      strcat(texto,"v1.0.10");
+[; ;Liofilizador Placa Mae.c: 3012:      strcat(texto,"v1.0.12");
 [e ( _strcat (2 , &U _texto :s 56C ]
 "3013
 [; ;Liofilizador Placa Mae.c: 3013:      print(texto);
@@ -8449,7 +8449,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 42C 66 79 65 82 68 32 61 0 ]
 [a 48C 82 101 105 110 105 99 105 97 108 105 122 97 99 111 101 115 58 0 ]
 [a 52C 68 101 115 108 105 103 97 114 32 100 111 32 86 97 99 117 111 58 0 ]
-[a 56C 118 49 46 48 46 49 48 0 ]
+[a 56C 118 49 46 48 46 49 50 0 ]
 [a 8C 74 74 32 67 105 101 110 116 105 102 105 99 97 32 73 110 100 46 32 101 32 67 111 109 46 32 100 101 32 69 113 46 32 67 105 101 110 116 105 102 105 99 111 115 46 0 ]
 [a 45C 32 73 103 117 97 105 115 46 0 ]
 [a 46C 32 100 105 102 101 114 101 110 116 101 115 46 0 ]

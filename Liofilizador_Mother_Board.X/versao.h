@@ -1,6 +1,6 @@
 // arquivo criado pelo script versionar.sh
-// Neraildes - Mon, 9 Dec 2019 12:22:17 -0300
+// Neraildes - Wed, 18 Dec 2019 10:58:25 -0300
 #ifndef VERSAO_H
 #define	VERSAO_H
-#define FVERSION "v1.0.10"
+#define FVERSION "v1.0.12"
 #endif
