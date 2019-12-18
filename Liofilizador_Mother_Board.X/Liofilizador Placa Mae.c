@@ -371,8 +371,8 @@ void main(void)
        EEPROM_Write_Integer(0x09,10); // Valor inicial do tempo de captura de log
        EEPROM_Write_Long32(11,123456);//Valor inicial da senha do administrador         
        TrendCurveFuncao(FORMAT); 
-       EEPROM_Write_Byte(17,0);//processo_Hora
-       EEPROM_Write_Byte(18,0);//processo_Min;uto       
+       EEPROM_Write_Byte(17,10);//processo_Hora 
+       EEPROM_Write_Byte(18,20);//processo_Min;uto       
        }   
      RecallBlackoutStatus(); 
      TrendCurveFuncao(LOAD);
@@ -431,11 +431,11 @@ void main(void)
      Condensador=0;
 
      //--------timer 1----------
-     Exibe_Hora_Data(FALSE); //Exibe data e Hora sem os segundos (FALSE)
+     Exibe_Hora_Data(FALSE); //Exibe data e Hora sem os segundos (FALSE)   
      rtc.milisegundo=0;
      rtc.segundo=0;
-     processo_hora=EEPROM_Read_Byte(17);
-     processo_minuto=EEPROM_Read_Byte(18);
+     //processo_hora=EEPROM_Read_Byte(17);
+     //processo_minuto=EEPROM_Read_Byte(18);
      processo_segundo=0;     
      delay_condensador=0;
      
@@ -487,7 +487,7 @@ void main(void)
                   memo_statuspower=statuspower.bits;
                   }                          
 
-
+                
                 if((processo_segundo==0) || (processo_segundo==30))
                     { 
                     if(flag_wakeup==1)
@@ -2337,7 +2337,7 @@ void Contagem_Tempo_de_Processo(char value){
          processo_hora=0;
          }
       PROCULUS_VP_Write_String(1970,"Executando Processo...");  
-      flag_time_process=1;      
+      flag_time_process=TRUE;      
        //Write_Fat(TRUE);
       }
     else
@@ -2351,11 +2351,12 @@ void Contagem_Tempo_de_Processo(char value){
 }
 
 void SaveBlackoutStatusRuning(void){
-     if(processo_minuto%10==0)
+     if(processo_segundo%30==0)
        {
        if(flag_save_time==0)  
           {
           flag_save_time=1;  
+          PROCULUS_OK();
           EEPROM_Write_Byte(17,processo_hora);     //Hora
           EEPROM_Write_Byte(18,processo_minuto);   //Minuto        
           }
@@ -2789,9 +2790,8 @@ char menorValorDisponivel(char * trendCurve){
 void Exibe_Tempo_de_Processo(void){
      if(flag_time_process)
        {
-       //update_time_process();
-       char temp0,temp1;     
-
+       char temp0,temp1;  
+       
        temp0=processo_hora/10;
        temp1=processo_hora%10;
        PROCULUS_VP_Write_UInt16(40,temp0);
@@ -2803,7 +2803,7 @@ void Exibe_Tempo_de_Processo(void){
        temp1=processo_minuto%10;
        PROCULUS_VP_Write_UInt16(43,temp0);
        PROCULUS_VP_Write_UInt16(44,temp1);                          
-      }
+       }
 }
 
 
