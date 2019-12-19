@@ -8490,6 +8490,9 @@ void Ligar_Cargas_Compassadamente(){
           print("Cond. de blackout encontrada!");
           print("Acionando Cargas, Aguarde...");
 
+
+          statuspower.flag_global_condensador=0;
+
           print("Iniciando Cargas.");
           __asm("CLRWDT");
           print("1-Condensador.");

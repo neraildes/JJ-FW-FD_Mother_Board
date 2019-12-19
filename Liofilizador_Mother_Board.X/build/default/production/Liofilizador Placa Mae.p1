@@ -8488,54 +8488,57 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3239
 [; ;Liofilizador Placa Mae.c: 3239:           print("Acionando Cargas, Aguarde...");
 [e ( _print (1 :s 66C ]
-"3241
-[; ;Liofilizador Placa Mae.c: 3241:           print("Iniciando Cargas.");
-[e ( _print (1 :s 67C ]
 "3242
-[; ;Liofilizador Placa Mae.c: 3242:           __asm("CLRWDT");
-[; <" CLRWDT ;# ">
-"3243
-[; ;Liofilizador Placa Mae.c: 3243:           print("1-Condensador.");
-[e ( _print (1 :s 68C ]
+[; ;Liofilizador Placa Mae.c: 3242:           statuspower.flag_global_condensador=0;
+[e = . . _statuspower 1 2 -> -> 0 `i `uc ]
 "3244
-[; ;Liofilizador Placa Mae.c: 3244:           my_delay_ms(100);
-[e ( _my_delay_ms (1 -> -> 100 `i `l ]
+[; ;Liofilizador Placa Mae.c: 3244:           print("Iniciando Cargas.");
+[e ( _print (1 :s 67C ]
 "3245
-[; ;Liofilizador Placa Mae.c: 3245:           global_condensador();
-[e ( _global_condensador ..  ]
+[; ;Liofilizador Placa Mae.c: 3245:           __asm("CLRWDT");
+[; <" CLRWDT ;# ">
 "3246
-[; ;Liofilizador Placa Mae.c: 3246:           my_delay_ms(10000);
-[e ( _my_delay_ms (1 -> -> 10000 `i `l ]
+[; ;Liofilizador Placa Mae.c: 3246:           print("1-Condensador.");
+[e ( _print (1 :s 68C ]
 "3247
-[; ;Liofilizador Placa Mae.c: 3247:           print("2-Vacuo.");
-[e ( _print (1 :s 69C ]
+[; ;Liofilizador Placa Mae.c: 3247:           my_delay_ms(100);
+[e ( _my_delay_ms (1 -> -> 100 `i `l ]
 "3248
-[; ;Liofilizador Placa Mae.c: 3248:           global_vacuo();
-[e ( _global_vacuo ..  ]
+[; ;Liofilizador Placa Mae.c: 3248:           global_condensador();
+[e ( _global_condensador ..  ]
 "3249
 [; ;Liofilizador Placa Mae.c: 3249:           my_delay_ms(10000);
 [e ( _my_delay_ms (1 -> -> 10000 `i `l ]
 "3250
-[; ;Liofilizador Placa Mae.c: 3250:           print("3-Aquecimento");
-[e ( _print (1 :s 70C ]
+[; ;Liofilizador Placa Mae.c: 3250:           print("2-Vacuo.");
+[e ( _print (1 :s 69C ]
 "3251
-[; ;Liofilizador Placa Mae.c: 3251:           global_aquecimento();
-[e ( _global_aquecimento ..  ]
+[; ;Liofilizador Placa Mae.c: 3251:           global_vacuo();
+[e ( _global_vacuo ..  ]
 "3252
-[; ;Liofilizador Placa Mae.c: 3252:           PROCULUS_Show_Screen(15);
-[e ( _PROCULUS_Show_Screen (1 -> -> 15 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3252:           my_delay_ms(10000);
+[e ( _my_delay_ms (1 -> -> 10000 `i `l ]
 "3253
-[; ;Liofilizador Placa Mae.c: 3253:           }
-}
-[e :U 791 ]
+[; ;Liofilizador Placa Mae.c: 3253:           print("3-Aquecimento");
+[e ( _print (1 :s 70C ]
 "3254
-[; ;Liofilizador Placa Mae.c: 3254:      memo_statuspower=statuspower.bits;
-[e = _memo_statuspower . _statuspower 0 ]
+[; ;Liofilizador Placa Mae.c: 3254:           global_aquecimento();
+[e ( _global_aquecimento ..  ]
 "3255
-[; ;Liofilizador Placa Mae.c: 3255:      PROCULUS_Show_Screen(15);
+[; ;Liofilizador Placa Mae.c: 3255:           PROCULUS_Show_Screen(15);
 [e ( _PROCULUS_Show_Screen (1 -> -> 15 `i `ui ]
 "3256
-[; ;Liofilizador Placa Mae.c: 3256: }
+[; ;Liofilizador Placa Mae.c: 3256:           }
+}
+[e :U 791 ]
+"3257
+[; ;Liofilizador Placa Mae.c: 3257:      memo_statuspower=statuspower.bits;
+[e = _memo_statuspower . _statuspower 0 ]
+"3258
+[; ;Liofilizador Placa Mae.c: 3258:      PROCULUS_Show_Screen(15);
+[e ( _PROCULUS_Show_Screen (1 -> -> 15 `i `ui ]
+"3259
+[; ;Liofilizador Placa Mae.c: 3259: }
 [e :UE 790 ]
 }
 [a 45C 87 32 48 120 0 ]
