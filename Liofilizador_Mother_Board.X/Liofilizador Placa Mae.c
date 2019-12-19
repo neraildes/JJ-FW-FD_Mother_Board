@@ -340,13 +340,13 @@ void main(void)
      
      
      
-     //------------------------------------------------------------------------- 
-     statuspower.bits=EEPROM_Read_Byte(16); //StatusPower
-     if(statuspower.bits==0) 
-       {
-       clear_screen();
-       PROCULUS_Show_Screen(0);   
-       }  
+//     //------------------------------------------------------------------------- 
+//     statuspower.bits=EEPROM_Read_Byte(16); //StatusPower
+//     if(statuspower.bits==0) 
+//       {
+//       clear_screen();
+//       PROCULUS_Show_Screen(0);   
+//       }  
          
      
      
@@ -367,6 +367,7 @@ void main(void)
      
      
      //======================== INFORMAÇÕES INICIAIS ===========================
+     Tamanho_Display=EEPROM_Read_Integer(0xFA);
      my_delay_ms_CLRWDT(300); 
      print("JJ Cientifica Ind. e Com. de Eq. Cientificos.");     
      my_delay_ms_CLRWDT(300);
@@ -933,7 +934,7 @@ void ShowSensorRealTimeHS(void)
         SlaveBoard  = (tupla / 2)+1; 
         canal = tupla % 2;
         bb[0]=canal; 
-        leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_READ_ANALOG, 1, bb); //Fix Observar se não é EMULA
+        leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_READ_ANALOG, 1, bb); //fix -Retirar EMULA
         flag_array_slave_WDT[SlaveBoard]=TRUE;
         }
      
@@ -3207,7 +3208,7 @@ void Ligar_Cargas_Compassadamente(){
           if(flag_global_condensador==1)
             { 
             flag_global_condensador=0;
-            print("1-Condensador.");
+            print("2-Condensador.");
             PROCULUS_VP_Write_UInt16(0x03,1);  //Condensador
             global_condensador();
             my_delay_ms_CLRWDT(10000);
@@ -3218,7 +3219,7 @@ void Ligar_Cargas_Compassadamente(){
             {
             flag_global_vacuo=0;
             flag_time_process=TRUE;
-            print("2-Vacuo.");
+            print("3-Vacuo.");
             PROCULUS_VP_Write_UInt16(0x04,1);  //Vacuo
             global_vacuo();
             my_delay_ms_CLRWDT(10000);
@@ -3228,7 +3229,7 @@ void Ligar_Cargas_Compassadamente(){
           if(flag_global_aquecimento==1)
             {   
             flag_global_aquecimento=0;
-            print("3-Aquecimento");
+            print("4-Aquecimento");
             PROCULUS_VP_Write_UInt16(0x05,1);//Aquecimento 
             global_aquecimento();
             my_delay_ms_CLRWDT(10000);
