@@ -6355,7 +6355,7 @@ unsigned char countboard()
      statusgen.flag_usart_rx=0;
      for(int contador=0;contador<400;contador++)
          {
-          _delay((unsigned long)((500)*(32000000/4000000.0)));
+          _delay((unsigned long)((200)*(32000000/4000000.0)));
           if(statusgen.flag_usart_rx==1)
              {
              _delay((unsigned long)((2)*(32000000/4000.0)));
@@ -7615,13 +7615,14 @@ void Check_And_Send_Capture_Datalog(void){
          {
          statusgen.flag_capture_datalog=0;
 
+         _delay((unsigned long)((20)*(32000000/4000.0)));
          save_datalog(0);
 
 
          }
        }
 }
-# 2362 "Liofilizador Placa Mae.c"
+# 2363 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {

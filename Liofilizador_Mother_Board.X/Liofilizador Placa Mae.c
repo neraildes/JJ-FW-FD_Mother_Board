@@ -2345,6 +2345,7 @@ void Check_And_Send_Capture_Datalog(void){
          {  
          flag_capture_datalog=0; 
          //PROCULUS_OK();
+         __delay_ms(20); //EVITA LEITURA -1.0Volts
          save_datalog(0);         
          //processo.pontos++; //Totaliza os pontos capturados para indicar na Fat
                             //o tamanho do registro.
