@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.10 build 88905656 
-                                                                                               Thu Dec 19 12:54:59 2019
+                                                                                               Thu Dec 19 13:18:54 2019
 
 Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1 
      1                           	processor	18F4620
@@ -1197,7 +1197,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   1183  00FFDC  30                 	db	48	;'0'
   1184  00FFDD  2E                 	db	46
   1185  00FFDE  31                 	db	49	;'1'
-  1186  00FFDF  32                 	db	50	;'2'
+  1186  00FFDF  33                 	db	51	;'3'
   1187  00FFE0  00                 	db	0
   1188  00FFE1  42                 	db	66	;'B'
   1189  00FFE2  4F                 	db	79	;'O'
@@ -7444,7 +7444,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   7222  0038FE  6E1D               	movwf	(strcat@src+1)^0,c
   7223  003900  EC92  F040         	call	_strcat	;wreg free
   7224  003904                     
-  7225                           ;Liofilizador Placa Mae.c: 3044:      strcat(texto,"v1.0.12");
+  7225                           ;Liofilizador Placa Mae.c: 3044:      strcat(texto,"v1.0.13");
   7226  003904  0E50               	movlw	low _texto
   7227  003906  6E1A               	movwf	strcat@dest^0,c
   7228  003908  0E02               	movlw	high _texto
@@ -33934,7 +33934,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.10 build 88905656 
-Symbol Table                                                                                   Thu Dec 19 12:54:59 2019
+Symbol Table                                                                                   Thu Dec 19 13:18:54 2019
 
                                       _USART_putc 81E2                          ?_PROCULUS_VP_Read_String 001F  
                SaveLiofilizadorOnMemory@addEEPROM 0033                                                l40 34E0  
