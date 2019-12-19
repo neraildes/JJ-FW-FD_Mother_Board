@@ -43,8 +43,8 @@
 #define PPCOR   1787
 
 #define FATOR_PADRAO 1.0
-#define FATOR_TENSAO 1.0 //0.4546
-#define FATOR_VACUO  1.0 //0.05
+#define FATOR_TENSAO 0.4546
+#define FATOR_VACUO  0.05
 
 //------------------------------------------------------------------------------
 const char *boardtype[5]={"Mother Board",
@@ -933,7 +933,7 @@ void ShowSensorRealTimeHS(void)
         SlaveBoard  = (tupla / 2)+1; 
         canal = tupla % 2;
         bb[0]=canal; 
-        leitura[tupla]=Send_To_Slave_EMULA(SlaveBoard, COMMAND_READ_ANALOG, 1, bb);
+        leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_READ_ANALOG, 1, bb); //Fix Observar se não é EMULA
         flag_array_slave_WDT[SlaveBoard]=TRUE;
         }
      
@@ -2387,7 +2387,7 @@ void SaveBlackoutStatusRuning(void){
        if(flag_save_time==0)  
           {
           flag_save_time=1;  
-          PROCULUS_OK();
+          PROCULUS_OK(); //fix  DESATIVAR
           EEPROM_Write_Byte(17,processo_hora);     //Hora
           EEPROM_Write_Byte(18,processo_minuto);   //Minuto           
           }

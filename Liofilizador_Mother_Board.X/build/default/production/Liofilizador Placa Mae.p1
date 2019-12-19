@@ -2279,14 +2279,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 698:                                                   mapa.fator[canal]=1.0;
 [e = *U + &U . _mapa 1 * -> -> F4068 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .1.0 `f ]
 "700
-[; ;Liofilizador Placa Mae.c: 700:                                                   if(icone==0)mapa.fator[canal]=1.0;
+[; ;Liofilizador Placa Mae.c: 700:                                                   if(icone==0)mapa.fator[canal]=0.4546;
 [e $ ! == -> _icone `i -> 0 `i 351  ]
-[e = *U + &U . _mapa 1 * -> -> F4068 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .1.0 `f ]
+[e = *U + &U . _mapa 1 * -> -> F4068 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .0.4546 `f ]
 [e :U 351 ]
 "701
-[; ;Liofilizador Placa Mae.c: 701:                                                   if(icone==1)mapa.fator[canal]=1.0;
+[; ;Liofilizador Placa Mae.c: 701:                                                   if(icone==1)mapa.fator[canal]=0.05;
 [e $ ! == -> _icone `i -> 1 `i 352  ]
-[e = *U + &U . _mapa 1 * -> -> F4068 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .1.0 `f ]
+[e = *U + &U . _mapa 1 * -> -> F4068 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .0.05 `f ]
 [e :U 352 ]
 "706
 [; ;Liofilizador Placa Mae.c: 706:                                                   TrendCurveFuncao(2);
@@ -2717,8 +2717,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 847:          {
 {
 "848
-[; ;Liofilizador Placa Mae.c: 848:           _delay((unsigned long)((200)*(32000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;Liofilizador Placa Mae.c: 848:           _delay((unsigned long)((500)*(32000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
 "849
 [; ;Liofilizador Placa Mae.c: 849:           if(statusgen.flag_usart_rx==1)
 [e $ ! == -> . _statusgen 0 `i -> 1 `i 386  ]
@@ -3010,8 +3010,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 935:         bb[0]=canal;
 [e = *U + &U _bb * -> -> -> 0 `i `ui `ux -> -> # *U &U _bb `ui `ux _canal ]
 "936
-[; ;Liofilizador Placa Mae.c: 936:         leitura[tupla]=Send_To_Slave_EMULA(SlaveBoard, 0X1A, 1, bb);
-[e = *U + &U _leitura * -> _tupla `ux -> -> # *U &U _leitura `ui `ux ( _Send_To_Slave_EMULA (4 , , , _SlaveBoard -> -> 26 `i `uc -> -> 1 `i `uc &U _bb ]
+[; ;Liofilizador Placa Mae.c: 936:         leitura[tupla]=Send_To_Slave(SlaveBoard, 0X1A, 1, bb);
+[e = *U + &U _leitura * -> _tupla `ux -> -> # *U &U _leitura `ui `ux ( _Send_To_Slave (4 , , , _SlaveBoard -> -> 26 `i `uc -> -> 1 `i `uc &U _bb ]
 "937
 [; ;Liofilizador Placa Mae.c: 937:         flag_array_slave_WDT[SlaveBoard]=1;
 [e = *U + &U _flag_array_slave_WDT * -> _SlaveBoard `ux -> -> # *U &U _flag_array_slave_WDT `ui `ux -> -> 1 `i `uc ]
@@ -7661,14 +7661,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 2940:                                  mapa.fator[mapa.canal[index]]=1.0;
 [e = *U + &U . _mapa 1 * -> *U + &U . _mapa 2 * -> _index `ux -> -> # *U &U . _mapa 2 `ui `ux `ux -> -> # *U &U . _mapa 1 `ui `ux -> .1.0 `f ]
 "2941
-[; ;Liofilizador Placa Mae.c: 2941:                                  if(mapa.canal[index]==0)mapa.fator[mapa.canal[index]]=1.0;
+[; ;Liofilizador Placa Mae.c: 2941:                                  if(mapa.canal[index]==0)mapa.fator[mapa.canal[index]]=0.4546;
 [e $ ! == -> *U + &U . _mapa 2 * -> _index `ux -> -> # *U &U . _mapa 2 `ui `ux `i -> 0 `i 747  ]
-[e = *U + &U . _mapa 1 * -> *U + &U . _mapa 2 * -> _index `ux -> -> # *U &U . _mapa 2 `ui `ux `ux -> -> # *U &U . _mapa 1 `ui `ux -> .1.0 `f ]
+[e = *U + &U . _mapa 1 * -> *U + &U . _mapa 2 * -> _index `ux -> -> # *U &U . _mapa 2 `ui `ux `ux -> -> # *U &U . _mapa 1 `ui `ux -> .0.4546 `f ]
 [e :U 747 ]
 "2942
-[; ;Liofilizador Placa Mae.c: 2942:                                  if(mapa.canal[index]==1)mapa.fator[mapa.canal[index]]=1.0;
+[; ;Liofilizador Placa Mae.c: 2942:                                  if(mapa.canal[index]==1)mapa.fator[mapa.canal[index]]=0.05;
 [e $ ! == -> *U + &U . _mapa 2 * -> _index `ux -> -> # *U &U . _mapa 2 `ui `ux `i -> 1 `i 748  ]
-[e = *U + &U . _mapa 1 * -> *U + &U . _mapa 2 * -> _index `ux -> -> # *U &U . _mapa 2 `ui `ux `ux -> -> # *U &U . _mapa 1 `ui `ux -> .1.0 `f ]
+[e = *U + &U . _mapa 1 * -> *U + &U . _mapa 2 * -> _index `ux -> -> # *U &U . _mapa 2 `ui `ux `ux -> -> # *U &U . _mapa 1 `ui `ux -> .0.05 `f ]
 [e :U 748 ]
 "2943
 [; ;Liofilizador Placa Mae.c: 2943:                                  }

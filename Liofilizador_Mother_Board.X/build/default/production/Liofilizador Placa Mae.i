@@ -6207,8 +6207,8 @@ void main(void)
 
                                                   mapa.fator[canal]=1.0;
 
-                                                  if(icone==0)mapa.fator[canal]=1.0;
-                                                  if(icone==1)mapa.fator[canal]=1.0;
+                                                  if(icone==0)mapa.fator[canal]=0.4546;
+                                                  if(icone==1)mapa.fator[canal]=0.05;
 
 
 
@@ -6355,7 +6355,7 @@ unsigned char countboard()
      statusgen.flag_usart_rx=0;
      for(int contador=0;contador<400;contador++)
          {
-          _delay((unsigned long)((200)*(32000000/4000000.0)));
+          _delay((unsigned long)((500)*(32000000/4000000.0)));
           if(statusgen.flag_usart_rx==1)
              {
              _delay((unsigned long)((2)*(32000000/4000.0)));
@@ -6436,7 +6436,7 @@ void ShowSensorRealTimeHS(void)
         SlaveBoard = (tupla / 2)+1;
         canal = tupla % 2;
         bb[0]=canal;
-        leitura[tupla]=Send_To_Slave_EMULA(SlaveBoard, 0X1A, 1, bb);
+        leitura[tupla]=Send_To_Slave(SlaveBoard, 0X1A, 1, bb);
         flag_array_slave_WDT[SlaveBoard]=1;
         }
 
@@ -8201,8 +8201,8 @@ void TrendCurveFuncao(char funcao){
                                  {
                                  mapa.entrada[mapa.canal[index]]=&leitura[(mapa.icone[mapa.canal[index]]-1<3)?(mapa.icone[mapa.canal[index]]-1):((mapa.icone[mapa.canal[index]]-1)+1)];
                                  mapa.fator[mapa.canal[index]]=1.0;
-                                 if(mapa.canal[index]==0)mapa.fator[mapa.canal[index]]=1.0;
-                                 if(mapa.canal[index]==1)mapa.fator[mapa.canal[index]]=1.0;
+                                 if(mapa.canal[index]==0)mapa.fator[mapa.canal[index]]=0.4546;
+                                 if(mapa.canal[index]==1)mapa.fator[mapa.canal[index]]=0.05;
                                  }
                               }
 
