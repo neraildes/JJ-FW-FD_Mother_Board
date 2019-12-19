@@ -5670,16 +5670,15 @@ int VOLTAGEM_read(char canal);
 # 1 "./versao.h" 1
 # 29 "Liofilizador Placa Mae.c" 2
 # 50 "Liofilizador Placa Mae.c"
-const char *boardtype[6]={"Mother Board",
+const char *boardtype[5]={"Mother Board",
                           "Vaccum Board",
                           "PT100 Board ",
                           "NTC Board   ",
-                          "Relay_Board ",
-                          "Ethernet    "};
-# 66 "Liofilizador Placa Mae.c"
+                          "Relay_Board "};
+# 64 "Liofilizador Placa Mae.c"
 volatile unsigned char usart_buffer[74];
 volatile unsigned char usart_buffer_fila[6][74];
-# 76 "Liofilizador Placa Mae.c"
+# 74 "Liofilizador Placa Mae.c"
 volatile unsigned int tempodecorrido ;
 volatile unsigned int tempocaptura ;
 volatile unsigned int tempocapturaconstante ;
@@ -5724,7 +5723,7 @@ char buffer[74];
 char maincnt;
 unsigned int pagina=15;
 unsigned int paginamemo=15;
-# 132 "Liofilizador Placa Mae.c"
+# 130 "Liofilizador Placa Mae.c"
 volatile unsigned char flag_senha_global_liberada;
 volatile unsigned char flag_senha_liberada;
 volatile unsigned char totalboard;
@@ -5851,7 +5850,16 @@ void main(void)
      My_ADC_init();
      I2C_Master_Init(100000);
      my_delay_ms_CLRWDT(500);
-# 345 "Liofilizador Placa Mae.c"
+# 344 "Liofilizador Placa Mae.c"
+     statuspower.bits=EEPROM_Read_Byte(16);
+     if(statuspower.bits==0)
+       {
+       clear_screen();
+       PROCULUS_Show_Screen(0);
+       }
+
+
+
      {
      unsigned int reset;
      reset=EEPROM_Read_Integer(34);
@@ -5866,30 +5874,6 @@ void main(void)
 
      }
 
-
-     if(EEPROM_Read_Byte(52)==0xFF)
-       {
-       print("Formatando memoria principal...");
-       Formatar_Banco_de_Dados(0,10);
-       Formatar_Lista_de_Receitas();
-       Formatar_Dados_de_Seguranca();
-       Formatar_Datalog();
-       flag_senha_global_liberada=0;
-       flag_senha_liberada=0;
-       Gravar_Status_da_Senha_Global();
-       EEPROM_Write_Byte(16,0);
-       EEPROM_Write_Integer(0x09,10);
-       EEPROM_Write_Long32(11,123456);
-       TrendCurveFuncao(0);
-       EEPROM_Write_Byte(17,10);
-       EEPROM_Write_Byte(18,20);
-       }
-     RecallBlackoutStatus();
-     TrendCurveFuncao(1);
-     senha_atual=EEPROM_Read_Long32(11);
-     Carregar_Status_da_Senha_Global();
-     Carregar_Parametros_de_Seguranca();
-     Carregar_tempo_de_datalog();
 
 
 
@@ -5909,6 +5893,34 @@ void main(void)
 
 
 
+
+
+     if(EEPROM_Read_Byte(52)==0xFF)
+       {
+       print("Formatando memoria principal...");
+       Formatar_Banco_de_Dados(0,10);
+       Formatar_Lista_de_Receitas();
+       Formatar_Dados_de_Seguranca();
+       Formatar_Datalog();
+       flag_senha_global_liberada=0;
+       flag_senha_liberada=0;
+       Gravar_Status_da_Senha_Global();
+       EEPROM_Write_Byte(16,0);
+       EEPROM_Write_Integer(0x09,10);
+       EEPROM_Write_Long32(11,123456);
+       TrendCurveFuncao(0);
+       EEPROM_Write_Byte(17,0);
+       EEPROM_Write_Byte(18,0);
+       }
+     RecallBlackoutStatus();
+     TrendCurveFuncao(1);
+     senha_atual=EEPROM_Read_Long32(11);
+     Carregar_Status_da_Senha_Global();
+     Carregar_Parametros_de_Seguranca();
+     Carregar_tempo_de_datalog();
+
+
+
      print("Analisando dados...");
      for(char i=0;i<15;i++)
         {
@@ -5916,17 +5928,35 @@ void main(void)
         ShowStaticValueGrid(i);
         }
 
+
+
+
+
+
      for(char i=0;i<8;i++)
          {
          __asm("CLRWDT");
          Exibe_Receita(i);
          }
 
+     senha_atual=EEPROM_Read_Long32(11);
 
+     Carregar_Status_da_Senha_Global();
 
 
 
      ShowSensorRealTimeHS();
+
+
+
+     Carregar_Parametros_de_Seguranca();
+     Carregar_tempo_de_datalog();
+
+
+
+
+
+
      Exibe_Tempo_de_Processo();
      Icones_de_alarmes();
 
@@ -5947,6 +5977,7 @@ void main(void)
 
 
      processo_segundo=0;
+     memo_statuspower=statuspower.bits;
      delay_condensador=0;
 
 
@@ -6387,7 +6418,7 @@ int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
     }
     return 0;
 }
-# 888 "Liofilizador Placa Mae.c"
+# 919 "Liofilizador Placa Mae.c"
 void ShowSensorRealTimeHS(void)
      {
      char bb[3];
@@ -6448,7 +6479,7 @@ void ShowSensorRealTimeHS(void)
       statusgen1.flag_proculus_hs=0;
 
      }
-# 957 "Liofilizador Placa Mae.c"
+# 988 "Liofilizador Placa Mae.c"
 void Carrega_Tupla_Receita(char index, t_receita *receita){
      unsigned int addeeprom;
 
@@ -6494,7 +6525,7 @@ void Exibe_Receita(int index){
      texto[8]=0;
      PROCULUS_VP_Write_String(vp+4,texto);
 }
-# 1020 "Liofilizador Placa Mae.c"
+# 1051 "Liofilizador Placa Mae.c"
 void DataBaseBackupMain(unsigned char tupla)
       {
       unsigned int vp;
@@ -6515,7 +6546,7 @@ void DataBaseBackupMain(unsigned char tupla)
       EEPROM_Write_Integer(addEEPROM+16,PROCULUS_VP_Read_UInt16(vp+11));
 
       }
-# 1057 "Liofilizador Placa Mae.c"
+# 1088 "Liofilizador Placa Mae.c"
  void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
       {
       char CanalAD;
@@ -6595,7 +6626,7 @@ void DataBaseBackupMain(unsigned char tupla)
          PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
          }
 }
-# 1144 "Liofilizador Placa Mae.c"
+# 1175 "Liofilizador Placa Mae.c"
 void save_datalog(unsigned int add){
      char index;
      char bb[3];
@@ -6612,7 +6643,7 @@ void save_datalog(unsigned int add){
             }
          }
 }
-# 1169 "Liofilizador Placa Mae.c"
+# 1200 "Liofilizador Placa Mae.c"
  void ShowAndSetSlaveParameters(unsigned char tupla)
       {
       unsigned char CanalAD;
@@ -6644,7 +6675,7 @@ void save_datalog(unsigned int add){
       PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
 
       }
-# 1209 "Liofilizador Placa Mae.c"
+# 1240 "Liofilizador Placa Mae.c"
 void Send_to_PC(unsigned char size){
 
 
@@ -6653,7 +6684,7 @@ void Send_to_PC(unsigned char size){
      USART_putc(usart_protocol.origem);
      USART_putc(usart_protocol.command);
      USART_putc(size);
-# 1227 "Liofilizador Placa Mae.c"
+# 1258 "Liofilizador Placa Mae.c"
 }
 
 
@@ -6685,7 +6716,7 @@ void Decodify_Command(void){
     ((char *)&add_24LCxxxx)[0]=(usart_protocol.value[4]);
 
     switch(usart_protocol.command){
-# 1289 "Liofilizador Placa Mae.c"
+# 1320 "Liofilizador Placa Mae.c"
         case 0x08:
              EEPROM_Write_Byte(usart_protocol.value[0],
                                usart_protocol.value[1]);
@@ -6814,13 +6845,13 @@ void Decodify_Command(void){
              Send_to_PC(3);
              SEND_REPLY_OK();
              break;
-# 1500 "Liofilizador Placa Mae.c"
+# 1531 "Liofilizador Placa Mae.c"
         case 0X21:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
              Send_to_PC(3);
              SEND_REPLY_OK();
-# 1547 "Liofilizador Placa Mae.c"
+# 1578 "Liofilizador Placa Mae.c"
     }
 }
 
@@ -7437,7 +7468,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2171 "Liofilizador Placa Mae.c"
+# 2202 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -7590,7 +7621,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2331 "Liofilizador Placa Mae.c"
+# 2362 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
@@ -7614,7 +7645,7 @@ void Contagem_Tempo_de_Processo(char value){
 }
 
 void SaveBlackoutStatusRuning(void){
-     if(processo_segundo%30==0)
+     if(processo_minuto%10==0)
        {
        if(statusgen1.flag_save_time==0)
           {
@@ -8272,7 +8303,7 @@ void ShowHardwareInfo(){
      totalboard=0;
      strcpy(texto,"");
      strcat(texto,"* : Mother Board ");
-     strcat(texto,"v1.0.12");
+     strcat(texto,"master");
      print(texto);
      for(destino=1;destino<15;destino++)
         {
@@ -8411,34 +8442,60 @@ void Carregar_Display_Schematic_Color(){
 }
 
 void Ligar_Cargas_Compassadamente(){
+     PROCULUS_VP_Write_UInt16(0x02,0);
+     PROCULUS_VP_Write_UInt16(0x03,0);
+     PROCULUS_VP_Write_UInt16(0x04,0);
+     PROCULUS_VP_Write_UInt16(0x05,0);
+     statuspower.flag_time_process=0;
+
      statuspower.bits=EEPROM_Read_Byte(16);
      if(statuspower.bits!=0)
           {
           print("Cond. de blackout encontrada!");
           print("Acionando Cargas, Aguarde...");
+
           Contagem_Tempo_de_Processo(0);
-          PROCULUS_VP_Write_UInt16(0x02,statuspower.flag_global_datalog);
-          PROCULUS_VP_Write_UInt16(0x03,statuspower.flag_global_condensador);
-          PROCULUS_VP_Write_UInt16(0x04,statuspower.flag_global_vacuo);
-          PROCULUS_VP_Write_UInt16(0x05,statuspower.flag_global_aquecimento);
 
-          statuspower.flag_global_datalog=0;
-          statuspower.flag_global_condensador=0;
-          statuspower.flag_global_vacuo=0;
-          statuspower.flag_global_aquecimento=0;
+          if(statuspower.flag_global_datalog==1)
+             {
+             statuspower.flag_global_datalog=0;
+             print("1-DataLog");
+             PROCULUS_VP_Write_UInt16(0x02,1);
+             global_datalog();
+             my_delay_ms_CLRWDT(10000);
+             }
 
-          global_datalog();
-          print("1-Datalog.");
-          my_delay_ms_CLRWDT(100);
-          print("2-Condensador.");
-          global_condensador();
-          my_delay_ms_CLRWDT(10000);
-          print("3-Vacuo.");
-          global_vacuo();
-          my_delay_ms_CLRWDT(10000);
-          print("4-Aquecimento");
-          global_aquecimento();
-          my_delay_ms_CLRWDT(1000);
+
+          if(statuspower.flag_global_condensador==1)
+            {
+            statuspower.flag_global_condensador=0;
+            print("1-Condensador.");
+            PROCULUS_VP_Write_UInt16(0x03,1);
+            global_condensador();
+            my_delay_ms_CLRWDT(10000);
+            }
+
+
+          if(statuspower.flag_global_vacuo==1)
+            {
+            statuspower.flag_global_vacuo=0;
+            statuspower.flag_time_process=1;
+            print("2-Vacuo.");
+            PROCULUS_VP_Write_UInt16(0x04,1);
+            global_vacuo();
+            my_delay_ms_CLRWDT(10000);
+            }
+
+
+          if(statuspower.flag_global_aquecimento==1)
+            {
+            statuspower.flag_global_aquecimento=0;
+            print("3-Aquecimento");
+            PROCULUS_VP_Write_UInt16(0x05,1);
+            global_aquecimento();
+            my_delay_ms_CLRWDT(10000);
+            }
+          PROCULUS_Show_Screen(15);
           }
      memo_statuspower=statuspower.bits;
      PROCULUS_Show_Screen(15);
