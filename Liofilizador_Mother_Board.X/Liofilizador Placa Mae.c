@@ -357,6 +357,8 @@ void main(void)
      }//------------------------------------------------------------------------
      
      //-------------------------------------------------------------------------
+     my_delay_ms_CLRWDT(300); 
+     print("JJ Cientifica Ind. e Com. de Eq. Cientificos.");      
      if(EEPROM_Read_Byte(OFFSET_EEPROM)==0xFF)
        {         
        print("Formatando memoria principal..."); 
@@ -383,8 +385,6 @@ void main(void)
      //------------------------------------------------------------------------- 
      
      //======================== INFORMAÇÕES INICIAIS ===========================
-     my_delay_ms_CLRWDT(300); 
-     print("JJ Cientifica Ind. e Com. de Eq. Cientificos.");     
      my_delay_ms_CLRWDT(300);
      print("Inicializando o Sistema...");
      my_delay_ms_CLRWDT(300);
@@ -434,8 +434,13 @@ void main(void)
      Exibe_Hora_Data(FALSE); //Exibe data e Hora sem os segundos (FALSE)
      rtc.milisegundo=0;
      rtc.segundo=0;
-     processo_hora=EEPROM_Read_Byte(17);
-     processo_minuto=EEPROM_Read_Byte(18);
+     
+     
+     processo_hora=12;
+     processo_minuto=32;
+     
+     
+     
      processo_segundo=0;     
      delay_condensador=0;
      
@@ -463,7 +468,7 @@ void main(void)
              //-----------------------------------------------------------------
 
                 if(rtc.milisegundo<2) if(pagina!=25) Exibe_Hora_Data(FALSE); //Exibe data e hora sem segundos
-                if(flag_time_process==TRUE) SaveBlackoutStatusRuning(); //Salva status e tempo de processo a cada 10 minutos
+                //if(flag_time_process==TRUE) SaveBlackoutStatusRuning(); //Salva status e tempo de processo a cada 10 minutos
                 Exibe_Tempo_de_Processo();
                 Icones_de_alarmes();    
 
@@ -1614,7 +1619,7 @@ void Formatar_Banco_de_Dados(char inicio, char total){
           liofilizador[j].tempoOFF=0;
           liofilizador[j].histerese=0;
           strcpy(liofilizador[j].receita,"");          
-          liofilizador[j].status=0;//IconStatusTrue[j]-1; //Fix - Colocar NOK         
+          liofilizador[j].status=0;      
           SaveLiofilizadorOnMemory(j,&liofilizador[j]);          
           }
     
@@ -2351,13 +2356,14 @@ void Contagem_Tempo_de_Processo(char value){
 }
 
 void SaveBlackoutStatusRuning(void){
-     if(processo_minuto%10==0)
-       {
+     if(processo_minuto%2==0)  //fix passar para 10 minutos
+       {          
        if(flag_save_time==0)  
           {
           flag_save_time=1;  
+          PROCULUS_OK();
           EEPROM_Write_Byte(17,processo_hora);     //Hora
-          EEPROM_Write_Byte(18,processo_minuto);   //Minuto        
+          EEPROM_Write_Byte(18,processo_minuto);   //Minuto           
           }
        }
      else
