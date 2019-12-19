@@ -174,6 +174,8 @@ unsigned char memo_statuspower;
 volatile unsigned char delay_condensador;
 
 int index;
+int Tamanho_Display;
+int TrendColor[13];
 
 T_mapa mapa;
 
@@ -431,7 +433,11 @@ void main(void)
        }   
      RecallBlackoutStatus();
      TrendCurveFuncao(LOAD);
-     
+     senha_atual=EEPROM_Read_Long32(11);
+     Carregar_Status_da_Senha_Global(); 
+     Carregar_Parametros_de_Seguranca();
+     Carregar_tempo_de_datalog(); 
+     //-------------------------------------------------------------------------     
 
      //-------------------------------------------------------------------------
      if(statuspower.bits!=0)
@@ -484,17 +490,17 @@ void main(void)
        {
        PROCULUS_Show_Screen(15);       
        }  
-     else
-       {
-       print("Iniciando Liofilizador.");
-       asm("CLRWDT");
-       global_condensador();
-       my_delay_ms(10000);
-       global_vacuo();
-       my_delay_ms(10000);
-       global_aquecimento();
-       PROCULUS_Show_Screen(15); 
-       }  
+//     else
+//       {
+//       print("Iniciando Liofilizador.");
+//       asm("CLRWDT");
+//       global_condensador();
+//       my_delay_ms(10000);
+//       global_vacuo();
+//       my_delay_ms(10000);
+//       global_aquecimento();
+//       PROCULUS_Show_Screen(15); 
+//       }  
      
      pagina=0;
      paginamemo=0;
@@ -510,8 +516,8 @@ void main(void)
      Exibe_Hora_Data(FALSE);
      rtc.milisegundo=0;
      rtc.segundo=0;
-     processo_hora=EEPROM_Read_Byte(17);
-     processo_minuto=EEPROM_Read_Byte(18);
+     //processo_hora=EEPROM_Read_Byte(17);
+     //processo_minuto=EEPROM_Read_Byte(18);
      processo_segundo=0;
      memo_statuspower=statuspower.bits;
      delay_condensador=0;
@@ -519,9 +525,7 @@ void main(void)
      //=========================================================================
      //                              M A I N
      //=========================================================================
-
-     
-        
+        Ligar_Cargas_Compassadamente();
         while(1)
              {
              flag_main_loop_WDT=TRUE;
@@ -3233,29 +3237,22 @@ void Ligar_Cargas_Compassadamente(){
           {   
           print("Cond. de blackout encontrada!");
           print("Acionando Cargas, Aguarde...");
-          Contagem_Tempo_de_Processo(FALSE);
-          PROCULUS_VP_Write_UInt16(0x02,flag_global_datalog);  //Valor inicial do botao Datalog
-          PROCULUS_VP_Write_UInt16(0x03,flag_global_condensador);  //Valor inicial do botao Condensador
-          PROCULUS_VP_Write_UInt16(0x04,flag_global_vacuo);  //Valor inicial do botao Vacuo
-          PROCULUS_VP_Write_UInt16(0x05,flag_global_aquecimento);  //Valor inicial do botao Aquecimento Global
-
-          flag_global_datalog=0;
+          
+          
           flag_global_condensador=0;
-          flag_global_vacuo=0;     
-          flag_global_aquecimento=0; 
-
-          global_datalog();
-          print("1-Datalog.");
-          my_delay_ms_CLRWDT(100);            
-          print("2-Condensador.");
+          
+          print("Iniciando Cargas.");
+          asm("CLRWDT");
+          print("1-Condensador.");
+          my_delay_ms(100);
           global_condensador();
-          my_delay_ms_CLRWDT(10000);
-          print("3-Vacuo.");
-          global_vacuo();     
-          my_delay_ms_CLRWDT(10000);
-          print("4-Aquecimento");
-          global_aquecimento();                
-          my_delay_ms_CLRWDT(1000);
+          my_delay_ms(10000);
+          print("2-Vacuo.");
+          global_vacuo();
+          my_delay_ms(10000);
+          print("3-Aquecimento");
+          global_aquecimento();
+          PROCULUS_Show_Screen(15);           
           }
      memo_statuspower=statuspower.bits;
      PROCULUS_Show_Screen(15);
