@@ -6628,7 +6628,7 @@ void save_datalog(unsigned int add){
      Send_To_Slave(0xFF, 0x02 , 0, bb);
 
      for(index=0;index<(totalboard*2);index++)
-      {
+  {
          if(mapa.entrada[index]!=((void*)0))
             {
             PROCULUS_graphic_plot(mapa.canal[index]+1,*mapa.entrada[index]*mapa.fator[index]);
@@ -7607,7 +7607,7 @@ void Check_And_Send_Capture_Datalog(void){
          {
          statusgen.flag_capture_datalog=0;
 
-         _delay((unsigned long)((20)*(32000000/4000.0)));
+         _delay((unsigned long)((25)*(32000000/4000.0)));
          save_datalog(0);
 
 

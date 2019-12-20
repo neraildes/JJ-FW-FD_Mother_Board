@@ -1,7 +1,7 @@
 ___lwdiv@dividend C 0 COMRAM 1
 EEPROM_24C1025_Write_Buffer@range 20 0 COMRAM 1
 USART_put_buffer@vetor D 0 COMRAM 1
-_PROCULUS_Buzzer 7D70 0 CODE 0
+_PROCULUS_Buzzer 7D7A 0 CODE 0
 my_delay_ms_CLRWDT@time C 0 COMRAM 1
 showTotalReset@valor 2C 0 COMRAM 1
 __CFG_XINST$OFF 0 0 ABS 0
@@ -24,7 +24,7 @@ __S0 30000E 0 ABS 0
 reverse@i 17 0 COMRAM 1
 __S1 6B0 0 ABS 0
 __S2 0 0 ABS 0
-_PROCULUS_Show_Screen 80EE 0 CODE 0
+_PROCULUS_Show_Screen 80F8 0 CODE 0
 _Formatar_Dados_de_Seguranca 74D4 0 CODE 0
 __Hintentry 0 0 ABS 0
 reverse@j 19 0 COMRAM 1
@@ -45,7 +45,7 @@ _RBIF 7F90 0 ABS 0
 EEPROM_Write_Buffer@i 30 0 COMRAM 1
 main@dica DC 0 BANK0 1
 PROCULUS_VP_Write_Long32@vp 1D 0 COMRAM 1
-__end_of_Check_And_Send_Capture_Datalog 7CC8 0 CODE 0
+__end_of_Check_And_Send_Capture_Datalog 7B1A 0 CODE 0
 MenorCanalLivre@canalBusca F 0 COMRAM 1
 TrendCurveFuncao@i 3F 0 COMRAM 1
 isr@i B 0 COMRAM 1
@@ -65,7 +65,7 @@ start 428 0 CODE 0
 reverse@s 10 0 COMRAM 1
 _delay_update_display 9F 0 BANK0 1
 PROCULUS_VP_Write_Long32@pt 27 0 COMRAM 1
-__end_of_Send_to_PC 7E9C 0 CODE 0
+__end_of_Send_to_PC 7EA6 0 CODE 0
 ___fltol@f1 33 0 COMRAM 1
 USART_input_buffer@time D 0 COMRAM 1
 TrendCurveFuncao@cor 3C 0 COMRAM 1
@@ -100,12 +100,12 @@ ttemp5 6F 0 COMRAM 1
 ttemp6 72 0 COMRAM 1
 ttemp7 76 0 COMRAM 1
 wtemp8 6F 0 COMRAM 1
-_Condensador_Switch 8066 0 CODE 0
+_Condensador_Switch 8070 0 CODE 0
 __size_of_RecallBlackoutStatus 0 0 ABS 0
 __end_of_PROCULUS_OK 79FA 0 CODE 0
 __Hconfig 30000E 0 CONFIG 0
 __Lconfig 300000 0 CONFIG 0
-_I2C_Master_Stop 81C8 0 CODE 0
+_I2C_Master_Stop 81D2 0 CODE 0
 __end_of_SaveLiofilizadorOnMemory 5DD8 0 CODE 0
 ShowAndSetSlaveParameters@tupla 2B 0 COMRAM 1
 _itoa$3523 21 0 COMRAM 1
@@ -138,7 +138,7 @@ __Lram 0 0 ABS 0
 _main$1634 E0 0 BANK0 1
 _ultoa 4E76 0 CODE 0
 _icone B9 0 BANK0 1
-__end_of_PROCULUS_NOK 80CC 0 CODE 0
+__end_of_PROCULUS_NOK 80D6 0 CODE 0
 __Hcomram 0 0 ABS 0
 __Lcomram 0 0 ABS 0
 main@canal_sequencial E9 0 BANK0 1
@@ -176,7 +176,7 @@ _EECON2 FA7 0 ABS 0
 __size_of_PROCULUS_VP_Write_Long32 0 0 ABS 0
 __end_of_global_datalog 6FEE 0 CODE 0
 Carrega_Tupla_Receita@addeeprom 1F 0 COMRAM 1
-_EEPROM_Read_String 7B96 0 CODE 0
+_EEPROM_Read_String 7BDC 0 CODE 0
 __size_of_my_pow 0 0 ABS 0
 ?___fltol 33 0 COMRAM 1
 __size_of_my_delay_ms 0 0 ABS 0
@@ -250,9 +250,9 @@ __CFG_EBTR0$OFF 0 0 ABS 0
 __Htext100 0 0 ABS 0
 __Ltext100 0 0 ABS 0
 __size_of_TrendCurveFuncao 0 0 ABS 0
-__ptext100 7B96 0 CODE 0
+__ptext100 7BDC 0 CODE 0
 showTotalReset@bb 28 0 COMRAM 1
-_Gravar_Status_da_Senha_Global 816C 0 CODE 0
+_Gravar_Status_da_Senha_Global 8176 0 CODE 0
 __size_of_global_vacuo 0 0 ABS 0
 __Htext110 0 0 ABS 0
 __Ltext110 0 0 ABS 0
@@ -278,7 +278,7 @@ EEPROM_Read_Integer@resultado 13 0 COMRAM 1
 EEPROM_24C1025_Read_Buffer@mem_add 12 0 COMRAM 1
 __HnvFARRAM 0 0 FARRAM 0
 __LnvFARRAM 0 0 FARRAM 0
-__ptext101 7DA6 0 CODE 0
+__ptext101 7DB0 0 CODE 0
 __ptext120 72BE 0 CODE 0
 __size_of_ShowStaticValueGrid 0 0 ABS 0
 PROCULUS_Get_Page@retorno 1B 0 COMRAM 1
@@ -291,8 +291,8 @@ Send_To_Slave@buffer 11 0 COMRAM 1
 strcpy@src 12 0 COMRAM 1
 _delay_condensador 69 0 COMRAM 1
 _proculus 1AF 0 BANK1 1
-__end_of_AcordaFilha 81B4 0 CODE 0
-__end_of_PROCULUS_TPFLAG_Write 8128 0 CODE 0
+__end_of_AcordaFilha 81BE 0 CODE 0
+__end_of_PROCULUS_TPFLAG_Write 8132 0 CODE 0
 my_delay_ms_TMR1@i 11 0 COMRAM 1
 __end_of_PROCULUS_Get_Page 679E 0 CODE 0
 EEPROM_24C1025_Write_Byte@data 26 0 COMRAM 1
@@ -311,7 +311,7 @@ main@canal 91 0 BANK0 1
 __end_of_I2C_Master_Read 7AD4 0 CODE 0
 __size_of_EEPROM_Write_Buffer 0 0 ABS 0
 __ptext102 6848 0 CODE 0
-__ptext121 7D70 0 CODE 0
+__ptext121 7D7A 0 CODE 0
 __ptext140 776C 0 CODE 0
 __Htext131 0 0 ABS 0
 __Htext112 0 0 ABS 0
@@ -334,9 +334,9 @@ __Ltext122 0 0 ABS 0
 __Ltext103 0 0 ABS 0
 _Delay_Led_Tmr0 A5 0 BANK0 1
 Buffer_Manager@i 11 0 COMRAM 1
-__ptext103 7F60 0 CODE 0
+__ptext103 7F6A 0 CODE 0
 __ptext122 7164 0 CODE 0
-__ptext141 819A 0 CODE 0
+__ptext141 81A4 0 CODE 0
 EEPROM_24C1025_Write_Buffer@sizedata 13 0 COMRAM 1
 __Htext132 0 0 ABS 0
 __Htext113 0 0 ABS 0
@@ -359,9 +359,9 @@ __Ltext104 0 0 ABS 0
 PROCULUS_Read_RTC@year 2E 0 COMRAM 1
 _SaveLiofilizadorOnMemory 5CF0 0 CODE 0
 __size_of_PROCULUS_Buffer_to_Proculus 0 0 ABS 0
-__ptext104 7F86 0 CODE 0
+__ptext104 7F90 0 CODE 0
 __ptext123 71D8 0 CODE 0
-__ptext142 801E 0 CODE 0
+__ptext142 8028 0 CODE 0
 buscaIndex@i 10 0 COMRAM 1
 USART_init@i 22 0 COMRAM 1
 __Htext133 0 0 ABS 0
@@ -370,8 +370,8 @@ __Ltext133 0 0 ABS 0
 __Ltext114 0 0 ABS 0
 __size_of_PROCULUS_Control_Activation 0 0 ABS 0
 PROCULUS_Read_RTC@hour 37 0 COMRAM 1
-__ptext114 7FAC 0 CODE 0
-__ptext133 7FF8 0 CODE 0
+__ptext114 7FB6 0 CODE 0
+__ptext133 8002 0 CODE 0
 PROCULUS_REG_Read@size 15 0 COMRAM 1
 __Htext143 0 0 ABS 0
 __Htext124 0 0 ABS 0
@@ -384,7 +384,7 @@ ShowHardwareInfo@destino 2B 0 COMRAM 1
 USART_init@baudrate 19 0 COMRAM 1
 __ptext105 78BE 0 CODE 0
 __ptext124 51DC 0 CODE 0
-__ptext143 81A8 0 CODE 0
+__ptext143 81B2 0 CODE 0
 __size_of_PROCULUS_REG_Write 0 0 ABS 0
 __Htext134 0 0 ABS 0
 __Htext115 0 0 ABS 0
@@ -393,7 +393,7 @@ __Ltext115 0 0 ABS 0
 _Contagem_Tempo_de_Processo 739C 0 CODE 0
 __Hdata 0 0 ABS 0
 __Ldata 0 0 ABS 0
-__ptext115 8128 0 CODE 0
+__ptext115 8132 0 CODE 0
 __ptext134 6DD4 0 CODE 0
 __CFG_EBTR3$OFF 0 0 ABS 0
 _pagina F0 0 BANK0 1
@@ -404,8 +404,8 @@ __Ltext106 0 0 ABS 0
 __end_of_showTotalReset 30C0 0 CODE 0
 _Carregar_Parametros_de_Seguranca 62A6 0 CODE 0
 PROCULUS_VP_Read@i 1E 0 COMRAM 1
-__ptext106 81D2 0 CODE 0
-__ptext125 7C8C 0 CODE 0
+__ptext106 81DC 0 CODE 0
+__ptext125 7AD4 0 CODE 0
 __end_of_Set_Receita 5EAE 0 CODE 0
 EEPROM_24C1025_Read_Str@texto 16 0 COMRAM 1
 _usart_buffer_fila 4F4 0 BIGRAM 1
@@ -417,18 +417,18 @@ _USART_input_buffer 7714 0 CODE 0
 __size_of_PROCULUS_OK 0 0 ABS 0
 stackhi F7F 0 ABS 0
 save_datalog@index 49 0 COMRAM 1
-_EEPROM_24C1025_Read_Byte 7E3E 0 CODE 0
+_EEPROM_24C1025_Read_Byte 7E48 0 CODE 0
 __ptext116 5620 0 CODE 0
-__ptext135 80CC 0 CODE 0
+__ptext135 80D6 0 CODE 0
 itoa@isNegative 23 0 COMRAM 1
 PROCULUS_VP_Write_String@vp 1D 0 COMRAM 1
 Global_Aquecimento_Switch@estado 24 0 COMRAM 1
-__end_of_Gravar_Status_da_Senha_Global 817E 0 CODE 0
+__end_of_Gravar_Status_da_Senha_Global 8188 0 CODE 0
 __Htext126 0 0 ABS 0
 __Htext107 0 0 ABS 0
 __Ltext126 0 0 ABS 0
 __Ltext107 0 0 ABS 0
-__end_of_I2C_Master_Wait 7F60 0 CODE 0
+__end_of_I2C_Master_Wait 7F6A 0 CODE 0
 __HcstackBANK0 0 0 ABS 0
 __LcstackBANK0 0 0 ABS 0
 __size_of_Carregar_Display_Schematic_Color 0 0 ABS 0
@@ -439,7 +439,7 @@ USART_put_string@ptr F 0 COMRAM 1
 __pcstackBANK0 DB 0 BANK0 1
 my_delay_ms_TMR1@time C 0 COMRAM 1
 __end_of_I2C_Master_Init 76BA 0 CODE 0
-_EEPROM_Write_Integer 7FD2 0 CODE 0
+_EEPROM_Write_Integer 7FDC 0 CODE 0
 _strlen 78BE 0 CODE 0
 ___awmod@sign 11 0 COMRAM 1
 __Htext136 0 0 ABS 0
@@ -451,12 +451,12 @@ __Ltext117 0 0 ABS 0
 __Htemp 6F 0 COMRAM 1
 __Ltemp 6E 0 COMRAM 1
 stacklo 6B0 0 ABS 0
-_strcat 7F60 0 CODE 0
+_strcat 7F6A 0 CODE 0
 __Hrbit 0 0 COMRAM 1
 __Lrbit 0 0 COMRAM 1
 __ptext117 79FA 0 CODE 0
 __ptext136 6426 0 CODE 0
-__end_of_I2C_Master_Stop 81D2 0 CODE 0
+__end_of_I2C_Master_Stop 81DC 0 CODE 0
 __Hinit 42C 0 CODE 0
 __Linit 428 0 CODE 0
 __Htext127 0 0 ABS 0
@@ -465,8 +465,8 @@ __Hintcodelo 428 0 CODE 0
 __Ltext127 0 0 ABS 0
 __Ltext108 0 0 ABS 0
 __Lintcodelo 18 0 CODE 0
-___wmul 7FF8 0 CODE 0
-_PROCULUS_VP_Read_UInt16 7FAC 0 CODE 0
+___wmul 8002 0 CODE 0
+_PROCULUS_VP_Read_UInt16 7FB6 0 CODE 0
 __Hrbss 0 0 COMRAM 1
 __end_of_MenorCanalLivre 7164 0 CODE 0
 __end_of_main 1482 0 CODE 0
@@ -484,23 +484,23 @@ PROCULUS_Read_RTC@retorno 24 0 COMRAM 1
 __CFG_WDT$ON 0 0 ABS 0
 __Htext 0 0 ABS 0
 __Ltext 0 0 ABS 0
-__ptext118 7FD2 0 CODE 0
-__ptext137 7AD4 0 CODE 0
+__ptext118 7FDC 0 CODE 0
+__ptext137 7B1A 0 CODE 0
 EEPROM_24C1025_Write_Int@chip_add 28 0 COMRAM 1
 __Htext128 0 0 ABS 0
 __Htext109 0 0 ABS 0
 __Ltext128 0 0 ABS 0
 __Ltext109 0 0 ABS 0
 _my_pow 6642 0 CODE 0
-__end_of_My_ADC_init 818C 0 CODE 0
+__end_of_My_ADC_init 8196 0 CODE 0
 _boardtype 1F5 0 BANK1 1
 __size_of_Carregar_Status_da_Senha_Global 0 0 ABS 0
 __end_of_EEPROM_Write_String 7A48 0 CODE 0
-_EEPROM_24C1025_Write_Int 7EEE 0 CODE 0
+_EEPROM_24C1025_Write_Int 7EF8 0 CODE 0
 _strcpy 7600 0 CODE 0
-_PROCULUS_VP_Read_Double32 7E9C 0 CODE 0
+_PROCULUS_VP_Read_Double32 7EA6 0 CODE 0
 _statusgen C5 0 BANK0 1
-__ptext109 80AA 0 CODE 0
+__ptext109 80B4 0 CODE 0
 __ptext128 5726 0 CODE 0
 ___wmul@multiplier 15 0 COMRAM 1
 __Htext138 0 0 ABS 0
@@ -522,8 +522,8 @@ __pdataBANK0 EA 0 BANK0 1
 __Htext129 0 0 ABS 0
 __Ltext129 0 0 ABS 0
 end_of_initialization 683A 0 CODE 0
-__end_of_PROCULUS_Show_Screen 810C 0 CODE 0
-__end_of_Condensador_Switch 8088 0 CODE 0
+__end_of_PROCULUS_Show_Screen 8116 0 CODE 0
+__end_of_Condensador_Switch 8092 0 CODE 0
 __size_of_PROCULUS_VP_Read_String 0 0 ABS 0
 __ptext129 1A9A 0 CODE 0
 __Htext139 0 0 ABS 0
@@ -536,12 +536,12 @@ _EEPROM_24C1025_Write_Str 4682 0 CODE 0
 EEPROM_24C1025_Read_Str@ctrl 23 0 COMRAM 1
 _pagina_31 2296 0 CODE 0
 ultoa@temp 21 0 COMRAM 1
-_EEPROM_Read_Byte 7AD4 0 CODE 0
+_EEPROM_Read_Byte 7B1A 0 CODE 0
 _Upload_Data_to_Slave 36B6 0 CODE 0
 TrendCurveFuncao@figura 3A 0 COMRAM 1
 __size_of_PROCULUS_NOK 0 0 ABS 0
 TrendCurveFuncao@funcao 37 0 COMRAM 1
-_EEPROM_Read_Buffer 7C50 0 CODE 0
+_EEPROM_Read_Buffer 7C96 0 CODE 0
 ___wmul@multiplicand 17 0 COMRAM 1
 __end_of_PROCULUS_Control_Activation 795E 0 CODE 0
 __end_of_ShowMessage 68F0 0 CODE 0
@@ -549,7 +549,7 @@ ShowSensorRealTimeHS@SlaveBoard 2E 0 COMRAM 1
 _SSPCON1 FC6 0 ABS 0
 PROCULUS_VP_Read@size 19 0 COMRAM 1
 ShowStaticValueGrid@tupla 30 0 COMRAM 1
-__end_of_EEPROM_Read_Byte 7B16 0 CODE 0
+__end_of_EEPROM_Read_Byte 7B5C 0 CODE 0
 _Seg_Vacuo 99 0 BANK0 1
 ShowAndSetSlaveParameters@bb 27 0 COMRAM 1
 _T1CKPS0 7E6C 0 ABS 0
@@ -559,10 +559,10 @@ main@i_1615 E7 0 BANK0 1
 __size_of_I2C_Master_Wait 0 0 ABS 0
 EEPROM_24C1025_Write_Buffer@count 1E 0 COMRAM 1
 _T1CKPS1 7E6D 0 ABS 0
-__end_of_PROCULUS_VP_Write_String 7FAC 0 CODE 0
+__end_of_PROCULUS_VP_Write_String 7FB6 0 CODE 0
 _pagina_23 582C 0 CODE 0
 buscaIndex@valor E 0 COMRAM 1
-_SEND_REPLY_OK 818C 0 CODE 0
+_SEND_REPLY_OK 8196 0 CODE 0
 pagina_31@confirma_senha 51 0 COMRAM 1
 _PROCULUS_Get_Page 66F2 0 CODE 0
 __end_of_PROCULUS_VP_Write 64DE 0 CODE 0
@@ -578,7 +578,7 @@ __size_of_I2C_Master_Stop 0 0 ABS 0
 _pagina_15 72BE 0 CODE 0
 _statusgen1 C3 0 BANK0 1
 EEPROM_Read_Buffer@i 15 0 COMRAM 1
-__end_of_EEPROM_24C1025_Write_Int 7F14 0 CODE 0
+__end_of_EEPROM_24C1025_Write_Int 7F1E 0 CODE 0
 _pagina_25 746C 0 CODE 0
 main@reset E2 0 BANK0 1
 __end_of_Decodify_Command 292C 0 CODE 0
@@ -599,13 +599,13 @@ _TrendCurveFuncao 1482 0 CODE 0
 _I2C_Master_Read 7A8E 0 CODE 0
 EEPROM_Write_String@dado 2D 0 COMRAM 1
 Atualizar_Lista_de_Receitas@i 2D 0 COMRAM 1
-_USART_put_int 819A 0 CODE 0
+_USART_put_int 81A4 0 CODE 0
 EEPROM_24C1025_Fill_All@page 181 0 BANK1 1
-__end_of_I2C_Master_RepeatedStart 81EC 0 CODE 0
+__end_of_I2C_Master_RepeatedStart 81F6 0 CODE 0
 SaveLiofilizadorOnMemory@liofilizador 2F 0 COMRAM 1
 _EEPROM_Write_Byte 6EE8 0 CODE 0
 __end_of_Exibe_Tempo_de_Processo 61E2 0 CODE 0
-__end_of_PROCULUS_Popup 81DC 0 CODE 0
+__end_of_PROCULUS_Popup 81E6 0 CODE 0
 __size_of_PROCULUS_VP_Write_String 0 0 ABS 0
 _Delay_Led_Usart 1AD 0 BANK1 1
 EEPROM_24C1025_Read_Byte@data 2B 0 COMRAM 1
@@ -615,7 +615,7 @@ EEPROM_Write_String@addr 2B 0 COMRAM 1
 I2C_Master_Write@d D 0 COMRAM 1
 __Hibigdata 0 0 CODE 0
 __Libigdata 0 0 CODE 0
-_Send_to_PC 7E6E 0 CODE 0
+_Send_to_PC 7E78 0 CODE 0
 Upload_Data_to_Slave@temp 1D 0 COMRAM 1
 __size_of_Decodify_Command 0 0 ABS 0
 _pagina_47 6ADE 0 CODE 0
@@ -647,7 +647,7 @@ __size_of_Condensador_Switch 0 0 ABS 0
 __Hbank1 0 0 ABS 0
 __Lbank1 0 0 ABS 0
 PROCULUS_REG_Read@tempo 1B 0 COMRAM 1
-_EEPROM_24C1025_Write_Byte 7F14 0 CODE 0
+_EEPROM_24C1025_Write_Byte 7F1E 0 CODE 0
 __Hbank2 0 0 ABS 0
 __Lbank2 0 0 ABS 0
 PROCULUS_VP_Read@tempo 1C 0 COMRAM 1
@@ -667,12 +667,12 @@ __Hpowerup 428 0 CODE 0
 _SSPSTAT FC7 0 ABS 0
 __Lpowerup 428 0 CODE 0
 EEPROM_24C1025_Write_Buffer@mem_add F 0 COMRAM 1
-_I2C_Master_RepeatedStart 81E4 0 CODE 0
+_I2C_Master_RepeatedStart 81EE 0 CODE 0
 __Hbank6 0 0 ABS 0
 __Lbank6 0 0 ABS 0
 EEPROM_Read_Integer@addr 10 0 COMRAM 1
 __Hbank7 0 0 ABS 0
-_PROCULUS_NOK 80AA 0 CODE 0
+_PROCULUS_NOK 80B4 0 CODE 0
 __Lbank7 0 0 ABS 0
 __Hbank8 0 0 ABS 0
 __Lbank8 0 0 ABS 0
@@ -692,7 +692,7 @@ _INTCON2bits FF1 0 ABS 0
 _SSPCON2bits FC5 0 ABS 0
 ___flmul@grs 27 0 COMRAM 1
 __Htext2 0 0 ABS 0
-_My_ADC_init 817E 0 CODE 0
+_My_ADC_init 8188 0 CODE 0
 _Grava_Receita 64DE 0 CODE 0
 __Ltext2 0 0 ABS 0
 __ptext1 4E76 0 CODE 0
@@ -718,7 +718,7 @@ _Exibe_Tempo_de_Processo 611C 0 CODE 0
 __Ltext7 0 0 ABS 0
 __end_of_Exibe_Hora_Data 786E 0 CODE 0
 __size_of_I2C_Master_Write 0 0 ABS 0
-__ptext6 7C14 0 CODE 0
+__ptext6 7C5A 0 CODE 0
 Upload_Data_to_Slave@board 24 0 COMRAM 1
 __HbssCOMRAM 0 0 ABS 0
 __LbssCOMRAM 0 0 ABS 0
@@ -726,7 +726,7 @@ _PROCULUS_REG_Write 71D8 0 CODE 0
 __Htext8 0 0 ABS 0
 __Ltext8 0 0 ABS 0
 __ptext7 6CAE 0 CODE 0
-_Carregar_tempo_de_datalog 7E0C 0 CODE 0
+_Carregar_tempo_de_datalog 7E16 0 CODE 0
 PROCULUS_VP_Read_UInt16@vp 1F 0 COMRAM 1
 __pbssCOMRAM 61 0 COMRAM 1
 __Htext9 0 0 ABS 0
@@ -755,10 +755,10 @@ __size_of_EEPROM_24C1025_Read_Int 0 0 ABS 0
 _Ligar_Cargas_Compassadamente 3A8E 0 CODE 0
 _totalboard 6A 0 COMRAM 1
 __size_of_Exibe_Tempo_de_Processo 0 0 ABS 0
-__end_of_EEPROM_Write_Buffer 7C14 0 CODE 0
+__end_of_EEPROM_Write_Buffer 7C5A 0 CODE 0
 USART_to_Protocol@usart_protocol C 0 COMRAM 1
 __end_of_EEPROM_Write_Byte 6F6C 0 CODE 0
-__end_of_EEPROM_24C1025_Read_Byte 7E6E 0 CODE 0
+__end_of_EEPROM_24C1025_Read_Byte 7E78 0 CODE 0
 Captura_Pagina@retorno 2B 0 COMRAM 1
 _Condensador 67 0 COMRAM 1
 Send_To_Slave@comando F 0 COMRAM 1
@@ -766,9 +766,9 @@ __end_of_EEPROM_24C1025_Read_Buffer 34C6 0 CODE 0
 Formatar_Lista_de_Receitas@i 36 0 COMRAM 1
 _Index_Sel_Rec BD 0 BANK0 1
 __end_of_Comando_Display 5A20 0 CODE 0
-_PROCULUS_VP_Write_UInt16 80CC 0 CODE 0
+_PROCULUS_VP_Write_UInt16 80D6 0 CODE 0
 _Carrega_Tupla_Receita 5EAE 0 CODE 0
-_Atualizar_Lista_de_Receitas 8088 0 CODE 0
+_Atualizar_Lista_de_Receitas 8092 0 CODE 0
 __size_of_Atualizar_Lista_de_Receitas 0 0 ABS 0
 _EEPROM_Read_Long32 795E 0 CODE 0
 EEPROM_24C1025_Read_Int@mem_add 26 0 COMRAM 1
@@ -776,7 +776,7 @@ strlen@a E 0 COMRAM 1
 __end_of_my_delay_ms_TMR1 70EA 0 CODE 0
 PROCULUS_Show_Screen@vetor 1D 0 COMRAM 1
 _OSCTUNEbits F9B 0 ABS 0
-__end_of_PROCULUS_VP_Read_String 8142 0 CODE 0
+__end_of_PROCULUS_VP_Read_String 814C 0 CODE 0
 Condensador_Switch@estado 1B 0 COMRAM 1
 Grava_Receita@receita 2F 0 COMRAM 1
 EEPROM_24C1025_Read_Str@mem_add 12 0 COMRAM 1
@@ -788,15 +788,15 @@ _my_delay_ms 776C 0 CODE 0
 __size_of___xxtofl 0 0 ABS 0
 _BAUDCONbits FB8 0 ABS 0
 ___rparam_used 1 0 ABS 0
-_Check_And_Send_Capture_Datalog 7C8C 0 CODE 0
+_Check_And_Send_Capture_Datalog 7AD4 0 CODE 0
 __size_of_PROCULUS_TPFLAG_Write 0 0 ABS 0
 __end_of___lwdiv 71D8 0 CODE 0
 __size_of_PROCULUS_Get_Page 0 0 ABS 0
 strcpy@d 18 0 COMRAM 1
-_PROCULUS_VP_Read_String 8128 0 CODE 0
-__end_of_EEPROM_Read_Integer 7DDA 0 CODE 0
+_PROCULUS_VP_Read_String 8132 0 CODE 0
+__end_of_EEPROM_Read_Integer 7DE4 0 CODE 0
 Condensador_Switch@buffer 1C 0 COMRAM 1
-_PROCULUS_TPFLAG_Read 8142 0 CODE 0
+_PROCULUS_TPFLAG_Read 814C 0 CODE 0
 __end_of_Grava_Receita 6592 0 CODE 0
 print@MAXVP 14B 0 BANK1 1
 __size_of_USART_putc 0 0 ABS 0
@@ -804,11 +804,11 @@ __end_of_ShowHardwareInfo 3A8E 0 CODE 0
 __size_of_USART_init 0 0 ABS 0
 my_delay_ms@time C 0 COMRAM 1
 my_pow@i 26 0 COMRAM 1
-_str2bcd 7EC6 0 CODE 0
+_str2bcd 7ED0 0 CODE 0
 __size_of_my_delay_ms_TMR1 0 0 ABS 0
-_SaveBlackoutStatus 7DDA 0 CODE 0
+_SaveBlackoutStatus 7DE4 0 CODE 0
 __size_of_PROCULUS_Read_RTC 0 0 ABS 0
-__end_of_EEPROM_24C1025_Write_Byte 7F3A 0 CODE 0
+__end_of_EEPROM_24C1025_Write_Byte 7F44 0 CODE 0
 my_delay_ms@i 11 0 COMRAM 1
 Contagem_Tempo_de_Processo@value 21 0 COMRAM 1
 ?_Captura_Pagina 1D 0 COMRAM 1
@@ -820,8 +820,8 @@ __end_of_ShowSensorRealTimeHS 2C0A 0 CODE 0
 USART_put_int@value D 0 COMRAM 1
 __size_of_Formatar_Lista_de_Receitas 0 0 ABS 0
 Grava_Receita@index 33 0 COMRAM 1
-_USART_putc 801E 0 CODE 0
-__end_of_PROCULUS_VP_Read_UInt16 7FD2 0 CODE 0
+_USART_putc 8028 0 CODE 0
+__end_of_PROCULUS_VP_Read_UInt16 7FDC 0 CODE 0
 __size_of_global_condensador 0 0 ABS 0
 EEPROM_Write_Buffer@dado 2D 0 COMRAM 1
 _showTotalReset 2EA0 0 CODE 0
@@ -855,7 +855,7 @@ __end_of___lldiv 6A3A 0 CODE 0
 EEPROM_24C1025_Write_Byte@chip_add 28 0 COMRAM 1
 PROCULUS_VP_Read_String@vp 1F 0 COMRAM 1
 ___awmod 6592 0 CODE 0
-_Incrementa_Contador_de_Repique_do_Vacuo 7B16 0 CODE 0
+_Incrementa_Contador_de_Repique_do_Vacuo 7B5C 0 CODE 0
 __Hparam 0 0 COMRAM 1
 __Lparam 0 0 COMRAM 1
 _leitura 1D7 0 BANK1 1
@@ -864,7 +864,7 @@ __Hspace_0 30000E 0 ABS 0
 __HcstackCOMRAM 0 0 ABS 0
 __Lspace_0 0 0 ABS 0
 __LcstackCOMRAM 0 0 ABS 0
-__end_of_Incrementa_Contador_de_Repique_do_Vacuo 7B56 0 CODE 0
+__end_of_Incrementa_Contador_de_Repique_do_Vacuo 7B9C 0 CODE 0
 PROCULUS_Write_RTC@date 10 0 COMRAM 1
 PROCULUS_Write_RTC@time 12 0 COMRAM 1
 _Icones_de_alarmes 6C16 0 CODE 0
@@ -884,16 +884,16 @@ __Hsmallconst 0 0 SMALLCONST 0
 ShowMessage@texto 2B 0 COMRAM 1
 __Lsmallconst 0 0 SMALLCONST 0
 __end_of_my_pow 66F2 0 CODE 0
-__end_of_buscaIndex 7C50 0 CODE 0
+__end_of_buscaIndex 7C96 0 CODE 0
 __end_of_Contagem_Tempo_de_Processo 7404 0 CODE 0
 _USART_to_Protocol 5F84 0 CODE 0
 ___fltol 5726 0 CODE 0
-_PROCULUS_TPFLAG_Write 810C 0 CODE 0
+_PROCULUS_TPFLAG_Write 8116 0 CODE 0
 _Formatar_Lista_de_Receitas 77C4 0 CODE 0
 __Hspace_2 0 0 ABS 0
 __Lspace_2 0 0 ABS 0
-_bcd2str 7CC8 0 CODE 0
-_AcordaFilha 81A8 0 CODE 0
+_bcd2str 7CD2 0 CODE 0
+_AcordaFilha 81B2 0 CODE 0
 ultoa@temp_loc 46 0 COMRAM 1
 ___flmul 1A9A 0 CODE 0
 _global_datalog 6F6C 0 CODE 0
@@ -917,7 +917,7 @@ ___awdiv 61E2 0 CODE 0
 __ramtop 1000 0 RAM 0
 _trendvp EC 0 BANK0 1
 __mediumconst FC8A 0 MEDIUMCONST 0
-__end_of_Carregar_tempo_de_datalog 7E3E 0 CODE 0
+__end_of_Carregar_tempo_de_datalog 7E48 0 CODE 0
 ___lwdiv 7164 0 CODE 0
 _vpPrint EA 0 BANK0 1
 __size_of_SEND_REPLY_OK 0 0 ABS 0
@@ -957,7 +957,7 @@ Decodify_Command@add 33 0 COMRAM 1
 EEPROM_24C1025_Write_Str@range 1E 0 COMRAM 1
 __size_of_EEPROM_24C1025_Read_Byte 0 0 ABS 0
 print@vp_roll 149 0 BANK1 1
-__pidataBANK0 81DC 0 CODE 0
+__pidataBANK0 81E6 0 CODE 0
 __size_of_global_datalog 0 0 ABS 0
 EEPROM_24C1025_Read_Buffer@data 17 0 COMRAM 1
 _SaveBlackoutStatusRuning 753A 0 CODE 0
@@ -975,12 +975,12 @@ PROCULUS_Show_Screen@screen 1B 0 COMRAM 1
 _processo_segundo C1 0 BANK0 1
 pagina_49@i 3D 0 COMRAM 1
 __size_of_PROCULUS_TPFLAG_Read 0 0 ABS 0
-__end_of_Atualizar_Lista_de_Receitas 80AA 0 CODE 0
+__end_of_Atualizar_Lista_de_Receitas 80B4 0 CODE 0
 __size_of_SaveLiofilizadorOnMemory 0 0 ABS 0
 PROCULUS_graphic_plot@channel 3F 0 COMRAM 1
 __CFG_WRT1$OFF 0 0 ABS 0
 ShowAndSetSlaveParameters@addEEPROM 2E 0 COMRAM 1
-_EEPROM_Write_Buffer 7BD6 0 CODE 0
+_EEPROM_Write_Buffer 7C1C 0 CODE 0
 __size_of___lwdiv 0 0 ABS 0
 Comando_Protocolo_Serial@i 3F 0 COMRAM 1
 EEPROM_24C1025_Read_Str@cnt 20 0 COMRAM 1
@@ -1002,9 +1002,9 @@ __Hbank11 0 0 ABS 0
 __Lbank11 0 0 ABS 0
 __CFG_PWRT$ON 0 0 ABS 0
 _tmr_led_tmr0 A7 0 BANK0 1
-_I2C_Master_Start 8158 0 CODE 0
+_I2C_Master_Start 8162 0 CODE 0
 Decodify_Command@add_24LCxxxx 3A 0 COMRAM 1
-_PROCULUS_Popup 81D2 0 CODE 0
+_PROCULUS_Popup 81DC 0 CODE 0
 __CFG_WRT3$OFF 0 0 ABS 0
 __CFG_FCMEN$OFF 0 0 ABS 0
 __end_of_Buffer_Manager 6426 0 CODE 0
@@ -1014,7 +1014,7 @@ __Lbank12 0 0 ABS 0
 __size_of_EEPROM_Write_Long32 0 0 ABS 0
 __size_of_SaveBlackoutStatusRuning 0 0 ABS 0
 __size_of_I2C_Master_RepeatedStart 0 0 ABS 0
-__end_of_PROCULUS_Buzzer 7DA6 0 CODE 0
+__end_of_PROCULUS_Buzzer 7DB0 0 CODE 0
 __Hbank13 0 0 ABS 0
 __Lbank13 0 0 ABS 0
 PROCULUS_Read_RTC@minute 3A 0 COMRAM 1
@@ -1030,7 +1030,7 @@ __end_of_Formatar_Dados_de_Seguranca 753A 0 CODE 0
 ShowStaticValueGrid@addEEPROM 2F 0 COMRAM 1
 __Htext10 0 0 ABS 0
 __Ltext10 0 0 ABS 0
-__end_of_EEPROM_Write_Long32 7B96 0 CODE 0
+__end_of_EEPROM_Write_Long32 7BDC 0 CODE 0
 EEPROM_24C1025_Read_Int@data 2D 0 COMRAM 1
 __Htext20 0 0 ABS 0
 __Ltext20 0 0 ABS 0
@@ -1069,7 +1069,7 @@ __Htext22 0 0 ABS 0
 __Ltext60 0 0 ABS 0
 __Ltext41 0 0 ABS 0
 __Ltext22 0 0 ABS 0
-__end_of_str2bcd 7EEE 0 CODE 0
+__end_of_str2bcd 7EF8 0 CODE 0
 EEPROM_Write_Long32@addr 2B 0 COMRAM 1
 __ptext12 6368 0 CODE 0
 __ptext31 6C16 0 CODE 0
@@ -1086,7 +1086,7 @@ PROCULUS_VP_Write@i 1C 0 COMRAM 1
 __HbssBANK2 0 0 ABS 0
 __ptext22 3C68 0 CODE 0
 __ptext41 74D4 0 CODE 0
-__ptext60 7E3E 0 CODE 0
+__ptext60 7E48 0 CODE 0
 __LbssBANK2 0 0 ABS 0
 print@textolocal 100 0 BANK1 1
 __end_of_PROCULUS_Buffer_to_Proculus 52F6 0 CODE 0
@@ -1101,7 +1101,7 @@ __Ltext23 0 0 ABS 0
 _tmr_led_usart A9 0 BANK0 1
 __ptext13 5DD8 0 CODE 0
 __ptext32 765E 0 CODE 0
-__ptext51 7D00 0 CODE 0
+__ptext51 7D0A 0 CODE 0
 __ptext70 592A 0 CODE 0
 __pbssBANK2 200 0 BANK2 1
 ShowMessage@retem 26 0 COMRAM 1
@@ -1119,7 +1119,7 @@ __Ltext33 0 0 ABS 0
 __Ltext14 0 0 ABS 0
 _ADCON1bits FC1 0 ABS 0
 _processo_hora 6C 0 COMRAM 1
-__ptext23 8044 0 CODE 0
+__ptext23 804E 0 CODE 0
 __ptext42 611C 0 CODE 0
 __ptext61 32D0 0 CODE 0
 __ptext80 759E 0 CODE 0
@@ -1139,11 +1139,11 @@ __Ltext43 0 0 ABS 0
 __Ltext24 0 0 ABS 0
 __ptext14 753A 0 CODE 0
 __ptext33 6996 0 CODE 0
-__ptext52 7E6E 0 CODE 0
+__ptext52 7E78 0 CODE 0
 __ptext71 1EC4 0 CODE 0
 __ptext90 582C 0 CODE 0
 clear_screen@i 21 0 COMRAM 1
-__pidataBANK1 81B4 0 CODE 0
+__pidataBANK1 81BE 0 CODE 0
 __Htext91 0 0 ABS 0
 __Htext72 0 0 ABS 0
 __Htext53 0 0 ABS 0
@@ -1154,10 +1154,10 @@ __Ltext72 0 0 ABS 0
 __Ltext53 0 0 ABS 0
 __Ltext34 0 0 ABS 0
 __Ltext15 0 0 ABS 0
-__ptext24 7B16 0 CODE 0
+__ptext24 7B5C 0 CODE 0
 __ptext43 6592 0 CODE 0
-__ptext62 81E4 0 CODE 0
-__ptext81 7E9C 0 CODE 0
+__ptext62 81EE 0 CODE 0
+__ptext81 7EA6 0 CODE 0
 I2C_Master_Read@a D 0 COMRAM 1
 Gerenciador_de_Senha@senha 3C 0 COMRAM 1
 __Htext82 0 0 ABS 0
@@ -1168,9 +1168,9 @@ __Ltext82 0 0 ABS 0
 __Ltext63 0 0 ABS 0
 __Ltext44 0 0 ABS 0
 __Ltext25 0 0 ABS 0
-__ptext15 7DDA 0 CODE 0
+__ptext15 7DE4 0 CODE 0
 __ptext34 4000 0 CODE 0
-__ptext53 818C 0 CODE 0
+__ptext53 8196 0 CODE 0
 __ptext72 495E 0 CODE 0
 __ptext91 1482 0 CODE 0
 ___inthi_sp 0 0 STACK 2
@@ -1187,7 +1187,7 @@ __Ltext16 0 0 ABS 0
 __ptext25 739C 0 CODE 0
 __ptext44 781A 0 CODE 0
 __ptext63 7A8E 0 CODE 0
-__ptext82 816C 0 CODE 0
+__ptext82 8176 0 CODE 0
 __size_of_Incrementa_Contador_de_Repique_do_Vacuo 0 0 ABS 0
 __Htext83 0 0 ABS 0
 __Htext64 0 0 ABS 0
@@ -1201,8 +1201,8 @@ __ptext16 6054 0 CODE 0
 __ptext35 44F6 0 CODE 0
 __ptext54 6D44 0 CODE 0
 __ptext73 64DE 0 CODE 0
-__ptext92 7BD6 0 CODE 0
-_EEPROM_24C1025_Read_Int 7D38 0 CODE 0
+__ptext92 7C1C 0 CODE 0
+_EEPROM_24C1025_Read_Int 7D42 0 CODE 0
 PROCULUS_VP_Write@vp 15 0 COMRAM 1
 __Htext93 0 0 ABS 0
 __Htext74 0 0 ABS 0
@@ -1218,9 +1218,9 @@ __HbssBANK3 0 0 ABS 0
 __ptext26 6F6C 0 CODE 0
 __ptext45 3E34 0 CODE 0
 __ptext64 6FEE 0 CODE 0
-__ptext83 7B56 0 CODE 0
+__ptext83 7B9C 0 CODE 0
 __LbssBANK3 0 0 ABS 0
-_buscaIndex 7C14 0 CODE 0
+_buscaIndex 7C5A 0 CODE 0
 __size_of_ShowSensorRealTimeHS 0 0 ABS 0
 EEPROM_24C1025_Write_Buffer@data 14 0 COMRAM 1
 _USART_init 6CAE 0 CODE 0
@@ -1236,11 +1236,11 @@ __Ltext65 0 0 ABS 0
 __Ltext46 0 0 ABS 0
 __Ltext27 0 0 ABS 0
 ___llmod@divisor 10 0 COMRAM 1
-__ptext17 817E 0 CODE 0
-__ptext36 810C 0 CODE 0
+__ptext17 8188 0 CODE 0
+__ptext36 8116 0 CODE 0
 __ptext55 4682 0 CODE 0
-__ptext74 8088 0 CODE 0
-__ptext93 7C50 0 CODE 0
+__ptext74 8092 0 CODE 0
+__ptext93 7C96 0 CODE 0
 __pbssBANK3 300 0 BANK3 1
 global_datalog@bb 25 0 COMRAM 1
 ___awmod@divisor E 0 COMRAM 1
@@ -1255,7 +1255,7 @@ __Ltext56 0 0 ABS 0
 __Ltext37 0 0 ABS 0
 __Ltext18 0 0 ABS 0
 __ptext27 68F0 0 CODE 0
-__ptext46 7CC8 0 CODE 0
+__ptext46 7CD2 0 CODE 0
 __ptext65 34C6 0 CODE 0
 __ptext84 795E 0 CODE 0
 __end_of_PROCULUS_Read_RTC 4000 0 CODE 0
@@ -1269,8 +1269,8 @@ __Ltext66 0 0 ABS 0
 __Ltext47 0 0 ABS 0
 __Ltext28 0 0 ABS 0
 __ptext18 70EA 0 CODE 0
-__ptext37 8142 0 CODE 0
-__ptext56 7EEE 0 CODE 0
+__ptext37 814C 0 CODE 0
+__ptext56 7EF8 0 CODE 0
 __ptext75 52F6 0 CODE 0
 __ptext94 4C02 0 CODE 0
 ___fltol@sign1 3B 0 COMRAM 1
@@ -1285,9 +1285,9 @@ __Ltext57 0 0 ABS 0
 __Ltext38 0 0 ABS 0
 __Ltext19 0 0 ABS 0
 EEPROM_24C1025_Read_Buffer@cnt_133 22 0 COMRAM 1
-__ptext28 8066 0 CODE 0
+__ptext28 8070 0 CODE 0
 __ptext47 7714 0 CODE 0
-__ptext66 81BE 0 CODE 0
+__ptext66 81C8 0 CODE 0
 __ptext85 786E 0 CODE 0
 ?_EEPROM_24C1025_Read_Int 26 0 COMRAM 1
 __Htext86 0 0 ABS 0
@@ -1301,7 +1301,7 @@ __Ltext29 0 0 ABS 0
 Decodify_Command@dados 31 0 COMRAM 1
 __ptext19 3A8E 0 CODE 0
 __ptext38 5B12 0 CODE 0
-__ptext57 7F14 0 CODE 0
+__ptext57 7F1E 0 CODE 0
 EEPROM_Read_Long32@ptr 14 0 COMRAM 1
 __ptext76 6ADE 0 CODE 0
 __ptext95 62A6 0 CODE 0
@@ -1320,8 +1320,8 @@ __Ltext58 0 0 ABS 0
 __Ltext39 0 0 ABS 0
 __ptext29 4D40 0 CODE 0
 __ptext48 5C02 0 CODE 0
-__ptext67 81C8 0 CODE 0
-__ptext86 7E0C 0 CODE 0
+__ptext67 81D2 0 CODE 0
+__ptext86 7E16 0 CODE 0
 _MenorCanalLivre 70EA 0 CODE 0
 __Htext87 0 0 ABS 0
 __Htext68 0 0 ABS 0
@@ -1332,7 +1332,7 @@ __Ltext49 0 0 ABS 0
 Decodify_Command@tempchar 38 0 COMRAM 1
 __ptext39 77C4 0 CODE 0
 __ptext58 30C0 0 CODE 0
-__ptext77 80EE 0 CODE 0
+__ptext77 80F8 0 CODE 0
 __ptext96 2C0A 0 CODE 0
 _TrendColor 184 0 BANK1 1
 __Htext97 0 0 ABS 0
@@ -1344,7 +1344,7 @@ __Ltext78 0 0 ABS 0
 __Ltext59 0 0 ABS 0
 __HbssBANK4 0 0 ABS 0
 __ptext49 5F84 0 CODE 0
-__ptext68 8158 0 CODE 0
+__ptext68 8162 0 CODE 0
 __ptext87 746C 0 CODE 0
 __LbssBANK4 0 0 ABS 0
 __size_of_PROCULUS_VP_Write 0 0 ABS 0
@@ -1356,7 +1356,7 @@ __end_of_PROCULUS_graphic_plot 739C 0 CODE 0
 I2C_Master_Read@temp 10 0 COMRAM 1
 __Ltext88 0 0 ABS 0
 __Ltext69 0 0 ABS 0
-__ptext59 7D38 0 CODE 0
+__ptext59 7D42 0 CODE 0
 __ptext78 5EAE 0 CODE 0
 __ptext97 36B6 0 CODE 0
 __pbssBANK4 400 0 BANK4 1
@@ -1364,9 +1364,9 @@ __Htext98 0 0 ABS 0
 __Htext79 0 0 ABS 0
 __Ltext98 0 0 ABS 0
 __Ltext79 0 0 ABS 0
-__ptext69 7F3A 0 CODE 0
+__ptext69 7F44 0 CODE 0
 __ptext88 4802 0 CODE 0
-__end_of_EEPROM_Read_String 7BD6 0 CODE 0
+__end_of_EEPROM_Read_String 7C1C 0 CODE 0
 my_delay_ms_CLRWDT@i 11 0 COMRAM 1
 Send_To_Slave@retorno 16 0 COMRAM 1
 __Htext89 0 0 ABS 0
@@ -1376,12 +1376,12 @@ __ptext98 4368 0 CODE 0
 EEPROM_24C1025_Read_Buffer@range 24 0 COMRAM 1
 __Htext99 0 0 ABS 0
 __Ltext99 0 0 ABS 0
-__ptext89 7EC6 0 CODE 0
+__ptext89 7ED0 0 CODE 0
 _my_delay_ms_CLRWDT 76BA 0 CODE 0
 __size_of_USART_put_string 0 0 ABS 0
 _Captura_Pagina 6A3A 0 CODE 0
 __ptext99 61E2 0 CODE 0
-__end_of_SEND_REPLY_OK 819A 0 CODE 0
+__end_of_SEND_REPLY_OK 81A4 0 CODE 0
 _delaycheckscreen A3 0 BANK0 1
 ___lldiv@divisor 10 0 COMRAM 1
 __size_of___lldiv 0 0 ABS 0
@@ -1400,7 +1400,7 @@ __size_of_USART_put_int 0 0 ABS 0
 _EEPROM_24C1025_Read_Buffer 32D0 0 CODE 0
 strcpy@dest 10 0 COMRAM 1
 reverse@length 13 0 COMRAM 1
-_EEPROM_Read_Integer 7DA6 0 CODE 0
+_EEPROM_Read_Integer 7DB0 0 CODE 0
 _USART_put_string 6D44 0 CODE 0
 __size_of_USART_input_buffer 0 0 ABS 0
 _PROCULUS_VP_Write 6426 0 CODE 0
@@ -1416,21 +1416,21 @@ EEPROM_24C1025_Write_Buffer@ctrl 21 0 COMRAM 1
 __CFG_CP1$OFF 0 0 ABS 0
 __size_of___wmul 0 0 ABS 0
 _Voltimetro 9B 0 BANK0 1
-__end_of_strcat 7F86 0 CODE 0
+__end_of_strcat 7F90 0 CODE 0
 __Hreset_vec 4 0 CODE 0
 _Vacuometro 9D 0 BANK0 1
 __Lreset_vec 0 0 CODE 0
 PROCULUS_Control_Activation@value 15 0 COMRAM 1
 PROCULUS_VP_Read_Double32@vetor 23 0 COMRAM 1
 __CFG_CP2$OFF 0 0 ABS 0
-__end_of_PROCULUS_TPFLAG_Read 8158 0 CODE 0
+__end_of_PROCULUS_TPFLAG_Read 8162 0 CODE 0
 __end_of_itoa 4C02 0 CODE 0
 __end_of_EEPROM_24C1025_Write_Buffer 36B6 0 CODE 0
 __size_of_USART_put_buffer 0 0 ABS 0
 __CFG_CP3$OFF 0 0 ABS 0
-_I2C_Master_Write 81BE 0 CODE 0
+_I2C_Master_Write 81C8 0 CODE 0
 _Gerenciador_de_Senha_Global 4000 0 CODE 0
-__end_of_USART_putc 8044 0 CODE 0
+__end_of_USART_putc 804E 0 CODE 0
 _ShowStaticValueGrid 4368 0 CODE 0
 __size_of_Comando_Protocolo_Serial 0 0 ABS 0
 ___xxtofl@exp 15 0 COMRAM 1
@@ -1439,7 +1439,7 @@ ShowHardwareInfo@resposta 29 0 COMRAM 1
 __size_of_EEPROM_Read_String 0 0 ABS 0
 PROCULUS_VP_Write_Long32@value 1F 0 COMRAM 1
 EEPROM_Read_Long32@result 16 0 COMRAM 1
-__end_of_EEPROM_Write_Integer 7FF8 0 CODE 0
+__end_of_EEPROM_Write_Integer 8002 0 CODE 0
 ShowSensorRealTimeHS@bb 29 0 COMRAM 1
 __end_of_ShowAndSetSlaveParameters 4AB6 0 CODE 0
 EEPROM_24C1025_Write_Byte@mem_add 22 0 COMRAM 1
@@ -1464,9 +1464,9 @@ PROCULUS_VP_Write@size 19 0 COMRAM 1
 EEPROM_24C1025_Fill_All@buffer 100 0 BANK1 1
 _Comando_Display 592A 0 CODE 0
 intlevel1 0 0 CODE 0
-__end_of_I2C_Master_Write 81C8 0 CODE 0
+__end_of_I2C_Master_Write 81D2 0 CODE 0
 _global_condensador 68F0 0 CODE 0
-__end_of_EEPROM_Read_Buffer 7C8C 0 CODE 0
+__end_of_EEPROM_Read_Buffer 7CD2 0 CODE 0
 EEPROM_24C1025_Read_Buffer@chip_add 23 0 COMRAM 1
 ___xxtofl@val C 0 COMRAM 1
 __CFG_WRTB$OFF 0 0 ABS 0
@@ -1481,12 +1481,12 @@ __size_of_Formatar_Banco_de_Dados 0 0 ABS 0
 _trendExist BA 0 BANK0 1
 intlevel3 0 0 CODE 0
 EEPROM_24C1025_Write_Str@data 13 0 COMRAM 1
-_USART_put_buffer 7D00 0 CODE 0
+_USART_put_buffer 7D0A 0 CODE 0
 __CFG_WRTC$OFF 0 0 ABS 0
 EEPROM_24C1025_Read_Byte@chip_add 2A 0 COMRAM 1
 __end_of_Icones_de_alarmes 6CAE 0 CODE 0
 _Set_Receita 5DD8 0 CODE 0
-__end_of_PROCULUS_VP_Write_UInt16 80EE 0 CODE 0
+__end_of_PROCULUS_VP_Write_UInt16 80F8 0 CODE 0
 Vaccum_Switch@estado 1B 0 COMRAM 1
 __size_of_EEPROM_24C1025_Write_Byte 0 0 ABS 0
 _tmr_led_memory AB 0 BANK0 1
@@ -1504,7 +1504,7 @@ Exibe_Hora_Data@time 4B 0 COMRAM 1
 showTotalReset@placa 2B 0 COMRAM 1
 __end_of_reverse 6C16 0 CODE 0
 EEPROM_Read_Long32@addr 10 0 COMRAM 1
-_I2C_Master_Wait 7F3A 0 CODE 0
+_I2C_Master_Wait 7F44 0 CODE 0
 ShowMessage@mensagem 21 0 COMRAM 1
 __end_of_EEPROM_24C1025_Fill_All 7070 0 CODE 0
 __size_of___fltol 0 0 ABS 0
@@ -1512,15 +1512,15 @@ __CFG_CPB$OFF 0 0 ABS 0
 USART_put_buffer@ptr 10 0 COMRAM 1
 PROCULUS_TPFLAG_Write@vetor 1B 0 COMRAM 1
 pagina_49@liofilizador 40 0 COMRAM 1
-__end_of_EEPROM_24C1025_Read_Int 7D70 0 CODE 0
-__end_of___wmul 801E 0 CODE 0
+__end_of_EEPROM_24C1025_Read_Int 7D7A 0 CODE 0
+__end_of___wmul 8028 0 CODE 0
 EEPROM_24C1025_Fill_All@value 22 0 COMRAM 1
 _Seg_Aq_vacuo 97 0 BANK0 1
 __CFG_CPD$OFF 0 0 ABS 0
 start_initialization 679E 0 CODE 0
 ___lldiv@quotient 14 0 COMRAM 1
 ___awdiv@quotient 12 0 COMRAM 1
-__end_of_I2C_Master_Start 816C 0 CODE 0
+__end_of_I2C_Master_Start 8176 0 CODE 0
 __size_of_DataBaseBackupMain 0 0 ABS 0
 ___lwdiv@quotient 10 0 COMRAM 1
 __size_of_My_ADC_init 0 0 ABS 0
@@ -1529,11 +1529,11 @@ __size_of_EEPROM_24C1025_Read_Buffer 0 0 ABS 0
 __size_of_EEPROM_Write_String 0 0 ABS 0
 __CFG_BOREN$SBORDIS 0 0 ABS 0
 _I2C_Master_Init 765E 0 CODE 0
-_PROCULUS_VP_Write_String 7F86 0 CODE 0
+_PROCULUS_VP_Write_String 7F90 0 CODE 0
 ?_Send_To_Slave F 0 COMRAM 1
 _global_vacuo 3C68 0 CODE 0
 __size_of_EEPROM_24C1025_Write_Buffer 0 0 ABS 0
-_Vaccum_Switch 8044 0 CODE 0
+_Vaccum_Switch 804E 0 CODE 0
 __size_of_EEPROM_Write_Integer 0 0 ABS 0
 __size_of_save_datalog 0 0 ABS 0
 pagina_19@inicio 49 0 COMRAM 1
@@ -1554,8 +1554,8 @@ Formatar_Banco_de_Dados@total 34 0 COMRAM 1
 pagina_49@i_1826 3F 0 COMRAM 1
 __size_of___awmod 0 0 ABS 0
 ___flmul@aexp 2B 0 COMRAM 1
-__end_of_USART_put_int 81A8 0 CODE 0
-__end_of_SaveBlackoutStatus 7E0C 0 CODE 0
+__end_of_USART_put_int 81B2 0 CODE 0
+__end_of_SaveBlackoutStatus 7E16 0 CODE 0
 _Carregar_Status_da_Senha_Global 6DD4 0 CODE 0
 _returnToScreen BC 0 BANK0 1
 Send_To_Slave@destino 15 0 COMRAM 1
@@ -1565,20 +1565,20 @@ _PROCULUS_VP_Read 5620 0 CODE 0
 DataBaseBackupMain@addEEPROM 34 0 COMRAM 1
 __initialization 679E 0 CODE 0
 ___flmul@bexp 2C 0 COMRAM 1
-__end_of_PROCULUS_VP_Read_Double32 7EC6 0 CODE 0
+__end_of_PROCULUS_VP_Read_Double32 7ED0 0 CODE 0
 __end_of_EEPROM_Read_Long32 79AC 0 CODE 0
-__end_of_USART_put_buffer 7D38 0 CODE 0
+__end_of_USART_put_buffer 7D42 0 CODE 0
 ?_EEPROM_Read_Integer 10 0 COMRAM 1
 EEPROM_24C1025_Fill_All@chip_add 180 0 BANK1 1
 _Send_To_Slave 50BC 0 CODE 0
-_EEPROM_Write_Long32 7B56 0 CODE 0
-__end_of_bcd2str 7D00 0 CODE 0
+_EEPROM_Write_Long32 7B9C 0 CODE 0
+__end_of_bcd2str 7D0A 0 CODE 0
 __end_of_global_vacuo 3E34 0 CODE 0
 pagina_19@i_1856 4C 0 COMRAM 1
 PROCULUS_Buffer_to_Proculus@i 12 0 COMRAM 1
 ___flmul@prod 2D 0 COMRAM 1
 PROCULUS_VP_Write_Long32@vetor 23 0 COMRAM 1
-__end_of_Vaccum_Switch 8066 0 CODE 0
+__end_of_Vaccum_Switch 8070 0 CODE 0
 ___llmod@dividend C 0 COMRAM 1
 __CFG_LPT1OSC$OFF 0 0 ABS 0
 ___awmod@dividend C 0 COMRAM 1
@@ -1624,7 +1624,7 @@ ___awdiv@dividend C 0 COMRAM 1
 PROCULUS_VP_Read_String@text 21 0 COMRAM 1
 %segments
 reset_vec 0 3 CODE 0 0
-intcodelo 18 81EB CODE 18 0
+intcodelo 18 81F5 CODE 18 0
 mediumconst FC8A FFFF MEDIUMCONST FC8A 0
 config 300000 30000D CONFIG 300000 0
 idloc 200000 200007 IDLOC 200000 0
@@ -1638,7 +1638,7 @@ bssBIGRAM 4F4 6AF BIGRAM 4F4 1
 %locals
 dist/default/production\Liofilizador_Mother_Board.X.production.o
 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
-C:\Users\Dell\AppData\Local\Temp\sc7k.s
+C:\Users\Dell\AppData\Local\Temp\s10g.s
 5115 679E 0 CODE 0
 5117 679E 0 CODE 0
 5120 679E 0 CODE 0
@@ -2078,12 +2078,12 @@ timedate.c
 24 70B6 0 CODE 0
 25 70E8 0 CODE 0
 Liofilizador Placa Mae.c
-2968 7C14 0 CODE 0
-2971 7C14 0 CODE 0
-2973 7C18 0 CODE 0
-2974 7C3A 0 CODE 0
-2975 7C4C 0 CODE 0
-2976 7C4E 0 CODE 0
+2968 7C5A 0 CODE 0
+2971 7C5A 0 CODE 0
+2973 7C5E 0 CODE 0
+2974 7C80 0 CODE 0
+2975 7C92 0 CODE 0
+2976 7C94 0 CODE 0
 usart.c
 17 6CAE 0 CODE 0
 22 6CAE 0 CODE 0
@@ -2233,11 +2233,11 @@ Liofilizador Placa Mae.c
 2399 7598 0 CODE 0
 2401 759C 0 CODE 0
 Liofilizador Placa Mae.c
-2404 7DDA 0 CODE 0
-2405 7DDA 0 CODE 0
-2406 7DEA 0 CODE 0
-2407 7DFA 0 CODE 0
-2408 7E0A 0 CODE 0
+2404 7DE4 0 CODE 0
+2405 7DE4 0 CODE 0
+2406 7DF4 0 CODE 0
+2407 7E04 0 CODE 0
+2408 7E14 0 CODE 0
 Liofilizador Placa Mae.c
 2413 6054 0 CODE 0
 2414 6054 0 CODE 0
@@ -2253,13 +2253,13 @@ Liofilizador Placa Mae.c
 2427 6118 0 CODE 0
 2428 611A 0 CODE 0
 adc.c
-6 817E 0 CODE 0
-8 817E 0 CODE 0
-9 8180 0 CODE 0
-10 8182 0 CODE 0
-11 8186 0 CODE 0
-12 8188 0 CODE 0
-14 818A 0 CODE 0
+6 8188 0 CODE 0
+8 8188 0 CODE 0
+9 818A 0 CODE 0
+10 818C 0 CODE 0
+11 8190 0 CODE 0
+12 8192 0 CODE 0
+14 8194 0 CODE 0
 Liofilizador Placa Mae.c
 3084 70EA 0 CODE 0
 3087 70EA 0 CODE 0
@@ -2376,19 +2376,19 @@ Liofilizador Placa Mae.c
 1831 3E28 0 CODE 0
 1835 3E32 0 CODE 0
 Liofilizador Placa Mae.c
-1749 8044 0 CODE 0
-1751 8046 0 CODE 0
-1752 804A 0 CODE 0
-1753 804E 0 CODE 0
-1754 8064 0 CODE 0
+1749 804E 0 CODE 0
+1751 8050 0 CODE 0
+1752 8054 0 CODE 0
+1753 8058 0 CODE 0
+1754 806E 0 CODE 0
 Liofilizador Placa Mae.c
-3118 7B16 0 CODE 0
-3120 7B16 0 CODE 0
-3122 7B26 0 CODE 0
-3123 7B28 0 CODE 0
-3124 7B3C 0 CODE 0
-3125 7B40 0 CODE 0
-3127 7B54 0 CODE 0
+3118 7B5C 0 CODE 0
+3120 7B5C 0 CODE 0
+3122 7B6C 0 CODE 0
+3123 7B6E 0 CODE 0
+3124 7B82 0 CODE 0
+3125 7B86 0 CODE 0
+3127 7B9A 0 CODE 0
 Liofilizador Placa Mae.c
 2364 739C 0 CODE 0
 2365 739E 0 CODE 0
@@ -2427,11 +2427,11 @@ Liofilizador Placa Mae.c
 1775 6990 0 CODE 0
 1777 6994 0 CODE 0
 Liofilizador Placa Mae.c
-1742 8066 0 CODE 0
-1744 8068 0 CODE 0
-1745 806C 0 CODE 0
-1746 8070 0 CODE 0
-1747 8086 0 CODE 0
+1742 8070 0 CODE 0
+1744 8072 0 CODE 0
+1745 8076 0 CODE 0
+1746 807A 0 CODE 0
+1747 8090 0 CODE 0
 Liofilizador Placa Mae.c
 1850 4D40 0 CODE 0
 1851 4D40 0 CODE 0
@@ -2537,16 +2537,16 @@ Liofilizador Placa Mae.c
 2476 467A 0 CODE 0
 2479 4680 0 CODE 0
 proculus.c
-564 810C 0 CODE 0
-566 810E 0 CODE 0
-567 8112 0 CODE 0
-568 8116 0 CODE 0
-571 8126 0 CODE 0
+564 8116 0 CODE 0
+566 8118 0 CODE 0
+567 811C 0 CODE 0
+568 8120 0 CODE 0
+571 8130 0 CODE 0
 proculus.c
-574 8142 0 CODE 0
-576 8142 0 CODE 0
-577 8154 0 CODE 0
-580 8156 0 CODE 0
+574 814C 0 CODE 0
+576 814C 0 CODE 0
+577 815E 0 CODE 0
+580 8160 0 CODE 0
 proculus.c
 30 5B12 0 CODE 0
 33 5B14 0 CODE 0
@@ -2670,11 +2670,11 @@ proculus.c
 179 3FEA 0 CODE 0
 180 3FFE 0 CODE 0
 util.c.c
-57 7CC8 0 CODE 0
-58 7CCA 0 CODE 0
-59 7CDA 0 CODE 0
-60 7CEE 0 CODE 0
-61 7CFE 0 CODE 0
+57 7CD2 0 CODE 0
+58 7CD4 0 CODE 0
+59 7CE4 0 CODE 0
+60 7CF8 0 CODE 0
+61 7D08 0 CODE 0
 usart.c
 106 7714 0 CODE 0
 107 7714 0 CODE 0
@@ -2787,27 +2787,27 @@ Liofilizador Placa Mae.c
 1579 288E 0 CODE 0
 1580 292A 0 CODE 0
 usart.c
-88 7D00 0 CODE 0
-93 7D00 0 CODE 0
-94 7D04 0 CODE 0
-96 7D0C 0 CODE 0
-98 7D10 0 CODE 0
-99 7D1E 0 CODE 0
-100 7D22 0 CODE 0
-96 7D24 0 CODE 0
-102 7D36 0 CODE 0
+88 7D0A 0 CODE 0
+93 7D0A 0 CODE 0
+94 7D0E 0 CODE 0
+96 7D16 0 CODE 0
+98 7D1A 0 CODE 0
+99 7D28 0 CODE 0
+100 7D2C 0 CODE 0
+96 7D2E 0 CODE 0
+102 7D40 0 CODE 0
 Liofilizador Placa Mae.c
-1241 7E6E 0 CODE 0
-1244 7E70 0 CODE 0
-1245 7E7C 0 CODE 0
-1246 7E84 0 CODE 0
-1247 7E8C 0 CODE 0
-1248 7E94 0 CODE 0
-1259 7E9A 0 CODE 0
+1241 7E78 0 CODE 0
+1244 7E7A 0 CODE 0
+1245 7E86 0 CODE 0
+1246 7E8E 0 CODE 0
+1247 7E96 0 CODE 0
+1248 7E9E 0 CODE 0
+1259 7EA4 0 CODE 0
 Liofilizador Placa Mae.c
-1582 818C 0 CODE 0
-1583 818C 0 CODE 0
-1584 8198 0 CODE 0
+1582 8196 0 CODE 0
+1583 8196 0 CODE 0
+1584 81A2 0 CODE 0
 usart.c
 154 6D44 0 CODE 0
 157 6D44 0 CODE 0
@@ -2848,13 +2848,13 @@ EEPROM_24C1025.c
 183 47F2 0 CODE 0
 185 4800 0 CODE 0
 EEPROM_24C1025.c
-273 7EEE 0 CODE 0
-274 7EF0 0 CODE 0
-275 7F12 0 CODE 0
+273 7EF8 0 CODE 0
+274 7EFA 0 CODE 0
+275 7F1C 0 CODE 0
 EEPROM_24C1025.c
-262 7F14 0 CODE 0
-263 7F16 0 CODE 0
-264 7F38 0 CODE 0
+262 7F1E 0 CODE 0
+263 7F20 0 CODE 0
+264 7F42 0 CODE 0
 EEPROM_24C1025.c
 190 30C0 0 CODE 0
 191 30C2 0 CODE 0
@@ -2903,15 +2903,15 @@ EEPROM_24C1025.c
 247 32C0 0 CODE 0
 248 32CE 0 CODE 0
 EEPROM_24C1025.c
-278 7D38 0 CODE 0
-280 7D3A 0 CODE 0
-281 7D5C 0 CODE 0
-282 7D6E 0 CODE 0
+278 7D42 0 CODE 0
+280 7D44 0 CODE 0
+281 7D66 0 CODE 0
+282 7D78 0 CODE 0
 EEPROM_24C1025.c
-267 7E3E 0 CODE 0
-269 7E40 0 CODE 0
-270 7E62 0 CODE 0
-271 7E6C 0 CODE 0
+267 7E48 0 CODE 0
+269 7E4A 0 CODE 0
+270 7E6C 0 CODE 0
+271 7E76 0 CODE 0
 EEPROM_24C1025.c
 70 32D0 0 CODE 0
 75 32D2 0 CODE 0
@@ -2959,10 +2959,10 @@ EEPROM_24C1025.c
 129 34B6 0 CODE 0
 130 34C4 0 CODE 0
 I2C.c
-55 81E4 0 CODE 0
-57 81E4 0 CODE 0
-58 81E8 0 CODE 0
-59 81EA 0 CODE 0
+55 81EE 0 CODE 0
+57 81EE 0 CODE 0
+58 81F2 0 CODE 0
+59 81F4 0 CODE 0
 I2C.c
 74 7A8E 0 CODE 0
 77 7A8E 0 CODE 0
@@ -3022,27 +3022,27 @@ EEPROM_24C1025.c
 63 36A6 0 CODE 0
 64 36B4 0 CODE 0
 I2C.c
-68 81BE 0 CODE 0
-70 81BE 0 CODE 0
-71 81C2 0 CODE 0
-72 81C6 0 CODE 0
+68 81C8 0 CODE 0
+70 81C8 0 CODE 0
+71 81CC 0 CODE 0
+72 81D0 0 CODE 0
 I2C.c
-61 81C8 0 CODE 0
-63 81C8 0 CODE 0
-64 81CC 0 CODE 0
-65 81CE 0 CODE 0
-66 81D0 0 CODE 0
+61 81D2 0 CODE 0
+63 81D2 0 CODE 0
+64 81D6 0 CODE 0
+65 81D8 0 CODE 0
+66 81DA 0 CODE 0
 I2C.c
-47 8158 0 CODE 0
-49 8158 0 CODE 0
-50 815A 0 CODE 0
-51 8164 0 CODE 0
-52 8168 0 CODE 0
-53 816A 0 CODE 0
+47 8162 0 CODE 0
+49 8162 0 CODE 0
+50 8164 0 CODE 0
+51 816E 0 CODE 0
+52 8172 0 CODE 0
+53 8174 0 CODE 0
 I2C.c
-42 7F3A 0 CODE 0
-44 7F3A 0 CODE 0
-45 7F5E 0 CODE 0
+42 7F44 0 CODE 0
+44 7F44 0 CODE 0
+45 7F68 0 CODE 0
 Liofilizador Placa Mae.c
 1884 592A 0 CODE 0
 1887 592A 0 CODE 0
@@ -3147,11 +3147,11 @@ Liofilizador Placa Mae.c
 1012 6574 0 CODE 0
 1013 6590 0 CODE 0
 Liofilizador Placa Mae.c
-2844 8088 0 CODE 0
-2845 8088 0 CODE 0
-2848 808C 0 CODE 0
-2849 8096 0 CODE 0
-2850 80A8 0 CODE 0
+2844 8092 0 CODE 0
+2845 8092 0 CODE 0
+2848 8096 0 CODE 0
+2849 80A0 0 CODE 0
+2850 80B2 0 CODE 0
 Liofilizador Placa Mae.c
 1018 52F6 0 CODE 0
 1022 52F6 0 CODE 0
@@ -3179,12 +3179,12 @@ Liofilizador Placa Mae.c
 2016 6B78 0 CODE 0
 2021 6B7C 0 CODE 0
 proculus.c
-453 80EE 0 CODE 0
-455 80EE 0 CODE 0
-456 80F2 0 CODE 0
-457 80F6 0 CODE 0
-458 80FA 0 CODE 0
-459 810A 0 CODE 0
+453 80F8 0 CODE 0
+455 80F8 0 CODE 0
+456 80FC 0 CODE 0
+457 8100 0 CODE 0
+458 8104 0 CODE 0
+459 8114 0 CODE 0
 Liofilizador Placa Mae.c
 989 5EAE 0 CODE 0
 992 5EB0 0 CODE 0
@@ -3231,21 +3231,21 @@ proculus.c
 300 75E6 0 CODE 0
 301 75FE 0 CODE 0
 proculus.c
-395 7E9C 0 CODE 0
-397 7E9C 0 CODE 0
-399 7EB4 0 CODE 0
-400 7EC4 0 CODE 0
+395 7EA6 0 CODE 0
+397 7EA6 0 CODE 0
+399 7EBE 0 CODE 0
+400 7ECE 0 CODE 0
 Liofilizador Placa Mae.c
-2593 816C 0 CODE 0
-2594 816C 0 CODE 0
-2595 817C 0 CODE 0
+2593 8176 0 CODE 0
+2594 8176 0 CODE 0
+2595 8186 0 CODE 0
 eeprom.c
-187 7B56 0 CODE 0
-192 7B56 0 CODE 0
-193 7B56 0 CODE 0
-194 7B5E 0 CODE 0
-195 7B62 0 CODE 0
-196 7B94 0 CODE 0
+187 7B9C 0 CODE 0
+192 7B9C 0 CODE 0
+193 7B9C 0 CODE 0
+194 7BA4 0 CODE 0
+195 7BA8 0 CODE 0
+196 7BDA 0 CODE 0
 eeprom.c
 201 795E 0 CODE 0
 206 795E 0 CODE 0
@@ -3266,10 +3266,10 @@ Liofilizador Placa Mae.c
 2239 78B8 0 CODE 0
 2241 78BC 0 CODE 0
 Liofilizador Placa Mae.c
-2434 7E0C 0 CODE 0
-2435 7E0C 0 CODE 0
-2436 7E34 0 CODE 0
-2437 7E3C 0 CODE 0
+2434 7E16 0 CODE 0
+2435 7E16 0 CODE 0
+2436 7E3E 0 CODE 0
+2437 7E46 0 CODE 0
 Liofilizador Placa Mae.c
 2203 746C 0 CODE 0
 2206 746C 0 CODE 0
@@ -3316,9 +3316,9 @@ proculus.c
 220 494C 0 CODE 0
 221 495C 0 CODE 0
 util.c.c
-63 7EC6 0 CODE 0
-64 7EC6 0 CODE 0
-65 7EEC 0 CODE 0
+63 7ED0 0 CODE 0
+64 7ED0 0 CODE 0
+65 7EF6 0 CODE 0
 Liofilizador Placa Mae.c
 2167 582C 0 CODE 0
 2169 582C 0 CODE 0
@@ -3402,21 +3402,21 @@ Liofilizador Placa Mae.c
 2962 1A66 0 CODE 0
 2963 1A98 0 CODE 0
 eeprom.c
-246 7BD6 0 CODE 0
-248 7BD6 0 CODE 0
-250 7BDE 0 CODE 0
-251 7BF6 0 CODE 0
-252 7BFA 0 CODE 0
-253 7BFE 0 CODE 0
-254 7C12 0 CODE 0
+246 7C1C 0 CODE 0
+248 7C1C 0 CODE 0
+250 7C24 0 CODE 0
+251 7C3C 0 CODE 0
+252 7C40 0 CODE 0
+253 7C44 0 CODE 0
+254 7C58 0 CODE 0
 eeprom.c
-257 7C50 0 CODE 0
-259 7C50 0 CODE 0
-261 7C58 0 CODE 0
-262 7C6E 0 CODE 0
-263 7C72 0 CODE 0
-264 7C76 0 CODE 0
-265 7C8A 0 CODE 0
+257 7C96 0 CODE 0
+259 7C96 0 CODE 0
+261 7C9E 0 CODE 0
+262 7CB4 0 CODE 0
+263 7CB8 0 CODE 0
+264 7CBC 0 CODE 0
+265 7CD0 0 CODE 0
 Liofilizador Placa Mae.c
 3130 4C02 0 CODE 0
 3132 4C02 0 CODE 0
@@ -3612,19 +3612,19 @@ C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\awdiv.c
 40 629C 0 CODE 0
 41 62A4 0 CODE 0
 eeprom.c
-230 7B96 0 CODE 0
-233 7B96 0 CODE 0
-234 7B96 0 CODE 0
-235 7BA8 0 CODE 0
-237 7BB8 0 CODE 0
-238 7BC8 0 CODE 0
-239 7BD4 0 CODE 0
+230 7BDC 0 CODE 0
+233 7BDC 0 CODE 0
+234 7BDC 0 CODE 0
+235 7BEE 0 CODE 0
+237 7BFE 0 CODE 0
+238 7C0E 0 CODE 0
+239 7C1A 0 CODE 0
 eeprom.c
-80 7DA6 0 CODE 0
-83 7DA6 0 CODE 0
-84 7DB6 0 CODE 0
-85 7DD0 0 CODE 0
-86 7DD8 0 CODE 0
+80 7DB0 0 CODE 0
+83 7DB0 0 CODE 0
+84 7DC0 0 CODE 0
+85 7DDA 0 CODE 0
+86 7DE2 0 CODE 0
 Liofilizador Placa Mae.c
 1711 6848 0 CODE 0
 1715 6848 0 CODE 0
@@ -3635,13 +3635,13 @@ Liofilizador Placa Mae.c
 1720 68CA 0 CODE 0
 1721 68EE 0 CODE 0
 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\strcat.c
-3 7F60 0 CODE 0
-5 7F60 0 CODE 0
-7 7F84 0 CODE 0
+3 7F6A 0 CODE 0
+5 7F6A 0 CODE 0
+7 7F8E 0 CODE 0
 proculus.c
-405 7F86 0 CODE 0
-406 7F86 0 CODE 0
-407 7FAA 0 CODE 0
+405 7F90 0 CODE 0
+406 7F90 0 CODE 0
+407 7FB4 0 CODE 0
 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\strlen.c
 5 78BE 0 CODE 0
 7 78BE 0 CODE 0
@@ -3651,9 +3651,9 @@ C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\strlen.c
 11 7900 0 CODE 0
 12 790C 0 CODE 0
 proculus.c
-132 81D2 0 CODE 0
-133 81D4 0 CODE 0
-134 81DA 0 CODE 0
+132 81DC 0 CODE 0
+133 81DE 0 CODE 0
+134 81E4 0 CODE 0
 proculus.c
 122 790E 0 CODE 0
 123 7910 0 CODE 0
@@ -3673,10 +3673,10 @@ proculus.c
 499 79EC 0 CODE 0
 500 79F8 0 CODE 0
 proculus.c
-503 80AA 0 CODE 0
-504 80AA 0 CODE 0
-505 80B6 0 CODE 0
-506 80CA 0 CODE 0
+503 80B4 0 CODE 0
+504 80B4 0 CODE 0
+505 80C0 0 CODE 0
+506 80D4 0 CODE 0
 Liofilizador Placa Mae.c
 1639 5A20 0 CODE 0
 1640 5A22 0 CODE 0
@@ -3722,14 +3722,14 @@ Liofilizador Placa Mae.c
 1069 5092 0 CODE 0
 1071 50BA 0 CODE 0
 proculus.c
-261 7FAC 0 CODE 0
-263 7FAC 0 CODE 0
-264 7FC4 0 CODE 0
-265 7FD0 0 CODE 0
+261 7FB6 0 CODE 0
+263 7FB6 0 CODE 0
+264 7FCE 0 CODE 0
+265 7FDA 0 CODE 0
 proculus.c
-409 8128 0 CODE 0
-410 8128 0 CODE 0
-411 8140 0 CODE 0
+409 8132 0 CODE 0
+410 8132 0 CODE 0
+411 814A 0 CODE 0
 proculus.c
 84 5620 0 CODE 0
 91 5620 0 CODE 0
@@ -3762,10 +3762,10 @@ eeprom.c
 226 7A36 0 CODE 0
 227 7A46 0 CODE 0
 eeprom.c
-73 7FD2 0 CODE 0
-75 7FD2 0 CODE 0
-76 7FE2 0 CODE 0
-77 7FF6 0 CODE 0
+73 7FDC 0 CODE 0
+75 7FDC 0 CODE 0
+76 7FEC 0 CODE 0
+77 8000 0 CODE 0
 eeprom.c
 20 6EE8 0 CODE 0
 23 6EE8 0 CODE 0
@@ -3802,12 +3802,12 @@ Liofilizador Placa Mae.c
 2051 7326 0 CODE 0
 2055 732C 0 CODE 0
 proculus.c
-424 7D70 0 CODE 0
-426 7D70 0 CODE 0
-427 7D8C 0 CODE 0
-428 7D90 0 CODE 0
-429 7D94 0 CODE 0
-430 7DA4 0 CODE 0
+424 7D7A 0 CODE 0
+426 7D7A 0 CODE 0
+427 7D96 0 CODE 0
+428 7D9A 0 CODE 0
+429 7D9E 0 CODE 0
+430 7DAE 0 CODE 0
 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\lwdiv.c
 7 7164 0 CODE 0
 13 7164 0 CODE 0
@@ -3850,13 +3850,13 @@ proculus.c
 486 52E2 0 CODE 0
 487 52F4 0 CODE 0
 Liofilizador Placa Mae.c
-2342 7C8C 0 CODE 0
-2343 7C8C 0 CODE 0
-2345 7C9C 0 CODE 0
-2347 7CAA 0 CODE 0
-2349 7CAC 0 CODE 0
-2350 7CBA 0 CODE 0
-2355 7CC6 0 CODE 0
+2342 7AD4 0 CODE 0
+2343 7AD4 0 CODE 0
+2345 7AE4 0 CODE 0
+2347 7AF2 0 CODE 0
+2349 7AF4 0 CODE 0
+2350 7B0C 0 CODE 0
+2355 7B18 0 CODE 0
 Liofilizador Placa Mae.c
 1176 5516 0 CODE 0
 1182 5516 0 CODE 0
@@ -4054,12 +4054,12 @@ util.c.c
 184 66E8 0 CODE 0
 185 66F0 0 CODE 0
 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\Umul16.c
-15 7FF8 0 CODE 0
-37 7FF8 0 CODE 0
-38 8004 0 CODE 0
-39 800C 0 CODE 0
-52 8014 0 CODE 0
-53 801C 0 CODE 0
+15 8002 0 CODE 0
+37 8002 0 CODE 0
+38 800E 0 CODE 0
+39 8016 0 CODE 0
+52 801E 0 CODE 0
+53 8026 0 CODE 0
 Liofilizador Placa Mae.c
 2575 6DD4 0 CODE 0
 2576 6DD4 0 CODE 0
@@ -4075,12 +4075,12 @@ Liofilizador Placa Mae.c
 2589 6E4A 0 CODE 0
 2591 6E5E 0 CODE 0
 proculus.c
-252 80CC 0 CODE 0
-255 80CC 0 CODE 0
-256 80CC 0 CODE 0
-257 80D0 0 CODE 0
-258 80D4 0 CODE 0
-259 80EC 0 CODE 0
+252 80D6 0 CODE 0
+255 80D6 0 CODE 0
+256 80D6 0 CODE 0
+257 80DA 0 CODE 0
+258 80DE 0 CODE 0
+259 80F6 0 CODE 0
 proculus.c
 69 6426 0 CODE 0
 71 6426 0 CODE 0
@@ -4094,17 +4094,17 @@ proculus.c
 79 64C8 0 CODE 0
 81 64DC 0 CODE 0
 eeprom.c
-55 7AD4 0 CODE 0
-57 7AD4 0 CODE 0
-59 7ADE 0 CODE 0
-60 7AEC 0 CODE 0
-61 7AF0 0 CODE 0
-62 7AF4 0 CODE 0
-63 7AF6 0 CODE 0
-64 7AF8 0 CODE 0
-65 7AFA 0 CODE 0
-66 7B12 0 CODE 0
-68 7B14 0 CODE 0
+55 7B1A 0 CODE 0
+57 7B1A 0 CODE 0
+59 7B24 0 CODE 0
+60 7B32 0 CODE 0
+61 7B36 0 CODE 0
+62 7B3A 0 CODE 0
+63 7B3C 0 CODE 0
+64 7B3E 0 CODE 0
+65 7B40 0 CODE 0
+66 7B58 0 CODE 0
+68 7B5A 0 CODE 0
 Liofilizador Placa Mae.c
 2706 6A3A 0 CODE 0
 2708 6A3A 0 CODE 0
@@ -4143,28 +4143,28 @@ timedate.c
 13 7790 0 CODE 0
 14 77C2 0 CODE 0
 usart.c
-124 819A 0 CODE 0
-125 819A 0 CODE 0
-126 81A0 0 CODE 0
-127 81A6 0 CODE 0
+124 81A4 0 CODE 0
+125 81A4 0 CODE 0
+126 81AA 0 CODE 0
+127 81B0 0 CODE 0
 usart.c
-59 801E 0 CODE 0
-61 8020 0 CODE 0
-63 8024 0 CODE 0
-65 802E 0 CODE 0
-61 802E 0 CODE 0
-66 803C 0 CODE 0
-67 8040 0 CODE 0
-71 8042 0 CODE 0
+59 8028 0 CODE 0
+61 802A 0 CODE 0
+63 802E 0 CODE 0
+65 8038 0 CODE 0
+61 8038 0 CODE 0
+66 8046 0 CODE 0
+67 804A 0 CODE 0
+71 804C 0 CODE 0
 Liofilizador Placa Mae.c
-2981 81A8 0 CODE 0
-2982 81A8 0 CODE 0
-2983 81AC 0 CODE 0
-2984 81AE 0 CODE 0
-2985 81B0 0 CODE 0
-2986 81B2 0 CODE 0
-C:\Users\Dell\AppData\Local\Temp\sc7k.s
-42006 18 0 CODE 0
+2981 81B2 0 CODE 0
+2982 81B2 0 CODE 0
+2983 81B6 0 CODE 0
+2984 81B8 0 CODE 0
+2985 81BA 0 CODE 0
+2986 81BC 0 CODE 0
+C:\Users\Dell\AppData\Local\Temp\s10g.s
+42011 18 0 CODE 0
 isr.c
 70 18 0 CODE 0
 74 36 0 CODE 0

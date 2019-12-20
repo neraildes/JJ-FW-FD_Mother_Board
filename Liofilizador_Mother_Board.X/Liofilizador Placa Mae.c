@@ -1182,7 +1182,7 @@ void save_datalog(unsigned int add){
      Send_To_Slave(TODOS, COMMAND_SAVE_LOG , 0, bb); 
      //===================================================================================
      for(index=0;index<(totalboard*2);index++)
-	     {
+	 {
          if(mapa.entrada[index]!=NULL) 
             {	
             PROCULUS_graphic_plot(mapa.canal[index]+1,*mapa.entrada[index]*mapa.fator[index]);
@@ -2346,7 +2346,7 @@ void Check_And_Send_Capture_Datalog(void){
          {  
          flag_capture_datalog=0; 
          //PROCULUS_OK();
-         __delay_ms(20); //EVITA LEITURA -1.0Volts
+         __delay_ms(25); //EVITA LEITURA -1.0Volts
          save_datalog(0);         
          //processo.pontos++; //Totaliza os pontos capturados para indicar na Fat
                             //o tamanho do registro.

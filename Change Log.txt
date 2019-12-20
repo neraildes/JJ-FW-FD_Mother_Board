@@ -6,6 +6,10 @@ Tarefas a serem feitas (em ordem de prioridade)
 .........."Placa não conectada" e "Sem sensor" para vacuo e pt100.
 ..........Recuperar grafico apos blackout.
 
+Versao 1.0.13
+	Alteraçao no tempo de captura do datalog para evitar -1.0V de leitura.
+
+
 Versao 1.0.11
         Acionamento em cascata e temporizado após blackout.
 	Proculus considera que qualquer retorno da funcao VP Read maior que 4 é texto e coloca um terminador.

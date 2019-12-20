@@ -3540,7 +3540,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 449  ]
 [e :U 446 ]
 "1185
-[; ;Liofilizador Placa Mae.c: 1185:       {
+[; ;Liofilizador Placa Mae.c: 1185:   {
 {
 "1186
 [; ;Liofilizador Placa Mae.c: 1186:          if(mapa.entrada[index]!=((void*)0))
@@ -5993,8 +5993,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 2347:          statusgen.flag_capture_datalog=0;
 [e = . _statusgen 6 -> -> 0 `i `uc ]
 "2349
-[; ;Liofilizador Placa Mae.c: 2349:          _delay((unsigned long)((20)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;Liofilizador Placa Mae.c: 2349:          _delay((unsigned long)((25)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "2350
 [; ;Liofilizador Placa Mae.c: 2350:          save_datalog(0);
 [e ( _save_datalog (1 -> -> 0 `i `ui ]
