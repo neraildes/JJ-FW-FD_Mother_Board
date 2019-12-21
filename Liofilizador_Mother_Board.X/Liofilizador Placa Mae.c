@@ -287,33 +287,9 @@ void main(void)
      
      
      
-     
-     /*
-     while(1)
-          {
-             asm("CLRWDT");
-             //------------INTERPRETA COMANDO DO MICROCOMPUTADOR--------------------                 
-             if(flag_usart_rx)
-                { 
-                 flag_usart_rx=0;
-                 USART_put_int(0x1234);
-                //Comando_Protocolo_Serial(); 
-                }                    
 
-             //----------------INTERPRETA COMANDO DO DISPLAY----------------
-             if(flag_usart_rx)
-                {
-                flag_usart_rx=0; 
-                USART_put_int(0x5678);
-                //Comando_Display();
-                }//flag_usart_rx           
-          }
      
-     */
-     
-     
-     
-     
+    Teste24cXXXX();     
      
      
      
@@ -474,7 +450,11 @@ void main(void)
      //=========================================================================
      //                              M A I N
      //=========================================================================
+        
+        
+        add_datalog=0;
         Ligar_Cargas_Compassadamente();
+        PROCULUS_Show_Screen(15);
         while(1)
              {
              flag_main_loop_WDT=TRUE;
@@ -1175,11 +1155,16 @@ void DataBaseBackupMain(unsigned char tupla)
 //Salva e atualiza grafico
 void save_datalog(unsigned int add){
      char index;
-     char bb[3];
+     char bb[4];
      char boardadd;
      
      //===================================================================================
-     Send_To_Slave(TODOS, COMMAND_SAVE_LOG , 0, bb); 
+     bb[0]=High (add_datalog);
+     bb[1]=Lower(add_datalog);
+     bb[2]=Hi   (add_datalog);
+     bb[3]=Lo   (add_datalog);
+     Send_To_Slave(TODOS, COMMAND_SAVE_LOG , 4, bb);
+     add_datalog+=2;
      //===================================================================================
      for(index=0;index<(totalboard*2);index++)
 	 {
@@ -2347,7 +2332,8 @@ void Check_And_Send_Capture_Datalog(void){
          flag_capture_datalog=0; 
          //PROCULUS_OK();
          __delay_ms(25); //EVITA LEITURA -1.0Volts
-         save_datalog(0);         
+         save_datalog(add_datalog);         
+         add_datalog+=2;
          //processo.pontos++; //Totaliza os pontos capturados para indicar na Fat
                             //o tamanho do registro.
          }
@@ -3181,6 +3167,7 @@ void Carregar_Display_Schematic_Color(){
 }
 
 void Ligar_Cargas_Compassadamente(){
+     int valor;
      PROCULUS_VP_Write_UInt16(0x02,0); //DATALOG
      PROCULUS_VP_Write_UInt16(0x03,0); //CONDENSADOR
      PROCULUS_VP_Write_UInt16(0x04,0); //VACUO
@@ -3197,10 +3184,46 @@ void Ligar_Cargas_Compassadamente(){
           
           if(flag_global_datalog==1)
              {   
+             
              flag_global_datalog=0;
              print("1-DataLog");
              PROCULUS_VP_Write_UInt16(0x02,1); //Datalog
-             global_datalog();          
+             global_datalog(); 
+             
+
+             
+             
+             
+             {
+//             PROCULUS_OK();
+//             for(unsigned long addlog=0; addlog<600; addlog+=2)
+//                {                  
+//                buffer[0]=High (addlog);
+//                buffer[1]=Lower(addlog);
+//                buffer[2]=Hi   (addlog);
+//                buffer[3]=Lo   (addlog);                   
+//                Send_To_Slave(1, COMMAND_SAVE_LOG, 4,buffer); 
+//                //my_delay_ms_CLRWDT(500);
+//                }
+             
+             PROCULUS_Show_Screen(35);
+             PROCULUS_OK();
+             for(unsigned long addlog=0; addlog<600; addlog+=2)
+                { 
+                buffer[0]=0; //Canal de Vacuometro
+                buffer[1]=High (addlog);
+                buffer[2]=Lower(addlog);
+                buffer[3]=Hi   (addlog);
+                buffer[4]=Lo   (addlog); 
+                valor=Send_To_Slave(1, COMMAND_EEE_R_INT, 5, buffer);
+                my_delay_ms_CLRWDT(50);
+                PROCULUS_graphic_plot(1,valor);
+                }             
+             }             
+             
+             
+             
+             
              my_delay_ms_CLRWDT(10000);
              }
           
@@ -3236,6 +3259,81 @@ void Ligar_Cargas_Compassadamente(){
             }
           PROCULUS_Show_Screen(15);           
           }
-     memo_statuspower=statuspower.bits;
-     PROCULUS_Show_Screen(15);
+     memo_statuspower=statuspower.bits;     
 }
+
+
+
+
+
+void Teste24cXXXX(void){
+     unsigned char chip, placa;
+     unsigned long add_eeprom;
+     unsigned int valor;
+     unsigned int valorLido;
+     
+     Tamanho_Display=80;
+     PROCULUS_Show_Screen(0);
+ 
+     add_eeprom=0x200;
+     valor=1234; 
+     
+     placa=1;
+     chip =0;
+     
+     while(TRUE)
+          {          
+          add_eeprom=0x200;
+          valor=1234;          
+          print("Gravando");
+          for(char i=0;i<100;i++)
+               { 
+               strcpy(texto,"0x");
+               itoa((int)add_eeprom,buffer,16);
+               strcat(texto,buffer);
+               strcat(texto," = ");
+               itoa(valor,buffer,10);
+               strcat(texto,buffer);   
+               print(texto);
+               
+               buffer[0]=chip;//chip
+               buffer[1]=High(add_eeprom);
+               buffer[2]=Lower(add_eeprom);
+               buffer[3]=Hi(add_eeprom);
+               buffer[4]=Lo(add_eeprom);
+               buffer[5]=Hi(valor);
+               buffer[6]=Lo(valor);
+               Send_To_Slave(placa, COMMAND_EEE_W_INT, 7, buffer);
+               add_eeprom+=2;
+               valor++;
+               }
+          
+          
+
+          add_eeprom=0x200;
+          print("Lendo");
+          for(char i=0;i<100;i++)             
+              {     
+               strcpy(texto,"0x");
+               itoa((int)add_eeprom,buffer,16);
+               strcat(texto,buffer);
+               strcat(texto," = ");
+               itoa(valor,buffer,10);
+               strcat(texto,buffer);   
+               print(texto);               
+  
+               buffer[0]=chip;//chip
+               buffer[1]=High(add_eeprom);
+               buffer[2]=Lower(add_eeprom);
+               buffer[3]=Hi(add_eeprom);
+               buffer[4]=Lo(add_eeprom);
+               valorLido=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, buffer);
+               add_eeprom+=2;
+              }
+
+          
+          my_delay_ms_CLRWDT(500);
+     }    
+}         
+
+     

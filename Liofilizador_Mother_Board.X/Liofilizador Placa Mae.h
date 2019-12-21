@@ -172,5 +172,7 @@ void Incrementa_Contador_de_Repique_do_Vacuo(void);
 void Carregar_Display_Schematic_Color(void);
 void Ligar_Cargas_Compassadamente(void);
 
+void Teste24cXXXX(void);
+
 #endif	/* LIOFILIZADOR_PLACA_MAE_H */
 
