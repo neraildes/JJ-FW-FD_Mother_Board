@@ -8539,71 +8539,23 @@ void Ligar_Cargas_Compassadamente(){
 
 
 void Teste24cXXXX(void){
-     unsigned char chip, placa;
+     unsigned char chip, placa,canal;
      unsigned long add_eeprom;
      unsigned int valor;
      unsigned int valorLido;
-
-     Tamanho_Display=80;
-     PROCULUS_Show_Screen(0);
-
-     add_eeprom=0x200;
-     valor=1234;
+     char bb[5];
 
      placa=1;
-     chip =0;
+     canal=0;
 
      while(1)
           {
-          add_eeprom=0x200;
-          valor=1234;
-          print("Gravando");
-          for(char i=0;i<100;i++)
-               {
-               strcpy(texto,"0x");
-               itoa((int)add_eeprom,buffer,16);
-               strcat(texto,buffer);
-               strcat(texto," = ");
-               itoa(valor,buffer,10);
-               strcat(texto,buffer);
-               print(texto);
-
-               buffer[0]=chip;
-               buffer[1]=((char *)&add_eeprom)[3];
-               buffer[2]=((char *)&add_eeprom)[2];
-               buffer[3]=((char *)&add_eeprom)[1];
-               buffer[4]=((char *)&add_eeprom)[0];
-               buffer[5]=((char *)&valor)[1];
-               buffer[6]=((char *)&valor)[0];
-               Send_To_Slave(placa, 0x13, 7, buffer);
-               add_eeprom+=2;
-               valor++;
-               }
-
-
-
-          add_eeprom=0x200;
-          print("Lendo");
-          for(char i=0;i<100;i++)
-              {
-               strcpy(texto,"0x");
-               itoa((int)add_eeprom,buffer,16);
-               strcat(texto,buffer);
-               strcat(texto," = ");
-               itoa(valor,buffer,10);
-               strcat(texto,buffer);
-               print(texto);
-
-               buffer[0]=chip;
-               buffer[1]=((char *)&add_eeprom)[3];
-               buffer[2]=((char *)&add_eeprom)[2];
-               buffer[3]=((char *)&add_eeprom)[1];
-               buffer[4]=((char *)&add_eeprom)[0];
-               valorLido=Send_To_Slave(placa, 0x14, 5, buffer);
-               add_eeprom+=2;
-              }
-
+          bb[0]=canal;
+          valorLido=Send_To_Slave(placa, 0X1A, 1, bb);
+          valorLido=123;
+          itoa(valorLido,texto,10);
+          print(texto);
 
           my_delay_ms_CLRWDT(500);
-     }
+          }
 }

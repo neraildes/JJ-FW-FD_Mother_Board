@@ -3267,73 +3267,25 @@ void Ligar_Cargas_Compassadamente(){
 
 
 void Teste24cXXXX(void){
-     unsigned char chip, placa;
+     unsigned char chip, placa,canal;
      unsigned long add_eeprom;
      unsigned int valor;
      unsigned int valorLido;
-     
-     Tamanho_Display=80;
-     PROCULUS_Show_Screen(0);
- 
-     add_eeprom=0x200;
-     valor=1234; 
+     char bb[5];
      
      placa=1;
-     chip =0;
+     canal=0;
      
-     while(TRUE)
-          {          
-          add_eeprom=0x200;
-          valor=1234;          
-          print("Gravando");
-          for(char i=0;i<100;i++)
-               { 
-               strcpy(texto,"0x");
-               itoa((int)add_eeprom,buffer,16);
-               strcat(texto,buffer);
-               strcat(texto," = ");
-               itoa(valor,buffer,10);
-               strcat(texto,buffer);   
-               print(texto);
-               
-               buffer[0]=chip;//chip
-               buffer[1]=High(add_eeprom);
-               buffer[2]=Lower(add_eeprom);
-               buffer[3]=Hi(add_eeprom);
-               buffer[4]=Lo(add_eeprom);
-               buffer[5]=Hi(valor);
-               buffer[6]=Lo(valor);
-               Send_To_Slave(placa, COMMAND_EEE_W_INT, 7, buffer);
-               add_eeprom+=2;
-               valor++;
-               }
-          
-          
-
-          add_eeprom=0x200;
-          print("Lendo");
-          for(char i=0;i<100;i++)             
-              {     
-               strcpy(texto,"0x");
-               itoa((int)add_eeprom,buffer,16);
-               strcat(texto,buffer);
-               strcat(texto," = ");
-               itoa(valor,buffer,10);
-               strcat(texto,buffer);   
-               print(texto);               
-  
-               buffer[0]=chip;//chip
-               buffer[1]=High(add_eeprom);
-               buffer[2]=Lower(add_eeprom);
-               buffer[3]=Hi(add_eeprom);
-               buffer[4]=Lo(add_eeprom);
-               valorLido=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, buffer);
-               add_eeprom+=2;
-              }
-
+     while(1)
+          {  
+          bb[0]=canal;
+          valorLido=Send_To_Slave(placa, COMMAND_READ_ANALOG, 1, bb);     
+          valorLido=1234;
+          itoa(valorLido,texto,10);
+          print(texto); 
           
           my_delay_ms_CLRWDT(500);
-     }    
+          }
 }         
 
      

@@ -8608,9 +8608,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _Teste24cXXXX ]
 [f ]
 "3270
-[; ;Liofilizador Placa Mae.c: 3270:      unsigned char chip, placa;
+[; ;Liofilizador Placa Mae.c: 3270:      unsigned char chip, placa,canal;
 [v _chip `uc ~T0 @X0 1 a ]
 [v _placa `uc ~T0 @X0 1 a ]
+[v _canal `uc ~T0 @X0 1 a ]
 "3271
 [; ;Liofilizador Placa Mae.c: 3271:      unsigned long add_eeprom;
 [v _add_eeprom `ul ~T0 @X0 1 a ]
@@ -8620,195 +8621,53 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3273
 [; ;Liofilizador Placa Mae.c: 3273:      unsigned int valorLido;
 [v _valorLido `ui ~T0 @X0 1 a ]
-"3275
-[; ;Liofilizador Placa Mae.c: 3275:      Tamanho_Display=80;
-[e = _Tamanho_Display -> 80 `i ]
+"3274
+[; ;Liofilizador Placa Mae.c: 3274:      char bb[5];
+[v _bb `uc ~T0 @X0 -> 5 `i a ]
 "3276
-[; ;Liofilizador Placa Mae.c: 3276:      PROCULUS_Show_Screen(0);
-[e ( _PROCULUS_Show_Screen (1 -> -> 0 `i `ui ]
-"3278
-[; ;Liofilizador Placa Mae.c: 3278:      add_eeprom=0x200;
-[e = _add_eeprom -> -> -> 512 `i `l `ul ]
-"3279
-[; ;Liofilizador Placa Mae.c: 3279:      valor=1234;
-[e = _valor -> -> 1234 `i `ui ]
-"3281
-[; ;Liofilizador Placa Mae.c: 3281:      placa=1;
+[; ;Liofilizador Placa Mae.c: 3276:      placa=1;
 [e = _placa -> -> 1 `i `uc ]
-"3282
-[; ;Liofilizador Placa Mae.c: 3282:      chip =0;
-[e = _chip -> -> 0 `i `uc ]
-"3284
-[; ;Liofilizador Placa Mae.c: 3284:      while(1)
+"3277
+[; ;Liofilizador Placa Mae.c: 3277:      canal=0;
+[e = _canal -> -> 0 `i `uc ]
+"3279
+[; ;Liofilizador Placa Mae.c: 3279:      while(1)
 [e :U 798 ]
+"3280
+[; ;Liofilizador Placa Mae.c: 3280:           {
+{
+"3281
+[; ;Liofilizador Placa Mae.c: 3281:           bb[0]=canal;
+[e = *U + &U _bb * -> -> -> 0 `i `ui `ux -> -> # *U &U _bb `ui `ux -> _canal `uc ]
+"3282
+[; ;Liofilizador Placa Mae.c: 3282:           valorLido=Send_To_Slave(placa, 0X1A, 1, bb);
+[e = _valorLido -> ( _Send_To_Slave (4 , , , -> _placa `uc -> -> 26 `i `uc -> -> 1 `i `uc &U _bb `ui ]
+"3283
+[; ;Liofilizador Placa Mae.c: 3283:           valorLido=123;
+[e = _valorLido -> -> 123 `i `ui ]
+"3284
+[; ;Liofilizador Placa Mae.c: 3284:           itoa(valorLido,texto,10);
+[e ( _itoa (3 , , -> _valorLido `i &U _texto -> 10 `i ]
 "3285
-[; ;Liofilizador Placa Mae.c: 3285:           {
-{
-"3286
-[; ;Liofilizador Placa Mae.c: 3286:           add_eeprom=0x200;
-[e = _add_eeprom -> -> -> 512 `i `l `ul ]
+[; ;Liofilizador Placa Mae.c: 3285:           print(texto);
+[e ( _print (1 &U _texto ]
 "3287
-[; ;Liofilizador Placa Mae.c: 3287:           valor=1234;
-[e = _valor -> -> 1234 `i `ui ]
-"3288
-[; ;Liofilizador Placa Mae.c: 3288:           print("Gravando");
-[e ( _print (1 :s 68C ]
-"3289
-[; ;Liofilizador Placa Mae.c: 3289:           for(char i=0;i<100;i++)
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 800  ]
-[e $U 801  ]
-[e :U 800 ]
-"3290
-[; ;Liofilizador Placa Mae.c: 3290:                {
-{
-"3291
-[; ;Liofilizador Placa Mae.c: 3291:                strcpy(texto,"0x");
-[e ( _strcpy (2 , &U _texto :s 69C ]
-"3292
-[; ;Liofilizador Placa Mae.c: 3292:                itoa((int)add_eeprom,buffer,16);
-[e ( _itoa (3 , , -> _add_eeprom `i &U _buffer -> 16 `i ]
-"3293
-[; ;Liofilizador Placa Mae.c: 3293:                strcat(texto,buffer);
-[e ( _strcat (2 , &U _texto -> &U _buffer `*Cuc ]
-"3294
-[; ;Liofilizador Placa Mae.c: 3294:                strcat(texto," = ");
-[e ( _strcat (2 , &U _texto :s 70C ]
-"3295
-[; ;Liofilizador Placa Mae.c: 3295:                itoa(valor,buffer,10);
-[e ( _itoa (3 , , -> _valor `i &U _buffer -> 10 `i ]
-"3296
-[; ;Liofilizador Placa Mae.c: 3296:                strcat(texto,buffer);
-[e ( _strcat (2 , &U _texto -> &U _buffer `*Cuc ]
-"3297
-[; ;Liofilizador Placa Mae.c: 3297:                print(texto);
-[e ( _print (1 &U _texto ]
-"3299
-[; ;Liofilizador Placa Mae.c: 3299:                buffer[0]=chip;
-[e = *U + &U _buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _buffer `ui `ux -> _chip `uc ]
-"3300
-[; ;Liofilizador Placa Mae.c: 3300:                buffer[1]=((char *)&add_eeprom)[3];
-[e = *U + &U _buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _buffer `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 3 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3301
-[; ;Liofilizador Placa Mae.c: 3301:                buffer[2]=((char *)&add_eeprom)[2];
-[e = *U + &U _buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _buffer `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 2 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3302
-[; ;Liofilizador Placa Mae.c: 3302:                buffer[3]=((char *)&add_eeprom)[1];
-[e = *U + &U _buffer * -> -> -> 3 `i `ui `ux -> -> # *U &U _buffer `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 1 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3303
-[; ;Liofilizador Placa Mae.c: 3303:                buffer[4]=((char *)&add_eeprom)[0];
-[e = *U + &U _buffer * -> -> -> 4 `i `ui `ux -> -> # *U &U _buffer `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 0 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3304
-[; ;Liofilizador Placa Mae.c: 3304:                buffer[5]=((char *)&valor)[1];
-[e = *U + &U _buffer * -> -> -> 5 `i `ui `ux -> -> # *U &U _buffer `ui `ux *U + -> &U _valor `*uc * -> -> 1 `i `x -> -> # *U -> &U _valor `*uc `i `x ]
-"3305
-[; ;Liofilizador Placa Mae.c: 3305:                buffer[6]=((char *)&valor)[0];
-[e = *U + &U _buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _buffer `ui `ux *U + -> &U _valor `*uc * -> -> 0 `i `x -> -> # *U -> &U _valor `*uc `i `x ]
-"3306
-[; ;Liofilizador Placa Mae.c: 3306:                Send_To_Slave(placa, 0x13, 7, buffer);
-[e ( _Send_To_Slave (4 , , , -> _placa `uc -> -> 19 `i `uc -> -> 7 `i `uc &U _buffer ]
-"3307
-[; ;Liofilizador Placa Mae.c: 3307:                add_eeprom+=2;
-[e =+ _add_eeprom -> -> -> 2 `i `l `ul ]
-"3308
-[; ;Liofilizador Placa Mae.c: 3308:                valor++;
-[e ++ _valor -> -> 1 `i `ui ]
-"3309
-[; ;Liofilizador Placa Mae.c: 3309:                }
-}
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 800  ]
-[e :U 801 ]
-}
-"3313
-[; ;Liofilizador Placa Mae.c: 3313:           add_eeprom=0x200;
-[e = _add_eeprom -> -> -> 512 `i `l `ul ]
-"3314
-[; ;Liofilizador Placa Mae.c: 3314:           print("Lendo");
-[e ( _print (1 :s 71C ]
-"3315
-[; ;Liofilizador Placa Mae.c: 3315:           for(char i=0;i<100;i++)
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 803  ]
-[e $U 804  ]
-[e :U 803 ]
-"3316
-[; ;Liofilizador Placa Mae.c: 3316:               {
-{
-"3317
-[; ;Liofilizador Placa Mae.c: 3317:                strcpy(texto,"0x");
-[e ( _strcpy (2 , &U _texto :s 72C ]
-"3318
-[; ;Liofilizador Placa Mae.c: 3318:                itoa((int)add_eeprom,buffer,16);
-[e ( _itoa (3 , , -> _add_eeprom `i &U _buffer -> 16 `i ]
-"3319
-[; ;Liofilizador Placa Mae.c: 3319:                strcat(texto,buffer);
-[e ( _strcat (2 , &U _texto -> &U _buffer `*Cuc ]
-"3320
-[; ;Liofilizador Placa Mae.c: 3320:                strcat(texto," = ");
-[e ( _strcat (2 , &U _texto :s 73C ]
-"3321
-[; ;Liofilizador Placa Mae.c: 3321:                itoa(valor,buffer,10);
-[e ( _itoa (3 , , -> _valor `i &U _buffer -> 10 `i ]
-"3322
-[; ;Liofilizador Placa Mae.c: 3322:                strcat(texto,buffer);
-[e ( _strcat (2 , &U _texto -> &U _buffer `*Cuc ]
-"3323
-[; ;Liofilizador Placa Mae.c: 3323:                print(texto);
-[e ( _print (1 &U _texto ]
-"3325
-[; ;Liofilizador Placa Mae.c: 3325:                buffer[0]=chip;
-[e = *U + &U _buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _buffer `ui `ux -> _chip `uc ]
-"3326
-[; ;Liofilizador Placa Mae.c: 3326:                buffer[1]=((char *)&add_eeprom)[3];
-[e = *U + &U _buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _buffer `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 3 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3327
-[; ;Liofilizador Placa Mae.c: 3327:                buffer[2]=((char *)&add_eeprom)[2];
-[e = *U + &U _buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _buffer `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 2 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3328
-[; ;Liofilizador Placa Mae.c: 3328:                buffer[3]=((char *)&add_eeprom)[1];
-[e = *U + &U _buffer * -> -> -> 3 `i `ui `ux -> -> # *U &U _buffer `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 1 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3329
-[; ;Liofilizador Placa Mae.c: 3329:                buffer[4]=((char *)&add_eeprom)[0];
-[e = *U + &U _buffer * -> -> -> 4 `i `ui `ux -> -> # *U &U _buffer `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 0 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3330
-[; ;Liofilizador Placa Mae.c: 3330:                valorLido=Send_To_Slave(placa, 0x14, 5, buffer);
-[e = _valorLido -> ( _Send_To_Slave (4 , , , -> _placa `uc -> -> 20 `i `uc -> -> 5 `i `uc &U _buffer `ui ]
-"3331
-[; ;Liofilizador Placa Mae.c: 3331:                add_eeprom+=2;
-[e =+ _add_eeprom -> -> -> 2 `i `l `ul ]
-"3332
-[; ;Liofilizador Placa Mae.c: 3332:               }
-}
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 803  ]
-[e :U 804 ]
-}
-"3335
-[; ;Liofilizador Placa Mae.c: 3335:           my_delay_ms_CLRWDT(500);
+[; ;Liofilizador Placa Mae.c: 3287:           my_delay_ms_CLRWDT(500);
 [e ( _my_delay_ms_CLRWDT (1 -> -> 500 `i `l ]
-"3336
-[; ;Liofilizador Placa Mae.c: 3336:      }
+"3288
+[; ;Liofilizador Placa Mae.c: 3288:           }
 }
 [e :U 797 ]
 [e $U 798  ]
 [e :U 799 ]
-"3337
-[; ;Liofilizador Placa Mae.c: 3337: }
+"3289
+[; ;Liofilizador Placa Mae.c: 3289: }
 [e :UE 796 ]
 }
 [a 42C 87 32 48 120 0 ]
-[a 69C 48 120 0 ]
-[a 72C 48 120 0 ]
 [a 31C 68 101 115 99 97 114 114 101 103 97 110 100 111 32 68 97 100 111 115 0 ]
 [a 55C 109 97 115 116 101 114 0 ]
 [a 67C 52 45 65 113 117 101 99 105 109 101 110 116 111 0 ]
-[a 71C 76 101 110 100 111 0 ]
-[a 68C 71 114 97 118 97 110 100 111 0 ]
 [a 33C 70 111 114 109 97 116 97 110 100 111 0 ]
 [a 64C 49 45 68 97 116 97 76 111 103 0 ]
 [a 1C 77 111 116 104 101 114 32 66 111 97 114 100 0 ]
@@ -8850,8 +8709,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 48C 80 108 97 99 97 32 48 32 61 32 0 ]
 [a 43C 32 61 32 0 ]
 [a 50C 32 61 32 0 ]
-[a 70C 32 61 32 0 ]
-[a 73C 32 61 32 0 ]
 [a 57C 32 58 32 0 ]
 [a 4C 78 84 67 32 66 111 97 114 100 32 32 32 0 ]
 [a 9C 42 32 58 32 68 105 115 112 108 97 121 32 32 32 32 32 32 0 ]
