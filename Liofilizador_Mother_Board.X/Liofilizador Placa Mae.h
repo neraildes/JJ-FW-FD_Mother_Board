@@ -113,7 +113,7 @@ void SaveBlackoutStatusRuning(void);
 void RecallBlackoutStatus(void);
 
 void Check_And_Send_Capture_Datalog(void); //Analisa condição para salvar datalog
-void save_datalog(unsigned int add); //Envia comando de captura para todas as placas simultaneamente
+void save_datalog(unsigned long add_datalog); //Envia comando de captura para todas as placas simultaneamente
 
 void Contagem_Tempo_de_Processo(char value);
 void Carregar_tempo_de_datalog(void);
