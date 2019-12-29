@@ -13,14 +13,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S271 . bits . ]
 "270
 [; ;./global.h: 270: struct{
-[s S273 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S273 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico ]
-"286
-[; ;./global.h: 286: struct{
+[s S273 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S273 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication ]
+"288
+[; ;./global.h: 288: struct{
 [s S274 :1 `uc 1 ]
 [n S274 . flag_main_loop_WDT ]
-"291
-[; ;./global.h: 291: typedef struct{
+"293
+[; ;./global.h: 293: typedef struct{
 [s S275 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S275 . milisegundo segundo minuto hora ]
 [t ~ __interrupt . k ]
@@ -81,10 +81,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "10 isr.c
 [; ;isr.c: 10: extern volatile unsigned char usart_buffer[74];
 [v _usart_buffer `Vuc ~T0 @X0 -> 0 `x e ]
-[v F2612 `Vuc ~T0 @X0 -> 74 `i t ]
+[v F2613 `Vuc ~T0 @X0 -> 74 `i t ]
 "11
 [; ;isr.c: 11: extern volatile unsigned char usart_buffer_fila[6][74];
-[v _usart_buffer_fila `F2612 ~T0 @X0 -> 0 `x e ]
+[v _usart_buffer_fila `F2613 ~T0 @X0 -> 0 `x e ]
 "3498 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 3498: extern volatile unsigned char RCREG __attribute__((address(0xFAE)));
 [v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
@@ -702,14 +702,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "259
 [; ;./global.h: 259:       } statuspower;
 [v _statuspower `S271 ~T0 @X0 1 e ]
-"277
-[; ;./global.h: 277: }statusgen1;
+"278
+[; ;./global.h: 278: }statusgen1;
 [v _statusgen1 `S273 ~T0 @X0 1 e ]
-"288
-[; ;./global.h: 288: }statusWDT;
+"290
+[; ;./global.h: 290: }statusWDT;
 [v _statusWDT `S274 ~T0 @X0 1 e ]
-"298
-[; ;./global.h: 298: volatile t_rtc rtc;
+"300
+[; ;./global.h: 300: volatile t_rtc rtc;
 [v _rtc `VS275 ~T0 @X0 1 e ]
 "54 isr.c
 [; ;isr.c: 54: volatile unsigned int tempo;
@@ -742,11 +742,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;isr.c: 75:         {
 {
 "76
-[; ;isr.c: 76:         TRISDbits.RD4=0;
-[e = . . _TRISDbits 1 4 -> -> 0 `i `uc ]
+[; ;isr.c: 76:         TRISDbits.RD5=0;
+[e = . . _TRISDbits 1 5 -> -> 0 `i `uc ]
 "77
-[; ;isr.c: 77:         PORTDbits.RD4=1;
-[e = . . _PORTDbits 0 4 -> -> 1 `i `uc ]
+[; ;isr.c: 77:         PORTDbits.RD5=1;
+[e = . . _PORTDbits 0 5 -> -> 1 `i `uc ]
 "78
 [; ;isr.c: 78:         if(statusgen.flag_usart_rx==0)
 [e $ ! == -> . _statusgen 0 `i -> 0 `i 281  ]
@@ -831,11 +831,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;isr.c: 101:             {
 {
 "102
-[; ;isr.c: 102:                 PORTDbits.RD4=0;
-[e = . . _PORTDbits 0 4 -> -> 0 `i `uc ]
+[; ;isr.c: 102:                 PORTDbits.RD5=0;
+[e = . . _PORTDbits 0 5 -> -> 0 `i `uc ]
 "103
-[; ;isr.c: 103:                 PORTDbits.RD4=1;
-[e = . . _PORTDbits 0 4 -> -> 1 `i `uc ]
+[; ;isr.c: 103:                 PORTDbits.RD5=1;
+[e = . . _PORTDbits 0 5 -> -> 1 `i `uc ]
 "104
 [; ;isr.c: 104:                 (*pointer)=RCREG;
 [e = *U _pointer _RCREG ]
@@ -884,8 +884,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ != _tempo -> -> 0 `i `ui 288  ]
 [e :U 289 ]
 "119
-[; ;isr.c: 119:         PORTDbits.RD4=0;
-[e = . . _PORTDbits 0 4 -> -> 0 `i `uc ]
+[; ;isr.c: 119:         PORTDbits.RD5=0;
+[e = . . _PORTDbits 0 5 -> -> 0 `i `uc ]
 "121
 [; ;isr.c: 121:         if(RCSTAbits.OERR)
 [e $ ! != -> . . _RCSTAbits 0 1 `i -> 0 `i 293  ]

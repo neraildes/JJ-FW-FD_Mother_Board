@@ -50,7 +50,8 @@
 #define WINDOW_TELA_05 5
 
 
-#define DELAY_PROCULUS __delay_ms(32)
+#define DELAY_PROCULUS_HS __delay_ms(32)
+#define DELAY_PROCULUS_LS __delay_ms(6)
 
     
 typedef struct {

@@ -4465,8 +4465,9 @@ struct{
         unsigned flag_proculus_hs :1;
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
+        unsigned flag_recomunication :1;
 }statusgen1;
-# 286 "./global.h"
+# 288 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -4484,7 +4485,7 @@ volatile t_rtc rtc;
 # 1 "./isr.h" 1
 # 13 "./isr.h"
 # 1 "./proculus.h" 1
-# 56 "./proculus.h"
+# 57 "./proculus.h"
 typedef struct {
     unsigned int header;
     unsigned char size;
@@ -4684,8 +4685,8 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
 
     if(PIR1bits.RCIF)
         {
-        TRISDbits.RD4=0;
-        PORTDbits.RD4=1;
+        TRISDbits.RD5=0;
+        PORTDbits.RD5=1;
         if(statusgen.flag_usart_rx==0)
            {
            statusgen.flag_usart_rx=1;
@@ -4710,8 +4711,8 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
         {
             if (PIR1bits.RCIF)
             {
-                PORTDbits.RD4=0;
-                PORTDbits.RD4=1;
+                PORTDbits.RD5=0;
+                PORTDbits.RD5=1;
                 (*pointer)=RCREG;
                 if(count<74 -1)
                    {
@@ -4727,7 +4728,7 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
 
         }
 
-        PORTDbits.RD4=0;
+        PORTDbits.RD5=0;
 
         if(RCSTAbits.OERR)
            {

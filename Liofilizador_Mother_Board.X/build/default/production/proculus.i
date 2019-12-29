@@ -95,8 +95,9 @@ struct{
         unsigned flag_proculus_hs :1;
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
+        unsigned flag_recomunication :1;
 }statusgen1;
-# 286 "./global.h"
+# 288 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -113,7 +114,7 @@ volatile t_rtc rtc;
 # 2 "proculus.c" 2
 
 # 1 "./proculus.h" 1
-# 56 "./proculus.h"
+# 57 "./proculus.h"
 typedef struct {
     unsigned int header;
     unsigned char size;
@@ -5411,7 +5412,11 @@ volatile unsigned int tempodecorrido;
 
 void PROCULUS_REG_Write(unsigned char *vetor, unsigned char size){
      unsigned char i;
-     _delay((unsigned long)((32)*(32000000/4000.0)));
+     if(!statusgen1.flag_proculus_hs)
+        _delay((unsigned long)((32)*(32000000/4000.0)));
+     else
+        _delay((unsigned long)((6)*(32000000/4000.0)));
+
      USART_put_int(0x5AA5);
      USART_putc((unsigned char)(1+size));
      USART_putc(0x80);
@@ -5426,7 +5431,10 @@ void PROCULUS_REG_Write(unsigned char *vetor, unsigned char size){
 void PROCULUS_REG_Read(unsigned char reg, unsigned char size, unsigned char *retorno){
      unsigned char i;
      unsigned int tempo;
-     if(!statusgen1.flag_proculus_hs) _delay((unsigned long)((32)*(32000000/4000.0)));
+     if(!statusgen1.flag_proculus_hs)
+        _delay((unsigned long)((32)*(32000000/4000.0)));
+     else
+        _delay((unsigned long)((6)*(32000000/4000.0)));
      USART_put_int(0x5AA5);
      USART_putc((unsigned char)(2+size));
      USART_putc(0x81);
@@ -5464,7 +5472,10 @@ void PROCULUS_REG_Read(unsigned char reg, unsigned char size, unsigned char *ret
 
 void PROCULUS_VP_Write(unsigned int vp,char *vetor,char size){
      unsigned char i;
-     if(!statusgen1.flag_proculus_hs) _delay((unsigned long)((32)*(32000000/4000.0)));
+     if(!statusgen1.flag_proculus_hs)
+        _delay((unsigned long)((32)*(32000000/4000.0)));
+     else
+        _delay((unsigned long)((6)*(32000000/4000.0)));
      USART_put_int(0x5AA5);
      USART_putc((unsigned char)(3+size));
      USART_putc(0x82);
@@ -5482,9 +5493,10 @@ void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size){
      unsigned int tempo;
      t_proculus proculus;
 
-
-
-     _delay((unsigned long)((32)*(32000000/4000.0)));
+     if(!statusgen1.flag_proculus_hs)
+        _delay((unsigned long)((32)*(32000000/4000.0)));
+     else
+        _delay((unsigned long)((6)*(32000000/4000.0)));
      USART_put_int(0x5AA5);
      USART_putc(4);
      USART_putc(0x83);
@@ -5615,7 +5627,7 @@ void PROCULUS_Write_RTC(char *date, char *time){
      USART_putc(str2bcd(minute));
      USART_putc(str2bcd(second));
 }
-# 237 "proculus.c"
+# 248 "proculus.c"
 void PROCULUS_VP_Write_Byte(unsigned int vp,char value){
      char vetor[1];
      vetor[0]=value;
@@ -5662,7 +5674,7 @@ unsigned int PROCULUS_VP_Read_Int16(int vp){
      PROCULUS_VP_Read(vp,vetor,2);
      return (int)((vetor[0]<<8)+vetor[1]);
 }
-# 292 "proculus.c"
+# 303 "proculus.c"
 void PROCULUS_VP_Write_Long32(unsigned int vp, unsigned long value){
      char vetor[4];
      unsigned char *pt;
@@ -5679,10 +5691,10 @@ long PROCULUS_VP_Read_Long32(unsigned int vp){
      char vetor[4];
      long retorno=1234;
      PROCULUS_VP_Read(vp,vetor,4);
-# 316 "proculus.c"
+# 327 "proculus.c"
      return retorno;
 }
-# 327 "proculus.c"
+# 338 "proculus.c"
 void PROCULUS_VP_Write_Float24(unsigned int vp, float value){
      char vetor[4];
      char *pt;
@@ -5787,7 +5799,7 @@ void PROCULUS_Buzzer(unsigned int time_ms_x_10){
      vetor[1]=(unsigned char) time_ms_x_10;
      PROCULUS_REG_Write(vetor,2);
 }
-# 441 "proculus.c"
+# 452 "proculus.c"
 void PROCULUS_Reset(void){
      unsigned char vetor[3];
      vetor[0]=0xEE;
@@ -5807,7 +5819,7 @@ void PROCULUS_Show_Screen(unsigned int screen){
      vetor[2] = (char) screen;
      PROCULUS_REG_Write(vetor,3);
 }
-# 475 "proculus.c"
+# 486 "proculus.c"
 void PROCULUS_Buffer_to_Proculus(t_proculus *proculus){
      unsigned char i;
      proculus->header = (usart_buffer[0]<<8)+usart_buffer[1];
@@ -5840,7 +5852,7 @@ void PROCULUS_NOK(void){
      PROCULUS_Buzzer(300);
      my_delay_ms(100);
 }
-# 520 "proculus.c"
+# 531 "proculus.c"
 unsigned int PROCULUS_Get_Page(void)
      {
      int i;
@@ -5863,7 +5875,7 @@ unsigned int PROCULUS_Get_Page(void)
      my_delay_ms(1);
      return retorno;
      }
-# 564 "proculus.c"
+# 575 "proculus.c"
 void PROCULUS_TPFLAG_Write(char value){
     unsigned char vetor[3];
     vetor[0]=5;

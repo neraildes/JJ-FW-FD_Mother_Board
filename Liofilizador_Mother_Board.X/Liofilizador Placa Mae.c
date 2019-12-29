@@ -462,6 +462,7 @@ void main(void)
              Buffer_Manager(); // Buffer de recepção de dados seriais [10]
                   
              //=========================SELECAO DE PAGINA============================
+             flag_proculus_hs=TRUE;
              if(delaycheckscreen>1000)
                {
                delaycheckscreen=0;      
@@ -471,9 +472,9 @@ void main(void)
                   paginamemo=pagina;                  
                   }//pagina!= 
                }              
-             
+             flag_proculus_hs=FALSE;
              //-----------------------------------------------------------------
-
+                flag_proculus_hs=TRUE;
                 if(rtc.milisegundo<2) if(pagina!=25) Exibe_Hora_Data(FALSE); //Exibe data e hora sem segundos
                 if(flag_time_process==TRUE) SaveBlackoutStatusRuning(); //Salva status e tempo de processo a cada 10 minutos
                 Exibe_Tempo_de_Processo();
@@ -481,17 +482,17 @@ void main(void)
 
                 Gerenciador_de_Senha();  //Habilita acesso global por 30 segundos
                 Gerenciador_de_Senha_Global(); //Libera Senha Global eternamente                       
-
+                flag_proculus_hs=FALSE;
                 global_datalog(); // LEITURA DOS SENSORES
-                __delay_ms(32);                 
+                //__delay_ms(32);                 
                 global_vacuo();
-                __delay_ms(32);
+                //__delay_ms(32);
                 global_condensador();
-                __delay_ms(32);
+                //__delay_ms(32);
                 global_aquecimento();
-                __delay_ms(32);
+                //__delay_ms(32);
 
-                //BILD Ligar no SAC para Taisa.
+                flag_proculus_hs=TRUE;
                 if(memo_statuspower!=statuspower.bits) 
                   { 
                   PROCULUS_OK();  
@@ -513,6 +514,7 @@ void main(void)
                     flag_wakeup=1;
                     }                  
                 Check_And_Send_Capture_Datalog();
+                flag_proculus_hs=FALSE;
                 //------------------CODIGO RAPIDO---------------------
                 ShowSensorRealTimeHS();                          
                 //----------------------------------------------------  
@@ -522,6 +524,7 @@ void main(void)
 
 
             //=================AJUSTA O CONTADOR DE ACORDO COM A PÁGINA=============
+            flag_proculus_hs=TRUE;    
             switch(pagina)
                   {                                          
                   //case 15: //---------------- PAGINA PRINCIPAL----------------------                            
@@ -764,30 +767,34 @@ void main(void)
                           break;
                   }//switch pagina
 
-                 
-            
-                 __delay_ms(50);
-                 USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
-                 USART_putc(0xCD);USART_putc(0xCD);
-                 for(unsigned int tempo=0; tempo<500; tempo++)
-                     {
-                     if(flag_usart_rx==TRUE) break;
-                     __delay_ms(1);
-                     }            
-                 
+                       flag_recomunication =TRUE;
+                 while(flag_recomunication==TRUE){ 
+                       flag_recomunication =FALSE;    
+                      __delay_ms(50);
+                      USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
+                      USART_putc(0xCD);USART_putc(0xCD);
+                      for(unsigned int tempo=0; tempo<200; tempo++)
+                          {
+                          if(flag_usart_rx==TRUE) break;
+                          Delay_Led_Memory=DEFAULT_LEDS; 
+                          my_delay_ms_CLRWDT(1);
+                          }            
 
-                 //------------INTERPRETA COMANDO DO MICROCOMPUTADOR--------------------                 
-                 if(flag_usart_rx)
-                    { 
-                    Comando_Protocolo_Serial(); 
-                    }                    
-                  
-                 //----------------INTERPRETA COMANDO DO DISPLAY----------------
-                 if(flag_usart_rx)
-                    { 
-                    Comando_Display();
-                    }//flag_usart_rx         
 
+                      //------------INTERPRETA COMANDO DO MICROCOMPUTADOR--------------------                 
+                      if(flag_usart_rx)
+                         { 
+                         Comando_Protocolo_Serial(); 
+                         flag_recomunication=TRUE;
+                         }                    
+
+                      //----------------INTERPRETA COMANDO DO DISPLAY----------------
+                      if(flag_usart_rx)
+                         { 
+                         Comando_Display();
+                         flag_recomunication=TRUE;
+                         }//flag_usart_rx         
+                 } 
                           
                   
             }
@@ -909,12 +916,23 @@ void ShowSensorRealTimeHS(void)
      //Faz leitura de todas as tuplas, inclusive da tupla vazia da placa 2.
      //Inicia no vetor numero zero.
      //-------------------------------------------------------------------------
+     my_delay_ms(32);
+     
      for(tupla=0;tupla<(totalboard*2);tupla++)
         { 
         SlaveBoard  = (tupla / 2)+1; 
         canal = tupla % 2;
         bb[0]=canal; 
         leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_READ_ANALOG, 1, bb); //fix -Retirar EMULA
+        
+//        if(leitura[tupla]==-1)
+//          {   
+//          TRISDbits.RD6=0; //Fix Apagar debug
+//          PORTDbits.RD6=1;             
+//          //__delay_us(25);
+//          PORTDbits.RD6=0;
+//          }
+        
         flag_array_slave_WDT[SlaveBoard]=TRUE;
         }
      
@@ -928,7 +946,7 @@ void ShowSensorRealTimeHS(void)
               {
               case 0:
                      PROCULUS_VP_Write_UInt16(153,leitura[tupla]); //Voltimetro 
-                     Voltimetro=leitura[tupla];
+                     Voltimetro=leitura[tupla];                     
                      break;               
               case 1:
                      PROCULUS_VP_Write_UInt16(151,leitura[tupla]); //Vacuometro 
@@ -2064,10 +2082,7 @@ void pagina_19(void)
 
        
        
-       
-       
-       //TRISDbits.RD5=0;
-       //PORTDbits.RD5=1;
+
        if(PROCULUS_VP_Read_UInt16(167)==1) //GRAVAR
          {
          PROCULUS_VP_Write_UInt16(167,0);  
@@ -2088,12 +2103,8 @@ void pagina_19(void)
             PROCULUS_NOK();                                 
             }             
          }
-       //PORTDbits.RD5=0;
-       
-       
-       
-       
-       
+
+
 
        if(PROCULUS_VP_Read_UInt16(166)==1) //UPLOAD
          {  

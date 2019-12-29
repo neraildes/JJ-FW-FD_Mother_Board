@@ -13,14 +13,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S2 . bits . ]
 "270
 [; ;./global.h: 270: struct{
-[s S4 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S4 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico ]
-"286
-[; ;./global.h: 286: struct{
+[s S4 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S4 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication ]
+"288
+[; ;./global.h: 288: struct{
 [s S5 :1 `uc 1 ]
 [n S5 . flag_main_loop_WDT ]
-"291
-[; ;./global.h: 291: typedef struct{
+"293
+[; ;./global.h: 293: typedef struct{
 [s S6 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S6 . milisegundo segundo minuto hora ]
 "20 ./global.h
@@ -95,14 +95,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "259
 [; ;./global.h: 259:       } statuspower;
 [v _statuspower `S2 ~T0 @X0 1 e ]
-"277
-[; ;./global.h: 277: }statusgen1;
+"278
+[; ;./global.h: 278: }statusgen1;
 [v _statusgen1 `S4 ~T0 @X0 1 e ]
-"288
-[; ;./global.h: 288: }statusWDT;
+"290
+[; ;./global.h: 290: }statusWDT;
 [v _statusWDT `S5 ~T0 @X0 1 e ]
-"298
-[; ;./global.h: 298: volatile t_rtc rtc;
+"300
+[; ;./global.h: 300: volatile t_rtc rtc;
 [v _rtc `VS6 ~T0 @X0 1 e ]
 "5 ntc10k.c
 [; ;ntc10k.c: 5: double NTC10K_Read_Temperature(unsigned char canal)

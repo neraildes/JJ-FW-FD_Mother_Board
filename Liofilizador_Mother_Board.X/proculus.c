@@ -15,7 +15,11 @@ volatile unsigned int  tempodecorrido;
 
 void PROCULUS_REG_Write(unsigned char *vetor, unsigned char size){
      unsigned char i;
-     DELAY_PROCULUS;
+     if(!flag_proculus_hs) 
+        DELAY_PROCULUS_HS; 
+     else
+        DELAY_PROCULUS_LS;  
+     
      USART_put_int(PROCULUS_HEADER);
      USART_putc((unsigned char)(1+size));
      USART_putc(Control_Register_Write);
@@ -30,7 +34,10 @@ void PROCULUS_REG_Write(unsigned char *vetor, unsigned char size){
 void PROCULUS_REG_Read(unsigned char reg, unsigned char size, unsigned char *retorno){
      unsigned char i;
      unsigned int tempo;
-     if(!flag_proculus_hs) DELAY_PROCULUS; 
+     if(!flag_proculus_hs) 
+        DELAY_PROCULUS_HS; 
+     else
+        DELAY_PROCULUS_LS; 
      USART_put_int(PROCULUS_HEADER);
      USART_putc((unsigned char)(2+size)); //era 1+size
      USART_putc(Control_Register_Read);
@@ -68,7 +75,10 @@ void PROCULUS_REG_Read(unsigned char reg, unsigned char size, unsigned char *ret
 //------------------------------------------------------------------------------
 void PROCULUS_VP_Write(unsigned int vp,char *vetor,char size){
      unsigned char i;
-     if(!flag_proculus_hs) DELAY_PROCULUS;     
+     if(!flag_proculus_hs) 
+        DELAY_PROCULUS_HS; 
+     else
+        DELAY_PROCULUS_LS;     
      USART_put_int(PROCULUS_HEADER);
      USART_putc((unsigned char)(3+size));
      USART_putc(VP_WRITE);
@@ -84,11 +94,12 @@ void PROCULUS_VP_Write(unsigned int vp,char *vetor,char size){
 void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size){ 
      unsigned char i;
      unsigned int  tempo;
-     t_proculus proculus;
-     
-     
+     t_proculus proculus;     
 
-     DELAY_PROCULUS;
+     if(!flag_proculus_hs) 
+        DELAY_PROCULUS_HS; 
+     else
+        DELAY_PROCULUS_LS; 
      USART_put_int(PROCULUS_HEADER);   //5AA5
      USART_putc(4);
      USART_putc(VP_READ);

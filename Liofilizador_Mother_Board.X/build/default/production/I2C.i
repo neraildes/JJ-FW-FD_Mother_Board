@@ -4465,8 +4465,9 @@ struct{
         unsigned flag_proculus_hs :1;
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
+        unsigned flag_recomunication :1;
 }statusgen1;
-# 286 "./global.h"
+# 288 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
