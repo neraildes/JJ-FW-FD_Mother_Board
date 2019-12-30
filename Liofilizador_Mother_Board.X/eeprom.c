@@ -81,8 +81,7 @@ void EEPROM_Write_Integer(unsigned int addr, unsigned int dado)
 int EEPROM_Read_Integer(unsigned int addr)
 {
       int resultado;
-      resultado =EEPROM_Read_Byte(addr)<<8;
-      resultado+=EEPROM_Read_Byte(addr+1);
+      resultado =(int)EEPROM_Read_Byte(addr)<<8 | (int)EEPROM_Read_Byte(addr+1);
       return resultado; 
 }
 

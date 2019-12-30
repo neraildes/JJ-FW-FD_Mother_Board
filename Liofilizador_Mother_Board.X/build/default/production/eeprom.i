@@ -4584,11 +4584,10 @@ void EEPROM_Write_Integer(unsigned int addr, unsigned int dado)
 int EEPROM_Read_Integer(unsigned int addr)
 {
       int resultado;
-      resultado =EEPROM_Read_Byte(addr)<<8;
-      resultado+=EEPROM_Read_Byte(addr+1);
+      resultado =(int)EEPROM_Read_Byte(addr)<<8 | (int)EEPROM_Read_Byte(addr+1);
       return resultado;
 }
-# 98 "eeprom.c"
+# 97 "eeprom.c"
 void EEPROM_Write_Float(unsigned int addr,float dado)
 {
       unsigned char *ptr;
@@ -4641,7 +4640,7 @@ float EEPROM_Read_Double(unsigned int addr)
           *(ptr++)=EEPROM_Read_Byte(addr++);
       return result;
 }
-# 158 "eeprom.c"
+# 157 "eeprom.c"
 void EEPROM_Write_ULong24(unsigned int addr,long dado)
 {
       unsigned char *ptr;

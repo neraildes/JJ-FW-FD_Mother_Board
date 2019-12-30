@@ -766,13 +766,23 @@ void main(void)
                           }
                           break;
                   }//switch pagina
+            
+
+
+          
+
+
+           
+            
 
                        flag_recomunication =TRUE;
                  while(flag_recomunication==TRUE){ 
                        flag_recomunication =FALSE;    
                       __delay_ms(200);
+
                       USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
                       USART_putc(0xCD);USART_putc(0xCD);
+                  
                       for(unsigned int tempo=0; tempo<200; tempo++)
                           {
                           if(flag_usart_rx==TRUE) break;                           
@@ -780,13 +790,16 @@ void main(void)
                           }            
 
 
-                      //------------INTERPRETA COMANDO DO MICROCOMPUTADOR--------------------                 
+                      //------------INTERPRETA COMANDO DO MICROCOMPUTADOR-------------------- 
                       if(flag_usart_rx)
                          { 
+                         TRISDbits.RD6=0; //Fix Apagar debug
+                         PORTDbits.RD6=1;                                            
                          Comando_Protocolo_Serial(); 
+                         PORTDbits.RD6=0;                             
                          flag_recomunication=TRUE;
                          }                    
-
+                      
                       //----------------INTERPRETA COMANDO DO DISPLAY----------------
                       if(flag_usart_rx)
                          { 
@@ -924,14 +937,6 @@ void ShowSensorRealTimeHS(void)
         canal = tupla % 2;
         bb[0]=canal; 
         leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_READ_ANALOG, 1, bb); //fix -Retirar EMULA
-        
-//        if(leitura[tupla]==-1)
-//          {   
-//          TRISDbits.RD6=0; //Fix Apagar debug
-//          PORTDbits.RD6=1;             
-//          //__delay_us(25);
-//          PORTDbits.RD6=0;
-//          }
         
         flag_array_slave_WDT[SlaveBoard]=TRUE;
         }
@@ -1337,9 +1342,10 @@ void Decodify_Command(void){
              break;
         case COMMAND_IEE_W_INT:
              {
-             unsigned char add;
-             add=usart_protocol.value[0];
-             dados=(usart_protocol.value[1]<<8)|usart_protocol.value[2];
+             int add;
+             int dado;
+             add=  (int)(usart_protocol.value[0]<<8) | (int)usart_protocol.value[1]<<0;
+             dados=(int)(usart_protocol.value[2]<<8) | (int)usart_protocol.value[3]<<0;
              EEPROM_Write_Integer(add,dados);
              Send_to_PC(3);
              SEND_REPLY_OK();
@@ -1605,7 +1611,7 @@ void Comando_Protocolo_Serial(void){
                    Decodify_Command();
                    flag_usart_rx=0;
                    }
-                else 
+                else //Destino Placa Filha
                    { 
                    /*
                    Origem = 0XC0
