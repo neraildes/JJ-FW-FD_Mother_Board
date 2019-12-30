@@ -29,6 +29,7 @@ void EEPROM_Write_Byte(unsigned int addr, unsigned char dado)
           last_GIE=1;
        else
           last_GIE=0; 
+    
        EEADRH=Hi(addr);
        EEADR=Lo(addr);
        EEDATA=dado;

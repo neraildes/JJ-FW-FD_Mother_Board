@@ -6298,13 +6298,12 @@ void main(void)
                        statusgen1.flag_recomunication =1;
                  while(statusgen1.flag_recomunication==1){
                        statusgen1.flag_recomunication =0;
-                      _delay((unsigned long)((50)*(32000000/4000.0)));
+                      _delay((unsigned long)((200)*(32000000/4000.0)));
                       USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
                       USART_putc(0xCD);USART_putc(0xCD);
                       for(unsigned int tempo=0; tempo<200; tempo++)
                           {
                           if(statusgen.flag_usart_rx==1) break;
-                          Delay_Led_Memory=5;
                           my_delay_ms_CLRWDT(1);
                           }
 
@@ -6322,6 +6321,7 @@ void main(void)
                          Comando_Display();
                          statusgen1.flag_recomunication=1;
                          }
+
                  }
 
 
@@ -6731,13 +6731,17 @@ void Decodify_Command(void){
     switch(usart_protocol.command){
 # 1323 "Liofilizador Placa Mae.c"
         case 0x08:
-             EEPROM_Write_Byte(usart_protocol.value[0],
-                               usart_protocol.value[1]);
+             EEPROM_Write_Byte((int)usart_protocol.value[0]<<8 |
+                               (int)usart_protocol.value[1]<<0,
+                               usart_protocol.value[2]
+                               );
              Send_to_PC(3);
              SEND_REPLY_OK();
              break;
         case 0x09:
-             tempchar=EEPROM_Read_Byte(usart_protocol.value[0]);
+             tempchar=EEPROM_Read_Byte((int)usart_protocol.value[0]<<8 |
+                                       (int)usart_protocol.value[1]<<0
+                                       );
              Send_to_PC(1);
              USART_putc(tempchar);
              break;
@@ -6858,13 +6862,13 @@ void Decodify_Command(void){
              Send_to_PC(3);
              SEND_REPLY_OK();
              break;
-# 1534 "Liofilizador Placa Mae.c"
+# 1538 "Liofilizador Placa Mae.c"
         case 0X21:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
              Send_to_PC(3);
              SEND_REPLY_OK();
-# 1581 "Liofilizador Placa Mae.c"
+# 1585 "Liofilizador Placa Mae.c"
     }
 }
 
@@ -7474,7 +7478,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2198 "Liofilizador Placa Mae.c"
+# 2202 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -7628,7 +7632,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2359 "Liofilizador Placa Mae.c"
+# 2363 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {

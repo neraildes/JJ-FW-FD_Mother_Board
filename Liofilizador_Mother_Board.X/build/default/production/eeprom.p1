@@ -610,729 +610,729 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;eeprom.c: 31:           last_GIE=0;
 [e = _last_GIE -> -> 0 `i `uc ]
 [e :U 281 ]
-"32
-[; ;eeprom.c: 32:        EEADRH=((char *)&addr)[1];
-[e = _EEADRH -> *U + -> &U _addr `*uc * -> -> 1 `i `x -> -> # *U -> &U _addr `*uc `i `x `uc ]
 "33
-[; ;eeprom.c: 33:        EEADR=((char *)&addr)[0];
-[e = _EEADR -> *U + -> &U _addr `*uc * -> -> 0 `i `x -> -> # *U -> &U _addr `*uc `i `x `uc ]
+[; ;eeprom.c: 33:        EEADRH=((char *)&addr)[1];
+[e = _EEADRH -> *U + -> &U _addr `*uc * -> -> 1 `i `x -> -> # *U -> &U _addr `*uc `i `x `uc ]
 "34
-[; ;eeprom.c: 34:        EEDATA=dado;
-[e = _EEDATA _dado ]
+[; ;eeprom.c: 34:        EEADR=((char *)&addr)[0];
+[e = _EEADR -> *U + -> &U _addr `*uc * -> -> 0 `i `x -> -> # *U -> &U _addr `*uc `i `x `uc ]
 "35
-[; ;eeprom.c: 35:        EECON1bits.EEPGD=0;
-[e = . . _EECON1bits 0 7 -> -> 0 `i `uc ]
+[; ;eeprom.c: 35:        EEDATA=dado;
+[e = _EEDATA _dado ]
 "36
-[; ;eeprom.c: 36:        EECON1bits.CFGS=0;
-[e = . . _EECON1bits 0 6 -> -> 0 `i `uc ]
+[; ;eeprom.c: 36:        EECON1bits.EEPGD=0;
+[e = . . _EECON1bits 0 7 -> -> 0 `i `uc ]
 "37
-[; ;eeprom.c: 37:        EECON1bits.WREN=1;
-[e = . . _EECON1bits 0 2 -> -> 1 `i `uc ]
+[; ;eeprom.c: 37:        EECON1bits.CFGS=0;
+[e = . . _EECON1bits 0 6 -> -> 0 `i `uc ]
 "38
-[; ;eeprom.c: 38:        INTCONbits.GIE=0;
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;eeprom.c: 38:        EECON1bits.WREN=1;
+[e = . . _EECON1bits 0 2 -> -> 1 `i `uc ]
 "39
-[; ;eeprom.c: 39:        EECON2=0x55;
-[e = _EECON2 -> -> 85 `i `uc ]
+[; ;eeprom.c: 39:        INTCONbits.GIE=0;
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
 "40
-[; ;eeprom.c: 40:        EECON2=0xAA;
-[e = _EECON2 -> -> 170 `i `uc ]
+[; ;eeprom.c: 40:        EECON2=0x55;
+[e = _EECON2 -> -> 85 `i `uc ]
 "41
-[; ;eeprom.c: 41:        EECON1bits.WR=1;
+[; ;eeprom.c: 41:        EECON2=0xAA;
+[e = _EECON2 -> -> 170 `i `uc ]
+"42
+[; ;eeprom.c: 42:        EECON1bits.WR=1;
 [e = . . _EECON1bits 0 1 -> -> 1 `i `uc ]
-"43
-[; ;eeprom.c: 43:        if(last_GIE)
-[e $ ! != -> _last_GIE `i -> 0 `i 282  ]
 "44
-[; ;eeprom.c: 44:           INTCONbits.GIE=1;
+[; ;eeprom.c: 44:        if(last_GIE)
+[e $ ! != -> _last_GIE `i -> 0 `i 282  ]
+"45
+[; ;eeprom.c: 45:           INTCONbits.GIE=1;
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
 [e $U 283  ]
-"45
-[; ;eeprom.c: 45:        else
-[e :U 282 ]
 "46
-[; ;eeprom.c: 46:           INTCONbits.GIE=0;
+[; ;eeprom.c: 46:        else
+[e :U 282 ]
+"47
+[; ;eeprom.c: 47:           INTCONbits.GIE=0;
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
 [e :U 283 ]
-"48
-[; ;eeprom.c: 48:        EECON1bits.WREN=0;
-[e = . . _EECON1bits 0 2 -> -> 0 `i `uc ]
 "49
-[; ;eeprom.c: 49:        _delay((unsigned long)((25)*(32000000/4000.0)));
+[; ;eeprom.c: 49:        EECON1bits.WREN=0;
+[e = . . _EECON1bits 0 2 -> -> 0 `i `uc ]
+"50
+[; ;eeprom.c: 50:        _delay((unsigned long)((25)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"51
-[; ;eeprom.c: 51: }
+"52
+[; ;eeprom.c: 52: }
 [e :UE 276 ]
 }
-"55
-[; ;eeprom.c: 55: unsigned char EEPROM_Read_Byte(unsigned int addr)
-[v _EEPROM_Read_Byte `(uc ~T0 @X0 1 ef1`ui ]
 "56
-[; ;eeprom.c: 56: {
+[; ;eeprom.c: 56: unsigned char EEPROM_Read_Byte(unsigned int addr)
+[v _EEPROM_Read_Byte `(uc ~T0 @X0 1 ef1`ui ]
+"57
+[; ;eeprom.c: 57: {
 {
 [e :U _EEPROM_Read_Byte ]
-"55
-[; ;eeprom.c: 55: unsigned char EEPROM_Read_Byte(unsigned int addr)
-[v _addr `ui ~T0 @X0 1 r1 ]
 "56
-[; ;eeprom.c: 56: {
-[f ]
+[; ;eeprom.c: 56: unsigned char EEPROM_Read_Byte(unsigned int addr)
+[v _addr `ui ~T0 @X0 1 r1 ]
 "57
-[; ;eeprom.c: 57:    Delay_Led_Memory=5;
+[; ;eeprom.c: 57: {
+[f ]
+"58
+[; ;eeprom.c: 58:    Delay_Led_Memory=5;
 [e = _Delay_Led_Memory -> -> 5 `i `ui ]
-"59
-[; ;eeprom.c: 59:    while(EECON1bits.WR==1)continue;
+"60
+[; ;eeprom.c: 60:    while(EECON1bits.WR==1)continue;
 [e $U 285  ]
 [e :U 286 ]
 [e $U 285  ]
 [e :U 285 ]
 [e $ == -> . . _EECON1bits 0 1 `i -> 1 `i 286  ]
 [e :U 287 ]
-"60
-[; ;eeprom.c: 60:    EEADRH=((char *)&addr)[1];
-[e = _EEADRH -> *U + -> &U _addr `*uc * -> -> 1 `i `x -> -> # *U -> &U _addr `*uc `i `x `uc ]
 "61
-[; ;eeprom.c: 61:    EEADR =((char *)&addr)[0];
-[e = _EEADR -> *U + -> &U _addr `*uc * -> -> 0 `i `x -> -> # *U -> &U _addr `*uc `i `x `uc ]
+[; ;eeprom.c: 61:    EEADRH=((char *)&addr)[1];
+[e = _EEADRH -> *U + -> &U _addr `*uc * -> -> 1 `i `x -> -> # *U -> &U _addr `*uc `i `x `uc ]
 "62
-[; ;eeprom.c: 62:    EECON1bits.EEPGD=0;
-[e = . . _EECON1bits 0 7 -> -> 0 `i `uc ]
+[; ;eeprom.c: 62:    EEADR =((char *)&addr)[0];
+[e = _EEADR -> *U + -> &U _addr `*uc * -> -> 0 `i `x -> -> # *U -> &U _addr `*uc `i `x `uc ]
 "63
-[; ;eeprom.c: 63:    EECON1bits.CFGS=0;
-[e = . . _EECON1bits 0 6 -> -> 0 `i `uc ]
+[; ;eeprom.c: 63:    EECON1bits.EEPGD=0;
+[e = . . _EECON1bits 0 7 -> -> 0 `i `uc ]
 "64
-[; ;eeprom.c: 64:    EECON1bits.RD=1;
-[e = . . _EECON1bits 0 0 -> -> 1 `i `uc ]
+[; ;eeprom.c: 64:    EECON1bits.CFGS=0;
+[e = . . _EECON1bits 0 6 -> -> 0 `i `uc ]
 "65
-[; ;eeprom.c: 65:    _delay((unsigned long)((25)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;eeprom.c: 65:    EECON1bits.RD=1;
+[e = . . _EECON1bits 0 0 -> -> 1 `i `uc ]
 "66
-[; ;eeprom.c: 66:    return EEDATA;
+[; ;eeprom.c: 66:    _delay((unsigned long)((25)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"67
+[; ;eeprom.c: 67:    return EEDATA;
 [e ) _EEDATA ]
 [e $UE 284  ]
-"68
-[; ;eeprom.c: 68: }
+"69
+[; ;eeprom.c: 69: }
 [e :UE 284 ]
 }
-"73
-[; ;eeprom.c: 73: void EEPROM_Write_Integer(unsigned int addr, unsigned int dado)
-[v _EEPROM_Write_Integer `(v ~T0 @X0 1 ef2`ui`ui ]
 "74
-[; ;eeprom.c: 74: {
+[; ;eeprom.c: 74: void EEPROM_Write_Integer(unsigned int addr, unsigned int dado)
+[v _EEPROM_Write_Integer `(v ~T0 @X0 1 ef2`ui`ui ]
+"75
+[; ;eeprom.c: 75: {
 {
 [e :U _EEPROM_Write_Integer ]
-"73
-[; ;eeprom.c: 73: void EEPROM_Write_Integer(unsigned int addr, unsigned int dado)
+"74
+[; ;eeprom.c: 74: void EEPROM_Write_Integer(unsigned int addr, unsigned int dado)
 [v _addr `ui ~T0 @X0 1 r1 ]
 [v _dado `ui ~T0 @X0 1 r2 ]
-"74
-[; ;eeprom.c: 74: {
-[f ]
 "75
-[; ;eeprom.c: 75:      EEPROM_Write_Byte(addr,((char *)&dado)[1]);
-[e ( _EEPROM_Write_Byte (2 , _addr -> *U + -> &U _dado `*uc * -> -> 1 `i `x -> -> # *U -> &U _dado `*uc `i `x `uc ]
+[; ;eeprom.c: 75: {
+[f ]
 "76
-[; ;eeprom.c: 76:      EEPROM_Write_Byte(++addr,((char *)&dado)[0]);
-[e ( _EEPROM_Write_Byte (2 , =+ _addr -> -> 1 `i `ui -> *U + -> &U _dado `*uc * -> -> 0 `i `x -> -> # *U -> &U _dado `*uc `i `x `uc ]
+[; ;eeprom.c: 76:      EEPROM_Write_Byte(addr,((char *)&dado)[1]);
+[e ( _EEPROM_Write_Byte (2 , _addr -> *U + -> &U _dado `*uc * -> -> 1 `i `x -> -> # *U -> &U _dado `*uc `i `x `uc ]
 "77
-[; ;eeprom.c: 77: }
+[; ;eeprom.c: 77:      EEPROM_Write_Byte(++addr,((char *)&dado)[0]);
+[e ( _EEPROM_Write_Byte (2 , =+ _addr -> -> 1 `i `ui -> *U + -> &U _dado `*uc * -> -> 0 `i `x -> -> # *U -> &U _dado `*uc `i `x `uc ]
+"78
+[; ;eeprom.c: 78: }
 [e :UE 288 ]
 }
-"80
-[; ;eeprom.c: 80: int EEPROM_Read_Integer(unsigned int addr)
-[v _EEPROM_Read_Integer `(i ~T0 @X0 1 ef1`ui ]
 "81
-[; ;eeprom.c: 81: {
+[; ;eeprom.c: 81: int EEPROM_Read_Integer(unsigned int addr)
+[v _EEPROM_Read_Integer `(i ~T0 @X0 1 ef1`ui ]
+"82
+[; ;eeprom.c: 82: {
 {
 [e :U _EEPROM_Read_Integer ]
-"80
-[; ;eeprom.c: 80: int EEPROM_Read_Integer(unsigned int addr)
-[v _addr `ui ~T0 @X0 1 r1 ]
 "81
-[; ;eeprom.c: 81: {
-[f ]
+[; ;eeprom.c: 81: int EEPROM_Read_Integer(unsigned int addr)
+[v _addr `ui ~T0 @X0 1 r1 ]
 "82
-[; ;eeprom.c: 82:       int resultado;
-[v _resultado `i ~T0 @X0 1 a ]
+[; ;eeprom.c: 82: {
+[f ]
 "83
-[; ;eeprom.c: 83:       resultado =EEPROM_Read_Byte(addr)<<8;
-[e = _resultado << -> ( _EEPROM_Read_Byte (1 _addr `i -> 8 `i ]
+[; ;eeprom.c: 83:       int resultado;
+[v _resultado `i ~T0 @X0 1 a ]
 "84
-[; ;eeprom.c: 84:       resultado+=EEPROM_Read_Byte(addr+1);
-[e =+ _resultado -> ( _EEPROM_Read_Byte (1 + _addr -> -> 1 `i `ui `i ]
+[; ;eeprom.c: 84:       resultado =EEPROM_Read_Byte(addr)<<8;
+[e = _resultado << -> ( _EEPROM_Read_Byte (1 _addr `i -> 8 `i ]
 "85
-[; ;eeprom.c: 85:       return resultado;
+[; ;eeprom.c: 85:       resultado+=EEPROM_Read_Byte(addr+1);
+[e =+ _resultado -> ( _EEPROM_Read_Byte (1 + _addr -> -> 1 `i `ui `i ]
+"86
+[; ;eeprom.c: 86:       return resultado;
 [e ) _resultado ]
 [e $UE 289  ]
-"86
-[; ;eeprom.c: 86: }
+"87
+[; ;eeprom.c: 87: }
 [e :UE 289 ]
 }
-"97
-[; ;eeprom.c: 97: void EEPROM_Write_Float(unsigned int addr,float dado)
-[v _EEPROM_Write_Float `(v ~T0 @X0 1 ef2`ui`f ]
 "98
-[; ;eeprom.c: 98: {
+[; ;eeprom.c: 98: void EEPROM_Write_Float(unsigned int addr,float dado)
+[v _EEPROM_Write_Float `(v ~T0 @X0 1 ef2`ui`f ]
+"99
+[; ;eeprom.c: 99: {
 {
 [e :U _EEPROM_Write_Float ]
-"97
-[; ;eeprom.c: 97: void EEPROM_Write_Float(unsigned int addr,float dado)
+"98
+[; ;eeprom.c: 98: void EEPROM_Write_Float(unsigned int addr,float dado)
 [v _addr `ui ~T0 @X0 1 r1 ]
 [v _dado `f ~T0 @X0 1 r2 ]
-"98
-[; ;eeprom.c: 98: {
-[f ]
 "99
-[; ;eeprom.c: 99:       unsigned char *ptr;
-[v _ptr `*uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 99: {
+[f ]
 "100
-[; ;eeprom.c: 100:       unsigned char i;
-[v _i `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 100:       unsigned char *ptr;
+[v _ptr `*uc ~T0 @X0 1 a ]
 "101
-[; ;eeprom.c: 101:       unsigned char addr_memo;
-[v _addr_memo `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 101:       unsigned char i;
+[v _i `uc ~T0 @X0 1 a ]
 "102
-[; ;eeprom.c: 102:       addr_memo=addr;
-[e = _addr_memo -> _addr `uc ]
+[; ;eeprom.c: 102:       unsigned char addr_memo;
+[v _addr_memo `uc ~T0 @X0 1 a ]
 "103
-[; ;eeprom.c: 103:       ptr=(unsigned char *)&dado;
-[e = _ptr -> &U _dado `*uc ]
+[; ;eeprom.c: 103:       addr_memo=addr;
+[e = _addr_memo -> _addr `uc ]
 "104
-[; ;eeprom.c: 104:       for (i=0;i<3;i++)
+[; ;eeprom.c: 104:       ptr=(unsigned char *)&dado;
+[e = _ptr -> &U _dado `*uc ]
+"105
+[; ;eeprom.c: 105:       for (i=0;i<3;i++)
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 3 `i 291  ]
 [e $U 292  ]
 [e :U 291 ]
-"105
-[; ;eeprom.c: 105:           EEPROM_Write_Byte(addr++,*(ptr++));
+"106
+[; ;eeprom.c: 106:           EEPROM_Write_Byte(addr++,*(ptr++));
 [e ( _EEPROM_Write_Byte (2 , ++ _addr -> -> 1 `i `ui *U ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ]
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 3 `i 291  ]
 [e :U 292 ]
 }
-"106
-[; ;eeprom.c: 106: }
+"107
+[; ;eeprom.c: 107: }
 [e :UE 290 ]
 }
-"109
-[; ;eeprom.c: 109: float EEPROM_Read_Float(unsigned int addr)
-[v _EEPROM_Read_Float `(f ~T0 @X0 1 ef1`ui ]
 "110
-[; ;eeprom.c: 110: {
+[; ;eeprom.c: 110: float EEPROM_Read_Float(unsigned int addr)
+[v _EEPROM_Read_Float `(f ~T0 @X0 1 ef1`ui ]
+"111
+[; ;eeprom.c: 111: {
 {
 [e :U _EEPROM_Read_Float ]
-"109
-[; ;eeprom.c: 109: float EEPROM_Read_Float(unsigned int addr)
-[v _addr `ui ~T0 @X0 1 r1 ]
 "110
-[; ;eeprom.c: 110: {
-[f ]
+[; ;eeprom.c: 110: float EEPROM_Read_Float(unsigned int addr)
+[v _addr `ui ~T0 @X0 1 r1 ]
 "111
-[; ;eeprom.c: 111:       float result;
-[v _result `f ~T0 @X0 1 a ]
+[; ;eeprom.c: 111: {
+[f ]
 "112
-[; ;eeprom.c: 112:       unsigned char *ptr;
-[v _ptr `*uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 112:       float result;
+[v _result `f ~T0 @X0 1 a ]
 "113
-[; ;eeprom.c: 113:       unsigned char i;
-[v _i `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 113:       unsigned char *ptr;
+[v _ptr `*uc ~T0 @X0 1 a ]
 "114
-[; ;eeprom.c: 114:       ptr=(unsigned char *)&result;
-[e = _ptr -> &U _result `*uc ]
+[; ;eeprom.c: 114:       unsigned char i;
+[v _i `uc ~T0 @X0 1 a ]
 "115
-[; ;eeprom.c: 115:       for (i=0;i<3;i++)
+[; ;eeprom.c: 115:       ptr=(unsigned char *)&result;
+[e = _ptr -> &U _result `*uc ]
+"116
+[; ;eeprom.c: 116:       for (i=0;i<3;i++)
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 3 `i 295  ]
 [e $U 296  ]
 [e :U 295 ]
-"116
-[; ;eeprom.c: 116:           *(ptr++)=EEPROM_Read_Byte(addr++);
+"117
+[; ;eeprom.c: 117:           *(ptr++)=EEPROM_Read_Byte(addr++);
 [e = *U ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ( _EEPROM_Read_Byte (1 ++ _addr -> -> 1 `i `ui ]
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 3 `i 295  ]
 [e :U 296 ]
 }
-"117
-[; ;eeprom.c: 117:       return result;
+"118
+[; ;eeprom.c: 118:       return result;
 [e ) _result ]
 [e $UE 294  ]
-"118
-[; ;eeprom.c: 118: }
+"119
+[; ;eeprom.c: 119: }
 [e :UE 294 ]
 }
-"126
-[; ;eeprom.c: 126: void EEPROM_Write_Double(unsigned int addr,double dado)
-[v _EEPROM_Write_Double `(v ~T0 @X0 1 ef2`ui`d ]
 "127
-[; ;eeprom.c: 127: {
+[; ;eeprom.c: 127: void EEPROM_Write_Double(unsigned int addr,double dado)
+[v _EEPROM_Write_Double `(v ~T0 @X0 1 ef2`ui`d ]
+"128
+[; ;eeprom.c: 128: {
 {
 [e :U _EEPROM_Write_Double ]
-"126
-[; ;eeprom.c: 126: void EEPROM_Write_Double(unsigned int addr,double dado)
+"127
+[; ;eeprom.c: 127: void EEPROM_Write_Double(unsigned int addr,double dado)
 [v _addr `ui ~T0 @X0 1 r1 ]
 [v _dado `d ~T0 @X0 1 r2 ]
-"127
-[; ;eeprom.c: 127: {
-[f ]
 "128
-[; ;eeprom.c: 128:       unsigned char *ptr;
-[v _ptr `*uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 128: {
+[f ]
 "129
-[; ;eeprom.c: 129:       unsigned char i;
-[v _i `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 129:       unsigned char *ptr;
+[v _ptr `*uc ~T0 @X0 1 a ]
 "130
-[; ;eeprom.c: 130:       unsigned char addr_memo;
-[v _addr_memo `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 130:       unsigned char i;
+[v _i `uc ~T0 @X0 1 a ]
 "131
-[; ;eeprom.c: 131:       addr_memo=addr;
-[e = _addr_memo -> _addr `uc ]
+[; ;eeprom.c: 131:       unsigned char addr_memo;
+[v _addr_memo `uc ~T0 @X0 1 a ]
 "132
-[; ;eeprom.c: 132:       ptr=(unsigned char *)&dado;
-[e = _ptr -> &U _dado `*uc ]
+[; ;eeprom.c: 132:       addr_memo=addr;
+[e = _addr_memo -> _addr `uc ]
 "133
-[; ;eeprom.c: 133:       for (i=0;i<4;i++)
+[; ;eeprom.c: 133:       ptr=(unsigned char *)&dado;
+[e = _ptr -> &U _dado `*uc ]
+"134
+[; ;eeprom.c: 134:       for (i=0;i<4;i++)
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 4 `i 299  ]
 [e $U 300  ]
 [e :U 299 ]
-"134
-[; ;eeprom.c: 134:           EEPROM_Write_Byte(addr++,*(ptr++));
+"135
+[; ;eeprom.c: 135:           EEPROM_Write_Byte(addr++,*(ptr++));
 [e ( _EEPROM_Write_Byte (2 , ++ _addr -> -> 1 `i `ui *U ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ]
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 4 `i 299  ]
 [e :U 300 ]
 }
-"135
-[; ;eeprom.c: 135: }
+"136
+[; ;eeprom.c: 136: }
 [e :UE 298 ]
 }
-"139
-[; ;eeprom.c: 139: float EEPROM_Read_Double(unsigned int addr)
-[v _EEPROM_Read_Double `(f ~T0 @X0 1 ef1`ui ]
 "140
-[; ;eeprom.c: 140: {
+[; ;eeprom.c: 140: float EEPROM_Read_Double(unsigned int addr)
+[v _EEPROM_Read_Double `(f ~T0 @X0 1 ef1`ui ]
+"141
+[; ;eeprom.c: 141: {
 {
 [e :U _EEPROM_Read_Double ]
-"139
-[; ;eeprom.c: 139: float EEPROM_Read_Double(unsigned int addr)
-[v _addr `ui ~T0 @X0 1 r1 ]
 "140
-[; ;eeprom.c: 140: {
-[f ]
+[; ;eeprom.c: 140: float EEPROM_Read_Double(unsigned int addr)
+[v _addr `ui ~T0 @X0 1 r1 ]
 "141
-[; ;eeprom.c: 141:       float result;
-[v _result `f ~T0 @X0 1 a ]
+[; ;eeprom.c: 141: {
+[f ]
 "142
-[; ;eeprom.c: 142:       unsigned char *ptr;
-[v _ptr `*uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 142:       float result;
+[v _result `f ~T0 @X0 1 a ]
 "143
-[; ;eeprom.c: 143:       unsigned char i;
-[v _i `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 143:       unsigned char *ptr;
+[v _ptr `*uc ~T0 @X0 1 a ]
 "144
-[; ;eeprom.c: 144:       ptr=(unsigned char *)&result;
-[e = _ptr -> &U _result `*uc ]
+[; ;eeprom.c: 144:       unsigned char i;
+[v _i `uc ~T0 @X0 1 a ]
 "145
-[; ;eeprom.c: 145:       for (i=0;i<4;i++)
+[; ;eeprom.c: 145:       ptr=(unsigned char *)&result;
+[e = _ptr -> &U _result `*uc ]
+"146
+[; ;eeprom.c: 146:       for (i=0;i<4;i++)
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 4 `i 303  ]
 [e $U 304  ]
 [e :U 303 ]
-"146
-[; ;eeprom.c: 146:           *(ptr++)=EEPROM_Read_Byte(addr++);
+"147
+[; ;eeprom.c: 147:           *(ptr++)=EEPROM_Read_Byte(addr++);
 [e = *U ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ( _EEPROM_Read_Byte (1 ++ _addr -> -> 1 `i `ui ]
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 4 `i 303  ]
 [e :U 304 ]
 }
-"147
-[; ;eeprom.c: 147:       return result;
+"148
+[; ;eeprom.c: 148:       return result;
 [e ) _result ]
 [e $UE 302  ]
-"148
-[; ;eeprom.c: 148: }
+"149
+[; ;eeprom.c: 149: }
 [e :UE 302 ]
 }
-"157
-[; ;eeprom.c: 157: void EEPROM_Write_ULong24(unsigned int addr,long dado)
-[v _EEPROM_Write_ULong24 `(v ~T0 @X0 1 ef2`ui`l ]
 "158
-[; ;eeprom.c: 158: {
+[; ;eeprom.c: 158: void EEPROM_Write_ULong24(unsigned int addr,long dado)
+[v _EEPROM_Write_ULong24 `(v ~T0 @X0 1 ef2`ui`l ]
+"159
+[; ;eeprom.c: 159: {
 {
 [e :U _EEPROM_Write_ULong24 ]
-"157
-[; ;eeprom.c: 157: void EEPROM_Write_ULong24(unsigned int addr,long dado)
+"158
+[; ;eeprom.c: 158: void EEPROM_Write_ULong24(unsigned int addr,long dado)
 [v _addr `ui ~T0 @X0 1 r1 ]
 [v _dado `l ~T0 @X0 1 r2 ]
-"158
-[; ;eeprom.c: 158: {
-[f ]
 "159
-[; ;eeprom.c: 159:       unsigned char *ptr;
-[v _ptr `*uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 159: {
+[f ]
 "160
-[; ;eeprom.c: 160:       unsigned char i;
-[v _i `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 160:       unsigned char *ptr;
+[v _ptr `*uc ~T0 @X0 1 a ]
 "161
-[; ;eeprom.c: 161:       unsigned char addr_memo;
-[v _addr_memo `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 161:       unsigned char i;
+[v _i `uc ~T0 @X0 1 a ]
 "162
-[; ;eeprom.c: 162:       addr_memo=addr;
-[e = _addr_memo -> _addr `uc ]
+[; ;eeprom.c: 162:       unsigned char addr_memo;
+[v _addr_memo `uc ~T0 @X0 1 a ]
 "163
-[; ;eeprom.c: 163:       ptr=(unsigned char *)&dado;
-[e = _ptr -> &U _dado `*uc ]
+[; ;eeprom.c: 163:       addr_memo=addr;
+[e = _addr_memo -> _addr `uc ]
 "164
-[; ;eeprom.c: 164:       for (i=0;i<3;i++){
+[; ;eeprom.c: 164:       ptr=(unsigned char *)&dado;
+[e = _ptr -> &U _dado `*uc ]
+"165
+[; ;eeprom.c: 165:       for (i=0;i<3;i++){
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 3 `i 307  ]
 [e $U 308  ]
 [e :U 307 ]
 {
-"165
-[; ;eeprom.c: 165:           EEPROM_Write_Byte(addr,*ptr);
-[e ( _EEPROM_Write_Byte (2 , _addr *U _ptr ]
 "166
-[; ;eeprom.c: 166:           addr++;
-[e ++ _addr -> -> 1 `i `ui ]
+[; ;eeprom.c: 166:           EEPROM_Write_Byte(addr,*ptr);
+[e ( _EEPROM_Write_Byte (2 , _addr *U _ptr ]
 "167
-[; ;eeprom.c: 167:           ptr++;
-[e ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ]
+[; ;eeprom.c: 167:           addr++;
+[e ++ _addr -> -> 1 `i `ui ]
 "168
-[; ;eeprom.c: 168:           }
+[; ;eeprom.c: 168:           ptr++;
+[e ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ]
+"169
+[; ;eeprom.c: 169:           }
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 3 `i 307  ]
 [e :U 308 ]
 }
-"169
-[; ;eeprom.c: 169: }
+"170
+[; ;eeprom.c: 170: }
 [e :UE 306 ]
 }
-"172
-[; ;eeprom.c: 172: long EEPROM_Read_ULong24(unsigned int addr)
-[v _EEPROM_Read_ULong24 `(l ~T0 @X0 1 ef1`ui ]
 "173
-[; ;eeprom.c: 173: {
+[; ;eeprom.c: 173: long EEPROM_Read_ULong24(unsigned int addr)
+[v _EEPROM_Read_ULong24 `(l ~T0 @X0 1 ef1`ui ]
+"174
+[; ;eeprom.c: 174: {
 {
 [e :U _EEPROM_Read_ULong24 ]
-"172
-[; ;eeprom.c: 172: long EEPROM_Read_ULong24(unsigned int addr)
-[v _addr `ui ~T0 @X0 1 r1 ]
 "173
-[; ;eeprom.c: 173: {
-[f ]
+[; ;eeprom.c: 173: long EEPROM_Read_ULong24(unsigned int addr)
+[v _addr `ui ~T0 @X0 1 r1 ]
 "174
-[; ;eeprom.c: 174:       unsigned long result;
-[v _result `ul ~T0 @X0 1 a ]
+[; ;eeprom.c: 174: {
+[f ]
 "175
-[; ;eeprom.c: 175:       unsigned char *ptr;
-[v _ptr `*uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 175:       unsigned long result;
+[v _result `ul ~T0 @X0 1 a ]
 "176
-[; ;eeprom.c: 176:       unsigned char i;
-[v _i `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 176:       unsigned char *ptr;
+[v _ptr `*uc ~T0 @X0 1 a ]
 "177
-[; ;eeprom.c: 177:       ptr=(unsigned char *)&result;
-[e = _ptr -> &U _result `*uc ]
+[; ;eeprom.c: 177:       unsigned char i;
+[v _i `uc ~T0 @X0 1 a ]
 "178
-[; ;eeprom.c: 178:       for (i=0;i<3;i++)
+[; ;eeprom.c: 178:       ptr=(unsigned char *)&result;
+[e = _ptr -> &U _result `*uc ]
+"179
+[; ;eeprom.c: 179:       for (i=0;i<3;i++)
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 3 `i 311  ]
 [e $U 312  ]
 [e :U 311 ]
-"179
-[; ;eeprom.c: 179:           *(ptr++)=EEPROM_Read_Byte(addr++);
+"180
+[; ;eeprom.c: 180:           *(ptr++)=EEPROM_Read_Byte(addr++);
 [e = *U ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ( _EEPROM_Read_Byte (1 ++ _addr -> -> 1 `i `ui ]
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 3 `i 311  ]
 [e :U 312 ]
 }
-"180
-[; ;eeprom.c: 180:       return result;
+"181
+[; ;eeprom.c: 181:       return result;
 [e ) -> _result `l ]
 [e $UE 310  ]
-"181
-[; ;eeprom.c: 181: }
+"182
+[; ;eeprom.c: 182: }
 [e :UE 310 ]
 }
-"187
-[; ;eeprom.c: 187: void EEPROM_Write_Long32(unsigned int addr,long dado)
-[v _EEPROM_Write_Long32 `(v ~T0 @X0 1 ef2`ui`l ]
 "188
-[; ;eeprom.c: 188: {
+[; ;eeprom.c: 188: void EEPROM_Write_Long32(unsigned int addr,long dado)
+[v _EEPROM_Write_Long32 `(v ~T0 @X0 1 ef2`ui`l ]
+"189
+[; ;eeprom.c: 189: {
 {
 [e :U _EEPROM_Write_Long32 ]
-"187
-[; ;eeprom.c: 187: void EEPROM_Write_Long32(unsigned int addr,long dado)
+"188
+[; ;eeprom.c: 188: void EEPROM_Write_Long32(unsigned int addr,long dado)
 [v _addr `ui ~T0 @X0 1 r1 ]
 [v _dado `l ~T0 @X0 1 r2 ]
-"188
-[; ;eeprom.c: 188: {
-[f ]
 "189
-[; ;eeprom.c: 189:       unsigned char *ptr;
-[v _ptr `*uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 189: {
+[f ]
 "190
-[; ;eeprom.c: 190:       unsigned char i;
-[v _i `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 190:       unsigned char *ptr;
+[v _ptr `*uc ~T0 @X0 1 a ]
 "191
-[; ;eeprom.c: 191:       unsigned char addr_memo;
-[v _addr_memo `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 191:       unsigned char i;
+[v _i `uc ~T0 @X0 1 a ]
 "192
-[; ;eeprom.c: 192:       addr_memo=addr;
-[e = _addr_memo -> _addr `uc ]
+[; ;eeprom.c: 192:       unsigned char addr_memo;
+[v _addr_memo `uc ~T0 @X0 1 a ]
 "193
-[; ;eeprom.c: 193:       ptr=(unsigned char *)&dado;
-[e = _ptr -> &U _dado `*uc ]
+[; ;eeprom.c: 193:       addr_memo=addr;
+[e = _addr_memo -> _addr `uc ]
 "194
-[; ;eeprom.c: 194:       for (i=0;i<4;i++)
+[; ;eeprom.c: 194:       ptr=(unsigned char *)&dado;
+[e = _ptr -> &U _dado `*uc ]
+"195
+[; ;eeprom.c: 195:       for (i=0;i<4;i++)
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 4 `i 315  ]
 [e $U 316  ]
 [e :U 315 ]
-"195
-[; ;eeprom.c: 195:            EEPROM_Write_Byte(addr++,*(ptr++));
+"196
+[; ;eeprom.c: 196:            EEPROM_Write_Byte(addr++,*(ptr++));
 [e ( _EEPROM_Write_Byte (2 , ++ _addr -> -> 1 `i `ui *U ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ]
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 4 `i 315  ]
 [e :U 316 ]
 }
-"196
-[; ;eeprom.c: 196: }
+"197
+[; ;eeprom.c: 197: }
 [e :UE 314 ]
 }
-"201
-[; ;eeprom.c: 201: long EEPROM_Read_Long32(unsigned int addr)
-[v _EEPROM_Read_Long32 `(l ~T0 @X0 1 ef1`ui ]
 "202
-[; ;eeprom.c: 202: {
+[; ;eeprom.c: 202: long EEPROM_Read_Long32(unsigned int addr)
+[v _EEPROM_Read_Long32 `(l ~T0 @X0 1 ef1`ui ]
+"203
+[; ;eeprom.c: 203: {
 {
 [e :U _EEPROM_Read_Long32 ]
-"201
-[; ;eeprom.c: 201: long EEPROM_Read_Long32(unsigned int addr)
-[v _addr `ui ~T0 @X0 1 r1 ]
 "202
-[; ;eeprom.c: 202: {
-[f ]
+[; ;eeprom.c: 202: long EEPROM_Read_Long32(unsigned int addr)
+[v _addr `ui ~T0 @X0 1 r1 ]
 "203
-[; ;eeprom.c: 203:       unsigned long result;
-[v _result `ul ~T0 @X0 1 a ]
+[; ;eeprom.c: 203: {
+[f ]
 "204
-[; ;eeprom.c: 204:       unsigned char *ptr;
-[v _ptr `*uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 204:       unsigned long result;
+[v _result `ul ~T0 @X0 1 a ]
 "205
-[; ;eeprom.c: 205:       unsigned char i;
-[v _i `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 205:       unsigned char *ptr;
+[v _ptr `*uc ~T0 @X0 1 a ]
 "206
-[; ;eeprom.c: 206:       ptr=(unsigned char *)&result;
-[e = _ptr -> &U _result `*uc ]
+[; ;eeprom.c: 206:       unsigned char i;
+[v _i `uc ~T0 @X0 1 a ]
 "207
-[; ;eeprom.c: 207:       for (i=0;i<4;i++)
+[; ;eeprom.c: 207:       ptr=(unsigned char *)&result;
+[e = _ptr -> &U _result `*uc ]
+"208
+[; ;eeprom.c: 208:       for (i=0;i<4;i++)
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 4 `i 319  ]
 [e $U 320  ]
 [e :U 319 ]
-"208
-[; ;eeprom.c: 208:           {
-{
 "209
-[; ;eeprom.c: 209:           *(ptr++)=EEPROM_Read_Byte(addr++);
-[e = *U ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ( _EEPROM_Read_Byte (1 ++ _addr -> -> 1 `i `ui ]
+[; ;eeprom.c: 209:           {
+{
 "210
-[; ;eeprom.c: 210:           }
+[; ;eeprom.c: 210:           *(ptr++)=EEPROM_Read_Byte(addr++);
+[e = *U ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ( _EEPROM_Read_Byte (1 ++ _addr -> -> 1 `i `ui ]
+"211
+[; ;eeprom.c: 211:           }
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 4 `i 319  ]
 [e :U 320 ]
 }
-"211
-[; ;eeprom.c: 211:       return result;
+"212
+[; ;eeprom.c: 212:       return result;
 [e ) -> _result `l ]
 [e $UE 318  ]
-"212
-[; ;eeprom.c: 212: }
+"213
+[; ;eeprom.c: 213: }
 [e :UE 318 ]
 }
-"218
-[; ;eeprom.c: 218: void EEPROM_Write_String(unsigned int addr,char *dado)
-[v _EEPROM_Write_String `(v ~T0 @X0 1 ef2`ui`*uc ]
 "219
-[; ;eeprom.c: 219: {
+[; ;eeprom.c: 219: void EEPROM_Write_String(unsigned int addr,char *dado)
+[v _EEPROM_Write_String `(v ~T0 @X0 1 ef2`ui`*uc ]
+"220
+[; ;eeprom.c: 220: {
 {
 [e :U _EEPROM_Write_String ]
-"218
-[; ;eeprom.c: 218: void EEPROM_Write_String(unsigned int addr,char *dado)
+"219
+[; ;eeprom.c: 219: void EEPROM_Write_String(unsigned int addr,char *dado)
 [v _addr `ui ~T0 @X0 1 r1 ]
 [v _dado `*uc ~T0 @X0 1 r2 ]
-"219
-[; ;eeprom.c: 219: {
-[f ]
 "220
-[; ;eeprom.c: 220:     while(*dado)
+[; ;eeprom.c: 220: {
+[f ]
+"221
+[; ;eeprom.c: 221:     while(*dado)
 [e $U 323  ]
 [e :U 324 ]
-"221
-[; ;eeprom.c: 221:     {
-{
 "222
-[; ;eeprom.c: 222:      EEPROM_Write_Byte(addr,*dado);
-[e ( _EEPROM_Write_Byte (2 , _addr -> *U _dado `uc ]
+[; ;eeprom.c: 222:     {
+{
 "223
-[; ;eeprom.c: 223:      addr++;
-[e ++ _addr -> -> 1 `i `ui ]
+[; ;eeprom.c: 223:      EEPROM_Write_Byte(addr,*dado);
+[e ( _EEPROM_Write_Byte (2 , _addr -> *U _dado `uc ]
 "224
-[; ;eeprom.c: 224:      dado++;
-[e ++ _dado * -> -> 1 `i `x -> -> # *U _dado `i `x ]
+[; ;eeprom.c: 224:      addr++;
+[e ++ _addr -> -> 1 `i `ui ]
 "225
-[; ;eeprom.c: 225:     }
+[; ;eeprom.c: 225:      dado++;
+[e ++ _dado * -> -> 1 `i `x -> -> # *U _dado `i `x ]
+"226
+[; ;eeprom.c: 226:     }
 }
 [e :U 323 ]
-"220
-[; ;eeprom.c: 220:     while(*dado)
+"221
+[; ;eeprom.c: 221:     while(*dado)
 [e $ != -> *U _dado `i -> 0 `i 324  ]
 [e :U 325 ]
-"226
-[; ;eeprom.c: 226:     EEPROM_Write_Byte(addr,0);
-[e ( _EEPROM_Write_Byte (2 , _addr -> -> 0 `i `uc ]
 "227
-[; ;eeprom.c: 227: }
+[; ;eeprom.c: 227:     EEPROM_Write_Byte(addr,0);
+[e ( _EEPROM_Write_Byte (2 , _addr -> -> 0 `i `uc ]
+"228
+[; ;eeprom.c: 228: }
 [e :UE 322 ]
 }
-"230
-[; ;eeprom.c: 230: void EEPROM_Read_String(unsigned int addr,char *dado)
-[v _EEPROM_Read_String `(v ~T0 @X0 1 ef2`ui`*uc ]
 "231
-[; ;eeprom.c: 231: {
+[; ;eeprom.c: 231: void EEPROM_Read_String(unsigned int addr,char *dado)
+[v _EEPROM_Read_String `(v ~T0 @X0 1 ef2`ui`*uc ]
+"232
+[; ;eeprom.c: 232: {
 {
 [e :U _EEPROM_Read_String ]
-"230
-[; ;eeprom.c: 230: void EEPROM_Read_String(unsigned int addr,char *dado)
+"231
+[; ;eeprom.c: 231: void EEPROM_Read_String(unsigned int addr,char *dado)
 [v _addr `ui ~T0 @X0 1 r1 ]
 [v _dado `*uc ~T0 @X0 1 r2 ]
-"231
-[; ;eeprom.c: 231: {
-[f ]
 "232
-[; ;eeprom.c: 232:     unsigned char c;
-[v _c `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 232: {
+[f ]
 "233
-[; ;eeprom.c: 233:     do{
+[; ;eeprom.c: 233:     unsigned char c;
+[v _c `uc ~T0 @X0 1 a ]
+"234
+[; ;eeprom.c: 234:     do{
 [e :U 329 ]
 {
-"234
-[; ;eeprom.c: 234:         c=EEPROM_Read_Byte(addr++);
-[e = _c ( _EEPROM_Read_Byte (1 ++ _addr -> -> 1 `i `ui ]
 "235
-[; ;eeprom.c: 235:         *(dado++)=c;
+[; ;eeprom.c: 235:         c=EEPROM_Read_Byte(addr++);
+[e = _c ( _EEPROM_Read_Byte (1 ++ _addr -> -> 1 `i `ui ]
+"236
+[; ;eeprom.c: 236:         *(dado++)=c;
 [e = *U ++ _dado * -> -> 1 `i `x -> -> # *U _dado `i `x -> _c `uc ]
-"237
-[; ;eeprom.c: 237:       }while(c);
+"238
+[; ;eeprom.c: 238:       }while(c);
 }
 [e $ != -> _c `i -> 0 `i 329  ]
 [e :U 328 ]
-"238
-[; ;eeprom.c: 238:       *(dado)=0;
-[e = *U _dado -> -> 0 `i `uc ]
 "239
-[; ;eeprom.c: 239: }
+[; ;eeprom.c: 239:       *(dado)=0;
+[e = *U _dado -> -> 0 `i `uc ]
+"240
+[; ;eeprom.c: 240: }
 [e :UE 326 ]
 }
-"246
-[; ;eeprom.c: 246: void EEPROM_Write_Buffer(unsigned int addr,char *dado,char size)
-[v _EEPROM_Write_Buffer `(v ~T0 @X0 1 ef3`ui`*uc`uc ]
 "247
-[; ;eeprom.c: 247: {
+[; ;eeprom.c: 247: void EEPROM_Write_Buffer(unsigned int addr,char *dado,char size)
+[v _EEPROM_Write_Buffer `(v ~T0 @X0 1 ef3`ui`*uc`uc ]
+"248
+[; ;eeprom.c: 248: {
 {
 [e :U _EEPROM_Write_Buffer ]
-"246
-[; ;eeprom.c: 246: void EEPROM_Write_Buffer(unsigned int addr,char *dado,char size)
+"247
+[; ;eeprom.c: 247: void EEPROM_Write_Buffer(unsigned int addr,char *dado,char size)
 [v _addr `ui ~T0 @X0 1 r1 ]
 [v _dado `*uc ~T0 @X0 1 r2 ]
 [v _size `uc ~T0 @X0 1 r3 ]
-"247
-[; ;eeprom.c: 247: {
-[f ]
 "248
-[; ;eeprom.c: 248:     for(char i=0;i<size;i++)
+[; ;eeprom.c: 248: {
+[f ]
+"249
+[; ;eeprom.c: 249:     for(char i=0;i<size;i++)
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
 [e $U 334  ]
 [e :U 331 ]
-"249
-[; ;eeprom.c: 249:     {
-{
 "250
-[; ;eeprom.c: 250:      EEPROM_Write_Byte(addr,*dado);
-[e ( _EEPROM_Write_Byte (2 , _addr -> *U _dado `uc ]
+[; ;eeprom.c: 250:     {
+{
 "251
-[; ;eeprom.c: 251:      addr++;
-[e ++ _addr -> -> 1 `i `ui ]
+[; ;eeprom.c: 251:      EEPROM_Write_Byte(addr,*dado);
+[e ( _EEPROM_Write_Byte (2 , _addr -> *U _dado `uc ]
 "252
-[; ;eeprom.c: 252:      dado++;
-[e ++ _dado * -> -> 1 `i `x -> -> # *U _dado `i `x ]
+[; ;eeprom.c: 252:      addr++;
+[e ++ _addr -> -> 1 `i `ui ]
 "253
-[; ;eeprom.c: 253:     }
+[; ;eeprom.c: 253:      dado++;
+[e ++ _dado * -> -> 1 `i `x -> -> # *U _dado `i `x ]
+"254
+[; ;eeprom.c: 254:     }
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e :U 334 ]
 [e $ < -> _i `i -> _size `i 331  ]
 [e :U 332 ]
 }
-"254
-[; ;eeprom.c: 254: }
+"255
+[; ;eeprom.c: 255: }
 [e :UE 330 ]
 }
-"257
-[; ;eeprom.c: 257: void EEPROM_Read_Buffer(unsigned int addr,char *dado,char size)
-[v _EEPROM_Read_Buffer `(v ~T0 @X0 1 ef3`ui`*uc`uc ]
 "258
-[; ;eeprom.c: 258: {
+[; ;eeprom.c: 258: void EEPROM_Read_Buffer(unsigned int addr,char *dado,char size)
+[v _EEPROM_Read_Buffer `(v ~T0 @X0 1 ef3`ui`*uc`uc ]
+"259
+[; ;eeprom.c: 259: {
 {
 [e :U _EEPROM_Read_Buffer ]
-"257
-[; ;eeprom.c: 257: void EEPROM_Read_Buffer(unsigned int addr,char *dado,char size)
+"258
+[; ;eeprom.c: 258: void EEPROM_Read_Buffer(unsigned int addr,char *dado,char size)
 [v _addr `ui ~T0 @X0 1 r1 ]
 [v _dado `*uc ~T0 @X0 1 r2 ]
 [v _size `uc ~T0 @X0 1 r3 ]
-"258
-[; ;eeprom.c: 258: {
-[f ]
 "259
-[; ;eeprom.c: 259:     for(char i=0;i<size;i++)
+[; ;eeprom.c: 259: {
+[f ]
+"260
+[; ;eeprom.c: 260:     for(char i=0;i<size;i++)
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
 [e $U 339  ]
 [e :U 336 ]
-"260
-[; ;eeprom.c: 260:         {
-{
 "261
-[; ;eeprom.c: 261:         (*dado)=EEPROM_Read_Byte(addr);
-[e = *U _dado -> ( _EEPROM_Read_Byte (1 _addr `uc ]
+[; ;eeprom.c: 261:         {
+{
 "262
-[; ;eeprom.c: 262:         addr++;
-[e ++ _addr -> -> 1 `i `ui ]
+[; ;eeprom.c: 262:         (*dado)=EEPROM_Read_Byte(addr);
+[e = *U _dado -> ( _EEPROM_Read_Byte (1 _addr `uc ]
 "263
-[; ;eeprom.c: 263:         dado++;
-[e ++ _dado * -> -> 1 `i `x -> -> # *U _dado `i `x ]
+[; ;eeprom.c: 263:         addr++;
+[e ++ _addr -> -> 1 `i `ui ]
 "264
-[; ;eeprom.c: 264:         };
+[; ;eeprom.c: 264:         dado++;
+[e ++ _dado * -> -> 1 `i `x -> -> # *U _dado `i `x ]
+"265
+[; ;eeprom.c: 265:         };
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e :U 339 ]
 [e $ < -> _i `i -> _size `i 336  ]
 [e :U 337 ]
 }
-"265
-[; ;eeprom.c: 265: }
+"266
+[; ;eeprom.c: 266: }
 [e :UE 335 ]
 }

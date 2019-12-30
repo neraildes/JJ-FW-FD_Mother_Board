@@ -770,13 +770,12 @@ void main(void)
                        flag_recomunication =TRUE;
                  while(flag_recomunication==TRUE){ 
                        flag_recomunication =FALSE;    
-                      __delay_ms(50);
+                      __delay_ms(200);
                       USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
                       USART_putc(0xCD);USART_putc(0xCD);
                       for(unsigned int tempo=0; tempo<200; tempo++)
                           {
-                          if(flag_usart_rx==TRUE) break;
-                          Delay_Led_Memory=DEFAULT_LEDS; 
+                          if(flag_usart_rx==TRUE) break;                           
                           my_delay_ms_CLRWDT(1);
                           }            
 
@@ -793,7 +792,8 @@ void main(void)
                          { 
                          Comando_Display();
                          flag_recomunication=TRUE;
-                         }//flag_usart_rx         
+                         }//flag_usart_rx                       
+                      
                  } 
                           
                   
@@ -1321,13 +1321,17 @@ void Decodify_Command(void){
          */ 
         //---------------------- EEPROM INTERNA --------------------------------
         case COMMAND_IEE_W_BYTE:
-             EEPROM_Write_Byte(usart_protocol.value[0],
-                               usart_protocol.value[1]);
+             EEPROM_Write_Byte((int)usart_protocol.value[0]<<8 | //____Endereco 0x3FF
+                               (int)usart_protocol.value[1]<<0,  //
+                               usart_protocol.value[2]  
+                               );
              Send_to_PC(3);
              SEND_REPLY_OK();
              break;
         case COMMAND_IEE_R_BYTE:
-             tempchar=EEPROM_Read_Byte(usart_protocol.value[0]);            
+             tempchar=EEPROM_Read_Byte((int)usart_protocol.value[0]<<8 |
+                                       (int)usart_protocol.value[1]<<0
+                                       );            
              Send_to_PC(1);
              USART_putc(tempchar);              
              break;
