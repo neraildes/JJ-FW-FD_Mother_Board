@@ -6885,7 +6885,7 @@ void SEND_REPLY_OK(void){
 
 void Comando_Protocolo_Serial(void){
 
-        unsigned char size, i, OrigemMemo;
+        unsigned char size, i, DestinoMemo;
 
         USART_to_Protocol(&usart_protocol);
         if(usart_protocol.header==0xAABB)
@@ -6904,7 +6904,7 @@ void Comando_Protocolo_Serial(void){
 
 
 
-                   OrigemMemo=usart_protocol.origem;
+                   DestinoMemo=usart_protocol.destino;
                    Send_To_Slave(usart_protocol.destino,
                                  usart_protocol.command,
                                  usart_protocol.size,
@@ -6920,12 +6920,13 @@ void Comando_Protocolo_Serial(void){
 
                    USART_to_Protocol(&usart_protocol);
                    USART_put_int(0xAABB);
-                   USART_putc(usart_protocol.origem);
-                   USART_putc(OrigemMemo);
+                   USART_putc(DestinoMemo);
+                   USART_putc(0xC0);
                    USART_putc(usart_protocol.command);
-                   USART_putc(usart_protocol.size);
+                   USART_putc(usart_protocol.size+3);
                    for(i=0;i<usart_protocol.size;i++)
                          USART_putc(usart_protocol.value[i]);
+                   SEND_REPLY_OK();
 
                    statusgen.flag_usart_rx=0;
                    }
@@ -7484,7 +7485,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2208 "Liofilizador Placa Mae.c"
+# 2209 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -7638,7 +7639,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2369 "Liofilizador Placa Mae.c"
+# 2370 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {

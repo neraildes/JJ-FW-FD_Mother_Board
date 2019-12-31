@@ -1598,7 +1598,7 @@ void SEND_REPLY_OK(void){
 
 void Comando_Protocolo_Serial(void){
  //======================= COMUNICACAO COM O PC =========================
-        unsigned char size, i, OrigemMemo;
+        unsigned char size, i, DestinoMemo;
                
         USART_to_Protocol(&usart_protocol);
         if(usart_protocol.header==HEADER_LIOFILIZADOR)   
@@ -1617,7 +1617,7 @@ void Comando_Protocolo_Serial(void){
                    Origem = 0XC0
                    Destino= 0X01 a 0X0F
                    */
-                   OrigemMemo=usart_protocol.origem;
+                   DestinoMemo=usart_protocol.destino;
                    Send_To_Slave(usart_protocol.destino,
                                  usart_protocol.command,
                                  usart_protocol.size,
@@ -1633,13 +1633,14 @@ void Comando_Protocolo_Serial(void){
                    
                    USART_to_Protocol(&usart_protocol);
                    USART_put_int(HEADER_LIOFILIZADOR);
-                   USART_putc(usart_protocol.origem);// 0X01 a 0x0F
-                   USART_putc(OrigemMemo);
+                   USART_putc(DestinoMemo);//usart_protocol.origem);// 0X01 a 0x0F
+                   USART_putc(0xC0);
                    USART_putc(usart_protocol.command);
-                   USART_putc(usart_protocol.size);
+                   USART_putc(usart_protocol.size+3);                                                         
                    for(i=0;i<usart_protocol.size;i++)
                          USART_putc(usart_protocol.value[i]);
-
+                   SEND_REPLY_OK();
+                   
                    flag_usart_rx=0;               
                    }
                 }
