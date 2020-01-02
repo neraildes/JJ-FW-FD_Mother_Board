@@ -79,11 +79,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 572: extern volatile PORTDbits_t PORTDbits __attribute__((address(0xF83)));
 [v _PORTDbits `VS26 ~T0 @X0 0 e@3971 ]
 "10 isr.c
-[; ;isr.c: 10: extern volatile unsigned char usart_buffer[74];
+[; ;isr.c: 10: extern volatile unsigned char usart_buffer[32+10];
 [v _usart_buffer `Vuc ~T0 @X0 -> 0 `x e ]
-[v F2613 `Vuc ~T0 @X0 -> 74 `i t ]
+[v F2613 `Vuc ~T0 @X0 -> 42 `i t ]
 "11
-[; ;isr.c: 11: extern volatile unsigned char usart_buffer_fila[6][74];
+[; ;isr.c: 11: extern volatile unsigned char usart_buffer_fila[6][32+10];
 [v _usart_buffer_fila `F2613 ~T0 @X0 -> 0 `x e ]
 "3498 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 3498: extern volatile unsigned char RCREG __attribute__((address(0xFAE)));
@@ -780,13 +780,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "86
 [; ;isr.c: 86:                if(usart_buffer_fila[i][0]==0)
-[e $ ! == -> *U + &U *U + &U _usart_buffer_fila * -> _i `ux -> * -> # *U &U *U &U _usart_buffer_fila `ui -> -> 74 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _usart_buffer_fila * -> _i `ux -> * -> # *U &U *U &U _usart_buffer_fila `ui -> -> 74 `i `ui `ux `ui `ux `i -> 0 `i 286  ]
+[e $ ! == -> *U + &U *U + &U _usart_buffer_fila * -> _i `ux -> * -> # *U &U *U &U _usart_buffer_fila `ui -> -> 42 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _usart_buffer_fila * -> _i `ux -> * -> # *U &U *U &U _usart_buffer_fila `ui -> -> 42 `i `ui `ux `ui `ux `i -> 0 `i 286  ]
 "87
 [; ;isr.c: 87:                   {
 {
 "88
 [; ;isr.c: 88:                   pointer=&usart_buffer_fila[i][0];
-[e = _pointer &U *U + &U *U + &U _usart_buffer_fila * -> _i `ux -> * -> # *U &U *U &U _usart_buffer_fila `ui -> -> 74 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _usart_buffer_fila * -> _i `ux -> * -> # *U &U *U &U _usart_buffer_fila `ui -> -> 74 `i `ui `ux `ui `ux ]
+[e = _pointer &U *U + &U *U + &U _usart_buffer_fila * -> _i `ux -> * -> # *U &U *U &U _usart_buffer_fila `ui -> -> 42 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _usart_buffer_fila * -> _i `ux -> * -> # *U &U *U &U _usart_buffer_fila `ui -> -> 42 `i `ui `ux `ui `ux ]
 "89
 [; ;isr.c: 89:                   statusgen.flag_usart_rx=1;
 [e = . _statusgen 0 -> -> 1 `i `uc ]
@@ -840,8 +840,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;isr.c: 104:                 (*pointer)=RCREG;
 [e = *U _pointer _RCREG ]
 "105
-[; ;isr.c: 105:                 if(count<74 -1)
-[e $ ! < _count - -> 74 `i -> 1 `i 291  ]
+[; ;isr.c: 105:                 if(count<32+10 -1)
+[e $ ! < _count - + -> 32 `i -> 10 `i -> 1 `i 291  ]
 "106
 [; ;isr.c: 106:                    {
 {

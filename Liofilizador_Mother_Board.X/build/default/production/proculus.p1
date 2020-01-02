@@ -75,7 +75,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 572: extern volatile PORTDbits_t PORTDbits __attribute__((address(0xF83)));
 [v _PORTDbits `VS34 ~T0 @X0 0 e@3971 ]
 "11 proculus.c
-[; ;proculus.c: 11: extern volatile unsigned char usart_buffer[74];
+[; ;proculus.c: 11: extern volatile unsigned char usart_buffer[32+10];
 [v _usart_buffer `Vuc ~T0 @X0 -> 0 `x e ]
 "57 ./proculus.h
 [; ;./proculus.h: 57: typedef struct {

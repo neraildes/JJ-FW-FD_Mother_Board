@@ -144,7 +144,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [s S276 `i 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc -> 74 `i ]
 [n S276 . header origem destino command size value ]
 "10 usart.c
-[; ;usart.c: 10: extern volatile unsigned char usart_buffer[74];
+[; ;usart.c: 10: extern volatile unsigned char usart_buffer[32+10];
 [v _usart_buffer `Vuc ~T0 @X0 -> 0 `x e ]
 "13
 [; ;usart.c: 13: extern volatile unsigned int Delay_Led_Usart;

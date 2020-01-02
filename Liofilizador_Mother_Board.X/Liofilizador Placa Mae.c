@@ -298,26 +298,50 @@ void main(void)
           PROCULUS_Show_Screen(35);
           PROCULUS_OK();
           {
+             #define BUFFER_GRAFICO 128  
+             int buffer[BUFFER_GRAFICO];  
              int valorLido;
-             char bb[5];              
-             unsigned long add_eeprom;
+             char bb[5];     
+             char flag_exit;
              
-             //for(add_eeprom=0;add_eeprom<600;add_eeprom+=2)
-               do {
-                  bb[0]=0;
-                  bb[1]=High (add_eeprom);
-                  bb[2]=Lower(add_eeprom);
-                  bb[3]=Hi   (add_eeprom);
-                  bb[4]=Lo   (add_eeprom);
+             flag_exit=FALSE;
+             unsigned long add_eeprom=0;
+             
+             while(1)
+                {         
+
                   my_delay_ms_CLRWDT(50);
-                  valorLido=Send_To_Slave(1, COMMAND_EEE_R_INT, 5, bb);
+                  for(char i=0;i<BUFFER_GRAFICO;i++)
+                     {  
+                     bb[0]=0;
+                     bb[1]=High (add_eeprom);
+                     bb[2]=Lower(add_eeprom);
+                     bb[3]=Hi   (add_eeprom);
+                     bb[4]=Lo   (add_eeprom);                       
+                     buffer[i]=Send_To_Slave(1, COMMAND_EEE_R_INT, 5, bb);
+                     if(buffer[i]==0xFFFF)
+                        {   
+                        flag_exit=TRUE;  
+                        break;
+                        }
+                     add_eeprom+=2;
+                     }
+                  
+                  
                   my_delay_ms_CLRWDT(50);
-                  PROCULUS_graphic_plot(1,(valorLido*FATOR_TENSAO));
-                  add_eeprom+=2;
-               } while(valorLido!=0xFFFF);
-             
-             //my_delay_ms_CLRWDT(10000);
-             
+                  flag_proculus_hs=TRUE;
+                  for(char i=0;i<BUFFER_GRAFICO;i++)
+                      { 
+                      if(buffer[i]==0xFFFF)
+                         {   
+                         flag_exit=TRUE;  
+                         break;
+                         }
+                      PROCULUS_graphic_plot(1,(buffer[i]*FATOR_TENSAO));                  
+                      }
+                  flag_proculus_hs=FALSE;
+                if(flag_exit)break;  
+                } 
           }     
           PROCULUS_OK();
      

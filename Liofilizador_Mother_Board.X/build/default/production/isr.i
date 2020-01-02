@@ -4630,8 +4630,8 @@ unsigned char USART_input_buffer(void);
 
 
 
-extern volatile unsigned char usart_buffer[74];
-extern volatile unsigned char usart_buffer_fila[6][74];
+extern volatile unsigned char usart_buffer[32+10];
+extern volatile unsigned char usart_buffer_fila[6][32+10];
 # 20 "isr.c"
 extern volatile unsigned int tempodecorrido ;
 extern volatile unsigned int tempocaptura ;
@@ -4718,7 +4718,7 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
                 PORTDbits.RD5=0;
                 PORTDbits.RD5=1;
                 (*pointer)=RCREG;
-                if(count<74 -1)
+                if(count<32+10 -1)
                    {
                    count++;
                    pointer++;
