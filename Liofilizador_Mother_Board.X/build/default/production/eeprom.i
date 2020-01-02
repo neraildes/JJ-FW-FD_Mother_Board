@@ -4384,7 +4384,8 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 10 "eeprom.c" 2
+# 9 "eeprom.c" 2
+
 # 1 "./global.h" 1
 # 20 "./global.h"
 #pragma config OSC = INTIO67
@@ -4488,7 +4489,8 @@ typedef struct{
 }t_rtc;
 
 volatile t_rtc rtc;
-# 11 "eeprom.c" 2
+# 10 "eeprom.c" 2
+
 # 1 "./eeprom.h" 1
 # 14 "./eeprom.h"
 void EEPROM_Write_Byte(unsigned int addr, unsigned char dado);
@@ -4511,7 +4513,8 @@ void EEPROM_Read_String(unsigned int addr,char *dado);
 
 void EEPROM_Write_Buffer(unsigned int addr,char *dado,char size);
 void EEPROM_Read_Buffer(unsigned int addr,char *dado,char size);
-# 12 "eeprom.c" 2
+# 11 "eeprom.c" 2
+
 
 
 extern volatile unsigned int tmr_led_memory;

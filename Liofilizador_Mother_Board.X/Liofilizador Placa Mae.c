@@ -289,8 +289,37 @@ void main(void)
      
 
      
-    //Teste24cXXXX();     
+    //Teste24cXXXX(); 
      
+    /*--------------------------------------------------------------------------
+     *                  A R E A    D E    T E S T E
+     -------------------------------------------------------------------------*/ 
+    
+          PROCULUS_Show_Screen(35);
+          PROCULUS_OK();
+          {
+             int valorLido;
+             char bb[5];              
+             unsigned long add_eeprom;
+             
+             //for(add_eeprom=0;add_eeprom<600;add_eeprom+=2)
+               do {
+                  bb[0]=0;
+                  bb[1]=High (add_eeprom);
+                  bb[2]=Lower(add_eeprom);
+                  bb[3]=Hi   (add_eeprom);
+                  bb[4]=Lo   (add_eeprom);
+                  my_delay_ms_CLRWDT(50);
+                  valorLido=Send_To_Slave(1, COMMAND_EEE_R_INT, 5, bb);
+                  my_delay_ms_CLRWDT(50);
+                  PROCULUS_graphic_plot(1,(valorLido*FATOR_TENSAO));
+                  add_eeprom+=2;
+               } while(valorLido!=0xFFFF);
+             
+             //my_delay_ms_CLRWDT(10000);
+             
+          }     
+          PROCULUS_OK();
      
      
      
@@ -325,8 +354,8 @@ void main(void)
 //       }  
          
      
-     
-     {//-----------TOTALIZADOR DE RESET-------------         
+     {
+     //-----------TOTALIZADOR DE RESET-------------         
      unsigned int reset;    
      reset=EEPROM_Read_Integer(34);
      if(reset==0xFFFF)
@@ -479,10 +508,12 @@ void main(void)
                 if(flag_time_process==TRUE) SaveBlackoutStatusRuning(); //Salva status e tempo de processo a cada 10 minutos
                 Exibe_Tempo_de_Processo();
                 Icones_de_alarmes();    
-
+                flag_proculus_hs=FALSE;
+                
+                
                 Gerenciador_de_Senha();  //Habilita acesso global por 30 segundos
                 Gerenciador_de_Senha_Global(); //Libera Senha Global eternamente                       
-                flag_proculus_hs=FALSE;
+                
                 global_datalog(); // LEITURA DOS SENSORES
                 //__delay_ms(32);                 
                 global_vacuo();
@@ -1376,7 +1407,7 @@ void Decodify_Command(void){
         case COMMAND_EEE_W_BYTE:
              EEPROM_24C1025_Write_Byte(usart_protocol.value[0],      //CHIP NUMBER
                                                   add_24LCxxxx,      //ADD of Memory                                                  
-                                      &usart_protocol.value[5]);     //VALUE
+                                       usart_protocol.value[5]);     //VALUE
              Send_to_PC(3);
              SEND_REPLY_OK();
              break;
@@ -1390,12 +1421,11 @@ void Decodify_Command(void){
              break;
         case COMMAND_EEE_W_INT:
              {
-             char valor[2];
-             valor[0]=(usart_protocol.value[5]);
-             valor[1]=(usart_protocol.value[6]);
              EEPROM_24C1025_Write_Int(usart_protocol.value[0],  //CHIP NUMBER
                                                  add_24LCxxxx,  //Add of memory
-                                                       valor);  //
+                                   (int)usart_protocol.value[5]<<8 |
+                                        usart_protocol.value[6]                                  
+                                                             );  //
              Send_to_PC(3);
              SEND_REPLY_OK();
              break;

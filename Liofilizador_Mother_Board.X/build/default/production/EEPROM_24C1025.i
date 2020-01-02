@@ -4379,21 +4379,6 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 1 "EEPROM_24C1025.c" 2
 
 
-# 1 "./util.h" 1
-
-
-
-void print(char *texto);
-void bcd2str(char valor, char *dado);
-char str2bcd(char *value);
-void clear_screen(void);
-int my_pow(int rad, int exp);
-
-char* itoa(int num, char* str, int base);
-char * reverse( char * s );
-char *ultoa(unsigned long num, char *str, int radix);
-# 3 "EEPROM_24C1025.c" 2
-
 # 1 "./global.h" 1
 # 20 "./global.h"
 #pragma config OSC = INTIO67
@@ -4497,7 +4482,7 @@ typedef struct{
 }t_rtc;
 
 volatile t_rtc rtc;
-# 4 "EEPROM_24C1025.c" 2
+# 3 "EEPROM_24C1025.c" 2
 
 # 1 "./I2C.h" 1
 # 11 "./I2C.h"
@@ -4509,7 +4494,7 @@ void I2C_Master_RepeatedStart(void);
 void I2C_Master_Stop(void);
 void I2C_Master_Write(unsigned d);
 unsigned short I2C_Master_Read(unsigned short a);
-# 5 "EEPROM_24C1025.c" 2
+# 4 "EEPROM_24C1025.c" 2
 
 # 1 "./EEPROM_24C1025.h" 1
 # 16 "./EEPROM_24C1025.h"
@@ -4527,16 +4512,18 @@ void EEPROM_24C1025_Read_Str(unsigned char chip_add, unsigned long mem_add,char 
 void EEPROM_24C1025_Write_Str(unsigned char chip_add, unsigned long mem_add,char *data);
 
 
-void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char *data);
+void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char data);
 unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem_add);
-void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, char *data);
+void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data);
 unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_add);
 
 void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned char value);
-# 6 "EEPROM_24C1025.c" 2
+# 5 "EEPROM_24C1025.c" 2
 
 
+extern volatile unsigned int Delay_Led_Memory;
 
+extern char buffer[64];
 
 
 void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
@@ -4547,6 +4534,8 @@ void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
      unsigned char range=0;
      unsigned char ctrl;
      unsigned char count;
+
+     Delay_Led_Memory=5;
 
      if(mem_add>0x1FFFF) return;
 
@@ -4606,6 +4595,8 @@ void EEPROM_24C1025_Read_Buffer(unsigned char chip_add,
      unsigned char cnt=0;
      unsigned char range=0;
      unsigned char ctrl;
+
+     Delay_Led_Memory=5;
 
      if(mem_add>0x1FFFF) return;
 
@@ -4777,20 +4768,29 @@ void EEPROM_24C1025_Read_Str(unsigned char chip_add, unsigned long mem_add,char 
      I2C_Master_Stop();
      _delay((unsigned long)((650)*(32000000/4000000.0)));
 }
-# 262 "EEPROM_24C1025.c"
-void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char *data){
-     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 1, data);
+
+
+
+
+
+
+
+void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char data){
+     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 1, &data);
 }
 
 
 unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem_add){
-    char *data;
-    EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 1, data);
-    return *data;
+    char data;
+    EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 1, &data);
+    return data;
 }
 
-void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, char *data){
-     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 2, data);
+void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data){
+     char local[2];
+     local[0]=((char *)&data)[1];
+     local[1]=((char *)&data)[0];
+     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 2, local);
 }
 
 
@@ -4802,7 +4802,7 @@ unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_a
 
 
 void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned char value){
-     char buffer[128];
+
      unsigned char i;
      unsigned int page=0;
      for(i=0;i<128;i++) buffer[i]=value;

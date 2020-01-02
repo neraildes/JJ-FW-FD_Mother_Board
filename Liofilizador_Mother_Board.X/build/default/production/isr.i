@@ -4377,7 +4377,8 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 3 "isr.c" 2
+# 2 "isr.c" 2
+
 # 1 "./global.h" 1
 # 20 "./global.h"
 #pragma config OSC = INTIO67
@@ -4481,7 +4482,8 @@ typedef struct{
 }t_rtc;
 
 volatile t_rtc rtc;
-# 4 "isr.c" 2
+# 3 "isr.c" 2
+
 # 1 "./isr.h" 1
 # 13 "./isr.h"
 # 1 "./proculus.h" 1
@@ -4596,7 +4598,8 @@ void PROCULUS_Clear_Line_Graphic(char channel);
 
 
 void __attribute__((picinterrupt(("low_priority")))) isr(void);
-# 5 "isr.c" 2
+# 4 "isr.c" 2
+
 # 1 "./usart.h" 1
 # 20 "./usart.h"
 # 1 "./protocolo.h" 1
@@ -4621,7 +4624,8 @@ void USART_put_long(unsigned long value);
 void USART_put_string(char *vetor);
 void USART_put_buffer(char *vetor, char size);
 unsigned char USART_input_buffer(void);
-# 6 "isr.c" 2
+# 5 "isr.c" 2
+
 
 
 

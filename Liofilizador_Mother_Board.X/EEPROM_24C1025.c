@@ -1,11 +1,12 @@
 #include <xc.h>
 #include <stdlib.h>
-#include "util.h"
 #include "global.h"
 #include "I2C.h"
 #include "EEPROM_24C1025.h"
 
+extern volatile unsigned int Delay_Led_Memory; //Verde
 
+extern char buffer[64];
 //------------------------------------------------------------------------------
 
 void EEPROM_24C1025_Write_Buffer(unsigned char chip_add, 
@@ -16,6 +17,8 @@ void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
      unsigned char range=0;
      unsigned char ctrl;
      unsigned char count;
+     
+     Delay_Led_Memory=DEFAULT_LEDS;
      
      if(mem_add>0x1FFFF) return;
      
@@ -75,6 +78,8 @@ void EEPROM_24C1025_Read_Buffer(unsigned char chip_add,
      unsigned char cnt=0;
      unsigned char range=0;
      unsigned char ctrl;
+     
+     Delay_Led_Memory=DEFAULT_LEDS;
      
      if(mem_add>0x1FFFF) return;
      
@@ -253,25 +258,22 @@ void EEPROM_24C1025_Read_Str(unsigned char chip_add, unsigned long mem_add,char 
 
 
 
-
-
-
-
-
-
-void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char *data){
-     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 1, data);
+void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char data){
+     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 1, &data);
 }
 
 
 unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem_add){
-    char *data;
-    EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 1, data);
-    return *data;
+    char data;
+    EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 1, &data);
+    return data;
 }
 
-void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, char *data){
-     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 2, data);
+void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data){
+     char local[2];
+     local[0]=Hi(data);
+     local[1]=Lo(data);
+     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 2, local);
 }
 
 
@@ -283,7 +285,7 @@ unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_a
 
 
 void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned char value){
-     char buffer[128];
+     //char buffer[32];
      unsigned char i;
      unsigned int page=0;
      for(i=0;i<128;i++) buffer[i]=value;
