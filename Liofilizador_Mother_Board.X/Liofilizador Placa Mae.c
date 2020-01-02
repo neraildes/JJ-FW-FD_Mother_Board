@@ -289,63 +289,11 @@ void main(void)
      
 
      
-    //Teste24cXXXX(); 
      
-    /*--------------------------------------------------------------------------
-     *                  A R E A    D E    T E S T E
-     -------------------------------------------------------------------------*/ 
-    
-          PROCULUS_Show_Screen(35);
-          PROCULUS_OK();
-          {
-             #define BUFFER_GRAFICO 128  
-             int buffer[BUFFER_GRAFICO];  
-             int valorLido;
-             char bb[5];     
-             char flag_exit;
-             
-             flag_exit=FALSE;
-             unsigned long add_eeprom=0;
-             
-             while(1)
-                {         
+     
 
-                  my_delay_ms_CLRWDT(50);
-                  for(char i=0;i<BUFFER_GRAFICO;i++)
-                     {  
-                     bb[0]=0;
-                     bb[1]=High (add_eeprom);
-                     bb[2]=Lower(add_eeprom);
-                     bb[3]=Hi   (add_eeprom);
-                     bb[4]=Lo   (add_eeprom);                       
-                     buffer[i]=Send_To_Slave(1, COMMAND_EEE_R_INT, 5, bb);
-                     if(buffer[i]==0xFFFF)
-                        {   
-                        flag_exit=TRUE;  
-                        break;
-                        }
-                     add_eeprom+=2;
-                     }
-                  
-                  
-                  my_delay_ms_CLRWDT(50);
-                  flag_proculus_hs=TRUE;
-                  for(char i=0;i<BUFFER_GRAFICO;i++)
-                      { 
-                      if(buffer[i]==0xFFFF)
-                         {   
-                         flag_exit=TRUE;  
-                         break;
-                         }
-                      PROCULUS_graphic_plot(1,(buffer[i]*FATOR_TENSAO));                  
-                      }
-                  flag_proculus_hs=FALSE;
-                if(flag_exit)break;  
-                } 
-          }     
-          PROCULUS_OK();
      
-     
+          
      
      
      
@@ -503,7 +451,7 @@ void main(void)
      //=========================================================================
      //                              M A I N
      //=========================================================================
-        
+        Teste24cXXXX();
         
         add_datalog=0;
         Ligar_Cargas_Compassadamente();
@@ -1507,8 +1455,9 @@ void Decodify_Command(void){
              }
         
         case COMMAND_EEE_FILL_ALL:
-             EEPROM_24C1025_Fill_All(usart_protocol.value[0], //chip_add, unsigned char value){
-                                     usart_protocol.value[1]);
+             EEPROM_24C1025_Fill_All(usart_protocol.value[0], //chip_add, 
+                               (int)(usart_protocol.value[1]<<8)|//unsigned char value
+                                     usart_protocol.value[2]);
              Send_to_PC(3);
              SEND_REPLY_OK();            
              break;
@@ -3257,36 +3206,12 @@ void Ligar_Cargas_Compassadamente(){
           Contagem_Tempo_de_Processo(FALSE);          
           
           if(flag_global_datalog==1)
-             {   
-             
+             {              
              flag_global_datalog=0;
              print("1-DataLog");
              PROCULUS_VP_Write_UInt16(0x02,1); //Datalog
              global_datalog(); 
-             
-
-
-             PROCULUS_Show_Screen(35);
-             {
-             int valorLido;
-             char bb[5];              
-             unsigned long add_eeprom;
-             
-             for(add_eeprom=0;add_eeprom<600;add_eeprom+=2)
-                  {
-                  bb[0]=0;
-                  bb[1]=High (add_eeprom);
-                  bb[2]=Lower(add_eeprom);
-                  bb[3]=Hi   (add_eeprom);
-                  bb[4]=Lo   (add_eeprom);
-                  valorLido=Send_To_Slave(1, COMMAND_EEE_R_INT, 5, bb);
-                  my_delay_ms_CLRWDT(50);
-                  PROCULUS_graphic_plot(1,valorLido);
-                  }
-             
-             //my_delay_ms_CLRWDT(10000);
              }
-            }
           
           if(flag_global_condensador==1)
             { 
@@ -3327,45 +3252,59 @@ void Ligar_Cargas_Compassadamente(){
 
 
 void Teste24cXXXX(void){
-     unsigned char chip, placa,canal;
-     unsigned long add_eeprom;
-     unsigned int valor;
-     int valorLido;
-     char bb[5];
-     Tamanho_Display=80;
-     PROCULUS_Show_Screen(0);
-     //-------------------------------------------------------------------------
+    /*--------------------------------------------------------------------------
+     *                  A R E A    D E    T E S T E
+     -------------------------------------------------------------------------*/ 
      
-     add_eeprom=0;
-     placa=1;
-     canal=0;
-     chip=0;
-     
-     while(1)
-          {  
-          add_eeprom=0;
-          save_datalog(add_eeprom); //Salva as duas entradas analogicas ja formatadas com a grandeza
-          
-          strcpy(texto,"Analogica Canal 0 = ");
-          bb[0]=canal;
-          valorLido=Send_To_Slave(placa, COMMAND_READ_ANALOG, 1, bb);           
-          itoa(valorLido,buffer,10);
-          strcat(texto,buffer);
-          print(texto);
-          
-          bb[0]=chip;
-          bb[1]=High (add_eeprom);
-          bb[2]=Lower(add_eeprom);
-          bb[3]=Hi   (add_eeprom);
-          bb[4]=Lo   (add_eeprom);
-          valorLido=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, bb);  
-          strcpy(texto,"Memoria chip 0 =");         
-          itoa(valorLido,buffer,10);
-          strcat(texto,buffer);
-          print(texto);         
-          
-          my_delay_ms_CLRWDT(500);
-          }
+          PROCULUS_Show_Screen(35);
+          PROCULUS_OK();
+          {
+             #define BUFFER_GRAFICO 128  
+             int buffer[BUFFER_GRAFICO];  
+             int valorLido;
+             char bb[5];     
+             char flag_exit;
+             
+             flag_exit=FALSE;
+             unsigned long add_eeprom=0;
+             
+             while(1)
+                {         
+
+                  my_delay_ms_CLRWDT(50);
+                  for(char i=0;i<BUFFER_GRAFICO;i++)
+                     {  
+                     bb[0]=0;
+                     bb[1]=High (add_eeprom);
+                     bb[2]=Lower(add_eeprom);
+                     bb[3]=Hi   (add_eeprom);
+                     bb[4]=Lo   (add_eeprom);                       
+                     buffer[i]=Send_To_Slave(1, COMMAND_EEE_R_INT, 5, bb);
+                     if(buffer[i]==0xFFFF)
+                        {   
+                        flag_exit=TRUE;  
+                        break;
+                        }
+                     add_eeprom+=2;
+                     }
+                  
+                  
+                  my_delay_ms_CLRWDT(50);
+                  flag_proculus_hs=TRUE;
+                  for(char i=0;i<BUFFER_GRAFICO;i++)
+                      { 
+                      if(buffer[i]==0xFFFF)
+                         {   
+                         flag_exit=TRUE;  
+                         break;
+                         }
+                      PROCULUS_graphic_plot(1,(buffer[i]*FATOR_TENSAO));                  
+                      }
+                  flag_proculus_hs=FALSE;
+                if(flag_exit)break;  
+                } 
+          }     
+          PROCULUS_OK();
 }         
 
      
