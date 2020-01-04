@@ -8521,56 +8521,54 @@ void Ligar_Cargas_Compassadamente(){
 
 
 
-void Teste24cXXXX(void){
+void Teste24cXXXX(void)
+{
 
 
 
-
-     char flag_exit;
-     unsigned long add_eeprom=0;
-     int leitura[7];
      char bb[5];
+     char SlaveBoard;
+     char canal;
+     char tupla;
+     unsigned long add_eeprom;
+     char flag_exit;
+     int leitura[14];
 
-     PROCULUS_Show_Screen(35);
      PROCULUS_OK();
-
-     flag_exit=0;
-
-     while(1)
-        {
-        TRISDbits.RD6=0;
-        PORTDbits.RD6=1;
-        bb[0]=0;
-        bb[1]=((char *)&add_eeprom)[3];
-        bb[2]=((char *)&add_eeprom)[2];
-        bb[3]=((char *)&add_eeprom)[1];
-        bb[4]=((char *)&add_eeprom)[0];
-        leitura[0]=Send_To_Slave(1, 0x14, 5, bb);
-
-        bb[0]=1;
-        bb[1]=((char *)&add_eeprom)[3];
-        bb[2]=((char *)&add_eeprom)[2];
-        bb[3]=((char *)&add_eeprom)[1];
-        bb[4]=((char *)&add_eeprom)[0];
-        leitura[1]=Send_To_Slave(1, 0x14, 5, bb);
-        PORTDbits.RD6=0;
+     add_eeprom=0;
+     do{
+          flag_exit=0;
+          for(tupla=0;tupla<(totalboard*2);tupla++)
+             {
+             SlaveBoard = (tupla / 2)+1;
+             canal = tupla % 2;
 
 
-        _delay((unsigned long)((32)*(32000000/4000.0)));
-        PROCULUS_graphic_plot(1,(leitura[0]*0.4546));
-        PROCULUS_graphic_plot(2,(leitura[1]*0.05));
-        _delay((unsigned long)((32)*(32000000/4000.0)));
-        add_eeprom+=2;
-        __asm("CLRWDT");
-        if((leitura[0]==0xFFFF)||(leitura[1]==0xFFFF))
-            {
-            break;
-            PROCULUS_OK();
-            my_delay_ms_CLRWDT(10000);
-            add_eeprom=0;
-            }
-        }
-        PROCULUS_OK();
+             bb[0]=canal;
+             bb[1]=((char *)&add_eeprom)[3];
+             bb[2]=((char *)&add_eeprom)[2];
+             bb[3]=((char *)&add_eeprom)[1];
+             bb[4]=((char *)&add_eeprom)[0];
+             leitura[tupla]=Send_To_Slave(SlaveBoard, 0x14, 5, bb);
 
-
+             if((leitura[0]==0xFFFF)&&(tupla==0))
+               {
+               flag_exit=1;
+               break;
+               }
+             __asm("CLRWDT");
+             }
+          _delay((unsigned long)((32)*(32000000/4000.0)));
+          for(char i=0;i<totalboard*2;i++)
+             {
+             switch(i)
+                   {
+                   case 0: PROCULUS_graphic_plot(i+1,(leitura[i]*0.4546));break;
+                   case 1: PROCULUS_graphic_plot(i+1,(leitura[i]*0.05));break;
+                  default: PROCULUS_graphic_plot(i+1,(leitura[i]*1.0));break;
+                   }
+             }
+          add_eeprom+=2;
+       }while(flag_exit==0);
+       PROCULUS_OK();
 }

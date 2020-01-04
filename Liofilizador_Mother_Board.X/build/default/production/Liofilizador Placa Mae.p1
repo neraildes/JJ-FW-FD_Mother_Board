@@ -599,21 +599,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7 ./util.h
 [; ;./util.h: 7: void clear_screen(void);
 [v _clear_screen `(v ~T0 @X0 0 ef ]
-"2057 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2057:     struct {
-[s S76 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S76 . TRISD0 TRISD1 TRISD2 TRISD3 TRISD4 TRISD5 TRISD6 TRISD7 ]
-"2067
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2067:     struct {
-[s S77 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S77 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
-"2056
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2056: typedef union {
-[u S75 `S76 1 `S77 1 ]
-[n S75 . . . ]
-"2078
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2078: extern volatile TRISDbits_t TRISDbits __attribute__((address(0xF95)));
-[v _TRISDbits `VS75 ~T0 @X0 0 e@3989 ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -8591,135 +8576,171 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 790 ]
 }
 "3250
-[; ;Liofilizador Placa Mae.c: 3250: void Teste24cXXXX(void){
+[; ;Liofilizador Placa Mae.c: 3250: void Teste24cXXXX(void)
 [v _Teste24cXXXX `(v ~T0 @X0 1 ef ]
+"3251
+[; ;Liofilizador Placa Mae.c: 3251: {
 {
 [e :U _Teste24cXXXX ]
 [f ]
 "3255
-[; ;Liofilizador Placa Mae.c: 3255:      char flag_exit;
-[v _flag_exit `uc ~T0 @X0 1 a ]
-"3256
-[; ;Liofilizador Placa Mae.c: 3256:      unsigned long add_eeprom=0;
-[v _add_eeprom `ul ~T0 @X0 1 a ]
-[e = _add_eeprom -> -> -> 0 `i `l `ul ]
-"3257
-[; ;Liofilizador Placa Mae.c: 3257:      int leitura[7];
-[v _leitura `i ~T0 @X0 -> 7 `i a ]
-"3258
-[; ;Liofilizador Placa Mae.c: 3258:      char bb[5];
+[; ;Liofilizador Placa Mae.c: 3255:      char bb[5];
 [v _bb `uc ~T0 @X0 -> 5 `i a ]
+"3256
+[; ;Liofilizador Placa Mae.c: 3256:      char SlaveBoard;
+[v _SlaveBoard `uc ~T0 @X0 1 a ]
+"3257
+[; ;Liofilizador Placa Mae.c: 3257:      char canal;
+[v _canal `uc ~T0 @X0 1 a ]
+"3258
+[; ;Liofilizador Placa Mae.c: 3258:      char tupla;
+[v _tupla `uc ~T0 @X0 1 a ]
+"3259
+[; ;Liofilizador Placa Mae.c: 3259:      unsigned long add_eeprom;
+[v _add_eeprom `ul ~T0 @X0 1 a ]
 "3260
-[; ;Liofilizador Placa Mae.c: 3260:      PROCULUS_Show_Screen(35);
-[e ( _PROCULUS_Show_Screen (1 -> -> 35 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3260:      char flag_exit;
+[v _flag_exit `uc ~T0 @X0 1 a ]
 "3261
-[; ;Liofilizador Placa Mae.c: 3261:      PROCULUS_OK();
-[e ( _PROCULUS_OK ..  ]
+[; ;Liofilizador Placa Mae.c: 3261:      int leitura[14];
+[v _leitura `i ~T0 @X0 -> 14 `i a ]
 "3263
-[; ;Liofilizador Placa Mae.c: 3263:      flag_exit=0;
-[e = _flag_exit -> -> 0 `i `uc ]
-"3265
-[; ;Liofilizador Placa Mae.c: 3265:      while(1)
-[e :U 798 ]
-"3266
-[; ;Liofilizador Placa Mae.c: 3266:         {
-{
-"3267
-[; ;Liofilizador Placa Mae.c: 3267:         TRISDbits.RD6=0;
-[e = . . _TRISDbits 1 6 -> -> 0 `i `uc ]
-"3268
-[; ;Liofilizador Placa Mae.c: 3268:         PORTDbits.RD6=1;
-[e = . . _PORTDbits 0 6 -> -> 1 `i `uc ]
-"3269
-[; ;Liofilizador Placa Mae.c: 3269:         bb[0]=0;
-[e = *U + &U _bb * -> -> -> 0 `i `ui `ux -> -> # *U &U _bb `ui `ux -> -> 0 `i `uc ]
-"3270
-[; ;Liofilizador Placa Mae.c: 3270:         bb[1]=((char *)&add_eeprom)[3];
-[e = *U + &U _bb * -> -> -> 1 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 3 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3271
-[; ;Liofilizador Placa Mae.c: 3271:         bb[2]=((char *)&add_eeprom)[2];
-[e = *U + &U _bb * -> -> -> 2 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 2 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3272
-[; ;Liofilizador Placa Mae.c: 3272:         bb[3]=((char *)&add_eeprom)[1];
-[e = *U + &U _bb * -> -> -> 3 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 1 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3273
-[; ;Liofilizador Placa Mae.c: 3273:         bb[4]=((char *)&add_eeprom)[0];
-[e = *U + &U _bb * -> -> -> 4 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 0 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3274
-[; ;Liofilizador Placa Mae.c: 3274:         leitura[0]=Send_To_Slave(1, 0x14, 5, bb);
-[e = *U + &U _leitura * -> -> -> 0 `i `ui `ux -> -> # *U &U _leitura `ui `ux ( _Send_To_Slave (4 , , , -> -> 1 `i `uc -> -> 20 `i `uc -> -> 5 `i `uc &U _bb ]
-"3276
-[; ;Liofilizador Placa Mae.c: 3276:         bb[0]=1;
-[e = *U + &U _bb * -> -> -> 0 `i `ui `ux -> -> # *U &U _bb `ui `ux -> -> 1 `i `uc ]
-"3277
-[; ;Liofilizador Placa Mae.c: 3277:         bb[1]=((char *)&add_eeprom)[3];
-[e = *U + &U _bb * -> -> -> 1 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 3 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3278
-[; ;Liofilizador Placa Mae.c: 3278:         bb[2]=((char *)&add_eeprom)[2];
-[e = *U + &U _bb * -> -> -> 2 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 2 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3279
-[; ;Liofilizador Placa Mae.c: 3279:         bb[3]=((char *)&add_eeprom)[1];
-[e = *U + &U _bb * -> -> -> 3 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 1 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3280
-[; ;Liofilizador Placa Mae.c: 3280:         bb[4]=((char *)&add_eeprom)[0];
-[e = *U + &U _bb * -> -> -> 4 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 0 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
-"3281
-[; ;Liofilizador Placa Mae.c: 3281:         leitura[1]=Send_To_Slave(1, 0x14, 5, bb);
-[e = *U + &U _leitura * -> -> -> 1 `i `ui `ux -> -> # *U &U _leitura `ui `ux ( _Send_To_Slave (4 , , , -> -> 1 `i `uc -> -> 20 `i `uc -> -> 5 `i `uc &U _bb ]
-"3282
-[; ;Liofilizador Placa Mae.c: 3282:         PORTDbits.RD6=0;
-[e = . . _PORTDbits 0 6 -> -> 0 `i `uc ]
-"3285
-[; ;Liofilizador Placa Mae.c: 3285:         _delay((unsigned long)((32)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 32 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"3286
-[; ;Liofilizador Placa Mae.c: 3286:         PROCULUS_graphic_plot(1,(leitura[0]*0.4546));
-[e ( _PROCULUS_graphic_plot (2 , -> -> 1 `i `uc -> * -> *U + &U _leitura * -> -> -> 0 `i `ui `ux -> -> # *U &U _leitura `ui `ux `d .0.4546 `ui ]
-"3287
-[; ;Liofilizador Placa Mae.c: 3287:         PROCULUS_graphic_plot(2,(leitura[1]*0.05));
-[e ( _PROCULUS_graphic_plot (2 , -> -> 2 `i `uc -> * -> *U + &U _leitura * -> -> -> 1 `i `ui `ux -> -> # *U &U _leitura `ui `ux `d .0.05 `ui ]
-"3288
-[; ;Liofilizador Placa Mae.c: 3288:         _delay((unsigned long)((32)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 32 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"3289
-[; ;Liofilizador Placa Mae.c: 3289:         add_eeprom+=2;
-[e =+ _add_eeprom -> -> -> 2 `i `l `ul ]
-"3290
-[; ;Liofilizador Placa Mae.c: 3290:         __asm("CLRWDT");
-[; <" CLRWDT ;# ">
-"3291
-[; ;Liofilizador Placa Mae.c: 3291:         if((leitura[0]==0xFFFF)||(leitura[1]==0xFFFF))
-[e $ ! || == -> *U + &U _leitura * -> -> -> 0 `i `ui `ux -> -> # *U &U _leitura `ui `ux `ui -> 65535 `ui == -> *U + &U _leitura * -> -> -> 1 `i `ui `ux -> -> # *U &U _leitura `ui `ux `ui -> 65535 `ui 800  ]
-"3292
-[; ;Liofilizador Placa Mae.c: 3292:             {
-{
-"3293
-[; ;Liofilizador Placa Mae.c: 3293:             break;
-[e $U 799  ]
-"3294
-[; ;Liofilizador Placa Mae.c: 3294:             PROCULUS_OK();
+[; ;Liofilizador Placa Mae.c: 3263:      PROCULUS_OK();
 [e ( _PROCULUS_OK ..  ]
-"3295
-[; ;Liofilizador Placa Mae.c: 3295:             my_delay_ms_CLRWDT(10000);
-[e ( _my_delay_ms_CLRWDT (1 -> -> 10000 `i `l ]
-"3296
-[; ;Liofilizador Placa Mae.c: 3296:             add_eeprom=0;
+"3264
+[; ;Liofilizador Placa Mae.c: 3264:      add_eeprom=0;
 [e = _add_eeprom -> -> -> 0 `i `l `ul ]
-"3297
-[; ;Liofilizador Placa Mae.c: 3297:             }
-}
-[e :U 800 ]
-"3298
-[; ;Liofilizador Placa Mae.c: 3298:         }
-}
-[e :U 797 ]
-[e $U 798  ]
+"3265
+[; ;Liofilizador Placa Mae.c: 3265:      do{
 [e :U 799 ]
+{
+"3266
+[; ;Liofilizador Placa Mae.c: 3266:           flag_exit=0;
+[e = _flag_exit -> -> 0 `i `uc ]
+"3267
+[; ;Liofilizador Placa Mae.c: 3267:           for(tupla=0;tupla<(totalboard*2);tupla++)
+{
+[e = _tupla -> -> 0 `i `uc ]
+[e $U 803  ]
+[e :U 800 ]
+"3268
+[; ;Liofilizador Placa Mae.c: 3268:              {
+{
+"3269
+[; ;Liofilizador Placa Mae.c: 3269:              SlaveBoard = (tupla / 2)+1;
+[e = _SlaveBoard -> + / -> _tupla `i -> 2 `i -> 1 `i `uc ]
+"3270
+[; ;Liofilizador Placa Mae.c: 3270:              canal = tupla % 2;
+[e = _canal -> % -> _tupla `i -> 2 `i `uc ]
+"3273
+[; ;Liofilizador Placa Mae.c: 3273:              bb[0]=canal;
+[e = *U + &U _bb * -> -> -> 0 `i `ui `ux -> -> # *U &U _bb `ui `ux _canal ]
+"3274
+[; ;Liofilizador Placa Mae.c: 3274:              bb[1]=((char *)&add_eeprom)[3];
+[e = *U + &U _bb * -> -> -> 1 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 3 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
+"3275
+[; ;Liofilizador Placa Mae.c: 3275:              bb[2]=((char *)&add_eeprom)[2];
+[e = *U + &U _bb * -> -> -> 2 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 2 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
+"3276
+[; ;Liofilizador Placa Mae.c: 3276:              bb[3]=((char *)&add_eeprom)[1];
+[e = *U + &U _bb * -> -> -> 3 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 1 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
+"3277
+[; ;Liofilizador Placa Mae.c: 3277:              bb[4]=((char *)&add_eeprom)[0];
+[e = *U + &U _bb * -> -> -> 4 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_eeprom `*uc * -> -> 0 `i `x -> -> # *U -> &U _add_eeprom `*uc `i `x ]
+"3278
+[; ;Liofilizador Placa Mae.c: 3278:              leitura[tupla]=Send_To_Slave(SlaveBoard, 0x14, 5, bb);
+[e = *U + &U _leitura * -> _tupla `ux -> -> # *U &U _leitura `ui `ux ( _Send_To_Slave (4 , , , _SlaveBoard -> -> 20 `i `uc -> -> 5 `i `uc &U _bb ]
+"3280
+[; ;Liofilizador Placa Mae.c: 3280:              if((leitura[0]==0xFFFF)&&(tupla==0))
+[e $ ! && == -> *U + &U _leitura * -> -> -> 0 `i `ui `ux -> -> # *U &U _leitura `ui `ux `ui -> 65535 `ui == -> _tupla `i -> 0 `i 804  ]
+"3281
+[; ;Liofilizador Placa Mae.c: 3281:                {
+{
+"3282
+[; ;Liofilizador Placa Mae.c: 3282:                flag_exit=1;
+[e = _flag_exit -> -> 1 `i `uc ]
+"3283
+[; ;Liofilizador Placa Mae.c: 3283:                break;
+[e $U 801  ]
+"3284
+[; ;Liofilizador Placa Mae.c: 3284:                }
+}
+[e :U 804 ]
+"3285
+[; ;Liofilizador Placa Mae.c: 3285:              __asm("CLRWDT");
+[; <" CLRWDT ;# ">
+"3286
+[; ;Liofilizador Placa Mae.c: 3286:              }
+}
+[e ++ _tupla -> -> 1 `i `uc ]
+[e :U 803 ]
+[e $ < -> _tupla `i * -> _totalboard `i -> 2 `i 800  ]
+[e :U 801 ]
+}
+"3287
+[; ;Liofilizador Placa Mae.c: 3287:           _delay((unsigned long)((32)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 32 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"3288
+[; ;Liofilizador Placa Mae.c: 3288:           for(char i=0;i<totalboard*2;i++)
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $U 808  ]
+[e :U 805 ]
+"3289
+[; ;Liofilizador Placa Mae.c: 3289:              {
+{
+"3290
+[; ;Liofilizador Placa Mae.c: 3290:              switch(i)
+[e $U 810  ]
+"3291
+[; ;Liofilizador Placa Mae.c: 3291:                    {
+{
+"3292
+[; ;Liofilizador Placa Mae.c: 3292:                    case 0: PROCULUS_graphic_plot(i+1,(leitura[i]*0.4546));break;
+[e :U 811 ]
+[e ( _PROCULUS_graphic_plot (2 , -> + -> _i `i -> 1 `i `uc -> * -> *U + &U _leitura * -> _i `ux -> -> # *U &U _leitura `ui `ux `d .0.4546 `ui ]
+[e $U 809  ]
+"3293
+[; ;Liofilizador Placa Mae.c: 3293:                    case 1: PROCULUS_graphic_plot(i+1,(leitura[i]*0.05));break;
+[e :U 812 ]
+[e ( _PROCULUS_graphic_plot (2 , -> + -> _i `i -> 1 `i `uc -> * -> *U + &U _leitura * -> _i `ux -> -> # *U &U _leitura `ui `ux `d .0.05 `ui ]
+[e $U 809  ]
+"3294
+[; ;Liofilizador Placa Mae.c: 3294:                   default: PROCULUS_graphic_plot(i+1,(leitura[i]*1.0));break;
+[e :U 813 ]
+[e ( _PROCULUS_graphic_plot (2 , -> + -> _i `i -> 1 `i `uc -> * -> *U + &U _leitura * -> _i `ux -> -> # *U &U _leitura `ui `ux `d .1.0 `ui ]
+[e $U 809  ]
+"3295
+[; ;Liofilizador Placa Mae.c: 3295:                    }
+}
+[e $U 809  ]
+[e :U 810 ]
+[e [\ -> _i `i , $ -> 0 `i 811
+ , $ -> 1 `i 812
+ 813 ]
+[e :U 809 ]
+"3296
+[; ;Liofilizador Placa Mae.c: 3296:              }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 808 ]
+[e $ < -> _i `i * -> _totalboard `i -> 2 `i 805  ]
+[e :U 806 ]
+}
+"3297
+[; ;Liofilizador Placa Mae.c: 3297:           add_eeprom+=2;
+[e =+ _add_eeprom -> -> -> 2 `i `l `ul ]
+"3298
+[; ;Liofilizador Placa Mae.c: 3298:        }while(flag_exit==0);
+}
+[e $ == -> _flag_exit `i -> 0 `i 799  ]
+[e :U 798 ]
 "3299
-[; ;Liofilizador Placa Mae.c: 3299:         PROCULUS_OK();
+[; ;Liofilizador Placa Mae.c: 3299:        PROCULUS_OK();
 [e ( _PROCULUS_OK ..  ]
-"3302
-[; ;Liofilizador Placa Mae.c: 3302: }
+"3300
+[; ;Liofilizador Placa Mae.c: 3300: }
 [e :UE 796 ]
 }
 [a 42C 87 32 48 120 0 ]
