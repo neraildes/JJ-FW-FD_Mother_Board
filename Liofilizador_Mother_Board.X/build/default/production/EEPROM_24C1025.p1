@@ -574,17 +574,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _Delay_Led_Memory -> -> 5 `i `ui ]
 "24
 [; ;EEPROM_24C1025.c: 24:      if(mem_add>0x1FFFF) return;
-[e $ ! > _mem_add -> -> 131071 `l `ul 284  ]
-[e $UE 283  ]
-[e :U 284 ]
+[e $ ! > _mem_add -> -> 131071 `l `ul 277  ]
+[e $UE 276  ]
+[e :U 277 ]
 "26
 [; ;EEPROM_24C1025.c: 26:      if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 285  ]
+[e $ ! > _mem_add -> -> 65535 `ui `ul 278  ]
 [e = _range -> -> 8 `i `uc ]
-[e $U 286  ]
-[e :U 285 ]
+[e $U 279  ]
+[e :U 278 ]
 [e = _range -> -> 0 `i `uc ]
-[e :U 286 ]
+[e :U 279 ]
 "27
 [; ;EEPROM_24C1025.c: 27:      ctrl=chip_add;
 [e = _ctrl _chip_add ]
@@ -613,19 +613,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;EEPROM_24C1025.c: 36:      for(count=0;count<(sizedata-1);count++)
 {
 [e = _count -> -> 0 `i `uc ]
-[e $U 290  ]
-[e :U 287 ]
+[e $U 283  ]
+[e :U 280 ]
 "37
 [; ;EEPROM_24C1025.c: 37:           {
 {
 "38
 [; ;EEPROM_24C1025.c: 38:           if(mem_add>0x1FFFF) return;
-[e $ ! > _mem_add -> -> 131071 `l `ul 291  ]
-[e $UE 283  ]
-[e :U 291 ]
+[e $ ! > _mem_add -> -> 131071 `l `ul 284  ]
+[e $UE 276  ]
+[e :U 284 ]
 "39
 [; ;EEPROM_24C1025.c: 39:           if((mem_add+1)%128==0)
-[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 292  ]
+[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 285  ]
 "40
 [; ;EEPROM_24C1025.c: 40:             {
 {
@@ -646,12 +646,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
 "47
 [; ;EEPROM_24C1025.c: 47:             if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 293  ]
+[e $ ! > _mem_add -> -> 65535 `ui `ul 286  ]
 [e = _range -> -> 8 `i `uc ]
-[e $U 294  ]
-[e :U 293 ]
+[e $U 287  ]
+[e :U 286 ]
 [e = _range -> -> 0 `i `uc ]
-[e :U 294 ]
+[e :U 287 ]
 "48
 [; ;EEPROM_24C1025.c: 48:             ctrl=chip_add;
 [e = _ctrl _chip_add ]
@@ -679,10 +679,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "57
 [; ;EEPROM_24C1025.c: 57:             }
 }
-[e $U 295  ]
+[e $U 288  ]
 "58
 [; ;EEPROM_24C1025.c: 58:           else
-[e :U 292 ]
+[e :U 285 ]
 "59
 [; ;EEPROM_24C1025.c: 59:             {
 {
@@ -698,14 +698,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "63
 [; ;EEPROM_24C1025.c: 63:             }
 }
-[e :U 295 ]
+[e :U 288 ]
 "64
 [; ;EEPROM_24C1025.c: 64:      }
 }
 [e ++ _count -> -> 1 `i `uc ]
-[e :U 290 ]
-[e $ < -> _count `i - -> _sizedata `i -> 1 `i 287  ]
-[e :U 288 ]
+[e :U 283 ]
+[e $ < -> _count `i - -> _sizedata `i -> 1 `i 280  ]
+[e :U 281 ]
 }
 "65
 [; ;EEPROM_24C1025.c: 65:      I2C_Master_Write(*data);
@@ -714,11 +714,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;EEPROM_24C1025.c: 66:      I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
 "67
-[; ;EEPROM_24C1025.c: 67:      _delay((unsigned long)((650)*(32000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 650 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;EEPROM_24C1025.c: 67:      _delay((unsigned long)((5)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "68
 [; ;EEPROM_24C1025.c: 68: }
-[e :UE 283 ]
+[e :UE 276 ]
 }
 "74
 [; ;EEPROM_24C1025.c: 74: void EEPROM_24C1025_Read_Buffer(unsigned char chip_add,
@@ -758,17 +758,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _Delay_Led_Memory -> -> 5 `i `ui ]
 "85
 [; ;EEPROM_24C1025.c: 85:      if(mem_add>0x1FFFF) return;
-[e $ ! > _mem_add -> -> 131071 `l `ul 297  ]
-[e $UE 296  ]
-[e :U 297 ]
+[e $ ! > _mem_add -> -> 131071 `l `ul 290  ]
+[e $UE 289  ]
+[e :U 290 ]
 "87
 [; ;EEPROM_24C1025.c: 87:      if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 298  ]
+[e $ ! > _mem_add -> -> 65535 `ui `ul 291  ]
 [e = _range -> -> 8 `i `uc ]
-[e $U 299  ]
-[e :U 298 ]
+[e $U 292  ]
+[e :U 291 ]
 [e = _range -> -> 0 `i `uc ]
-[e :U 299 ]
+[e :U 292 ]
 "88
 [; ;EEPROM_24C1025.c: 88:      ctrl=chip_add;
 [e = _ctrl _chip_add ]
@@ -807,19 +807,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [v _cnt `uc ~T0 @X0 1 a ]
 [e = _cnt -> -> 0 `i `uc ]
-[e $U 303  ]
-[e :U 300 ]
+[e $U 296  ]
+[e :U 293 ]
 "102
 [; ;EEPROM_24C1025.c: 102:         {
 {
 "103
 [; ;EEPROM_24C1025.c: 103:            if(mem_add>0x1FFFF) break;
-[e $ ! > _mem_add -> -> 131071 `l `ul 304  ]
-[e $U 301  ]
-[e :U 304 ]
+[e $ ! > _mem_add -> -> 131071 `l `ul 297  ]
+[e $U 294  ]
+[e :U 297 ]
 "104
 [; ;EEPROM_24C1025.c: 104:            if((mem_add+1)%128==0)
-[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 305  ]
+[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 298  ]
 "105
 [; ;EEPROM_24C1025.c: 105:              {
 {
@@ -840,12 +840,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
 "112
 [; ;EEPROM_24C1025.c: 112:              if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 306  ]
+[e $ ! > _mem_add -> -> 65535 `ui `ul 299  ]
 [e = _range -> -> 8 `i `uc ]
-[e $U 307  ]
-[e :U 306 ]
+[e $U 300  ]
+[e :U 299 ]
 [e = _range -> -> 0 `i `uc ]
-[e :U 307 ]
+[e :U 300 ]
 "113
 [; ;EEPROM_24C1025.c: 113:              ctrl=chip_add;
 [e = _ctrl _chip_add ]
@@ -882,10 +882,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "125
 [; ;EEPROM_24C1025.c: 125:              }
 }
-[e $U 308  ]
+[e $U 301  ]
 "126
 [; ;EEPROM_24C1025.c: 126:            else
-[e :U 305 ]
+[e :U 298 ]
 "127
 [; ;EEPROM_24C1025.c: 127:              {
 {
@@ -901,14 +901,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "131
 [; ;EEPROM_24C1025.c: 131:              }
 }
-[e :U 308 ]
+[e :U 301 ]
 "132
 [; ;EEPROM_24C1025.c: 132:         }
 }
 [e ++ _cnt -> -> 1 `i `uc ]
-[e :U 303 ]
-[e $ < -> _cnt `i -> _sizedata `i 300  ]
-[e :U 301 ]
+[e :U 296 ]
+[e $ < -> _cnt `i -> _sizedata `i 293  ]
+[e :U 294 ]
 }
 "133
 [; ;EEPROM_24C1025.c: 133:         I2C_Master_Read(0);
@@ -921,7 +921,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 650 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
 "136
 [; ;EEPROM_24C1025.c: 136: }
-[e :UE 296 ]
+[e :UE 289 ]
 }
 "142
 [; ;EEPROM_24C1025.c: 142: void EEPROM_24C1025_Write_Str(unsigned char chip_add, unsigned long mem_add,char *data){
@@ -941,17 +941,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _ctrl `uc ~T0 @X0 1 a ]
 "146
 [; ;EEPROM_24C1025.c: 146:      if(mem_add>0x1FFFF) return;
-[e $ ! > _mem_add -> -> 131071 `l `ul 310  ]
-[e $UE 309  ]
-[e :U 310 ]
+[e $ ! > _mem_add -> -> 131071 `l `ul 303  ]
+[e $UE 302  ]
+[e :U 303 ]
 "148
 [; ;EEPROM_24C1025.c: 148:      if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 311  ]
+[e $ ! > _mem_add -> -> 65535 `ui `ul 304  ]
 [e = _range -> -> 8 `i `uc ]
-[e $U 312  ]
-[e :U 311 ]
+[e $U 305  ]
+[e :U 304 ]
 [e = _range -> -> 0 `i `uc ]
-[e :U 312 ]
+[e :U 305 ]
 "149
 [; ;EEPROM_24C1025.c: 149:      ctrl=chip_add;
 [e = _ctrl _chip_add ]
@@ -978,19 +978,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 0 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
 "158
 [; ;EEPROM_24C1025.c: 158:      while(*data)
-[e $U 313  ]
-[e :U 314 ]
+[e $U 306  ]
+[e :U 307 ]
 "159
 [; ;EEPROM_24C1025.c: 159:           {
 {
 "160
 [; ;EEPROM_24C1025.c: 160:           if(mem_add>0x1FFFF) return;
-[e $ ! > _mem_add -> -> 131071 `l `ul 316  ]
-[e $UE 309  ]
-[e :U 316 ]
+[e $ ! > _mem_add -> -> 131071 `l `ul 309  ]
+[e $UE 302  ]
+[e :U 309 ]
 "161
 [; ;EEPROM_24C1025.c: 161:           if((mem_add+1)%128==0)
-[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 317  ]
+[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 310  ]
 "162
 [; ;EEPROM_24C1025.c: 162:             {
 {
@@ -1011,12 +1011,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
 "169
 [; ;EEPROM_24C1025.c: 169:             if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 318  ]
+[e $ ! > _mem_add -> -> 65535 `ui `ul 311  ]
 [e = _range -> -> 8 `i `uc ]
-[e $U 319  ]
-[e :U 318 ]
+[e $U 312  ]
+[e :U 311 ]
 [e = _range -> -> 0 `i `uc ]
-[e :U 319 ]
+[e :U 312 ]
 "170
 [; ;EEPROM_24C1025.c: 170:             ctrl=chip_add;
 [e = _ctrl _chip_add ]
@@ -1044,10 +1044,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "179
 [; ;EEPROM_24C1025.c: 179:             }
 }
-[e $U 320  ]
+[e $U 313  ]
 "180
 [; ;EEPROM_24C1025.c: 180:           else
-[e :U 317 ]
+[e :U 310 ]
 "181
 [; ;EEPROM_24C1025.c: 181:             {
 {
@@ -1063,15 +1063,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "185
 [; ;EEPROM_24C1025.c: 185:             }
 }
-[e :U 320 ]
+[e :U 313 ]
 "186
 [; ;EEPROM_24C1025.c: 186:      }
 }
-[e :U 313 ]
+[e :U 306 ]
 "158
 [; ;EEPROM_24C1025.c: 158:      while(*data)
-[e $ != -> *U _data `i -> 0 `i 314  ]
-[e :U 315 ]
+[e $ != -> *U _data `i -> 0 `i 307  ]
+[e :U 308 ]
 "187
 [; ;EEPROM_24C1025.c: 187:      I2C_Master_Write(0);
 [e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
@@ -1079,11 +1079,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;EEPROM_24C1025.c: 188:      I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
 "189
-[; ;EEPROM_24C1025.c: 189:      _delay((unsigned long)((650)*(32000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 650 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;EEPROM_24C1025.c: 189:      _delay((unsigned long)((5)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "191
 [; ;EEPROM_24C1025.c: 191: }
-[e :UE 309 ]
+[e :UE 302 ]
 }
 "196
 [; ;EEPROM_24C1025.c: 196: void EEPROM_24C1025_Read_Str(unsigned char chip_add, unsigned long mem_add,char *texto){
@@ -1107,17 +1107,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _ctrl `uc ~T0 @X0 1 a ]
 "201
 [; ;EEPROM_24C1025.c: 201:      if(mem_add>0x1FFFF) return;
-[e $ ! > _mem_add -> -> 131071 `l `ul 322  ]
-[e $UE 321  ]
-[e :U 322 ]
+[e $ ! > _mem_add -> -> 131071 `l `ul 315  ]
+[e $UE 314  ]
+[e :U 315 ]
 "203
 [; ;EEPROM_24C1025.c: 203:      if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 323  ]
+[e $ ! > _mem_add -> -> 65535 `ui `ul 316  ]
 [e = _range -> -> 8 `i `uc ]
-[e $U 324  ]
-[e :U 323 ]
+[e $U 317  ]
+[e :U 316 ]
 [e = _range -> -> 0 `i `uc ]
-[e :U 324 ]
+[e :U 317 ]
 "204
 [; ;EEPROM_24C1025.c: 204:      ctrl=chip_add;
 [e = _ctrl _chip_add ]
@@ -1156,16 +1156,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _cnt -> -> 0 `i `uc ]
 "218
 [; ;EEPROM_24C1025.c: 218:      do{
-[e :U 327 ]
+[e :U 320 ]
 {
 "219
 [; ;EEPROM_24C1025.c: 219:            if(mem_add>0x1FFFF) break;
-[e $ ! > _mem_add -> -> 131071 `l `ul 328  ]
-[e $U 326  ]
-[e :U 328 ]
+[e $ ! > _mem_add -> -> 131071 `l `ul 321  ]
+[e $U 319  ]
+[e :U 321 ]
 "220
 [; ;EEPROM_24C1025.c: 220:            if((mem_add+1)%128==0)
-[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 329  ]
+[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 322  ]
 "221
 [; ;EEPROM_24C1025.c: 221:              {
 {
@@ -1186,12 +1186,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _texto * -> -> 1 `i `x -> -> # *U _texto `i `x ]
 "228
 [; ;EEPROM_24C1025.c: 228:              if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 330  ]
+[e $ ! > _mem_add -> -> 65535 `ui `ul 323  ]
 [e = _range -> -> 8 `i `uc ]
-[e $U 331  ]
-[e :U 330 ]
+[e $U 324  ]
+[e :U 323 ]
 [e = _range -> -> 0 `i `uc ]
-[e :U 331 ]
+[e :U 324 ]
 "229
 [; ;EEPROM_24C1025.c: 229:              ctrl=chip_add;
 [e = _ctrl _chip_add ]
@@ -1228,10 +1228,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "241
 [; ;EEPROM_24C1025.c: 241:              }
 }
-[e $U 332  ]
+[e $U 325  ]
 "242
 [; ;EEPROM_24C1025.c: 242:            else
-[e :U 329 ]
+[e :U 322 ]
 "243
 [; ;EEPROM_24C1025.c: 243:              {
 {
@@ -1240,9 +1240,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = *U _texto -> ( _I2C_Master_Read (1 -> -> 1 `i `us `uc ]
 "245
 [; ;EEPROM_24C1025.c: 245:              if((*texto)==0)break;
-[e $ ! == -> *U _texto `i -> 0 `i 333  ]
-[e $U 326  ]
-[e :U 333 ]
+[e $ ! == -> *U _texto `i -> 0 `i 326  ]
+[e $U 319  ]
+[e :U 326 ]
 "246
 [; ;EEPROM_24C1025.c: 246:              texto++;
 [e ++ _texto * -> -> 1 `i `x -> -> # *U _texto `i `x ]
@@ -1252,12 +1252,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "248
 [; ;EEPROM_24C1025.c: 248:              }
 }
-[e :U 332 ]
+[e :U 325 ]
 "249
 [; ;EEPROM_24C1025.c: 249:        }while((cnt++)<64);
 }
-[e $ < -> ++ _cnt -> -> 1 `i `uc `i -> 64 `i 327  ]
-[e :U 326 ]
+[e $ < -> ++ _cnt -> -> 1 `i `uc `i -> 64 `i 320  ]
+[e :U 319 ]
 "251
 [; ;EEPROM_24C1025.c: 251:      I2C_Master_Read(0);
 [e ( _I2C_Master_Read (1 -> -> 0 `i `us ]
@@ -1269,7 +1269,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 650 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
 "254
 [; ;EEPROM_24C1025.c: 254: }
-[e :UE 321 ]
+[e :UE 314 ]
 }
 "262
 [; ;EEPROM_24C1025.c: 262: void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char data){
@@ -1285,7 +1285,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _EEPROM_24C1025_Write_Buffer (4 , , , _chip_add _mem_add -> -> 1 `i `uc &U _data ]
 "264
 [; ;EEPROM_24C1025.c: 264: }
-[e :UE 334 ]
+[e :UE 327 ]
 }
 "267
 [; ;EEPROM_24C1025.c: 267: unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem_add){
@@ -1304,10 +1304,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "270
 [; ;EEPROM_24C1025.c: 270:     return data;
 [e ) -> _data `uc ]
-[e $UE 335  ]
+[e $UE 328  ]
 "271
 [; ;EEPROM_24C1025.c: 271: }
-[e :UE 335 ]
+[e :UE 328 ]
 }
 "273
 [; ;EEPROM_24C1025.c: 273: void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data){
@@ -1332,7 +1332,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _EEPROM_24C1025_Write_Buffer (4 , , , _chip_add _mem_add -> -> 2 `i `uc &U _local ]
 "278
 [; ;EEPROM_24C1025.c: 278: }
-[e :UE 336 ]
+[e :UE 329 ]
 }
 "281
 [; ;EEPROM_24C1025.c: 281: unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_add){
@@ -1351,10 +1351,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "284
 [; ;EEPROM_24C1025.c: 284:     return (data[0]<<8)+data[1];
 [e ) -> + << -> *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux `i -> 8 `i -> *U + &U _data * -> -> -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux `i `ui ]
-[e $UE 337  ]
+[e $UE 330  ]
 "285
 [; ;EEPROM_24C1025.c: 285: }
-[e :UE 337 ]
+[e :UE 330 ]
 }
 "288
 [; ;EEPROM_24C1025.c: 288: void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value){
@@ -1371,9 +1371,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;EEPROM_24C1025.c: 290:      for(mem_add=0;mem_add<=0x3FF;mem_add+=2)
 {
 [e = _mem_add -> -> -> 0 `i `l `ul ]
-[e $ <= _mem_add -> -> -> 1023 `i `l `ul 339  ]
-[e $U 340  ]
-[e :U 339 ]
+[e $ <= _mem_add -> -> -> 1023 `i `l `ul 332  ]
+[e $U 333  ]
+[e :U 332 ]
 "291
 [; ;EEPROM_24C1025.c: 291:         {
 {
@@ -1387,10 +1387,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;EEPROM_24C1025.c: 294:         }
 }
 [e =+ _mem_add -> -> -> 2 `i `l `ul ]
-[e $ <= _mem_add -> -> -> 1023 `i `l `ul 339  ]
-[e :U 340 ]
+[e $ <= _mem_add -> -> -> 1023 `i `l `ul 332  ]
+[e :U 333 ]
 }
 "295
 [; ;EEPROM_24C1025.c: 295: }
-[e :UE 338 ]
+[e :UE 331 ]
 }

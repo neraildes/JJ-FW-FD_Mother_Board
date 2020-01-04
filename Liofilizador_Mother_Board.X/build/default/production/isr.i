@@ -4689,8 +4689,8 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
 
     if(PIR1bits.RCIF)
         {
-        TRISDbits.RD5=0;
-        PORTDbits.RD5=1;
+
+
         if(statusgen.flag_usart_rx==0)
            {
            statusgen.flag_usart_rx=1;
@@ -4715,8 +4715,8 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
         {
             if (PIR1bits.RCIF)
             {
-                PORTDbits.RD5=0;
-                PORTDbits.RD5=1;
+
+
                 (*pointer)=RCREG;
                 if(count<32+10 -1)
                    {
@@ -4732,7 +4732,7 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
 
         }
 
-        PORTDbits.RD5=0;
+
 
         if(RCSTAbits.OERR)
            {

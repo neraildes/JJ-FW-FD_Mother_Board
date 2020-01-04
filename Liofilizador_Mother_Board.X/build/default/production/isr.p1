@@ -40,44 +40,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2596
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2596: extern volatile PIR1bits_t PIR1bits __attribute__((address(0xF9E)));
 [v _PIR1bits `VS93 ~T0 @X0 0 e@3998 ]
-"2057
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2057:     struct {
-[s S76 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S76 . TRISD0 TRISD1 TRISD2 TRISD3 TRISD4 TRISD5 TRISD6 TRISD7 ]
-"2067
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2067:     struct {
-[s S77 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S77 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
-"2056
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2056: typedef union {
-[u S75 `S76 1 `S77 1 ]
-[n S75 . . . ]
-"2078
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2078: extern volatile TRISDbits_t TRISDbits __attribute__((address(0xF95)));
-[v _TRISDbits `VS75 ~T0 @X0 0 e@3989 ]
-"541
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 541:     struct {
-[s S27 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S27 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
-"551
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 551:     struct {
-[s S28 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S28 . PSP0 PSP1 PSP2 PSP3 PSP4 PSP5 PSP6 PSP7 ]
-"561
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 561:     struct {
-[s S29 :5 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S29 . . P1B P1C P1D ]
-"567
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 567:     struct {
-[s S30 :7 `uc 1 :1 `uc 1 ]
-[n S30 . . SS2 ]
-"540
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 540: typedef union {
-[u S26 `S27 1 `S28 1 `S29 1 `S30 1 ]
-[n S26 . . . . . ]
-"572
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 572: extern volatile PORTDbits_t PORTDbits __attribute__((address(0xF83)));
-[v _PORTDbits `VS26 ~T0 @X0 0 e@3971 ]
 "10 isr.c
 [; ;isr.c: 10: extern volatile unsigned char usart_buffer[32+10];
 [v _usart_buffer `Vuc ~T0 @X0 -> 0 `x e ]
@@ -741,12 +703,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "75
 [; ;isr.c: 75:         {
 {
-"76
-[; ;isr.c: 76:         TRISDbits.RD5=0;
-[e = . . _TRISDbits 1 5 -> -> 0 `i `uc ]
-"77
-[; ;isr.c: 77:         PORTDbits.RD5=1;
-[e = . . _PORTDbits 0 5 -> -> 1 `i `uc ]
 "78
 [; ;isr.c: 78:         if(statusgen.flag_usart_rx==0)
 [e $ ! == -> . _statusgen 0 `i -> 0 `i 281  ]
@@ -830,12 +786,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "101
 [; ;isr.c: 101:             {
 {
-"102
-[; ;isr.c: 102:                 PORTDbits.RD5=0;
-[e = . . _PORTDbits 0 5 -> -> 0 `i `uc ]
-"103
-[; ;isr.c: 103:                 PORTDbits.RD5=1;
-[e = . . _PORTDbits 0 5 -> -> 1 `i `uc ]
 "104
 [; ;isr.c: 104:                 (*pointer)=RCREG;
 [e = *U _pointer _RCREG ]
@@ -883,9 +833,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;isr.c: 98:         while(tempo)
 [e $ != _tempo -> -> 0 `i `ui 288  ]
 [e :U 289 ]
-"119
-[; ;isr.c: 119:         PORTDbits.RD5=0;
-[e = . . _PORTDbits 0 5 -> -> 0 `i `uc ]
 "121
 [; ;isr.c: 121:         if(RCSTAbits.OERR)
 [e $ ! != -> . . _RCSTAbits 0 1 `i -> 0 `i 293  ]

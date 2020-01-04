@@ -285,8 +285,7 @@ void main(void)
      
      
      
-     
-     
+
 
      
      
@@ -795,11 +794,8 @@ void main(void)
 
                       //------------INTERPRETA COMANDO DO MICROCOMPUTADOR-------------------- 
                       if(flag_usart_rx)
-                         { 
-                         TRISDbits.RD6=0; //Fix Apagar debug
-                         PORTDbits.RD6=1;                                            
+                         {          
                          Comando_Protocolo_Serial(); 
-                         PORTDbits.RD6=0;                             
                          flag_recomunication=TRUE;
                          }                    
                       
@@ -3255,56 +3251,54 @@ void Teste24cXXXX(void){
     /*--------------------------------------------------------------------------
      *                  A R E A    D E    T E S T E
      -------------------------------------------------------------------------*/ 
+     #define MAXCHANNEL 7
+     char flag_exit;
+     unsigned long add_eeprom=0;
+     int  leitura[MAXCHANNEL];
+     char bb[5]; 
      
-          PROCULUS_Show_Screen(35);
-          PROCULUS_OK();
-          {
-             #define BUFFER_GRAFICO 128  
-             int buffer[BUFFER_GRAFICO];  
-             int valorLido;
-             char bb[5];     
-             char flag_exit;
-             
-             flag_exit=FALSE;
-             unsigned long add_eeprom=0;
-             
-             while(1)
-                {         
+     PROCULUS_Show_Screen(35);
+     PROCULUS_OK();
+          
+     flag_exit=FALSE;
 
-                  my_delay_ms_CLRWDT(50);
-                  for(char i=0;i<BUFFER_GRAFICO;i++)
-                     {  
-                     bb[0]=0;
-                     bb[1]=High (add_eeprom);
-                     bb[2]=Lower(add_eeprom);
-                     bb[3]=Hi   (add_eeprom);
-                     bb[4]=Lo   (add_eeprom);                       
-                     buffer[i]=Send_To_Slave(1, COMMAND_EEE_R_INT, 5, bb);
-                     if(buffer[i]==0xFFFF)
-                        {   
-                        flag_exit=TRUE;  
-                        break;
-                        }
-                     add_eeprom+=2;
-                     }
-                  
-                  
-                  my_delay_ms_CLRWDT(50);
-                  flag_proculus_hs=TRUE;
-                  for(char i=0;i<BUFFER_GRAFICO;i++)
-                      { 
-                      if(buffer[i]==0xFFFF)
-                         {   
-                         flag_exit=TRUE;  
-                         break;
-                         }
-                      PROCULUS_graphic_plot(1,(buffer[i]*FATOR_TENSAO));                  
-                      }
-                  flag_proculus_hs=FALSE;
-                if(flag_exit)break;  
-                } 
-          }     
-          PROCULUS_OK();
+     while(1)
+        {          
+        TRISDbits.RD6=0; //Fix Apagar debug
+        PORTDbits.RD6=1;            
+        bb[0]=0;
+        bb[1]=High (add_eeprom);
+        bb[2]=Lower(add_eeprom);
+        bb[3]=Hi   (add_eeprom);
+        bb[4]=Lo   (add_eeprom);      
+        leitura[0]=Send_To_Slave(1, COMMAND_EEE_R_INT, 5, bb); //fix -Retirar EMULA
+        
+        bb[0]=1;
+        bb[1]=High (add_eeprom);
+        bb[2]=Lower(add_eeprom);
+        bb[3]=Hi   (add_eeprom);
+        bb[4]=Lo   (add_eeprom); 
+        leitura[1]=Send_To_Slave(1, COMMAND_EEE_R_INT, 5, bb); //fix -Retirar EMULA
+        PORTDbits.RD6=0;        
+        
+        
+        __delay_ms(32);
+        PROCULUS_graphic_plot(1,(leitura[0]*FATOR_TENSAO)); //
+        PROCULUS_graphic_plot(2,(leitura[1]*FATOR_VACUO)); //
+        __delay_ms(32);
+        add_eeprom+=2;
+        asm("CLRWDT");
+        if((leitura[0]==0xFFFF)||(leitura[1]==0xFFFF))
+            {   
+            break;
+            PROCULUS_OK();
+            my_delay_ms_CLRWDT(10000);
+            add_eeprom=0;
+            }
+        }
+        PROCULUS_OK();     
+        //while(1)asm("CLRWDT");
+          
 }         
 
      
