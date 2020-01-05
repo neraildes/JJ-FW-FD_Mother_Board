@@ -4631,7 +4631,7 @@ unsigned char USART_input_buffer(void);
 
 
 extern volatile unsigned char usart_buffer[32+10];
-extern volatile unsigned char usart_buffer_fila[6][32+10];
+extern volatile unsigned char usart_buffer_fila[2][32+10];
 # 20 "isr.c"
 extern volatile unsigned int tempodecorrido ;
 extern volatile unsigned int tempocaptura ;
@@ -4691,26 +4691,11 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
         {
 
 
-        if(statusgen.flag_usart_rx==0)
-           {
-           statusgen.flag_usart_rx=1;
-           pointer=usart_buffer;
-           }
-        else
-           {for(char i=0;i<6;i++)
-               {
-               if(usart_buffer_fila[i][0]==0)
-                  {
-                  pointer=&usart_buffer_fila[i][0];
-                  statusgen.flag_usart_rx=1;
-                  break;
-                  }
-               }
-           }
-
         tempo=400;
         count=0;
         cntAbandona=255;
+        statusgen.flag_usart_rx=1;
+        pointer=usart_buffer;
         while(tempo)
         {
             if (PIR1bits.RCIF)

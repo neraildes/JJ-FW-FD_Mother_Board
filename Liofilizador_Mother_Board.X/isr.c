@@ -74,27 +74,12 @@ void __interrupt(low_priority) isr(void)
     if(PIR1bits.RCIF)
         {   
         //TRISDbits.RD5=0;
-        //PORTDbits.RD5=1;         
-        if(flag_usart_rx==FALSE)
-           {
-           flag_usart_rx=TRUE;
-           pointer=usart_buffer;
-           }
-        else//Senão preencher fila de buffer;
-           {for(char i=0;i<USART_LINE_BUFFER_SIZE;i++)
-               {
-               if(usart_buffer_fila[i][0]==0) 
-                  { 
-                  pointer=&usart_buffer_fila[i][0];                  
-                  flag_usart_rx=TRUE;
-                  break;
-                  }
-               }  
-           }
-        
+        //PORTDbits.RD5=1; 
         tempo=RX_MAX_WAIT_TIME;       
         count=0;
         cntAbandona=255;
+        flag_usart_rx=TRUE;
+        pointer=usart_buffer;        
         while(tempo)
         {    
             if (PIR1bits.RCIF) 

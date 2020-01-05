@@ -62,7 +62,7 @@ const char *boardtype[5]={"Mother Board",
 
 /*----------------------------------------------------------------------------*/
 volatile unsigned char usart_buffer[USART_BUFFER_SIZE]; 
-volatile unsigned char usart_buffer_fila[USART_LINE_BUFFER_SIZE][USART_BUFFER_SIZE];
+//volatile unsigned char usart_buffer_fila[USART_LINE_BUFFER_SIZE][USART_BUFFER_SIZE];
 
 
 //-----------------timer1-----------------------
@@ -457,10 +457,8 @@ void main(void)
         PROCULUS_Show_Screen(15);
         while(1)
              {
-             flag_main_loop_WDT=TRUE;
-             
-             Buffer_Manager(); // Buffer de recepção de dados seriais [10]
-                  
+             flag_main_loop_WDT=TRUE;       
+    
              //=========================SELECAO DE PAGINA============================
              flag_proculus_hs=TRUE;
              if(delaycheckscreen>1000)
@@ -2676,34 +2674,6 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
      PROCULUS_graphic_plot(LCDchannel, value);
 }  
 
-//Buffer de recebimento de dados pela serial. Pode receber até 10 comandos que
-//ficarao armazenados na memoria e serao processados.
-void Buffer_Manager(void)
-     {
-     char i;
-     if(flag_usart_rx==FALSE)
-         {
-         for(i=USART_LINE_BUFFER_SIZE;i>0;i--)
-           {
-           //flag_main_loop_WDT=1;  
-           if(usart_buffer_fila[i-1][0]!=0) 
-              { 
-              for(char j=0;j<USART_BUFFER_SIZE;j++) 
-                  {
-                  //flag_main_loop_WDT=1;
-                  usart_buffer[j]=usart_buffer_fila[i-1][j];
-                  }          
-              usart_buffer_fila[i-1][0]=0; 
-              flag_usart_rx=TRUE;
-              MonitorBuffer=i-1;
-              break;                
-              }
-           }
-         }
-}  
-     
-     
-     
 
 
 
@@ -3052,7 +3022,6 @@ void ShowHardwareInfo(){
      for(destino=1;destino<15;destino++)
         {
         my_delay_ms_CLRWDT(100); 
-        Buffer_Manager();        
         resposta = Send_To_Slave(destino, COMANDO_QUEM_EH_VOCE, 0, buffer);  
         tipo=Hi(resposta);
         if(resposta!=-1)

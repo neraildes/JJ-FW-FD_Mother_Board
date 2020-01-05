@@ -43,10 +43,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "10 isr.c
 [; ;isr.c: 10: extern volatile unsigned char usart_buffer[32+10];
 [v _usart_buffer `Vuc ~T0 @X0 -> 0 `x e ]
-[v F2613 `Vuc ~T0 @X0 -> 42 `i t ]
-"11
-[; ;isr.c: 11: extern volatile unsigned char usart_buffer_fila[6][32+10];
-[v _usart_buffer_fila `F2613 ~T0 @X0 -> 0 `x e ]
 "3498 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 3498: extern volatile unsigned char RCREG __attribute__((address(0xFAE)));
 [v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
@@ -704,506 +700,451 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;isr.c: 75:         {
 {
 "78
-[; ;isr.c: 78:         if(statusgen.flag_usart_rx==0)
-[e $ ! == -> . _statusgen 0 `i -> 0 `i 281  ]
+[; ;isr.c: 78:         tempo=400;
+[e = _tempo -> -> 400 `i `ui ]
 "79
-[; ;isr.c: 79:            {
-{
+[; ;isr.c: 79:         count=0;
+[e = _count -> 0 `i ]
 "80
-[; ;isr.c: 80:            statusgen.flag_usart_rx=1;
-[e = . _statusgen 0 -> -> 1 `i `uc ]
+[; ;isr.c: 80:         cntAbandona=255;
+[e = _cntAbandona -> -> 255 `i `uc ]
 "81
-[; ;isr.c: 81:            pointer=usart_buffer;
-[e = _pointer &U _usart_buffer ]
-"82
-[; ;isr.c: 82:            }
-}
-[e $U 282  ]
-"83
-[; ;isr.c: 83:         else
-[e :U 281 ]
-"84
-[; ;isr.c: 84:            {for(char i=0;i<6;i++)
-{
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 6 `i 283  ]
-[e $U 284  ]
-[e :U 283 ]
-"85
-[; ;isr.c: 85:                {
-{
-"86
-[; ;isr.c: 86:                if(usart_buffer_fila[i][0]==0)
-[e $ ! == -> *U + &U *U + &U _usart_buffer_fila * -> _i `ux -> * -> # *U &U *U &U _usart_buffer_fila `ui -> -> 42 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _usart_buffer_fila * -> _i `ux -> * -> # *U &U *U &U _usart_buffer_fila `ui -> -> 42 `i `ui `ux `ui `ux `i -> 0 `i 286  ]
-"87
-[; ;isr.c: 87:                   {
-{
-"88
-[; ;isr.c: 88:                   pointer=&usart_buffer_fila[i][0];
-[e = _pointer &U *U + &U *U + &U _usart_buffer_fila * -> _i `ux -> * -> # *U &U *U &U _usart_buffer_fila `ui -> -> 42 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _usart_buffer_fila * -> _i `ux -> * -> # *U &U *U &U _usart_buffer_fila `ui -> -> 42 `i `ui `ux `ui `ux ]
-"89
-[; ;isr.c: 89:                   statusgen.flag_usart_rx=1;
+[; ;isr.c: 81:         statusgen.flag_usart_rx=1;
 [e = . _statusgen 0 -> -> 1 `i `uc ]
-"90
-[; ;isr.c: 90:                   break;
-[e $U 284  ]
-"91
-[; ;isr.c: 91:                   }
-}
-[e :U 286 ]
-"92
-[; ;isr.c: 92:                }
-}
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 6 `i 283  ]
-[e :U 284 ]
-}
-"93
-[; ;isr.c: 93:            }
-}
+"82
+[; ;isr.c: 82:         pointer=usart_buffer;
+[e = _pointer &U _usart_buffer ]
+"83
+[; ;isr.c: 83:         while(tempo)
+[e $U 281  ]
 [e :U 282 ]
+"84
+[; ;isr.c: 84:         {
+{
+"85
+[; ;isr.c: 85:             if (PIR1bits.RCIF)
+[e $ ! != -> . . _PIR1bits 0 5 `i -> 0 `i 284  ]
+"86
+[; ;isr.c: 86:             {
+{
+"89
+[; ;isr.c: 89:                 (*pointer)=RCREG;
+[e = *U _pointer _RCREG ]
+"90
+[; ;isr.c: 90:                 if(count<32+10 -1)
+[e $ ! < _count - + -> 32 `i -> 10 `i -> 1 `i 285  ]
+"91
+[; ;isr.c: 91:                    {
+{
+"92
+[; ;isr.c: 92:                    count++;
+[e ++ _count -> -> 1 `i `Vi ]
+"93
+[; ;isr.c: 93:                    pointer++;
+[e ++ _pointer * -> -> 1 `i `x -> -> # *U _pointer `i `x ]
+"94
+[; ;isr.c: 94:                    }
+}
+[e :U 285 ]
 "95
-[; ;isr.c: 95:         tempo=400;
+[; ;isr.c: 95:                 tempo=400;
 [e = _tempo -> -> 400 `i `ui ]
 "96
-[; ;isr.c: 96:         count=0;
-[e = _count -> 0 `i ]
+[; ;isr.c: 96:             }
+}
+[e $U 286  ]
 "97
-[; ;isr.c: 97:         cntAbandona=255;
-[e = _cntAbandona -> -> 255 `i `uc ]
+[; ;isr.c: 97:             else
+[e :U 284 ]
 "98
-[; ;isr.c: 98:         while(tempo)
-[e $U 287  ]
-[e :U 288 ]
+[; ;isr.c: 98:             {
+{
 "99
-[; ;isr.c: 99:         {
-{
-"100
-[; ;isr.c: 100:             if (PIR1bits.RCIF)
-[e $ ! != -> . . _PIR1bits 0 5 `i -> 0 `i 290  ]
-"101
-[; ;isr.c: 101:             {
-{
-"104
-[; ;isr.c: 104:                 (*pointer)=RCREG;
-[e = *U _pointer _RCREG ]
-"105
-[; ;isr.c: 105:                 if(count<32+10 -1)
-[e $ ! < _count - + -> 32 `i -> 10 `i -> 1 `i 291  ]
-"106
-[; ;isr.c: 106:                    {
-{
-"107
-[; ;isr.c: 107:                    count++;
-[e ++ _count -> -> 1 `i `Vi ]
-"108
-[; ;isr.c: 108:                    pointer++;
-[e ++ _pointer * -> -> 1 `i `x -> -> # *U _pointer `i `x ]
-"109
-[; ;isr.c: 109:                    }
-}
-[e :U 291 ]
-"110
-[; ;isr.c: 110:                 tempo=400;
-[e = _tempo -> -> 400 `i `ui ]
-"111
-[; ;isr.c: 111:             }
-}
-[e $U 292  ]
-"112
-[; ;isr.c: 112:             else
-[e :U 290 ]
-"113
-[; ;isr.c: 113:             {
-{
-"114
-[; ;isr.c: 114:                 tempo--;
+[; ;isr.c: 99:                 tempo--;
 [e -- _tempo -> -> 1 `i `Vui ]
-"115
-[; ;isr.c: 115:             }
+"100
+[; ;isr.c: 100:             }
 }
-[e :U 292 ]
-"117
-[; ;isr.c: 117:         }
+[e :U 286 ]
+"102
+[; ;isr.c: 102:         }
+}
+[e :U 281 ]
+"83
+[; ;isr.c: 83:         while(tempo)
+[e $ != _tempo -> -> 0 `i `ui 282  ]
+[e :U 283 ]
+"106
+[; ;isr.c: 106:         if(RCSTAbits.OERR)
+[e $ ! != -> . . _RCSTAbits 0 1 `i -> 0 `i 287  ]
+"107
+[; ;isr.c: 107:            {
+{
+"108
+[; ;isr.c: 108:            RCSTAbits.CREN=0;
+[e = . . _RCSTAbits 0 4 -> -> 0 `i `uc ]
+"109
+[; ;isr.c: 109:            RCSTAbits.CREN=1;
+[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
+"110
+[; ;isr.c: 110:            tempo=RCREG;
+[e = _tempo -> _RCREG `ui ]
+"111
+[; ;isr.c: 111:            tempo=RCREG;
+[e = _tempo -> _RCREG `ui ]
+"112
+[; ;isr.c: 112:            tempo=RCREG;
+[e = _tempo -> _RCREG `ui ]
+"113
+[; ;isr.c: 113:            usart_buffer[0]=0;
+[e = *U + &U _usart_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux -> -> 0 `i `uc ]
+"114
+[; ;isr.c: 114:            statusgen.flag_usart_error=1;
+[e = . _statusgen 1 -> -> 1 `i `uc ]
+"115
+[; ;isr.c: 115:            }
 }
 [e :U 287 ]
-"98
-[; ;isr.c: 98:         while(tempo)
-[e $ != _tempo -> -> 0 `i `ui 288  ]
-[e :U 289 ]
-"121
-[; ;isr.c: 121:         if(RCSTAbits.OERR)
-[e $ ! != -> . . _RCSTAbits 0 1 `i -> 0 `i 293  ]
-"122
-[; ;isr.c: 122:            {
-{
-"123
-[; ;isr.c: 123:            RCSTAbits.CREN=0;
-[e = . . _RCSTAbits 0 4 -> -> 0 `i `uc ]
-"124
-[; ;isr.c: 124:            RCSTAbits.CREN=1;
-[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-"125
-[; ;isr.c: 125:            tempo=RCREG;
-[e = _tempo -> _RCREG `ui ]
-"126
-[; ;isr.c: 126:            tempo=RCREG;
-[e = _tempo -> _RCREG `ui ]
-"127
-[; ;isr.c: 127:            tempo=RCREG;
-[e = _tempo -> _RCREG `ui ]
-"128
-[; ;isr.c: 128:            usart_buffer[0]=0;
-[e = *U + &U _usart_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux -> -> 0 `i `uc ]
-"129
-[; ;isr.c: 129:            statusgen.flag_usart_error=1;
-[e = . _statusgen 1 -> -> 1 `i `uc ]
-"130
-[; ;isr.c: 130:            }
-}
-[e :U 293 ]
-"132
-[; ;isr.c: 132:     }
+"117
+[; ;isr.c: 117:     }
 }
 [e :U 280 ]
-"139
-[; ;isr.c: 139:     if(PIR1bits.TMR1IF==1){
-[e $ ! == -> . . _PIR1bits 0 0 `i -> 1 `i 294  ]
+"124
+[; ;isr.c: 124:     if(PIR1bits.TMR1IF==1){
+[e $ ! == -> . . _PIR1bits 0 0 `i -> 1 `i 288  ]
 {
-"140
-[; ;isr.c: 140:        PIR1bits.TMR1IF=0;
+"125
+[; ;isr.c: 125:        PIR1bits.TMR1IF=0;
 [e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
-"141
-[; ;isr.c: 141:        TMR1H = 0x3C;
+"126
+[; ;isr.c: 126:        TMR1H = 0x3C;
 [e = _TMR1H -> -> 60 `i `uc ]
-"142
-[; ;isr.c: 142:        TMR1L = 0xB4;
+"127
+[; ;isr.c: 127:        TMR1L = 0xB4;
 [e = _TMR1L -> -> 180 `i `uc ]
-"147
-[; ;isr.c: 147:        ClrReset=1;
+"132
+[; ;isr.c: 132:        ClrReset=1;
 [e = _ClrReset -> -> 1 `i `uc ]
-"148
-[; ;isr.c: 148:        if(statusWDT.flag_main_loop_WDT==0) ClrReset=0;
-[e $ ! == -> . _statusWDT 0 `i -> 0 `i 295  ]
+"133
+[; ;isr.c: 133:        if(statusWDT.flag_main_loop_WDT==0) ClrReset=0;
+[e $ ! == -> . _statusWDT 0 `i -> 0 `i 289  ]
 [e = _ClrReset -> -> 0 `i `uc ]
-[e :U 295 ]
-"150
-[; ;isr.c: 150:        for(count=1;count<=totalboard;count++)
+[e :U 289 ]
+"135
+[; ;isr.c: 135:        for(count=1;count<=totalboard;count++)
 {
 [e = _count -> 1 `i ]
-[e $U 299  ]
-[e :U 296 ]
-"151
-[; ;isr.c: 151:            {
+[e $U 293  ]
+[e :U 290 ]
+"136
+[; ;isr.c: 136:            {
 {
-"152
-[; ;isr.c: 152:            if(flag_array_slave_WDT[count]==0) ClrReset=0;
-[e $ ! == -> *U + &U _flag_array_slave_WDT * -> -> _count `Vui `ux -> -> # *U &U _flag_array_slave_WDT `ui `ux `i -> 0 `i 300  ]
+"137
+[; ;isr.c: 137:            if(flag_array_slave_WDT[count]==0) ClrReset=0;
+[e $ ! == -> *U + &U _flag_array_slave_WDT * -> -> _count `Vui `ux -> -> # *U &U _flag_array_slave_WDT `ui `ux `i -> 0 `i 294  ]
 [e = _ClrReset -> -> 0 `i `uc ]
-[e :U 300 ]
-"153
-[; ;isr.c: 153:            }
+[e :U 294 ]
+"138
+[; ;isr.c: 138:            }
 }
 [e ++ _count -> -> 1 `i `Vi ]
-[e :U 299 ]
-[e $ <= _count -> _totalboard `i 296  ]
+[e :U 293 ]
+[e $ <= _count -> _totalboard `i 290  ]
+[e :U 291 ]
+}
+"139
+[; ;isr.c: 139:        if(ClrReset==1)
+[e $ ! == -> _ClrReset `i -> 1 `i 295  ]
+"140
+[; ;isr.c: 140:           {
+{
+"141
+[; ;isr.c: 141:           __asm("CLRWDT");
+[; <" CLRWDT ;# ">
+"142
+[; ;isr.c: 142:           statusWDT.flag_main_loop_WDT=0;
+[e = . _statusWDT 0 -> -> 0 `i `uc ]
+"143
+[; ;isr.c: 143:           for(count=1;count<15;count++)
+{
+[e = _count -> 1 `i ]
+[e $ < _count -> 15 `i 296  ]
+[e $U 297  ]
+[e :U 296 ]
+"144
+[; ;isr.c: 144:               {
+{
+"145
+[; ;isr.c: 145:               flag_array_slave_WDT[count]=0;
+[e = *U + &U _flag_array_slave_WDT * -> -> _count `Vui `ux -> -> # *U &U _flag_array_slave_WDT `ui `ux -> -> 0 `i `uc ]
+"146
+[; ;isr.c: 146:               }
+}
+[e ++ _count -> -> 1 `i `Vi ]
+[e $ < _count -> 15 `i 296  ]
 [e :U 297 ]
 }
-"154
-[; ;isr.c: 154:        if(ClrReset==1)
-[e $ ! == -> _ClrReset `i -> 1 `i 301  ]
-"155
-[; ;isr.c: 155:           {
-{
-"156
-[; ;isr.c: 156:           __asm("CLRWDT");
-[; <" CLRWDT ;# ">
-"157
-[; ;isr.c: 157:           statusWDT.flag_main_loop_WDT=0;
-[e = . _statusWDT 0 -> -> 0 `i `uc ]
-"158
-[; ;isr.c: 158:           for(count=1;count<15;count++)
-{
-[e = _count -> 1 `i ]
-[e $ < _count -> 15 `i 302  ]
-[e $U 303  ]
-[e :U 302 ]
-"159
-[; ;isr.c: 159:               {
-{
-"160
-[; ;isr.c: 160:               flag_array_slave_WDT[count]=0;
-[e = *U + &U _flag_array_slave_WDT * -> -> _count `Vui `ux -> -> # *U &U _flag_array_slave_WDT `ui `ux -> -> 0 `i `uc ]
-"161
-[; ;isr.c: 161:               }
+"147
+[; ;isr.c: 147:           }
 }
-[e ++ _count -> -> 1 `i `Vi ]
-[e $ < _count -> 15 `i 302  ]
-[e :U 303 ]
-}
-"162
-[; ;isr.c: 162:           }
-}
-[e :U 301 ]
-"165
-[; ;isr.c: 165:         if(rtc.milisegundo>500)
-[e $ ! > . _rtc 0 -> -> 500 `i `ui 305  ]
-"166
-[; ;isr.c: 166:            PORTBbits.RB7=0;
+[e :U 295 ]
+"150
+[; ;isr.c: 150:         if(rtc.milisegundo>500)
+[e $ ! > . _rtc 0 -> -> 500 `i `ui 299  ]
+"151
+[; ;isr.c: 151:            PORTBbits.RB7=0;
 [e = . . _PORTBbits 0 7 -> -> 0 `i `uc ]
-[e $U 306  ]
-"167
-[; ;isr.c: 167:         else
-[e :U 305 ]
-"168
-[; ;isr.c: 168:            PORTBbits.RB7=1;
+[e $U 300  ]
+"152
+[; ;isr.c: 152:         else
+[e :U 299 ]
+"153
+[; ;isr.c: 153:            PORTBbits.RB7=1;
 [e = . . _PORTBbits 0 7 -> -> 1 `i `uc ]
-[e :U 306 ]
-"170
-[; ;isr.c: 170:        if(tempocaptura>0)
-[e $ ! > _tempocaptura -> -> 0 `i `ui 307  ]
-"171
-[; ;isr.c: 171:           {
+[e :U 300 ]
+"155
+[; ;isr.c: 155:        if(tempocaptura>0)
+[e $ ! > _tempocaptura -> -> 0 `i `ui 301  ]
+"156
+[; ;isr.c: 156:           {
 {
-"172
-[; ;isr.c: 172:           tempocaptura-=50;
+"157
+[; ;isr.c: 157:           tempocaptura-=50;
 [e =- _tempocaptura -> -> 50 `i `Vui ]
-"173
-[; ;isr.c: 173:           }
+"158
+[; ;isr.c: 158:           }
 }
-[e $U 308  ]
-"174
-[; ;isr.c: 174:        else
-[e :U 307 ]
-"175
-[; ;isr.c: 175:           {
+[e $U 302  ]
+"159
+[; ;isr.c: 159:        else
+[e :U 301 ]
+"160
+[; ;isr.c: 160:           {
 {
-"176
-[; ;isr.c: 176:           tempocaptura=tempocapturaconstante;
+"161
+[; ;isr.c: 161:           tempocaptura=tempocapturaconstante;
 [e = _tempocaptura _tempocapturaconstante ]
-"177
-[; ;isr.c: 177:           statusgen.flag_capture_datalog=1;
+"162
+[; ;isr.c: 162:           statusgen.flag_capture_datalog=1;
 [e = . _statusgen 6 -> -> 1 `i `uc ]
+"163
+[; ;isr.c: 163:           }
+}
+[e :U 302 ]
+"167
+[; ;isr.c: 167:           delaycheckscreen+=50;
+[e =+ _delaycheckscreen -> -> 50 `i `Vui ]
+"168
+[; ;isr.c: 168:           tempodecorrido+=50;
+[e =+ _tempodecorrido -> -> 50 `i `Vui ]
+"169
+[; ;isr.c: 169:           if(!flag_senha_global_liberada)
+[e $ ! ! != -> _flag_senha_global_liberada `i -> 0 `i 303  ]
+"170
+[; ;isr.c: 170:              if(senhacount>=0)
+[e $ ! >= _senhacount -> 0 `i 304  ]
+"171
+[; ;isr.c: 171:                 senhacount-=50;
+[e =- _senhacount -> -> 50 `i `Vi ]
+[e :U 304 ]
+[e :U 303 ]
+"173
+[; ;isr.c: 173:           delay_update_display+=50;
+[e =+ _delay_update_display -> -> 50 `i `Vui ]
+"175
+[; ;isr.c: 175:           rtc.milisegundo+=50;
+[e =+ . _rtc 0 -> -> 50 `i `Vui ]
+"176
+[; ;isr.c: 176:           if(rtc.milisegundo>=1000){
+[e $ ! >= . _rtc 0 -> -> 1000 `i `ui 305  ]
+{
 "178
-[; ;isr.c: 178:           }
+[; ;isr.c: 178:              if(statuspower.flag_time_process)
+[e $ ! != -> . . _statuspower 1 4 `i -> 0 `i 306  ]
+"179
+[; ;isr.c: 179:                {
+{
+"180
+[; ;isr.c: 180:                processo_segundo++;
+[e ++ _processo_segundo -> -> 1 `i `Vuc ]
+"181
+[; ;isr.c: 181:                if(processo_segundo>=60)
+[e $ ! >= -> _processo_segundo `i -> 60 `i 307  ]
+"182
+[; ;isr.c: 182:                   {
+{
+"183
+[; ;isr.c: 183:                   processo_segundo=0;
+[e = _processo_segundo -> -> 0 `i `uc ]
+"184
+[; ;isr.c: 184:                   processo_minuto++;
+[e ++ _processo_minuto -> -> 1 `i `Vuc ]
+"185
+[; ;isr.c: 185:                   if(processo_minuto>=60)
+[e $ ! >= -> _processo_minuto `i -> 60 `i 308  ]
+"186
+[; ;isr.c: 186:                     {
+{
+"187
+[; ;isr.c: 187:                     processo_minuto=0;
+[e = _processo_minuto -> -> 0 `i `uc ]
+"188
+[; ;isr.c: 188:                     processo_hora++;
+[e ++ _processo_hora -> -> 1 `i `Vuc ]
+"189
+[; ;isr.c: 189:                     if(processo_hora>=100)
+[e $ ! >= -> _processo_hora `i -> 100 `i 309  ]
+"190
+[; ;isr.c: 190:                       processo_hora=0;
+[e = _processo_hora -> -> 0 `i `uc ]
+[e :U 309 ]
+"191
+[; ;isr.c: 191:                     }
 }
 [e :U 308 ]
-"182
-[; ;isr.c: 182:           delaycheckscreen+=50;
-[e =+ _delaycheckscreen -> -> 50 `i `Vui ]
-"183
-[; ;isr.c: 183:           tempodecorrido+=50;
-[e =+ _tempodecorrido -> -> 50 `i `Vui ]
-"184
-[; ;isr.c: 184:           if(!flag_senha_global_liberada)
-[e $ ! ! != -> _flag_senha_global_liberada `i -> 0 `i 309  ]
-"185
-[; ;isr.c: 185:              if(senhacount>=0)
-[e $ ! >= _senhacount -> 0 `i 310  ]
-"186
-[; ;isr.c: 186:                 senhacount-=50;
-[e =- _senhacount -> -> 50 `i `Vi ]
-[e :U 310 ]
-[e :U 309 ]
-"188
-[; ;isr.c: 188:           delay_update_display+=50;
-[e =+ _delay_update_display -> -> 50 `i `Vui ]
-"190
-[; ;isr.c: 190:           rtc.milisegundo+=50;
-[e =+ . _rtc 0 -> -> 50 `i `Vui ]
-"191
-[; ;isr.c: 191:           if(rtc.milisegundo>=1000){
-[e $ ! >= . _rtc 0 -> -> 1000 `i `ui 311  ]
-{
+"192
+[; ;isr.c: 192:                   }
+}
+[e :U 307 ]
 "193
-[; ;isr.c: 193:              if(statuspower.flag_time_process)
-[e $ ! != -> . . _statuspower 1 4 `i -> 0 `i 312  ]
-"194
-[; ;isr.c: 194:                {
-{
+[; ;isr.c: 193:                }
+}
+[e :U 306 ]
 "195
-[; ;isr.c: 195:                processo_segundo++;
-[e ++ _processo_segundo -> -> 1 `i `Vuc ]
+[; ;isr.c: 195:              rtc.milisegundo=0;
+[e = . _rtc 0 -> -> 0 `i `ui ]
 "196
-[; ;isr.c: 196:                if(processo_segundo>=60)
-[e $ ! >= -> _processo_segundo `i -> 60 `i 313  ]
+[; ;isr.c: 196:              rtc.segundo++;
+[e ++ . _rtc 1 -> -> 1 `i `Vuc ]
 "197
-[; ;isr.c: 197:                   {
-{
+[; ;isr.c: 197:              if(delay_condensador)delay_condensador--;
+[e $ ! != -> _delay_condensador `i -> 0 `i 310  ]
+[e -- _delay_condensador -> -> 1 `i `Vuc ]
+[e :U 310 ]
 "198
-[; ;isr.c: 198:                   processo_segundo=0;
-[e = _processo_segundo -> -> 0 `i `uc ]
+[; ;isr.c: 198:              if(rtc.segundo>=60){
+[e $ ! >= -> . _rtc 1 `i -> 60 `i 311  ]
+{
 "199
-[; ;isr.c: 199:                   processo_minuto++;
-[e ++ _processo_minuto -> -> 1 `i `Vuc ]
+[; ;isr.c: 199:                 rtc.segundo=0;
+[e = . _rtc 1 -> -> 0 `i `uc ]
 "200
-[; ;isr.c: 200:                   if(processo_minuto>=60)
-[e $ ! >= -> _processo_minuto `i -> 60 `i 314  ]
+[; ;isr.c: 200:                 rtc.minuto++;
+[e ++ . _rtc 2 -> -> 1 `i `Vuc ]
 "201
-[; ;isr.c: 201:                     {
+[; ;isr.c: 201:                 if(rtc.minuto>=60){
+[e $ ! >= -> . _rtc 2 `i -> 60 `i 312  ]
 {
 "202
-[; ;isr.c: 202:                     processo_minuto=0;
-[e = _processo_minuto -> -> 0 `i `uc ]
+[; ;isr.c: 202:                    rtc.minuto=0;
+[e = . _rtc 2 -> -> 0 `i `uc ]
 "203
-[; ;isr.c: 203:                     processo_hora++;
-[e ++ _processo_hora -> -> 1 `i `Vuc ]
+[; ;isr.c: 203:                    rtc.hora++;
+[e ++ . _rtc 3 -> -> 1 `i `Vuc ]
 "204
-[; ;isr.c: 204:                     if(processo_hora>=100)
-[e $ ! >= -> _processo_hora `i -> 100 `i 315  ]
-"205
-[; ;isr.c: 205:                       processo_hora=0;
-[e = _processo_hora -> -> 0 `i `uc ]
-[e :U 315 ]
-"206
-[; ;isr.c: 206:                     }
-}
-[e :U 314 ]
-"207
-[; ;isr.c: 207:                   }
-}
+[; ;isr.c: 204:                    if(rtc.hora>=24)rtc.hora=0;
+[e $ ! >= -> . _rtc 3 `i -> 24 `i 313  ]
+[e = . _rtc 3 -> -> 0 `i `uc ]
 [e :U 313 ]
-"208
-[; ;isr.c: 208:                }
+"205
+[; ;isr.c: 205:                 }
 }
 [e :U 312 ]
-"210
-[; ;isr.c: 210:              rtc.milisegundo=0;
-[e = . _rtc 0 -> -> 0 `i `ui ]
-"211
-[; ;isr.c: 211:              rtc.segundo++;
-[e ++ . _rtc 1 -> -> 1 `i `Vuc ]
-"212
-[; ;isr.c: 212:              if(delay_condensador)delay_condensador--;
-[e $ ! != -> _delay_condensador `i -> 0 `i 316  ]
-[e -- _delay_condensador -> -> 1 `i `Vuc ]
-[e :U 316 ]
-"213
-[; ;isr.c: 213:              if(rtc.segundo>=60){
-[e $ ! >= -> . _rtc 1 `i -> 60 `i 317  ]
-{
-"214
-[; ;isr.c: 214:                 rtc.segundo=0;
-[e = . _rtc 1 -> -> 0 `i `uc ]
-"215
-[; ;isr.c: 215:                 rtc.minuto++;
-[e ++ . _rtc 2 -> -> 1 `i `Vuc ]
-"216
-[; ;isr.c: 216:                 if(rtc.minuto>=60){
-[e $ ! >= -> . _rtc 2 `i -> 60 `i 318  ]
-{
-"217
-[; ;isr.c: 217:                    rtc.minuto=0;
-[e = . _rtc 2 -> -> 0 `i `uc ]
-"218
-[; ;isr.c: 218:                    rtc.hora++;
-[e ++ . _rtc 3 -> -> 1 `i `Vuc ]
-"219
-[; ;isr.c: 219:                    if(rtc.hora>=24)rtc.hora=0;
-[e $ ! >= -> . _rtc 3 `i -> 24 `i 319  ]
-[e = . _rtc 3 -> -> 0 `i `uc ]
-[e :U 319 ]
-"220
-[; ;isr.c: 220:                 }
-}
-[e :U 318 ]
-"221
-[; ;isr.c: 221:              }
-}
-[e :U 317 ]
-"222
-[; ;isr.c: 222:           }
+"206
+[; ;isr.c: 206:              }
 }
 [e :U 311 ]
-"224
-[; ;isr.c: 224:     }
+"207
+[; ;isr.c: 207:           }
 }
-[e :U 294 ]
-"228
-[; ;isr.c: 228:      if(INTCONbits.INT0IF==1)
-[e $ ! == -> . . _INTCONbits 0 1 `i -> 1 `i 320  ]
-"229
-[; ;isr.c: 229:        {
+[e :U 305 ]
+"209
+[; ;isr.c: 209:     }
+}
+[e :U 288 ]
+"213
+[; ;isr.c: 213:      if(INTCONbits.INT0IF==1)
+[e $ ! == -> . . _INTCONbits 0 1 `i -> 1 `i 314  ]
+"214
+[; ;isr.c: 214:        {
 {
-"230
-[; ;isr.c: 230:        INTCONbits.INT0IF=0;
+"215
+[; ;isr.c: 215:        INTCONbits.INT0IF=0;
 [e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-"231
-[; ;isr.c: 231:        }
+"216
+[; ;isr.c: 216:        }
 }
-[e :U 320 ]
-"236
-[; ;isr.c: 236:     if(INTCONbits.T0IF==1)
-[e $ ! == -> . . _INTCONbits 1 2 `i -> 1 `i 321  ]
-"237
-[; ;isr.c: 237:                 {
+[e :U 314 ]
+"221
+[; ;isr.c: 221:     if(INTCONbits.T0IF==1)
+[e $ ! == -> . . _INTCONbits 1 2 `i -> 1 `i 315  ]
+"222
+[; ;isr.c: 222:                 {
 {
-"238
-[; ;isr.c: 238:                 _delay((unsigned long)((5)*(32000000/4000000.0)));
+"223
+[; ;isr.c: 223:                 _delay((unsigned long)((5)*(32000000/4000000.0)));
 [e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-"239
-[; ;isr.c: 239:                 TMR0=0xE1;
+"224
+[; ;isr.c: 224:                 TMR0=0xE1;
 [e = _TMR0 -> -> 225 `i `us ]
-"240
-[; ;isr.c: 240:                 INTCONbits.T0IF=0;
+"225
+[; ;isr.c: 225:                 INTCONbits.T0IF=0;
 [e = . . _INTCONbits 1 2 -> -> 0 `i `uc ]
-"243
-[; ;isr.c: 243:                   if(Delay_Led_Usart>0){
-[e $ ! > _Delay_Led_Usart -> -> 0 `i `ui 322  ]
+"228
+[; ;isr.c: 228:                   if(Delay_Led_Usart>0){
+[e $ ! > _Delay_Led_Usart -> -> 0 `i `ui 316  ]
 {
-"244
-[; ;isr.c: 244:                      Delay_Led_Usart--;
+"229
+[; ;isr.c: 229:                      Delay_Led_Usart--;
 [e -- _Delay_Led_Usart -> -> 1 `i `Vui ]
-"245
-[; ;isr.c: 245:                      PORTBbits.RB6=1;
+"230
+[; ;isr.c: 230:                      PORTBbits.RB6=1;
 [e = . . _PORTBbits 0 6 -> -> 1 `i `uc ]
-"246
-[; ;isr.c: 246:                      }
+"231
+[; ;isr.c: 231:                      }
 }
-[e $U 323  ]
-"247
-[; ;isr.c: 247:                   else{
-[e :U 322 ]
+[e $U 317  ]
+"232
+[; ;isr.c: 232:                   else{
+[e :U 316 ]
 {
-"248
-[; ;isr.c: 248:                      PORTBbits.RB6=0;
+"233
+[; ;isr.c: 233:                      PORTBbits.RB6=0;
 [e = . . _PORTBbits 0 6 -> -> 0 `i `uc ]
-"249
-[; ;isr.c: 249:                      }
+"234
+[; ;isr.c: 234:                      }
 }
-[e :U 323 ]
-"251
-[; ;isr.c: 251:                   if(Delay_Led_Memory>0){
-[e $ ! > _Delay_Led_Memory -> -> 0 `i `ui 324  ]
+[e :U 317 ]
+"236
+[; ;isr.c: 236:                   if(Delay_Led_Memory>0){
+[e $ ! > _Delay_Led_Memory -> -> 0 `i `ui 318  ]
 {
-"252
-[; ;isr.c: 252:                      Delay_Led_Memory--;
+"237
+[; ;isr.c: 237:                      Delay_Led_Memory--;
 [e -- _Delay_Led_Memory -> -> 1 `i `Vui ]
-"253
-[; ;isr.c: 253:                      PORTBbits.RB5=1;
+"238
+[; ;isr.c: 238:                      PORTBbits.RB5=1;
 [e = . . _PORTBbits 0 5 -> -> 1 `i `uc ]
-"254
-[; ;isr.c: 254:                      }
+"239
+[; ;isr.c: 239:                      }
 }
-[e $U 325  ]
-"255
-[; ;isr.c: 255:                   else{
-[e :U 324 ]
+[e $U 319  ]
+"240
+[; ;isr.c: 240:                   else{
+[e :U 318 ]
 {
-"256
-[; ;isr.c: 256:                      PORTBbits.RB5=0;
+"241
+[; ;isr.c: 241:                      PORTBbits.RB5=0;
 [e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
-"257
-[; ;isr.c: 257:                      }
+"242
+[; ;isr.c: 242:                      }
 }
-[e :U 325 ]
-"260
-[; ;isr.c: 260:             }
+[e :U 319 ]
+"245
+[; ;isr.c: 245:             }
 }
-[e :U 321 ]
-"263
-[; ;isr.c: 263: }
+[e :U 315 ]
+"248
+[; ;isr.c: 248: }
 [e :UE 279 ]
 }

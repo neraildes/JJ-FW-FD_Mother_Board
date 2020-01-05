@@ -4620,7 +4620,7 @@ void PROCULUS_Clear_Line_Graphic(char channel);
 
 
 extern volatile unsigned char usart_buffer[32+10];
-extern volatile unsigned char usart_buffer_fila[6][32+10];
+extern volatile unsigned char usart_buffer_fila[2][32+10];
 extern volatile unsigned int tmr_led_usart;
 extern volatile unsigned int Delay_Led_Usart;
 
