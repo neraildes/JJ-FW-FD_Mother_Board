@@ -258,7 +258,7 @@ void EEPROM_24C1025_Read_Str(unsigned char chip_add, unsigned long mem_add,char 
 
 
 
-
+//-------------------------------------BYTE-------------------------------------
 void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char data){
      EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 1, &data);
 }
@@ -270,6 +270,7 @@ unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem
     return data;
 }
 
+//--------------------------------------INT-------------------------------------
 void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data){
      char local[2];
      local[0]=Hi(data);
@@ -285,6 +286,34 @@ unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_a
 }
 
 
+//---------------------------------LONG-----------------------------------------
+void EEPROM_24C1025_Write_Long(unsigned char chip_add, unsigned long mem_add, long data){
+     char local[4];
+     local[0]=High(data);
+     local[1]=Lower(data);
+     local[2]=Hi(data);
+     local[3]=Lo(data);     
+     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 4, local);
+}
+
+unsigned long EEPROM_24C1025_Read_Long(unsigned char chip_add, unsigned long mem_add){
+    char data[4];
+    long resultado;
+    EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 4, data);
+    resultado=((long)data[0]<<24)|
+              ((long)data[1]<<16)|
+              ((long)data[2]<<8) |
+              ((long)data[2]<<0) ;
+    return resultado;        
+}
+
+
+
+
+
+
+
+//----------------------------FILL----------------------------------------------
 void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value){
      unsigned long mem_add;
      for(mem_add=0;mem_add<=0x3FF;mem_add+=2)

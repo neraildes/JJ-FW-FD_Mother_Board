@@ -1,26 +1,26 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"225 ./global.h
-[; ;./global.h: 225: struct {
+"231 ./global.h
+[; ;./global.h: 231: struct {
 [s S270 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S270 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"250
-[; ;./global.h: 250:       struct {
+"256
+[; ;./global.h: 256:       struct {
 [s S272 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S272 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work ]
-"248
-[; ;./global.h: 248: union {
+"254
+[; ;./global.h: 254: union {
 [u S271 `uc 1 `S272 1 ]
 [n S271 . bits . ]
-"270
-[; ;./global.h: 270: struct{
+"276
+[; ;./global.h: 276: struct{
 [s S273 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S273 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication ]
-"288
-[; ;./global.h: 288: struct{
+"294
+[; ;./global.h: 294: struct{
 [s S274 :1 `uc 1 ]
 [n S274 . flag_main_loop_WDT ]
-"293
-[; ;./global.h: 293: typedef struct{
+"299
+[; ;./global.h: 299: typedef struct{
 [s S275 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S275 . milisegundo segundo minuto hora ]
 [t ~ __interrupt . k ]
@@ -654,20 +654,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3 = OFF ]
 "72
 [p x EBTRB = OFF ]
-"234
-[; ;./global.h: 234: } statusgen ;
+"240
+[; ;./global.h: 240: } statusgen ;
 [v _statusgen `S270 ~T0 @X0 1 e ]
-"259
-[; ;./global.h: 259:       } statuspower;
+"265
+[; ;./global.h: 265:       } statuspower;
 [v _statuspower `S271 ~T0 @X0 1 e ]
-"278
-[; ;./global.h: 278: }statusgen1;
+"284
+[; ;./global.h: 284: }statusgen1;
 [v _statusgen1 `S273 ~T0 @X0 1 e ]
-"290
-[; ;./global.h: 290: }statusWDT;
+"296
+[; ;./global.h: 296: }statusWDT;
 [v _statusWDT `S274 ~T0 @X0 1 e ]
-"300
-[; ;./global.h: 300: volatile t_rtc rtc;
+"306
+[; ;./global.h: 306: volatile t_rtc rtc;
 [v _rtc `VS275 ~T0 @X0 1 e ]
 "54 isr.c
 [; ;isr.c: 54: volatile unsigned int tempo;

@@ -1,26 +1,26 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"225 ./global.h
-[; ;./global.h: 225: struct {
+"231 ./global.h
+[; ;./global.h: 231: struct {
 [s S270 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S270 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"250
-[; ;./global.h: 250:       struct {
+"256
+[; ;./global.h: 256:       struct {
 [s S272 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S272 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work ]
-"248
-[; ;./global.h: 248: union {
+"254
+[; ;./global.h: 254: union {
 [u S271 `uc 1 `S272 1 ]
 [n S271 . bits . ]
-"270
-[; ;./global.h: 270: struct{
+"276
+[; ;./global.h: 276: struct{
 [s S273 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S273 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication ]
-"288
-[; ;./global.h: 288: struct{
+"294
+[; ;./global.h: 294: struct{
 [s S274 :1 `uc 1 ]
 [n S274 . flag_main_loop_WDT ]
-"293
-[; ;./global.h: 293: typedef struct{
+"299
+[; ;./global.h: 299: typedef struct{
 [s S275 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S275 . milisegundo segundo minuto hora ]
 "8 EEPROM_24C1025.c
@@ -522,20 +522,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3 = OFF ]
 "72
 [p x EBTRB = OFF ]
-"234
-[; ;./global.h: 234: } statusgen ;
+"240
+[; ;./global.h: 240: } statusgen ;
 [v _statusgen `S270 ~T0 @X0 1 e ]
-"259
-[; ;./global.h: 259:       } statuspower;
+"265
+[; ;./global.h: 265:       } statuspower;
 [v _statuspower `S271 ~T0 @X0 1 e ]
-"278
-[; ;./global.h: 278: }statusgen1;
+"284
+[; ;./global.h: 284: }statusgen1;
 [v _statusgen1 `S273 ~T0 @X0 1 e ]
-"290
-[; ;./global.h: 290: }statusWDT;
+"296
+[; ;./global.h: 296: }statusWDT;
 [v _statusWDT `S274 ~T0 @X0 1 e ]
-"300
-[; ;./global.h: 300: volatile t_rtc rtc;
+"306
+[; ;./global.h: 306: volatile t_rtc rtc;
 [v _rtc `VS275 ~T0 @X0 1 e ]
 "13 EEPROM_24C1025.c
 [; ;EEPROM_24C1025.c: 13: void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
@@ -1309,8 +1309,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;EEPROM_24C1025.c: 271: }
 [e :UE 328 ]
 }
-"273
-[; ;EEPROM_24C1025.c: 273: void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data){
+"274
+[; ;EEPROM_24C1025.c: 274: void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data){
 [v _EEPROM_24C1025_Write_Int `(v ~T0 @X0 1 ef3`uc`ul`i ]
 {
 [e :U _EEPROM_24C1025_Write_Int ]
@@ -1318,79 +1318,138 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _mem_add `ul ~T0 @X0 1 r2 ]
 [v _data `i ~T0 @X0 1 r3 ]
 [f ]
-"274
-[; ;EEPROM_24C1025.c: 274:      char local[2];
-[v _local `uc ~T0 @X0 -> 2 `i a ]
 "275
-[; ;EEPROM_24C1025.c: 275:      local[0]=((char *)&data)[1];
-[e = *U + &U _local * -> -> -> 0 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 1 `i `x -> -> # *U -> &U _data `*uc `i `x ]
+[; ;EEPROM_24C1025.c: 275:      char local[2];
+[v _local `uc ~T0 @X0 -> 2 `i a ]
 "276
-[; ;EEPROM_24C1025.c: 276:      local[1]=((char *)&data)[0];
-[e = *U + &U _local * -> -> -> 1 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 0 `i `x -> -> # *U -> &U _data `*uc `i `x ]
+[; ;EEPROM_24C1025.c: 276:      local[0]=((char *)&data)[1];
+[e = *U + &U _local * -> -> -> 0 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 1 `i `x -> -> # *U -> &U _data `*uc `i `x ]
 "277
-[; ;EEPROM_24C1025.c: 277:      EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 2, local);
-[e ( _EEPROM_24C1025_Write_Buffer (4 , , , _chip_add _mem_add -> -> 2 `i `uc &U _local ]
+[; ;EEPROM_24C1025.c: 277:      local[1]=((char *)&data)[0];
+[e = *U + &U _local * -> -> -> 1 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 0 `i `x -> -> # *U -> &U _data `*uc `i `x ]
 "278
-[; ;EEPROM_24C1025.c: 278: }
+[; ;EEPROM_24C1025.c: 278:      EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 2, local);
+[e ( _EEPROM_24C1025_Write_Buffer (4 , , , _chip_add _mem_add -> -> 2 `i `uc &U _local ]
+"279
+[; ;EEPROM_24C1025.c: 279: }
 [e :UE 329 ]
 }
-"281
-[; ;EEPROM_24C1025.c: 281: unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_add){
+"282
+[; ;EEPROM_24C1025.c: 282: unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_add){
 [v _EEPROM_24C1025_Read_Int `(ui ~T0 @X0 1 ef2`uc`ul ]
 {
 [e :U _EEPROM_24C1025_Read_Int ]
 [v _chip_add `uc ~T0 @X0 1 r1 ]
 [v _mem_add `ul ~T0 @X0 1 r2 ]
 [f ]
-"282
-[; ;EEPROM_24C1025.c: 282:     char data[2];
-[v _data `uc ~T0 @X0 -> 2 `i a ]
 "283
-[; ;EEPROM_24C1025.c: 283:     EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 2, data);
-[e ( _EEPROM_24C1025_Read_Buffer (4 , , , _chip_add _mem_add -> -> 2 `i `uc &U _data ]
+[; ;EEPROM_24C1025.c: 283:     char data[2];
+[v _data `uc ~T0 @X0 -> 2 `i a ]
 "284
-[; ;EEPROM_24C1025.c: 284:     return (data[0]<<8)+data[1];
+[; ;EEPROM_24C1025.c: 284:     EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 2, data);
+[e ( _EEPROM_24C1025_Read_Buffer (4 , , , _chip_add _mem_add -> -> 2 `i `uc &U _data ]
+"285
+[; ;EEPROM_24C1025.c: 285:     return (data[0]<<8)+data[1];
 [e ) -> + << -> *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux `i -> 8 `i -> *U + &U _data * -> -> -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux `i `ui ]
 [e $UE 330  ]
-"285
-[; ;EEPROM_24C1025.c: 285: }
+"286
+[; ;EEPROM_24C1025.c: 286: }
 [e :UE 330 ]
 }
-"288
-[; ;EEPROM_24C1025.c: 288: void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value){
+"290
+[; ;EEPROM_24C1025.c: 290: void EEPROM_24C1025_Write_Long(unsigned char chip_add, unsigned long mem_add, long data){
+[v _EEPROM_24C1025_Write_Long `(v ~T0 @X0 1 ef3`uc`ul`l ]
+{
+[e :U _EEPROM_24C1025_Write_Long ]
+[v _chip_add `uc ~T0 @X0 1 r1 ]
+[v _mem_add `ul ~T0 @X0 1 r2 ]
+[v _data `l ~T0 @X0 1 r3 ]
+[f ]
+"291
+[; ;EEPROM_24C1025.c: 291:      char local[4];
+[v _local `uc ~T0 @X0 -> 4 `i a ]
+"292
+[; ;EEPROM_24C1025.c: 292:      local[0]=((char *)&data)[3];
+[e = *U + &U _local * -> -> -> 0 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 3 `i `x -> -> # *U -> &U _data `*uc `i `x ]
+"293
+[; ;EEPROM_24C1025.c: 293:      local[1]=((char *)&data)[2];
+[e = *U + &U _local * -> -> -> 1 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 2 `i `x -> -> # *U -> &U _data `*uc `i `x ]
+"294
+[; ;EEPROM_24C1025.c: 294:      local[2]=((char *)&data)[1];
+[e = *U + &U _local * -> -> -> 2 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 1 `i `x -> -> # *U -> &U _data `*uc `i `x ]
+"295
+[; ;EEPROM_24C1025.c: 295:      local[3]=((char *)&data)[0];
+[e = *U + &U _local * -> -> -> 3 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 0 `i `x -> -> # *U -> &U _data `*uc `i `x ]
+"296
+[; ;EEPROM_24C1025.c: 296:      EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 4, local);
+[e ( _EEPROM_24C1025_Write_Buffer (4 , , , _chip_add _mem_add -> -> 4 `i `uc &U _local ]
+"297
+[; ;EEPROM_24C1025.c: 297: }
+[e :UE 331 ]
+}
+"299
+[; ;EEPROM_24C1025.c: 299: unsigned long EEPROM_24C1025_Read_Long(unsigned char chip_add, unsigned long mem_add){
+[v _EEPROM_24C1025_Read_Long `(ul ~T0 @X0 1 ef2`uc`ul ]
+{
+[e :U _EEPROM_24C1025_Read_Long ]
+[v _chip_add `uc ~T0 @X0 1 r1 ]
+[v _mem_add `ul ~T0 @X0 1 r2 ]
+[f ]
+"300
+[; ;EEPROM_24C1025.c: 300:     char data[4];
+[v _data `uc ~T0 @X0 -> 4 `i a ]
+"301
+[; ;EEPROM_24C1025.c: 301:     long resultado;
+[v _resultado `l ~T0 @X0 1 a ]
+"302
+[; ;EEPROM_24C1025.c: 302:     EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 4, data);
+[e ( _EEPROM_24C1025_Read_Buffer (4 , , , _chip_add _mem_add -> -> 4 `i `uc &U _data ]
+"303
+[; ;EEPROM_24C1025.c: 303:     resultado=((long)data[0]<<24)|
+[e = _resultado | | | << -> *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 24 `i << -> *U + &U _data * -> -> -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 16 `i << -> *U + &U _data * -> -> -> 2 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 8 `i << -> *U + &U _data * -> -> -> 2 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 0 `i ]
+"307
+[; ;EEPROM_24C1025.c: 307:     return resultado;
+[e ) -> _resultado `ul ]
+[e $UE 332  ]
+"308
+[; ;EEPROM_24C1025.c: 308: }
+[e :UE 332 ]
+}
+"317
+[; ;EEPROM_24C1025.c: 317: void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value){
 [v _EEPROM_24C1025_Fill_All `(v ~T0 @X0 1 ef2`uc`ui ]
 {
 [e :U _EEPROM_24C1025_Fill_All ]
 [v _chip_add `uc ~T0 @X0 1 r1 ]
 [v _value `ui ~T0 @X0 1 r2 ]
 [f ]
-"289
-[; ;EEPROM_24C1025.c: 289:      unsigned long mem_add;
+"318
+[; ;EEPROM_24C1025.c: 318:      unsigned long mem_add;
 [v _mem_add `ul ~T0 @X0 1 a ]
-"290
-[; ;EEPROM_24C1025.c: 290:      for(mem_add=0;mem_add<=0x3FF;mem_add+=2)
+"319
+[; ;EEPROM_24C1025.c: 319:      for(mem_add=0;mem_add<=0x3FF;mem_add+=2)
 {
 [e = _mem_add -> -> -> 0 `i `l `ul ]
-[e $ <= _mem_add -> -> -> 1023 `i `l `ul 332  ]
-[e $U 333  ]
-[e :U 332 ]
-"291
-[; ;EEPROM_24C1025.c: 291:         {
+[e $ <= _mem_add -> -> -> 1023 `i `l `ul 334  ]
+[e $U 335  ]
+[e :U 334 ]
+"320
+[; ;EEPROM_24C1025.c: 320:         {
 {
-"292
-[; ;EEPROM_24C1025.c: 292:         EEPROM_24C1025_Write_Int(chip_add, mem_add, value);
+"321
+[; ;EEPROM_24C1025.c: 321:         EEPROM_24C1025_Write_Int(chip_add, mem_add, value);
 [e ( _EEPROM_24C1025_Write_Int (3 , , _chip_add _mem_add -> _value `i ]
-"293
-[; ;EEPROM_24C1025.c: 293:         __asm("CLRWDT");
+"322
+[; ;EEPROM_24C1025.c: 322:         __asm("CLRWDT");
 [; <" CLRWDT ;# ">
-"294
-[; ;EEPROM_24C1025.c: 294:         }
+"323
+[; ;EEPROM_24C1025.c: 323:         }
 }
 [e =+ _mem_add -> -> -> 2 `i `l `ul ]
-[e $ <= _mem_add -> -> -> 1023 `i `l `ul 332  ]
-[e :U 333 ]
+[e $ <= _mem_add -> -> -> 1023 `i `l `ul 334  ]
+[e :U 335 ]
 }
-"295
-[; ;EEPROM_24C1025.c: 295: }
-[e :UE 331 ]
+"324
+[; ;EEPROM_24C1025.c: 324: }
+[e :UE 333 ]
 }

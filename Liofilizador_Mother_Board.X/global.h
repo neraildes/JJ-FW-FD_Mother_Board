@@ -216,11 +216,17 @@
 
 
 
+
 //------------------------------------------------------------------------------
 #define OFFSET_EEPROM_RECEITA       256
 #define RECEITA_EEPROM_SIZE          16
 #define OFFSET_VP_RECEITA           420
 #define VP_RECEITA_SIZE              10
+
+
+
+
+
 
 struct {
     unsigned flag_usart_rx        : 1 ;

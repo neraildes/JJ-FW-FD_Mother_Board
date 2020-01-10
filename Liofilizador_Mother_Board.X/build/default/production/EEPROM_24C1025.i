@@ -4434,7 +4434,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 
 
 #pragma config EBTRB = OFF
-# 225 "./global.h"
+# 231 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -4445,7 +4445,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 248 "./global.h"
+# 254 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -4458,7 +4458,7 @@ union {
 
              };
       } statuspower;
-# 270 "./global.h"
+# 276 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -4468,7 +4468,7 @@ struct{
         unsigned flag_generico :1;
         unsigned flag_recomunication :1;
 }statusgen1;
-# 288 "./global.h"
+# 294 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -4514,8 +4514,12 @@ void EEPROM_24C1025_Write_Str(unsigned char chip_add, unsigned long mem_add,char
 
 void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char data);
 unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem_add);
+
 void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data);
 unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_add);
+
+void EEPROM_24C1025_Write_Long(unsigned char chip_add, unsigned long mem_add, long data);
+unsigned long EEPROM_24C1025_Read_Long(unsigned char chip_add, unsigned long mem_add);
 
 void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value);
 # 5 "EEPROM_24C1025.c" 2
@@ -4787,6 +4791,7 @@ unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem
     return data;
 }
 
+
 void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data){
      char local[2];
      local[0]=((char *)&data)[1];
@@ -4802,6 +4807,27 @@ unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_a
 }
 
 
+
+void EEPROM_24C1025_Write_Long(unsigned char chip_add, unsigned long mem_add, long data){
+     char local[4];
+     local[0]=((char *)&data)[3];
+     local[1]=((char *)&data)[2];
+     local[2]=((char *)&data)[1];
+     local[3]=((char *)&data)[0];
+     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 4, local);
+}
+
+unsigned long EEPROM_24C1025_Read_Long(unsigned char chip_add, unsigned long mem_add){
+    char data[4];
+    long resultado;
+    EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 4, data);
+    resultado=((long)data[0]<<24)|
+              ((long)data[1]<<16)|
+              ((long)data[2]<<8) |
+              ((long)data[2]<<0) ;
+    return resultado;
+}
+# 317 "EEPROM_24C1025.c"
 void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value){
      unsigned long mem_add;
      for(mem_add=0;mem_add<=0x3FF;mem_add+=2)

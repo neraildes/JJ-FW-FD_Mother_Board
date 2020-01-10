@@ -53,20 +53,44 @@ typedef struct{
              char nome[10];    
 } t_receita;
 
+
+
 typedef struct{
     char date[10];
-    char time[10];
+    char time[10];       
 } t_tempo;
 
-typedef struct{
-    t_tempo      inicio;
-    unsigned int start_add;
-    t_tempo fim;
-    unsigned int end_add;
-    unsigned int amostra;
-    unsigned int pontos;
-} t_fat;
 
+
+
+
+
+typedef struct{
+    unsigned int  processo_number;    //2
+    t_tempo       inicio;             //20  
+    t_tempo       fim;                //20
+    unsigned char amostra;            //1
+    unsigned long add_start;          //4
+    unsigned long add_end;            //4
+    union {                           //1
+          unsigned char status_bits;
+          struct {
+                 unsigned flag_running    : 1 ;
+                 unsigned flag_finalized  : 1 ;
+                 unsigned flag_view       : 1 ;
+                 unsigned flag_download   : 1 ;
+                 };      
+          };     
+} t_fat8;
+
+
+
+
+//==============================================================================
+
+
+
+//==============================================================================
 
 unsigned char countboard(void);
 int  Send_To_Slave(char destino, char comando, char size, char * buffer); //Comando padrao para conversar com escravo.
@@ -144,7 +168,7 @@ void Carregar_Status_da_Senha_Global(void);
 void Atualizar_Lista_de_Receitas(void);
 
 int  Tupla_Log_Free(void);
-void Write_Fat(char value);
+
 void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCDchannel);
 //void Teclas_da_Tela_de_Aquecimento(void);
 void Buffer_Manager(void);
@@ -173,6 +197,12 @@ void Carregar_Display_Schematic_Color(void);
 void Ligar_Cargas_Compassadamente(void);
 
 void Teste24cXXXX(void);
+
+void FAT8_Save(unsigned char tupla);
+void FAT8_Show();
+void Inicializa_FAT8_Table();
+void FAT8_Write_Process_Inicialize();
+void FAT8_Write_Process_Finalize();
 
 #endif	/* LIOFILIZADOR_PLACA_MAE_H */
 
