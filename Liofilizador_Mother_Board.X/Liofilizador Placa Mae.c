@@ -117,8 +117,8 @@ t_receita        receita;
 
 
 
-t_fat8           fat8_processo;
-char             index_fat;
+t_fat8           fat8;
+char             fat8_index;
 
 //------------------------------------------------------------------------------
 
@@ -277,10 +277,53 @@ void main(void)
      
      
      
+     /*
+     PROCULUS_OK();
+     {
+     unsigned char NumProcesso;
+     unsigned char index;
+     char i;
+     char time[10];
+     char date[10]; 
+     
+     Inicializa_FAT8_Table();
+
+     PROCULUS_Read_RTC(date,time);
+
+     fat8.processo.processo_number=8;   
+     strcpy(fat8.processo.inicio.date,date);
+     strcpy(fat8.processo.inicio.time,time);    
+     strcpy(fat8.processo.fim.date,date);
+     strcpy(fat8.processo.fim.time,time);            
+     fat8.processo.amostra=0;
+     fat8.processo.add_start=0;        
+     fat8.processo.add_end=0;
+     fat8.processo.flag_running=0;
+     fat8.processo.flag_download=0;
+     fat8.processo.flag_view=0;
+     fat8.processo.flag_finalized=0; 
+     FAT8_Save(3);
      
      
-     
-     
+     while(1)
+        {
+        for(i=0;i<12;i++)
+           {
+           fat8.index=Find_Fat8_Running();
+            
+            
+           //fat8.processo.flag_view=1;
+           PROCULUS_VP_Write_UInt16(172,fat8.index);
+           
+           //Find_Fat8_Stoped();             
+           //FAT8_Load();
+                    
+           FAT8_Show();
+           my_delay_ms_CLRWDT(1000);         
+           }
+        }
+     }
+     */
      
      
      
@@ -481,15 +524,21 @@ void main(void)
         FAT8_Save(1);
         FAT8_Save(2);
         */ 
+     
+
+     
+        //fat8.index=Find_Fat8_Stoped();
+        //FAT8_Load(fat8.index);
         FAT8_Show();
         
         //add_datalog=0;
         Ligar_Cargas_Compassadamente();
-        PROCULUS_Show_Screen(15);
+        PROCULUS_Show_Screen(15);     
+        
         while(1)
              {
              flag_main_loop_WDT=TRUE;       
-    
+             
              //=========================SELECAO DE PAGINA============================
              flag_proculus_hs=TRUE;
              if(delaycheckscreen>1000)
@@ -512,26 +561,26 @@ void main(void)
                 
                 
                 Gerenciador_de_Senha();  //Habilita acesso global por 30 segundos
-                Gerenciador_de_Senha_Global(); //Libera Senha Global eternamente                       
+                Gerenciador_de_Senha_Global(); //Libera Senha Global eternamente                 
                 
                 global_datalog(); // LEITURA DOS SENSORES
-                __delay_ms(32);                 
-                global_vacuo();
-                __delay_ms(32);
-                global_condensador();
-                __delay_ms(32);
-                global_aquecimento();
-                __delay_ms(32);
-
+                global_condensador();             
+                global_vacuo();                
+                global_aquecimento();               
+                
                 flag_proculus_hs=TRUE;
                 if(memo_statuspower!=statuspower.bits) 
                   { 
                   PROCULUS_OK();  
                   SaveBlackoutStatus();
                   memo_statuspower=statuspower.bits;
-                  }                          
-
+                  }        
                 
+
+                /*--------------------------------------------------------------
+                 * Esta função não pode ser utilizada porque ela restarta o
+                 * contador de datalog
+                 *--------------------------------------------------------------
                 if((processo_segundo==0) || (processo_segundo==30))
                     { 
                     if(flag_wakeup==1)
@@ -543,12 +592,17 @@ void main(void)
                 else
                     {
                     flag_wakeup=1;
-                    }                  
+                    }         
+                --------------------------------------------------------------*/
+                   
+                           
                 Check_And_Send_Capture_Datalog();
                 flag_proculus_hs=FALSE;
+                
                 //------------------CODIGO RAPIDO---------------------
                 ShowSensorRealTimeHS();                          
                 //----------------------------------------------------  
+                
                 showTotalReset();
 
                           
@@ -667,8 +721,9 @@ void main(void)
                                PROCULUS_VP_Write_UInt16(0x1015+(i*30),i*10);
                                }                           
                             }   
-                            */
-                          //FAT8_Show();     
+                         */ 
+                            
+                          FAT8_Show();     
                           if(PROCULUS_VP_Read_UInt16(175)==1) //Grava tempo de captura
                              { 
                              PROCULUS_VP_Write_UInt16(175,0);
@@ -702,11 +757,6 @@ void main(void)
                             static int canal=0;
                             flag_proculus_hs=TRUE;
                             
-                            /*
-                            for(canal=0;canal<14;canal++)
-                                PROCULUS_VP_Write_UInt16(1000+canal,*mapa.entrada[canal]*mapa.fator[canal]);      
-                            */
-
                             for(trendvp=0x0310;trendvp<0x031D;trendvp++)
                                   {	
                                   icone=trendvp-0x0310;					  								  
@@ -861,6 +911,8 @@ void main(void)
                           
                   
             }
+            
+            
       
 }
 //------------------------------------------------------------------------------
@@ -986,7 +1038,7 @@ void ShowSensorRealTimeHS(void)
         SlaveBoard  = (tupla / 2)+1; 
         canal = tupla % 2;
         bb[0]=canal; 
-        leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_READ_ANALOG, 1, bb); //fix -Retirar EMULA
+        leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_READ_ANALOG, 1, bb); //Alternar com EMULA
         
         flag_array_slave_WDT[SlaveBoard]=TRUE;
         }
@@ -1134,30 +1186,30 @@ void FAT8_Save(unsigned char tupla){
      //vp         = 0x1000+(tupla*FAT8_VP_SIZE);
      addEEPROM  = (tupla*EEPROM_FAT8_SIZE)+OFFSET_EEPROM_FAT8;
 
-     EEPROM_24C1025_Write_Int (0,addEEPROM+0,  fat8_processo.processo_number);  //2
-     EEPROM_24C1025_Write_Str (0,addEEPROM+2,  fat8_processo.inicio.time);      //10  
-     EEPROM_24C1025_Write_Str (0,addEEPROM+12, fat8_processo.inicio.date);      //10
-     EEPROM_24C1025_Write_Str (0,addEEPROM+22, fat8_processo.fim.time);         //10
-     EEPROM_24C1025_Write_Str (0,addEEPROM+32, fat8_processo.fim.date);         //10
-     EEPROM_24C1025_Write_Byte(0,addEEPROM+42, fat8_processo.amostra);          //1
-     EEPROM_24C1025_Write_Long(0,addEEPROM+43, fat8_processo.add_start);        //4
-     EEPROM_24C1025_Write_Long(0,addEEPROM+47, fat8_processo.add_end);          //4
-     EEPROM_24C1025_Write_Byte(0,addEEPROM+48, fat8_processo.status_bits);        //1
+     EEPROM_24C1025_Write_Int (0,addEEPROM+0,  fat8.processo.processo_number);  //2
+     EEPROM_24C1025_Write_Str (0,addEEPROM+2,  fat8.processo.inicio.time);      //10  
+     EEPROM_24C1025_Write_Str (0,addEEPROM+12, fat8.processo.inicio.date);      //10
+     EEPROM_24C1025_Write_Str (0,addEEPROM+22, fat8.processo.fim.time);         //10
+     EEPROM_24C1025_Write_Str (0,addEEPROM+32, fat8.processo.fim.date);         //10
+     EEPROM_24C1025_Write_Byte(0,addEEPROM+42, fat8.processo.amostra);          //1
+     EEPROM_24C1025_Write_Long(0,addEEPROM+43, fat8.processo.add_start);        //4
+     EEPROM_24C1025_Write_Long(0,addEEPROM+47, fat8.processo.add_end);          //4
+     EEPROM_24C1025_Write_Byte(0,addEEPROM+51, fat8.processo.all_flags);        //1
 }
 
 void FAT8_Load(unsigned char tupla){
      unsigned long addEEPROM;
      addEEPROM  = (tupla*EEPROM_FAT8_SIZE)+OFFSET_EEPROM_FAT8;
      
-     fat8_processo.processo_number=EEPROM_24C1025_Read_Int(0,addEEPROM+0);      //2
-     EEPROM_24C1025_Read_Str(0, addEEPROM+2, fat8_processo.inicio.time);        //10
-     EEPROM_24C1025_Read_Str(0, addEEPROM+12, fat8_processo.inicio.date);       //10
-     EEPROM_24C1025_Read_Str(0, addEEPROM+22, fat8_processo.fim.time);          //10 
-     EEPROM_24C1025_Read_Str(0, addEEPROM+32, fat8_processo.fim.date);          //10
-     fat8_processo.amostra=EEPROM_24C1025_Read_Byte  (0,addEEPROM+42);          //1
-     fat8_processo.add_start=EEPROM_24C1025_Read_Long(0,addEEPROM+43);          //4
-     fat8_processo.add_end=EEPROM_24C1025_Read_Long  (0,addEEPROM+47);          //4
-     fat8_processo.status_bits=EEPROM_24C1025_Read_Byte(0,addEEPROM+50);          //1
+     fat8.processo.processo_number=EEPROM_24C1025_Read_Int(0,addEEPROM+0);      //2
+     EEPROM_24C1025_Read_Str(0, addEEPROM+2, fat8.processo.inicio.time);        //10
+     EEPROM_24C1025_Read_Str(0, addEEPROM+12, fat8.processo.inicio.date);       //10
+     EEPROM_24C1025_Read_Str(0, addEEPROM+22, fat8.processo.fim.time);          //10 
+     EEPROM_24C1025_Read_Str(0, addEEPROM+32, fat8.processo.fim.date);          //10
+     fat8.processo.amostra=EEPROM_24C1025_Read_Byte  (0,addEEPROM+42);          //1
+     fat8.processo.add_start=EEPROM_24C1025_Read_Long(0,addEEPROM+43);          //4
+     fat8.processo.add_end=EEPROM_24C1025_Read_Long  (0,addEEPROM+47);          //4
+     fat8.processo.all_flags=EEPROM_24C1025_Read_Byte(0,addEEPROM+51);          //1
 }
 
 void FAT8_Show(){
@@ -1167,11 +1219,11 @@ void FAT8_Show(){
         { 
         vp=0x1000+(tupla*FAT8_VP_SIZE);
         FAT8_Load(tupla);     
-        PROCULUS_VP_Write_UInt16(vp+0,fat8_processo.processo_number);
-        PROCULUS_VP_Write_String(vp+1,fat8_processo.inicio.date);
-        PROCULUS_VP_Write_String(vp+11,fat8_processo.inicio.time);
-        PROCULUS_VP_Write_UInt16(vp+21,(fat8_processo.add_end-fat8_processo.add_start)/2*
-                                        fat8_processo.amostra);
+        PROCULUS_VP_Write_UInt16(vp+0,fat8.processo.processo_number);
+        PROCULUS_VP_Write_String(vp+1,fat8.processo.inicio.date);
+        PROCULUS_VP_Write_String(vp+11,fat8.processo.inicio.time);
+        PROCULUS_VP_Write_UInt16(vp+21,(fat8.processo.add_end-fat8.processo.add_start)/2*
+                                        fat8.processo.amostra);
         }
      
 }
@@ -1892,15 +1944,14 @@ void global_condensador(void){
 
 void global_vacuo(void){     
         if((PROCULUS_VP_Read_UInt16(0x04)==1)&&(flag_global_vacuo==0)) 
-           {
+           {  
+           if(flag_global_vacuo==0) PROCULUS_OK(); 
            flag_global_vacuo=1; 
            if(Condensador<Seg_Condensador)
               { 
               Vaccum_Switch(TRUE); 
-              Contagem_Tempo_de_Processo(TRUE); 
-              if(!fat8_processo.flag_running) 
-                  FAT8_Write_Process_Inicialize();
-              PROCULUS_OK();
+              Contagem_Tempo_de_Processo(TRUE);
+              FAT8_Write_Process_Inicialize();
               }
            else
               { 
@@ -2456,7 +2507,7 @@ void Check_And_Send_Capture_Datalog(void){
          __delay_ms(25); //EVITA LEITURA -1.0Volts
          save_datalog(add_datalog);         
          add_datalog+=2;
-         fat8_processo.add_end=add_datalog;
+         fat8.processo.add_end=add_datalog;
          FAT8_Save(0);
          FAT8_Show();
          }
@@ -3385,15 +3436,15 @@ void Teste24cXXXX(void)
 
 void Inicializa_FAT8_Table(){
     
-    fat8_processo.processo_number=0;    
-    strcpy(fat8_processo.inicio.date,"");
-    strcpy(fat8_processo.inicio.time,"");    
-    strcpy(fat8_processo.fim.date,"");
-    strcpy(fat8_processo.fim.time,"");    
-    fat8_processo.amostra=0;
-    fat8_processo.add_start=0;
-    fat8_processo.add_end=0;
-    fat8_processo.status_bits=0;
+    fat8.processo.processo_number=0;    
+    strcpy(fat8.processo.inicio.date,"");
+    strcpy(fat8.processo.inicio.time,"");    
+    strcpy(fat8.processo.fim.date,"");
+    strcpy(fat8.processo.fim.time,"");    
+    fat8.processo.amostra=0;
+    fat8.processo.add_start=0;
+    fat8.processo.add_end=0;
+    fat8.processo.all_flags=0;
     
     for(char tupla=0;tupla<12;tupla++) FAT8_Save(tupla);
     EEPROM_24C1025_Write_Int (0,0,0);  //2 Numero de processo
@@ -3406,39 +3457,30 @@ void Inicializa_FAT8_Table(){
 void FAT8_Write_Process_Inicialize()
     {
     unsigned char NumProcesso;
-    unsigned char index;
     char time[10];
     char date[10];
     
-    for(char i=0;i<12;i++)
-       { 
-       FAT8_Load(i);
-       if((!fat8_processo.flag_finalized)&&(!fat8_processo.flag_running))
-         {
-         index=i;
-         break;
-         }  
-       }
-
+    fat8.index=Find_Fat8_Free();
+    
     NumProcesso=EEPROM_24C1025_Read_Int (0,0);
     NumProcesso++;
     EEPROM_24C1025_Write_Int (0,0,NumProcesso);
 
     PROCULUS_Read_RTC(date,time);
 
-    fat8_processo.processo_number=NumProcesso;    
-    strcpy(fat8_processo.inicio.date,date);
-    strcpy(fat8_processo.inicio.time,time);    
-    strcpy(fat8_processo.fim.date,"");
-    strcpy(fat8_processo.fim.time,"");            
-    fat8_processo.amostra=EEPROM_Read_Integer(0x09);
-    fat8_processo.add_start=0;        
-    fat8_processo.add_end=0;
-    fat8_processo.flag_running=1;
-    fat8_processo.flag_download=0;
-    fat8_processo.flag_view=0;
-    fat8_processo.flag_finalized=0;
-    FAT8_Save(NumProcesso);
+    fat8.processo.processo_number=NumProcesso;    
+    strcpy(fat8.processo.inicio.date,date);
+    strcpy(fat8.processo.inicio.time,time);    
+    strcpy(fat8.processo.fim.date,"");
+    strcpy(fat8.processo.fim.time,"");            
+    fat8.processo.amostra=EEPROM_Read_Integer(0x09);
+    fat8.processo.add_start=0;        
+    fat8.processo.add_end=0;
+    fat8.processo.flag_download=0;
+    fat8.processo.flag_view=0;
+    fat8.processo.flag_finalized=0;
+    fat8.processo.flag_running=1;
+    FAT8_Save(fat8.index);
     FAT8_Show();
     }
 
@@ -3449,36 +3491,78 @@ void FAT8_Write_Process_Finalize(){
     char time[10];
     char date[10];
     
-    for(char i=0;i<12;i++)
-       { 
-       FAT8_Load(i);
-       if(fat8_processo.flag_running)
-         {
-         index=i;
-         break;
-         }  
-       }
-
-    NumProcesso=EEPROM_24C1025_Read_Int (0,0);
-    //NumProcesso++;
-    //EEPROM_24C1025_Write_Int (0,0,NumProcesso);
-    
-    FAT8_Load(NumProcesso);    
+    fat8_index=Find_Fat8_Running();
+    FAT8_Load(fat8.index);    
 
     PROCULUS_Read_RTC(date,time);
 
-    fat8_processo.processo_number=NumProcesso;    
+    fat8.processo.processo_number=NumProcesso;    
     //strcpy(fat8_processo.inicio.date,date);
     //strcpy(fat8_processo.inicio.time,time);    
-    strcpy(fat8_processo.fim.date,date);
-    strcpy(fat8_processo.fim.time,time);            
-    //fat8_processo.amostra=EEPROM_Read_Integer(0x09);
-    fat8_processo.add_start=0;        
-    fat8_processo.add_end=add_datalog;
-    fat8_processo.flag_running=0;
-    fat8_processo.flag_download=0;
-    fat8_processo.flag_view=0;
-    fat8_processo.flag_finalized=1;
-    FAT8_Save(NumProcesso);
+    strcpy(fat8.processo.fim.date,date);
+    strcpy(fat8.processo.fim.time,time);            
+    //fat8.processo.amostra=EEPROM_Read_Integer(0x09);
+    fat8.processo.add_start=0;        
+    fat8.processo.add_end=add_datalog;
+    fat8.processo.flag_running=0;
+    fat8.processo.flag_download=0;
+    fat8.processo.flag_view=0;
+    fat8.processo.flag_finalized=1;
+    FAT8_Save(fat8_index);
     FAT8_Show();        
+}
+
+
+
+char Find_Fat8_Free(){
+     char i;
+     char resultado=-1;
+     for(i=0;i<12;i++)
+        {
+        FAT8_Load(i);
+        if((fat8.processo.flag_running==0)&&(!fat8.processo.flag_finalized)) 
+           {
+            resultado=i;
+            break;
+           } 
+        }    
+     return resultado;
+}
+
+
+char Find_Fat8_Running(){
+     char i;
+     char resultado=-1;
+     for(i=0;i<12;i++)
+        {
+        FAT8_Load(i);
+        if(fat8.processo.flag_running) 
+          {  
+          resultado=i;  
+          break;
+          }
+        }    
+     return resultado;
+}
+
+
+
+void Preenche_Dados_da_FAT8(){
+     char time[10];
+     char date[10]; 
+
+     PROCULUS_Read_RTC(date,time);
+
+     fat8.processo.processo_number=0;   
+     strcpy(fat8.processo.inicio.date,date);
+     strcpy(fat8.processo.inicio.time,time);    
+     strcpy(fat8.processo.fim.date,date);
+     strcpy(fat8.processo.fim.time,time);            
+     fat8.processo.amostra=0;
+     fat8.processo.add_start=0;        
+     fat8.processo.add_end=add_datalog;
+     fat8.processo.flag_running=0;
+     fat8.processo.flag_download=0;
+     fat8.processo.flag_view=0;
+     fat8.processo.flag_finalized=0;    
 }

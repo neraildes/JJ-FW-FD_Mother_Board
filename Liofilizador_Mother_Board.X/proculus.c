@@ -105,7 +105,7 @@ void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size){
      USART_putc(VP_READ);
      USART_put_int(vp);
      USART_putc((unsigned char)(size>>1));  // size = size / 2  
-     __delay_us(50);
+     //__delay_us(50);
 
 
 

@@ -61,9 +61,19 @@ typedef struct{
 } t_tempo;
 
 
+typedef struct{
+              char memoflags;    
+              union {
+                    unsigned flag_running    : 1 ;
+                    unsigned flag_finalized  : 1 ;
+                    unsigned flag_view       : 1 ;
+                    unsigned flag_download   : 1 ;
+                    }flags;
+              }bitflags;  
 
-
-
+              
+              
+//------------------------------------------------------------------------------
 
 typedef struct{
     unsigned int  processo_number;    //2
@@ -71,17 +81,27 @@ typedef struct{
     t_tempo       fim;                //20
     unsigned char amostra;            //1
     unsigned long add_start;          //4
-    unsigned long add_end;            //4
-    union {                           //1
-          unsigned char status_bits;
-          struct {
-                 unsigned flag_running    : 1 ;
-                 unsigned flag_finalized  : 1 ;
-                 unsigned flag_view       : 1 ;
-                 unsigned flag_download   : 1 ;
-                 };      
-          };     
-} t_fat8;
+    unsigned long add_end;            //4 
+    union 
+    {
+    unsigned char all_flags;
+    struct{
+         unsigned flag_running    : 1 ;
+         unsigned flag_finalized  : 1 ;
+         unsigned flag_view       : 1 ;
+         unsigned flag_download   : 1 ;
+         unsigned reserved0       : 1 ;
+         unsigned reserved1       : 1 ;
+         unsigned reserved2       : 1 ;
+         unsigned reserved3       : 1 ;
+         }; 
+    }; 
+} t_fat8_processo;
+
+typedef struct{
+        char index;
+        t_fat8_processo processo;
+}t_fat8;
 
 
 
@@ -198,11 +218,17 @@ void Ligar_Cargas_Compassadamente(void);
 
 void Teste24cXXXX(void);
 
+void Inicializa_FAT8_Table();          //Inicializa a tabela de FAT8
+void FAT8_Write_Process_Inicialize();  //Inicia um processo
+void FAT8_Write_Process_Finalize();    //Finaliza um processo
 void FAT8_Save(unsigned char tupla);
+void FAT8_Load(unsigned char tupla);
 void FAT8_Show();
-void Inicializa_FAT8_Table();
-void FAT8_Write_Process_Inicialize();
-void FAT8_Write_Process_Finalize();
+char Find_Fat8_Running();
+char Find_Fat8_Free();
+
+
+void Preenche_Dados_da_FAT8();
 
 #endif	/* LIOFILIZADOR_PLACA_MAE_H */
 

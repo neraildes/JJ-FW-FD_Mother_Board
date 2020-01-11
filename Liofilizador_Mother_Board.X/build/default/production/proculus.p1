@@ -881,9 +881,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "107
 [; ;proculus.c: 107:      USART_putc((unsigned char)(size>>1));
 [e ( _USART_putc (1 -> >> -> _size `i -> 1 `i `uc ]
-"108
-[; ;proculus.c: 108:      _delay((unsigned long)((50)*(32000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
 "113
 [; ;proculus.c: 113:      tempo=0;
 [e = _tempo -> -> 0 `i `ui ]
