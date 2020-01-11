@@ -4626,17 +4626,233 @@ void USART_put_buffer(char *vetor, char size);
 unsigned char USART_input_buffer(void);
 # 5 "isr.c" 2
 
+# 1 "./Liofilizador Placa Mae.h" 1
+# 13 "./Liofilizador Placa Mae.h"
+typedef struct{
+           int *entrada[15];
+           float fator[15];
+           char canal[15];
+           char icone[15];
+           char vpIcone[15];
+     int cor[15];
+              } T_mapa;
+
+
+
+typedef struct{
+        unsigned char plataforma;
+
+                 int setpoint;
+        unsigned char tempoON;
+        unsigned char tempoOFF;
+        unsigned char histerese;
+                 char receita[9];
+        unsigned int status ;
+} t_liofilizador;
+
+
+
+
+typedef struct{
+    unsigned char plataforma;
+    int setpoint;
+    unsigned int potenciaON;
+    unsigned int potenciaOFF;
+    unsigned char histerese;
+    unsigned char receita[10];
+    unsigned int status0;
+} t_aquecimento;
+
+typedef struct{
+    int setpoint;
+    unsigned int potenciaON;
+    unsigned int potenciaOFF;
+    unsigned char histerese;
+             char nome[10];
+} t_receita;
+
+
+
+typedef struct{
+    char date[10];
+    char time[10];
+} t_tempo;
+
+
+typedef struct{
+              char memoflags;
+              union {
+                    unsigned flag_running : 1 ;
+                    unsigned flag_finalized : 1 ;
+                    unsigned flag_view : 1 ;
+                    unsigned flag_download : 1 ;
+                    }flags;
+              }bitflags;
+
+
+
+
+
+typedef struct{
+    unsigned int processo_number;
+    t_tempo inicio;
+    t_tempo fim;
+    unsigned char amostra;
+    unsigned long add_start;
+    unsigned long add_end;
+    unsigned int minutes;
+    union
+    {
+    unsigned char all_flags;
+    struct{
+         unsigned flag_running : 1 ;
+         unsigned flag_finalized : 1 ;
+         unsigned flag_view : 1 ;
+         unsigned flag_download : 1 ;
+         unsigned reserved0 : 1 ;
+         unsigned reserved1 : 1 ;
+         unsigned reserved2 : 1 ;
+         unsigned reserved3 : 1 ;
+         };
+    };
+} t_fat8_processo;
+
+typedef struct{
+        char index;
+        t_fat8_processo processo;
+}t_fat8;
+# 116 "./Liofilizador Placa Mae.h"
+unsigned char countboard(void);
+int Send_To_Slave(char destino, char comando, char size, char * buffer);
+int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer);
+void ShowSensorRealTimeHS(void);
+void showTotalReset(void);
+void AcordaFilha(void);
+
+
+void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador);
+void ShowStaticValueGrid(unsigned char tupla);
+
+void ShowAndSetSlaveParameters(unsigned char tupla);
+void Comando_Protocolo_Serial(void);
+void Send_to_PC(unsigned char size);
+
+void Upload_Data_to_Slave(void);
+void Decodify_Command(void);
+void SEND_REPLY_OK(void);
+
+
+void global_datalog(void);
+void global_condensador(void);
+void global_vacuo(void);
+void global_aquecimento(void);
+
+void Exibe_Hora_Data(char showseconds);
+void Exibe_Tempo_de_Processo(void);
+
+void DataBaseBackupMain(unsigned char tupla);
+void Formatar_Banco_de_Dados(char inicio, char total);
+void Salva_Seguranca(void);
+void Formatar_Datalog(void);
+void ShowMessage(char mensagem[30],unsigned int delay, char SoundType, char retem);
+
+void Comando_Microcomputador(void);
+void Comando_Display(void);
+
+
+void Inicializar_Seguranca(void);
+
+void SaveBlackoutStatus(void);
+void SaveBlackoutStatusRuning(void);
+void RecallBlackoutStatus(void);
+
+void Check_And_Send_Capture_Datalog(void);
+void save_datalog(unsigned long add_datalog);
+
+void Contagem_Tempo_de_Processo(char value);
+void Carregar_tempo_de_datalog(void);
+
+void Carrega_Tupla_Receita(char index, t_receita *receita);
+
+void ShowHardwareInfo(void);
+
+void Global_Aquecimento_Switch(unsigned char estado);
+void Gerenciador_de_Senha(void);
+void Gerenciador_de_Senha_Global(void);
+void Icones_de_alarmes(void);
+
+void Condensador_Switch(unsigned char estado);
+void Vaccum_Switch(unsigned char estado);
+void TrendCurveFuncao(char funcao);
+char buscaIndex(char *buffer,char valor);
+
+void Exibe_Receita(int add_receita);
+void Grava_Receita(char index, t_receita *receita);
+void Formatar_Lista_de_Receitas(void);
+void Formatar_Dados_de_Seguranca(void);
+void Carregar_Parametros_de_Seguranca(void);
+
+void Gravar_Status_da_Senha_Global(void);
+void Carregar_Status_da_Senha_Global(void);
+
+void Atualizar_Lista_de_Receitas(void);
+
+int Tupla_Log_Free(void);
+
+void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCDchannel);
+
+void Buffer_Manager(void);
+
+
+unsigned int Captura_Pagina(void);
+_Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd);
+char menorValorDisponivel(char * trendCurve);
+
+
+ void Set_Receita(unsigned char index, char status);
+
+void pagina_15(void);
+void pagina_19(void);
+void pagina_23(void);
+void pagina_25(void);
+void pagina_29(void);
+void pagina_31(void);
+void pagina_47(void);
+void pagina_49(void);
+
+char MenorCanalLivre(void);
+
+void Incrementa_Contador_de_Repique_do_Vacuo(void);
+void Carregar_Display_Schematic_Color(void);
+void Ligar_Cargas_Compassadamente(void);
+
+void Teste24cXXXX(void);
+
+void Inicializa_FAT8_Table();
+void FAT8_Write_Process_Inicialize();
+void FAT8_Write_Process_Finalize();
+void FAT8_Save(unsigned char tupla);
+void FAT8_Load(unsigned char tupla);
+void FAT8_Show();
+char Find_Fat8_Running();
+char Find_Fat8_Free();
+
+
+void Preenche_Dados_da_FAT8();
+# 6 "isr.c" 2
+
 
 
 
 
 extern volatile unsigned char usart_buffer[32+10];
 extern volatile unsigned char usart_buffer_fila[2][32+10];
-# 20 "isr.c"
+# 21 "isr.c"
 extern volatile unsigned int tempodecorrido ;
 extern volatile unsigned int tempocaptura ;
 extern volatile unsigned int tempocapturaconstante ;
 
+extern volatile unsigned int processo_totalminuto;
 extern volatile unsigned char processo_segundo ;
 extern volatile unsigned char processo_minuto ;
 extern volatile unsigned char processo_hora ;
@@ -4814,6 +5030,7 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
              if(rtc.segundo>=60){
                 rtc.segundo=0;
                 rtc.minuto++;
+                processo_totalminuto++;
                 if(rtc.minuto>=60){
                    rtc.minuto=0;
                    rtc.hora++;

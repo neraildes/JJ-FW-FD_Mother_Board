@@ -3,6 +3,7 @@
 #include "global.h"
 #include "isr.h"
 #include "usart.h"
+#include "Liofilizador Placa Mae.h"
 
 
 
@@ -21,6 +22,7 @@ extern volatile unsigned int  tempodecorrido        ;
 extern volatile unsigned int  tempocaptura          ; //variavel de captura de dados para memoria datalog
 extern volatile unsigned int  tempocapturaconstante ; //variavel de memoria
 
+extern volatile unsigned int  processo_totalminuto;
 extern volatile unsigned char processo_segundo ;
 extern volatile unsigned char processo_minuto ;
 extern volatile unsigned char processo_hora   ;
@@ -174,14 +176,14 @@ void __interrupt(low_priority) isr(void)
        //-----------------------------------------------------------------------
           rtc.milisegundo+=50;          
           if(rtc.milisegundo>=1000){
-
+              
              if(flag_time_process)
                { 
                processo_segundo++;
                if(processo_segundo>=60)
                   {
                   processo_segundo=0;
-                  processo_minuto++;
+                  processo_minuto++;                  
                   if(processo_minuto>=60)
                     {
                     processo_minuto=0;
@@ -197,7 +199,8 @@ void __interrupt(low_priority) isr(void)
              if(delay_condensador)delay_condensador--;
              if(rtc.segundo>=60){
                 rtc.segundo=0;
-                rtc.minuto++;                
+                rtc.minuto++; 
+                processo_totalminuto++;
                 if(rtc.minuto>=60){
                    rtc.minuto=0;                   
                    rtc.hora++; 

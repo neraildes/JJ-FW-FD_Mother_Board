@@ -82,6 +82,7 @@ typedef struct{
     unsigned char amostra;            //1
     unsigned long add_start;          //4
     unsigned long add_end;            //4 
+    unsigned int  minutes;            //2
     union 
     {
     unsigned char all_flags;
