@@ -279,50 +279,32 @@ void main(void)
      
      
      /*
-     PROCULUS_OK();
-     {
-     unsigned char NumProcesso;
-     unsigned char index;
-     char i;
-     char time[10];
-     char date[10]; 
-     
-     Inicializa_FAT8_Table();
-
-     PROCULUS_Read_RTC(date,time);
-
-     fat8.processo.processo_number=8;   
-     strcpy(fat8.processo.inicio.date,date);
-     strcpy(fat8.processo.inicio.time,time);    
-     strcpy(fat8.processo.fim.date,date);
-     strcpy(fat8.processo.fim.time,time);            
-     fat8.processo.amostra=0;
-     fat8.processo.add_start=0;        
-     fat8.processo.add_end=0;
-     fat8.processo.flag_running=0;
-     fat8.processo.flag_download=0;
-     fat8.processo.flag_view=0;
-     fat8.processo.flag_finalized=0; 
-     FAT8_Save(3);
-     
-     
      while(1)
-        {
-        for(i=0;i<12;i++)
-           {
-           fat8.index=Find_Fat8_Running();
-            
-            
-           //fat8.processo.flag_view=1;
-           PROCULUS_VP_Write_UInt16(172,fat8.index);
-           
-           //Find_Fat8_Stoped();             
-           //FAT8_Load();
-                    
-           FAT8_Show();
-           my_delay_ms_CLRWDT(1000);         
-           }
-        }
+     {
+     PROCULUS_OK();
+     __delay_ms(500);
+     EEPROM_24C1025_Write_Long(0,0,12345);
+     //__delay_ms(50);
+     if(EEPROM_24C1025_Read_Long(0,0)==12345)
+       {  
+       PROCULUS_Buzzer(100)  ;
+       __delay_ms(100);
+       PROCULUS_Buzzer(100)  ;
+       __delay_ms(100);
+       PROCULUS_Buzzer(100)  ;
+       __delay_ms(100);
+       PROCULUS_Buzzer(100)  ;
+       __delay_ms(100);
+       PROCULUS_Buzzer(100)  ;
+       __delay_ms(100);
+       }
+     else
+       {
+       PROCULUS_Buzzer(100)  ;
+       __delay_ms(100);         
+       }   
+     my_delay_ms_CLRWDT(1000);
+     
      }
      */
      
@@ -437,14 +419,16 @@ void main(void)
        EEPROM_Write_Byte(17,0);//processo_Hora
        EEPROM_Write_Byte(18,0);//processo_Minuto   
        Inicializa_FAT8_Table();          //Inicializa tabela de Datalog 
-       EEPROM_24C1025_Write_Int (0,0,0); //Inicializa numero de processo
+       EEPROM_24C1025_Write_Int  (0,0,0); //Inicializa numero de processo
+       EEPROM_24C1025_Write_Long (0,2,0); //Inicializa add_datalog
        }   
      RecallBlackoutStatus();
      TrendCurveFuncao(LOAD);
      senha_atual=EEPROM_Read_Long32(11);
      Carregar_Status_da_Senha_Global(); 
      Carregar_Parametros_de_Seguranca();
-     Carregar_tempo_de_datalog(); 
+     Carregar_tempo_de_datalog(); //Intervalo de capturas
+     add_datalog=EEPROM_24C1025_Read_Long (0,2); //Inicializa add_datalog
      //-------------------------------------------------------------------------     
 
      //------------Valores Iniciais da tela Principal---------------------------
@@ -531,6 +515,7 @@ void main(void)
      
         //fat8.index=Find_Fat8_Stoped();
         //FAT8_Load(fat8.index);
+    
         FAT8_Show();
         
         //add_datalog=0;
@@ -705,26 +690,21 @@ void main(void)
                           break;
 
                   case 29: // Ajuste de tempo de captura de datalog
-                         {
-                         /*    
-                         char date[10];
-                         char time[10];
+ 
+                          for(char i=0;i<12;i++)   
+                             {                                 
+                             if(PROCULUS_VP_Read_UInt16(0x1017+(i*30))==1)
+                               {
+                               PROCULUS_VP_Write_UInt16(0x1017+(i*30),0);
+                               FAT8_Load(i);
+                               PROCULUS_Show_Screen(35);
+                               PROCULUS_Clean_All_Line_Graphic();
+                               Teste24cXXXX();
+                               break;  
+                               } 
+                             }                           
+                               
                          
-                         
-                          if(PROCULUS_VP_Read_UInt16(0x1017)==1)
-                            {   
-                            PROCULUS_VP_Write_UInt16(0x1017,0);   
-                            PROCULUS_OK();
-                            for(char i=0;i<12;i++)   
-                               {                                 
-                               PROCULUS_Read_RTC(date,time);     
-                               PROCULUS_VP_Write_UInt16(0x1000+(i*30),i);
-                               PROCULUS_VP_Write_String(0x1001+(i*30),date);
-                               PROCULUS_VP_Write_String(0x100B+(i*30),time);   
-                               PROCULUS_VP_Write_UInt16(0x1015+(i*30),i*10);
-                               }                           
-                            }   
-                         */ 
                             
                           FAT8_Show();     
                           if(PROCULUS_VP_Read_UInt16(175)==1) //Grava tempo de captura
@@ -732,7 +712,7 @@ void main(void)
                              PROCULUS_VP_Write_UInt16(175,0);
                              pagina_29(); 
                              }  
-                          } 
+                           
                           break;
                   case 31: //Troca de Senha
                           {
@@ -1240,6 +1220,11 @@ void FAT8_Show(){
         PROCULUS_VP_Write_String(vp+1,fat8.processo.inicio.date);
         PROCULUS_VP_Write_String(vp+11,fat8.processo.inicio.time);
         PROCULUS_VP_Write_UInt16(vp+21,fat8.processo.minutes);
+        
+        
+    
+        PROCULUS_VP_Write_UInt16(vp+24,fat8.processo.add_start);
+        PROCULUS_VP_Write_UInt16(vp+25,fat8.processo.add_end); 
         }
      
 }
@@ -1906,7 +1891,9 @@ void global_datalog(void){
             char bb[2];
             Send_To_Slave(TODOS, COMMAND_SYNCRONIZE , 0, bb);
             Carregar_tempo_de_datalog();
+            PROCULUS_Clean_All_Line_Graphic();
             FAT8_Write_Process_Inicialize();
+            
             flag_global_datalog=1;             
            }
         else if((PROCULUS_VP_Read_UInt16(2)==0)&&(flag_global_datalog==1))
@@ -2562,7 +2549,7 @@ void SaveBlackoutStatusRuning(void){
        if(flag_save_time==0)  
           {
           flag_save_time=1;  
-          PROCULUS_OK(); //fix  DESATIVAR
+          PROCULUS_OK(); //fix  DESATIVAR          
           EEPROM_Write_Byte(17,processo_hora);     //Hora
           EEPROM_Write_Byte(18,processo_minuto);   //Minuto           
           }
@@ -2575,7 +2562,7 @@ void SaveBlackoutStatusRuning(void){
 
 
 void SaveBlackoutStatus(void){
-     EEPROM_Write_Byte(16,statuspower.bits);  //Todos os Status
+     EEPROM_Write_Byte(16,statuspower.bits);  //Todos os Status     
      EEPROM_Write_Byte(17,processo_hora);     //Hora
      EEPROM_Write_Byte(18,processo_minuto);   //Minuto
 }
@@ -2584,7 +2571,7 @@ void SaveBlackoutStatus(void){
 
 
 void RecallBlackoutStatus(void){
-     statuspower.bits=EEPROM_Read_Byte(16);
+     statuspower.bits=EEPROM_Read_Byte(16);     
      processo_hora=EEPROM_Read_Byte(17);
      processo_minuto=EEPROM_Read_Byte(18);
 
@@ -3373,15 +3360,14 @@ void Teste24cXXXX(void)
      char bb[5];
      char SlaveBoard;
      char canal;
-     char tupla;
+     char tupla;  
      
-     unsigned long add_eeprom;
      char flag_exit;
      int  leitura[14];
      
      PROCULUS_Show_Screen(35);
      PROCULUS_OK();
-     add_eeprom=0;
+     add_datalog=fat8.processo.add_start;
      flag_exit=FALSE;
      do{          
           //Capturando dados das placas
@@ -3394,10 +3380,10 @@ void Teste24cXXXX(void)
              canal = tupla % 2;
             
              bb[0]=canal;
-             bb[1]=High (add_eeprom);
-             bb[2]=Lower(add_eeprom);
-             bb[3]=Hi   (add_eeprom);
-             bb[4]=Lo   (add_eeprom);      
+             bb[1]=High (add_datalog);
+             bb[2]=Lower(add_datalog);
+             bb[3]=Hi   (add_datalog);
+             bb[4]=Lo   (add_datalog);      
              leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_EEE_R_INT, 5, bb);
 
              if(tupla==0)
@@ -3410,7 +3396,7 @@ void Teste24cXXXX(void)
                }
              asm("CLRWDT");
              }
-          add_eeprom+=2;
+          add_datalog+=2;
 
           
           
@@ -3435,6 +3421,7 @@ void Teste24cXXXX(void)
           
           
        }while(flag_exit==FALSE);
+       /*
        PROCULUS_OK();
        if(PROCULUS_VP_Read_UInt16(2))  //Datalog no Display
           {
@@ -3444,6 +3431,7 @@ void Teste24cXXXX(void)
           }
        else
           add_datalog=0;  
+       */ 
 }     
 
 
@@ -3483,14 +3471,16 @@ void FAT8_Write_Process_Inicialize()
     PROCULUS_Read_RTC(date,time);
     
     processo_totalminuto=0;
-
+    
+    add_datalog=EEPROM_24C1025_Read_Long (0,2); //Inicializa add_datalog
+    
     fat8.processo.processo_number=NumProcesso;    
     strcpy(fat8.processo.inicio.date,date);
     strcpy(fat8.processo.inicio.time,time);    
     strcpy(fat8.processo.fim.date,"");
     strcpy(fat8.processo.fim.time,"");            
     fat8.processo.amostra=EEPROM_Read_Integer(0x09);
-    fat8.processo.add_start=0;        
+    fat8.processo.add_start=add_datalog;        
     fat8.processo.add_end=0;
     fat8.processo.minutes=0;
     fat8.processo.flag_download=0;
@@ -3511,7 +3501,7 @@ void FAT8_Write_Process_Finalize(){
     fat8_index=Find_Fat8_Running();
     FAT8_Load(fat8.index);    
 
-    PROCULUS_Read_RTC(date,time);
+    PROCULUS_Read_RTC(date,time);    
 
     fat8.processo.processo_number=NumProcesso;    
     //strcpy(fat8_processo.inicio.date,date);
@@ -3519,7 +3509,7 @@ void FAT8_Write_Process_Finalize(){
     strcpy(fat8.processo.fim.date,date);
     strcpy(fat8.processo.fim.time,time);            
     //fat8.processo.amostra=EEPROM_Read_Integer(0x09);
-    fat8.processo.add_start=0;        
+    //fat8.processo.add_start=0;        
     fat8.processo.add_end=add_datalog;
     fat8.processo.minutes=processo_totalminuto;
     fat8.processo.flag_running=0;
@@ -3527,7 +3517,9 @@ void FAT8_Write_Process_Finalize(){
     fat8.processo.flag_view=0;
     fat8.processo.flag_finalized=1;
     FAT8_Save(fat8_index);
-    FAT8_Show();        
+    FAT8_Show(); 
+    add_datalog+=2;
+    EEPROM_24C1025_Write_Long (0,2,add_datalog); //Inicializa add_datalog
 }
 
 

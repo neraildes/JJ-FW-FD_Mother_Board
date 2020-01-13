@@ -160,6 +160,8 @@ void PROCULUS_graphic_plot(unsigned char lcd_channel, unsigned int value); //Plo
 
 void PROCULUS_Clear_Line_Graphic(char channel);
 
+void PROCULUS_Clean_All_Line_Graphic();
+
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 

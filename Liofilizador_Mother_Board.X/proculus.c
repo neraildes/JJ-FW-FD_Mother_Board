@@ -611,6 +611,14 @@ void PROCULUS_Clear_Line_Graphic(char channel){
      PROCULUS_REG_Write(buffer,0x03);
 }
 
+void PROCULUS_Clean_All_Line_Graphic(){
+     unsigned char i;
+     for(i=0;i<8;i++)
+        {
+        PROCULUS_Clear_Line_Graphic(i+1) ;
+        }  
+}
+
 
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

@@ -303,7 +303,7 @@ unsigned long EEPROM_24C1025_Read_Long(unsigned char chip_add, unsigned long mem
     resultado=((long)data[0]<<24)|
               ((long)data[1]<<16)|
               ((long)data[2]<<8) |
-              ((long)data[2]<<0) ;
+              ((long)data[3]<<0) ;
     return resultado;        
 }
 

@@ -1406,7 +1406,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _EEPROM_24C1025_Read_Buffer (4 , , , _chip_add _mem_add -> -> 4 `i `uc &U _data ]
 "303
 [; ;EEPROM_24C1025.c: 303:     resultado=((long)data[0]<<24)|
-[e = _resultado | | | << -> *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 24 `i << -> *U + &U _data * -> -> -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 16 `i << -> *U + &U _data * -> -> -> 2 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 8 `i << -> *U + &U _data * -> -> -> 2 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 0 `i ]
+[e = _resultado | | | << -> *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 24 `i << -> *U + &U _data * -> -> -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 16 `i << -> *U + &U _data * -> -> -> 2 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 8 `i << -> *U + &U _data * -> -> -> 3 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 0 `i ]
 "307
 [; ;EEPROM_24C1025.c: 307:     return resultado;
 [e ) -> _resultado `ul ]

@@ -220,6 +220,8 @@ void PROCULUS_Popup(char value);
 void PROCULUS_graphic_plot(unsigned char lcd_channel, unsigned int value);
 
 void PROCULUS_Clear_Line_Graphic(char channel);
+
+void PROCULUS_Clean_All_Line_Graphic();
 # 3 "proculus.c" 2
 
 
@@ -5913,4 +5915,12 @@ void PROCULUS_Clear_Line_Graphic(char channel){
      buffer[0]=0xEB;
      buffer[1]=0x55+channel;
      PROCULUS_REG_Write(buffer,0x03);
+}
+
+void PROCULUS_Clean_All_Line_Graphic(){
+     unsigned char i;
+     for(i=0;i<8;i++)
+        {
+        PROCULUS_Clear_Line_Graphic(i+1) ;
+        }
 }

@@ -23,9 +23,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./global.h: 299: typedef struct{
 [s S6 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S6 . milisegundo segundo minuto hora ]
-[v F2574 `(v ~T0 @X0 1 tf1`ul ]
+[v F2575 `(v ~T0 @X0 1 tf1`ul ]
 "187 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18.h
-[v __delay `JF2574 ~T0 @X0 0 e ]
+[v __delay `JF2575 ~T0 @X0 0 e ]
 [p i __delay ]
 "38 ./usart.h
 [; ;./usart.h: 38: void USART_put_int(unsigned int value);
@@ -2051,6 +2051,39 @@ Version 4.0 HI-TECH Software Intermediate Code
 "612
 [; ;proculus.c: 612: }
 [e :UE 369 ]
+}
+"614
+[; ;proculus.c: 614: void PROCULUS_Clean_All_Line_Graphic(){
+[v _PROCULUS_Clean_All_Line_Graphic `(v ~T0 @X0 1 ef ]
+{
+[e :U _PROCULUS_Clean_All_Line_Graphic ]
+[f ]
+"615
+[; ;proculus.c: 615:      unsigned char i;
+[v _i `uc ~T0 @X0 1 a ]
+"616
+[; ;proculus.c: 616:      for(i=0;i<8;i++)
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 371  ]
+[e $U 372  ]
+[e :U 371 ]
+"617
+[; ;proculus.c: 617:         {
+{
+"618
+[; ;proculus.c: 618:         PROCULUS_Clear_Line_Graphic(i+1) ;
+[e ( _PROCULUS_Clear_Line_Graphic (1 -> + -> _i `i -> 1 `i `uc ]
+"619
+[; ;proculus.c: 619:         }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 371  ]
+[e :U 372 ]
+}
+"620
+[; ;proculus.c: 620: }
+[e :UE 370 ]
 }
 [a 5C 58 0 ]
 [a 6C 58 0 ]
