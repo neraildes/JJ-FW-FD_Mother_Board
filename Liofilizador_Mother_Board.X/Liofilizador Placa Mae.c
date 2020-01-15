@@ -3414,7 +3414,7 @@ void Plotar_Grafico_Gravado(void)
           value= round(tempfloat);
           add_datalog=(value*2)+fat8.processo.add_start;
   
-       }while(add_datalog<fat8.processo.add_end);
+       }while(add_datalog<fat8.processo.add_end); 
 }     
 
 
