@@ -4828,7 +4828,7 @@ void Incrementa_Contador_de_Repique_do_Vacuo(void);
 void Carregar_Display_Schematic_Color(void);
 void Ligar_Cargas_Compassadamente(void);
 
-void Teste24cXXXX(void);
+
 
 void Inicializa_FAT8_Table();
 void FAT8_Write_Process_Inicialize();
@@ -4838,9 +4838,8 @@ void FAT8_Load(unsigned char tupla);
 void FAT8_Show();
 char Find_Fat8_Running();
 char Find_Fat8_Free();
-
-
 void Preenche_Dados_da_FAT8();
+void Plotar_Grafico_Gravado(void);
 # 6 "isr.c" 2
 
 

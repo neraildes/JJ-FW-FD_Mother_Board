@@ -691,7 +691,7 @@ void main(void)
 
                   case 29: // Ajuste de tempo de captura de datalog
  
-                          for(char i=0;i<12;i++)   
+                          for(char i=0;i<12;i++) //Exibe Grafico Armazenado na Memoria  
                              {                                 
                              if(PROCULUS_VP_Read_UInt16(0x1017+(i*30))==1)
                                {
@@ -699,14 +699,19 @@ void main(void)
                                FAT8_Load(i);
                                PROCULUS_Show_Screen(35);
                                PROCULUS_Clean_All_Line_Graphic();
-                               Teste24cXXXX();
+                               Plotar_Grafico_Gravado();
                                break;  
                                } 
                              }                           
-                               
+
+                          if(PROCULUS_VP_Read_UInt16(0x30)==1) //Apaga dados do datalog
+                             { 
+                             PROCULUS_VP_Write_UInt16(0x30,0);
+                             Inicializa_FAT8_Table(); 
+                             }                            
                          
-                            
-                          FAT8_Show();     
+                          FAT8_Show();  
+                               
                           if(PROCULUS_VP_Read_UInt16(175)==1) //Grava tempo de captura
                              { 
                              PROCULUS_VP_Write_UInt16(175,0);
@@ -3352,22 +3357,27 @@ void Ligar_Cargas_Compassadamente(){
 
 
 
-void Teste24cXXXX(void)
+void Plotar_Grafico_Gravado(void)
 {
     /*--------------------------------------------------------------------------
      *                  A R E A    D E    T E S T E
      -------------------------------------------------------------------------*/ 
+     #define RESOLUCAOX 566.0
      char bb[5];
      char SlaveBoard;
      char canal;
      char tupla;  
+     unsigned long add_datalog;
      
      char flag_exit;
      int  leitura[14];
+     float tempfloat;
+     unsigned long value;
      
      PROCULUS_Show_Screen(35);
      PROCULUS_OK();
      add_datalog=fat8.processo.add_start;
+     tempfloat=0.0;
      flag_exit=FALSE;
      do{          
           //Capturando dados das placas
@@ -3378,38 +3388,20 @@ void Teste24cXXXX(void)
              if(tupla==3)continue;
              SlaveBoard  = (tupla / 2)+1; 
              canal = tupla % 2;
-            
+             
              bb[0]=canal;
              bb[1]=High (add_datalog);
              bb[2]=Lower(add_datalog);
              bb[3]=Hi   (add_datalog);
              bb[4]=Lo   (add_datalog);      
              leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_EEE_R_INT, 5, bb);
-
-             if(tupla==0)
-               {  
-               if(leitura[0]==0xFFFF)
-                  {  
-                  flag_exit=TRUE;
-                  break;
-                  }
-               }
              asm("CLRWDT");
              }
-          add_datalog+=2;
-
           
-          
-
           //  plotando no grafico
           __delay_ms(32);
           for(char i=0;i<totalboard*2;i++)
              {
-             if((leitura[0]==0xFFFF)&&(i==0))
-               {   
-               flag_exit=TRUE;
-               break;
-               }                    
              switch(i)
                    {
                    case 0: PROCULUS_graphic_plot(i+1,(leitura[i]*FATOR_TENSAO));break;
@@ -3418,20 +3410,11 @@ void Teste24cXXXX(void)
                    }               
              }  
 
-          
-          
-       }while(flag_exit==FALSE);
-       /*
-       PROCULUS_OK();
-       if(PROCULUS_VP_Read_UInt16(2))  //Datalog no Display
-          {
-          __delay_ms(1000);
-          PROCULUS_Buzzer(3000);
-          add_datalog=add_eeprom-2;
-          }
-       else
-          add_datalog=0;  
-       */ 
+          tempfloat+=((fat8.processo.add_end-fat8.processo.add_start)/2.0)/RESOLUCAOX;
+          value= round(tempfloat);
+          add_datalog=(value*2)+fat8.processo.add_start;
+  
+       }while(add_datalog<fat8.processo.add_end);
 }     
 
 
@@ -3450,8 +3433,7 @@ void Inicializa_FAT8_Table(){
     
     for(char tupla=0;tupla<12;tupla++) FAT8_Save(tupla);
     
-    
-    
+    EEPROM_24C1025_Write_Long (0,2,0); //Inicializa add_datalog    
 }
 
 
@@ -3503,7 +3485,7 @@ void FAT8_Write_Process_Finalize(){
 
     PROCULUS_Read_RTC(date,time);    
 
-    fat8.processo.processo_number=NumProcesso;    
+    //fat8.processo.processo_number=NumProcesso;    
     //strcpy(fat8_processo.inicio.date,date);
     //strcpy(fat8_processo.inicio.time,time);    
     strcpy(fat8.processo.fim.date,date);
