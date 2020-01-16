@@ -4882,7 +4882,8 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 20 "./usart.h" 2
+# 19 "./usart.h" 2
+
 # 1 "./protocolo.h" 1
 # 22 "./protocolo.h"
 typedef struct {
@@ -4893,7 +4894,7 @@ typedef struct {
         char size;
         char value[74];
 } t_usart_protocol;
-# 21 "./usart.h" 2
+# 20 "./usart.h" 2
 # 35 "./usart.h"
 void USART_to_Protocol(t_usart_protocol *usart_protocol);
 void USART_init(unsigned long baudrate);

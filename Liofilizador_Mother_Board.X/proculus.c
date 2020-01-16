@@ -537,15 +537,26 @@ unsigned int PROCULUS_Get_Page(void)
      USART_putc(0x81);
      USART_putc(0x03);
      USART_putc(0x02);     
-     for(i=0;i<1000;i++)
-         {    
+     for(i=0;i<5000;i++)
+         {   
+           asm("CLRWDT");
            if(flag_usart_rx)
            {
            flag_usart_rx=0;
-           retorno=(usart_buffer[6]<<8)+usart_buffer[7];
-           break;
+           //5AA5 05 81 03 02 [06 07]
+           if(usart_buffer[0]==0x5A &&
+              usart_buffer[1]==0xA5 && 
+              usart_buffer[2]==0x05 &&
+              usart_buffer[3]==0x81 &&     
+              usart_buffer[4]==0x03 &&
+              usart_buffer[5]==0x02
+              )
+              {
+              retorno=(usart_buffer[6]<<8)+usart_buffer[7];
+              break;
+              }       
            }
-           __delay_ms(1);
+           __delay_us(100);
          }     
      my_delay_ms(TIME_AFTER_SEND_PROCULUS_COMMAND);
      return retorno;

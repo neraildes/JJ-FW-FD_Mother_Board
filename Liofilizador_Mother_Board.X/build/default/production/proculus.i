@@ -4596,7 +4596,8 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 20 "./usart.h" 2
+# 19 "./usart.h" 2
+
 # 1 "./protocolo.h" 1
 # 22 "./protocolo.h"
 typedef struct {
@@ -4607,7 +4608,7 @@ typedef struct {
         char size;
         char value[74];
 } t_usart_protocol;
-# 21 "./usart.h" 2
+# 20 "./usart.h" 2
 # 35 "./usart.h"
 void USART_to_Protocol(t_usart_protocol *usart_protocol);
 void USART_init(unsigned long baudrate);
@@ -5864,20 +5865,31 @@ unsigned int PROCULUS_Get_Page(void)
      USART_putc(0x81);
      USART_putc(0x03);
      USART_putc(0x02);
-     for(i=0;i<1000;i++)
+     for(i=0;i<5000;i++)
          {
+           __asm("CLRWDT");
            if(statusgen.flag_usart_rx)
            {
            statusgen.flag_usart_rx=0;
-           retorno=(usart_buffer[6]<<8)+usart_buffer[7];
-           break;
+
+           if(usart_buffer[0]==0x5A &&
+              usart_buffer[1]==0xA5 &&
+              usart_buffer[2]==0x05 &&
+              usart_buffer[3]==0x81 &&
+              usart_buffer[4]==0x03 &&
+              usart_buffer[5]==0x02
+              )
+              {
+              retorno=(usart_buffer[6]<<8)+usart_buffer[7];
+              break;
+              }
            }
-           _delay((unsigned long)((1)*(32000000/4000.0)));
+           _delay((unsigned long)((100)*(32000000/4000000.0)));
          }
      my_delay_ms(1);
      return retorno;
      }
-# 575 "proculus.c"
+# 586 "proculus.c"
 void PROCULUS_TPFLAG_Write(char value){
     unsigned char vetor[3];
     vetor[0]=5;

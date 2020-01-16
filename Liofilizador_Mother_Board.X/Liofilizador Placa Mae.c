@@ -190,7 +190,9 @@ unsigned char memo_statuspower;
 volatile unsigned char delay_condensador;
 
 int index;
-int Tamanho_Display;
+int  Tamanho_Display;
+char maxlineDATALOG;
+
 int TrendColor[13];
 
 T_mapa mapa;
@@ -399,7 +401,11 @@ void main(void)
      ShowHardwareInfo();
      //-------------------------------------------------------------------------
      
-
+     
+     if(Tamanho_Display==80)
+        maxlineDATALOG=12;
+     else if(Tamanho_Display==50)
+             maxlineDATALOG=9;
      
      //-------------------------------------------------------------------------
      if(EEPROM_Read_Byte(OFFSET_EEPROM)==0xFF)
@@ -531,7 +537,7 @@ void main(void)
              if(delaycheckscreen>1000)
                {
                delaycheckscreen=0;      
-               pagina = Captura_Pagina();
+               pagina = PROCULUS_Get_Page();
                if(pagina!=paginamemo)
                   {
                   paginamemo=pagina;                  
@@ -690,8 +696,8 @@ void main(void)
                           break;
 
                   case 29: // Ajuste de tempo de captura de datalog
- 
-                          for(char i=0;i<12;i++) //Exibe Grafico Armazenado na Memoria  
+                          {
+                          for(char i=0;i<maxlineDATALOG;i++) //Exibe Grafico Armazenado na Memoria  
                              {                                 
                              if(PROCULUS_VP_Read_UInt16(0x1017+(i*30))==1)
                                {
@@ -717,7 +723,7 @@ void main(void)
                              PROCULUS_VP_Write_UInt16(175,0);
                              pagina_29(); 
                              }  
-                           
+                          } 
                           break;
                   case 31: //Troca de Senha
                           {
@@ -1217,7 +1223,7 @@ void FAT8_Load(unsigned char tupla){
 void FAT8_Show(){
      unsigned int  vp;
      
-     for(char tupla=0;tupla<12;tupla++)
+     for(char tupla=0;tupla<maxlineDATALOG;tupla++)
         { 
         vp=0x1000+(tupla*FAT8_VP_SIZE);
         FAT8_Load(tupla);     
@@ -2819,28 +2825,28 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 
 
 //------------------------------------------------------------------------------
-unsigned int Captura_Pagina(void){
-    unsigned int pagina[5];    
-    unsigned int retorno=0;   
-    
-    while(retorno==0)
-       { 
-       //flag_main_loop_WDT=1; 
-       for(char i=0;i<5;i++) 
-          pagina[i]=PROCULUS_Get_Page();
-
-          retorno=pagina[0];
-          for(char i=1;i<5;i++)
-             {
-             if(pagina[0]!=pagina[i]) 
-                { 
-                retorno=0;
-                break;
-                }
-             }    
-       }
-    return retorno;
-}
+//unsigned int Captura_Pagina(void){
+//    unsigned int pagina[5];    
+//    unsigned int retorno=0;   
+//    
+//    while(retorno==0)
+//       { 
+//       //flag_main_loop_WDT=1; 
+//       for(char i=0;i<5;i++) 
+//          pagina[i]=PROCULUS_Get_Page();
+//
+//          retorno=pagina[0];
+//          for(char i=1;i<5;i++)
+//             {
+//             if(pagina[0]!=pagina[i]) 
+//                { 
+//                retorno=0;
+//                break;
+//                }
+//             }    
+//       }
+//    return retorno;
+//}
 
 
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd)
@@ -3362,12 +3368,17 @@ void Plotar_Grafico_Gravado(void)
     /*--------------------------------------------------------------------------
      *                  A R E A    D E    T E S T E
      -------------------------------------------------------------------------*/ 
-     #define RESOLUCAOX 566.0
+     float RESOLUCAOX;
      char bb[5];
      char SlaveBoard;
      char canal;
      char tupla;  
      unsigned long add_datalog;
+     
+     if(Tamanho_Display==80)
+        RESOLUCAOX=566.0 ;
+     else if(Tamanho_Display==50)
+             RESOLUCAOX=321.0 ;
      
      char flag_exit;
      int  leitura[14];
@@ -3381,7 +3392,7 @@ void Plotar_Grafico_Gravado(void)
      flag_exit=FALSE;
      do{          
           //Capturando dados das placas
-          __delay_ms(32);
+          __delay_ms(50);
           flag_exit=FALSE;
           for(tupla=0;tupla<(totalboard*2);tupla++)
              { 
@@ -3399,7 +3410,7 @@ void Plotar_Grafico_Gravado(void)
              }
           
           //  plotando no grafico
-          __delay_ms(32);
+          __delay_ms(50);
           for(char i=0;i<totalboard*2;i++)
              {
              switch(i)
@@ -3413,13 +3424,27 @@ void Plotar_Grafico_Gravado(void)
           tempfloat+=((fat8.processo.add_end-fat8.processo.add_start)/2.0)/RESOLUCAOX;
           value= round(tempfloat);
           add_datalog=(value*2)+fat8.processo.add_start;
+          
+          TRISDbits.RD6=0;
+          PORTDbits.RD6=1;           
+          if(PROCULUS_Get_Page()!=35) 
+            {
+            PORTDbits.RD6=0;  
+            TRISDbits.RD7=0;
+            PORTDbits.RD7=1; 
+            __delay_us(500);
+            PORTDbits.RD7=0;            
+            PROCULUS_Clean_All_Line_Graphic();            
+            break;                            
+            }  
+          PORTDbits.RD6=0;
   
        }while(add_datalog<fat8.processo.add_end); 
 }     
 
 
 void Inicializa_FAT8_Table(){
-    
+
     fat8.processo.processo_number=0;    
     strcpy(fat8.processo.inicio.date,"");
     strcpy(fat8.processo.inicio.time,"");    
@@ -3431,9 +3456,10 @@ void Inicializa_FAT8_Table(){
     fat8.processo.minutes=0;
     fat8.processo.all_flags=0;
     
-    for(char tupla=0;tupla<12;tupla++) FAT8_Save(tupla);
+    for(char tupla=0;tupla<maxlineDATALOG;tupla++) FAT8_Save(tupla);
     
-    EEPROM_24C1025_Write_Long (0,2,0); //Inicializa add_datalog    
+    EEPROM_24C1025_Write_Long (0,2,0); //Inicializa add_datalog 
+    add_datalog=0;
 }
 
 
@@ -3501,7 +3527,8 @@ void FAT8_Write_Process_Finalize(){
     FAT8_Save(fat8_index);
     FAT8_Show(); 
     add_datalog+=2;
-    EEPROM_24C1025_Write_Long (0,2,add_datalog); //Inicializa add_datalog
+    EEPROM_24C1025_Write_Long (0,2,add_datalog); //Armazena add_datalog
+    
 }
 
 
@@ -3509,7 +3536,8 @@ void FAT8_Write_Process_Finalize(){
 char Find_Fat8_Free(){
      char i;
      char resultado=-1;
-     for(i=0;i<12;i++)
+     
+     for(i=0;i<maxlineDATALOG;i++)
         {
         FAT8_Load(i);
         if((fat8.processo.flag_running==0)&&(!fat8.processo.flag_finalized)) 
@@ -3525,7 +3553,8 @@ char Find_Fat8_Free(){
 char Find_Fat8_Running(){
      char i;
      char resultado=-1;
-     for(i=0;i<12;i++)
+
+     for(i=0;i<maxlineDATALOG;i++)
         {
         FAT8_Load(i);
         if(fat8.processo.flag_running) 

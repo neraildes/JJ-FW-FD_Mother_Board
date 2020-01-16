@@ -1894,196 +1894,209 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;proculus.c: 539:      USART_putc(0x02);
 [e ( _USART_putc (1 -> -> 2 `i `uc ]
 "540
-[; ;proculus.c: 540:      for(i=0;i<1000;i++)
+[; ;proculus.c: 540:      for(i=0;i<5000;i++)
 {
 [e = _i -> 0 `i ]
-[e $ < _i -> 1000 `i 361  ]
+[e $ < _i -> 5000 `i 361  ]
 [e $U 362  ]
 [e :U 361 ]
 "541
 [; ;proculus.c: 541:          {
 {
 "542
-[; ;proculus.c: 542:            if(statusgen.flag_usart_rx)
-[e $ ! != -> . _statusgen 0 `i -> 0 `i 364  ]
+[; ;proculus.c: 542:            __asm("CLRWDT");
+[; <" CLRWDT ;# ">
 "543
-[; ;proculus.c: 543:            {
-{
+[; ;proculus.c: 543:            if(statusgen.flag_usart_rx)
+[e $ ! != -> . _statusgen 0 `i -> 0 `i 364  ]
 "544
-[; ;proculus.c: 544:            statusgen.flag_usart_rx=0;
-[e = . _statusgen 0 -> -> 0 `i `uc ]
+[; ;proculus.c: 544:            {
+{
 "545
-[; ;proculus.c: 545:            retorno=(usart_buffer[6]<<8)+usart_buffer[7];
-[e = _retorno -> + << -> *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
-"546
-[; ;proculus.c: 546:            break;
-[e $U 362  ]
+[; ;proculus.c: 545:            statusgen.flag_usart_rx=0;
+[e = . _statusgen 0 -> -> 0 `i `uc ]
 "547
-[; ;proculus.c: 547:            }
+[; ;proculus.c: 547:            if(usart_buffer[0]==0x5A &&
+[e $ ! && && && && && == -> *U + &U _usart_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 90 `i == -> *U + &U _usart_buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 165 `i == -> *U + &U _usart_buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 5 `i == -> *U + &U _usart_buffer * -> -> -> 3 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 129 `i == -> *U + &U _usart_buffer * -> -> -> 4 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 3 `i == -> *U + &U _usart_buffer * -> -> -> 5 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 2 `i 365  ]
+"554
+[; ;proculus.c: 554:               {
+{
+"555
+[; ;proculus.c: 555:               retorno=(usart_buffer[6]<<8)+usart_buffer[7];
+[e = _retorno -> + << -> *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
+"556
+[; ;proculus.c: 556:               break;
+[e $U 362  ]
+"557
+[; ;proculus.c: 557:               }
+}
+[e :U 365 ]
+"558
+[; ;proculus.c: 558:            }
 }
 [e :U 364 ]
-"548
-[; ;proculus.c: 548:            _delay((unsigned long)((1)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"549
-[; ;proculus.c: 549:          }
+"559
+[; ;proculus.c: 559:            _delay((unsigned long)((100)*(32000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+"560
+[; ;proculus.c: 560:          }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 1000 `i 361  ]
+[e $ < _i -> 5000 `i 361  ]
 [e :U 362 ]
 }
-"550
-[; ;proculus.c: 550:      my_delay_ms(1);
+"561
+[; ;proculus.c: 561:      my_delay_ms(1);
 [e ( _my_delay_ms (1 -> -> 1 `i `l ]
-"551
-[; ;proculus.c: 551:      return retorno;
+"562
+[; ;proculus.c: 562:      return retorno;
 [e ) _retorno ]
 [e $UE 360  ]
-"552
-[; ;proculus.c: 552:      }
+"563
+[; ;proculus.c: 563:      }
 [e :UE 360 ]
 }
-"575
-[; ;proculus.c: 575: void PROCULUS_TPFLAG_Write(char value){
+"586
+[; ;proculus.c: 586: void PROCULUS_TPFLAG_Write(char value){
 [v _PROCULUS_TPFLAG_Write `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _PROCULUS_TPFLAG_Write ]
 [v _value `uc ~T0 @X0 1 r1 ]
 [f ]
-"576
-[; ;proculus.c: 576:     unsigned char vetor[3];
+"587
+[; ;proculus.c: 587:     unsigned char vetor[3];
 [v _vetor `uc ~T0 @X0 -> 3 `i a ]
-"577
-[; ;proculus.c: 577:     vetor[0]=5;
+"588
+[; ;proculus.c: 588:     vetor[0]=5;
 [e = *U + &U _vetor * -> -> -> 0 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> -> 5 `i `uc ]
-"578
-[; ;proculus.c: 578:     vetor[1]=value;
+"589
+[; ;proculus.c: 589:     vetor[1]=value;
 [e = *U + &U _vetor * -> -> -> 1 `i `ui `ux -> -> # *U &U _vetor `ui `ux -> _value `uc ]
-"579
-[; ;proculus.c: 579:     PROCULUS_REG_Write(vetor, 2);
+"590
+[; ;proculus.c: 590:     PROCULUS_REG_Write(vetor, 2);
 [e ( _PROCULUS_REG_Write (2 , &U _vetor -> -> 2 `i `uc ]
-"582
-[; ;proculus.c: 582: }
-[e :UE 365 ]
+"593
+[; ;proculus.c: 593: }
+[e :UE 366 ]
 }
-"585
-[; ;proculus.c: 585: char PROCULUS_TPFLAG_Read(void){
+"596
+[; ;proculus.c: 596: char PROCULUS_TPFLAG_Read(void){
 [v _PROCULUS_TPFLAG_Read `(uc ~T0 @X0 1 ef ]
 {
 [e :U _PROCULUS_TPFLAG_Read ]
 [f ]
-"586
-[; ;proculus.c: 586:      unsigned char retorno[10];
+"597
+[; ;proculus.c: 597:      unsigned char retorno[10];
 [v _retorno `uc ~T0 @X0 -> 10 `i a ]
-"587
-[; ;proculus.c: 587:      PROCULUS_REG_Read(0x05, 0x01, retorno);
+"598
+[; ;proculus.c: 598:      PROCULUS_REG_Read(0x05, 0x01, retorno);
 [e ( _PROCULUS_REG_Read (3 , , -> -> 5 `i `uc -> -> 1 `i `uc &U _retorno ]
-"588
-[; ;proculus.c: 588:      return retorno[0];
+"599
+[; ;proculus.c: 599:      return retorno[0];
 [e ) -> *U + &U _retorno * -> -> -> 0 `i `ui `ux -> -> # *U &U _retorno `ui `ux `uc ]
-[e $UE 366  ]
-"591
-[; ;proculus.c: 591: }
-[e :UE 366 ]
+[e $UE 367  ]
+"602
+[; ;proculus.c: 602: }
+[e :UE 367 ]
 }
-"594
-[; ;proculus.c: 594: void PROCULUS_graphic_plot(unsigned char lcd_channel, unsigned int value){
+"605
+[; ;proculus.c: 605: void PROCULUS_graphic_plot(unsigned char lcd_channel, unsigned int value){
 [v _PROCULUS_graphic_plot `(v ~T0 @X0 1 ef2`uc`ui ]
 {
 [e :U _PROCULUS_graphic_plot ]
 [v _lcd_channel `uc ~T0 @X0 1 r1 ]
 [v _value `ui ~T0 @X0 1 r2 ]
 [f ]
-"595
-[; ;proculus.c: 595:      char channel;
+"606
+[; ;proculus.c: 606:      char channel;
 [v _channel `uc ~T0 @X0 1 a ]
-"596
-[; ;proculus.c: 596:      if((lcd_channel>=1)&&(lcd_channel<=8))
-[e $ ! && >= -> _lcd_channel `i -> 1 `i <= -> _lcd_channel `i -> 8 `i 368  ]
-"597
-[; ;proculus.c: 597:        {
-{
-"598
-[; ;proculus.c: 598:        channel=(char)my_pow(2,(lcd_channel-1));
-[e = _channel -> ( _my_pow (2 , -> 2 `i - -> _lcd_channel `i -> 1 `i `uc ]
-"599
-[; ;proculus.c: 599:        USART_put_int(0x5AA5);
-[e ( _USART_put_int (1 -> -> 23205 `i `ui ]
-"600
-[; ;proculus.c: 600:        USART_putc(0x04);
-[e ( _USART_putc (1 -> -> 4 `i `uc ]
-"601
-[; ;proculus.c: 601:        USART_putc(0x84);
-[e ( _USART_putc (1 -> -> 132 `i `uc ]
-"602
-[; ;proculus.c: 602:        USART_putc(channel);
-[e ( _USART_putc (1 -> _channel `uc ]
-"603
-[; ;proculus.c: 603:        USART_put_int(1150+value);
-[e ( _USART_put_int (1 + -> -> 1150 `i `ui _value ]
-"604
-[; ;proculus.c: 604:        }
-}
-[e :U 368 ]
-"605
-[; ;proculus.c: 605: }
-[e :UE 367 ]
-}
 "607
-[; ;proculus.c: 607: void PROCULUS_Clear_Line_Graphic(char channel){
+[; ;proculus.c: 607:      if((lcd_channel>=1)&&(lcd_channel<=8))
+[e $ ! && >= -> _lcd_channel `i -> 1 `i <= -> _lcd_channel `i -> 8 `i 369  ]
+"608
+[; ;proculus.c: 608:        {
+{
+"609
+[; ;proculus.c: 609:        channel=(char)my_pow(2,(lcd_channel-1));
+[e = _channel -> ( _my_pow (2 , -> 2 `i - -> _lcd_channel `i -> 1 `i `uc ]
+"610
+[; ;proculus.c: 610:        USART_put_int(0x5AA5);
+[e ( _USART_put_int (1 -> -> 23205 `i `ui ]
+"611
+[; ;proculus.c: 611:        USART_putc(0x04);
+[e ( _USART_putc (1 -> -> 4 `i `uc ]
+"612
+[; ;proculus.c: 612:        USART_putc(0x84);
+[e ( _USART_putc (1 -> -> 132 `i `uc ]
+"613
+[; ;proculus.c: 613:        USART_putc(channel);
+[e ( _USART_putc (1 -> _channel `uc ]
+"614
+[; ;proculus.c: 614:        USART_put_int(1150+value);
+[e ( _USART_put_int (1 + -> -> 1150 `i `ui _value ]
+"615
+[; ;proculus.c: 615:        }
+}
+[e :U 369 ]
+"616
+[; ;proculus.c: 616: }
+[e :UE 368 ]
+}
+"618
+[; ;proculus.c: 618: void PROCULUS_Clear_Line_Graphic(char channel){
 [v _PROCULUS_Clear_Line_Graphic `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _PROCULUS_Clear_Line_Graphic ]
 [v _channel `uc ~T0 @X0 1 r1 ]
 [f ]
-"608
-[; ;proculus.c: 608:      unsigned char buffer[2];
+"619
+[; ;proculus.c: 619:      unsigned char buffer[2];
 [v _buffer `uc ~T0 @X0 -> 2 `i a ]
-"609
-[; ;proculus.c: 609:      buffer[0]=0xEB;
+"620
+[; ;proculus.c: 620:      buffer[0]=0xEB;
 [e = *U + &U _buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _buffer `ui `ux -> -> 235 `i `uc ]
-"610
-[; ;proculus.c: 610:      buffer[1]=0x55+channel;
+"621
+[; ;proculus.c: 621:      buffer[1]=0x55+channel;
 [e = *U + &U _buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _buffer `ui `ux -> + -> 85 `i -> _channel `i `uc ]
-"611
-[; ;proculus.c: 611:      PROCULUS_REG_Write(buffer,0x03);
+"622
+[; ;proculus.c: 622:      PROCULUS_REG_Write(buffer,0x03);
 [e ( _PROCULUS_REG_Write (2 , &U _buffer -> -> 3 `i `uc ]
-"612
-[; ;proculus.c: 612: }
-[e :UE 369 ]
+"623
+[; ;proculus.c: 623: }
+[e :UE 370 ]
 }
-"614
-[; ;proculus.c: 614: void PROCULUS_Clean_All_Line_Graphic(){
+"625
+[; ;proculus.c: 625: void PROCULUS_Clean_All_Line_Graphic(){
 [v _PROCULUS_Clean_All_Line_Graphic `(v ~T0 @X0 1 ef ]
 {
 [e :U _PROCULUS_Clean_All_Line_Graphic ]
 [f ]
-"615
-[; ;proculus.c: 615:      unsigned char i;
+"626
+[; ;proculus.c: 626:      unsigned char i;
 [v _i `uc ~T0 @X0 1 a ]
-"616
-[; ;proculus.c: 616:      for(i=0;i<8;i++)
+"627
+[; ;proculus.c: 627:      for(i=0;i<8;i++)
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 8 `i 371  ]
-[e $U 372  ]
-[e :U 371 ]
-"617
-[; ;proculus.c: 617:         {
+[e $ < -> _i `i -> 8 `i 372  ]
+[e $U 373  ]
+[e :U 372 ]
+"628
+[; ;proculus.c: 628:         {
 {
-"618
-[; ;proculus.c: 618:         PROCULUS_Clear_Line_Graphic(i+1) ;
+"629
+[; ;proculus.c: 629:         PROCULUS_Clear_Line_Graphic(i+1) ;
 [e ( _PROCULUS_Clear_Line_Graphic (1 -> + -> _i `i -> 1 `i `uc ]
-"619
-[; ;proculus.c: 619:         }
+"630
+[; ;proculus.c: 630:         }
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 8 `i 371  ]
-[e :U 372 ]
+[e $ < -> _i `i -> 8 `i 372  ]
+[e :U 373 ]
 }
-"620
-[; ;proculus.c: 620: }
-[e :UE 370 ]
+"631
+[; ;proculus.c: 631: }
+[e :UE 371 ]
 }
 [a 5C 58 0 ]
 [a 6C 58 0 ]

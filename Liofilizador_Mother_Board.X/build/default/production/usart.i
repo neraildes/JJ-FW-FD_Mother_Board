@@ -4496,7 +4496,7 @@ typedef struct {
         char size;
         char value[74];
 } t_usart_protocol;
-# 21 "./usart.h" 2
+# 20 "./usart.h" 2
 # 35 "./usart.h"
 void USART_to_Protocol(t_usart_protocol *usart_protocol);
 void USART_init(unsigned long baudrate);
