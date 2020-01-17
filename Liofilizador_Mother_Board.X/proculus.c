@@ -531,7 +531,7 @@ void PROCULUS_Delay(unsigned int tempo_ms){
 unsigned int PROCULUS_Get_Page(void)
      {
      int i;
-     volatile unsigned int retorno=0;
+     static unsigned int retorno=0;
      USART_put_int(PROCULUS_HEADER);
      USART_putc(0x03);
      USART_putc(0x81);

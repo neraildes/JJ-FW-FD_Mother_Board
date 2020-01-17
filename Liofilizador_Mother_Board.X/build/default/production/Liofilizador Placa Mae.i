@@ -5432,7 +5432,7 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 void Buffer_Manager(void);
 
 
-
+unsigned int Captura_Pagina(void);
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd);
 char menorValorDisponivel(char * trendCurve);
 
@@ -5772,7 +5772,7 @@ t_receita receita;
 
 
 t_fat8 fat8;
-char fat8_index;
+
 
 
 
@@ -6661,7 +6661,7 @@ void FAT8_Save(unsigned char tupla){
 void FAT8_Load(unsigned char tupla){
      unsigned long addEEPROM;
 
-     if(tupla>11)
+     if(tupla>(maxlineDATALOG-1))
        {
        PROCULUS_Buzzer(1000);
        return;

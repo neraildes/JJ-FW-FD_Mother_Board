@@ -4806,7 +4806,7 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 void Buffer_Manager(void);
 
 
-
+unsigned int Captura_Pagina(void);
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd);
 char menorValorDisponivel(char * trendCurve);
 

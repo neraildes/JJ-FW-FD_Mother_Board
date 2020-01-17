@@ -1200,7 +1200,7 @@ void FAT8_Save(unsigned char tupla){
 void FAT8_Load(unsigned char tupla){
      unsigned long addEEPROM;
      
-     if(tupla>11) 
+     if(tupla>(maxlineDATALOG-1)) 
        {  
        PROCULUS_Buzzer(1000);
        return;
