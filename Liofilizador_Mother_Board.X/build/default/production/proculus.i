@@ -1,4 +1,4 @@
-# 1 "Liofilizador Placa Mae.c"
+# 1 "proculus.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,147 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "Liofilizador Placa Mae.c" 2
+# 1 "proculus.c" 2
+
+# 1 "./global.h" 1
+# 20 "./global.h"
+#pragma config OSC = INTIO67
+#pragma config FCMEN = OFF
+#pragma config IESO = OFF
+
+
+#pragma config PWRT = ON
+#pragma config BOREN = SBORDIS
+#pragma config BORV = 3
+
+
+#pragma config WDT = ON
+#pragma config WDTPS = 16384
+
+
+#pragma config CCP2MX = PORTC
+#pragma config PBADEN = ON
+#pragma config LPT1OSC = OFF
+#pragma config MCLRE = ON
+
+
+#pragma config STVREN = ON
+#pragma config LVP = OFF
+#pragma config XINST = OFF
+
+
+#pragma config CP0 = OFF
+#pragma config CP1 = OFF
+#pragma config CP2 = OFF
+#pragma config CP3 = OFF
+
+
+#pragma config CPB = OFF
+#pragma config CPD = OFF
+
+
+#pragma config WRT0 = OFF
+#pragma config WRT1 = OFF
+#pragma config WRT2 = OFF
+#pragma config WRT3 = OFF
+
+
+#pragma config WRTC = OFF
+#pragma config WRTB = OFF
+#pragma config WRTD = OFF
+
+
+#pragma config EBTR0 = OFF
+#pragma config EBTR1 = OFF
+#pragma config EBTR2 = OFF
+#pragma config EBTR3 = OFF
+
+
+#pragma config EBTRB = OFF
+# 231 "./global.h"
+struct {
+    unsigned flag_usart_rx : 1 ;
+    unsigned flag_usart_error : 1 ;
+    unsigned flag_power_off : 1 ;
+    unsigned flag_led_tmr0 : 1 ;
+    unsigned flag_led_usart : 1 ;
+    unsigned flag_led_memory : 1 ;
+    unsigned flag_capture_datalog : 1 ;
+    unsigned flag_edit_temperatura: 1 ;
+} statusgen ;
+# 254 "./global.h"
+union {
+      unsigned char bits;
+      struct {
+             unsigned flag_global_datalog : 1 ;
+             unsigned flag_global_aquecimento : 1 ;
+             unsigned flag_global_condensador : 1 ;
+             unsigned flag_global_vacuo : 1 ;
+             unsigned flag_time_process : 1 ;
+             unsigned flag_call_work : 1 ;
+
+             };
+      } statuspower;
+# 276 "./global.h"
+struct{
+        unsigned flag_save_time :1;
+        unsigned flag_wakeup :1;
+        unsigned flagSendDataFix :1;
+        unsigned flag_proculus_hs :1;
+        unsigned flag_Vacuo_estava_ligado :1;
+        unsigned flag_generico :1;
+        unsigned flag_recomunication :1;
+}statusgen1;
+# 294 "./global.h"
+struct{
+        unsigned flag_main_loop_WDT :1;
+}statusWDT;
+
+
+typedef struct{
+    unsigned int milisegundo;
+    unsigned char segundo;
+    unsigned char minuto;
+    unsigned char hora;
+}t_rtc;
+
+volatile t_rtc rtc;
+# 2 "proculus.c" 2
+
+# 1 "./proculus.h" 1
+# 57 "./proculus.h"
+typedef struct {
+    unsigned int header;
+    unsigned char size;
+    unsigned char function;
+    unsigned int vp;
+    unsigned char length;
+    unsigned int dado[15];
+    unsigned char page;
+    unsigned char button;
+    unsigned char status;
+    }t_proculus;
+
+
+typedef struct{
+              unsigned char plataforma;
+              unsigned int temperaturaatual;
+              unsigned int setpoint;
+              unsigned char tempoON;
+              unsigned char tempoOFF;
+              } t_visaogeral;
+
+
+void PROCULUS_REG_Write(unsigned char *vetor, unsigned char size);
+void PROCULUS_REG_Read(unsigned char reg, unsigned char size, unsigned char *retorno);
+void PROCULUS_Read_RTC(char *date, char *time);
+void PROCULUS_Write_RTC(char *date, char *time);
+void PROCULUS_Control_Activation(char value);
+
+void PROCULUS_VP_Write(unsigned int vp,char *vetor,char size);
+
+
+void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size);
 
 
 
@@ -14,7 +154,79 @@
 
 
 
+void PROCULUS_VP_Write_Byte(unsigned int vp,char value);
+unsigned char PROCULUS_VP_Read_Byte(unsigned int vp);
 
+
+
+void PROCULUS_VP_Write_UInt16(unsigned int vp, unsigned int value);
+unsigned int PROCULUS_VP_Read_UInt16(unsigned int vp);
+
+
+
+void PROCULUS_VP_Write_Int16(unsigned int vp, int value);
+unsigned int PROCULUS_VP_Read_Int16(int vp);
+
+
+
+long PROCULUS_VP_Read_Long32(unsigned int vp);
+void PROCULUS_VP_Write_Long32(unsigned int vp, unsigned long value);
+
+
+
+void PROCULUS_VP_Write_Float24(unsigned int vp, float value);
+float PROCULUS_VP_Read_Float24(unsigned int vp);
+
+void PROCULUS_VP_Write_Float32(unsigned int vp, float value);
+float PROCULUS_VP_Read_Float32(unsigned int vp);
+
+
+
+
+void PROCULUS_VP_Write_Double24(unsigned int vp, double value);
+double PROCULUS_VP_Read_Double24(unsigned int vp);
+
+void PROCULUS_VP_Write_Double32(unsigned int vp, double value);
+double PROCULUS_VP_Read_Double32(unsigned int vp);
+
+
+void PROCULUS_VP_Write_String(unsigned int vp, char *text);
+void PROCULUS_VP_Read_String(unsigned int vp, char *text);
+
+
+
+
+
+
+
+unsigned char PROCULUS_Read_Version(void);
+void PROCULUS_Buzzer(unsigned int time_ms_x_10);
+void PROCULUS_Show_Screen(unsigned int screen);
+void PROCULUS_Reset(void);
+char PROCULUS_TPFLAG_Read(void);
+void PROCULUS_TPFLAG_Write(char value);
+
+void PROCULUS_Buffer_to_Proculus(t_proculus *proculus);
+
+void PROCULUS_OK(void);
+void PROCULUS_NOK(void);
+
+void PROCULUS_Delay(unsigned int tempo_ms);
+
+unsigned int PROCULUS_Get_Page(void);
+
+void PROCULUS_Popup(char value);
+
+void PROCULUS_graphic_plot(unsigned char lcd_channel, unsigned int value);
+
+void PROCULUS_Clear_Line_Graphic(char channel);
+
+void PROCULUS_Clean_All_Line_Graphic();
+# 3 "proculus.c" 2
+
+
+# 1 "./usart.h" 1
+# 19 "./usart.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4384,7 +4596,31 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 9 "Liofilizador Placa Mae.c" 2
+# 19 "./usart.h" 2
+
+# 1 "./protocolo.h" 1
+# 22 "./protocolo.h"
+typedef struct {
+        int header;
+        char origem;
+        char destino;
+        char command;
+        char size;
+        char value[74];
+} t_usart_protocol;
+# 20 "./usart.h" 2
+# 35 "./usart.h"
+void USART_to_Protocol(t_usart_protocol *usart_protocol);
+void USART_init(unsigned long baudrate);
+void USART_putc(unsigned char value);
+void USART_put_int(unsigned int value);
+void USART_put_sint(int value);
+void USART_put_float24(float value);
+void USART_put_long(unsigned long value);
+void USART_put_string(char *vetor);
+void USART_put_buffer(char *vetor, char size);
+unsigned char USART_input_buffer(void);
+# 5 "proculus.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\string.h" 1 3
 # 25 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\string.h" 3
@@ -4441,250 +4677,22 @@ size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
 
 
 void *memccpy (void *restrict, const void *restrict, int, size_t);
-# 10 "Liofilizador Placa Mae.c" 2
+# 6 "proculus.c" 2
 
+# 1 "./util.h" 1
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 1 3
-# 33 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
-# 76 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long long time_t;
-# 293 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef void * timer_t;
 
 
+void print(char *texto);
+void bcd2str(char valor, char *dado);
+char str2bcd(char *value);
+void clear_screen(void);
+int my_pow(int rad, int exp);
 
-
-typedef int clockid_t;
-
-
-
-
-typedef long clock_t;
-# 313 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-struct timespec { time_t tv_sec; long tv_nsec; };
-
-
-
-
-
-typedef int pid_t;
-# 33 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 2 3
-
-
-
-
-
-
-
-struct tm {
- int tm_sec;
- int tm_min;
- int tm_hour;
- int tm_mday;
- int tm_mon;
- int tm_year;
- int tm_wday;
- int tm_yday;
- int tm_isdst;
- long __tm_gmtoff;
- const char *__tm_zone;
-};
-
-clock_t clock (void);
-time_t time (time_t *);
-double difftime (time_t, time_t);
-time_t mktime (struct tm *);
-size_t strftime (char *restrict, size_t, const char *restrict, const struct tm *restrict);
-struct tm *gmtime (const time_t *);
-struct tm *localtime (const time_t *);
-char *asctime (const struct tm *);
-char *ctime (const time_t *);
-int timespec_get(struct timespec *, int);
-# 73 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 3
-size_t strftime_l (char * restrict, size_t, const char * restrict, const struct tm * restrict, locale_t);
-
-struct tm *gmtime_r (const time_t *restrict, struct tm *restrict);
-struct tm *localtime_r (const time_t *restrict, struct tm *restrict);
-char *asctime_r (const struct tm *restrict, char *restrict);
-char *ctime_r (const time_t *, char *);
-
-void tzset (void);
-
-struct itimerspec {
- struct timespec it_interval;
- struct timespec it_value;
-};
-# 102 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 3
-int nanosleep (const struct timespec *, struct timespec *);
-int clock_getres (clockid_t, struct timespec *);
-int clock_gettime (clockid_t, struct timespec *);
-int clock_settime (clockid_t, const struct timespec *);
-int clock_nanosleep (clockid_t, int, const struct timespec *, struct timespec *);
-int clock_getcpuclockid (pid_t, clockid_t *);
-
-struct sigevent;
-int timer_create (clockid_t, struct sigevent *restrict, timer_t *restrict);
-int timer_delete (timer_t);
-int timer_settime (timer_t, int, const struct itimerspec *restrict, struct itimerspec *restrict);
-int timer_gettime (timer_t, struct itimerspec *);
-int timer_getoverrun (timer_t);
-
-extern char *tzname[2];
-
-
-
-
-
-char *strptime (const char *restrict, const char *restrict, struct tm *restrict);
-extern int daylight;
-extern long timezone;
-extern int getdate_err;
-struct tm *getdate (const char *);
-# 12 "Liofilizador Placa Mae.c" 2
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 1 3
-# 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
-
-
-
-
-
-typedef void * va_list[1];
-
-
-
-
-typedef void * __isoc_va_list[1];
-# 137 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long ssize_t;
-# 246 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long long off_t;
-# 399 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef struct _IO_FILE FILE;
-# 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 2 3
-# 52 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 3
-typedef union _G_fpos64_t {
- char __opaque[16];
- double __align;
-} fpos_t;
-
-extern FILE *const stdin;
-extern FILE *const stdout;
-extern FILE *const stderr;
-
-
-
-
-
-FILE *fopen(const char *restrict, const char *restrict);
-FILE *freopen(const char *restrict, const char *restrict, FILE *restrict);
-int fclose(FILE *);
-
-int remove(const char *);
-int rename(const char *, const char *);
-
-int feof(FILE *);
-int ferror(FILE *);
-int fflush(FILE *);
-void clearerr(FILE *);
-
-int fseek(FILE *, long, int);
-long ftell(FILE *);
-void rewind(FILE *);
-
-int fgetpos(FILE *restrict, fpos_t *restrict);
-int fsetpos(FILE *, const fpos_t *);
-
-size_t fread(void *restrict, size_t, size_t, FILE *restrict);
-size_t fwrite(const void *restrict, size_t, size_t, FILE *restrict);
-
-int fgetc(FILE *);
-int getc(FILE *);
-int getchar(void);
-int ungetc(int, FILE *);
-
-int fputc(int, FILE *);
-int putc(int, FILE *);
-int putchar(int);
-
-char *fgets(char *restrict, int, FILE *restrict);
-
-char *gets(char *);
-
-
-int fputs(const char *restrict, FILE *restrict);
-int puts(const char *);
-
-#pragma printf_check(printf) const
-#pragma printf_check(vprintf) const
-#pragma printf_check(sprintf) const
-#pragma printf_check(snprintf) const
-#pragma printf_check(vsprintf) const
-#pragma printf_check(vsnprintf) const
-
-int printf(const char *restrict, ...);
-int fprintf(FILE *restrict, const char *restrict, ...);
-int sprintf(char *restrict, const char *restrict, ...);
-int snprintf(char *restrict, size_t, const char *restrict, ...);
-
-int vprintf(const char *restrict, __isoc_va_list);
-int vfprintf(FILE *restrict, const char *restrict, __isoc_va_list);
-int vsprintf(char *restrict, const char *restrict, __isoc_va_list);
-int vsnprintf(char *restrict, size_t, const char *restrict, __isoc_va_list);
-
-int scanf(const char *restrict, ...);
-int fscanf(FILE *restrict, const char *restrict, ...);
-int sscanf(const char *restrict, const char *restrict, ...);
-int vscanf(const char *restrict, __isoc_va_list);
-int vfscanf(FILE *restrict, const char *restrict, __isoc_va_list);
-int vsscanf(const char *restrict, const char *restrict, __isoc_va_list);
-
-void perror(const char *);
-
-int setvbuf(FILE *restrict, char *restrict, int, size_t);
-void setbuf(FILE *restrict, char *restrict);
-
-char *tmpnam(char *);
-FILE *tmpfile(void);
-
-
-
-
-FILE *fmemopen(void *restrict, size_t, const char *restrict);
-FILE *open_memstream(char **, size_t *);
-FILE *fdopen(int, const char *);
-FILE *popen(const char *, const char *);
-int pclose(FILE *);
-int fileno(FILE *);
-int fseeko(FILE *, off_t, int);
-off_t ftello(FILE *);
-int dprintf(int, const char *restrict, ...);
-int vdprintf(int, const char *restrict, __isoc_va_list);
-void flockfile(FILE *);
-int ftrylockfile(FILE *);
-void funlockfile(FILE *);
-int getc_unlocked(FILE *);
-int getchar_unlocked(void);
-int putc_unlocked(int, FILE *);
-int putchar_unlocked(int);
-ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict);
-ssize_t getline(char **restrict, size_t *restrict, FILE *restrict);
-int renameat(int, const char *, int, const char *);
-char *ctermid(char *);
-
-
-
-
-
-
-
-char *tempnam(const char *, const char *);
-# 13 "Liofilizador Placa Mae.c" 2
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdbool.h" 1 3
-# 14 "Liofilizador Placa Mae.c" 2
+char* itoa(int num, char* str, int base);
+char * reverse( char * s );
+char *ultoa(unsigned long num, char *str, int radix);
+# 7 "proculus.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\math.h" 1 3
 # 10 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\math.h" 3
@@ -5147,3678 +5155,784 @@ double jn(int, double);
 double y0(double);
 double y1(double);
 double yn(int, double);
-# 15 "Liofilizador Placa Mae.c" 2
-
-# 1 "./global.h" 1
-# 20 "./global.h"
-#pragma config OSC = INTIO67
-#pragma config FCMEN = OFF
-#pragma config IESO = OFF
-
-
-#pragma config PWRT = ON
-#pragma config BOREN = SBORDIS
-#pragma config BORV = 3
-
-
-#pragma config WDT = ON
-#pragma config WDTPS = 16384
-
-
-#pragma config CCP2MX = PORTC
-#pragma config PBADEN = ON
-#pragma config LPT1OSC = OFF
-#pragma config MCLRE = ON
-
-
-#pragma config STVREN = ON
-#pragma config LVP = OFF
-#pragma config XINST = OFF
-
-
-#pragma config CP0 = OFF
-#pragma config CP1 = OFF
-#pragma config CP2 = OFF
-#pragma config CP3 = OFF
-
-
-#pragma config CPB = OFF
-#pragma config CPD = OFF
-
-
-#pragma config WRT0 = OFF
-#pragma config WRT1 = OFF
-#pragma config WRT2 = OFF
-#pragma config WRT3 = OFF
-
-
-#pragma config WRTC = OFF
-#pragma config WRTB = OFF
-#pragma config WRTD = OFF
-
-
-#pragma config EBTR0 = OFF
-#pragma config EBTR1 = OFF
-#pragma config EBTR2 = OFF
-#pragma config EBTR3 = OFF
-
-
-#pragma config EBTRB = OFF
-# 231 "./global.h"
-struct {
-    unsigned flag_usart_rx : 1 ;
-    unsigned flag_usart_error : 1 ;
-    unsigned flag_power_off : 1 ;
-    unsigned flag_led_tmr0 : 1 ;
-    unsigned flag_led_usart : 1 ;
-    unsigned flag_led_memory : 1 ;
-    unsigned flag_capture_datalog : 1 ;
-    unsigned flag_edit_temperatura: 1 ;
-} statusgen ;
-# 254 "./global.h"
-union {
-      unsigned char bits;
-      struct {
-             unsigned flag_global_datalog : 1 ;
-             unsigned flag_global_aquecimento : 1 ;
-             unsigned flag_global_condensador : 1 ;
-             unsigned flag_global_vacuo : 1 ;
-             unsigned flag_time_process : 1 ;
-             unsigned flag_call_work : 1 ;
-
-             };
-      } statuspower;
-# 276 "./global.h"
-struct{
-        unsigned flag_save_time :1;
-        unsigned flag_wakeup :1;
-        unsigned flagSendDataFix :1;
-        unsigned flag_proculus_hs :1;
-        unsigned flag_Vacuo_estava_ligado :1;
-        unsigned flag_generico :1;
-        unsigned flag_recomunication :1;
-}statusgen1;
-# 294 "./global.h"
-struct{
-        unsigned flag_main_loop_WDT :1;
-}statusWDT;
-
-
-typedef struct{
-    unsigned int milisegundo;
-    unsigned char segundo;
-    unsigned char minuto;
-    unsigned char hora;
-}t_rtc;
-
-volatile t_rtc rtc;
-# 16 "Liofilizador Placa Mae.c" 2
-
-# 1 "./Liofilizador Placa Mae.h" 1
-# 13 "./Liofilizador Placa Mae.h"
-typedef struct{
-           int *entrada[15];
-           float fator[15];
-           char canal[15];
-           char icone[15];
-           char vpIcone[15];
-     int cor[15];
-              } T_mapa;
-
-
-
-typedef struct{
-        unsigned char plataforma;
-
-                 int setpoint;
-        unsigned char tempoON;
-        unsigned char tempoOFF;
-        unsigned char histerese;
-                 char receita[9];
-        unsigned int status ;
-} t_liofilizador;
-
-
-
-
-typedef struct{
-    unsigned char plataforma;
-    int setpoint;
-    unsigned int potenciaON;
-    unsigned int potenciaOFF;
-    unsigned char histerese;
-    unsigned char receita[10];
-    unsigned int status0;
-} t_aquecimento;
-
-typedef struct{
-    int setpoint;
-    unsigned int potenciaON;
-    unsigned int potenciaOFF;
-    unsigned char histerese;
-             char nome[10];
-} t_receita;
-
-
-
-typedef struct{
-    char date[10];
-    char time[10];
-} t_tempo;
-
-
-typedef struct{
-              char memoflags;
-              union {
-                    unsigned flag_running : 1 ;
-                    unsigned flag_finalized : 1 ;
-                    unsigned flag_view : 1 ;
-                    unsigned flag_download : 1 ;
-                    }flags;
-              }bitflags;
-
-
-
-
-
-typedef struct{
-    unsigned int processo_number;
-    t_tempo inicio;
-    t_tempo fim;
-    unsigned char amostra;
-    unsigned long add_start;
-    unsigned long add_end;
-    unsigned int minutes;
-    union
-    {
-    unsigned char all_flags;
-    struct{
-         unsigned flag_running : 1 ;
-         unsigned flag_finalized : 1 ;
-         unsigned flag_view : 1 ;
-         unsigned flag_download : 1 ;
-         unsigned reserved0 : 1 ;
-         unsigned reserved1 : 1 ;
-         unsigned reserved2 : 1 ;
-         unsigned reserved3 : 1 ;
-         };
-    };
-} t_fat8_processo;
-
-typedef struct{
-        char index;
-        t_fat8_processo processo;
-}t_fat8;
-# 116 "./Liofilizador Placa Mae.h"
-unsigned char countboard(void);
-int Send_To_Slave(char destino, char comando, char size, char * buffer);
-int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer);
-void ShowSensorRealTimeHS(void);
-void showTotalReset(void);
-void AcordaFilha(void);
-
-
-void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador);
-void ShowStaticValueGrid(unsigned char tupla);
-
-void ShowAndSetSlaveParameters(unsigned char tupla);
-void Comando_Protocolo_Serial(void);
-void Send_to_PC(unsigned char size);
-
-void Upload_Data_to_Slave(void);
-void Decodify_Command(void);
-void SEND_REPLY_OK(void);
-
-
-void global_datalog(void);
-void global_condensador(void);
-void global_vacuo(void);
-void global_aquecimento(void);
-
-void Exibe_Hora_Data(char showseconds);
-void Exibe_Tempo_de_Processo(void);
-
-void DataBaseBackupMain(unsigned char tupla);
-void Formatar_Banco_de_Dados(char inicio, char total);
-void Salva_Seguranca(void);
-void Formatar_Datalog(void);
-void ShowMessage(char mensagem[30],unsigned int delay, char SoundType, char retem);
-
-void Comando_Microcomputador(void);
-void Comando_Display(void);
-
-
-void Inicializar_Seguranca(void);
-
-void SaveBlackoutStatus(void);
-void SaveBlackoutStatusRuning(void);
-void RecallBlackoutStatus(void);
-
-void Check_And_Send_Capture_Datalog(void);
-void save_datalog(unsigned long add_datalog);
-
-void Contagem_Tempo_de_Processo(char value);
-void Carregar_tempo_de_datalog(void);
-
-void Carrega_Tupla_Receita(char index, t_receita *receita);
-
-void ShowHardwareInfo(void);
-
-void Global_Aquecimento_Switch(unsigned char estado);
-void Gerenciador_de_Senha(void);
-void Gerenciador_de_Senha_Global(void);
-void Icones_de_alarmes(void);
-
-void Condensador_Switch(unsigned char estado);
-void Vaccum_Switch(unsigned char estado);
-void TrendCurveFuncao(char funcao);
-char buscaIndex(char *buffer,char valor);
-
-void Exibe_Receita(int add_receita);
-void Grava_Receita(char index, t_receita *receita);
-void Formatar_Lista_de_Receitas(void);
-void Formatar_Dados_de_Seguranca(void);
-void Carregar_Parametros_de_Seguranca(void);
-
-void Gravar_Status_da_Senha_Global(void);
-void Carregar_Status_da_Senha_Global(void);
-
-void Atualizar_Lista_de_Receitas(void);
-
-int Tupla_Log_Free(void);
-
-void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCDchannel);
-
-void Buffer_Manager(void);
-
-
-unsigned int Captura_Pagina(void);
-_Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd);
-char menorValorDisponivel(char * trendCurve);
-
-
- void Set_Receita(unsigned char index, char status);
-
-void pagina_15(void);
-void pagina_19(void);
-void pagina_23(void);
-void pagina_25(void);
-void pagina_29(void);
-void pagina_31(void);
-void pagina_47(void);
-void pagina_49(void);
-
-char MenorCanalLivre(void);
-
-void Incrementa_Contador_de_Repique_do_Vacuo(void);
-void Carregar_Display_Schematic_Color(void);
-void Ligar_Cargas_Compassadamente(void);
-
-
-
-void Inicializa_FAT8_Table();
-void FAT8_Write_Process_Inicialize();
-void FAT8_Write_Process_Finalize();
-void FAT8_Save(unsigned char tupla);
-void FAT8_Load(unsigned char tupla);
-void FAT8_Show();
-char Find_Fat8_Running();
-char Find_Fat8_Free();
-void Preenche_Dados_da_FAT8();
-void Plotar_Grafico_Gravado(void);
-# 17 "Liofilizador Placa Mae.c" 2
-
-# 1 "./isr.h" 1
-# 13 "./isr.h"
-# 1 "./proculus.h" 1
-# 57 "./proculus.h"
-typedef struct {
-    unsigned int header;
-    unsigned char size;
-    unsigned char function;
-    unsigned int vp;
-    unsigned char length;
-    unsigned int dado[15];
-    unsigned char page;
-    unsigned char button;
-    unsigned char status;
-    }t_proculus;
-
-
-typedef struct{
-              unsigned char plataforma;
-              unsigned int temperaturaatual;
-              unsigned int setpoint;
-              unsigned char tempoON;
-              unsigned char tempoOFF;
-              } t_visaogeral;
-
-
-void PROCULUS_REG_Write(unsigned char *vetor, unsigned char size);
-void PROCULUS_REG_Read(unsigned char reg, unsigned char size, unsigned char *retorno);
-void PROCULUS_Read_RTC(char *date, char *time);
-void PROCULUS_Write_RTC(char *date, char *time);
-void PROCULUS_Control_Activation(char value);
-
-void PROCULUS_VP_Write(unsigned int vp,char *vetor,char size);
-
-
-void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size);
-
-
-
-
-
-
-
-void PROCULUS_VP_Write_Byte(unsigned int vp,char value);
-unsigned char PROCULUS_VP_Read_Byte(unsigned int vp);
-
-
-
-void PROCULUS_VP_Write_UInt16(unsigned int vp, unsigned int value);
-unsigned int PROCULUS_VP_Read_UInt16(unsigned int vp);
-
-
-
-void PROCULUS_VP_Write_Int16(unsigned int vp, int value);
-unsigned int PROCULUS_VP_Read_Int16(int vp);
-
-
-
-long PROCULUS_VP_Read_Long32(unsigned int vp);
-void PROCULUS_VP_Write_Long32(unsigned int vp, unsigned long value);
-
-
-
-void PROCULUS_VP_Write_Float24(unsigned int vp, float value);
-float PROCULUS_VP_Read_Float24(unsigned int vp);
-
-void PROCULUS_VP_Write_Float32(unsigned int vp, float value);
-float PROCULUS_VP_Read_Float32(unsigned int vp);
-
-
-
-
-void PROCULUS_VP_Write_Double24(unsigned int vp, double value);
-double PROCULUS_VP_Read_Double24(unsigned int vp);
-
-void PROCULUS_VP_Write_Double32(unsigned int vp, double value);
-double PROCULUS_VP_Read_Double32(unsigned int vp);
-
-
-void PROCULUS_VP_Write_String(unsigned int vp, char *text);
-void PROCULUS_VP_Read_String(unsigned int vp, char *text);
-
-
-
-
-
-
-
-unsigned char PROCULUS_Read_Version(void);
-void PROCULUS_Buzzer(unsigned int time_ms_x_10);
-void PROCULUS_Show_Screen(unsigned int screen);
-void PROCULUS_Reset(void);
-char PROCULUS_TPFLAG_Read(void);
-void PROCULUS_TPFLAG_Write(char value);
-
-void PROCULUS_Buffer_to_Proculus(t_proculus *proculus);
-
-void PROCULUS_OK(void);
-void PROCULUS_NOK(void);
-
-void PROCULUS_Delay(unsigned int tempo_ms);
-
-unsigned int PROCULUS_Get_Page(void);
-
-void PROCULUS_Popup(char value);
-
-void PROCULUS_graphic_plot(unsigned char lcd_channel, unsigned int value);
-
-void PROCULUS_Clear_Line_Graphic(char channel);
-
-void PROCULUS_Clean_All_Line_Graphic();
-# 13 "./isr.h" 2
-
-
-
-void __attribute__((picinterrupt(("low_priority")))) isr(void);
-# 18 "Liofilizador Placa Mae.c" 2
-
-
-# 1 "./usart.h" 1
-# 20 "./usart.h"
-# 1 "./protocolo.h" 1
-# 22 "./protocolo.h"
-typedef struct {
-        int header;
-        char origem;
-        char destino;
-        char command;
-        char size;
-        char value[74];
-} t_usart_protocol;
-# 20 "./usart.h" 2
-# 35 "./usart.h"
-void USART_to_Protocol(t_usart_protocol *usart_protocol);
-void USART_init(unsigned long baudrate);
-void USART_putc(unsigned char value);
-void USART_put_int(unsigned int value);
-void USART_put_sint(int value);
-void USART_put_float24(float value);
-void USART_put_long(unsigned long value);
-void USART_put_string(char *vetor);
-void USART_put_buffer(char *vetor, char size);
-unsigned char USART_input_buffer(void);
-# 20 "Liofilizador Placa Mae.c" 2
-
-# 1 "./I2C.h" 1
-# 11 "./I2C.h"
-void I2C_Master_Init(const unsigned long c);
-void I2C_Slave_Init(short address);
-void I2C_Master_Wait(void);
-void I2C_Master_Start(void);
-void I2C_Master_RepeatedStart(void);
-void I2C_Master_Stop(void);
-void I2C_Master_Write(unsigned d);
-unsigned short I2C_Master_Read(unsigned short a);
-# 21 "Liofilizador Placa Mae.c" 2
-
-# 1 "./adc.h" 1
-# 15 "./adc.h"
-void My_ADC_init(void);
-double My_ADC_Read(unsigned char canal);
-
-
-
-void My_ADC_init(void) ;
-float ADC_Read(unsigned char canal) ;
-float ADC_Read_NTC(unsigned char canal) ;
-unsigned int LerADcomFiltro(unsigned char canal) ;
-unsigned int NovoADCon(unsigned char canal) ;
-unsigned int captura();
-void ADCON_set(unsigned char canal);
-# 22 "Liofilizador Placa Mae.c" 2
+# 8 "proculus.c" 2
 
 # 1 "./timedate.h" 1
-# 19 "./timedate.h"
+# 13 "./timedate.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 1 3
+# 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
+
+
+
+
+
+typedef void * va_list[1];
+
+
+
+
+typedef void * __isoc_va_list[1];
+# 137 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long ssize_t;
+# 246 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long off_t;
+# 399 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct _IO_FILE FILE;
+# 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 2 3
+# 52 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 3
+typedef union _G_fpos64_t {
+ char __opaque[16];
+ double __align;
+} fpos_t;
+
+extern FILE *const stdin;
+extern FILE *const stdout;
+extern FILE *const stderr;
+
+
+
+
+
+FILE *fopen(const char *restrict, const char *restrict);
+FILE *freopen(const char *restrict, const char *restrict, FILE *restrict);
+int fclose(FILE *);
+
+int remove(const char *);
+int rename(const char *, const char *);
+
+int feof(FILE *);
+int ferror(FILE *);
+int fflush(FILE *);
+void clearerr(FILE *);
+
+int fseek(FILE *, long, int);
+long ftell(FILE *);
+void rewind(FILE *);
+
+int fgetpos(FILE *restrict, fpos_t *restrict);
+int fsetpos(FILE *, const fpos_t *);
+
+size_t fread(void *restrict, size_t, size_t, FILE *restrict);
+size_t fwrite(const void *restrict, size_t, size_t, FILE *restrict);
+
+int fgetc(FILE *);
+int getc(FILE *);
+int getchar(void);
+int ungetc(int, FILE *);
+
+int fputc(int, FILE *);
+int putc(int, FILE *);
+int putchar(int);
+
+char *fgets(char *restrict, int, FILE *restrict);
+
+char *gets(char *);
+
+
+int fputs(const char *restrict, FILE *restrict);
+int puts(const char *);
+
+#pragma printf_check(printf) const
+#pragma printf_check(vprintf) const
+#pragma printf_check(sprintf) const
+#pragma printf_check(snprintf) const
+#pragma printf_check(vsprintf) const
+#pragma printf_check(vsnprintf) const
+
+int printf(const char *restrict, ...);
+int fprintf(FILE *restrict, const char *restrict, ...);
+int sprintf(char *restrict, const char *restrict, ...);
+int snprintf(char *restrict, size_t, const char *restrict, ...);
+
+int vprintf(const char *restrict, __isoc_va_list);
+int vfprintf(FILE *restrict, const char *restrict, __isoc_va_list);
+int vsprintf(char *restrict, const char *restrict, __isoc_va_list);
+int vsnprintf(char *restrict, size_t, const char *restrict, __isoc_va_list);
+
+int scanf(const char *restrict, ...);
+int fscanf(FILE *restrict, const char *restrict, ...);
+int sscanf(const char *restrict, const char *restrict, ...);
+int vscanf(const char *restrict, __isoc_va_list);
+int vfscanf(FILE *restrict, const char *restrict, __isoc_va_list);
+int vsscanf(const char *restrict, const char *restrict, __isoc_va_list);
+
+void perror(const char *);
+
+int setvbuf(FILE *restrict, char *restrict, int, size_t);
+void setbuf(FILE *restrict, char *restrict);
+
+char *tmpnam(char *);
+FILE *tmpfile(void);
+
+
+
+
+FILE *fmemopen(void *restrict, size_t, const char *restrict);
+FILE *open_memstream(char **, size_t *);
+FILE *fdopen(int, const char *);
+FILE *popen(const char *, const char *);
+int pclose(FILE *);
+int fileno(FILE *);
+int fseeko(FILE *, off_t, int);
+off_t ftello(FILE *);
+int dprintf(int, const char *restrict, ...);
+int vdprintf(int, const char *restrict, __isoc_va_list);
+void flockfile(FILE *);
+int ftrylockfile(FILE *);
+void funlockfile(FILE *);
+int getc_unlocked(FILE *);
+int getchar_unlocked(void);
+int putc_unlocked(int, FILE *);
+int putchar_unlocked(int);
+ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict);
+ssize_t getline(char **restrict, size_t *restrict, FILE *restrict);
+int renameat(int, const char *, int, const char *);
+char *ctermid(char *);
+
+
+
+
+
+
+
+char *tempnam(const char *, const char *);
+# 13 "./timedate.h" 2
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 1 3
+# 33 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 76 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long time_t;
+# 293 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef void * timer_t;
+
+
+
+
+typedef int clockid_t;
+
+
+
+
+typedef long clock_t;
+# 313 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+struct timespec { time_t tv_sec; long tv_nsec; };
+
+
+
+
+
+typedef int pid_t;
+# 33 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 2 3
+
+
+
+
+
+
+
+struct tm {
+ int tm_sec;
+ int tm_min;
+ int tm_hour;
+ int tm_mday;
+ int tm_mon;
+ int tm_year;
+ int tm_wday;
+ int tm_yday;
+ int tm_isdst;
+ long __tm_gmtoff;
+ const char *__tm_zone;
+};
+
+clock_t clock (void);
+time_t time (time_t *);
+double difftime (time_t, time_t);
+time_t mktime (struct tm *);
+size_t strftime (char *restrict, size_t, const char *restrict, const struct tm *restrict);
+struct tm *gmtime (const time_t *);
+struct tm *localtime (const time_t *);
+char *asctime (const struct tm *);
+char *ctime (const time_t *);
+int timespec_get(struct timespec *, int);
+# 73 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 3
+size_t strftime_l (char * restrict, size_t, const char * restrict, const struct tm * restrict, locale_t);
+
+struct tm *gmtime_r (const time_t *restrict, struct tm *restrict);
+struct tm *localtime_r (const time_t *restrict, struct tm *restrict);
+char *asctime_r (const struct tm *restrict, char *restrict);
+char *ctime_r (const time_t *, char *);
+
+void tzset (void);
+
+struct itimerspec {
+ struct timespec it_interval;
+ struct timespec it_value;
+};
+# 102 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 3
+int nanosleep (const struct timespec *, struct timespec *);
+int clock_getres (clockid_t, struct timespec *);
+int clock_gettime (clockid_t, struct timespec *);
+int clock_settime (clockid_t, const struct timespec *);
+int clock_nanosleep (clockid_t, int, const struct timespec *, struct timespec *);
+int clock_getcpuclockid (pid_t, clockid_t *);
+
+struct sigevent;
+int timer_create (clockid_t, struct sigevent *restrict, timer_t *restrict);
+int timer_delete (timer_t);
+int timer_settime (timer_t, int, const struct itimerspec *restrict, struct itimerspec *restrict);
+int timer_gettime (timer_t, struct itimerspec *);
+int timer_getoverrun (timer_t);
+
+extern char *tzname[2];
+
+
+
+
+
+char *strptime (const char *restrict, const char *restrict, struct tm *restrict);
+extern int daylight;
+extern long timezone;
+extern int getdate_err;
+struct tm *getdate (const char *);
+# 14 "./timedate.h" 2
+
+
+
+
+
 void my_delay_ms(long time);
 void my_delay_ms_TMR1(long time);
 void my_delay_ms_CLRWDT(long time);
-# 23 "Liofilizador Placa Mae.c" 2
-
-# 1 "./util.h" 1
-
-
-
-void print(char *texto);
-void bcd2str(char valor, char *dado);
-char str2bcd(char *value);
-void clear_screen(void);
-int my_pow(int rad, int exp);
-
-char* itoa(int num, char* str, int base);
-char * reverse( char * s );
-char *ultoa(unsigned long num, char *str, int radix);
-# 24 "Liofilizador Placa Mae.c" 2
-
-# 1 "./protocolo.h" 1
-# 25 "Liofilizador Placa Mae.c" 2
-
-# 1 "./eeprom.h" 1
-# 14 "./eeprom.h"
-void EEPROM_Write_Byte(unsigned int addr, unsigned char dado);
-unsigned char EEPROM_Read_Byte(unsigned int addr);
-void EEPROM_Write_Integer(unsigned int addr, unsigned int dado);
-int EEPROM_Read_Integer(unsigned int addr);
-void EEPROM_Write_Float(unsigned int addr,float dado);
-float EEPROM_Read_Float(unsigned int addr);
-void EEPROM_Write_Double(unsigned int addr,double dado);
-float EEPROM_Read_Double(unsigned int addr);
-
-
-void EEPROM_Write_ULong24(unsigned int addr,long dado);
-long EEPROM_Read_ULong24(unsigned int addr);
-void EEPROM_Write_Long32(unsigned int addr,long dado);
-long EEPROM_Read_Long32(unsigned int addr);
-
-void EEPROM_Write_String(unsigned int addr,char *dado);
-void EEPROM_Read_String(unsigned int addr,char *dado);
-
-void EEPROM_Write_Buffer(unsigned int addr,char *dado,char size);
-void EEPROM_Read_Buffer(unsigned int addr,char *dado,char size);
-# 26 "Liofilizador Placa Mae.c" 2
-
-# 1 "./EEPROM_24C1025.h" 1
-# 16 "./EEPROM_24C1025.h"
-void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
-                                  unsigned long mem_add,
-                                 unsigned char sizedata,
-                                            char *data);
-
-void EEPROM_24C1025_Read_Buffer(unsigned char chip_add,
-                                 unsigned long mem_add,
-                                unsigned char sizedata,
-                                           char *data);
-
-void EEPROM_24C1025_Read_Str(unsigned char chip_add, unsigned long mem_add,char *texto);
-void EEPROM_24C1025_Write_Str(unsigned char chip_add, unsigned long mem_add,char *data);
-
-
-void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char data);
-unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem_add);
-
-void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data);
-unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_add);
-
-void EEPROM_24C1025_Write_Long(unsigned char chip_add, unsigned long mem_add, long data);
-unsigned long EEPROM_24C1025_Read_Long(unsigned char chip_add, unsigned long mem_add);
-
-void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value);
-# 27 "Liofilizador Placa Mae.c" 2
-
-# 1 "./voltagem.h" 1
-# 12 "./voltagem.h"
-int VOLTAGEM_read(char canal);
-# 28 "Liofilizador Placa Mae.c" 2
-
-# 1 "./versao.h" 1
-# 29 "Liofilizador Placa Mae.c" 2
-# 60 "Liofilizador Placa Mae.c"
-const char *boardtype[5]={"Mother Board",
-                          "Vaccum Board",
-                          "PT100 Board ",
-                          "NTC Board   ",
-                          "Relay_Board "};
-# 74 "Liofilizador Placa Mae.c"
-volatile unsigned char usart_buffer[32+10];
-# 84 "Liofilizador Placa Mae.c"
-volatile unsigned int tempodecorrido ;
-volatile unsigned int tempocaptura ;
-volatile unsigned int tempocapturaconstante ;
-
-volatile unsigned int processo_totalminuto;
-volatile unsigned char processo_segundo ;
-volatile unsigned char processo_minuto ;
-volatile unsigned char processo_hora ;
-
-
-
-volatile unsigned int tmr_led_memory;
-volatile unsigned int Delay_Led_Memory;
-
-volatile unsigned int tmr_led_usart;
-volatile unsigned int Delay_Led_Usart;
-
-volatile unsigned int tmr_led_tmr0;
-volatile unsigned int Delay_Led_Tmr0;
-
-
-
-
-volatile unsigned int delaycheckscreen;
-volatile signed int senhacount;
-volatile unsigned int delay_update_display;
-
-
-
-t_usart_protocol usart_protocol;
-t_proculus proculus;
-t_liofilizador liofilizador[10];
-t_receita receita;
-
-
-
-
-t_fat8 fat8;
-
-
-
-
-char texto[74];
-char buffer[74];
-
-
-
-char maincnt;
-unsigned int pagina=15;
-unsigned int paginamemo=15;
-# 146 "Liofilizador Placa Mae.c"
-volatile unsigned char flag_senha_global_liberada;
-volatile unsigned char flag_senha_liberada;
-volatile unsigned char totalboard;
-volatile signed int senhacount;
-unsigned long senha_atual;
-char senhavetor[4];
-
-
-int Condensador ;
-int Vacuometro ;
-int Voltimetro ;
-
-int Seg_Condensador ;
-int Seg_Vacuo ;
-int Seg_Aq_cond ;
-int Seg_Aq_vacuo ;
-int leitura[0x0F] ;
-
-
-char Index_Receita;
-char Index_Sel_Rec;
-
-
-unsigned long add_datalog;
-
-char returnToScreen;
-
-volatile char MonitorBuffer;
-
-
-
-char trendExist;
-int trendvp=0x0310;
-char icone ;
-
-
-unsigned char nabucodonozor=0;
-
-unsigned int vpPrint=2000;
-
-volatile unsigned char flag_array_slave_WDT[15];
-
-unsigned char memo_statuspower;
-
-volatile unsigned char delay_condensador;
-
-int index;
-int Tamanho_Display;
-char maxlineDATALOG;
-
-int TrendColor[13];
-
-T_mapa mapa;
-
-
-void main(void)
-{
-     my_delay_ms_CLRWDT(100);
-
-     OSCCONbits.IRCF0=1;
-     OSCCONbits.IRCF1=1;
-     OSCCONbits.IRCF2=1;
-     OSCTUNEbits.PLLEN=1;
-
-     TRISA=0b11101111;
-     TRISB=0b00000001;
-     TRISC=0b11110000;
-     TRISD=0b11100011;
-     TRISE=0xFF;
-
-
-
-     T0CONbits.T0CS = 0;
-     T0CONbits.PSA = 0;
-     T0CONbits.T0PS1 = 1;
-     T0CONbits.T0PS1 = 1;
-     T0CONbits.T0PS2 = 1;
-     INTCON2bits.TMR0IP =0;
-     INTCONbits.T0IE =1;
-
-
-
-     RBIF=0;
-     INTCONbits.INT0IE =0;
-
-
-     PIR1bits.TMR1IF = 0;
-     IPR1bits.TMR1IP=0;
-     TMR1H = 0x0B;
-     TMR1L = 0xBA;
-     TMR1CS = 0;
-     T1CKPS0 = 1;
-     T1CKPS1 = 1;
-     T1RUN=1;
-     T1OSCEN=1;
-     PIE1bits.TMR1IE=1;
-     TMR1ON = 1;
-
-
-
-
-
-     INTCONbits.PEIE =1;
-
-
-
-
-     INTCONbits.GIE =1;
-
-
-
-
-
-
-     Delay_Led_Tmr0=0;
-     PORTBbits.RB7=0;
-     Delay_Led_Usart=0;
-     PORTBbits.RB6=0;
-     Delay_Led_Memory=0;
-     PORTBbits.RB5=0;
-
-
-
-     USART_init(115200);
-     My_ADC_init();
-     I2C_Master_Init(100000);
-     my_delay_ms_CLRWDT(500);
-# 370 "Liofilizador Placa Mae.c"
-     {
-
-     unsigned int reset;
-     reset=EEPROM_Read_Integer(34);
-     if(reset==0xFFFF)
-       {
-       EEPROM_Write_Integer(34,0);
-       EEPROM_Write_Integer(0xE8,0);
-       }
-     reset++;
-     EEPROM_Write_Integer(34,reset);
-     statusgen1.flag_Vacuo_estava_ligado=0;
-
-     }
-
-
-
-
-     Tamanho_Display=EEPROM_Read_Integer(0xFA);
-     my_delay_ms_CLRWDT(300);
-     print("JJ Cientifica Ind. e Com. de Eq. Cientificos.");
-     my_delay_ms_CLRWDT(300);
-     print("Inicializando o Sistema...");
-     my_delay_ms_CLRWDT(300);
-     print("Analisando Hardware. Aguarde...");
-     my_delay_ms_CLRWDT(300);
-     PROCULUS_VP_Read_String(1990, buffer);
-     strcpy(texto,"* : Display      ");
-     strcat(texto,buffer);
-     print(texto);
-     my_delay_ms_CLRWDT(300);
-     ShowHardwareInfo();
-
-
-
-     if(Tamanho_Display==80)
-        maxlineDATALOG=12;
-     else if(Tamanho_Display==50)
-             maxlineDATALOG=9;
-
-
-     if(EEPROM_Read_Byte(52)==0xFF)
-       {
-       print("Formatando memoria principal...");
-       Formatar_Banco_de_Dados(0,10);
-       Formatar_Lista_de_Receitas();
-       Formatar_Dados_de_Seguranca();
-       Formatar_Datalog();
-       flag_senha_global_liberada=0;
-       flag_senha_liberada=0;
-       Gravar_Status_da_Senha_Global();
-       EEPROM_Write_Byte(16,0);
-       EEPROM_Write_Integer(0x09,10);
-       EEPROM_Write_Long32(11,123456);
-       TrendCurveFuncao(0);
-       EEPROM_Write_Byte(17,0);
-       EEPROM_Write_Byte(18,0);
-       Inicializa_FAT8_Table();
-       EEPROM_24C1025_Write_Int (0,0,0);
-       EEPROM_24C1025_Write_Long (0,2,0);
-       }
-     RecallBlackoutStatus();
-     TrendCurveFuncao(1);
-     senha_atual=EEPROM_Read_Long32(11);
-     Carregar_Status_da_Senha_Global();
-     Carregar_Parametros_de_Seguranca();
-     Carregar_tempo_de_datalog();
-     add_datalog=EEPROM_24C1025_Read_Long (0,2);
-
-
-
-     print("Analisando dados...");
-     for(char i=0;i<15;i++)
-        {
-        __asm("CLRWDT");
-        ShowStaticValueGrid(i);
-        }
-
-
-
-
-
-
-     for(char i=0;i<8;i++)
-         {
-         __asm("CLRWDT");
-         Exibe_Receita(i);
-         }
-
-     senha_atual=EEPROM_Read_Long32(11);
-
-     Carregar_Status_da_Senha_Global();
-
-
-
-     ShowSensorRealTimeHS();
-
-
-
-     Carregar_Parametros_de_Seguranca();
-     Carregar_tempo_de_datalog();
-
-
-
-
-
-
-     Exibe_Tempo_de_Processo();
-     Icones_de_alarmes();
-
-     pagina=0;
-     paginamemo=0;
-     maincnt=0;
-     delaycheckscreen=0;
-     MonitorBuffer=0;
-
-     Vacuometro=0;
-     Voltimetro=0;
-     Condensador=0;
-
-
-     Exibe_Hora_Data(0);
-     rtc.milisegundo=0;
-     rtc.segundo=0;
-
-
-     processo_segundo=0;
-     memo_statuspower=statuspower.bits;
-     delay_condensador=0;
-# 525 "Liofilizador Placa Mae.c"
-        FAT8_Show();
-
-
-        Ligar_Cargas_Compassadamente();
-        PROCULUS_Show_Screen(15);
-
-        while(1)
-             {
-             statusWDT.flag_main_loop_WDT=1;
-
-
-             statusgen1.flag_proculus_hs=1;
-             if(delaycheckscreen>1000)
-               {
-               delaycheckscreen=0;
-               pagina = PROCULUS_Get_Page();
-               if(pagina!=paginamemo)
-                  {
-                  paginamemo=pagina;
-                  }
-               }
-             statusgen1.flag_proculus_hs=0;
-
-                statusgen1.flag_proculus_hs=1;
-                if(rtc.milisegundo<2) if(pagina!=25) Exibe_Hora_Data(0);
-                if(statuspower.flag_time_process==1) SaveBlackoutStatusRuning();
-                Exibe_Tempo_de_Processo();
-                Icones_de_alarmes();
-                statusgen1.flag_proculus_hs=0;
-
-
-                Gerenciador_de_Senha();
-                Gerenciador_de_Senha_Global();
-
-                global_datalog();
-                global_condensador();
-                global_vacuo();
-                global_aquecimento();
-
-                statusgen1.flag_proculus_hs=1;
-
-                if(memo_statuspower!=statuspower.bits)
-                  {
-                  PROCULUS_OK();
-                  SaveBlackoutStatus();
-                  memo_statuspower=statuspower.bits;
-                  }
-# 593 "Liofilizador Placa Mae.c"
-                Check_And_Send_Capture_Datalog();
-                statusgen1.flag_proculus_hs=0;
-
-
-                ShowSensorRealTimeHS();
-
-
-                showTotalReset();
-
-
-
-
-
-            statusgen1.flag_proculus_hs=1;
-            switch(pagina)
-                  {
-
-
-
-
-
-
-                  case 19:
-                  case 21:
-
-
-                           for(char i=0; i<10; i++)
-                               {
-
-                               if(PROCULUS_VP_Read_UInt16(7+i)==1)
-                                  {
-                                  PROCULUS_VP_Write_UInt16(7+i,0);
-                                  Index_Sel_Rec=i;
-                                  if(Index_Sel_Rec<=4)
-                                     {
-                                     returnToScreen=19;
-                                     PROCULUS_Show_Screen(27);
-                                     }
-                                  else
-                                     {
-                                     returnToScreen=21;
-                                     PROCULUS_Show_Screen(28);
-                                     }
-                                  }
-                               }
-                          pagina_19();
-                          break;
-                  case 23:
-                          if(PROCULUS_VP_Read_UInt16(1)==1)
-                             {
-                             PROCULUS_VP_Write_UInt16(1,0);
-                             pagina_23();
-                             }
-                          break;
-
-                  case 25:
-                         if(maincnt==0)
-                            {
-                            Exibe_Hora_Data(1);
-                            maincnt++;
-                            }
-                          if(PROCULUS_VP_Read_UInt16(152)==1)
-                             {
-                             PROCULUS_VP_Write_UInt16(152,0);
-                             Exibe_Hora_Data(1);
-                             }
-                          if(PROCULUS_VP_Read_UInt16(174)==1)
-                             {
-                             PROCULUS_VP_Write_UInt16(174,0);
-                             pagina_25();
-                             }
-                          break;
-                  case 27:
-                  case 28:
-                          for(Index_Receita=0;Index_Receita<8;Index_Receita++)
-                              {
-                              if(PROCULUS_VP_Read_UInt16(0x0020+Index_Receita)==1)
-                                 {
-                                 PROCULUS_VP_Write_UInt16(0x0020+Index_Receita,0);
-                                 PROCULUS_Show_Screen(returnToScreen);
-                                 Carrega_Tupla_Receita(Index_Receita, &receita);
-                                 Set_Receita(Index_Sel_Rec,1);
-                                 }
-                              }
-
-                              if(PROCULUS_VP_Read_UInt16(17)==1)
-                                 {
-                                 PROCULUS_VP_Write_UInt16(17,0);
-                                 PROCULUS_Show_Screen(returnToScreen);
-                                 }
-
-                              if(PROCULUS_VP_Read_UInt16(18)==1)
-                                 {
-                                 PROCULUS_VP_Write_UInt16(18,0);
-                                 receita.histerese=0;
-                                 strcpy(receita.nome,"");
-                                 receita.potenciaOFF=0;
-                                 receita.potenciaON=0;
-                                 receita.setpoint=0;
-                                 Set_Receita(Index_Sel_Rec,0);
-                                 PROCULUS_Show_Screen(returnToScreen);
-                                 }
-
-                          break;
-
-                  case 29:
-                          {
-                          for(char i=0;i<maxlineDATALOG;i++)
-                             {
-                             if(PROCULUS_VP_Read_UInt16(0x1017+(i*30))==1)
-                               {
-                               PROCULUS_VP_Write_UInt16(0x1017+(i*30),0);
-                               FAT8_Load(i);
-                               PROCULUS_Show_Screen(35);
-                               PROCULUS_Clean_All_Line_Graphic();
-                               Plotar_Grafico_Gravado();
-                               break;
-                               }
-                             }
-
-                          if(PROCULUS_VP_Read_UInt16(0x30)==1)
-                             {
-                             PROCULUS_VP_Write_UInt16(0x30,0);
-                             Inicializa_FAT8_Table();
-                             }
-
-                          FAT8_Show();
-
-                          if(PROCULUS_VP_Read_UInt16(175)==1)
-                             {
-                             PROCULUS_VP_Write_UInt16(175,0);
-                             pagina_29();
-                             }
-                          }
-                          break;
-                  case 31:
-                          {
-
-
-                          unsigned long dica;
-
-                          dica=~(senha_atual^0xE4BA2F10);
-
-                          ultoa(dica,texto,16);
-
-                          PROCULUS_VP_Write_String(1660,texto);
-                          my_delay_ms_TMR1(500);
-                          }
-                          if(PROCULUS_VP_Read_UInt16(386)==1)
-                             {
-                             PROCULUS_VP_Write_UInt16(386,0);
-                             pagina_31();
-                             }
-                          break;
-                  case 35:
-                            {
-                            int tv;
-                            char total;
-                            static int canal=0;
-                            statusgen1.flag_proculus_hs=1;
-
-                            for(trendvp=0x0310;trendvp<0x031D;trendvp++)
-                                  {
-                                  icone=trendvp-0x0310;
-                                  if(PROCULUS_VP_Read_UInt16(trendvp)==14)
-                                          {
-                                          if(flag_senha_liberada)
-                                               {
-
-                                               if(Tamanho_Display==50)canal=icone;
-                                               if(Tamanho_Display==80)canal=MenorCanalLivre();
-
-                                               if(canal<8)
-                                                  {
-                                                  PROCULUS_VP_Write_UInt16(0x310+icone,icone+1);
-                                                  PROCULUS_VP_Write_UInt16((canal*10+1789),(canal<<8)|(0x0001));
-                                                  PROCULUS_VP_Write_UInt16((canal*10+1787),TrendColor[icone]);
-
-
-                                                  mapa.canal[canal]=canal;
-                                                  mapa.icone[canal]=icone+1;
-                                                  mapa.vpIcone[icone]=icone+1;
-                                                  mapa.cor[canal]=TrendColor[icone];
-                                                  mapa.fator[canal]=1.0;
-                                                  mapa.entrada[canal]=&leitura[(icone<3)?(icone):((icone)+1)];
-
-                                                  mapa.fator[canal]=1.0;
-
-                                                  if(icone==0)mapa.fator[canal]=0.4546;
-                                                  if(icone==1)mapa.fator[canal]=0.05;
-
-
-
-
-                                                  TrendCurveFuncao(2);
-                                                  }
-                                               else
-                                                  {
-                                                  PROCULUS_VP_Write_UInt16((canal*10+1789),(canal<<8)|(0x0A00));
-                                                  PROCULUS_VP_Write_UInt16((canal*10+1787),0xFFFF);
-                                                  PROCULUS_VP_Write_UInt16(trendvp,-1);
-                                                  }
-                                               }
-                                          else
-                                               {
-                                               PROCULUS_NOK();
-                                               PROCULUS_VP_Write_UInt16(trendvp,-1);
-                                               PROCULUS_Popup(0x52);
-                                               }
-                                          }
-                                     else
-                                      if((PROCULUS_VP_Read_UInt16(trendvp)>=15)&&(PROCULUS_VP_Read_UInt16(trendvp)<=30))
-                                          {
-                                          if(flag_senha_liberada)
-                                               {
-                                               char canal_aleatorio, canal_sequencial;
-
-                                               canal_sequencial=buscaIndex(mapa.icone,icone+1);
-                                               canal_aleatorio=mapa.icone[icone]-1;
-
-                                               PROCULUS_VP_Write_UInt16(trendvp,-1);
-                                               PROCULUS_VP_Write_UInt16((canal_sequencial*10+1789),0x0A00);
-                                               PROCULUS_VP_Write_UInt16((canal_sequencial*10+1787),0xFFFF);
-
-                                                                                       mapa.entrada[canal_sequencial]=((void*)0);
-                                               mapa.canal[canal_sequencial]=0X0A;
-                                               mapa.icone[canal_sequencial]=-1;
-                                               mapa.vpIcone[icone]=-1;
-                                               mapa.cor[canal_sequencial]=0xFFFF;
-                                                                                   mapa.fator[canal_sequencial]=0.0;
-
-
-                                               TrendCurveFuncao(2);
-                                               }
-                                          else
-                                               {
-                                               PROCULUS_NOK();
-                                               PROCULUS_Popup(0x52);
-                                               if(Tamanho_Display==50)PROCULUS_VP_Write_UInt16(trendvp,mapa.icone[icone]);
-                                               if(Tamanho_Display==80)PROCULUS_VP_Write_UInt16(trendvp,mapa.vpIcone[icone]);
-                                               }
-                                          }
-                                  }
-
-
-
-
-
-
-                            statusgen1.flag_proculus_hs=0;
-                            break;
-                            }
-                  case 47:
-                          Atualizar_Lista_de_Receitas();
-
-                          for(Index_Receita=0;Index_Receita<8;Index_Receita++)
-                              {
-
-                              if(PROCULUS_VP_Read_UInt16(0x0020+Index_Receita)==1)
-                                 {
-                                 PROCULUS_VP_Write_UInt16(0x0020+Index_Receita,0);
-                                 pagina_47();
-                                 break;
-                                 }
-                              }
-
-                          break;
-                  case 49:
-                          {
-                          pagina_49();
-                          }
-                          break;
-                  }
-# 875 "Liofilizador Placa Mae.c"
-                       statusgen1.flag_recomunication =1;
-                 while(statusgen1.flag_recomunication==1){
-                       statusgen1.flag_recomunication =0;
-                      _delay((unsigned long)((200)*(32000000/4000.0)));
-
-                      USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
-                      USART_putc(0xCD);USART_putc(0xCD);
-
-                      for(unsigned int tempo=0; tempo<200; tempo++)
-                          {
-                          if(statusgen.flag_usart_rx==1) break;
-                          my_delay_ms_CLRWDT(1);
-                          }
-
-
-
-                      if(statusgen.flag_usart_rx)
-                         {
-                         Comando_Protocolo_Serial();
-                         statusgen1.flag_recomunication=1;
-                         }
-
-
-                      if(statusgen.flag_usart_rx)
-                         {
-                         Comando_Display();
-                         statusgen1.flag_recomunication=1;
-                         }
-
+# 9 "proculus.c" 2
+
+
+extern volatile unsigned char usart_buffer[32+10];
+volatile unsigned int tempodecorrido;
+
+
+
+void PROCULUS_REG_Write(unsigned char *vetor, unsigned char size){
+     unsigned char i;
+     if(!statusgen1.flag_proculus_hs)
+        _delay((unsigned long)((32)*(32000000/4000.0)));
+     else
+        _delay((unsigned long)((6)*(32000000/4000.0)));
+
+     USART_put_int(0x5AA5);
+     USART_putc((unsigned char)(1+size));
+     USART_putc(0x80);
+     for(i=0;i<size;i++)
+         USART_putc(vetor[i]);
+     my_delay_ms(1);
+}
+
+
+
+
+void PROCULUS_REG_Read(unsigned char reg, unsigned char size, unsigned char *retorno){
+     unsigned char i;
+     unsigned int tempo;
+     if(!statusgen1.flag_proculus_hs)
+        _delay((unsigned long)((32)*(32000000/4000.0)));
+     else
+        _delay((unsigned long)((6)*(32000000/4000.0)));
+     USART_put_int(0x5AA5);
+     USART_putc((unsigned char)(2+size));
+     USART_putc(0x81);
+     USART_putc(reg);
+     USART_putc(size);
+
+
+     TRISDbits.RD4=0;
+     PORTDbits.RD4=1;
+
+     tempo=0;
+     while(tempo<400)
+           {
+           _delay((unsigned long)((500)*(32000000/4000000.0)));
+           if(statusgen.flag_usart_rx)
+              {
+              statusgen.flag_usart_rx=0;
+              for(i=0;i<size;i++)
+                 {
+                 *(&retorno[i])=(unsigned char)usart_buffer[(6+i)];
                  }
+              break;
+              }
+           tempo++;
+           }
 
+     PORTDbits.RD4=0;
 
-            }
-
-
+     my_delay_ms(1);
 
 }
 
-unsigned char countboard()
-         {
-         unsigned char retorno;
-         retorno=0;
-         for(char destino=0;destino<0x0F;destino++)
-             {
-             if(Send_To_Slave(destino, 0x03, 0, buffer)!=-1) retorno++;
-             }
-         return retorno;
-         }
 
 
 
- int Send_To_Slave(char destino, char comando, char size, char * buffer)
-{
-     unsigned int contador;
-     int retorno=-1;
-     char i;
-
-     USART_put_int(0xAABB);
-     USART_putc(0x00);
-     USART_putc(destino);
-     USART_putc(comando);
-     USART_putc(size);
+void PROCULUS_VP_Write(unsigned int vp,char *vetor,char size){
+     unsigned char i;
+     if(!statusgen1.flag_proculus_hs)
+        _delay((unsigned long)((32)*(32000000/4000.0)));
+     else
+        _delay((unsigned long)((6)*(32000000/4000.0)));
+     USART_put_int(0x5AA5);
+     USART_putc((unsigned char)(3+size));
+     USART_putc(0x82);
+     USART_put_int(vp);
      for(i=0;i<size;i++)
-          USART_putc(buffer[i]);
-     _delay((unsigned long)((80)*(32000000/4000000.0)));
+        USART_putc(vetor[i]);
+     USART_putc(0);
+     my_delay_ms(1);
+
+}
 
 
-     statusgen.flag_usart_rx=0;
-     for(int contador=0;contador<400;contador++)
-         {
-          _delay((unsigned long)((200)*(32000000/4000000.0)));
-          if(statusgen.flag_usart_rx==1)
-             {
-             _delay((unsigned long)((2)*(32000000/4000.0)));
-             statusgen.flag_usart_rx=0;
-             size=usart_buffer[5];
-             retorno = (usart_buffer[6]<<8)|(usart_buffer[7]);
-             for(i=0;i<size;i++)
-                 buffer[i]=usart_buffer[i+6];
-             contador=0;
-             break;
-             }
-          }
+void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size){
+     unsigned char i;
+     unsigned int tempo;
+     t_proculus proculus;
+
+     if(!statusgen1.flag_proculus_hs)
+        _delay((unsigned long)((32)*(32000000/4000.0)));
+     else
+        _delay((unsigned long)((6)*(32000000/4000.0)));
+     USART_put_int(0x5AA5);
+     USART_putc(4);
+     USART_putc(0x83);
+     USART_put_int(vp);
+     USART_putc((unsigned char)(size>>1));
+
+
+
+
+
+     tempo=0;
+     while(tempo<400)
+           {
+           _delay((unsigned long)((500)*(32000000/4000000.0)));
+           if(statusgen.flag_usart_rx)
+              {
+              statusgen.flag_usart_rx=0;
+              for(i=0;i<size;i++)
+                 {
+                 *(&vetor[i])=usart_buffer[(7+i)];
+                 }
+              break;
+              }
+           tempo++;
+           }
+    if(size>4)*(&vetor[i])=0;
+    my_delay_ms(1);
+}
+
+
+void PROCULUS_Control_Activation(char value){
+     my_delay_ms(500);
+     USART_put_int(0x5AA5);
+     USART_putc(0x03);
+     USART_putc(0x80);
+     USART_putc(0x4F);
+     USART_putc(value);
+     my_delay_ms(500);
+}
+
+void PROCULUS_Popup(char value){
+     PROCULUS_Control_Activation(value);
+}
+
+
+
+void PROCULUS_Read_RTC(char *date,char *time){
+     char i;
+     char retorno[10];
+     char year[3],month[3],day[3],hour[3],minute[3],second[3];
+
+
+     USART_put_int(0x5AA5);
+     USART_putc(0x03);
+     USART_putc(0x81);
+     USART_putc(0x20);
+     USART_putc(0x07);
+
+
+     if(USART_input_buffer())
+        {
+        for(i=0;i<10;i++)
+            retorno[i] = usart_buffer[(unsigned char)(6+i)];
+        }
+
+        bcd2str(retorno[0],year);
+        bcd2str(retorno[1],month);
+        bcd2str(retorno[2],day);
+
+        strcpy(date,"");
+        strcat(date,day);
+        strcat(date,"/");
+        strcat(date,month);
+        strcat(date,"/");
+        strcat(date,year);
+
+        bcd2str(retorno[4],hour);
+        bcd2str(retorno[5],minute);
+        bcd2str(retorno[6],second);
+
+        strcpy(time,"");
+        strcat(time,hour);
+        strcat(time,":");
+        strcat(time,minute);
+        strcat(time,":");
+        strcat(time,second);
+
+        my_delay_ms(1);
+}
+
+void PROCULUS_Write_RTC(char *date, char *time){
+     char year[3],month[3],day[3],hour[3],minute[3],second[3];
+
+     year[0]=date[6];
+     year[1]=date[7];
+     year[2]=0;
+
+     month[0]=date[3];
+     month[1]=date[4];
+     month[2]=0;
+
+     day[0]=date[0];
+     day[1]=date[1];
+     day[2]=0;
+
+     hour[0]=time[0];
+     hour[1]=time[1];
+     hour[2]=0;
+
+     minute[0]=time[3];
+     minute[1]=time[4];
+     minute[2]=0;
+
+     second[0]=time[6];
+     second[1]=time[7];
+     second[2]=0;
+
+     USART_put_int(0x5AA5);
+     USART_putc(0x0A);
+     USART_putc(0x80);
+     USART_putc(0x1F);
+     USART_putc(0x5A);
+     USART_putc(str2bcd(year));
+     USART_putc(str2bcd(month));
+     USART_putc(str2bcd(day));
+     USART_putc(0x01);
+     USART_putc(str2bcd(hour));
+     USART_putc(str2bcd(minute));
+     USART_putc(str2bcd(second));
+}
+# 248 "proculus.c"
+void PROCULUS_VP_Write_Byte(unsigned int vp,char value){
+     char vetor[1];
+     vetor[0]=value;
+     PROCULUS_VP_Write(vp,vetor,1);
+     my_delay_ms(1);
+}
+unsigned char PROCULUS_VP_Read_Byte(unsigned int vp){
+     char vetor[1];
+     PROCULUS_VP_Read(vp,vetor,1);
+     return vetor[0];
+}
+
+
+
+
+void PROCULUS_VP_Write_UInt16(unsigned int vp, unsigned int value){
+     char vetor[2];
+     unsigned char *pt;
+     pt=(unsigned char *)(&value);
+     vetor[1]=(char)(value);
+     vetor[0]=(char)(value>>8);
+     PROCULUS_VP_Write(vp,vetor,2);
+}
+
+unsigned int PROCULUS_VP_Read_UInt16(unsigned int vp){
+     char vetor[2];
+     PROCULUS_VP_Read(vp,vetor,2);
+     return (((unsigned int)vetor[0]<<8)+vetor[1]);
+}
+
+
+
+
+void PROCULUS_VP_Write_Int16(unsigned int vp, int value){
+     char vetor[2];
+     char *pt;
+     pt=(char *)(&value);
+     vetor[1]=(char)(value>>8);
+     vetor[0]=(char)(value);
+     PROCULUS_VP_Write(vp,vetor,2);
+}
+unsigned int PROCULUS_VP_Read_Int16(int vp){
+     char vetor[2];
+     PROCULUS_VP_Read(vp,vetor,2);
+     return (int)((vetor[0]<<8)+vetor[1]);
+}
+# 303 "proculus.c"
+void PROCULUS_VP_Write_Long32(unsigned int vp, unsigned long value){
+     char vetor[4];
+     unsigned char *pt;
+     pt=(unsigned char *)(&value);
+     vetor[3]=(char)(*(pt++));
+     vetor[2]=(char)(*(pt++));
+     vetor[1]=(char)(*(pt++));
+     vetor[0]=(char)(*(pt++));
+     PROCULUS_VP_Write(vp,vetor,4);
+}
+
+
+long PROCULUS_VP_Read_Long32(unsigned int vp){
+     char vetor[4];
+     long retorno=1234;
+     PROCULUS_VP_Read(vp,vetor,4);
+# 327 "proculus.c"
      return retorno;
 }
-
-
-
-
-int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
-{
- switch(destino)
-       {
-       case 0:
-             break;
-       case 1:if(buffer[0]==0)
-                        return 100;
-              else
-   return 200;
-       break;
-       case 2:if(buffer[0]==0)
-                 return 300;
-              else
-   return -1;
-       break;
-       case 3:if(buffer[0]==0)
-                        return 400;
-                else
-                        return 500;
-         break;
-       case 4:if(buffer[0]==0)
-                        return 600;
-                else
-                        return 700;
-         break;
-       case 5:if(buffer[0]==0)
-                        return 800;
-                else
-                        return 900;
-         break;
-       case 6:if(buffer[0]==0)
-                        return 1000;
-                else
-                        return 1100;
-         break;
-       case 7:if(buffer[0]==0)
-                        return 1200;
-                else
-                        return 1300;
-         break;
-    }
-    return 0;
+# 338 "proculus.c"
+void PROCULUS_VP_Write_Float24(unsigned int vp, float value){
+     char vetor[4];
+     char *pt;
+     pt=(char *)(&value);
+     vetor[2]=(char)(*(pt++));
+     vetor[1]=(char)(*(pt++));
+     vetor[0]=(char)(*(pt++));
+     PROCULUS_VP_Write(vp,vetor,3);
 }
-# 1016 "Liofilizador Placa Mae.c"
-void ShowSensorRealTimeHS(void)
+ float PROCULUS_VP_Read_Float24(unsigned int vp){
+     char vetor[4];
+     PROCULUS_VP_Read(vp,vetor,4);
+
+     return 1234;
+}
+
+
+void PROCULUS_VP_Write_Float32(unsigned int vp, float value){
+     char vetor[4];
+     char *pt;
+     pt=(char *)(&value);
+     vetor[3]=(char)(*(pt++));
+     vetor[2]=(char)(*(pt++));
+     vetor[1]=(char)(*(pt++));
+     vetor[0]=(char)(*(pt++));
+     PROCULUS_VP_Write(vp,vetor,4);
+}
+ float PROCULUS_VP_Read_Float32(unsigned int vp){
+     char vetor[4];
+     PROCULUS_VP_Read(vp,vetor,4);
+
+     return 1234;
+}
+
+
+
+
+
+
+void PROCULUS_VP_Write_Double24(unsigned int vp, double value){
+     char vetor[3];
+     char *pnt;
+
+     pnt=(char *)(&value);
+     vetor[0]=*(pnt++);
+     vetor[1]=*(pnt++);
+     vetor[2]=*(pnt++);
+     PROCULUS_VP_Write(vp,vetor,3);
+}
+double PROCULUS_VP_Read_Double24(unsigned int vp){
+     char vetor[3];
+     PROCULUS_VP_Read(vp,vetor,3);
+
+     return 1234;
+}
+
+
+
+void PROCULUS_VP_Write_Double32(unsigned int vp, double value){
+     double vetor[4];
+
+
+
+
+
+
+     PROCULUS_VP_Write(vp,(char*)vetor,4);
+}
+double PROCULUS_VP_Read_Double32(unsigned int vp){
+     char vetor[4];
+     PROCULUS_VP_Read(vp,vetor,4);
+
+     return 1234;
+}
+
+
+
+
+void PROCULUS_VP_Write_String(unsigned int vp,char *text){
+     PROCULUS_VP_Write(vp, text, strlen(text)+1);
+}
+
+void PROCULUS_VP_Read_String(unsigned int vp,char *text){
+     PROCULUS_VP_Read(vp, text, 30);
+}
+
+
+
+
+
+
+unsigned char PROCULUS_Read_Version(void){
+    unsigned char retorno[2];
+    PROCULUS_REG_Read(0x00,2,retorno);
+    return retorno[0];
+}
+
+void PROCULUS_Buzzer(unsigned int time_ms_x_10){
+     unsigned char vetor[2];
+     time_ms_x_10 /= 10;
+     vetor[0]=0x02;
+     vetor[1]=(unsigned char) time_ms_x_10;
+     PROCULUS_REG_Write(vetor,2);
+}
+# 452 "proculus.c"
+void PROCULUS_Reset(void){
+     unsigned char vetor[3];
+     vetor[0]=0xEE;
+     vetor[1]=0x5A;
+     vetor[2]=0xA5;
+     PROCULUS_REG_Write(vetor,3);
+}
+
+
+
+
+
+void PROCULUS_Show_Screen(unsigned int screen){
+     unsigned char vetor[3];
+     vetor[0] = 0x03;
+     vetor[1] = (char)(screen>>8);
+     vetor[2] = (char) screen;
+     PROCULUS_REG_Write(vetor,3);
+}
+# 486 "proculus.c"
+void PROCULUS_Buffer_to_Proculus(t_proculus *proculus){
+     unsigned char i;
+     proculus->header = (usart_buffer[0]<<8)+usart_buffer[1];
+     proculus->size = usart_buffer[2];
+     proculus->function= usart_buffer[3];
+     proculus->vp = (usart_buffer[4]<<8)+usart_buffer[5];
+     proculus->length = usart_buffer[6];
+     for (i=0;i<=proculus->size;i++)
+     proculus->dado[i] = usart_buffer[7+i];
+     proculus->page = usart_buffer[7];
+     proculus->button = ((usart_buffer[8]>>4)&0x0F);
+     proculus->status = (usart_buffer[8]&0x0F);
+}
+
+
+
+
+
+
+void PROCULUS_OK(void){
+     PROCULUS_Buzzer(100);
+     my_delay_ms(100);
+     PROCULUS_Buzzer(100);
+     my_delay_ms(100);
+     PROCULUS_Buzzer(100);
+}
+
+
+void PROCULUS_NOK(void){
+     PROCULUS_Buzzer(300);
+     my_delay_ms(100);
+}
+# 531 "proculus.c"
+unsigned int PROCULUS_Get_Page(void)
      {
-     char bb[3];
-     char SlaveBoard;
-     char canal;
-     char tupla;
-     int vp, vpicone;
-
-
-
-
-
-     my_delay_ms(32);
-
-     for(tupla=0;tupla<(totalboard*2);tupla++)
-        {
-        SlaveBoard = (tupla / 2)+1;
-        canal = tupla % 2;
-        bb[0]=canal;
-        leitura[tupla]=Send_To_Slave(SlaveBoard, 0X1A, 1, bb);
-
-        flag_array_slave_WDT[SlaveBoard]=1;
-        }
-
-
-
-     my_delay_ms(50);
-     statusgen1.flag_proculus_hs=1;
-     for(tupla=0;tupla<(totalboard*2);tupla++)
-        {
-        switch(tupla)
-              {
-              case 0:
-                     PROCULUS_VP_Write_UInt16(153,leitura[tupla]);
-                     Voltimetro=leitura[tupla];
-                     break;
-              case 1:
-                     PROCULUS_VP_Write_UInt16(151,leitura[tupla]);
-                     Vacuometro=leitura[tupla];
-                     break;
-              case 2:
-                     PROCULUS_VP_Write_UInt16(150,leitura[tupla]);
-                     Condensador=leitura[tupla];
-                     break;
-              case 3:
-
-                     break;
-              default:
-                  canal=tupla-4;
-                  vp = 230+(canal*12);
-                  vpicone = 400+canal;
-                  PROCULUS_VP_Write_UInt16(vp+1,leitura[canal+4]);
-
-                  if(leitura[canal+4]<-400)PROCULUS_VP_Write_UInt16(vpicone,1);
-                  else if(leitura[canal+4]==-1)PROCULUS_VP_Write_UInt16(vpicone,0);
-                  else PROCULUS_VP_Write_UInt16(vpicone,3);
-
-                  break;
-              }
-        }
-      statusgen1.flag_proculus_hs=0;
-
-     }
-# 1088 "Liofilizador Placa Mae.c"
-void Carrega_Tupla_Receita(char index, t_receita *receita){
-     unsigned int addeeprom;
-
-     addeeprom=256 +16*index;
-
-     receita->setpoint=EEPROM_Read_Integer(addeeprom+0);
-     receita->potenciaON=EEPROM_Read_Byte (addeeprom+2);
-     receita->potenciaOFF=EEPROM_Read_Byte(addeeprom+3);
-     receita->histerese=EEPROM_Read_Byte (addeeprom+4);
-     EEPROM_Read_String(addeeprom+5,texto);
-     strcpy(receita->nome,texto);
-}
-
-
-
-
-
-
-void Grava_Receita(char index, t_receita *receita){
-     unsigned int addeeprom;
-     unsigned int vp;
-
-     addeeprom=256 +16*index;
-
-     EEPROM_Write_Integer(addeeprom+0 ,receita->setpoint);
-     EEPROM_Write_Byte (addeeprom+2 ,receita->potenciaON);
-     EEPROM_Write_Byte (addeeprom+3 ,receita->potenciaOFF);
-     EEPROM_Write_Byte (addeeprom+4 ,receita->histerese);
-     EEPROM_Write_String (addeeprom+5 ,receita->nome);
-}
-
-
-void Exibe_Receita(int index){
-     unsigned int addeeprom;
-     unsigned int vp;
-
-     addeeprom=256 +16*index;
-     vp =420 +10*index;
-
-
-     PROCULUS_VP_Write_UInt16(vp+0,EEPROM_Read_Integer(addeeprom));
-     PROCULUS_VP_Write_UInt16(vp+1,EEPROM_Read_Byte(addeeprom+2));
-     PROCULUS_VP_Write_UInt16(vp+2,EEPROM_Read_Byte(addeeprom+3));
-     PROCULUS_VP_Write_UInt16(vp+3,EEPROM_Read_Byte(addeeprom+4));
-     EEPROM_Read_String(addeeprom+5,texto);
-     texto[8]=0;
-     PROCULUS_VP_Write_String(vp+4,texto);
-}
-# 1154 "Liofilizador Placa Mae.c"
-void DataBaseBackupMain(unsigned char tupla)
-      {
-      unsigned int vp;
-      unsigned char addEEPROM;
-
-      vp = 230+(tupla*12);
-      addEEPROM = ((tupla)*18)+52;
-
-
-      EEPROM_Write_Byte (addEEPROM+0 ,tupla);
-
-      EEPROM_Write_Integer(addEEPROM+1 ,PROCULUS_VP_Read_UInt16(vp+2));
-      EEPROM_Write_Byte (addEEPROM+3 ,PROCULUS_VP_Read_UInt16(vp+3));
-      EEPROM_Write_Byte (addEEPROM+4 ,PROCULUS_VP_Read_UInt16(vp+4));
-      EEPROM_Write_Byte (addEEPROM+5 ,PROCULUS_VP_Read_UInt16(vp+5));
-      PROCULUS_VP_Read_String(vp+6,texto);
-      EEPROM_Write_String (addEEPROM+6 ,texto);
-      EEPROM_Write_Integer(addEEPROM+16,PROCULUS_VP_Read_UInt16(vp+11));
-
-      }
-
-
-void FAT8_Save(unsigned char tupla){
-     unsigned long addEEPROM;
-
-     if(tupla>(maxlineDATALOG-1))
-       {
-       PROCULUS_Buzzer(1000);
-       return;
-       }
-
-
-     addEEPROM = (tupla*54)+0x10;
-
-     EEPROM_24C1025_Write_Int (0,addEEPROM+0, fat8.processo.processo_number);
-     EEPROM_24C1025_Write_Str (0,addEEPROM+2, fat8.processo.inicio.time);
-     EEPROM_24C1025_Write_Str (0,addEEPROM+12, fat8.processo.inicio.date);
-     EEPROM_24C1025_Write_Str (0,addEEPROM+22, fat8.processo.fim.time);
-     EEPROM_24C1025_Write_Str (0,addEEPROM+32, fat8.processo.fim.date);
-     EEPROM_24C1025_Write_Byte(0,addEEPROM+42, fat8.processo.amostra);
-     EEPROM_24C1025_Write_Long(0,addEEPROM+43, fat8.processo.add_start);
-     EEPROM_24C1025_Write_Long(0,addEEPROM+47, fat8.processo.add_end);
-     EEPROM_24C1025_Write_Int (0,addEEPROM+51, fat8.processo.minutes);
-     EEPROM_24C1025_Write_Byte(0,addEEPROM+53, fat8.processo.all_flags);
-}
-
-void FAT8_Load(unsigned char tupla){
-     unsigned long addEEPROM;
-
-     if(tupla>(maxlineDATALOG-1))
-       {
-       PROCULUS_Buzzer(1000);
-       return;
-       }
-
-     addEEPROM = (tupla*54)+0x10;
-
-     fat8.processo.processo_number=EEPROM_24C1025_Read_Int(0,addEEPROM+0);
-     EEPROM_24C1025_Read_Str(0, addEEPROM+2, fat8.processo.inicio.time);
-     EEPROM_24C1025_Read_Str(0, addEEPROM+12, fat8.processo.inicio.date);
-     EEPROM_24C1025_Read_Str(0, addEEPROM+22, fat8.processo.fim.time);
-     EEPROM_24C1025_Read_Str(0, addEEPROM+32, fat8.processo.fim.date);
-     fat8.processo.amostra=EEPROM_24C1025_Read_Byte (0,addEEPROM+42);
-     fat8.processo.add_start=EEPROM_24C1025_Read_Long(0,addEEPROM+43);
-     fat8.processo.add_end=EEPROM_24C1025_Read_Long (0,addEEPROM+47);
-     fat8.processo.minutes=EEPROM_24C1025_Read_Int (0,addEEPROM+51);
-     fat8.processo.all_flags=EEPROM_24C1025_Read_Byte(0,addEEPROM+53);
-}
-
-void FAT8_Show(){
-     unsigned int vp;
-
-     for(char tupla=0;tupla<maxlineDATALOG;tupla++)
-        {
-        vp=0x1000+(tupla*30);
-        FAT8_Load(tupla);
-        PROCULUS_VP_Write_UInt16(vp+0,fat8.processo.processo_number);
-        PROCULUS_VP_Write_String(vp+1,fat8.processo.inicio.date);
-        PROCULUS_VP_Write_String(vp+11,fat8.processo.inicio.time);
-        PROCULUS_VP_Write_UInt16(vp+21,fat8.processo.minutes);
-
-
-
-        PROCULUS_VP_Write_UInt16(vp+24,fat8.processo.add_start);
-        PROCULUS_VP_Write_UInt16(vp+25,fat8.processo.add_end);
-        }
-
-}
-# 1254 "Liofilizador Placa Mae.c"
- void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
-      {
-      char CanalAD;
-      unsigned char addEEPROM;
-      addEEPROM = (index*18)+52;
-      CanalAD = (unsigned char) (index % 2);
-
-      EEPROM_Write_Byte(addEEPROM+0,liofilizador->plataforma);
-
-      EEPROM_Write_Integer(addEEPROM +1 , liofilizador->setpoint);
-      EEPROM_Write_Byte(addEEPROM +3 , liofilizador->tempoON);
-      EEPROM_Write_Byte(addEEPROM +4 , liofilizador->tempoOFF);
-      EEPROM_Write_Byte(addEEPROM +5 , liofilizador->histerese);
-      EEPROM_Write_String(addEEPROM +6 , liofilizador->receita);
-      EEPROM_Write_Integer(addEEPROM +16 , liofilizador->status);
-      }
-
-
-
-
- void Set_Receita(unsigned char index, char status)
-      {
-      int vp;
-      unsigned int addEEPROM;
-
-      addEEPROM = 256 +16*index;
-      vp = 230+(index*12);
-
-      PROCULUS_VP_Write_UInt16(vp+2,receita.setpoint);
-      PROCULUS_VP_Write_UInt16(vp+3,receita.potenciaON);
-      PROCULUS_VP_Write_UInt16(vp+4,receita.potenciaOFF);
-      PROCULUS_VP_Write_UInt16(vp+5,receita.histerese);
-      PROCULUS_VP_Write_String(vp+6,receita.nome);
-      if(status==1)
-         PROCULUS_VP_Write_UInt16(vp+11,1);
-      else
-         PROCULUS_VP_Write_UInt16(vp+11,0);
-      }
-
-
-
-
-
-
- void ShowStaticValueGrid(unsigned char tupla)
-      {
-      char CanalAD;
-      char SlaveBoard;
-      int vp, vpicone;
-      char bb[2];
-      unsigned char addEEPROM;
-      int temperatura;
-
-
-      addEEPROM = (tupla*18)+52;
-      CanalAD = (unsigned char) (tupla % 2);
-      bb[0] = CanalAD;
-      SlaveBoard = (unsigned char) (tupla / 2)+1;
-      vp = 230+(tupla*12);
-
-
-      if(tupla>=4){
-         tupla-=4;
-         addEEPROM = (tupla*18)+52;
-         CanalAD = (unsigned char) (tupla % 2);
-         bb[0] = CanalAD;
-         SlaveBoard = (unsigned char) (tupla / 2)+1+2;
-         vp = 230+(tupla*12);
-         vpicone = 400+tupla;
-         PROCULUS_VP_Write_UInt16(vp+0,EEPROM_Read_Byte (addEEPROM+0)+1);
-         PROCULUS_VP_Write_UInt16(vp+2,EEPROM_Read_Integer (addEEPROM+1));
-         PROCULUS_VP_Write_UInt16(vp+3,EEPROM_Read_Byte (addEEPROM+3));
-         PROCULUS_VP_Write_UInt16(vp+4,EEPROM_Read_Byte (addEEPROM+4));
-         PROCULUS_VP_Write_UInt16(vp+5,EEPROM_Read_Byte (addEEPROM+5));
-         EEPROM_Read_String(addEEPROM+6,texto);
-         PROCULUS_VP_Write_String(vp+6,texto);
-         PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
-         }
-}
-# 1341 "Liofilizador Placa Mae.c"
-void save_datalog(unsigned long add_datalog){
-     char index;
-     char bb[4];
-     char boardadd;
-
-
-     bb[0]=((char *)&add_datalog)[3];
-     bb[1]=((char *)&add_datalog)[2];
-     bb[2]=((char *)&add_datalog)[1];
-     bb[3]=((char *)&add_datalog)[0];
-     Send_To_Slave(0xFF, 0x02 , 4, bb);
-
-     for(index=0;index<(totalboard*2);index++)
-  {
-         if(mapa.entrada[index]!=((void*)0))
-            {
-            PROCULUS_graphic_plot(mapa.canal[index]+1,*mapa.entrada[index]*mapa.fator[index]);
-            }
-         }
-}
-# 1370 "Liofilizador Placa Mae.c"
- void ShowAndSetSlaveParameters(unsigned char tupla)
-      {
-      unsigned char CanalAD;
-      unsigned char SlaveBoard;
-      unsigned char addEEPROM;
-      unsigned int vp;
-      unsigned char bb[2];
-
-
-      vp = 230+(tupla*12);
-
-      addEEPROM = (tupla*18)+52;
-      CanalAD = (unsigned char) (tupla % 2);
-      SlaveBoard = (unsigned char) (tupla / 2);
-
-      bb[0] = CanalAD;
-      PROCULUS_VP_Write_UInt16(vp+0,EEPROM_Read_Byte(addEEPROM+0));
-
-
-
-
-
-      PROCULUS_VP_Write_UInt16(vp+2,EEPROM_Read_Integer(addEEPROM+1));
-      PROCULUS_VP_Write_UInt16(vp+3,EEPROM_Read_Byte (addEEPROM+3));
-      PROCULUS_VP_Write_UInt16(vp+4,EEPROM_Read_Byte (addEEPROM+4));
-      PROCULUS_VP_Write_UInt16(vp+5,EEPROM_Read_Byte (addEEPROM+5));
-      EEPROM_Read_String (addEEPROM+6,texto);
-      PROCULUS_VP_Write_String(vp+6,texto);
-      PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
-
-      }
-# 1410 "Liofilizador Placa Mae.c"
-void Send_to_PC(unsigned char size){
-
-
-     USART_put_int(0xAABB);
-     USART_putc(usart_protocol.destino);
-     USART_putc(usart_protocol.origem);
-     USART_putc(usart_protocol.command);
-     USART_putc(size);
-# 1428 "Liofilizador Placa Mae.c"
-}
-
-
-
-
-void Comando_Microcomputador(void){
-     USART_to_Protocol(&usart_protocol);
-     if(usart_protocol.header==0xAABB)
-        if(usart_protocol.destino==0x00)
-        {
-        Decodify_Command();
-        statusgen.flag_usart_rx=0;
-        }
-}
-
-
-
-
-
-void Decodify_Command(void){
-    int dados;
-    char tempchar;
-    int tempint;
-    unsigned long add_24LCxxxx;
-
-    ((char *)&add_24LCxxxx)[3]=(usart_protocol.value[1]);
-    ((char *)&add_24LCxxxx)[2]=(usart_protocol.value[2]);
-    ((char *)&add_24LCxxxx)[1]=(usart_protocol.value[3]);
-    ((char *)&add_24LCxxxx)[0]=(usart_protocol.value[4]);
-
-    switch(usart_protocol.command){
-# 1490 "Liofilizador Placa Mae.c"
-        case 0x08:
-             EEPROM_Write_Byte((int)usart_protocol.value[0]<<8 |
-                               (int)usart_protocol.value[1]<<0,
-                               usart_protocol.value[2]
-                               );
-             Send_to_PC(3);
-             SEND_REPLY_OK();
-             break;
-        case 0x09:
-             tempchar=EEPROM_Read_Byte((int)usart_protocol.value[0]<<8 |
-                                       (int)usart_protocol.value[1]<<0
-                                       );
-             Send_to_PC(1);
-             USART_putc(tempchar);
-             break;
-        case 0x0A:
-             {
-             int add;
-             int dado;
-             add= (int)(usart_protocol.value[0]<<8) | (int)usart_protocol.value[1]<<0;
-             dados=(int)(usart_protocol.value[2]<<8) | (int)usart_protocol.value[3]<<0;
-             EEPROM_Write_Integer(add,dados);
-             Send_to_PC(3);
-             SEND_REPLY_OK();
-             }
-             break;
-        case 0x0B:
-             tempint=EEPROM_Read_Integer(usart_protocol.value[0]);
-             Send_to_PC(2);
-             USART_put_int(tempint);
-             break;
-
-        case 0x0C :
-             EEPROM_Write_String(usart_protocol.value[0],
-                                &usart_protocol.value[1]);
-             Send_to_PC(3);
-             SEND_REPLY_OK();
-             break;
-        case 0x0D:
-             {
-
-             EEPROM_Read_String(usart_protocol.value[0],texto);
-             Send_to_PC(sizeof(texto));
-             USART_put_string(texto);
-             break;
-             }
-
-
-        case 0x11:
-             EEPROM_24C1025_Write_Byte(usart_protocol.value[0],
-                                                  add_24LCxxxx,
-                                       usart_protocol.value[5]);
-             Send_to_PC(3);
-             SEND_REPLY_OK();
-             break;
-        case 0x12:
-             tempchar=EEPROM_24C1025_Read_Byte(usart_protocol.value[0],
-                                                         add_24LCxxxx);
-
-
-             Send_to_PC(1);
-             USART_putc(tempchar);
-             break;
-        case 0x13:
-             {
-             EEPROM_24C1025_Write_Int(usart_protocol.value[0],
-                                                 add_24LCxxxx,
-                                   (int)usart_protocol.value[5]<<8 |
-                                        usart_protocol.value[6]
-                                                             );
-             Send_to_PC(3);
-             SEND_REPLY_OK();
-             break;
-             }
-        case 0x14:
-             tempint=EEPROM_24C1025_Read_Int(usart_protocol.value[0],
-                                                       add_24LCxxxx);
-             Send_to_PC(2);
-             USART_put_int(tempint);
-             break;
-
-
-        case 0x18:
-             {
-             char sizedata;
-             sizedata=usart_protocol.value[5];
-             EEPROM_24C1025_Read_Buffer(usart_protocol.value[0],
-                                        add_24LCxxxx,
-                                        sizedata,
-                                        buffer);
-
-
-
-             Send_to_PC(sizedata);
-             USART_put_buffer(buffer,sizedata);
-             }
-             break;
-
-        case 0x17:
-             EEPROM_24C1025_Write_Buffer(usart_protocol.value[0],
-                                         add_24LCxxxx,
-                                         usart_protocol.value[5],
-                                         &usart_protocol.value[6]);
-
-             Send_to_PC(3);
-             SEND_REPLY_OK();
-             break;
-
-        case 0x15 :
-             EEPROM_24C1025_Write_Str(usart_protocol.value[0],
-                                                 add_24LCxxxx,
-                                    &usart_protocol.value[5]);
-             Send_to_PC(3);
-             SEND_REPLY_OK();
-             break;
-        case 0x16:
-             {
-             EEPROM_24C1025_Read_Str(usart_protocol.value[0],
-                                                add_24LCxxxx,
-                                                      texto);
-
-             Send_to_PC(strlen(texto));
-             USART_put_string(texto);
-             break;
-             }
-
-        case 0x19:
-             EEPROM_24C1025_Fill_All(usart_protocol.value[0],
-                               (int)(usart_protocol.value[1]<<8)|
-                                     usart_protocol.value[2]);
-             Send_to_PC(3);
-             SEND_REPLY_OK();
-             break;
-# 1706 "Liofilizador Placa Mae.c"
-        case 0X21:
-             PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
-                             (usart_protocol.value[1]));
-             Send_to_PC(3);
-             SEND_REPLY_OK();
-# 1753 "Liofilizador Placa Mae.c"
-    }
-}
-
-void SEND_REPLY_OK(void){
-     USART_put_string("OK");
-}
-
-
-void Comando_Protocolo_Serial(void){
-
-        unsigned char size, i, DestinoMemo;
-
-        USART_to_Protocol(&usart_protocol);
-        if(usart_protocol.header==0xAABB)
-            {
-            if(usart_protocol.origem==0xC0)
-                {
-                Delay_Led_Usart=5;
-                if(usart_protocol.destino==0x00)
-                   {
-                   Decodify_Command();
-                   statusgen.flag_usart_rx=0;
-                   }
-                else
-                   {
-
-
-
-
-                   DestinoMemo=usart_protocol.destino;
-                   Send_To_Slave(usart_protocol.destino,
-                                 usart_protocol.command,
-                                 usart_protocol.size,
-                                 usart_protocol.value
-                                 );
-                   statusgen.flag_usart_rx=0;
-
-
-
-
-
-
-
-                   USART_to_Protocol(&usart_protocol);
-                   USART_put_int(0xAABB);
-                   USART_putc(DestinoMemo);
-                   USART_putc(0xC0);
-                   USART_putc(usart_protocol.command);
-                   USART_putc(usart_protocol.size+3);
-                   for(i=0;i<usart_protocol.size;i++)
-                         USART_putc(usart_protocol.value[i]);
-                   SEND_REPLY_OK();
-
-                   statusgen.flag_usart_rx=0;
-                   }
-                }
-        statusgen.flag_usart_rx=0;
-        }
-}
-
-
-void Formatar_Banco_de_Dados(char inicio, char total){
-     for(char j=inicio;j<(inicio+total);j++)
-          {
-
-          liofilizador[j].plataforma=j;
-          liofilizador[j].setpoint=0;
-          liofilizador[j].tempoON=0;
-          liofilizador[j].tempoOFF=0;
-          liofilizador[j].histerese=0;
-          strcpy(liofilizador[j].receita,"");
-          liofilizador[j].status=0;
-          SaveLiofilizadorOnMemory(j,&liofilizador[j]);
-          }
-
-}
-
-
-
-void Upload_Data_to_Slave(void){
-     char index;
-     char board;
-     char canal;
-     char addEEPROM;
-     char buffer[3];
-     int temp;
-
-
-     for(index=4;index<15;index++){
-         board=(index/2)+1;
-         canal=(index%2);
-         addEEPROM = ((index-4)*18)+52;
-
-
-
-
-
-         temp=EEPROM_Read_Integer(addEEPROM+1);
-         buffer[0]=(canal*7)+0;
-         buffer[1]=((char *)&temp)[1];
-         buffer[2]=((char *)&temp)[0];
-         Send_To_Slave(board,0x0A,3,buffer);
-         _delay((unsigned long)((150)*(32000000/4000.0)));
-
-         buffer[0]=(canal*7)+2;
-         buffer[1]=EEPROM_Read_Byte(addEEPROM+3);
-         Send_To_Slave(board,0x08,2,buffer);
-         _delay((unsigned long)((150)*(32000000/4000.0)));
-
-         buffer[0]=(canal*7)+3;
-         buffer[1]=EEPROM_Read_Byte(addEEPROM+4);
-         Send_To_Slave(board,0x08,2,buffer);
-         _delay((unsigned long)((150)*(32000000/4000.0)));
-
-         buffer[0]=(canal*7)+4;
-         buffer[1]=EEPROM_Read_Byte(addEEPROM+5);
-         Send_To_Slave(board,0x08,2,buffer);
-         _delay((unsigned long)((150)*(32000000/4000.0)));
-
-         temp=EEPROM_Read_Integer(addEEPROM+16);
-         buffer[0]=(canal*7)+5;
-         buffer[1]=((char *)&temp)[1];
-         buffer[2]=((char *)&temp)[0];
-         Send_To_Slave(board,0x0A,3,buffer);
-         _delay((unsigned long)((150)*(32000000/4000.0)));
-         if(canal==1) Send_To_Slave(board,0x01,0,buffer);
-
-         }
-
-}
-
-
-
-void ShowMessage(char mensagem[20],unsigned int delay, char SoundType, char retem){
-     char texto[30];
-
-
-     strcpy(texto,"                             ");
-     texto[(30-strlen(mensagem))/2]=0;
-     strcat(texto,mensagem);
-     PROCULUS_VP_Write_String(180,texto);
-     my_delay_ms(delay);
-     if(!retem) PROCULUS_VP_Write_String(180,"");
-}
-
-
-void global_datalog(void){
-        if((PROCULUS_VP_Read_UInt16(2)==1)&&(statuspower.flag_global_datalog==0))
+     int i;
+     static unsigned int retorno=0;
+     USART_put_int(0x5AA5);
+     USART_putc(0x03);
+     USART_putc(0x81);
+     USART_putc(0x03);
+     USART_putc(0x02);
+     for(i=0;i<5000;i++)
+         {
+           __asm("CLRWDT");
+           if(statusgen.flag_usart_rx)
            {
-            char bb[2];
+           statusgen.flag_usart_rx=0;
 
-            Send_To_Slave(0xFF, 0x00 , 0, bb);
-            Carregar_tempo_de_datalog();
-
-            if(Find_Fat8_Running()==255)
+           if(usart_buffer[0]==0x5A &&
+              usart_buffer[1]==0xA5 &&
+              usart_buffer[2]==0x05 &&
+              usart_buffer[3]==0x81 &&
+              usart_buffer[4]==0x03 &&
+              usart_buffer[5]==0x02
+              )
               {
-              PROCULUS_Clean_All_Line_Graphic();
-              FAT8_Write_Process_Inicialize();
-              }
-            else
-              {
-              add_datalog=EEPROM_24C1025_Read_Long (0,2);
-              processo_totalminuto=EEPROM_24C1025_Read_Long (0,4);
-              }
-
-            statuspower.flag_global_datalog=1;
-           }
-        else if((PROCULUS_VP_Read_UInt16(2)==0)&&(statuspower.flag_global_datalog==1))
-               {
-
-               FAT8_Write_Process_Finalize();
-               statuspower.flag_global_datalog=0;
-               }
-}
-
-
-
-
-void Condensador_Switch(unsigned char estado){
-     char buffer[2];
-     buffer[0]=0;
-     buffer[1]=estado;
-     Send_To_Slave(0x02,0x26,2,buffer);
-}
-
-void Vaccum_Switch(unsigned char estado){
-     char buffer[2];
-     buffer[0]=0;
-     buffer[1]=estado;
-     Send_To_Slave(0x01,0x26,2,buffer);
-}
-
-
-void global_condensador(void){
-        if((PROCULUS_VP_Read_UInt16(0x03)==1)&&(statuspower.flag_global_condensador==0))
-            {
-            if(delay_condensador==0)
-               {
-               statuspower.flag_global_condensador=1;
-               Condensador_Switch(1);
-               }
-            else
-               {
-               PROCULUS_Buzzer(1000);
-               PROCULUS_VP_Write_UInt16(0x03,0);
-               }
-            }
-        if((PROCULUS_VP_Read_UInt16(0x03)==0)&&(statuspower.flag_global_condensador==1))
-           {
-           statuspower.flag_global_condensador=0;
-           Condensador_Switch(0);
-           delay_condensador=30;
-           }
-}
-
-
-
-
-void global_vacuo(void){
-        if((PROCULUS_VP_Read_UInt16(0x04)==1)&&(statuspower.flag_global_vacuo==0))
-           {
-           if(statuspower.flag_global_vacuo==0) PROCULUS_OK();
-           statuspower.flag_global_vacuo=1;
-           if(Condensador<Seg_Condensador)
-              {
-              Vaccum_Switch(1);
-              Contagem_Tempo_de_Processo(1);
-              }
-           else
-              {
-              Vaccum_Switch(0);
-              Incrementa_Contador_de_Repique_do_Vacuo();
+              retorno=(usart_buffer[6]<<8)+usart_buffer[7];
+              break;
               }
            }
-        else if((PROCULUS_VP_Read_UInt16(0x04)==0)&&(statuspower.flag_global_vacuo==1))
-                {
-                statuspower.flag_global_vacuo=0;
-                Vaccum_Switch(0);
-                PROCULUS_VP_Write_UInt16(6,0);
-
-                PROCULUS_Popup(0x42);
-                PROCULUS_VP_Write_UInt16(0x0016,0);
-                for(int i=0;i<10000;i++)
-                     {
-                     my_delay_ms(1);
-                     if (PROCULUS_VP_Read_UInt16(6)!=0) break;
-                     __asm("CLRWDT");
-                     }
-
-                if(PROCULUS_VP_Read_UInt16(6)==241)
-                     {
-                     Contagem_Tempo_de_Processo(0);
-                     processo_hora=0;
-                     processo_minuto=0;
-                     PROCULUS_OK();
-                     }
-
-
-                }
-        else if((PROCULUS_VP_Read_UInt16(0x04)==1)&&(statuspower.flag_global_vacuo==1))
-                {
-                if(Condensador<Seg_Condensador)
-                   {
-                   Vaccum_Switch(1);
-                   statusgen1.flag_Vacuo_estava_ligado=1;
-                   }
-                else
-                   {
-                   Vaccum_Switch(0);
-                   Incrementa_Contador_de_Repique_do_Vacuo();
-                   }
-                }
-}
-
-
-void Global_Aquecimento_Switch(unsigned char estado){
-     char buffer[2];
-     unsigned char board;
-     for(board=3;board<(totalboard*2-1);board++)
-        {
-
-        buffer[0]=estado;
-        Send_To_Slave(board,0x2A,1,buffer);
-        }
-}
-
-
-void global_aquecimento(void){
-        if((PROCULUS_VP_Read_UInt16(5)==1)&&(statuspower.flag_global_aquecimento==0))
-           {
-           if((Condensador<Seg_Aq_cond)&&(Vacuometro<Seg_Aq_vacuo))
-                     {
-                     statuspower.flag_global_aquecimento=1;
-                     Global_Aquecimento_Switch(1);
-                     }
-           }
-        if((PROCULUS_VP_Read_UInt16(5)==0)&&(statuspower.flag_global_aquecimento==1))
-           {
-           Global_Aquecimento_Switch(0);
-           statuspower.flag_global_aquecimento=0;
-           PROCULUS_VP_Write_String(1970,"");
-           }
-        else if ((PROCULUS_VP_Read_UInt16(5)==1)&&(statuspower.flag_global_aquecimento==1))
-           {
-           if((Condensador>Seg_Aq_cond)||(Vacuometro>Seg_Aq_vacuo))
-              {
-              statuspower.flag_global_aquecimento=0;
-
-
-              Global_Aquecimento_Switch(0);
-
-              }
-           }
-
-}
-
-
-
-
-
-
-void Comando_Display(void){
-unsigned char i;
-
-  PROCULUS_Buffer_to_Proculus(&proculus);
-  if(proculus.header==0x5AA5)
-     {
-     statusgen.flag_usart_rx=0;
-     if(proculus.page==0x15) pagina_15();
-     if(proculus.page==0x19) pagina_19();
-     if(proculus.page==0x23) pagina_23();
-     if(proculus.page==0x25) pagina_25();
-     if(proculus.page==0x29) pagina_29();
-     if(proculus.page==0x31) pagina_31();
-     if(proculus.page==0x47) pagina_47();
-     if(proculus.page==0x49) pagina_49();
-     proculus.header=0;
+           _delay((unsigned long)((100)*(32000000/4000000.0)));
+         }
+     my_delay_ms(1);
+     return retorno;
      }
-}
-
-
-void pagina_49(void){
-     t_liofilizador liofilizador;
-
-     if(PROCULUS_VP_Read_UInt16(390)==1)
-                   {
-
-                   receita.setpoint=0;
-                   receita.potenciaON=0;
-                   receita.potenciaOFF=0;
-                   receita.histerese=0;
-                   strcpy(receita.nome,"");
-                   Grava_Receita(Index_Receita, &receita);
-                   Exibe_Receita(Index_Receita);
-
-                   PROCULUS_VP_Write_UInt16(410,0);
-                   PROCULUS_VP_Write_UInt16(411,0);
-                   PROCULUS_VP_Write_UInt16(412,0);
-                   PROCULUS_VP_Write_UInt16(413,0);
-                   PROCULUS_VP_Write_String(414,"");
-
-                   Atualizar_Lista_de_Receitas();
-                   PROCULUS_VP_Write_UInt16(390,0);
-
-                   PROCULUS_Popup(0x60);
-                   PROCULUS_OK();
-                   PROCULUS_VP_Write_String(1910,"Item Excluido com sucesso!");
-                   my_delay_ms(1500);
-                   PROCULUS_VP_Write_String(1910,"");
-                   }
-
-
-
-
-     if(PROCULUS_VP_Read_UInt16(391)==1)
-                   {
-
-                   receita.setpoint=PROCULUS_VP_Read_UInt16(410);
-                   receita.potenciaON=PROCULUS_VP_Read_UInt16(411);
-                   receita.potenciaOFF=PROCULUS_VP_Read_UInt16(412);
-                   receita.histerese=PROCULUS_VP_Read_UInt16(413);
-                   PROCULUS_VP_Read_String(414,receita.nome);
-                   Grava_Receita(Index_Receita, &receita);
-
-
-                   Atualizar_Lista_de_Receitas();
-                   PROCULUS_VP_Write_UInt16(391,0);
-
-                   PROCULUS_Popup(0x51);
-                   PROCULUS_OK();
-                   PROCULUS_VP_Write_String(1910,"Dados Gravados com sucesso!");
-                   my_delay_ms(1500);
-                   PROCULUS_VP_Write_String(1910,"");
-                   }
-
-
-     if(PROCULUS_VP_Read_UInt16(392)==1)
-                   {
-
-                   PROCULUS_VP_Write_String(1910,"Aguarde... Carregando Dados!");
-                   Carrega_Tupla_Receita(Index_Receita, &receita);
-                   PROCULUS_VP_Write_String(1910,"Aguarde... Armazenando Dados!");
-                   for(char i=0;i<(totalboard-2)*2;i++)
-                       {
-
-                       liofilizador.plataforma=i;
-                       liofilizador.setpoint=receita.setpoint;
-                       liofilizador.tempoON=receita.potenciaON;
-                       liofilizador.tempoOFF=receita.potenciaOFF;
-                       liofilizador.histerese=receita.histerese;
-                       strcpy(liofilizador.receita,receita.nome);
-                       liofilizador.status=1;
-                       SaveLiofilizadorOnMemory(i,&liofilizador);
-                       }
-                   PROCULUS_VP_Write_String(1910,"Aguarde... Transferindo dados para placas externas!");
-                   Upload_Data_to_Slave();
-                   PROCULUS_VP_Write_String(1910,"Aguarde... Atualizando Tabela!");
-                   for(char i=0;i<15;i++)ShowStaticValueGrid(i);
-                   for(char i=0;i<10;i++)ShowAndSetSlaveParameters(i);
-
-
-                   PROCULUS_VP_Write_UInt16(392,0);
-                   PROCULUS_Popup(0x60);
-                   PROCULUS_OK();
-                   PROCULUS_VP_Write_String(1910,"");
-                   }
-
-     if(PROCULUS_VP_Read_UInt16(393)==1)
-                   {
-                   PROCULUS_VP_Write_UInt16(393,0);
-                   PROCULUS_Show_Screen(47);
-                   }
-
-}
-
-
-void pagina_47(void){
-     t_receita receita;
-     if(flag_senha_liberada)
-         {
-         PROCULUS_Show_Screen(49);
-
-         Carrega_Tupla_Receita(Index_Receita, &receita);
-
-         PROCULUS_VP_Write_UInt16(410,receita.setpoint);
-         PROCULUS_VP_Write_UInt16(411,receita.potenciaON);
-         PROCULUS_VP_Write_UInt16(412,receita.potenciaOFF);
-         PROCULUS_VP_Write_UInt16(413,receita.histerese);
-         PROCULUS_VP_Write_String(414,receita.nome);
-         }
-     else
-         {
-         PROCULUS_Popup(0x52);
-         PROCULUS_NOK();
-         }
-
+# 586 "proculus.c"
+void PROCULUS_TPFLAG_Write(char value){
+    unsigned char vetor[3];
+    vetor[0]=5;
+    vetor[1]=value;
+    PROCULUS_REG_Write(vetor, 2);
 
 
 }
 
 
+char PROCULUS_TPFLAG_Read(void){
+     unsigned char retorno[10];
+     PROCULUS_REG_Read(0x05, 0x01, retorno);
+     return retorno[0];
 
-
-
-
-void pagina_15(void){
-   if(proculus.button==3)
-      {
-      PROCULUS_Buzzer(2000);
-      }
-
-   if(proculus.button==2)
-      {
-      if(proculus.status==0){
-
-
-         PORTDbits.RD2=1;
-          }
-      }
-
-
-   if (proculus.button==5)
-      {
-      if(proculus.status==1)
-         {
-
-
-
-         maincnt=0;
-         }
-     }
 
 }
 
 
-
-void pagina_19(void)
-{
-
-       if(PROCULUS_VP_Read_UInt16(168)==1)
-         {
-         PROCULUS_VP_Write_UInt16(168,0);
-         if(flag_senha_liberada)
-            {
-            for(char i=0;i<15;i++)
-                {
-
-                ShowStaticValueGrid(i);
-                }
-            PROCULUS_OK();
-            }
-         else
-            {
-            PROCULUS_Popup(0x52);
-            PROCULUS_NOK();
-            }
-         }
-
-
-
-
-       if(PROCULUS_VP_Read_UInt16(167)==1)
-         {
-         PROCULUS_VP_Write_UInt16(167,0);
-         if(flag_senha_liberada)
-            {
-             ShowMessage("Gravando Dados, Aguarde!",2000,0,1);
-             for(char i=0;i<10;i++)
-                 {
-
-                 DataBaseBackupMain(i);
-                 }
-             ShowMessage("SUCESSO!!!",2000,1,0);
-             PROCULUS_OK();
-            }
-         else
-            {
-            PROCULUS_Popup(0x52);
-            PROCULUS_NOK();
-            }
-         }
-
-
-
-       if(PROCULUS_VP_Read_UInt16(166)==1)
-         {
-         PROCULUS_VP_Write_UInt16(166,0);
-         if(flag_senha_liberada)
-            {
-             ShowMessage("Descarregando Dados",2000,0,1);
-             Upload_Data_to_Slave();
-             ShowMessage("SUCESSO!!!",2000,1,0);
-             PROCULUS_OK();
-            }
-         else
-            {
-            PROCULUS_Popup(0x52);
-            PROCULUS_NOK();
-            }
-         }
-
-
-
-
-
-       if(PROCULUS_VP_Read_UInt16(169)==1)
-         {
-         PROCULUS_VP_Write_UInt16(169,0);
-         if(flag_senha_liberada)
-            {
-             char inicio;
-             ShowMessage("Formatando",2000,0,1);
-
-             if(pagina==19)inicio=0;
-             if(pagina==21)inicio=5;
-
-
-             Formatar_Banco_de_Dados(inicio,5);
-             for(char i=0;i<15;i++)
-                 {
-
-                 ShowStaticValueGrid(i);
-                 }
-             PROCULUS_OK();
-             ShowMessage("SUCESSO!",2000,1,0);
-            }
-         else
-            {
-            PROCULUS_Popup(0x52);
-            PROCULUS_NOK();
-            }
-         }
-
-}
-
-
-
-void pagina_23(void)
-{
-    if(flag_senha_liberada)
-      {
-        Seg_Condensador=PROCULUS_VP_Read_UInt16(210);
-        Seg_Vacuo=PROCULUS_VP_Read_UInt16(211);
-        Seg_Aq_cond=PROCULUS_VP_Read_UInt16(212);
-        Seg_Aq_vacuo=PROCULUS_VP_Read_UInt16(213);
-        Tamanho_Display=PROCULUS_VP_Read_UInt16(214);
-
-        EEPROM_Write_Integer(0x01,Seg_Condensador);
-        EEPROM_Write_Integer(0x03,Seg_Vacuo);
-        EEPROM_Write_Integer(0x05,Seg_Aq_cond);
-        EEPROM_Write_Integer(0x07,Seg_Aq_vacuo);
-        EEPROM_Write_Integer(0xFA,Tamanho_Display);
-        TrendCurveFuncao(1);
-
-        PROCULUS_Popup(0x51);
-        PROCULUS_OK();
-        Carregar_Parametros_de_Seguranca();
-
-     }
-    else
-     {
-     PROCULUS_Popup(0x52);
-     PROCULUS_NOK();
-     }
-}
-# 2386 "Liofilizador Placa Mae.c"
-void pagina_25(void)
-{
-
-    if(flag_senha_liberada)
+void PROCULUS_graphic_plot(unsigned char lcd_channel, unsigned int value){
+     char channel;
+     if((lcd_channel>=1)&&(lcd_channel<=8))
        {
-       char date[10];
-       char time[10];
-       PROCULUS_VP_Read_String(20,date);
-       PROCULUS_VP_Read_String(30,time);
-       PROCULUS_Write_RTC(date,time);
-       PROCULUS_Popup(0x51);
-       PROCULUS_OK();
-       }
-    else
-       {
-       PROCULUS_Popup(0x52);
-       PROCULUS_NOK();
-       }
-
-}
-
-
-
-
-void pagina_29(void)
-  {
-    if(flag_senha_liberada)
-         {
-          EEPROM_Write_Integer(0x09,PROCULUS_VP_Read_UInt16(172));
-          Carregar_tempo_de_datalog();
-          PROCULUS_Popup(0x51);
-          PROCULUS_OK();
-         }
-     else
-         {
-         PROCULUS_Popup(0x52);
-         PROCULUS_NOK();
-         }
-  }
-
-
-
-void pagina_31(void){
-         unsigned long nova_senha, confirma_senha;
-         char senhavetor[4];
-
-         nova_senha =PROCULUS_VP_Read_Double32(382);
-         confirma_senha=PROCULUS_VP_Read_Double32(384);
-
-
-         PROCULUS_VP_Read(380,senhavetor,4);
-         senha_atual=((unsigned long)senhavetor[0]<<24)+
-                     ((unsigned long)senhavetor[1]<<16)+
-                     ((unsigned long)senhavetor[2]<< 8)+
-                     ((unsigned long)senhavetor[3]<< 0);
-
-         PROCULUS_VP_Read(382,senhavetor,4);
-         nova_senha =((unsigned long)senhavetor[0]<<24)+
-                     ((unsigned long)senhavetor[1]<<16)+
-                     ((unsigned long)senhavetor[2]<< 8)+
-                     ((unsigned long)senhavetor[3]<< 0);
-
-
-         PROCULUS_VP_Read(384,senhavetor,4);
-         confirma_senha=((unsigned long)senhavetor[0]<<24)+
-                        ((unsigned long)senhavetor[1]<<16)+
-                        ((unsigned long)senhavetor[2]<< 8)+
-                        ((unsigned long)senhavetor[3]<< 0);
-
-
-
-         if((senha_atual==0) ||
-            (nova_senha ==0) ||
-            (confirma_senha==0))
-            {
-
-            PROCULUS_Popup(0x23) ;
-            }
-         else
-         if(senha_atual==EEPROM_Read_Long32(11))
-            {
-            if(nova_senha==confirma_senha)
-               {
-               EEPROM_Write_Long32(11,nova_senha) ;
-               senha_atual=nova_senha;
-               Gravar_Status_da_Senha_Global();
-               PROCULUS_VP_Write_Long32(380,0);
-               PROCULUS_VP_Write_Long32(382,0);
-               PROCULUS_VP_Write_Long32(384,0);
-               PROCULUS_Popup(0x22) ;
-               }
-            else
-               {
-
-               PROCULUS_Popup(0X21) ;
-               }
-            }
-         else
-            {
-
-
-            PROCULUS_Popup(0X20) ;
-            }
-
-}
-
-
-
-void Exibe_Hora_Data(char showseconds){
-     char date[10];
-     char time[10];
-
-     PROCULUS_Read_RTC(date,time);
-     if(showseconds==0) time[5]=0;
-     PROCULUS_VP_Write_String(20,date);
-     PROCULUS_VP_Write_String(30,time);
-}
-
-
-
-
-
-
-
-void Inicializar_Seguranca(void){
-     Seg_Condensador=EEPROM_Read_Integer(0x01);
-     Seg_Vacuo=EEPROM_Read_Integer(0x03);
-     Seg_Aq_cond=EEPROM_Read_Integer(0x05);
-     Seg_Aq_vacuo=EEPROM_Read_Integer(0x07);
-     PROCULUS_VP_Write_UInt16(210,Seg_Condensador);
-     PROCULUS_VP_Write_UInt16(211,Seg_Vacuo);
-     PROCULUS_VP_Write_UInt16(212,Seg_Aq_cond);
-     PROCULUS_VP_Write_UInt16(213,Seg_Aq_vacuo);
-}
-
-
-
-
-
-void Check_And_Send_Capture_Datalog(void){
-     if(statuspower.flag_global_datalog==1)
-       {
-       if(statusgen.flag_capture_datalog==1)
-         {
-         statusgen.flag_capture_datalog=0;
-         _delay((unsigned long)((25)*(32000000/4000.0)));
-         save_datalog(add_datalog);
-         add_datalog+=2;
-         }
-       }
-}
-# 2545 "Liofilizador Placa Mae.c"
-void Contagem_Tempo_de_Processo(char value){
-    if(value)
-      {
-      if(statuspower.flag_time_process==0)
-         {
-         processo_minuto=0;
-         processo_hora=0;
-         }
-      PROCULUS_VP_Write_String(1970,"Executando Processo...");
-      statuspower.flag_time_process=1;
-
-      }
-    else
-      {
-      PROCULUS_VP_Write_String(1970,"");
-      statuspower.flag_time_process=0;
-      rtc.milisegundo=725;
-
-      }
-
-}
-
-void SaveBlackoutStatusRuning(void){
-     if(processo_minuto%10==0)
-       {
-       if(statusgen1.flag_save_time==0)
-          {
-          statusgen1.flag_save_time=1;
-          SaveBlackoutStatus();
-          }
-       }
-     else
-       {
-       statusgen1.flag_save_time=0;
+       channel=(char)my_pow(2,(lcd_channel-1));
+       USART_put_int(0x5AA5);
+       USART_putc(0x04);
+       USART_putc(0x84);
+       USART_putc(channel);
+       USART_put_int(1150+value);
        }
 }
 
-
-void SaveBlackoutStatus(void){
-     EEPROM_Write_Byte(16,statuspower.bits);
-     EEPROM_Write_Byte(17,processo_hora);
-     EEPROM_Write_Byte(18,processo_minuto);
-
-     EEPROM_24C1025_Write_Long (0,2,add_datalog);
-     EEPROM_24C1025_Write_Long (0,4,processo_totalminuto);
+void PROCULUS_Clear_Line_Graphic(char channel){
+     unsigned char buffer[2];
+     buffer[0]=0xEB;
+     buffer[1]=0x55+channel;
+     PROCULUS_REG_Write(buffer,0x03);
 }
 
-
-
-
-void RecallBlackoutStatus(void){
-     statuspower.bits=EEPROM_Read_Byte(16);
-     processo_hora=EEPROM_Read_Byte(17);
-     processo_minuto=EEPROM_Read_Byte(18);
-
-     if(statuspower.flag_global_datalog) PROCULUS_VP_Write_UInt16(2,1);
-     if(statuspower.flag_global_condensador) PROCULUS_VP_Write_UInt16(3,1);
-     if(statuspower.flag_global_vacuo) PROCULUS_VP_Write_UInt16(4,1);
-     if(statuspower.flag_global_aquecimento) PROCULUS_VP_Write_UInt16(5,1);
-
-
-     statuspower.flag_global_datalog=0;
-     statuspower.flag_global_condensador=0;
-     statuspower.flag_global_vacuo=0;
-     statuspower.flag_global_aquecimento=0;
-}
-
-
-
-
-
-void Carregar_tempo_de_datalog(void){
-     tempocapturaconstante=(EEPROM_Read_Integer(0x09)*1000);
-     tempocaptura=tempocapturaconstante;
-}
-
-
-void Gerenciador_de_Senha(void){
-     unsigned long senha;
-
-    PROCULUS_VP_Read(155,senhavetor,4);
-    senha=((unsigned long)senhavetor[0]<<24)+
-          ((unsigned long)senhavetor[1]<<16)+
-          ((unsigned long)senhavetor[2]<< 8)+
-          ((unsigned long)senhavetor[3]<< 0);
-
-
-    if(senha!=0)
+void PROCULUS_Clean_All_Line_Graphic(){
+     unsigned char i;
+     for(i=0;i<8;i++)
         {
-        if(senha==senha_atual)
-           {
-           senha=0;
-           senhacount=30000;
-           flag_senha_liberada=1;
-           PROCULUS_VP_Write_UInt16(154,1);
-           PROCULUS_VP_Write_UInt16(155,0);
-           PROCULUS_VP_Write_UInt16(156,0);
-           PROCULUS_OK();
-           }
+        PROCULUS_Clear_Line_Graphic(i+1) ;
         }
-
-
-    if((flag_senha_liberada==1)&&(senhacount<0))
-        {
-        flag_senha_liberada=0;
-        PROCULUS_VP_Write_UInt16(154,0);
-        PROCULUS_NOK();
-        }
-
-
-    if(PROCULUS_TPFLAG_Read()==0x5A)
-       {
-       senhacount=30000;
-       PROCULUS_TPFLAG_Write(0);
-       }
-
-}
-
-
-
-
-void Gerenciador_de_Senha_Global(void){
-     unsigned long senha;
-
-    PROCULUS_VP_Read(179,senhavetor,4);
-    senha=((unsigned long)senhavetor[0]<<24)+
-          ((unsigned long)senhavetor[1]<<16)+
-          ((unsigned long)senhavetor[2]<< 8)+
-          ((unsigned long)senhavetor[3]<< 0);
-
-
-    if(senha!=0)
-        {
-        if(senha==senha_atual)
-           {
-           senha=0;
-           PROCULUS_VP_Write_Long32(179,0);
-           if(PROCULUS_VP_Read_UInt16(178)==1)
-              {
-              flag_senha_global_liberada=0;
-              flag_senha_liberada=0;
-              senhacount=-1;
-              PROCULUS_VP_Write_UInt16(178,0);
-              PROCULUS_VP_Write_UInt16(154,0);
-              }
-           else if(PROCULUS_VP_Read_UInt16(178)==0)
-              {
-              flag_senha_global_liberada=1;
-              flag_senha_liberada=1;
-              senhacount=10;
-              PROCULUS_VP_Write_UInt16(178,1);
-              PROCULUS_VP_Write_UInt16(154,1);
-              }
-           Gravar_Status_da_Senha_Global();
-           PROCULUS_OK();
-           }
-        }
-
-}
-
-
-
-
-void Icones_de_alarmes(void){
-
-     if (Condensador<Seg_Condensador)
-         PROCULUS_VP_Write_UInt16(176,1);
-     else
-         PROCULUS_VP_Write_UInt16(176,0);
-
-     if (Vacuometro<Seg_Vacuo)
-         PROCULUS_VP_Write_UInt16(177,1);
-     else
-         PROCULUS_VP_Write_UInt16(177,0);
-
-}
-
-void Formatar_Lista_de_Receitas(void){
-     t_receita receita;
-     for(char i=0;i<8;i++)
-        {
-
-        receita.setpoint=0;
-        receita.potenciaON=0;
-        receita.potenciaOFF=0;
-        receita.histerese=0;
-        strcpy(receita.nome,"");
-        Grava_Receita(i, &receita);
-        }
-}
-
-void Carregar_Parametros_de_Seguranca(void){
-     Seg_Condensador=EEPROM_Read_Integer(0x01);
-     Seg_Vacuo=EEPROM_Read_Integer(0x03);
-     Seg_Aq_cond=EEPROM_Read_Integer(0x05);
-     Seg_Aq_vacuo=EEPROM_Read_Integer(0x07);
-     PROCULUS_VP_Write_UInt16(210,Seg_Condensador);
-     PROCULUS_VP_Write_UInt16(211,Seg_Vacuo);
-     PROCULUS_VP_Write_UInt16(212,Seg_Aq_cond);
-     PROCULUS_VP_Write_UInt16(213,Seg_Aq_vacuo);
-
-     PROCULUS_VP_Write_UInt16(172,EEPROM_Read_Integer(0x09));
-}
-
-void Formatar_Dados_de_Seguranca(void){
-     EEPROM_Write_Integer(0x01,-150);
-     EEPROM_Write_Integer(0x03,10000);
-     EEPROM_Write_Integer(0x05,-150);
-     EEPROM_Write_Integer(0x07,8000);
-     EEPROM_Write_Integer(0xFA,50);
-}
-
-void Carregar_Status_da_Senha_Global(void){
-     flag_senha_global_liberada=EEPROM_Read_Byte(15);
-     if(flag_senha_global_liberada)
-        {
-        PROCULUS_VP_Write_UInt16(178,1);
-        flag_senha_liberada=1;
-        senhacount=10;
-        PROCULUS_VP_Write_UInt16(154,1);
-        }
-     else
-        {
-        PROCULUS_VP_Write_UInt16(178,0);
-        flag_senha_liberada=0;
-        senhacount=-1;
-        PROCULUS_VP_Write_UInt16(154,0);
-        }
-}
-
-void Gravar_Status_da_Senha_Global(void){
-     EEPROM_Write_Byte(15,flag_senha_global_liberada);
-}
-
-
-void Formatar_Datalog(void){
-    int i;
-    for(i=500;i<=720;i+=20)
-       {
-
-       PROCULUS_VP_Write_String(i,"");
-       PROCULUS_VP_Write_String(i+3,"");
-       PROCULUS_VP_Write_String(i+13,"");
-       }
-}
-
-
-
-int Tupla_Log_Free(void){
-    int i;
-    for(i=500;i<=720;i+=20)
-        {
-        PROCULUS_VP_Read_String(i,texto);
-        if(strlen(texto)==0) break;
-        my_delay_ms_CLRWDT(500);
-        }
-    return i;
-}
-
-
-void Write_Fat(char value){
-     char date[10];
-     char time[10];
-     char index;
-     unsigned long add_memo;
-
-
-
-
-     PROCULUS_Read_RTC(date,time);
-
-
-
-}
-
-
-void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCDchannel){
-     char bb[3];
-     int value;
-
-     bb[0]=chipNumber;
-     bb[1]=((char *)&add_24C1025)[1];
-     bb[2]=((char *)&add_24C1025)[0];
-
-     value=Send_To_Slave(SlaveBoardAdd, 0x14, 3, bb);
-
-
-     PROCULUS_graphic_plot(LCDchannel, value);
-}
-# 2863 "Liofilizador Placa Mae.c"
-_Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd)
-     {
-     char txt[30];
-     char bb[5];
-     int salva=0;
-     int ler=0;
-
-     strcpy(texto,"BOARD =");
-     itoa(board,txt,16);
-     strcat(texto,txt);
-     print(texto);
-
-
-
-             for(int add=inicialadd; add<=finaladd; add++)
-                {
-
-                bb[0]=chip;
-                bb[1]=((char *)&add)[1];
-                bb[2]=((char *)&add)[0];
-                bb[3]=((char *)&salva)[1];
-                bb[4]=((char *)&salva)[0];
-                Send_To_Slave(board, 0x13, 5, bb);
-
-                bb[0]=chip;
-                bb[1]=((char *)&add)[1];
-                bb[2]=((char *)&add)[0];
-                ler=Send_To_Slave(board, 0x14, 3, bb);
-
-
-                strcpy(texto,"W 0x");
-                itoa(add,txt,16);
-                strcat(texto,txt);
-                strcpy(txt," = ");
-                strcat(texto,txt);
-                itoa(value,txt,10);
-                strcat(texto,txt);
-
-
-                if(salva==ler)
-                   {
-                   strcpy(txt," Iguais.");
-                   }
-                else
-                   {
-                   strcpy(txt," diferentes.");
-
-                   }
-                strcat(texto,txt);
-                print(texto);
-                value++;
-                }
-     return 1;
-     }
-
-
-
-char menorValorDisponivel(char * trendCurve){
-     unsigned char icone;
-     char i,j,p;
-
-      icone=0;
-      for(p=1;p<14;p++)
-         {
-         trendExist=0;
-         for(i=1;i<14;i++)
-            {
-            for(j=i;j<14;j++)
-               {
-
-               if(trendCurve[j]==p)
-                  {
-                  trendExist=1;
-                  break;
-                  }
-               }
-            if(trendExist==1)
-               {
-               break;
-               }
-            }
-         if(trendExist==0)
-           {
-           icone=p;
-           break;
-            }
-         }
-
-     return icone;
-}
-
-
-
-void Exibe_Tempo_de_Processo(void){
-     if(statuspower.flag_time_process)
-       {
-       char temp0,temp1;
-
-       temp0=processo_hora/10;
-       temp1=processo_hora%10;
-       PROCULUS_VP_Write_UInt16(40,temp0);
-       PROCULUS_VP_Write_UInt16(41,temp1);
-
-       PROCULUS_VP_Write_UInt16(42,1);
-
-       temp0=processo_minuto/10;
-       temp1=processo_minuto%10;
-       PROCULUS_VP_Write_UInt16(43,temp0);
-       PROCULUS_VP_Write_UInt16(44,temp1);
-       }
-}
-
-
-
-void Atualizar_Lista_de_Receitas(void){
-     for(char i=0;i<8;i++)
-        {
-
-        Exibe_Receita(i);
-        }
-}
-
-
-
-
-
-void TrendCurveFuncao(char funcao){
-     char figura;
-     char canal;
-     int cor;
-     char i, index;
-     Carregar_Display_Schematic_Color();
-     switch(funcao)
-           {
-           case 0:
-                       for(i=0;i<13;i++)
-                          {
-                          mapa.cor[i]=0xFFFF;
-        mapa.canal[i]=0x0A;
-        mapa.icone[i]=-1;
-                          mapa.vpIcone[i]=-1;
-                          mapa.entrada[i]=((void*)0);
-                          mapa.fator[i]=0;
-
-                          EEPROM_Write_Byte(19+i,mapa.vpIcone[i]);
-                          EEPROM_Write_Byte(0xEA+i,mapa.icone[i]);
-                          EEPROM_Write_Byte(36+i,mapa.canal[i]);
-
-                          PROCULUS_VP_Write_UInt16(0x0310+i,-1);
-                          PROCULUS_VP_Write_UInt16((i*10+1789),0x0A00);
-                          PROCULUS_VP_Write_UInt16((i*10+1787),0xFFFF);
-                          }
-                       break;
-           case 1:
-
-                       EEPROM_Read_Buffer(19,mapa.vpIcone,15);
-                       EEPROM_Read_Buffer(0xEA,mapa.icone,15);
-                       EEPROM_Read_Buffer(36,mapa.canal,15);
-
-
-
-
-                       for(i=0;i<13;i++)
-                          {
-                          figura=mapa.vpIcone[i];
-                          if(figura!=255)
-                             {
-                             PROCULUS_VP_Write_UInt16(0x0310+i, figura);
-                             }
-                          else
-                            {
-                            PROCULUS_VP_Write_UInt16(0x0310+i,-1);
-                            }
-                          }
-
-
-                       for(i=0;i<13;i++)
-                          {
-                          if(mapa.canal[i]<8)
-                             {
-        cor=TrendColor[mapa.icone[i]-1];
-        }
-     else
-        {
-        cor=0xFFFF;
-        }
-     PROCULUS_VP_Write_UInt16((i*10+1787),cor);
-     mapa.cor[i]=cor;
-     }
-
-
-                       for(i=0;i<13;i++)
-                          {
-                          canal=mapa.canal[i];
-     if((canal>=0)&&(canal<=7))
-        {
-                             PROCULUS_VP_Write_UInt16((i*10+1789),(canal<<8)|(0x0001));
-               }
-     else
-               {
-                             PROCULUS_VP_Write_UInt16((i*10+1789),0x0A00);
-        }
-     }
-
-
-
-
-                          for(index=0;index<8;index++)
-                              {
-                              if(mapa.canal[index]!=0x0A)
-                                 {
-                                 mapa.entrada[mapa.canal[index]]=&leitura[(mapa.icone[mapa.canal[index]]-1<3)?(mapa.icone[mapa.canal[index]]-1):((mapa.icone[mapa.canal[index]]-1)+1)];
-                                 mapa.fator[mapa.canal[index]]=1.0;
-                                 if(mapa.canal[index]==0)mapa.fator[mapa.canal[index]]=0.4546;
-                                 if(mapa.canal[index]==1)mapa.fator[mapa.canal[index]]=0.05;
-                                 }
-                              }
-
-
-                       break;
-           case 2:
-                       for(i=0;i<14;i++)
-                           {
-                           mapa.vpIcone[i]=PROCULUS_VP_Read_UInt16(0x0310+i);
-      mapa.canal[i]=PROCULUS_VP_Read_UInt16(i*10+1789)>>8;
-                           }
-                       EEPROM_Write_Buffer(19,&mapa.vpIcone[0],15);
-                       EEPROM_Write_Buffer(0xEA,&mapa.icone[0],15);
-                       EEPROM_Write_Buffer(36,&mapa.canal[0],15);
-                       break;
-
-
-           }
-}
-
-
-
-
-char buscaIndex(char *buffer,char valor)
-{
- char i;
- for(i=0;i<13;i++)
-    {
-    if(buffer[i]==valor) break;
-    }
- return i;
-}
-
-
-
-
-void AcordaFilha(){
-     statuspower.flag_global_datalog=0;
-     statuspower.flag_global_condensador=0;
-     statuspower.flag_global_vacuo=0;
-     statuspower.flag_global_aquecimento=0;
-}
-
-
-void showTotalReset(void){
-    clear_screen();
-    print("-----RELATORIO TECNICO----");
-
-    print("Reinicializacoes:");
-    if(PROCULUS_VP_Read_UInt16(0x00AA)==1)
-      {
-      char bb[3];
-      int valor;
-      char placa;
-      char vetor[3];
-      PROCULUS_VP_Write_UInt16(0x00AA,0);
-      PROCULUS_Show_Screen(0);
-      valor=EEPROM_Read_Integer(34);
-      itoa(valor,buffer,10);
-      strcpy(texto,"Placa 0 = ");
-      strcat(texto,buffer);
-      print(texto);
-      for(placa=1;placa<=totalboard;placa++)
-          {
-
-          strcpy(texto,"Placa ");
-          itoa(placa,buffer,10);
-          strcat(texto,buffer);
-          strcpy(buffer," = ");
-          strcat(texto,buffer);
-          bb[0]=0x10;
-          valor=Send_To_Slave(placa,0x0B,1,bb);
-          itoa(valor,buffer,10);
-          strcat(texto,buffer);
-          print(texto);
-          }
-
-      print("Desligar do Vacuo:");
-      valor=EEPROM_Read_Integer(0xE8);
-      itoa(valor,texto,10);
-      strcat(texto," vez(es).");
-      print(texto);
-
-      my_delay_ms_CLRWDT(15000);
-      PROCULUS_Show_Screen(15);
-      }
-
-}
-
-
-void ShowHardwareInfo(){
-     char i;
-     char destino;
-     char tipo;
-     int resposta;
-     char versao[10];
-     Send_To_Slave(destino, 0x03, 0, buffer);
-     totalboard=0;
-     strcpy(texto,"");
-     strcat(texto,"* : Mother Board ");
-     strcat(texto,"v1.0.16");
-     print(texto);
-     for(destino=1;destino<15;destino++)
-        {
-        my_delay_ms_CLRWDT(100);
-        resposta = Send_To_Slave(destino, 0x03, 0, buffer);
-        tipo=((char *)&resposta)[1];
-        if(resposta!=-1)
-            {
-            totalboard++;
-            strcpy(texto,"");
-            itoa(destino,texto,10);
-            strcat(texto," : ");
-            strcat(texto, boardtype[tipo]);
-            strcat(texto," ");
-            strcpy(buffer," ");
-            Send_To_Slave(destino, 0x2B, 0, buffer);
-            strcat(texto,buffer);
-            print(texto);
-            }
-        }
-
-
-
-     if(totalboard==0)
-        {
-        print("Nenhuma Placa conectada!");
-        }
-     else
-        {
-        itoa(totalboard,texto,10);
-        strcat(texto," placa(s) encontrada(s).");
-        print(texto);
-        }
-
-
-}
-
-char MenorCanalLivre()
-     {
-     unsigned char canal, canalLivre, canalBusca, busca, Exist;
-     canal=0x0A;
-     for(canalLivre=0;canalLivre<8;canalLivre++)
-     {
-
-     Exist=0;
-     for(canalBusca=0;canalBusca<13;canalBusca++)
-        {
-        busca=mapa.canal[canalBusca];
-
-     if(canalLivre==busca)
-    {
-
-    Exist=1;
-    break;
-    }
-     }
-  if(Exist==0)
-    {
-
-    canal=canalLivre;
-    break;
-    }
-  }
-
-  return canal;
-  }
-
-
-
-
-
-void Incrementa_Contador_de_Repique_do_Vacuo(){
-     int valor;
-     if(statusgen1.flag_Vacuo_estava_ligado==1)
-       {
-       statusgen1.flag_Vacuo_estava_ligado=0;
-       valor=EEPROM_Read_Integer(0xE8);
-       valor++;
-       EEPROM_Write_Integer(0xE8,valor);
-       }
-}
-
-
-void Carregar_Display_Schematic_Color(){
-
-     Tamanho_Display=EEPROM_Read_Integer(0xFA);
-     PROCULUS_VP_Write_UInt16(214,Tamanho_Display);
-
-     if(Tamanho_Display==50){
-          TrendColor[0] =0xF800;
-          TrendColor[1] =0x03E0;
-          TrendColor[2] =0x001F;
-          TrendColor[3] =0xFFFF;
-          TrendColor[4] =0xFFFF;
-          TrendColor[5] =0xFFFF;
-          TrendColor[6] =0xFFFF;
-          TrendColor[7] =0xFFFF;
-          TrendColor[8] =0xFFFF;
-          TrendColor[9] =0xFFFF;
-          TrendColor[10]=0xFFFF;
-          TrendColor[11]=0xFFFF;
-          TrendColor[12]=0xFFFF;
-     }
-     else if(Tamanho_Display==80){
-          TrendColor[0] =0x0000;
-          TrendColor[1] =0x39E7;
-          TrendColor[2] =0x6B6D;
-          TrendColor[3] =0x7800;
-          TrendColor[4] =0x9A23;
-          TrendColor[5] =0xF800;
-          TrendColor[6] =0xFBE0;
-          TrendColor[7] =0xFBF7;
-          TrendColor[8] =0xD540;
-          TrendColor[9] =0x03E0;
-          TrendColor[10]=0x07E0;
-          TrendColor[11]=0x001F;
-          TrendColor[12]=0xF81F;
-          }
-     else {
-          TrendColor[0] =0xFFFF;
-          TrendColor[1] =0xFFFF;
-          TrendColor[2] =0xFFFF;
-          TrendColor[3] =0xFFFF;
-          TrendColor[4] =0xFFFF;
-          TrendColor[5] =0xFFFF;
-          TrendColor[6] =0xFFFF;
-          TrendColor[7] =0xFFFF;
-          TrendColor[8] =0xFFFF;
-          TrendColor[9] =0xFFFF;
-          TrendColor[10]=0xFFFF;
-          TrendColor[11]=0xFFFF;
-          TrendColor[12]=0xFFFF;
-
-          }
-}
-
-void Ligar_Cargas_Compassadamente(){
-     int valor;
-     PROCULUS_VP_Write_UInt16(0x02,0);
-     PROCULUS_VP_Write_UInt16(0x03,0);
-     PROCULUS_VP_Write_UInt16(0x04,0);
-     PROCULUS_VP_Write_UInt16(0x05,0);
-     statuspower.flag_time_process=0;
-
-     statuspower.bits=EEPROM_Read_Byte(16);
-     if(statuspower.bits!=0)
-          {
-          print("Cond. de blackout encontrada!");
-          print("Acionando Cargas, Aguarde...");
-
-          Contagem_Tempo_de_Processo(0);
-
-          if(statuspower.flag_global_datalog==1)
-             {
-             statuspower.flag_global_datalog=0;
-             print("1-DataLog");
-             PROCULUS_VP_Write_UInt16(0x02,1);
-             global_datalog();
-             }
-
-          if(statuspower.flag_global_condensador==1)
-            {
-            statuspower.flag_global_condensador=0;
-            print("2-Condensador.");
-            PROCULUS_VP_Write_UInt16(0x03,1);
-            global_condensador();
-            my_delay_ms_CLRWDT(10000);
-            }
-
-
-          if(statuspower.flag_global_vacuo==1)
-            {
-            statuspower.flag_global_vacuo=0;
-            statuspower.flag_time_process=1;
-            print("3-Vacuo.");
-            PROCULUS_VP_Write_UInt16(0x04,1);
-            global_vacuo();
-            my_delay_ms_CLRWDT(10000);
-            }
-
-
-          if(statuspower.flag_global_aquecimento==1)
-            {
-            statuspower.flag_global_aquecimento=0;
-            print("4-Aquecimento");
-            PROCULUS_VP_Write_UInt16(0x05,1);
-            global_aquecimento();
-            my_delay_ms_CLRWDT(10000);
-            }
-          PROCULUS_Show_Screen(15);
-          }
-     memo_statuspower=statuspower.bits;
-}
-
-
-
-
-
-void Plotar_Grafico_Gravado(void)
-{
-
-
-
-     float RESOLUCAOX;
-     char bb[5];
-     char SlaveBoard;
-     char canal;
-     char tupla;
-     unsigned long add_datalog;
-
-     if(Tamanho_Display==80)
-        RESOLUCAOX=566.0 ;
-     else if(Tamanho_Display==50)
-             RESOLUCAOX=321.0 ;
-
-     char flag_exit;
-     int leitura[14];
-     float tempfloat;
-     unsigned long value;
-
-     PROCULUS_Show_Screen(35);
-     PROCULUS_OK();
-     add_datalog=fat8.processo.add_start;
-     tempfloat=0.0;
-     flag_exit=0;
-     do{
-
-          _delay((unsigned long)((50)*(32000000/4000.0)));
-          flag_exit=0;
-          for(tupla=0;tupla<(totalboard*2);tupla++)
-             {
-             if(tupla==3)continue;
-             SlaveBoard = (tupla / 2)+1;
-             canal = tupla % 2;
-
-             bb[0]=canal;
-             bb[1]=((char *)&add_datalog)[3];
-             bb[2]=((char *)&add_datalog)[2];
-             bb[3]=((char *)&add_datalog)[1];
-             bb[4]=((char *)&add_datalog)[0];
-             leitura[tupla]=Send_To_Slave(SlaveBoard, 0x14, 5, bb);
-             __asm("CLRWDT");
-             }
-
-
-          _delay((unsigned long)((50)*(32000000/4000.0)));
-          for(char i=0;i<totalboard*2;i++)
-             {
-             switch(i)
-                   {
-                   case 0: PROCULUS_graphic_plot(i+1,(leitura[i]*0.4546));break;
-                   case 1: PROCULUS_graphic_plot(i+1,(leitura[i]*0.05));break;
-                  default: PROCULUS_graphic_plot(i+1,(leitura[i]*1.0));break;
-                   }
-             }
-
-          tempfloat+=((fat8.processo.add_end-fat8.processo.add_start)/2.0)/RESOLUCAOX;
-          value= roundf(tempfloat);
-          add_datalog=(value*2)+fat8.processo.add_start;
-
-          TRISDbits.RD6=0;
-          PORTDbits.RD6=1;
-          if(PROCULUS_Get_Page()!=35)
-            {
-            PORTDbits.RD6=0;
-            TRISDbits.RD7=0;
-            PORTDbits.RD7=1;
-            _delay((unsigned long)((500)*(32000000/4000000.0)));
-            PORTDbits.RD7=0;
-            PROCULUS_Clean_All_Line_Graphic();
-            break;
-            }
-          PORTDbits.RD6=0;
-
-       }while(add_datalog<fat8.processo.add_end);
-}
-
-
-void Inicializa_FAT8_Table(){
-
-    fat8.processo.processo_number=0;
-    strcpy(fat8.processo.inicio.date,"");
-    strcpy(fat8.processo.inicio.time,"");
-    strcpy(fat8.processo.fim.date,"");
-    strcpy(fat8.processo.fim.time,"");
-    fat8.processo.amostra=0;
-    fat8.processo.add_start=0;
-    fat8.processo.add_end=0;
-    fat8.processo.minutes=0;
-    fat8.processo.all_flags=0;
-
-    for(char tupla=0;tupla<maxlineDATALOG;tupla++) FAT8_Save(tupla);
-
-    EEPROM_24C1025_Write_Long (0,2,0);
-    add_datalog=0;
-}
-
-
-
-void FAT8_Write_Process_Inicialize()
-    {
-    unsigned char NumProcesso;
-    char time[10];
-    char date[10];
-
-    fat8.index=Find_Fat8_Free();
-
-    NumProcesso=EEPROM_24C1025_Read_Int (0,0);
-    NumProcesso++;
-    EEPROM_24C1025_Write_Int (0,0,NumProcesso);
-
-    PROCULUS_Read_RTC(date,time);
-
-    processo_totalminuto=0;
-
-    add_datalog=EEPROM_24C1025_Read_Long (0,2);
-
-    fat8.processo.processo_number=NumProcesso;
-    strcpy(fat8.processo.inicio.date,date);
-    strcpy(fat8.processo.inicio.time,time);
-    strcpy(fat8.processo.fim.date,"");
-    strcpy(fat8.processo.fim.time,"");
-    fat8.processo.amostra=EEPROM_Read_Integer(0x09);
-    fat8.processo.add_start=add_datalog;
-    fat8.processo.add_end=0;
-    fat8.processo.minutes=0;
-    fat8.processo.flag_download=0;
-    fat8.processo.flag_view=0;
-    fat8.processo.flag_finalized=0;
-    fat8.processo.flag_running=1;
-    FAT8_Save(fat8.index);
-    FAT8_Show();
-    }
-
-
-void FAT8_Write_Process_Finalize(){
-    unsigned char NumProcesso;
-    unsigned char index;
-    char time[10];
-    char date[10];
-
-    fat8.index=Find_Fat8_Running();
-    FAT8_Load(fat8.index);
-
-    PROCULUS_Read_RTC(date,time);
-
-
-
-
-    strcpy(fat8.processo.fim.date,date);
-    strcpy(fat8.processo.fim.time,time);
-
-
-    fat8.processo.add_end=add_datalog;
-    fat8.processo.minutes=processo_totalminuto;
-    fat8.processo.flag_running=0;
-    fat8.processo.flag_download=0;
-    fat8.processo.flag_view=0;
-    fat8.processo.flag_finalized=1;
-    FAT8_Save(fat8.index);
-    FAT8_Show();
-    add_datalog+=2;
-    EEPROM_24C1025_Write_Long (0,2,add_datalog);
-
-}
-
-
-
-char Find_Fat8_Free(){
-     char i;
-     char resultado=-1;
-
-     for(i=0;i<maxlineDATALOG;i++)
-        {
-        FAT8_Load(i);
-        if((fat8.processo.flag_running==0)&&(!fat8.processo.flag_finalized))
-           {
-            resultado=i;
-            break;
-           }
-        }
-     return resultado;
-}
-
-
-char Find_Fat8_Running(){
-     char i;
-     char resultado=-1;
-
-     for(i=0;i<maxlineDATALOG;i++)
-        {
-        FAT8_Load(i);
-        if(fat8.processo.flag_running)
-          {
-          resultado=i;
-          break;
-          }
-        }
-     return resultado;
-}
-
-
-
-void Preenche_Dados_da_FAT8(){
-     char time[10];
-     char date[10];
-
-     PROCULUS_Read_RTC(date,time);
-
-     fat8.processo.processo_number=0;
-     strcpy(fat8.processo.inicio.date,date);
-     strcpy(fat8.processo.inicio.time,time);
-     strcpy(fat8.processo.fim.date,date);
-     strcpy(fat8.processo.fim.time,time);
-     fat8.processo.amostra=0;
-     fat8.processo.add_start=0;
-     fat8.processo.add_end=add_datalog;
-     fat8.processo.minutes=0;
-     fat8.processo.flag_running=0;
-     fat8.processo.flag_download=0;
-     fat8.processo.flag_view=0;
-     fat8.processo.flag_finalized=0;
 }
