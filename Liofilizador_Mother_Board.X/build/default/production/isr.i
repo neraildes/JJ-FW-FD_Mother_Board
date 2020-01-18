@@ -4720,7 +4720,7 @@ typedef struct{
 } t_fat8_processo;
 
 typedef struct{
-        char index;
+        signed char index;
         t_fat8_processo processo;
 }t_fat8;
 # 116 "./Liofilizador Placa Mae.h"
@@ -4830,13 +4830,13 @@ void Ligar_Cargas_Compassadamente(void);
 
 
 
-void Inicializa_FAT8_Table();
+void Format_FAT8_Table();
 void FAT8_Write_Process_Inicialize();
 void FAT8_Write_Process_Finalize();
 void FAT8_Save(unsigned char tupla);
 void FAT8_Load(unsigned char tupla);
 void FAT8_Show();
-char Find_Fat8_Running();
+signed char Find_Fat8_Running();
 char Find_Fat8_Free();
 void Preenche_Dados_da_FAT8();
 void Plotar_Grafico_Gravado(void);
