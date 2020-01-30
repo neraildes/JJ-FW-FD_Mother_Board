@@ -1,26 +1,26 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"231 ./global.h
-[; ;./global.h: 231: struct {
+"232 ./global.h
+[; ;./global.h: 232: struct {
 [s S9 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S9 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"256
-[; ;./global.h: 256:       struct {
+"257
+[; ;./global.h: 257:       struct {
 [s S11 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S11 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work ]
-"254
-[; ;./global.h: 254: union {
+"255
+[; ;./global.h: 255: union {
 [u S10 `uc 1 `S11 1 ]
 [n S10 . bits . ]
-"276
-[; ;./global.h: 276: struct{
+"277
+[; ;./global.h: 277: struct{
 [s S12 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S12 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication ]
-"294
-[; ;./global.h: 294: struct{
+"295
+[; ;./global.h: 295: struct{
 [s S13 :1 `uc 1 ]
 [n S13 . flag_main_loop_WDT ]
-"299
-[; ;./global.h: 299: typedef struct{
+"300
+[; ;./global.h: 300: typedef struct{
 [s S14 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S14 . milisegundo segundo minuto hora ]
 "15 util.c.c
@@ -110,20 +110,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3 = OFF ]
 "72
 [p x EBTRB = OFF ]
-"240
-[; ;./global.h: 240: } statusgen ;
+"241
+[; ;./global.h: 241: } statusgen ;
 [v _statusgen `S9 ~T0 @X0 1 e ]
-"265
-[; ;./global.h: 265:       } statuspower;
+"266
+[; ;./global.h: 266:       } statuspower;
 [v _statuspower `S10 ~T0 @X0 1 e ]
-"284
-[; ;./global.h: 284: }statusgen1;
+"285
+[; ;./global.h: 285: }statusgen1;
 [v _statusgen1 `S12 ~T0 @X0 1 e ]
-"296
-[; ;./global.h: 296: }statusWDT;
+"297
+[; ;./global.h: 297: }statusWDT;
 [v _statusWDT `S13 ~T0 @X0 1 e ]
-"306
-[; ;./global.h: 306: volatile t_rtc rtc;
+"307
+[; ;./global.h: 307: volatile t_rtc rtc;
 [v _rtc `VS14 ~T0 @X0 1 e ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 54: __asm("PORTA equ 0F80h");

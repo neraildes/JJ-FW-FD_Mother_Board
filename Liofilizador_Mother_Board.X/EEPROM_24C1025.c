@@ -324,7 +324,17 @@ void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value){
 }
 
 
-
+char TesteMemoria24C1025(void)
+{
+     int value;
+     value=1977;
+     EEPROM_24C1025_Write_Int(0,0x0E,value);
+     value=EEPROM_24C1025_Read_Int(0,0x0E);
+     if(value==1977)
+        return 0xFF;
+     else
+        return 0x00;     
+}
 
 
 

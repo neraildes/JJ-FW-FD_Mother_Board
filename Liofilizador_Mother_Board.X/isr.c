@@ -75,8 +75,8 @@ void __interrupt(low_priority) isr(void)
     //============================= U S A R T ==================================
     if(PIR1bits.RCIF)
         {   
-        //TRISDbits.RD5=0;
-        //PORTDbits.RD5=1; 
+        TRISDbits.RD6=0;
+        PORTDbits.RD6=1; 
         tempo=RX_MAX_WAIT_TIME;       
         count=0;
         cntAbandona=255;
@@ -86,8 +86,8 @@ void __interrupt(low_priority) isr(void)
         {    
             if (PIR1bits.RCIF) 
             {     
-                //PORTDbits.RD5=0;
-                //PORTDbits.RD5=1;
+                PORTDbits.RD6=0;
+                PORTDbits.RD6=1;
                 (*pointer)=RCREG;
                 if(count<USART_BUFFER_SIZE-1) 
                    {  
@@ -103,7 +103,7 @@ void __interrupt(low_priority) isr(void)
 
         }           
         //(*pointer)=0;
-        //PORTDbits.RD5=0;
+        PORTDbits.RD6=0;
         
         if(RCSTAbits.OERR)
            {

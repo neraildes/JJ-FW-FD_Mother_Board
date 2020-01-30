@@ -4434,7 +4434,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 
 
 #pragma config EBTRB = OFF
-# 231 "./global.h"
+# 232 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -4445,7 +4445,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 254 "./global.h"
+# 255 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -4458,7 +4458,7 @@ union {
 
              };
       } statuspower;
-# 276 "./global.h"
+# 277 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -4468,7 +4468,7 @@ struct{
         unsigned flag_generico :1;
         unsigned flag_recomunication :1;
 }statusgen1;
-# 294 "./global.h"
+# 295 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -4488,7 +4488,7 @@ volatile t_rtc rtc;
 # 11 "./I2C.h"
 void I2C_Master_Init(const unsigned long c);
 void I2C_Slave_Init(short address);
-void I2C_Master_Wait(void);
+char I2C_Master_Wait(void);
 void I2C_Master_Start(void);
 void I2C_Master_RepeatedStart(void);
 void I2C_Master_Stop(void);
@@ -4521,6 +4521,7 @@ unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_a
 void EEPROM_24C1025_Write_Long(unsigned char chip_add, unsigned long mem_add, long data);
 unsigned long EEPROM_24C1025_Read_Long(unsigned char chip_add, unsigned long mem_add);
 
+char TesteMemoria24C1025(void);
 void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value);
 # 5 "EEPROM_24C1025.c" 2
 
@@ -4835,4 +4836,17 @@ void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value){
         EEPROM_24C1025_Write_Int(chip_add, mem_add, value);
         __asm("CLRWDT");
         }
+}
+
+
+char TesteMemoria24C1025(void)
+{
+     int value;
+     value=1977;
+     EEPROM_24C1025_Write_Int(0,0x0E,value);
+     value=EEPROM_24C1025_Read_Int(0,0x0E);
+     if(value==1977)
+        return 0xFF;
+     else
+        return 0x00;
 }

@@ -44,10 +44,6 @@ void PROCULUS_REG_Read(unsigned char reg, unsigned char size, unsigned char *ret
      USART_putc(reg);
      USART_putc(size);
      
-     
-     TRISDbits.RD4=0;
-     PORTDbits.RD4=1;
-
      tempo=0;
      while(tempo<RX_MAX_WAIT_TIME)
            {
@@ -63,8 +59,6 @@ void PROCULUS_REG_Read(unsigned char reg, unsigned char size, unsigned char *ret
               } 
            tempo++;                   
            } 
-     
-     PORTDbits.RD4=0;
      
      my_delay_ms(TIME_AFTER_SEND_PROCULUS_COMMAND);
           
@@ -105,12 +99,9 @@ void PROCULUS_VP_Read(unsigned int vp,char *vetor,char size){
      USART_putc(VP_READ);
      USART_put_int(vp);
      USART_putc((unsigned char)(size>>1));  // size = size / 2  
-     //__delay_us(50);
-
-
-
-
+     __delay_ms(10); //Necessário para ignorar conversa com display
      tempo=0;
+     
      while(tempo<RX_MAX_WAIT_TIME) 
            {
            __delay_us(500);

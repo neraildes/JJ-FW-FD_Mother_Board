@@ -1,10 +1,20 @@
 Tarefas a serem feitas (em ordem de prioridade)
 
 
-..........Ruido no vacuo ao ligar condensador.
-..........Padronizar cores do grafico.
+
 .........."Placa não conectada" e "Sem sensor" para vacuo e pt100.
-..........Recuperar grafico apos blackout.
+
+
+Versão 1.0.18
+        Retirado ruido ao ligar condensador (liga vacuo) trocando a ordem de checagem e deixando vacuo por ultimo
+	Cores de grafico padronizada.
+	Salvamento de grafico e datalog e resumo ao visualizar no equipamento.
+	Limitar numero de processo a 10000.
+	falhas
+	    Ao comunicar com placa 2 lendo valor de memória desliga o condensador (programa rodando).(provável cão de guarda)
+	    
+
+
 
 Versao 1.0.13
 	Alteraçao no tempo de captura do datalog para evitar -1.0V de leitura.

@@ -436,7 +436,20 @@ void main(void)
      Carregar_tempo_de_datalog(); //Intervalo de capturas
      add_datalog=EEPROM_24C1025_Read_Long (0,2); //Inicializa add_datalog
      //-------------------------------------------------------------------------     
-
+     print("Testando Memoria Externa...");
+     if(TesteMemoria24C1025())
+        print("->Memoria OK!") ;
+     else
+        { 
+        print("->Memoria ERRO!");
+        PROCULUS_Buzzer(1000);
+        __delay_ms(1000);
+        PROCULUS_Buzzer(1000);
+        __delay_ms(1000);
+        PROCULUS_Buzzer(1000);
+        my_delay_ms_CLRWDT(2000);
+        }
+     
      //------------Valores Iniciais da tela Principal---------------------------
      print("Analisando dados...");  
      for(char i=0;i<15;i++)
@@ -528,7 +541,8 @@ void main(void)
         //add_datalog=0;
         Ligar_Cargas_Compassadamente();
         PROCULUS_Show_Screen(15);     
-        
+        TRISDbits.TRISD5=0;//fix Apagar Debug
+        PORTDbits.RD5=0;//FIX APAGAR
         while(1)
              {
              
@@ -548,7 +562,7 @@ void main(void)
              flag_proculus_hs=FALSE;
              //-----------------------------------------------------------------
                 flag_proculus_hs=TRUE;
-                Exibe_Hora_Data(FALSE); //Exibe data e hora sem segundos
+                if(rtc.segundo<5) if(pagina!=25) Exibe_Hora_Data(FALSE); //Exibe data e hora sem segundos
                 if(flag_time_process==TRUE) SaveBlackoutStatusRuning(); //Salva status e tempo de processo a cada 10 minutos
                 Exibe_Tempo_de_Processo();
                 Icones_de_alarmes();    
@@ -559,10 +573,9 @@ void main(void)
                 Gerenciador_de_Senha_Global(); //Libera Senha Global eternamente                 
                 
                 global_datalog(); // LEITURA DOS SENSORES                 
-                global_condensador();             
-                global_vacuo();                
+                global_vacuo(); 
                 global_aquecimento();
-                
+                global_condensador();                 
                 
                 
                 flag_proculus_hs=TRUE;
@@ -884,7 +897,7 @@ void main(void)
                       USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
                       USART_putc(0xCD);USART_putc(0xCD);
                   
-                      for(unsigned int tempo=0; tempo<200; tempo++)
+                      for(unsigned int tempo=0; tempo<350; tempo++)
                           {
                           if(flag_usart_rx==TRUE) break;                           
                           my_delay_ms_CLRWDT(1);
@@ -930,7 +943,7 @@ unsigned char countboard()
  int  Send_To_Slave(char destino, char comando, char size, char * buffer)
 {
      unsigned int contador;
-     int retorno=-1;
+     char flag_retorno;
      char i;
      
      USART_put_int(HEADER_LIOFILIZADOR);
@@ -944,6 +957,9 @@ unsigned char countboard()
      
      
      flag_usart_rx=0;
+     int retorno=-1;
+     usart_buffer[5]=2;
+     flag_retorno=FALSE;
      for(int contador=0;contador<RX_MAX_WAIT_TIME;contador++)
          {
           __delay_us(200);
@@ -951,6 +967,7 @@ unsigned char countboard()
              {
              __delay_ms(2); 
              flag_usart_rx=0;
+             flag_retorno=TRUE;
              size=usart_buffer[5];
              retorno = (usart_buffer[6]<<8)|(usart_buffer[7]);
              for(i=0;i<size;i++)
@@ -958,7 +975,14 @@ unsigned char countboard()
              contador=0;
              break;
              }
-          } 
+          }
+     if(flag_retorno==FALSE)
+        {
+        usart_buffer[5]=2; 
+        usart_buffer[6]=0xFF;
+        usart_buffer[7]=0xFF;
+        }
+     
      return retorno;
 }
 
@@ -1458,6 +1482,8 @@ void Decodify_Command(void){
     Lower(add_24LCxxxx)=(usart_protocol.value[2]);
     Hi(add_24LCxxxx)=(usart_protocol.value[3]);
     Lo(add_24LCxxxx)=(usart_protocol.value[4]);    
+    
+    //__delay_ms(50);
 
     switch(usart_protocol.command){
         /*
@@ -1631,7 +1657,7 @@ void Decodify_Command(void){
              Send_to_PC(2);
              USART_put_int(tempint);
              break;
-
+        
         case COMMAND_CLK_PIC_R:
              {
              char hh[10];
@@ -1707,45 +1733,71 @@ void Decodify_Command(void){
              SEND_REPLY_OK();
              break;
         */
+        case COMMAND_LCD_W_VP_INT:
+             PROCULUS_VP_Write_Int16((usart_protocol.value[0]<<8)|
+                                     (usart_protocol.value[1]<<0),
+                                     (usart_protocol.value[2])<<0|
+                                     (usart_protocol.value[3])<<8);
+             Send_to_PC(3);
+             SEND_REPLY_OK();
+             break;
+             
+        case COMMAND_LCD_R_VP_INT:
+             {           
+             PORTDbits.RD5=1; //Fix Apagar Debug                  
+             tempint=PROCULUS_VP_Read_Int16((usart_protocol.value[0]<<8)+
+                                             (usart_protocol.value[1]));
+
+             PORTDbits.RD5=0; //Fix Apagar Debug              
+             PORTDbits.RD5=1; //Fix Apagar Debug   
+             Send_to_PC((strlen(texto)));
+             USART_put_int(tempint);
+             PORTDbits.RD5=0; //Fix Apagar Debug
+             break;
+             }
+        
+        /*
+        case COMMAND_LCD_W_VP_STR:
+            
+            break;
+        
+        case COMMAND_LCD_R_VP_STR:
+            
+            break; 
+        */    
+
         case COMMAND_PROCULUS_Buzzer:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
              Send_to_PC(3);
              SEND_REPLY_OK();
-        /*
-        case COMMAND_LCD_W_VP_INT:
-             PROCULUS_VP_Write_Int16((usart_protocol.value[0]<<8)+
-                                      (usart_protocol.value[1]),
-                                      (usart_protocol.value[2])+
-                                      (usart_protocol.value[3]<<8));
+             break;
+        
+        case COMMAND_LDC_PAGE:
+             PROCULUS_Show_Screen((usart_protocol.value[0]<<8)+
+                                  (usart_protocol.value[1]));
              Send_to_PC(3);
-             SEND_REPLY_OK();
+             SEND_REPLY_OK();            
+             break;
+        
+        case COMMAND_CONTROL_ACTIVE: 
+             PROCULUS_Popup(usart_protocol.value[0]);
+             Send_to_PC(3);
+             SEND_REPLY_OK();         
              break;
 
-
-        case COMMAND_LCD_R_VP_INT:
-             {
-             //unsigned char texto[20];
-             tempint=PROCULUS_VP_Read_Int16((usart_protocol.value[0]<<8)+
-                                             (usart_protocol.value[1]));
-
-             Send_to_PC((strlen(texto)));
-             USART_put_int(tempint);
-             break;
-             }
+        
         case COMMAND_LCD_W_VP_STR:
-             PROCULUS_VP_Write_String((usart_protocol.value[0]<<8)+
-
+             PROCULUS_VP_Write_String((usart_protocol.value[0]<<8)|
                                       (usart_protocol.value[1]),
                                      &(usart_protocol.value[2]));
 
              Send_to_PC(3);
-
              SEND_REPLY_OK();
-
+             break;
+        
         case COMMAND_LCD_R_VP_STR:
-             {
-             //unsigned char texto[20];
+             {             
              PROCULUS_VP_Read_String((usart_protocol.value[0]<<8)+
                                      (usart_protocol.value[1]),
                                       texto);
@@ -1753,7 +1805,7 @@ void Decodify_Command(void){
              USART_put_string(texto);
              break;
              }
-        */
+        
     }
 }
 
@@ -1783,6 +1835,7 @@ void Comando_Protocolo_Serial(void){
                    Origem = 0XC0
                    Destino= 0X01 a 0X0F
                    */
+                   //*aqui 
                    DestinoMemo=usart_protocol.destino;
                    Send_To_Slave(usart_protocol.destino,
                                  usart_protocol.command,
@@ -3494,7 +3547,7 @@ void Format_FAT8_Table(){
 
 void FAT8_Write_Process_Inicialize()
     {
-    unsigned char NumProcesso;
+    unsigned int NumProcesso;
     char time[10];
     char date[10];
     
@@ -3502,6 +3555,7 @@ void FAT8_Write_Process_Inicialize()
     
     NumProcesso=EEPROM_24C1025_Read_Int (0,0);
     NumProcesso++;
+    if(NumProcesso>10000) NumProcesso=0;
     EEPROM_24C1025_Write_Int (0,0,NumProcesso);
 
     PROCULUS_Read_RTC(date,time);

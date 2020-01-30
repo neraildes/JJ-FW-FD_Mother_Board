@@ -4433,7 +4433,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 
 
 #pragma config EBTRB = OFF
-# 231 "./global.h"
+# 232 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -4444,7 +4444,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 254 "./global.h"
+# 255 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -4457,7 +4457,7 @@ union {
 
              };
       } statuspower;
-# 276 "./global.h"
+# 277 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -4467,7 +4467,7 @@ struct{
         unsigned flag_generico :1;
         unsigned flag_recomunication :1;
 }statusgen1;
-# 294 "./global.h"
+# 295 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -4487,7 +4487,7 @@ volatile t_rtc rtc;
 # 11 "./I2C.h"
 void I2C_Master_Init(const unsigned long c);
 void I2C_Slave_Init(short address);
-void I2C_Master_Wait(void);
+char I2C_Master_Wait(void);
 void I2C_Master_Start(void);
 void I2C_Master_RepeatedStart(void);
 void I2C_Master_Stop(void);
@@ -4547,47 +4547,69 @@ void I2C_Slave_Init(short address)
 
 
 
-void I2C_Master_Wait(void)
+char I2C_Master_Wait(void)
 {
-  while ((SSPSTAT & 0b00000100) || (SSPCON2 & 0b00011111)) continue;
+  char tempo;
+  tempo=200;
+  while ((SSPSTAT & 0b00000100) || (SSPCON2 & 0b00011111))
+      {
+      if(tempo)
+         tempo--;
+      else
+         break;
+      _delay((unsigned long)((1)*(32000000/4000.0)));
+      }
+  return tempo ;
 }
 
 void I2C_Master_Start(void)
 {
   INTCONbits.GIE=0;
   Delay_Led_Memory=5;
-  I2C_Master_Wait();
-  SSPCON2bits.SEN = 1;
+  if(I2C_Master_Wait())
+    {
+    SSPCON2bits.SEN = 1;
+    }
 }
 
 void I2C_Master_RepeatedStart(void)
 {
-  I2C_Master_Wait();
-  SSPCON2bits.RSEN = 1;
+  if(I2C_Master_Wait())
+    {
+    SSPCON2bits.RSEN = 1;
+    }
 }
 
 void I2C_Master_Stop(void)
 {
-  I2C_Master_Wait();
-  SSPCON2bits.PEN = 1;
+  if(I2C_Master_Wait())
+    {
+    SSPCON2bits.PEN = 1;
+    }
   INTCONbits.GIE=1;
 }
 
 void I2C_Master_Write(unsigned d)
 {
-  I2C_Master_Wait();
-  SSPBUF = d;
+  if(I2C_Master_Wait())
+    {
+    SSPBUF = d;
+    }
 }
 
 unsigned short I2C_Master_Read(unsigned short a)
 {
   unsigned short temp;
-  I2C_Master_Wait();
-  SSPCON2bits.RCEN = 1;
-  I2C_Master_Wait();
-  temp = SSPBUF;
-  I2C_Master_Wait();
-  SSPCON2bits.ACKDT = (a)?0:1;
-  SSPCON2bits.ACKEN = 1;
-  return temp;
+  if(I2C_Master_Wait())SSPCON2bits.RCEN = 1;
+  if(I2C_Master_Wait())temp = SSPBUF;
+  if(I2C_Master_Wait())
+    {
+    SSPCON2bits.ACKDT = (a)?0:1;
+    SSPCON2bits.ACKEN = 1;
+    return temp;
+    }
+  else
+    {
+    return 0x00;
+    }
 }

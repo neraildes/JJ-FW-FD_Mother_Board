@@ -36,6 +36,7 @@ unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_a
 void EEPROM_24C1025_Write_Long(unsigned char chip_add, unsigned long mem_add, long data);
 unsigned long EEPROM_24C1025_Read_Long(unsigned char chip_add, unsigned long mem_add);
 
+char TesteMemoria24C1025(void);
 void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value);
 
 

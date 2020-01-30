@@ -1,26 +1,26 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"231 ./global.h
-[; ;./global.h: 231: struct {
+"232 ./global.h
+[; ;./global.h: 232: struct {
 [s S270 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S270 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"256
-[; ;./global.h: 256:       struct {
+"257
+[; ;./global.h: 257:       struct {
 [s S272 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S272 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work ]
-"254
-[; ;./global.h: 254: union {
+"255
+[; ;./global.h: 255: union {
 [u S271 `uc 1 `S272 1 ]
 [n S271 . bits . ]
-"276
-[; ;./global.h: 276: struct{
+"277
+[; ;./global.h: 277: struct{
 [s S273 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S273 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication ]
-"294
-[; ;./global.h: 294: struct{
+"295
+[; ;./global.h: 295: struct{
 [s S274 :1 `uc 1 ]
 [n S274 . flag_main_loop_WDT ]
-"299
-[; ;./global.h: 299: typedef struct{
+"300
+[; ;./global.h: 300: typedef struct{
 [s S275 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S275 . milisegundo segundo minuto hora ]
 [t ~ __interrupt . k ]
@@ -40,6 +40,44 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2596
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2596: extern volatile PIR1bits_t PIR1bits __attribute__((address(0xF9E)));
 [v _PIR1bits `VS93 ~T0 @X0 0 e@3998 ]
+"2057
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2057:     struct {
+[s S76 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S76 . TRISD0 TRISD1 TRISD2 TRISD3 TRISD4 TRISD5 TRISD6 TRISD7 ]
+"2067
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2067:     struct {
+[s S77 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S77 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
+"2056
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2056: typedef union {
+[u S75 `S76 1 `S77 1 ]
+[n S75 . . . ]
+"2078
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 2078: extern volatile TRISDbits_t TRISDbits __attribute__((address(0xF95)));
+[v _TRISDbits `VS75 ~T0 @X0 0 e@3989 ]
+"541
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 541:     struct {
+[s S27 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S27 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
+"551
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 551:     struct {
+[s S28 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S28 . PSP0 PSP1 PSP2 PSP3 PSP4 PSP5 PSP6 PSP7 ]
+"561
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 561:     struct {
+[s S29 :5 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S29 . . P1B P1C P1D ]
+"567
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 567:     struct {
+[s S30 :7 `uc 1 :1 `uc 1 ]
+[n S30 . . SS2 ]
+"540
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 540: typedef union {
+[u S26 `S27 1 `S28 1 `S29 1 `S30 1 ]
+[n S26 . . . . . ]
+"572
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 572: extern volatile PORTDbits_t PORTDbits __attribute__((address(0xF83)));
+[v _PORTDbits `VS26 ~T0 @X0 0 e@3971 ]
 "11 isr.c
 [; ;isr.c: 11: extern volatile unsigned char usart_buffer[32+10];
 [v _usart_buffer `Vuc ~T0 @X0 -> 0 `x e ]
@@ -657,20 +695,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3 = OFF ]
 "72
 [p x EBTRB = OFF ]
-"240
-[; ;./global.h: 240: } statusgen ;
+"241
+[; ;./global.h: 241: } statusgen ;
 [v _statusgen `S270 ~T0 @X0 1 e ]
-"265
-[; ;./global.h: 265:       } statuspower;
+"266
+[; ;./global.h: 266:       } statuspower;
 [v _statuspower `S271 ~T0 @X0 1 e ]
-"284
-[; ;./global.h: 284: }statusgen1;
+"285
+[; ;./global.h: 285: }statusgen1;
 [v _statusgen1 `S273 ~T0 @X0 1 e ]
-"296
-[; ;./global.h: 296: }statusWDT;
+"297
+[; ;./global.h: 297: }statusWDT;
 [v _statusWDT `S274 ~T0 @X0 1 e ]
-"306
-[; ;./global.h: 306: volatile t_rtc rtc;
+"307
+[; ;./global.h: 307: volatile t_rtc rtc;
 [v _rtc `VS275 ~T0 @X0 1 e ]
 "56 isr.c
 [; ;isr.c: 56: volatile unsigned int tempo;
@@ -702,6 +740,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "77
 [; ;isr.c: 77:         {
 {
+"78
+[; ;isr.c: 78:         TRISDbits.RD6=0;
+[e = . . _TRISDbits 1 6 -> -> 0 `i `uc ]
+"79
+[; ;isr.c: 79:         PORTDbits.RD6=1;
+[e = . . _PORTDbits 0 6 -> -> 1 `i `uc ]
 "80
 [; ;isr.c: 80:         tempo=400;
 [e = _tempo -> -> 400 `i `ui ]
@@ -730,6 +774,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "88
 [; ;isr.c: 88:             {
 {
+"89
+[; ;isr.c: 89:                 PORTDbits.RD6=0;
+[e = . . _PORTDbits 0 6 -> -> 0 `i `uc ]
+"90
+[; ;isr.c: 90:                 PORTDbits.RD6=1;
+[e = . . _PORTDbits 0 6 -> -> 1 `i `uc ]
 "91
 [; ;isr.c: 91:                 (*pointer)=RCREG;
 [e = *U _pointer _RCREG ]
@@ -777,6 +827,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;isr.c: 85:         while(tempo)
 [e $ != _tempo -> -> 0 `i `ui 293  ]
 [e :U 294 ]
+"106
+[; ;isr.c: 106:         PORTDbits.RD6=0;
+[e = . . _PORTDbits 0 6 -> -> 0 `i `uc ]
 "108
 [; ;isr.c: 108:         if(RCSTAbits.OERR)
 [e $ ! != -> . . _RCSTAbits 0 1 `i -> 0 `i 298  ]

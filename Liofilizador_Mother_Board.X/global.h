@@ -203,8 +203,9 @@
 
 
 //==============================================================================
-#define SALVO_COM_SUCESSO        0x51 
+#define SALVO_COM_SUCESSO        0x50
 #define ACESSO_NEGADO            0x52
+#define ACESSO_NEGADO_HIDE       0x53
 #define SENHA_INVALIDA           0X20 
 #define SENHAS_DIFERENTES        0X21
 #define SENHA_CADASTRADA_SUCESSO 0x22

@@ -297,7 +297,7 @@ struct tm *getdate (const char *);
 
 
 #pragma config EBTRB = OFF
-# 231 "./global.h"
+# 232 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -308,7 +308,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 254 "./global.h"
+# 255 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -321,7 +321,7 @@ union {
 
              };
       } statuspower;
-# 276 "./global.h"
+# 277 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -331,7 +331,7 @@ struct{
         unsigned flag_generico :1;
         unsigned flag_recomunication :1;
 }statusgen1;
-# 294 "./global.h"
+# 295 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -351,7 +351,7 @@ volatile t_rtc rtc;
 # 11 "./I2C.h"
 void I2C_Master_Init(const unsigned long c);
 void I2C_Slave_Init(short address);
-void I2C_Master_Wait(void);
+char I2C_Master_Wait(void);
 void I2C_Master_Start(void);
 void I2C_Master_RepeatedStart(void);
 void I2C_Master_Stop(void);
