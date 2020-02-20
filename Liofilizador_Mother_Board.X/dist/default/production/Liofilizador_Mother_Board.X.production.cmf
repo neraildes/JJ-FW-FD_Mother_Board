@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\Dell\AppData\Local\Temp\sb88.o
+$C:\Users\Dell\AppData\Local\Temp\s91k.o
 idloc IDLOC 0 200000 200000 8 1
 init CODE 0 3BC 3BC 4 1
 reset_vec CODE 0 0 0 4 1
@@ -255,7 +255,7 @@ MEDIUMCONST A3BC-FC49 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Liofilizador_Mother_Board.X.production.o
-18 intcodelo CODE >53645:C:\Users\Dell\AppData\Local\Temp\sb88.s
+18 intcodelo CODE >53645:C:\Users\Dell\AppData\Local\Temp\s91k.s
 18 intcodelo CODE >72:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\isr.c
 2E intcodelo CODE >76:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\isr.c
 3C intcodelo CODE >78:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\isr.c
@@ -3207,80 +3207,80 @@ FFC text0 CODE >791:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizado
 14A6 text0 CODE >881:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 14AA text0 CODE >882:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 1520 text0 CODE >884:C:\Indka Ind. e Com. Ltda (externo)\JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
-8C0C cinit CODE >5291:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C0C cinit CODE >5293:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C0C cinit CODE >5296:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C0C cinit CODE >5558:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C0E cinit CODE >5559:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C10 cinit CODE >5560:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C12 cinit CODE >5561:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C14 cinit CODE >5562:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C16 cinit CODE >5563:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C18 cinit CODE >5564:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C1C cinit CODE >5565:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C20 cinit CODE >5566:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C20 cinit CODE >5567:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C22 cinit CODE >5568:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C26 cinit CODE >5569:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C28 cinit CODE >5570:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C2A cinit CODE >5571:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C2C cinit CODE >5575:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C2E cinit CODE >5576:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C30 cinit CODE >5577:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C32 cinit CODE >5578:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C34 cinit CODE >5579:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C36 cinit CODE >5580:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C38 cinit CODE >5581:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C3C cinit CODE >5582:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C40 cinit CODE >5583:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C40 cinit CODE >5584:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C42 cinit CODE >5585:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C46 cinit CODE >5586:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C48 cinit CODE >5587:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C4A cinit CODE >5588:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C4C cinit CODE >5592:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C50 cinit CODE >5593:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C52 cinit CODE >5594:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C52 cinit CODE >5595:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C54 cinit CODE >5596:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C56 cinit CODE >5597:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C58 cinit CODE >5600:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C5C cinit CODE >5601:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C5E cinit CODE >5602:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C5E cinit CODE >5603:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C60 cinit CODE >5604:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C62 cinit CODE >5605:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C64 cinit CODE >5608:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C68 cinit CODE >5609:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C6A cinit CODE >5610:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C6A cinit CODE >5611:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C6C cinit CODE >5612:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C6E cinit CODE >5613:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C70 cinit CODE >5616:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C74 cinit CODE >5617:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C76 cinit CODE >5618:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C76 cinit CODE >5619:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C78 cinit CODE >5620:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C7A cinit CODE >5621:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C7C cinit CODE >5624:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C80 cinit CODE >5625:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C82 cinit CODE >5626:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C82 cinit CODE >5627:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C84 cinit CODE >5628:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C86 cinit CODE >5629:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C88 cinit CODE >5632:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C8C cinit CODE >5633:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C8E cinit CODE >5634:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C8E cinit CODE >5635:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C90 cinit CODE >5636:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C92 cinit CODE >5637:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C94 cinit CODE >5643:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C94 cinit CODE >5645:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C96 cinit CODE >5646:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C98 cinit CODE >5648:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C9A cinit CODE >5649:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C9C cinit CODE >5650:C:\Users\Dell\AppData\Local\Temp\sb88.s
-8C9E cinit CODE >5651:C:\Users\Dell\AppData\Local\Temp\sb88.s
+8C0C cinit CODE >5291:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C0C cinit CODE >5293:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C0C cinit CODE >5296:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C0C cinit CODE >5558:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C0E cinit CODE >5559:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C10 cinit CODE >5560:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C12 cinit CODE >5561:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C14 cinit CODE >5562:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C16 cinit CODE >5563:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C18 cinit CODE >5564:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C1C cinit CODE >5565:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C20 cinit CODE >5566:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C20 cinit CODE >5567:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C22 cinit CODE >5568:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C26 cinit CODE >5569:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C28 cinit CODE >5570:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C2A cinit CODE >5571:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C2C cinit CODE >5575:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C2E cinit CODE >5576:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C30 cinit CODE >5577:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C32 cinit CODE >5578:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C34 cinit CODE >5579:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C36 cinit CODE >5580:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C38 cinit CODE >5581:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C3C cinit CODE >5582:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C40 cinit CODE >5583:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C40 cinit CODE >5584:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C42 cinit CODE >5585:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C46 cinit CODE >5586:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C48 cinit CODE >5587:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C4A cinit CODE >5588:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C4C cinit CODE >5592:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C50 cinit CODE >5593:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C52 cinit CODE >5594:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C52 cinit CODE >5595:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C54 cinit CODE >5596:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C56 cinit CODE >5597:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C58 cinit CODE >5600:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C5C cinit CODE >5601:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C5E cinit CODE >5602:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C5E cinit CODE >5603:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C60 cinit CODE >5604:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C62 cinit CODE >5605:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C64 cinit CODE >5608:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C68 cinit CODE >5609:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C6A cinit CODE >5610:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C6A cinit CODE >5611:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C6C cinit CODE >5612:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C6E cinit CODE >5613:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C70 cinit CODE >5616:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C74 cinit CODE >5617:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C76 cinit CODE >5618:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C76 cinit CODE >5619:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C78 cinit CODE >5620:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C7A cinit CODE >5621:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C7C cinit CODE >5624:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C80 cinit CODE >5625:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C82 cinit CODE >5626:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C82 cinit CODE >5627:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C84 cinit CODE >5628:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C86 cinit CODE >5629:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C88 cinit CODE >5632:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C8C cinit CODE >5633:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C8E cinit CODE >5634:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C8E cinit CODE >5635:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C90 cinit CODE >5636:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C92 cinit CODE >5637:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C94 cinit CODE >5643:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C94 cinit CODE >5645:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C96 cinit CODE >5646:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C98 cinit CODE >5648:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C9A cinit CODE >5649:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C9C cinit CODE >5650:C:\Users\Dell\AppData\Local\Temp\s91k.s
+8C9E cinit CODE >5651:C:\Users\Dell\AppData\Local\Temp\s91k.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -3328,7 +3328,7 @@ __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\Liofilizador_Mother_Boar
 PROCULUS_TPFLAG_Write@value 1B 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 PROCULUS_TPFLAG_Write@vetor 18 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_EEPROM_Read_String 9CC4 0 CODE 0 text67 dist/default/production\Liofilizador_Mother_Board.X.production.o
-__mediumconst FC4A 0 MEDIUMCONST 0 mediumconst C:\Users\Dell\AppData\Local\Temp\sb88.o
+__mediumconst FC4A 0 MEDIUMCONST 0 mediumconst C:\Users\Dell\AppData\Local\Temp\s91k.o
 ShowStaticValueGrid@bb 27 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ShowStaticValueGrid@vp 2B 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_Ligar_Cargas_Compassadamente 589C 0 CODE 0 text26 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3366,7 +3366,7 @@ bcd2str@dado 9 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Moth
 _RBIF 7F90 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 _RCIE 7CED 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 _TMR0 FD6 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\Dell\AppData\Local\Temp\sb88.o
+___sp 0 0 STACK 2 stack C:\Users\Dell\AppData\Local\Temp\s91k.o
 _fat8 100 0 BANK1 1 bssBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _itoa 64A6 0 CODE 0 text11 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _main 3C0 0 CODE 0 text0 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3375,7 +3375,7 @@ btemp 77 0 COMRAM 1 temp dist/default/production\Liofilizador_Mother_Board.X.pro
 EEPROM_24C1025_Write_Str@mem_add D 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 Send_To_Slave@contador_1809 15 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 _Delay_Led_Memory 182 0 BANK1 1 bssBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
-start 3BC 0 CODE 0 init C:\Users\Dell\AppData\Local\Temp\sb88.o
+start 3BC 0 CODE 0 init C:\Users\Dell\AppData\Local\Temp\s91k.o
 ___flmul@aexp 24 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___flmul@bexp 29 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___flmul@prod 2A 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3469,11 +3469,11 @@ __end_of_Contagem_Tempo_de_Processo 9408 0 CODE 0 text79 dist/default/production
 USART_put_string@vetor A 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_buscaIndex 9D7C 0 CODE 0 text6 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _PROCULUS_TPFLAG_Read A348 0 CODE 0 text112 dist/default/production\Liofilizador_Mother_Board.X.production.o
-__accesstop 80 0 ABS 0 - C:\Users\Dell\AppData\Local\Temp\sb88.o
-intlevel0 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\sb88.o
-intlevel1 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\sb88.o
-intlevel2 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\sb88.o
-intlevel3 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\sb88.o
+__accesstop 80 0 ABS 0 - C:\Users\Dell\AppData\Local\Temp\s91k.o
+intlevel0 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\s91k.o
+intlevel1 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\s91k.o
+intlevel2 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\s91k.o
+intlevel3 0 0 CODE 0 text C:\Users\Dell\AppData\Local\Temp\s91k.o
 __end_of_Exibe_Receita 704E 0 CODE 0 text46 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __ptext100 65F2 0 CODE 0 text100 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __ptext101 9408 0 CODE 0 text101 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3610,8 +3610,8 @@ USART_input_buffer@time A 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofil
 USART_putc@value 9 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 Find_Fat8_Running@i 52 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___awdiv@dividend 9 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-___inthi_sp 0 0 STACK 2 stack C:\Users\Dell\AppData\Local\Temp\sb88.o
-___intlo_sp 0 0 STACK 2 stack C:\Users\Dell\AppData\Local\Temp\sb88.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\Dell\AppData\Local\Temp\s91k.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\Dell\AppData\Local\Temp\s91k.o
 _Tamanho_Display D3 0 BANK0 1 bssBANK0 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_PROCULUS_graphic_plot 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_PROCULUS_OK 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3964,7 +3964,7 @@ _Plotar_Grafico_Gravado 262E 0 CODE 0 text16 dist/default/production\Liofilizado
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\Liofilizador_Mother_Board.X.production.o
 __Hbigram 0 0 ABS 0 bigram dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_PROCULUS_Buzzer 9F08 0 CODE 0 text125 dist/default/production\Liofilizador_Mother_Board.X.production.o
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Dell\AppData\Local\Temp\sb88.o
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Dell\AppData\Local\Temp\s91k.o
 showTotalReset@placa 83 0 BANK0 1 cstackBANK0 dist/default/production\Liofilizador_Mother_Board.X.production.o
 showTotalReset@valor 84 0 BANK0 1 cstackBANK0 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_Comando_Display 7856 0 CODE 0 text42 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4510,8 +4510,8 @@ __size_of_global_datalog 0 0 ABS 0 - dist/default/production\Liofilizador_Mother
 EEPROM_Write_Byte@last_GIE 27 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 save_datalog@index 8D 0 BANK0 1 cstackBANK0 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _USART_put_string 8DCE 0 CODE 0 text37 dist/default/production\Liofilizador_Mother_Board.X.production.o
-stackhi F7F 0 ABS 0 - C:\Users\Dell\AppData\Local\Temp\sb88.o
-stacklo 4AA 0 ABS 0 - C:\Users\Dell\AppData\Local\Temp\sb88.o
+stackhi F7F 0 ABS 0 - C:\Users\Dell\AppData\Local\Temp\s91k.o
+stacklo 4AA 0 ABS 0 - C:\Users\Dell\AppData\Local\Temp\s91k.o
 EEPROM_Read_Long32@addr D 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_Formatar_Banco_de_Dados 7948 0 CODE 0 text71 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_PROCULUS_VP_Read_Int16 9FF8 0 CODE 0 text40 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4770,7 +4770,7 @@ my_delay_ms@time 9 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_
 __size_of_Upload_Data_to_Slave 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_SaveBlackoutStatusRuning 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_EEPROM_24C1025_Write_Buffer 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
-__ramtop 1000 0 RAM 0 ramtop C:\Users\Dell\AppData\Local\Temp\sb88.o
+__ramtop 1000 0 RAM 0 ramtop C:\Users\Dell\AppData\Local\Temp\s91k.o
 _PROCULUS_graphic_plot 916C 0 CODE 0 text154 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _my_delay_ms_CLRWDT 96AE 0 CODE 0 text30 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _Carrega_Tupla_Receita 7DB6 0 CODE 0 text49 dist/default/production\Liofilizador_Mother_Board.X.production.o
