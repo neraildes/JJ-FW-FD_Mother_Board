@@ -229,5 +229,7 @@ signed char Find_Fat8_Running();
 char Find_Fat8_Free();
 void Preenche_Dados_da_FAT8();
 void Plotar_Grafico_Gravado(void);
+void Recarregar_Parametros_de_Configuracao(void);
+void ouve_comunicacao(void);
 #endif	/* LIOFILIZADOR_PLACA_MAE_H */
 

@@ -702,7 +702,7 @@ void main(void)
                                  {
                                  PROCULUS_VP_Write_UInt16(18,0);
                                  receita.histerese=0;
-                                 strcpy(receita.nome,"");
+                                 strcpy(receita.nome," ");
                                  receita.potenciaOFF=0;
                                  receita.potenciaON=0;
                                  receita.setpoint=0;
@@ -879,51 +879,10 @@ void main(void)
                           pagina_49();                    
                           }
                           break;
-                  }//switch pagina
+                  }//switch pagina          
             
-
-
-          
-
-
-           
-            
-
-                       flag_recomunication =TRUE;
-                 while(flag_recomunication==TRUE){ 
-                       flag_recomunication =FALSE;    
-                      __delay_ms(200);
-
-                      USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
-                      USART_putc(0xCD);USART_putc(0xCD);
-                  
-                      for(unsigned int tempo=0; tempo<350; tempo++)
-                          {
-                          if(flag_usart_rx==TRUE) break;                           
-                          my_delay_ms_CLRWDT(1);
-                          }            
-
-
-                      //------------INTERPRETA COMANDO DO MICROCOMPUTADOR-------------------- 
-                      if(flag_usart_rx)
-                         {          
-                         Comando_Protocolo_Serial(); 
-                         flag_recomunication=TRUE;
-                         }                    
-                      
-                      //----------------INTERPRETA COMANDO DO DISPLAY----------------
-                      if(flag_usart_rx)
-                         { 
-                         Comando_Display();
-                         flag_recomunication=TRUE;
-                         }//flag_usart_rx                       
-                      
-                 } 
-                          
-                   
-            }
-            
-           
+                ouve_comunicacao(); 
+        }
       
 }
 //------------------------------------------------------------------------------
@@ -943,7 +902,7 @@ unsigned char countboard()
  int  Send_To_Slave(char destino, char comando, char size, char * buffer)
 {
      unsigned int contador;
-     char flag_retorno;
+     int retorno;
      char i;
      
      USART_put_int(HEADER_LIOFILIZADOR);
@@ -955,19 +914,19 @@ unsigned char countboard()
           USART_putc(buffer[i]);     
      __delay_us(80); //Para efeito de debug, vizualiza após ultimo byte ser enviado
      
-     
      flag_usart_rx=0;
-     int retorno=-1;
-     usart_buffer[5]=2;
-     flag_retorno=FALSE;
+     usart_buffer[5]=2;    //Size
+     usart_buffer[6]=0xFF; //Resposta Padrao HI
+     usart_buffer[7]=0xFF; //Resposta Padrao LO   
+     retorno=-1;
+     
      for(int contador=0;contador<RX_MAX_WAIT_TIME;contador++)
          {
           __delay_us(200);
           if(flag_usart_rx==1)
              {
-             __delay_ms(2); 
+             //__delay_ms(2); 
              flag_usart_rx=0;
-             flag_retorno=TRUE;
              size=usart_buffer[5];
              retorno = (usart_buffer[6]<<8)|(usart_buffer[7]);
              for(i=0;i<size;i++)
@@ -976,13 +935,6 @@ unsigned char countboard()
              break;
              }
           }
-     if(flag_retorno==FALSE)
-        {
-        usart_buffer[5]=2; 
-        usart_buffer[6]=0xFF;
-        usart_buffer[7]=0xFF;
-        }
-     
      return retorno;
 }
 
@@ -1093,7 +1045,7 @@ void ShowSensorRealTimeHS(void)
                   vp    = 230+(canal*TUPLA_VP_SIZE);
                   vpicone     = 400+canal;
                   PROCULUS_VP_Write_UInt16(vp+1,leitura[canal+4]);     
-
+                  
                   if(leitura[canal+4]<-400)PROCULUS_VP_Write_UInt16(vpicone,1); //sem sensor
                   else if(leitura[canal+4]==-1)PROCULUS_VP_Write_UInt16(vpicone,0); //sem placa                 
                   else PROCULUS_VP_Write_UInt16(vpicone,3); //Temperatura normal                  
@@ -1524,6 +1476,7 @@ void Decodify_Command(void){
                                );
              Send_to_PC(3);
              SEND_REPLY_OK();
+             Recarregar_Parametros_de_Configuracao();
              break;
         case COMMAND_IEE_R_BYTE:
              tempchar=EEPROM_Read_Byte((int)usart_protocol.value[0]<<8 |
@@ -1541,24 +1494,30 @@ void Decodify_Command(void){
              EEPROM_Write_Integer(add,dados);
              Send_to_PC(3);
              SEND_REPLY_OK();
+             Recarregar_Parametros_de_Configuracao();
              }
              break;
         case COMMAND_IEE_R_INT:
-             tempint=EEPROM_Read_Integer(usart_protocol.value[0]);
+             tempint=EEPROM_Read_Integer((int)usart_protocol.value[0]<<8 |
+                                         (int)usart_protocol.value[1]<<0
+                                          );         
              Send_to_PC(2);
              USART_put_int(tempint);
              break;
              
         case COMMAND_IEE_W_STR :
-             EEPROM_Write_String(usart_protocol.value[0],
-                                &usart_protocol.value[1]);
+             EEPROM_Write_String((int)usart_protocol.value[0]<<8 |
+                                 (int)usart_protocol.value[1]<<0 ,
+                                     &usart_protocol.value[2]);       
              Send_to_PC(3);
              SEND_REPLY_OK();
-             break;
+             break;            
         case COMMAND_IEE_R_STR:
              {
              //unsigned char texto[20];
-             EEPROM_Read_String(usart_protocol.value[0],texto);
+             EEPROM_Read_String((int)usart_protocol.value[0]<<8 |
+                                (int)usart_protocol.value[1]<<0 ,
+                                 texto);
              Send_to_PC(sizeof(texto));
              USART_put_string(texto);
              break;
@@ -1651,88 +1610,55 @@ void Decodify_Command(void){
              SEND_REPLY_OK();            
              break;
              
-         /* 
-        case COMMAND_READ_ANALOG:
-             tempint=((1023-ADC_Read(usart_protocol.value[0]))/10)-26;
+          
+        case COMMAND_PROC_CLOCK_R:             
              Send_to_PC(2);
-             USART_put_int(tempint);
+             USART_putc(processo_hora);
+             USART_putc(processo_minuto);
              break;
-        
-        case COMMAND_CLK_PIC_R:
+             
+        case COMMAND_CLK_RTC_R:
              {
-             char hh[10];
-             char mm[10];
-             char ss[10];             
-        
-             texto_pnt=itoa(hora,10);
-             texto_pnt=itoa(minuto,10);
-             texto_pnt=itoa(segundo,10);
-            
-            
-             strcpy(texto,"");             
-             if (hh[1]==0) 
-                {
-                strcat(texto,"0");
-                hh[2]=0;
+             char date[10];
+             char time[10];
+
+             PROCULUS_Read_RTC(date,time);             
+             Send_to_PC(9);
+             if((usart_protocol.value[0])==0)
+                {                 
+                USART_put_string(date);                
+                }  
+             else
+                {                  
+                USART_put_string(time);  //  HH:MM:SS                
                 }
-             strcat(texto,hh);             
-             strcat(texto,":");
-             if(mm[1]==0) 
-                {
-                strcat(texto,"0");
-                mm[2]=0;
-                }
-             strcat(texto,mm);
-             strcat(texto,":");
-             if(ss[1]==0) 
-                { 
-                strcat(texto,"0");
-                ss[2]=0;
-                }
-             strcat(texto,ss);
-             Send_to_PC(strlen(texto)); 
-             USART_put_string(texto);
-             USART_putc(0);
+             
              }
-             break;                     
-             */    
-             /*    
-             //unsigned char texto[20];
-             char hh[10];
-             char mm[10];
-             char ss[10];
-
-             IntToStr(hora, hh);
-             IntToStr(minuto, mm);
-             IntToStr(segundo, ss);
-             strcat(texto,"");
-             strcat(texto,hh);
-             strcat(texto,":");
-             strcat(texto,mm);
-             strcat(texto,":");
-             strcat(texto,ss);
-
-             Send_to_PC(strlen(texto));
-             USART_put_string(texto);
-             USART_putc(0);
+             break; 
+             
+        case COMMAND_CLK_RTC_W:
+             {
+             char date[10];
+             char time[10];
+             char i;
+             
+             for(i=0;i<8;i++)
+                {
+                date[i]=usart_protocol.value[i];
+                }
+             date[8]=0;
+             
+             for(i=0;i<8;i++)
+                {
+                time[i]=usart_protocol.value[i+8];
+                }
+             time[8]=0;
+             
+             PROCULUS_Write_RTC(date,time);
+             
              }
              break;
-             */
-             /*
-        case COMMAND_CLK_PIC_W:
-             hora=usart_protocol.value[0];
-             minuto=usart_protocol.value[1];
-             segundo=usart_protocol.value[2];
-             Send_to_PC(3);
-             SEND_REPLY_OK();
-             break ;
-
-        case COMMAND_LDC_PAGE:
-             PROCULUS_Show_Screen(usart_protocol.value[0]);
-             Send_to_PC(3);
-             SEND_REPLY_OK();
-             break;
-        */
+             
         case COMMAND_LCD_W_VP_INT:
              PROCULUS_VP_Write_Int16((usart_protocol.value[0]<<8)|
                                      (usart_protocol.value[1]<<0),
@@ -1785,8 +1711,27 @@ void Decodify_Command(void){
              Send_to_PC(3);
              SEND_REPLY_OK();         
              break;
-
+             
+        case COMMAND_SHOW_PROGRAM:
+             //for(char i=0;i<15;i++)
+             ShowStaticValueGrid(usart_protocol.value[0]+4);
+             Send_to_PC(3);
+             SEND_REPLY_OK();            
+             break;
+             
+        case COMMAND_FORMAT:
+             Formatar_Banco_de_Dados(0,10);
+             for(char i=0;i<15;i++) ShowStaticValueGrid(i);
+             Send_to_PC(3);
+             SEND_REPLY_OK();             
+             break;
         
+        case COMMAND_UPLOAD_PRG:
+             Upload_Data_to_Slave();
+             Send_to_PC(3);
+             SEND_REPLY_OK();                         
+             break;
+             
         case COMMAND_LCD_W_VP_STR:
              PROCULUS_VP_Write_String((usart_protocol.value[0]<<8)|
                                       (usart_protocol.value[1]),
@@ -1877,7 +1822,7 @@ void Formatar_Banco_de_Dados(char inicio, char total){
           liofilizador[j].tempoON=0;
           liofilizador[j].tempoOFF=0;
           liofilizador[j].histerese=0;
-          strcpy(liofilizador[j].receita,"");          
+          strcpy(liofilizador[j].receita," ");          
           liofilizador[j].status=0;      
           SaveLiofilizadorOnMemory(j,&liofilizador[j]);          
           }
@@ -1887,7 +1832,7 @@ void Formatar_Banco_de_Dados(char inicio, char total){
 
 //Provavel ponto que está dando erro
 void Upload_Data_to_Slave(void){
-     char index;     
+     char index;   
      char board;
      char canal;
      char addEEPROM;
@@ -2029,7 +1974,8 @@ void global_condensador(void){
 
 
 
-void global_vacuo(void){     
+void global_vacuo(void){ 
+        char count;    
         if((PROCULUS_VP_Read_UInt16(0x04)==1)&&(flag_global_vacuo==0)) 
            {  
            if(flag_global_vacuo==0) PROCULUS_OK(); 
@@ -2053,20 +1999,28 @@ void global_vacuo(void){
 
                 PROCULUS_Popup(DESEJA_ENCERRAR_PROCESSO);
                 PROCULUS_VP_Write_UInt16(0x0016,0);
-                for(int i=0;i<10000;i++)
+                while(TRUE)
                      {
-                     my_delay_ms(1);
-                     if (PROCULUS_VP_Read_UInt16(6)!=0) break;
+                     if ((PROCULUS_VP_Read_UInt16(6)==240)|
+                         (PROCULUS_VP_Read_UInt16(6)==241)) break;
                      asm("CLRWDT");
+                     ouve_comunicacao();
                      }
-
-                if(PROCULUS_VP_Read_UInt16(6)==241)//sim
+                
+                
+                if(PROCULUS_VP_Read_UInt16(6)==240)//sim
                      { 
                      Contagem_Tempo_de_Processo(FALSE);
                      processo_hora=0;
                      processo_minuto=0;                     
                      PROCULUS_OK();               
-                     }                              
+                     PROCULUS_OK();
+                     PROCULUS_OK();
+                     } 
+                else
+                     {
+                     PROCULUS_Buzzer(15000);
+                     }
 
                                    
                 }
@@ -2162,7 +2116,7 @@ void pagina_49(void){
                    receita.potenciaON=0;
                    receita.potenciaOFF=0;
                    receita.histerese=0;
-                   strcpy(receita.nome,"");           
+                   strcpy(receita.nome," ");           
                    Grava_Receita(Index_Receita, &receita);                   
                    Exibe_Receita(Index_Receita); 
 
@@ -2775,7 +2729,7 @@ void Gerenciador_de_Senha_Global(void){
 
 
 
-void Icones_de_alarmes(void){
+void Icones_de_alarmes(void){     
      //-------------------------------------------------------------------------    
      if (Condensador<Seg_Condensador)       
          PROCULUS_VP_Write_UInt16(176,1);         
@@ -2798,7 +2752,7 @@ void Formatar_Lista_de_Receitas(void){
         receita.potenciaON=0;
         receita.potenciaOFF=0;
         receita.histerese=0;
-        strcpy(receita.nome,"");           
+        strcpy(receita.nome," ");           
         Grava_Receita(i, &receita);        
         } 
 }
@@ -3268,7 +3222,7 @@ void ShowHardwareInfo(){
         }
       
 
-    
+     //totalboard=7; //fix apagar
      if(totalboard==0)
         { 
         print("Nenhuma Placa conectada!");        
@@ -3669,4 +3623,45 @@ void Preenche_Dados_da_FAT8(){
      fat8.processo.flag_download=0;
      fat8.processo.flag_view=0;
      fat8.processo.flag_finalized=0;    
+}
+
+
+void Recarregar_Parametros_de_Configuracao(void){
+     Carregar_Parametros_de_Seguranca();
+}
+
+
+
+void ouve_comunicacao(void){
+            flag_recomunication =TRUE;
+      while(flag_recomunication==TRUE){ 
+            flag_recomunication =FALSE;    
+           __delay_ms(200);
+
+           USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
+           USART_putc(0xCD);USART_putc(0xCD);
+
+           for(unsigned int tempo=0; tempo<350; tempo++)
+               {
+               if(flag_usart_rx==TRUE) break;                           
+               my_delay_ms_CLRWDT(1);
+               }            
+
+
+           //------------INTERPRETA COMANDO DO MICROCOMPUTADOR-------------------- 
+           if(flag_usart_rx)
+              {          
+              Comando_Protocolo_Serial(); 
+              flag_recomunication=TRUE;
+              }                    
+
+           //----------------INTERPRETA COMANDO DO DISPLAY----------------
+           if(flag_usart_rx)
+              { 
+              Comando_Display();
+              flag_recomunication=TRUE;
+              }//flag_usart_rx                       
+
+      } 
+
 }

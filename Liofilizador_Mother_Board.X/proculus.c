@@ -149,7 +149,7 @@ void PROCULUS_Read_RTC(char *date,char *time){
      USART_putc(0x20); //registro
      USART_putc(0x07); //quantidade de bytes a ler
      
-     
+     __delay_ms(15);
      if(USART_input_buffer())     
         {
         for(i=0;i<10;i++)

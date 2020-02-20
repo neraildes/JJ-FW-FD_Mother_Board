@@ -74,8 +74,9 @@ typedef struct {
 #define COMMAND_LDC_PAGE        0X25
 #define COMMAND_CONTROL_ACTIVE  0X26
 //...
-#define COMMAND_CLK_PIC_W       0X2E
-#define COMMAND_CLK_PIC_R       0X2F
+#define COMMAND_PROC_CLOCK_R    0X2D
+#define COMMAND_CLK_RTC_R       0X2E
+#define COMMAND_CLK_RTC_W       0X2F
 //---------------SLAVE--------------
 #define COMMAND_RELAY           0x30
 #define COMMAND_INPUT_LED       0X31
@@ -83,8 +84,13 @@ typedef struct {
 //----------------------------------
 #define COMMAND_GLOBAL_HOT      0x40
 #define COMMAND_VERSION         0x41
+#define COMMAND_SHOW_PROGRAM    0x42
+#define COMMAND_FORMAT          0x43
+#define COMMAND_UPLOAD_PRG      0x44
+
 //...
 //----------------------------------
+
 
 
 

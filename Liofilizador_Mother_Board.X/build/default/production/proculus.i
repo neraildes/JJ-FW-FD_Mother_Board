@@ -5549,7 +5549,7 @@ void PROCULUS_Read_RTC(char *date,char *time){
      USART_putc(0x20);
      USART_putc(0x07);
 
-
+     _delay((unsigned long)((15)*(32000000/4000.0)));
      if(USART_input_buffer())
         {
         for(i=0;i<10;i++)
