@@ -9269,16 +9269,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 3483:     fat8.processo.processo_number=0;
 [e = . . _fat8 1 0 -> -> 0 `i `ui ]
 "3484
-[; ;Liofilizador Placa Mae.c: 3484:     strcpy(fat8.processo.inicio.date,"");
+[; ;Liofilizador Placa Mae.c: 3484:     strcpy(fat8.processo.inicio.date," ");
 [e ( _strcpy (2 , &U . . . _fat8 1 1 0 :s 71C ]
 "3485
-[; ;Liofilizador Placa Mae.c: 3485:     strcpy(fat8.processo.inicio.time,"");
+[; ;Liofilizador Placa Mae.c: 3485:     strcpy(fat8.processo.inicio.time," ");
 [e ( _strcpy (2 , &U . . . _fat8 1 1 1 :s 72C ]
 "3486
-[; ;Liofilizador Placa Mae.c: 3486:     strcpy(fat8.processo.fim.date,"");
+[; ;Liofilizador Placa Mae.c: 3486:     strcpy(fat8.processo.fim.date," ");
 [e ( _strcpy (2 , &U . . . _fat8 1 2 0 :s 73C ]
 "3487
-[; ;Liofilizador Placa Mae.c: 3487:     strcpy(fat8.processo.fim.time,"");
+[; ;Liofilizador Placa Mae.c: 3487:     strcpy(fat8.processo.fim.time," ");
 [e ( _strcpy (2 , &U . . . _fat8 1 2 1 :s 74C ]
 "3488
 [; ;Liofilizador Placa Mae.c: 3488:     fat8.processo.amostra=0;
@@ -9819,6 +9819,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 40C 32 0 ]
 [a 61C 32 0 ]
 [a 62C 32 0 ]
+[a 71C 32 0 ]
+[a 72C 32 0 ]
+[a 73C 32 0 ]
+[a 74C 32 0 ]
 [a 19C 0 ]
 [a 20C 0 ]
 [a 22C 0 ]
@@ -9831,9 +9835,5 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 43C 0 ]
 [a 56C 0 ]
 [a 59C 0 ]
-[a 71C 0 ]
-[a 72C 0 ]
-[a 73C 0 ]
-[a 74C 0 ]
 [a 75C 0 ]
 [a 76C 0 ]

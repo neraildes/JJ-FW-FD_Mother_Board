@@ -1164,7 +1164,7 @@ void FAT8_Save(unsigned char tupla){
 
      //vp         = 0x1000+(tupla*FAT8_VP_SIZE);
      addEEPROM  = (tupla*EEPROM_FAT8_SIZE)+OFFSET_EEPROM_FAT8;
-
+  
      EEPROM_24C1025_Write_Int (0,addEEPROM+0,  fat8.processo.processo_number);  //2
      EEPROM_24C1025_Write_Str (0,addEEPROM+2,  fat8.processo.inicio.time);      //10  
      EEPROM_24C1025_Write_Str (0,addEEPROM+12, fat8.processo.inicio.date);      //10
@@ -3481,10 +3481,10 @@ void Plotar_Grafico_Gravado(void)
 void Format_FAT8_Table(){
 
     fat8.processo.processo_number=0;    
-    strcpy(fat8.processo.inicio.date,"");
-    strcpy(fat8.processo.inicio.time,"");    
-    strcpy(fat8.processo.fim.date,"");
-    strcpy(fat8.processo.fim.time,"");    
+    strcpy(fat8.processo.inicio.date," ");
+    strcpy(fat8.processo.inicio.time," ");    
+    strcpy(fat8.processo.fim.date," ");
+    strcpy(fat8.processo.fim.time," ");    
     fat8.processo.amostra=0;
     fat8.processo.add_start=0;
     fat8.processo.add_end=0;
