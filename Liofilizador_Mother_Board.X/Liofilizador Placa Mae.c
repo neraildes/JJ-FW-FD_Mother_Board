@@ -1177,6 +1177,31 @@ void FAT8_Save(unsigned char tupla){
      EEPROM_24C1025_Write_Byte(0,addEEPROM+53, fat8.processo.all_flags);        //1
 }
 
+
+void Grava_Info_Aquecimento(char tupla)
+{
+    //t_receita receita[10];
+    unsigned long addEEPROM;    
+    
+    for(char index=0;index<10;index++)
+       {
+       LoadLiofilizadorOnMemory(index, &liofilizador[index]);
+       }
+    
+    for(char i=0;i<10;i++)
+       {
+       addEEPROM=(i*16)+0x2A0+(tupla*10*16); 
+       EEPROM_24C1025_Write_Int (0,addEEPROM+ 0,liofilizador[i].setpoint);
+       EEPROM_24C1025_Write_Byte(0,addEEPROM+ 2,liofilizador[i].tempoON);
+       EEPROM_24C1025_Write_Byte(0,addEEPROM+ 3,liofilizador[i].tempoOFF);       
+       EEPROM_24C1025_Write_Byte(0,addEEPROM+ 4,liofilizador[i].histerese);
+       EEPROM_24C1025_Write_Str (0,addEEPROM+ 5,liofilizador[i].receita);
+       EEPROM_24C1025_Write_Byte(0,addEEPROM+15,liofilizador[i].status);
+       }
+}
+    
+
+
 void FAT8_Load(unsigned char tupla){
      unsigned long addEEPROM;
      
@@ -1251,12 +1276,45 @@ void FAT8_Show(){
 
  
  
+ //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//Salva uma tupla do liofilizador na memoria EEPROM interna com o endereço
+//inicial igual OFFSET_EEPROM.
+ void LoadLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
+      {
+      //char CanalAD;
+      unsigned char addEEPROM;
+      addEEPROM  = (index*TUPLA_EEPROM_SIZE)+OFFSET_EEPROM;
+      //CanalAD    = (unsigned char) (index % 2);
+      
+      liofilizador->plataforma= EEPROM_Read_Byte(addEEPROM+0);
+      //------ RESERVADO PARA LEITURA EM TEMPO REAL ----------
+      liofilizador->setpoint  = EEPROM_Read_Integer(addEEPROM+ 1);
+      liofilizador->tempoON   = EEPROM_Read_Byte(addEEPROM   + 3);
+      liofilizador->tempoOFF  = EEPROM_Read_Byte(addEEPROM   + 4);
+      liofilizador->histerese = EEPROM_Read_Byte(addEEPROM   + 5);
+      EEPROM_Read_String(addEEPROM + 6,liofilizador->receita);
+      liofilizador->status    = EEPROM_Read_Integer(addEEPROM+16);
+      }
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  void Set_Receita(unsigned char index, char status)
       {
       int  vp;
-      unsigned int addEEPROM;
+      //unsigned int addEEPROM;
 
-      addEEPROM   = OFFSET_EEPROM_RECEITA+RECEITA_EEPROM_SIZE*index;
+      //addEEPROM   = OFFSET_EEPROM_RECEITA+RECEITA_EEPROM_SIZE*index;
       vp          = 230+(index*TUPLA_VP_SIZE);              
      
       PROCULUS_VP_Write_UInt16(vp+2,receita.setpoint);     
@@ -1557,7 +1615,24 @@ void Decodify_Command(void){
              USART_put_int(tempint);
              break;
              
+        case COMMAND_EEE_W_32B:
+             {
+                 
+             }
+             break;
              
+        case COMMAND_EEE_R_32B:     
+             {
+             unsigned long retorno32b;    
+             retorno32b=EEPROM_24C1025_Read_Long(usart_protocol.value[0],    //CHIP NUMBER
+                                                          add_24LCxxxx);
+             Send_to_PC(4);
+             USART_putc(High(retorno32b));
+             USART_putc(Lower(retorno32b));             
+             USART_putc(Hi(retorno32b));
+             USART_putc(Lo(retorno32b));
+             }
+             break;
         case COMMAND_EEE_R_BUF:
              {                 
              char sizedata;
@@ -1906,10 +1981,11 @@ void global_datalog(void){
                         
             Send_To_Slave(TODOS, COMMAND_SYNCRONIZE , 0, bb);
             Carregar_tempo_de_datalog(); 
-            if(Find_Fat8_Running()==-1)
-              {
+            if(Find_Fat8_Running()==-1) //Se nao está rodando datalog
+              {                
               PROCULUS_Clean_All_Line_Graphic();                
-              FAT8_Write_Process_Inicialize();
+              FAT8_Write_Process_Inicialize();              
+              Grava_Info_Aquecimento(Find_Fat8_Free()-1);//Grava info para relatorio
               }
             else
               {  
@@ -3509,7 +3585,7 @@ void FAT8_Write_Process_Inicialize()
     
     NumProcesso=EEPROM_24C1025_Read_Int (0,0);
     NumProcesso++;
-    if(NumProcesso>10000) NumProcesso=0;
+    if(NumProcesso>9999) NumProcesso=0;
     EEPROM_24C1025_Write_Int (0,0,NumProcesso);
 
     PROCULUS_Read_RTC(date,time);

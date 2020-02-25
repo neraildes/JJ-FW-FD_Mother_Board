@@ -4733,6 +4733,7 @@ void AcordaFilha(void);
 
 
 void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador);
+void LoadLiofilizadorOnMemory(char index,t_liofilizador *liofilizador);
 void ShowStaticValueGrid(unsigned char tupla);
 
 void ShowAndSetSlaveParameters(unsigned char tupla);
@@ -4842,6 +4843,7 @@ void Preenche_Dados_da_FAT8();
 void Plotar_Grafico_Gravado(void);
 void Recarregar_Parametros_de_Configuracao(void);
 void ouve_comunicacao(void);
+void Grava_Info_Aquecimento(char tupla);
 # 6 "isr.c" 2
 
 

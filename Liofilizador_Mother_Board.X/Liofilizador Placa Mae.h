@@ -122,6 +122,7 @@ void AcordaFilha(void);
 
 
 void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador); //Salva dados de aquecimento na memória.
+void LoadLiofilizadorOnMemory(char index,t_liofilizador *liofilizador);
 void ShowStaticValueGrid(unsigned char tupla); //Exibe até 15 placas em tempo real. 
 
 void ShowAndSetSlaveParameters(unsigned char tupla);//Exibe e seta parametros dos escravos
@@ -231,5 +232,6 @@ void Preenche_Dados_da_FAT8();
 void Plotar_Grafico_Gravado(void);
 void Recarregar_Parametros_de_Configuracao(void);
 void ouve_comunicacao(void);
+void Grava_Info_Aquecimento(char tupla);
 #endif	/* LIOFILIZADOR_PLACA_MAE_H */
 

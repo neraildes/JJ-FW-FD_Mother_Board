@@ -87,7 +87,8 @@ typedef struct {
 #define COMMAND_SHOW_PROGRAM    0x42
 #define COMMAND_FORMAT          0x43
 #define COMMAND_UPLOAD_PRG      0x44
-
+#define COMMAND_EEE_R_32B       0x45
+#define COMMAND_EEE_W_32B       0x46  //não implementado
 //...
 //----------------------------------
 
