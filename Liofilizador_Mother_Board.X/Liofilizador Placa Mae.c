@@ -276,7 +276,10 @@ void main(void)
      
      
      
-     
+     //while(1){
+     //    asm("CLRWDT");
+     //    ouve_comunicacao();
+     //}
      
      
      
@@ -1487,7 +1490,10 @@ void Decodify_Command(void){
     char tempchar;
     int  tempint;
     unsigned long add_24LCxxxx;
+    unsigned char add_Chip;
     
+    
+    add_Chip = usart_protocol.value[0];
     High(add_24LCxxxx)=(usart_protocol.value[1]);
     Lower(add_24LCxxxx)=(usart_protocol.value[2]);
     Hi(add_24LCxxxx)=(usart_protocol.value[3]);
@@ -1637,10 +1643,10 @@ void Decodify_Command(void){
              {                 
              char sizedata;
              sizedata=usart_protocol.value[5];             
-             EEPROM_24C1025_Read_Buffer(usart_protocol.value[0],  //CHIP NUMBER
-                                        add_24LCxxxx,  //Add of memory
-                                        sizedata,  //SIZEDATA
-                                        buffer);  //Buffer of data 
+             EEPROM_24C1025_Read_Buffer(add_Chip,     //CHIP NUMBER
+                                        add_24LCxxxx, //Add of memory
+                                        sizedata,     //SIZEDATA
+                                        buffer);      //Buffer of data 
              
             
              
@@ -1676,7 +1682,7 @@ void Decodify_Command(void){
              USART_put_string(texto);
              break;
              }
-        
+
         case COMMAND_EEE_FILL_ALL:
              EEPROM_24C1025_Fill_All(usart_protocol.value[0], //chip_add, 
                                (int)(usart_protocol.value[1]<<8)|//unsigned char value
@@ -1855,12 +1861,14 @@ void Comando_Protocolo_Serial(void){
                    Origem = 0XC0
                    Destino= 0X01 a 0X0F
                    */
-                   //*aqui 
+                    
+                   
+                   
                    DestinoMemo=usart_protocol.destino;
                    Send_To_Slave(usart_protocol.destino,
                                  usart_protocol.command,
                                  usart_protocol.size,
-                                 usart_protocol.value
+                                &usart_protocol.value[0]
                                  );
                    flag_usart_rx=0;
                    
@@ -1879,6 +1887,12 @@ void Comando_Protocolo_Serial(void){
                    for(i=0;i<usart_protocol.size;i++)
                          USART_putc(usart_protocol.value[i]);
                    SEND_REPLY_OK();
+                   
+//                   for(char i=0;i<usart_protocol.size;i++)
+//                      {
+//                      PROCULUS_Buzzer(100) ;
+//                      my_delay_ms_CLRWDT(200);
+//                      }                   
                    
                    flag_usart_rx=0;               
                    }
