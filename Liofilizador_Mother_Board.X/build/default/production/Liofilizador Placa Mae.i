@@ -7238,13 +7238,7 @@ void Comando_Protocolo_Serial(void){
                                 &usart_protocol.value[0]
                                  );
                    statusgen.flag_usart_rx=0;
-
-
-
-
-
-
-
+# 1984 "Liofilizador Placa Mae.c"
                    USART_to_Protocol(&usart_protocol);
                    USART_put_int(0xAABB);
                    USART_putc(DestinoMemo);
@@ -7252,17 +7246,11 @@ void Comando_Protocolo_Serial(void){
                    USART_putc(usart_protocol.command);
                    USART_putc(usart_protocol.size+3);
                    for(i=0;i<usart_protocol.size;i++)
-                      {
-                      USART_putc(usart_protocol.value[i]);
-                      if((usart_protocol.value[i]==0) &&
-                        ((ComandoMemo==0x0D) ||
-                         (ComandoMemo==0x16) ||
-                         (ComandoMemo==0X23)))
-                          break;
-                      }
-                   if(usart_protocol.size<3)SEND_REPLY_OK();
+                         USART_putc(usart_protocol.value[i]);
+                   SEND_REPLY_OK();
 
                    statusgen.flag_usart_rx=0;
+
                    }
                 }
         statusgen.flag_usart_rx=0;
@@ -7852,7 +7840,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2578 "Liofilizador Placa Mae.c"
+# 2593 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -8004,7 +7992,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2737 "Liofilizador Placa Mae.c"
+# 2752 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
@@ -8303,7 +8291,7 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 
      PROCULUS_graphic_plot(LCDchannel, value);
 }
-# 3064 "Liofilizador Placa Mae.c"
+# 3079 "Liofilizador Placa Mae.c"
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd)
      {
      char txt[30];
