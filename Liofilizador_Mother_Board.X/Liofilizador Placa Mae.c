@@ -962,6 +962,8 @@ unsigned char countboard()
      
      flag_usart_rx=0;
      usart_buffer[5]=0;
+     
+     
      for(int contador=0;contador<RX_MAX_WAIT_TIME;contador++)
          {
           __delay_us(200);
@@ -999,6 +1001,7 @@ unsigned char countboard()
              }
           }
      */
+     
      /*
      if(usart_buffer[5]==0) //Sem Resposta
        {  

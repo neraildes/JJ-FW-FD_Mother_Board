@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v2.10\pic\dat\en_msgs.txt \
   -cs -h+dist/default/production\Liofilizador_Mother_Board.X.production.sym \
   --cmf=dist/default/production\Liofilizador_Mother_Board.X.production.cmf \
-  -z -Q18F4620 -oC:\Users\Dell\AppData\Local\Temp\saus.2 \
+  -z -Q18F4620 -oC:\Users\Dell\AppData\Local\Temp\sah4.2 \
   --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/Liofilizador_Mother_Board.X.production.map -E1 \
   -ver=XC8 --acfsm=1493 -ASTACK=04AAh-0F7Fh -pstack=STACK -ACODE=00h-0FFFFh \
@@ -27,7 +27,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Dell\AppData\Local\Temp\saus.o \
+  C:\Users\Dell\AppData\Local\Temp\sah4.o \
   dist/default/production\Liofilizador_Mother_Board.X.production.o 
 
 Object code version is 3.11
@@ -40,7 +40,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Dell\AppData\Local\Temp\saus.o
+C:\Users\Dell\AppData\Local\Temp\sah4.o
                 init                                3BC      3BC        4        C       0
                 reset_vec                             0        0        4        0       0
                 idloc                            200000   200000        8   200000       0
@@ -2552,7 +2552,7 @@ Total ram usage:        9 bytes
 
  *************** function _showTotalReset *****************
  Defined at:
-		line 3318 in file "Liofilizador Placa Mae.c"
+		line 3321 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -2655,7 +2655,7 @@ Total ram usage:        9 bytes
 
  *************** function _buscaIndex *****************
  Defined at:
-		line 3297 in file "Liofilizador Placa Mae.c"
+		line 3300 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   buffer          2    8[COMRAM] PTR unsigned char 
 		 -> mapa(165), 
@@ -2718,7 +2718,7 @@ Total ram usage:       10 bytes
 
  *************** function _ShowSensorRealTimeHS *****************
  Defined at:
-		line 1077 in file "Liofilizador Placa Mae.c"
+		line 1080 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -2756,7 +2756,7 @@ Total ram usage:       14 bytes
 
  *************** function _ShowHardwareInfo *****************
  Defined at:
-		line 3364 in file "Liofilizador Placa Mae.c"
+		line 3367 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -2868,7 +2868,7 @@ Total ram usage:       11 bytes
 
  *************** function _Set_Receita *****************
  Defined at:
-		line 1393 in file "Liofilizador Placa Mae.c"
+		line 1396 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   index           1    wreg     unsigned char 
   status          1   34[COMRAM] unsigned char 
@@ -2901,7 +2901,7 @@ Total ram usage:        6 bytes
 
  *************** function _SaveBlackoutStatusRuning *****************
  Defined at:
-		line 2754 in file "Liofilizador Placa Mae.c"
+		line 2757 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -2938,7 +2938,7 @@ Total ram usage:        0 bytes
 
  *************** function _RecallBlackoutStatus *****************
  Defined at:
-		line 2791 in file "Liofilizador Placa Mae.c"
+		line 2794 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -2969,7 +2969,7 @@ Total ram usage:        0 bytes
 
  *************** function _Plotar_Grafico_Gravado *****************
  Defined at:
-		line 3573 in file "Liofilizador Placa Mae.c"
+		line 3576 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3286,7 +3286,7 @@ Total ram usage:        0 bytes
 
  *************** function _MenorCanalLivre *****************
  Defined at:
-		line 3412 in file "Liofilizador Placa Mae.c"
+		line 3415 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3320,7 +3320,7 @@ Total ram usage:        5 bytes
 
  *************** function _Ligar_Cargas_Compassadamente *****************
  Defined at:
-		line 3511 in file "Liofilizador Placa Mae.c"
+		line 3514 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3401,7 +3401,7 @@ Total ram usage:       79 bytes
 
  *************** function _global_vacuo *****************
  Defined at:
-		line 2149 in file "Liofilizador Placa Mae.c"
+		line 2152 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3440,7 +3440,7 @@ Total ram usage:        1 bytes
 
  *************** function _ouve_comunicacao *****************
  Defined at:
-		line 3807 in file "Liofilizador Placa Mae.c"
+		line 3810 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3509,7 +3509,7 @@ Total ram usage:        9 bytes
 
  *************** function _Comando_Protocolo_Serial *****************
  Defined at:
-		line 1921 in file "Liofilizador Placa Mae.c"
+		line 1924 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3579,7 +3579,7 @@ Total ram usage:        7 bytes
 
  *************** function _Decodify_Command *****************
  Defined at:
-		line 1566 in file "Liofilizador Placa Mae.c"
+		line 1569 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3693,7 +3693,7 @@ Total ram usage:        6 bytes
 
  *************** function _Send_to_PC *****************
  Defined at:
-		line 1529 in file "Liofilizador Placa Mae.c"
+		line 1532 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   size            1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -3724,7 +3724,7 @@ Total ram usage:        1 bytes
 
  *************** function _SEND_REPLY_OK *****************
  Defined at:
-		line 1916 in file "Liofilizador Placa Mae.c"
+		line 1919 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3788,7 +3788,7 @@ Total ram usage:        4 bytes
 
  *************** function _Recarregar_Parametros_de_Configuracao *****************
  Defined at:
-		line 3801 in file "Liofilizador Placa Mae.c"
+		line 3804 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3913,7 +3913,7 @@ Total ram usage:        7 bytes
 
  *************** function _Comando_Display *****************
  Defined at:
-		line 2261 in file "Liofilizador Placa Mae.c"
+		line 2264 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3951,7 +3951,7 @@ Total ram usage:        0 bytes
 
  *************** function _pagina_49 *****************
  Defined at:
-		line 2281 in file "Liofilizador Placa Mae.c"
+		line 2284 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -4001,7 +4001,7 @@ Total ram usage:       27 bytes
 
  *************** function _ShowAndSetSlaveParameters *****************
  Defined at:
-		line 1489 in file "Liofilizador Placa Mae.c"
+		line 1492 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   tupla           1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -4041,7 +4041,7 @@ Total ram usage:       10 bytes
 
  *************** function _Atualizar_Lista_de_Receitas *****************
  Defined at:
-		line 3173 in file "Liofilizador Placa Mae.c"
+		line 3176 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -4072,7 +4072,7 @@ Total ram usage:        1 bytes
 
  *************** function _Exibe_Receita *****************
  Defined at:
-		line 1181 in file "Liofilizador Placa Mae.c"
+		line 1184 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   index           2   34[COMRAM] int 
  Auto vars:     Size  Location     Type
@@ -4110,7 +4110,7 @@ Total ram usage:        8 bytes
 
  *************** function _pagina_47 *****************
  Defined at:
-		line 2376 in file "Liofilizador Placa Mae.c"
+		line 2379 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -4182,7 +4182,7 @@ Total ram usage:        5 bytes
 
  *************** function _Carrega_Tupla_Receita *****************
  Defined at:
-		line 1149 in file "Liofilizador Placa Mae.c"
+		line 1152 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   index           1    wreg     unsigned char 
   receita         2   22[COMRAM] PTR struct .
@@ -4220,7 +4220,7 @@ Total ram usage:        7 bytes
 
  *************** function _pagina_31 *****************
  Defined at:
-		line 2615 in file "Liofilizador Placa Mae.c"
+		line 2618 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -4359,7 +4359,7 @@ Total ram usage:       11 bytes
 
  *************** function _pagina_29 *****************
  Defined at:
-		line 2597 in file "Liofilizador Placa Mae.c"
+		line 2600 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -4395,7 +4395,7 @@ Total ram usage:        0 bytes
 
  *************** function _pagina_25 *****************
  Defined at:
-		line 2573 in file "Liofilizador Placa Mae.c"
+		line 2576 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -4504,7 +4504,7 @@ Total ram usage:        4 bytes
 
  *************** function _pagina_23 *****************
  Defined at:
-		line 2537 in file "Liofilizador Placa Mae.c"
+		line 2540 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -4541,7 +4541,7 @@ Total ram usage:        0 bytes
 
  *************** function _TrendCurveFuncao *****************
  Defined at:
-		line 3185 in file "Liofilizador Placa Mae.c"
+		line 3188 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   funcao          1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -4648,7 +4648,7 @@ Total ram usage:        6 bytes
 
  *************** function _Carregar_Display_Schematic_Color *****************
  Defined at:
-		line 3458 in file "Liofilizador Placa Mae.c"
+		line 3461 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -4679,7 +4679,7 @@ Total ram usage:        0 bytes
 
  *************** function _Carregar_Parametros_de_Seguranca *****************
  Defined at:
-		line 2932 in file "Liofilizador Placa Mae.c"
+		line 2935 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -4712,7 +4712,7 @@ Total ram usage:        0 bytes
 
  *************** function _pagina_19 *****************
  Defined at:
-		line 2436 in file "Liofilizador Placa Mae.c"
+		line 2439 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -4755,7 +4755,7 @@ Total ram usage:        4 bytes
 
  *************** function _Upload_Data_to_Slave *****************
  Defined at:
-		line 2005 in file "Liofilizador Placa Mae.c"
+		line 2008 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -4795,7 +4795,7 @@ Total ram usage:       11 bytes
 
  *************** function _ShowStaticValueGrid *****************
  Defined at:
-		line 1417 in file "Liofilizador Placa Mae.c"
+		line 1420 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   tupla           1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -4840,7 +4840,7 @@ Total ram usage:       12 bytes
 
  *************** function _ShowMessage *****************
  Defined at:
-		line 2059 in file "Liofilizador Placa Mae.c"
+		line 2062 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   mensagem        2   29[COMRAM] PTR unsigned char 
 		 -> STR_34(9), STR_33(11), STR_32(11), STR_31(20), 
@@ -4950,7 +4950,7 @@ Total ram usage:        1 bytes
 
  *************** function _Formatar_Banco_de_Dados *****************
  Defined at:
-		line 1987 in file "Liofilizador Placa Mae.c"
+		line 1990 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   inicio          1    wreg     unsigned char 
   total           1   48[COMRAM] unsigned char 
@@ -4985,7 +4985,7 @@ Total ram usage:        8 bytes
 
  *************** function _SaveLiofilizadorOnMemory *****************
  Defined at:
-		line 1340 in file "Liofilizador Placa Mae.c"
+		line 1343 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   index           1    wreg     unsigned char 
   liofilizador    2   43[COMRAM] PTR struct .
@@ -5022,7 +5022,7 @@ Total ram usage:        5 bytes
 
  *************** function _DataBaseBackupMain *****************
  Defined at:
-		line 1215 in file "Liofilizador Placa Mae.c"
+		line 1218 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   tupla           1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -5097,7 +5097,7 @@ Total ram usage:        4 bytes
 
  *************** function _pagina_15 *****************
  Defined at:
-		line 2405 in file "Liofilizador Placa Mae.c"
+		line 2408 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -5158,7 +5158,7 @@ Total ram usage:        7 bytes
 
  *************** function _Vaccum_Switch *****************
  Defined at:
-		line 2116 in file "Liofilizador Placa Mae.c"
+		line 2119 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   estado          1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -5189,7 +5189,7 @@ Total ram usage:        3 bytes
 
  *************** function _Incrementa_Contador_de_Repique_do_Vacuo *****************
  Defined at:
-		line 3446 in file "Liofilizador Placa Mae.c"
+		line 3449 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -5220,7 +5220,7 @@ Total ram usage:        2 bytes
 
  *************** function _Contagem_Tempo_de_Processo *****************
  Defined at:
-		line 2732 in file "Liofilizador Placa Mae.c"
+		line 2735 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   value           1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -5251,7 +5251,7 @@ Total ram usage:        1 bytes
 
  *************** function _global_datalog *****************
  Defined at:
-		line 2072 in file "Liofilizador Placa Mae.c"
+		line 2075 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -5356,7 +5356,7 @@ Total ram usage:        3 bytes
 
  *************** function _Grava_Info_Aquecimento *****************
  Defined at:
-		line 1262 in file "Liofilizador Placa Mae.c"
+		line 1265 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   tupla           1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -5392,7 +5392,7 @@ Total ram usage:       11 bytes
 
  *************** function _LoadLiofilizadorOnMemory *****************
  Defined at:
-		line 1363 in file "Liofilizador Placa Mae.c"
+		line 1366 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   index           1    wreg     unsigned char 
   liofilizador    2   20[COMRAM] PTR struct .
@@ -5464,7 +5464,7 @@ Total ram usage:        5 bytes
 
  *************** function _FAT8_Write_Process_Inicialize *****************
  Defined at:
-		line 3674 in file "Liofilizador Placa Mae.c"
+		line 3677 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -5504,7 +5504,7 @@ Total ram usage:       22 bytes
 
  *************** function _Find_Fat8_Free *****************
  Defined at:
-		line 3744 in file "Liofilizador Placa Mae.c"
+		line 3747 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -5536,7 +5536,7 @@ Total ram usage:        2 bytes
 
  *************** function _FAT8_Write_Process_Finalize *****************
  Defined at:
-		line 3711 in file "Liofilizador Placa Mae.c"
+		line 3714 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -5575,7 +5575,7 @@ Total ram usage:       20 bytes
 
  *************** function _Find_Fat8_Running *****************
  Defined at:
-		line 3761 in file "Liofilizador Placa Mae.c"
+		line 3764 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -5608,7 +5608,7 @@ Total ram usage:        2 bytes
 
  *************** function _FAT8_Show *****************
  Defined at:
-		line 1309 in file "Liofilizador Placa Mae.c"
+		line 1312 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -5643,7 +5643,7 @@ Total ram usage:        5 bytes
 
  *************** function _FAT8_Load *****************
  Defined at:
-		line 1286 in file "Liofilizador Placa Mae.c"
+		line 1289 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   tupla           1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -5945,7 +5945,7 @@ Total ram usage:        5 bytes
 
  *************** function _Carregar_tempo_de_datalog *****************
  Defined at:
-		line 2812 in file "Liofilizador Placa Mae.c"
+		line 2815 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -6022,7 +6022,7 @@ Total ram usage:        8 bytes
 
  *************** function _global_condensador *****************
  Defined at:
-		line 2124 in file "Liofilizador Placa Mae.c"
+		line 2127 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -6056,7 +6056,7 @@ Total ram usage:        0 bytes
 
  *************** function _Condensador_Switch *****************
  Defined at:
-		line 2109 in file "Liofilizador Placa Mae.c"
+		line 2112 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   estado          1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -6087,7 +6087,7 @@ Total ram usage:        3 bytes
 
  *************** function _global_aquecimento *****************
  Defined at:
-		line 2227 in file "Liofilizador Placa Mae.c"
+		line 2230 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -6120,7 +6120,7 @@ Total ram usage:        1 bytes
 
  *************** function _Global_Aquecimento_Switch *****************
  Defined at:
-		line 2215 in file "Liofilizador Placa Mae.c"
+		line 2218 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   estado          1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -6152,7 +6152,7 @@ Total ram usage:       11 bytes
 
  *************** function _Icones_de_alarmes *****************
  Defined at:
-		line 2904 in file "Liofilizador Placa Mae.c"
+		line 2907 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -6246,7 +6246,7 @@ Total ram usage:       13 bytes
 
  *************** function _Gerenciador_de_Senha_Global *****************
  Defined at:
-		line 2862 in file "Liofilizador Placa Mae.c"
+		line 2865 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -6357,7 +6357,7 @@ Total ram usage:        6 bytes
 
  *************** function _Gravar_Status_da_Senha_Global *****************
  Defined at:
-		line 2971 in file "Liofilizador Placa Mae.c"
+		line 2974 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -6389,7 +6389,7 @@ Total ram usage:        0 bytes
 
  *************** function _Gerenciador_de_Senha *****************
  Defined at:
-		line 2818 in file "Liofilizador Placa Mae.c"
+		line 2821 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -6652,7 +6652,7 @@ Total ram usage:        0 bytes
 
  *************** function _Formatar_Lista_de_Receitas *****************
  Defined at:
-		line 2918 in file "Liofilizador Placa Mae.c"
+		line 2921 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -6684,7 +6684,7 @@ Total ram usage:       18 bytes
 
  *************** function _Grava_Receita *****************
  Defined at:
-		line 1167 in file "Liofilizador Placa Mae.c"
+		line 1170 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   index           1    wreg     unsigned char 
   receita         2   43[COMRAM] PTR struct .
@@ -6757,7 +6757,7 @@ Total ram usage:        4 bytes
 
  *************** function _Formatar_Datalog *****************
  Defined at:
-		line 2976 in file "Liofilizador Placa Mae.c"
+		line 2979 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -6787,7 +6787,7 @@ Total ram usage:        2 bytes
 
  *************** function _Formatar_Dados_de_Seguranca *****************
  Defined at:
-		line 2945 in file "Liofilizador Placa Mae.c"
+		line 2948 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -6902,7 +6902,7 @@ Total ram usage:        6 bytes
 
  *************** function _Format_FAT8_Table *****************
  Defined at:
-		line 3653 in file "Liofilizador Placa Mae.c"
+		line 3656 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -6934,7 +6934,7 @@ Total ram usage:        1 bytes
 
  *************** function _FAT8_Save *****************
  Defined at:
-		line 1237 in file "Liofilizador Placa Mae.c"
+		line 1240 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   tupla           1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -7431,7 +7431,7 @@ Total ram usage:        2 bytes
 
  *************** function _Exibe_Tempo_de_Processo *****************
  Defined at:
-		line 3152 in file "Liofilizador Placa Mae.c"
+		line 3155 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -7537,7 +7537,7 @@ Total ram usage:        8 bytes
 
  *************** function _Exibe_Hora_Data *****************
  Defined at:
-		line 2681 in file "Liofilizador Placa Mae.c"
+		line 2684 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   showseconds     1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -7954,7 +7954,7 @@ Total ram usage:        4 bytes
 
  *************** function _Check_And_Send_Capture_Datalog *****************
  Defined at:
-		line 2712 in file "Liofilizador Placa Mae.c"
+		line 2715 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -7984,7 +7984,7 @@ Total ram usage:        2 bytes
 
  *************** function _save_datalog *****************
  Defined at:
-		line 1460 in file "Liofilizador Placa Mae.c"
+		line 1463 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
   add_datalog     4    2[BANK0 ] unsigned long 
  Auto vars:     Size  Location     Type
@@ -8285,7 +8285,7 @@ Total ram usage:        6 bytes
 
  *************** function _Carregar_Status_da_Senha_Global *****************
  Defined at:
-		line 2953 in file "Liofilizador Placa Mae.c"
+		line 2956 in file "Liofilizador Placa Mae.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type

@@ -6414,6 +6414,8 @@ unsigned char countboard()
 
      statusgen.flag_usart_rx=0;
      usart_buffer[5]=0;
+
+
      for(int contador=0;contador<400;contador++)
          {
           _delay((unsigned long)((200)*(32000000/4000000.0)));
@@ -6429,7 +6431,7 @@ unsigned char countboard()
              break;
              }
           }
-# 1019 "Liofilizador Placa Mae.c"
+# 1022 "Liofilizador Placa Mae.c"
     return retorno;
 }
 
@@ -6480,7 +6482,7 @@ int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
     }
     return 0;
 }
-# 1077 "Liofilizador Placa Mae.c"
+# 1080 "Liofilizador Placa Mae.c"
 void ShowSensorRealTimeHS(void)
      {
      char bb[3];
@@ -6544,7 +6546,7 @@ void ShowSensorRealTimeHS(void)
       statusgen1.flag_proculus_hs=0;
 
      }
-# 1149 "Liofilizador Placa Mae.c"
+# 1152 "Liofilizador Placa Mae.c"
 void Carrega_Tupla_Receita(char index, t_receita *receita){
      unsigned int addeeprom;
 
@@ -6593,7 +6595,7 @@ void Exibe_Receita(int index){
      texto[8]=0;
      PROCULUS_VP_Write_String(vp+4,texto);
 }
-# 1215 "Liofilizador Placa Mae.c"
+# 1218 "Liofilizador Placa Mae.c"
 void DataBaseBackupMain(unsigned char tupla)
       {
       unsigned int vp;
@@ -6707,7 +6709,7 @@ void FAT8_Show(){
         }
 
 }
-# 1340 "Liofilizador Placa Mae.c"
+# 1343 "Liofilizador Placa Mae.c"
  void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
       {
       char CanalAD;
@@ -6747,7 +6749,7 @@ void FAT8_Show(){
       EEPROM_Read_String(addEEPROM + 6,liofilizador->receita);
       liofilizador->status = EEPROM_Read_Integer(addEEPROM+16);
       }
-# 1393 "Liofilizador Placa Mae.c"
+# 1396 "Liofilizador Placa Mae.c"
  void Set_Receita(unsigned char index, char status)
       {
       int vp;
@@ -6807,7 +6809,7 @@ void FAT8_Show(){
          PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
          }
 }
-# 1460 "Liofilizador Placa Mae.c"
+# 1463 "Liofilizador Placa Mae.c"
 void save_datalog(unsigned long add_datalog){
      char index;
      char bb[4];
@@ -6828,7 +6830,7 @@ void save_datalog(unsigned long add_datalog){
             }
          }
 }
-# 1489 "Liofilizador Placa Mae.c"
+# 1492 "Liofilizador Placa Mae.c"
  void ShowAndSetSlaveParameters(unsigned char tupla)
       {
       unsigned char CanalAD;
@@ -6860,7 +6862,7 @@ void save_datalog(unsigned long add_datalog){
       PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
 
       }
-# 1529 "Liofilizador Placa Mae.c"
+# 1532 "Liofilizador Placa Mae.c"
 void Send_to_PC(unsigned char size){
 
 
@@ -6869,7 +6871,7 @@ void Send_to_PC(unsigned char size){
      USART_putc(usart_protocol.origem);
      USART_putc(usart_protocol.command);
      USART_putc(size);
-# 1547 "Liofilizador Placa Mae.c"
+# 1550 "Liofilizador Placa Mae.c"
 }
 
 
@@ -6906,7 +6908,7 @@ void Decodify_Command(void){
 
 
     switch(usart_protocol.command){
-# 1614 "Liofilizador Placa Mae.c"
+# 1617 "Liofilizador Placa Mae.c"
         case 0x08:
              EEPROM_Write_Byte((int)usart_protocol.value[0]<<8 |
                                (int)usart_protocol.value[1]<<0,
@@ -7136,7 +7138,7 @@ void Decodify_Command(void){
              PORTDbits.RD5=0;
              break;
              }
-# 1854 "Liofilizador Placa Mae.c"
+# 1857 "Liofilizador Placa Mae.c"
         case 0X24:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
@@ -7848,7 +7850,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2573 "Liofilizador Placa Mae.c"
+# 2576 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -8000,7 +8002,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2732 "Liofilizador Placa Mae.c"
+# 2735 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
@@ -8299,7 +8301,7 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 
      PROCULUS_graphic_plot(LCDchannel, value);
 }
-# 3059 "Liofilizador Placa Mae.c"
+# 3062 "Liofilizador Placa Mae.c"
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd)
      {
      char txt[30];
