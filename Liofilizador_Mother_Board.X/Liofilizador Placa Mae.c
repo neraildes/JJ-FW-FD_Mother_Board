@@ -962,7 +962,25 @@ unsigned char countboard()
      
      flag_usart_rx=0;
      usart_buffer[5]=0;
+     for(int contador=0;contador<RX_MAX_WAIT_TIME;contador++)
+         {
+          __delay_us(200);
+          if(flag_usart_rx==1)
+             {
+             __delay_ms(2); 
+             flag_usart_rx=0;
+             size=usart_buffer[5];
+             retorno = (usart_buffer[6]<<8)|(usart_buffer[7]);
+             for(i=0;i<size;i++)
+                 buffer[i]=usart_buffer[i+6];          
+             contador=0;
+             break;
+             }
+          }      
      
+     
+     
+     /*
      for(int contador=0;contador<RX_MAX_WAIT_TIME;contador++)
          {
           __delay_us(200);          
@@ -980,7 +998,7 @@ unsigned char countboard()
              break;
              }
           }
-     
+     */
      /*
      if(usart_buffer[5]==0) //Sem Resposta
        {  

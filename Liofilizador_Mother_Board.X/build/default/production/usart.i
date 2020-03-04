@@ -4379,7 +4379,8 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 5 "usart.c" 2
+# 4 "usart.c" 2
+
 # 1 "./global.h" 1
 # 20 "./global.h"
 #pragma config OSC = INTIO67
@@ -4483,7 +4484,8 @@ typedef struct{
 }t_rtc;
 
 volatile t_rtc rtc;
-# 6 "usart.c" 2
+# 5 "usart.c" 2
+
 # 1 "./usart.h" 1
 # 20 "./usart.h"
 # 1 "./protocolo.h" 1
@@ -4508,7 +4510,8 @@ void USART_put_long(unsigned long value);
 void USART_put_string(char *vetor);
 void USART_put_buffer(char *vetor, char size);
 unsigned char USART_input_buffer(void);
-# 7 "usart.c" 2
+# 6 "usart.c" 2
+
 # 1 "./proculus.h" 1
 # 57 "./proculus.h"
 typedef struct {
@@ -4618,7 +4621,8 @@ void PROCULUS_graphic_plot(unsigned char lcd_channel, unsigned int value);
 void PROCULUS_Clear_Line_Graphic(char channel);
 
 void PROCULUS_Clean_All_Line_Graphic();
-# 8 "usart.c" 2
+# 7 "usart.c" 2
+
 
 
 extern volatile unsigned char usart_buffer[32+20];
