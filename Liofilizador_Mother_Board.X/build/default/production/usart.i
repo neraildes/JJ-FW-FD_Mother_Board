@@ -4621,8 +4621,8 @@ void PROCULUS_Clean_All_Line_Graphic();
 # 8 "usart.c" 2
 
 
-extern volatile unsigned char usart_buffer[32+10];
-extern volatile unsigned char usart_buffer_fila[2][32+10];
+extern volatile unsigned char usart_buffer[32+20];
+extern volatile unsigned char usart_buffer_fila[2][32+20];
 extern volatile unsigned int tmr_led_usart;
 extern volatile unsigned int Delay_Led_Usart;
 
@@ -4699,12 +4699,9 @@ void USART_putsc(char value)
 }
 
 
-void USART_put_buffer(char *vetor, char size)
-{
-    unsigned char loop;
+void USART_put_buffer(char *vetor, char size){
+    char loop=0;
     char *ptr;
-
-    loop=0;
     ptr = vetor;
 
     while(loop<size)

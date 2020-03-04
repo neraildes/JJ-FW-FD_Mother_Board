@@ -23,8 +23,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./global.h: 300: typedef struct{
 [s S275 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S275 . milisegundo segundo minuto hora ]
-"10 EEPROM_24C1025.c
-[; ;EEPROM_24C1025.c: 10: extern volatile unsigned int Delay_Led_Memory;
+"8 EEPROM_24C1025.c
+[; ;EEPROM_24C1025.c: 8: extern volatile unsigned int Delay_Led_Memory;
 [v _Delay_Led_Memory `Vui ~T0 @X0 0 e ]
 "14 ./I2C.h
 [; ;./I2C.h: 14: void I2C_Master_Start(void);
@@ -35,22 +35,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 "16
 [; ;./I2C.h: 16: void I2C_Master_Stop(void);
 [v _I2C_Master_Stop `(v ~T0 @X0 0 ef ]
-"21 ./timedate.h
-[; ;./timedate.h: 21: void my_delay_ms_CLRWDT(long time);
-[v _my_delay_ms_CLRWDT `(v ~T0 @X0 0 ef1`l ]
-"71 EEPROM_24C1025.c
-[; ;EEPROM_24C1025.c: 71:      my_delay_ms_WDT(5);
-[v _my_delay_ms_WDT `(i ~T0 @X0 0 e? ]
+[v F2424 `(v ~T0 @X0 1 tf1`ul ]
+"187 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18.h
+[v __delay `JF2424 ~T0 @X0 0 e ]
+[p i __delay ]
 "15 ./I2C.h
 [; ;./I2C.h: 15: void I2C_Master_RepeatedStart(void);
 [v _I2C_Master_RepeatedStart `(v ~T0 @X0 0 ef ]
 "18
 [; ;./I2C.h: 18: unsigned short I2C_Master_Read(unsigned short a);
 [v _I2C_Master_Read `(us ~T0 @X0 0 ef1`us ]
-[v F2424 `(v ~T0 @X0 1 tf1`ul ]
-"187 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18.h
-[v __delay `JF2424 ~T0 @X0 0 e ]
-[p i __delay ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -543,400 +537,394 @@ Version 4.0 HI-TECH Software Intermediate Code
 "307
 [; ;./global.h: 307: volatile t_rtc rtc;
 [v _rtc `VS275 ~T0 @X0 1 e ]
-"15 EEPROM_24C1025.c
-[; ;EEPROM_24C1025.c: 15: void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
+"13 EEPROM_24C1025.c
+[; ;EEPROM_24C1025.c: 13: void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
 [v _EEPROM_24C1025_Write_Buffer `(v ~T0 @X0 1 ef4`uc`ul`uc`*uc ]
-"19
-[; ;EEPROM_24C1025.c: 19:      {
+"17
+[; ;EEPROM_24C1025.c: 17:      {
 {
 [e :U _EEPROM_24C1025_Write_Buffer ]
-"15
-[; ;EEPROM_24C1025.c: 15: void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
+"13
+[; ;EEPROM_24C1025.c: 13: void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
 [v _chip_add `uc ~T0 @X0 1 r1 ]
-"16
-[; ;EEPROM_24C1025.c: 16:                                  unsigned long mem_add,
+"14
+[; ;EEPROM_24C1025.c: 14:                                  unsigned long mem_add,
 [v _mem_add `ul ~T0 @X0 1 r2 ]
-"17
-[; ;EEPROM_24C1025.c: 17:                                  unsigned char sizedata,
+"15
+[; ;EEPROM_24C1025.c: 15:                                  unsigned char sizedata,
 [v _sizedata `uc ~T0 @X0 1 r3 ]
-"18
-[; ;EEPROM_24C1025.c: 18:                                  char *data)
+"16
+[; ;EEPROM_24C1025.c: 16:                                  char *data)
 [v _data `*uc ~T0 @X0 1 r4 ]
-"19
-[; ;EEPROM_24C1025.c: 19:      {
+"17
+[; ;EEPROM_24C1025.c: 17:      {
 [f ]
-"20
-[; ;EEPROM_24C1025.c: 20:      unsigned char range=0;
+"18
+[; ;EEPROM_24C1025.c: 18:      unsigned char range=0;
 [v _range `uc ~T0 @X0 1 a ]
 [e = _range -> -> 0 `i `uc ]
-"21
-[; ;EEPROM_24C1025.c: 21:      unsigned char ctrl;
+"19
+[; ;EEPROM_24C1025.c: 19:      unsigned char ctrl;
 [v _ctrl `uc ~T0 @X0 1 a ]
-"22
-[; ;EEPROM_24C1025.c: 22:      unsigned char count;
+"20
+[; ;EEPROM_24C1025.c: 20:      unsigned char count;
 [v _count `uc ~T0 @X0 1 a ]
-"24
-[; ;EEPROM_24C1025.c: 24:      Delay_Led_Memory=5;
+"22
+[; ;EEPROM_24C1025.c: 22:      Delay_Led_Memory=5;
 [e = _Delay_Led_Memory -> -> 5 `i `ui ]
+"24
+[; ;EEPROM_24C1025.c: 24:      if(mem_add>0x1FFFF) return;
+[e $ ! > _mem_add -> -> 131071 `l `ul 277  ]
+[e $UE 276  ]
+[e :U 277 ]
 "26
-[; ;EEPROM_24C1025.c: 26:      if(mem_add>0x1FFFF) return;
-[e $ ! > _mem_add -> -> 131071 `l `ul 284  ]
-[e $UE 283  ]
-[e :U 284 ]
-"28
-[; ;EEPROM_24C1025.c: 28:      if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 285  ]
+[; ;EEPROM_24C1025.c: 26:      if(mem_add>0xFFFF) range=0x08; else range=0x00;
+[e $ ! > _mem_add -> -> 65535 `ui `ul 278  ]
 [e = _range -> -> 8 `i `uc ]
-[e $U 286  ]
-[e :U 285 ]
+[e $U 279  ]
+[e :U 278 ]
 [e = _range -> -> 0 `i `uc ]
-[e :U 286 ]
-"29
-[; ;EEPROM_24C1025.c: 29:      ctrl=chip_add;
+[e :U 279 ]
+"27
+[; ;EEPROM_24C1025.c: 27:      ctrl=chip_add;
 [e = _ctrl _chip_add ]
-"30
-[; ;EEPROM_24C1025.c: 30:      ctrl<<=1;
+"28
+[; ;EEPROM_24C1025.c: 28:      ctrl<<=1;
 [e =<< _ctrl -> -> 1 `i `uc ]
-"31
-[; ;EEPROM_24C1025.c: 31:      ctrl |= 0xA0;
+"29
+[; ;EEPROM_24C1025.c: 29:      ctrl |= 0xA0;
 [e =| _ctrl -> -> 160 `i `uc ]
-"32
-[; ;EEPROM_24C1025.c: 32:      ctrl |= range;
+"30
+[; ;EEPROM_24C1025.c: 30:      ctrl |= range;
 [e =| _ctrl -> _range `uc ]
-"34
-[; ;EEPROM_24C1025.c: 34:      I2C_Master_Start();
+"32
+[; ;EEPROM_24C1025.c: 32:      I2C_Master_Start();
 [e ( _I2C_Master_Start ..  ]
-"35
-[; ;EEPROM_24C1025.c: 35:      I2C_Master_Write(ctrl);
+"33
+[; ;EEPROM_24C1025.c: 33:      I2C_Master_Write(ctrl);
 [e ( _I2C_Master_Write (1 -> _ctrl `ui ]
-"36
-[; ;EEPROM_24C1025.c: 36:      I2C_Master_Write(((char *)&mem_add)[1]);
+"34
+[; ;EEPROM_24C1025.c: 34:      I2C_Master_Write(((char *)&mem_add)[1]);
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 1 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"37
-[; ;EEPROM_24C1025.c: 37:      I2C_Master_Write(((char *)&mem_add)[0]);
+"35
+[; ;EEPROM_24C1025.c: 35:      I2C_Master_Write(((char *)&mem_add)[0]);
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 0 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"38
-[; ;EEPROM_24C1025.c: 38:      for(count=0;count<(sizedata-1);count++)
+"36
+[; ;EEPROM_24C1025.c: 36:      for(count=0;count<(sizedata-1);count++)
 {
 [e = _count -> -> 0 `i `uc ]
-[e $U 290  ]
-[e :U 287 ]
+[e $U 283  ]
+[e :U 280 ]
+"37
+[; ;EEPROM_24C1025.c: 37:           {
+{
+"38
+[; ;EEPROM_24C1025.c: 38:           if(mem_add>0x1FFFF) return;
+[e $ ! > _mem_add -> -> 131071 `l `ul 284  ]
+[e $UE 276  ]
+[e :U 284 ]
 "39
-[; ;EEPROM_24C1025.c: 39:           {
-{
+[; ;EEPROM_24C1025.c: 39:           if((mem_add+1)%128==0)
+[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 285  ]
 "40
-[; ;EEPROM_24C1025.c: 40:           __asm("CLRWDT");
-[; <" CLRWDT ;# ">
+[; ;EEPROM_24C1025.c: 40:             {
+{
 "41
-[; ;EEPROM_24C1025.c: 41:           if(mem_add>0x1FFFF) return;
-[e $ ! > _mem_add -> -> 131071 `l `ul 291  ]
-[e $UE 283  ]
-[e :U 291 ]
+[; ;EEPROM_24C1025.c: 41:             I2C_Master_Write(*data);
+[e ( _I2C_Master_Write (1 -> *U _data `ui ]
 "42
-[; ;EEPROM_24C1025.c: 42:           if((mem_add+1)%128==0)
-[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 292  ]
-"43
-[; ;EEPROM_24C1025.c: 43:             {
-{
-"44
-[; ;EEPROM_24C1025.c: 44:             I2C_Master_Write(*data);
-[e ( _I2C_Master_Write (1 -> *U _data `ui ]
-"45
-[; ;EEPROM_24C1025.c: 45:             I2C_Master_Stop();
+[; ;EEPROM_24C1025.c: 42:             I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
+"44
+[; ;EEPROM_24C1025.c: 44:             _delay((unsigned long)((5)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"45
+[; ;EEPROM_24C1025.c: 45:             mem_add++;
+[e ++ _mem_add -> -> -> 1 `i `l `ul ]
+"46
+[; ;EEPROM_24C1025.c: 46:             data++;
+[e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
 "47
-[; ;EEPROM_24C1025.c: 47:             my_delay_ms_CLRWDT(5);
-[e ( _my_delay_ms_CLRWDT (1 -> -> 5 `i `l ]
-"48
-[; ;EEPROM_24C1025.c: 48:             mem_add++;
-[e ++ _mem_add -> -> -> 1 `i `l `ul ]
-"49
-[; ;EEPROM_24C1025.c: 49:             data++;
-[e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
-"50
-[; ;EEPROM_24C1025.c: 50:             if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 293  ]
+[; ;EEPROM_24C1025.c: 47:             if(mem_add>0xFFFF) range=0x08; else range=0x00;
+[e $ ! > _mem_add -> -> 65535 `ui `ul 286  ]
 [e = _range -> -> 8 `i `uc ]
-[e $U 294  ]
-[e :U 293 ]
+[e $U 287  ]
+[e :U 286 ]
 [e = _range -> -> 0 `i `uc ]
-[e :U 294 ]
-"51
-[; ;EEPROM_24C1025.c: 51:             ctrl=chip_add;
+[e :U 287 ]
+"48
+[; ;EEPROM_24C1025.c: 48:             ctrl=chip_add;
 [e = _ctrl _chip_add ]
-"52
-[; ;EEPROM_24C1025.c: 52:             ctrl<<=1;
+"49
+[; ;EEPROM_24C1025.c: 49:             ctrl<<=1;
 [e =<< _ctrl -> -> 1 `i `uc ]
-"53
-[; ;EEPROM_24C1025.c: 53:             ctrl |= 0xA0;
+"50
+[; ;EEPROM_24C1025.c: 50:             ctrl |= 0xA0;
 [e =| _ctrl -> -> 160 `i `uc ]
-"54
-[; ;EEPROM_24C1025.c: 54:             ctrl |= range;
+"51
+[; ;EEPROM_24C1025.c: 51:             ctrl |= range;
 [e =| _ctrl -> _range `uc ]
-"56
-[; ;EEPROM_24C1025.c: 56:             I2C_Master_Start();
+"53
+[; ;EEPROM_24C1025.c: 53:             I2C_Master_Start();
 [e ( _I2C_Master_Start ..  ]
-"57
-[; ;EEPROM_24C1025.c: 57:             I2C_Master_Write(ctrl);
+"54
+[; ;EEPROM_24C1025.c: 54:             I2C_Master_Write(ctrl);
 [e ( _I2C_Master_Write (1 -> _ctrl `ui ]
-"58
-[; ;EEPROM_24C1025.c: 58:             I2C_Master_Write(((char *)&mem_add)[1]);
+"55
+[; ;EEPROM_24C1025.c: 55:             I2C_Master_Write(((char *)&mem_add)[1]);
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 1 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"59
-[; ;EEPROM_24C1025.c: 59:             I2C_Master_Write(((char *)&mem_add)[0]);
+"56
+[; ;EEPROM_24C1025.c: 56:             I2C_Master_Write(((char *)&mem_add)[0]);
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 0 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"60
-[; ;EEPROM_24C1025.c: 60:             }
+"57
+[; ;EEPROM_24C1025.c: 57:             }
 }
-[e $U 295  ]
-"61
-[; ;EEPROM_24C1025.c: 61:           else
-[e :U 292 ]
-"62
-[; ;EEPROM_24C1025.c: 62:             {
+[e $U 288  ]
+"58
+[; ;EEPROM_24C1025.c: 58:           else
+[e :U 285 ]
+"59
+[; ;EEPROM_24C1025.c: 59:             {
 {
-"63
-[; ;EEPROM_24C1025.c: 63:             I2C_Master_Write(*data);
+"60
+[; ;EEPROM_24C1025.c: 60:             I2C_Master_Write(*data);
 [e ( _I2C_Master_Write (1 -> *U _data `ui ]
-"64
-[; ;EEPROM_24C1025.c: 64:             data++;
+"61
+[; ;EEPROM_24C1025.c: 61:             data++;
 [e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
-"65
-[; ;EEPROM_24C1025.c: 65:             mem_add++;
+"62
+[; ;EEPROM_24C1025.c: 62:             mem_add++;
 [e ++ _mem_add -> -> -> 1 `i `l `ul ]
-"66
-[; ;EEPROM_24C1025.c: 66:             }
+"63
+[; ;EEPROM_24C1025.c: 63:             }
 }
-[e :U 295 ]
-"67
-[; ;EEPROM_24C1025.c: 67:      }
+[e :U 288 ]
+"64
+[; ;EEPROM_24C1025.c: 64:      }
 }
 [e ++ _count -> -> 1 `i `uc ]
-[e :U 290 ]
-[e $ < -> _count `i - -> _sizedata `i -> 1 `i 287  ]
-[e :U 288 ]
+[e :U 283 ]
+[e $ < -> _count `i - -> _sizedata `i -> 1 `i 280  ]
+[e :U 281 ]
 }
-"68
-[; ;EEPROM_24C1025.c: 68:      I2C_Master_Write(*data);
+"65
+[; ;EEPROM_24C1025.c: 65:      I2C_Master_Write(*data);
 [e ( _I2C_Master_Write (1 -> *U _data `ui ]
-"69
-[; ;EEPROM_24C1025.c: 69:      I2C_Master_Stop();
+"66
+[; ;EEPROM_24C1025.c: 66:      I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
-"71
-[; ;EEPROM_24C1025.c: 71:      my_delay_ms_WDT(5);
-[e ( _my_delay_ms_WDT -> 5 `i ]
-"72
-[; ;EEPROM_24C1025.c: 72: }
-[e :UE 283 ]
+"67
+[; ;EEPROM_24C1025.c: 67:      _delay((unsigned long)((5)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"68
+[; ;EEPROM_24C1025.c: 68: }
+[e :UE 276 ]
 }
-"78
-[; ;EEPROM_24C1025.c: 78: void EEPROM_24C1025_Read_Buffer(unsigned char chip_add,
+"74
+[; ;EEPROM_24C1025.c: 74: void EEPROM_24C1025_Read_Buffer(unsigned char chip_add,
 [v _EEPROM_24C1025_Read_Buffer `(v ~T0 @X0 1 ef4`uc`ul`uc`*uc ]
-"82
-[; ;EEPROM_24C1025.c: 82:      {
+"78
+[; ;EEPROM_24C1025.c: 78:      {
 {
 [e :U _EEPROM_24C1025_Read_Buffer ]
-"78
-[; ;EEPROM_24C1025.c: 78: void EEPROM_24C1025_Read_Buffer(unsigned char chip_add,
+"74
+[; ;EEPROM_24C1025.c: 74: void EEPROM_24C1025_Read_Buffer(unsigned char chip_add,
 [v _chip_add `uc ~T0 @X0 1 r1 ]
-"79
-[; ;EEPROM_24C1025.c: 79:                                 unsigned long mem_add,
+"75
+[; ;EEPROM_24C1025.c: 75:                                 unsigned long mem_add,
 [v _mem_add `ul ~T0 @X0 1 r2 ]
-"80
-[; ;EEPROM_24C1025.c: 80:                                 unsigned char sizedata,
+"76
+[; ;EEPROM_24C1025.c: 76:                                 unsigned char sizedata,
 [v _sizedata `uc ~T0 @X0 1 r3 ]
-"81
-[; ;EEPROM_24C1025.c: 81:                                 char *data)
+"77
+[; ;EEPROM_24C1025.c: 77:                                 char *data)
 [v _data `*uc ~T0 @X0 1 r4 ]
-"82
-[; ;EEPROM_24C1025.c: 82:      {
+"78
+[; ;EEPROM_24C1025.c: 78:      {
 [f ]
-"83
-[; ;EEPROM_24C1025.c: 83:      unsigned char cnt=0;
+"79
+[; ;EEPROM_24C1025.c: 79:      unsigned char cnt=0;
 [v _cnt `uc ~T0 @X0 1 a ]
 [e = _cnt -> -> 0 `i `uc ]
-"84
-[; ;EEPROM_24C1025.c: 84:      unsigned char range=0;
+"80
+[; ;EEPROM_24C1025.c: 80:      unsigned char range=0;
 [v _range `uc ~T0 @X0 1 a ]
 [e = _range -> -> 0 `i `uc ]
-"85
-[; ;EEPROM_24C1025.c: 85:      unsigned char ctrl;
+"81
+[; ;EEPROM_24C1025.c: 81:      unsigned char ctrl;
 [v _ctrl `uc ~T0 @X0 1 a ]
-"87
-[; ;EEPROM_24C1025.c: 87:      Delay_Led_Memory=5;
+"83
+[; ;EEPROM_24C1025.c: 83:      Delay_Led_Memory=5;
 [e = _Delay_Led_Memory -> -> 5 `i `ui ]
-"89
-[; ;EEPROM_24C1025.c: 89:      if(mem_add>0x1FFFF) return;
-[e $ ! > _mem_add -> -> 131071 `l `ul 297  ]
-[e $UE 296  ]
-[e :U 297 ]
-"91
-[; ;EEPROM_24C1025.c: 91:      if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 298  ]
+"85
+[; ;EEPROM_24C1025.c: 85:      if(mem_add>0x1FFFF) return;
+[e $ ! > _mem_add -> -> 131071 `l `ul 290  ]
+[e $UE 289  ]
+[e :U 290 ]
+"87
+[; ;EEPROM_24C1025.c: 87:      if(mem_add>0xFFFF) range=0x08; else range=0x00;
+[e $ ! > _mem_add -> -> 65535 `ui `ul 291  ]
 [e = _range -> -> 8 `i `uc ]
-[e $U 299  ]
-[e :U 298 ]
+[e $U 292  ]
+[e :U 291 ]
 [e = _range -> -> 0 `i `uc ]
-[e :U 299 ]
-"92
-[; ;EEPROM_24C1025.c: 92:      ctrl=chip_add;
+[e :U 292 ]
+"88
+[; ;EEPROM_24C1025.c: 88:      ctrl=chip_add;
 [e = _ctrl _chip_add ]
-"93
-[; ;EEPROM_24C1025.c: 93:      ctrl<<=1;
+"89
+[; ;EEPROM_24C1025.c: 89:      ctrl<<=1;
 [e =<< _ctrl -> -> 1 `i `uc ]
-"94
-[; ;EEPROM_24C1025.c: 94:      ctrl |= 0xA0;
+"90
+[; ;EEPROM_24C1025.c: 90:      ctrl |= 0xA0;
 [e =| _ctrl -> -> 160 `i `uc ]
-"95
-[; ;EEPROM_24C1025.c: 95:      ctrl |= 0b00000001;
+"91
+[; ;EEPROM_24C1025.c: 91:      ctrl |= 0b00000001;
 [e =| _ctrl -> -> 1 `i `uc ]
-"96
-[; ;EEPROM_24C1025.c: 96:      ctrl |= range;
+"92
+[; ;EEPROM_24C1025.c: 92:      ctrl |= range;
 [e =| _ctrl -> _range `uc ]
-"98
-[; ;EEPROM_24C1025.c: 98:      I2C_Master_Start();
+"94
+[; ;EEPROM_24C1025.c: 94:      I2C_Master_Start();
 [e ( _I2C_Master_Start ..  ]
-"99
-[; ;EEPROM_24C1025.c: 99:      I2C_Master_Write(ctrl & 0xFE);
+"95
+[; ;EEPROM_24C1025.c: 95:      I2C_Master_Write(ctrl & 0xFE);
 [e ( _I2C_Master_Write (1 -> & -> _ctrl `i -> 254 `i `ui ]
-"100
-[; ;EEPROM_24C1025.c: 100:      I2C_Master_Write(((char *)&mem_add)[1]);
+"96
+[; ;EEPROM_24C1025.c: 96:      I2C_Master_Write(((char *)&mem_add)[1]);
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 1 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"101
-[; ;EEPROM_24C1025.c: 101:      I2C_Master_Write(((char *)&mem_add)[0]);
+"97
+[; ;EEPROM_24C1025.c: 97:      I2C_Master_Write(((char *)&mem_add)[0]);
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 0 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"102
-[; ;EEPROM_24C1025.c: 102:      I2C_Master_RepeatedStart();
+"98
+[; ;EEPROM_24C1025.c: 98:      I2C_Master_RepeatedStart();
 [e ( _I2C_Master_RepeatedStart ..  ]
-"103
-[; ;EEPROM_24C1025.c: 103:      I2C_Master_Write(ctrl);
+"99
+[; ;EEPROM_24C1025.c: 99:      I2C_Master_Write(ctrl);
 [e ( _I2C_Master_Write (1 -> _ctrl `ui ]
-"105
-[; ;EEPROM_24C1025.c: 105:      for(char cnt=0;cnt<(sizedata);cnt++)
+"101
+[; ;EEPROM_24C1025.c: 101:      for(char cnt=0;cnt<(sizedata);cnt++)
 {
 [v _cnt `uc ~T0 @X0 1 a ]
 [e = _cnt -> -> 0 `i `uc ]
-[e $U 303  ]
-[e :U 300 ]
+[e $U 296  ]
+[e :U 293 ]
+"102
+[; ;EEPROM_24C1025.c: 102:         {
+{
+"103
+[; ;EEPROM_24C1025.c: 103:            if(mem_add>0x1FFFF) break;
+[e $ ! > _mem_add -> -> 131071 `l `ul 297  ]
+[e $U 294  ]
+[e :U 297 ]
+"104
+[; ;EEPROM_24C1025.c: 104:            if((mem_add+1)%128==0)
+[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 298  ]
+"105
+[; ;EEPROM_24C1025.c: 105:              {
+{
 "106
-[; ;EEPROM_24C1025.c: 106:         {
-{
-"107
-[; ;EEPROM_24C1025.c: 107:            __asm("CLRWDT");
-[; <" CLRWDT ;# ">
-"108
-[; ;EEPROM_24C1025.c: 108:            if(mem_add>0x1FFFF) break;
-[e $ ! > _mem_add -> -> 131071 `l `ul 304  ]
-[e $U 301  ]
-[e :U 304 ]
-"109
-[; ;EEPROM_24C1025.c: 109:            if((mem_add+1)%128==0)
-[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 305  ]
-"110
-[; ;EEPROM_24C1025.c: 110:              {
-{
-"111
-[; ;EEPROM_24C1025.c: 111:              (*data)=I2C_Master_Read(0);
+[; ;EEPROM_24C1025.c: 106:              (*data)=I2C_Master_Read(0);
 [e = *U _data -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
-"112
-[; ;EEPROM_24C1025.c: 112:              I2C_Master_Stop();
+"107
+[; ;EEPROM_24C1025.c: 107:              I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
-"114
-[; ;EEPROM_24C1025.c: 114:              my_delay_ms_WDT(5);
-[e ( _my_delay_ms_WDT -> 5 `i ]
-"115
-[; ;EEPROM_24C1025.c: 115:              mem_add++;
+"109
+[; ;EEPROM_24C1025.c: 109:              _delay((unsigned long)((5)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"110
+[; ;EEPROM_24C1025.c: 110:              mem_add++;
 [e ++ _mem_add -> -> -> 1 `i `l `ul ]
-"116
-[; ;EEPROM_24C1025.c: 116:              data++;
+"111
+[; ;EEPROM_24C1025.c: 111:              data++;
 [e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
-"117
-[; ;EEPROM_24C1025.c: 117:              if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 306  ]
+"112
+[; ;EEPROM_24C1025.c: 112:              if(mem_add>0xFFFF) range=0x08; else range=0x00;
+[e $ ! > _mem_add -> -> 65535 `ui `ul 299  ]
 [e = _range -> -> 8 `i `uc ]
-[e $U 307  ]
-[e :U 306 ]
+[e $U 300  ]
+[e :U 299 ]
 [e = _range -> -> 0 `i `uc ]
-[e :U 307 ]
-"118
-[; ;EEPROM_24C1025.c: 118:              ctrl=chip_add;
+[e :U 300 ]
+"113
+[; ;EEPROM_24C1025.c: 113:              ctrl=chip_add;
 [e = _ctrl _chip_add ]
-"119
-[; ;EEPROM_24C1025.c: 119:              ctrl<<=1;
+"114
+[; ;EEPROM_24C1025.c: 114:              ctrl<<=1;
 [e =<< _ctrl -> -> 1 `i `uc ]
-"120
-[; ;EEPROM_24C1025.c: 120:              ctrl |= 0xA0;
+"115
+[; ;EEPROM_24C1025.c: 115:              ctrl |= 0xA0;
 [e =| _ctrl -> -> 160 `i `uc ]
-"121
-[; ;EEPROM_24C1025.c: 121:              ctrl |= 0b00000001;
+"116
+[; ;EEPROM_24C1025.c: 116:              ctrl |= 0b00000001;
 [e =| _ctrl -> -> 1 `i `uc ]
-"122
-[; ;EEPROM_24C1025.c: 122:              ctrl |= range;
+"117
+[; ;EEPROM_24C1025.c: 117:              ctrl |= range;
 [e =| _ctrl -> _range `uc ]
-"124
-[; ;EEPROM_24C1025.c: 124:              I2C_Master_Start();
+"119
+[; ;EEPROM_24C1025.c: 119:              I2C_Master_Start();
 [e ( _I2C_Master_Start ..  ]
-"125
-[; ;EEPROM_24C1025.c: 125:              I2C_Master_Write(ctrl & 0xFE);
+"120
+[; ;EEPROM_24C1025.c: 120:              I2C_Master_Write(ctrl & 0xFE);
 [e ( _I2C_Master_Write (1 -> & -> _ctrl `i -> 254 `i `ui ]
-"126
-[; ;EEPROM_24C1025.c: 126:              I2C_Master_Write(((char *)&mem_add)[1]);
+"121
+[; ;EEPROM_24C1025.c: 121:              I2C_Master_Write(((char *)&mem_add)[1]);
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 1 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"127
-[; ;EEPROM_24C1025.c: 127:              I2C_Master_Write(((char *)&mem_add)[0]);
+"122
+[; ;EEPROM_24C1025.c: 122:              I2C_Master_Write(((char *)&mem_add)[0]);
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 0 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"128
-[; ;EEPROM_24C1025.c: 128:              I2C_Master_RepeatedStart();
+"123
+[; ;EEPROM_24C1025.c: 123:              I2C_Master_RepeatedStart();
 [e ( _I2C_Master_RepeatedStart ..  ]
-"129
-[; ;EEPROM_24C1025.c: 129:              I2C_Master_Write(ctrl);
+"124
+[; ;EEPROM_24C1025.c: 124:              I2C_Master_Write(ctrl);
 [e ( _I2C_Master_Write (1 -> _ctrl `ui ]
-"130
-[; ;EEPROM_24C1025.c: 130:              }
+"125
+[; ;EEPROM_24C1025.c: 125:              }
 }
-[e $U 308  ]
-"131
-[; ;EEPROM_24C1025.c: 131:            else
-[e :U 305 ]
-"132
-[; ;EEPROM_24C1025.c: 132:              {
+[e $U 301  ]
+"126
+[; ;EEPROM_24C1025.c: 126:            else
+[e :U 298 ]
+"127
+[; ;EEPROM_24C1025.c: 127:              {
 {
-"133
-[; ;EEPROM_24C1025.c: 133:              (*data)=I2C_Master_Read(1);
+"128
+[; ;EEPROM_24C1025.c: 128:              (*data)=I2C_Master_Read(1);
 [e = *U _data -> ( _I2C_Master_Read (1 -> -> 1 `i `us `uc ]
-"134
-[; ;EEPROM_24C1025.c: 134:              data++;
+"129
+[; ;EEPROM_24C1025.c: 129:              data++;
 [e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
-"135
-[; ;EEPROM_24C1025.c: 135:              mem_add++;
+"130
+[; ;EEPROM_24C1025.c: 130:              mem_add++;
 [e ++ _mem_add -> -> -> 1 `i `l `ul ]
-"136
-[; ;EEPROM_24C1025.c: 136:              }
+"131
+[; ;EEPROM_24C1025.c: 131:              }
 }
-[e :U 308 ]
-"137
-[; ;EEPROM_24C1025.c: 137:         }
+[e :U 301 ]
+"132
+[; ;EEPROM_24C1025.c: 132:         }
 }
 [e ++ _cnt -> -> 1 `i `uc ]
-[e :U 303 ]
-[e $ < -> _cnt `i -> _sizedata `i 300  ]
-[e :U 301 ]
+[e :U 296 ]
+[e $ < -> _cnt `i -> _sizedata `i 293  ]
+[e :U 294 ]
 }
-"138
-[; ;EEPROM_24C1025.c: 138:         I2C_Master_Read(0);
+"133
+[; ;EEPROM_24C1025.c: 133:         I2C_Master_Read(0);
 [e ( _I2C_Master_Read (1 -> -> 0 `i `us ]
-"139
-[; ;EEPROM_24C1025.c: 139:         I2C_Master_Stop();
+"134
+[; ;EEPROM_24C1025.c: 134:         I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
-"140
-[; ;EEPROM_24C1025.c: 140:         _delay((unsigned long)((650)*(32000000/4000000.0)));
+"135
+[; ;EEPROM_24C1025.c: 135:         _delay((unsigned long)((650)*(32000000/4000000.0)));
 [e ( __delay (1 -> * -> -> 650 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-"141
-[; ;EEPROM_24C1025.c: 141: }
-[e :UE 296 ]
+"136
+[; ;EEPROM_24C1025.c: 136: }
+[e :UE 289 ]
 }
-"147
-[; ;EEPROM_24C1025.c: 147: void EEPROM_24C1025_Write_Str(unsigned char chip_add, unsigned long mem_add,char *data){
+"142
+[; ;EEPROM_24C1025.c: 142: void EEPROM_24C1025_Write_Str(unsigned char chip_add, unsigned long mem_add,char *data){
 [v _EEPROM_24C1025_Write_Str `(v ~T0 @X0 1 ef3`uc`ul`*uc ]
 {
 [e :U _EEPROM_24C1025_Write_Str ]
@@ -944,164 +932,161 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _mem_add `ul ~T0 @X0 1 r2 ]
 [v _data `*uc ~T0 @X0 1 r3 ]
 [f ]
-"148
-[; ;EEPROM_24C1025.c: 148:      unsigned char range=0;
+"143
+[; ;EEPROM_24C1025.c: 143:      unsigned char range=0;
 [v _range `uc ~T0 @X0 1 a ]
 [e = _range -> -> 0 `i `uc ]
-"149
-[; ;EEPROM_24C1025.c: 149:      unsigned char ctrl;
+"144
+[; ;EEPROM_24C1025.c: 144:      unsigned char ctrl;
 [v _ctrl `uc ~T0 @X0 1 a ]
+"146
+[; ;EEPROM_24C1025.c: 146:      if(mem_add>0x1FFFF) return;
+[e $ ! > _mem_add -> -> 131071 `l `ul 303  ]
+[e $UE 302  ]
+[e :U 303 ]
+"148
+[; ;EEPROM_24C1025.c: 148:      if(mem_add>0xFFFF) range=0x08; else range=0x00;
+[e $ ! > _mem_add -> -> 65535 `ui `ul 304  ]
+[e = _range -> -> 8 `i `uc ]
+[e $U 305  ]
+[e :U 304 ]
+[e = _range -> -> 0 `i `uc ]
+[e :U 305 ]
+"149
+[; ;EEPROM_24C1025.c: 149:      ctrl=chip_add;
+[e = _ctrl _chip_add ]
+"150
+[; ;EEPROM_24C1025.c: 150:      ctrl<<=1;
+[e =<< _ctrl -> -> 1 `i `uc ]
 "151
-[; ;EEPROM_24C1025.c: 151:      if(mem_add>0x1FFFF) return;
-[e $ ! > _mem_add -> -> 131071 `l `ul 310  ]
-[e $UE 309  ]
-[e :U 310 ]
-"153
-[; ;EEPROM_24C1025.c: 153:      if(mem_add>0xFFFF) range=0x08; else range=0x00;
+[; ;EEPROM_24C1025.c: 151:      ctrl |= 0xA0;
+[e =| _ctrl -> -> 160 `i `uc ]
+"152
+[; ;EEPROM_24C1025.c: 152:      ctrl |= range;
+[e =| _ctrl -> _range `uc ]
+"154
+[; ;EEPROM_24C1025.c: 154:      I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
+"155
+[; ;EEPROM_24C1025.c: 155:      I2C_Master_Write(ctrl);
+[e ( _I2C_Master_Write (1 -> _ctrl `ui ]
+"156
+[; ;EEPROM_24C1025.c: 156:      I2C_Master_Write(((char *)&mem_add)[1]);
+[e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 1 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
+"157
+[; ;EEPROM_24C1025.c: 157:      I2C_Master_Write(((char *)&mem_add)[0]);
+[e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 0 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
+"158
+[; ;EEPROM_24C1025.c: 158:      while(*data)
+[e $U 306  ]
+[e :U 307 ]
+"159
+[; ;EEPROM_24C1025.c: 159:           {
+{
+"160
+[; ;EEPROM_24C1025.c: 160:           if(mem_add>0x1FFFF) return;
+[e $ ! > _mem_add -> -> 131071 `l `ul 309  ]
+[e $UE 302  ]
+[e :U 309 ]
+"161
+[; ;EEPROM_24C1025.c: 161:           if((mem_add+1)%128==0)
+[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 310  ]
+"162
+[; ;EEPROM_24C1025.c: 162:             {
+{
+"163
+[; ;EEPROM_24C1025.c: 163:             I2C_Master_Write(*data);
+[e ( _I2C_Master_Write (1 -> *U _data `ui ]
+"164
+[; ;EEPROM_24C1025.c: 164:             I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"166
+[; ;EEPROM_24C1025.c: 166:             _delay((unsigned long)((5)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"167
+[; ;EEPROM_24C1025.c: 167:             mem_add++;
+[e ++ _mem_add -> -> -> 1 `i `l `ul ]
+"168
+[; ;EEPROM_24C1025.c: 168:             data++;
+[e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
+"169
+[; ;EEPROM_24C1025.c: 169:             if(mem_add>0xFFFF) range=0x08; else range=0x00;
 [e $ ! > _mem_add -> -> 65535 `ui `ul 311  ]
 [e = _range -> -> 8 `i `uc ]
 [e $U 312  ]
 [e :U 311 ]
 [e = _range -> -> 0 `i `uc ]
 [e :U 312 ]
-"154
-[; ;EEPROM_24C1025.c: 154:      ctrl=chip_add;
-[e = _ctrl _chip_add ]
-"155
-[; ;EEPROM_24C1025.c: 155:      ctrl<<=1;
-[e =<< _ctrl -> -> 1 `i `uc ]
-"156
-[; ;EEPROM_24C1025.c: 156:      ctrl |= 0xA0;
-[e =| _ctrl -> -> 160 `i `uc ]
-"157
-[; ;EEPROM_24C1025.c: 157:      ctrl |= range;
-[e =| _ctrl -> _range `uc ]
-"159
-[; ;EEPROM_24C1025.c: 159:      I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"160
-[; ;EEPROM_24C1025.c: 160:      I2C_Master_Write(ctrl);
-[e ( _I2C_Master_Write (1 -> _ctrl `ui ]
-"161
-[; ;EEPROM_24C1025.c: 161:      I2C_Master_Write(((char *)&mem_add)[1]);
-[e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 1 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"162
-[; ;EEPROM_24C1025.c: 162:      I2C_Master_Write(((char *)&mem_add)[0]);
-[e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 0 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"163
-[; ;EEPROM_24C1025.c: 163:      while(*data)
-[e $U 313  ]
-[e :U 314 ]
-"164
-[; ;EEPROM_24C1025.c: 164:           {
-{
-"165
-[; ;EEPROM_24C1025.c: 165:           __asm("CLRWDT");
-[; <" CLRWDT ;# ">
-"166
-[; ;EEPROM_24C1025.c: 166:           if(mem_add>0x1FFFF) return;
-[e $ ! > _mem_add -> -> 131071 `l `ul 316  ]
-[e $UE 309  ]
-[e :U 316 ]
-"167
-[; ;EEPROM_24C1025.c: 167:           if((mem_add+1)%128==0)
-[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 317  ]
-"168
-[; ;EEPROM_24C1025.c: 168:             {
-{
-"169
-[; ;EEPROM_24C1025.c: 169:             I2C_Master_Write(*data);
-[e ( _I2C_Master_Write (1 -> *U _data `ui ]
 "170
-[; ;EEPROM_24C1025.c: 170:             I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
-"172
-[; ;EEPROM_24C1025.c: 172:             my_delay_ms_WDT(5);
-[e ( _my_delay_ms_WDT -> 5 `i ]
-"173
-[; ;EEPROM_24C1025.c: 173:             mem_add++;
-[e ++ _mem_add -> -> -> 1 `i `l `ul ]
-"174
-[; ;EEPROM_24C1025.c: 174:             data++;
-[e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
-"175
-[; ;EEPROM_24C1025.c: 175:             if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 318  ]
-[e = _range -> -> 8 `i `uc ]
-[e $U 319  ]
-[e :U 318 ]
-[e = _range -> -> 0 `i `uc ]
-[e :U 319 ]
-"176
-[; ;EEPROM_24C1025.c: 176:             ctrl=chip_add;
+[; ;EEPROM_24C1025.c: 170:             ctrl=chip_add;
 [e = _ctrl _chip_add ]
-"177
-[; ;EEPROM_24C1025.c: 177:             ctrl<<=1;
+"171
+[; ;EEPROM_24C1025.c: 171:             ctrl<<=1;
 [e =<< _ctrl -> -> 1 `i `uc ]
-"178
-[; ;EEPROM_24C1025.c: 178:             ctrl |= 0xA0;
+"172
+[; ;EEPROM_24C1025.c: 172:             ctrl |= 0xA0;
 [e =| _ctrl -> -> 160 `i `uc ]
-"179
-[; ;EEPROM_24C1025.c: 179:             ctrl |= range;
+"173
+[; ;EEPROM_24C1025.c: 173:             ctrl |= range;
 [e =| _ctrl -> _range `uc ]
-"181
-[; ;EEPROM_24C1025.c: 181:             I2C_Master_Start();
+"175
+[; ;EEPROM_24C1025.c: 175:             I2C_Master_Start();
 [e ( _I2C_Master_Start ..  ]
-"182
-[; ;EEPROM_24C1025.c: 182:             I2C_Master_Write(ctrl);
+"176
+[; ;EEPROM_24C1025.c: 176:             I2C_Master_Write(ctrl);
 [e ( _I2C_Master_Write (1 -> _ctrl `ui ]
-"183
-[; ;EEPROM_24C1025.c: 183:             I2C_Master_Write(((char *)&mem_add)[1]);
+"177
+[; ;EEPROM_24C1025.c: 177:             I2C_Master_Write(((char *)&mem_add)[1]);
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 1 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"184
-[; ;EEPROM_24C1025.c: 184:             I2C_Master_Write(((char *)&mem_add)[0]);
+"178
+[; ;EEPROM_24C1025.c: 178:             I2C_Master_Write(((char *)&mem_add)[0]);
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 0 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
+"179
+[; ;EEPROM_24C1025.c: 179:             }
+}
+[e $U 313  ]
+"180
+[; ;EEPROM_24C1025.c: 180:           else
+[e :U 310 ]
+"181
+[; ;EEPROM_24C1025.c: 181:             {
+{
+"182
+[; ;EEPROM_24C1025.c: 182:             I2C_Master_Write(*data);
+[e ( _I2C_Master_Write (1 -> *U _data `ui ]
+"183
+[; ;EEPROM_24C1025.c: 183:             data++;
+[e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
+"184
+[; ;EEPROM_24C1025.c: 184:             mem_add++;
+[e ++ _mem_add -> -> -> 1 `i `l `ul ]
 "185
 [; ;EEPROM_24C1025.c: 185:             }
 }
-[e $U 320  ]
-"186
-[; ;EEPROM_24C1025.c: 186:           else
-[e :U 317 ]
-"187
-[; ;EEPROM_24C1025.c: 187:             {
-{
-"188
-[; ;EEPROM_24C1025.c: 188:             I2C_Master_Write(*data);
-[e ( _I2C_Master_Write (1 -> *U _data `ui ]
-"189
-[; ;EEPROM_24C1025.c: 189:             data++;
-[e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
-"190
-[; ;EEPROM_24C1025.c: 190:             mem_add++;
-[e ++ _mem_add -> -> -> 1 `i `l `ul ]
-"191
-[; ;EEPROM_24C1025.c: 191:             }
-}
-[e :U 320 ]
-"192
-[; ;EEPROM_24C1025.c: 192:      }
-}
 [e :U 313 ]
-"163
-[; ;EEPROM_24C1025.c: 163:      while(*data)
-[e $ != -> *U _data `i -> 0 `i 314  ]
-[e :U 315 ]
-"193
-[; ;EEPROM_24C1025.c: 193:      I2C_Master_Write(0);
-[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
-"194
-[; ;EEPROM_24C1025.c: 194:      I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
-"195
-[; ;EEPROM_24C1025.c: 195:      my_delay_ms_WDT(5);
-[e ( _my_delay_ms_WDT -> 5 `i ]
-"197
-[; ;EEPROM_24C1025.c: 197: }
-[e :UE 309 ]
+"186
+[; ;EEPROM_24C1025.c: 186:      }
 }
-"202
-[; ;EEPROM_24C1025.c: 202: void EEPROM_24C1025_Read_Str(unsigned char chip_add, unsigned long mem_add,char *texto){
+[e :U 306 ]
+"158
+[; ;EEPROM_24C1025.c: 158:      while(*data)
+[e $ != -> *U _data `i -> 0 `i 307  ]
+[e :U 308 ]
+"187
+[; ;EEPROM_24C1025.c: 187:      I2C_Master_Write(0);
+[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
+"188
+[; ;EEPROM_24C1025.c: 188:      I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"189
+[; ;EEPROM_24C1025.c: 189:      _delay((unsigned long)((5)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"191
+[; ;EEPROM_24C1025.c: 191: }
+[e :UE 302 ]
+}
+"196
+[; ;EEPROM_24C1025.c: 196: void EEPROM_24C1025_Read_Str(unsigned char chip_add, unsigned long mem_add,char *texto){
 [v _EEPROM_24C1025_Read_Str `(v ~T0 @X0 1 ef3`uc`ul`*uc ]
 {
 [e :U _EEPROM_24C1025_Read_Str ]
@@ -1109,188 +1094,185 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _mem_add `ul ~T0 @X0 1 r2 ]
 [v _texto `*uc ~T0 @X0 1 r3 ]
 [f ]
-"203
-[; ;EEPROM_24C1025.c: 203:      unsigned char cnt=0;
+"197
+[; ;EEPROM_24C1025.c: 197:      unsigned char cnt=0;
 [v _cnt `uc ~T0 @X0 1 a ]
 [e = _cnt -> -> 0 `i `uc ]
-"204
-[; ;EEPROM_24C1025.c: 204:      unsigned char range=0;
+"198
+[; ;EEPROM_24C1025.c: 198:      unsigned char range=0;
 [v _range `uc ~T0 @X0 1 a ]
 [e = _range -> -> 0 `i `uc ]
-"205
-[; ;EEPROM_24C1025.c: 205:      unsigned char ctrl;
+"199
+[; ;EEPROM_24C1025.c: 199:      unsigned char ctrl;
 [v _ctrl `uc ~T0 @X0 1 a ]
+"201
+[; ;EEPROM_24C1025.c: 201:      if(mem_add>0x1FFFF) return;
+[e $ ! > _mem_add -> -> 131071 `l `ul 315  ]
+[e $UE 314  ]
+[e :U 315 ]
+"203
+[; ;EEPROM_24C1025.c: 203:      if(mem_add>0xFFFF) range=0x08; else range=0x00;
+[e $ ! > _mem_add -> -> 65535 `ui `ul 316  ]
+[e = _range -> -> 8 `i `uc ]
+[e $U 317  ]
+[e :U 316 ]
+[e = _range -> -> 0 `i `uc ]
+[e :U 317 ]
+"204
+[; ;EEPROM_24C1025.c: 204:      ctrl=chip_add;
+[e = _ctrl _chip_add ]
+"205
+[; ;EEPROM_24C1025.c: 205:      ctrl<<=1;
+[e =<< _ctrl -> -> 1 `i `uc ]
+"206
+[; ;EEPROM_24C1025.c: 206:      ctrl |= 0xA0;
+[e =| _ctrl -> -> 160 `i `uc ]
 "207
-[; ;EEPROM_24C1025.c: 207:      if(mem_add>0x1FFFF) return;
-[e $ ! > _mem_add -> -> 131071 `l `ul 322  ]
-[e $UE 321  ]
-[e :U 322 ]
-"209
-[; ;EEPROM_24C1025.c: 209:      if(mem_add>0xFFFF) range=0x08; else range=0x00;
+[; ;EEPROM_24C1025.c: 207:      ctrl |= 0b00000001;
+[e =| _ctrl -> -> 1 `i `uc ]
+"208
+[; ;EEPROM_24C1025.c: 208:      ctrl |= range;
+[e =| _ctrl -> _range `uc ]
+"210
+[; ;EEPROM_24C1025.c: 210:      I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
+"211
+[; ;EEPROM_24C1025.c: 211:      I2C_Master_Write(ctrl & 0xFE);
+[e ( _I2C_Master_Write (1 -> & -> _ctrl `i -> 254 `i `ui ]
+"212
+[; ;EEPROM_24C1025.c: 212:      I2C_Master_Write(((char *)&mem_add)[1]);
+[e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 1 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
+"213
+[; ;EEPROM_24C1025.c: 213:      I2C_Master_Write(((char *)&mem_add)[0]);
+[e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 0 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
+"214
+[; ;EEPROM_24C1025.c: 214:      I2C_Master_RepeatedStart();
+[e ( _I2C_Master_RepeatedStart ..  ]
+"215
+[; ;EEPROM_24C1025.c: 215:      I2C_Master_Write(ctrl);
+[e ( _I2C_Master_Write (1 -> _ctrl `ui ]
+"217
+[; ;EEPROM_24C1025.c: 217:      cnt=0;
+[e = _cnt -> -> 0 `i `uc ]
+"218
+[; ;EEPROM_24C1025.c: 218:      do{
+[e :U 320 ]
+{
+"219
+[; ;EEPROM_24C1025.c: 219:            if(mem_add>0x1FFFF) break;
+[e $ ! > _mem_add -> -> 131071 `l `ul 321  ]
+[e $U 319  ]
+[e :U 321 ]
+"220
+[; ;EEPROM_24C1025.c: 220:            if((mem_add+1)%128==0)
+[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 322  ]
+"221
+[; ;EEPROM_24C1025.c: 221:              {
+{
+"222
+[; ;EEPROM_24C1025.c: 222:              (*texto)=I2C_Master_Read(0);
+[e = *U _texto -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+"223
+[; ;EEPROM_24C1025.c: 223:              I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"225
+[; ;EEPROM_24C1025.c: 225:              _delay((unsigned long)((5)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"226
+[; ;EEPROM_24C1025.c: 226:              mem_add++;
+[e ++ _mem_add -> -> -> 1 `i `l `ul ]
+"227
+[; ;EEPROM_24C1025.c: 227:              texto++;
+[e ++ _texto * -> -> 1 `i `x -> -> # *U _texto `i `x ]
+"228
+[; ;EEPROM_24C1025.c: 228:              if(mem_add>0xFFFF) range=0x08; else range=0x00;
 [e $ ! > _mem_add -> -> 65535 `ui `ul 323  ]
 [e = _range -> -> 8 `i `uc ]
 [e $U 324  ]
 [e :U 323 ]
 [e = _range -> -> 0 `i `uc ]
 [e :U 324 ]
-"210
-[; ;EEPROM_24C1025.c: 210:      ctrl=chip_add;
-[e = _ctrl _chip_add ]
-"211
-[; ;EEPROM_24C1025.c: 211:      ctrl<<=1;
-[e =<< _ctrl -> -> 1 `i `uc ]
-"212
-[; ;EEPROM_24C1025.c: 212:      ctrl |= 0xA0;
-[e =| _ctrl -> -> 160 `i `uc ]
-"213
-[; ;EEPROM_24C1025.c: 213:      ctrl |= 0b00000001;
-[e =| _ctrl -> -> 1 `i `uc ]
-"214
-[; ;EEPROM_24C1025.c: 214:      ctrl |= range;
-[e =| _ctrl -> _range `uc ]
-"216
-[; ;EEPROM_24C1025.c: 216:      I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"217
-[; ;EEPROM_24C1025.c: 217:      I2C_Master_Write(ctrl & 0xFE);
-[e ( _I2C_Master_Write (1 -> & -> _ctrl `i -> 254 `i `ui ]
-"218
-[; ;EEPROM_24C1025.c: 218:      I2C_Master_Write(((char *)&mem_add)[1]);
-[e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 1 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"219
-[; ;EEPROM_24C1025.c: 219:      I2C_Master_Write(((char *)&mem_add)[0]);
-[e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 0 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"220
-[; ;EEPROM_24C1025.c: 220:      I2C_Master_RepeatedStart();
-[e ( _I2C_Master_RepeatedStart ..  ]
-"221
-[; ;EEPROM_24C1025.c: 221:      I2C_Master_Write(ctrl);
-[e ( _I2C_Master_Write (1 -> _ctrl `ui ]
-"223
-[; ;EEPROM_24C1025.c: 223:      cnt=0;
-[e = _cnt -> -> 0 `i `uc ]
-"224
-[; ;EEPROM_24C1025.c: 224:      do{
-[e :U 327 ]
-{
-"225
-[; ;EEPROM_24C1025.c: 225:            __asm("CLRWDT");
-[; <" CLRWDT ;# ">
-"226
-[; ;EEPROM_24C1025.c: 226:            if(mem_add>0x1FFFF) break;
-[e $ ! > _mem_add -> -> 131071 `l `ul 328  ]
-[e $U 326  ]
-[e :U 328 ]
-"227
-[; ;EEPROM_24C1025.c: 227:            if((mem_add+1)%128==0)
-[e $ ! == % + _mem_add -> -> -> 1 `i `l `ul -> -> -> 128 `i `l `ul -> -> -> 0 `i `l `ul 329  ]
-"228
-[; ;EEPROM_24C1025.c: 228:              {
-{
 "229
-[; ;EEPROM_24C1025.c: 229:              (*texto)=I2C_Master_Read(0);
-[e = *U _texto -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
-"230
-[; ;EEPROM_24C1025.c: 230:              I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
-"232
-[; ;EEPROM_24C1025.c: 232:              my_delay_ms_WDT(5);
-[e ( _my_delay_ms_WDT -> 5 `i ]
-"233
-[; ;EEPROM_24C1025.c: 233:              mem_add++;
-[e ++ _mem_add -> -> -> 1 `i `l `ul ]
-"234
-[; ;EEPROM_24C1025.c: 234:              texto++;
-[e ++ _texto * -> -> 1 `i `x -> -> # *U _texto `i `x ]
-"235
-[; ;EEPROM_24C1025.c: 235:              if(mem_add>0xFFFF) range=0x08; else range=0x00;
-[e $ ! > _mem_add -> -> 65535 `ui `ul 330  ]
-[e = _range -> -> 8 `i `uc ]
-[e $U 331  ]
-[e :U 330 ]
-[e = _range -> -> 0 `i `uc ]
-[e :U 331 ]
-"236
-[; ;EEPROM_24C1025.c: 236:              ctrl=chip_add;
+[; ;EEPROM_24C1025.c: 229:              ctrl=chip_add;
 [e = _ctrl _chip_add ]
-"237
-[; ;EEPROM_24C1025.c: 237:              ctrl<<=1;
+"230
+[; ;EEPROM_24C1025.c: 230:              ctrl<<=1;
 [e =<< _ctrl -> -> 1 `i `uc ]
-"238
-[; ;EEPROM_24C1025.c: 238:              ctrl |= 0xA0;
+"231
+[; ;EEPROM_24C1025.c: 231:              ctrl |= 0xA0;
 [e =| _ctrl -> -> 160 `i `uc ]
-"239
-[; ;EEPROM_24C1025.c: 239:              ctrl |= 0b00000001;
+"232
+[; ;EEPROM_24C1025.c: 232:              ctrl |= 0b00000001;
 [e =| _ctrl -> -> 1 `i `uc ]
-"240
-[; ;EEPROM_24C1025.c: 240:              ctrl |= range;
+"233
+[; ;EEPROM_24C1025.c: 233:              ctrl |= range;
 [e =| _ctrl -> _range `uc ]
-"242
-[; ;EEPROM_24C1025.c: 242:              I2C_Master_Start();
+"235
+[; ;EEPROM_24C1025.c: 235:              I2C_Master_Start();
 [e ( _I2C_Master_Start ..  ]
-"243
-[; ;EEPROM_24C1025.c: 243:              I2C_Master_Write(ctrl & 0xFE);
+"236
+[; ;EEPROM_24C1025.c: 236:              I2C_Master_Write(ctrl & 0xFE);
 [e ( _I2C_Master_Write (1 -> & -> _ctrl `i -> 254 `i `ui ]
-"244
-[; ;EEPROM_24C1025.c: 244:              I2C_Master_Write(((char *)&mem_add)[1]);
+"237
+[; ;EEPROM_24C1025.c: 237:              I2C_Master_Write(((char *)&mem_add)[1]);
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 1 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"245
-[; ;EEPROM_24C1025.c: 245:              I2C_Master_Write(((char *)&mem_add)[0]);
+"238
+[; ;EEPROM_24C1025.c: 238:              I2C_Master_Write(((char *)&mem_add)[0]);
 [e ( _I2C_Master_Write (1 -> *U + -> &U _mem_add `*uc * -> -> 0 `i `x -> -> # *U -> &U _mem_add `*uc `i `x `ui ]
-"246
-[; ;EEPROM_24C1025.c: 246:              I2C_Master_RepeatedStart();
+"239
+[; ;EEPROM_24C1025.c: 239:              I2C_Master_RepeatedStart();
 [e ( _I2C_Master_RepeatedStart ..  ]
-"247
-[; ;EEPROM_24C1025.c: 247:              I2C_Master_Write(ctrl);
+"240
+[; ;EEPROM_24C1025.c: 240:              I2C_Master_Write(ctrl);
 [e ( _I2C_Master_Write (1 -> _ctrl `ui ]
+"241
+[; ;EEPROM_24C1025.c: 241:              }
+}
+[e $U 325  ]
+"242
+[; ;EEPROM_24C1025.c: 242:            else
+[e :U 322 ]
+"243
+[; ;EEPROM_24C1025.c: 243:              {
+{
+"244
+[; ;EEPROM_24C1025.c: 244:              (*texto)=I2C_Master_Read(1);
+[e = *U _texto -> ( _I2C_Master_Read (1 -> -> 1 `i `us `uc ]
+"245
+[; ;EEPROM_24C1025.c: 245:              if((*texto)==0)break;
+[e $ ! == -> *U _texto `i -> 0 `i 326  ]
+[e $U 319  ]
+[e :U 326 ]
+"246
+[; ;EEPROM_24C1025.c: 246:              texto++;
+[e ++ _texto * -> -> 1 `i `x -> -> # *U _texto `i `x ]
+"247
+[; ;EEPROM_24C1025.c: 247:              mem_add++;
+[e ++ _mem_add -> -> -> 1 `i `l `ul ]
 "248
 [; ;EEPROM_24C1025.c: 248:              }
 }
-[e $U 332  ]
+[e :U 325 ]
 "249
-[; ;EEPROM_24C1025.c: 249:            else
-[e :U 329 ]
-"250
-[; ;EEPROM_24C1025.c: 250:              {
-{
+[; ;EEPROM_24C1025.c: 249:        }while((cnt++)<64);
+}
+[e $ < -> ++ _cnt -> -> 1 `i `uc `i -> 64 `i 320  ]
+[e :U 319 ]
 "251
-[; ;EEPROM_24C1025.c: 251:              (*texto)=I2C_Master_Read(1);
-[e = *U _texto -> ( _I2C_Master_Read (1 -> -> 1 `i `us `uc ]
-"252
-[; ;EEPROM_24C1025.c: 252:              if((*texto)==0)break;
-[e $ ! == -> *U _texto `i -> 0 `i 333  ]
-[e $U 326  ]
-[e :U 333 ]
-"253
-[; ;EEPROM_24C1025.c: 253:              texto++;
-[e ++ _texto * -> -> 1 `i `x -> -> # *U _texto `i `x ]
-"254
-[; ;EEPROM_24C1025.c: 254:              mem_add++;
-[e ++ _mem_add -> -> -> 1 `i `l `ul ]
-"255
-[; ;EEPROM_24C1025.c: 255:              }
-}
-[e :U 332 ]
-"256
-[; ;EEPROM_24C1025.c: 256:        }while((cnt++)<64);
-}
-[e $ < -> ++ _cnt -> -> 1 `i `uc `i -> 64 `i 327  ]
-[e :U 326 ]
-"258
-[; ;EEPROM_24C1025.c: 258:      I2C_Master_Read(0);
+[; ;EEPROM_24C1025.c: 251:      I2C_Master_Read(0);
 [e ( _I2C_Master_Read (1 -> -> 0 `i `us ]
-"259
-[; ;EEPROM_24C1025.c: 259:      I2C_Master_Stop();
+"252
+[; ;EEPROM_24C1025.c: 252:      I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
-"260
-[; ;EEPROM_24C1025.c: 260:      _delay((unsigned long)((650)*(32000000/4000000.0)));
+"253
+[; ;EEPROM_24C1025.c: 253:      _delay((unsigned long)((650)*(32000000/4000000.0)));
 [e ( __delay (1 -> * -> -> 650 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-"261
-[; ;EEPROM_24C1025.c: 261: }
-[e :UE 321 ]
+"254
+[; ;EEPROM_24C1025.c: 254: }
+[e :UE 314 ]
 }
-"269
-[; ;EEPROM_24C1025.c: 269: void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char data){
+"262
+[; ;EEPROM_24C1025.c: 262: void EEPROM_24C1025_Write_Byte(unsigned char chip_add, unsigned long mem_add, char data){
 [v _EEPROM_24C1025_Write_Byte `(v ~T0 @X0 1 ef3`uc`ul`uc ]
 {
 [e :U _EEPROM_24C1025_Write_Byte ]
@@ -1298,37 +1280,37 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _mem_add `ul ~T0 @X0 1 r2 ]
 [v _data `uc ~T0 @X0 1 r3 ]
 [f ]
-"270
-[; ;EEPROM_24C1025.c: 270:      EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 1, &data);
+"263
+[; ;EEPROM_24C1025.c: 263:      EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 1, &data);
 [e ( _EEPROM_24C1025_Write_Buffer (4 , , , _chip_add _mem_add -> -> 1 `i `uc &U _data ]
-"271
-[; ;EEPROM_24C1025.c: 271: }
-[e :UE 334 ]
+"264
+[; ;EEPROM_24C1025.c: 264: }
+[e :UE 327 ]
 }
-"274
-[; ;EEPROM_24C1025.c: 274: unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem_add){
+"267
+[; ;EEPROM_24C1025.c: 267: unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem_add){
 [v _EEPROM_24C1025_Read_Byte `(uc ~T0 @X0 1 ef2`uc`ul ]
 {
 [e :U _EEPROM_24C1025_Read_Byte ]
 [v _chip_add `uc ~T0 @X0 1 r1 ]
 [v _mem_add `ul ~T0 @X0 1 r2 ]
 [f ]
-"275
-[; ;EEPROM_24C1025.c: 275:     char data;
+"268
+[; ;EEPROM_24C1025.c: 268:     char data;
 [v _data `uc ~T0 @X0 1 a ]
-"276
-[; ;EEPROM_24C1025.c: 276:     EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 1, &data);
+"269
+[; ;EEPROM_24C1025.c: 269:     EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 1, &data);
 [e ( _EEPROM_24C1025_Read_Buffer (4 , , , _chip_add _mem_add -> -> 1 `i `uc &U _data ]
-"277
-[; ;EEPROM_24C1025.c: 277:     return data;
+"270
+[; ;EEPROM_24C1025.c: 270:     return data;
 [e ) -> _data `uc ]
-[e $UE 335  ]
-"278
-[; ;EEPROM_24C1025.c: 278: }
-[e :UE 335 ]
+[e $UE 328  ]
+"271
+[; ;EEPROM_24C1025.c: 271: }
+[e :UE 328 ]
 }
-"280
-[; ;EEPROM_24C1025.c: 280: void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data){
+"274
+[; ;EEPROM_24C1025.c: 274: void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data){
 [v _EEPROM_24C1025_Write_Int `(v ~T0 @X0 1 ef3`uc`ul`i ]
 {
 [e :U _EEPROM_24C1025_Write_Int ]
@@ -1336,79 +1318,138 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _mem_add `ul ~T0 @X0 1 r2 ]
 [v _data `i ~T0 @X0 1 r3 ]
 [f ]
-"281
-[; ;EEPROM_24C1025.c: 281:      char local[2];
+"275
+[; ;EEPROM_24C1025.c: 275:      char local[2];
 [v _local `uc ~T0 @X0 -> 2 `i a ]
-"282
-[; ;EEPROM_24C1025.c: 282:      local[0]=((char *)&data)[1];
+"276
+[; ;EEPROM_24C1025.c: 276:      local[0]=((char *)&data)[1];
 [e = *U + &U _local * -> -> -> 0 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 1 `i `x -> -> # *U -> &U _data `*uc `i `x ]
-"283
-[; ;EEPROM_24C1025.c: 283:      local[1]=((char *)&data)[0];
+"277
+[; ;EEPROM_24C1025.c: 277:      local[1]=((char *)&data)[0];
 [e = *U + &U _local * -> -> -> 1 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 0 `i `x -> -> # *U -> &U _data `*uc `i `x ]
-"284
-[; ;EEPROM_24C1025.c: 284:      EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 2, local);
+"278
+[; ;EEPROM_24C1025.c: 278:      EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 2, local);
 [e ( _EEPROM_24C1025_Write_Buffer (4 , , , _chip_add _mem_add -> -> 2 `i `uc &U _local ]
-"285
-[; ;EEPROM_24C1025.c: 285: }
-[e :UE 336 ]
+"279
+[; ;EEPROM_24C1025.c: 279: }
+[e :UE 329 ]
 }
-"288
-[; ;EEPROM_24C1025.c: 288: unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_add){
+"282
+[; ;EEPROM_24C1025.c: 282: unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_add){
 [v _EEPROM_24C1025_Read_Int `(ui ~T0 @X0 1 ef2`uc`ul ]
 {
 [e :U _EEPROM_24C1025_Read_Int ]
 [v _chip_add `uc ~T0 @X0 1 r1 ]
 [v _mem_add `ul ~T0 @X0 1 r2 ]
 [f ]
-"289
-[; ;EEPROM_24C1025.c: 289:     char data[2];
+"283
+[; ;EEPROM_24C1025.c: 283:     char data[2];
 [v _data `uc ~T0 @X0 -> 2 `i a ]
-"290
-[; ;EEPROM_24C1025.c: 290:     EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 2, data);
+"284
+[; ;EEPROM_24C1025.c: 284:     EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 2, data);
 [e ( _EEPROM_24C1025_Read_Buffer (4 , , , _chip_add _mem_add -> -> 2 `i `uc &U _data ]
-"291
-[; ;EEPROM_24C1025.c: 291:     return (data[0]<<8)+data[1];
+"285
+[; ;EEPROM_24C1025.c: 285:     return (data[0]<<8)+data[1];
 [e ) -> + << -> *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux `i -> 8 `i -> *U + &U _data * -> -> -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux `i `ui ]
-[e $UE 337  ]
-"292
-[; ;EEPROM_24C1025.c: 292: }
-[e :UE 337 ]
+[e $UE 330  ]
+"286
+[; ;EEPROM_24C1025.c: 286: }
+[e :UE 330 ]
 }
+"290
+[; ;EEPROM_24C1025.c: 290: void EEPROM_24C1025_Write_Long(unsigned char chip_add, unsigned long mem_add, long data){
+[v _EEPROM_24C1025_Write_Long `(v ~T0 @X0 1 ef3`uc`ul`l ]
+{
+[e :U _EEPROM_24C1025_Write_Long ]
+[v _chip_add `uc ~T0 @X0 1 r1 ]
+[v _mem_add `ul ~T0 @X0 1 r2 ]
+[v _data `l ~T0 @X0 1 r3 ]
+[f ]
+"291
+[; ;EEPROM_24C1025.c: 291:      char local[4];
+[v _local `uc ~T0 @X0 -> 4 `i a ]
+"292
+[; ;EEPROM_24C1025.c: 292:      local[0]=((char *)&data)[3];
+[e = *U + &U _local * -> -> -> 0 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 3 `i `x -> -> # *U -> &U _data `*uc `i `x ]
+"293
+[; ;EEPROM_24C1025.c: 293:      local[1]=((char *)&data)[2];
+[e = *U + &U _local * -> -> -> 1 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 2 `i `x -> -> # *U -> &U _data `*uc `i `x ]
+"294
+[; ;EEPROM_24C1025.c: 294:      local[2]=((char *)&data)[1];
+[e = *U + &U _local * -> -> -> 2 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 1 `i `x -> -> # *U -> &U _data `*uc `i `x ]
 "295
-[; ;EEPROM_24C1025.c: 295: void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value){
+[; ;EEPROM_24C1025.c: 295:      local[3]=((char *)&data)[0];
+[e = *U + &U _local * -> -> -> 3 `i `ui `ux -> -> # *U &U _local `ui `ux *U + -> &U _data `*uc * -> -> 0 `i `x -> -> # *U -> &U _data `*uc `i `x ]
+"296
+[; ;EEPROM_24C1025.c: 296:      EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 4, local);
+[e ( _EEPROM_24C1025_Write_Buffer (4 , , , _chip_add _mem_add -> -> 4 `i `uc &U _local ]
+"297
+[; ;EEPROM_24C1025.c: 297: }
+[e :UE 331 ]
+}
+"299
+[; ;EEPROM_24C1025.c: 299: unsigned long EEPROM_24C1025_Read_Long(unsigned char chip_add, unsigned long mem_add){
+[v _EEPROM_24C1025_Read_Long `(ul ~T0 @X0 1 ef2`uc`ul ]
+{
+[e :U _EEPROM_24C1025_Read_Long ]
+[v _chip_add `uc ~T0 @X0 1 r1 ]
+[v _mem_add `ul ~T0 @X0 1 r2 ]
+[f ]
+"300
+[; ;EEPROM_24C1025.c: 300:     char data[4];
+[v _data `uc ~T0 @X0 -> 4 `i a ]
+"301
+[; ;EEPROM_24C1025.c: 301:     long resultado;
+[v _resultado `l ~T0 @X0 1 a ]
+"302
+[; ;EEPROM_24C1025.c: 302:     EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 4, data);
+[e ( _EEPROM_24C1025_Read_Buffer (4 , , , _chip_add _mem_add -> -> 4 `i `uc &U _data ]
+"303
+[; ;EEPROM_24C1025.c: 303:     resultado=((long)data[0]<<24)|
+[e = _resultado | | | << -> *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 24 `i << -> *U + &U _data * -> -> -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 16 `i << -> *U + &U _data * -> -> -> 2 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 8 `i << -> *U + &U _data * -> -> -> 3 `i `ui `ux -> -> # *U &U _data `ui `ux `l -> 0 `i ]
+"307
+[; ;EEPROM_24C1025.c: 307:     return resultado;
+[e ) -> _resultado `ul ]
+[e $UE 332  ]
+"308
+[; ;EEPROM_24C1025.c: 308: }
+[e :UE 332 ]
+}
+"317
+[; ;EEPROM_24C1025.c: 317: void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value){
 [v _EEPROM_24C1025_Fill_All `(v ~T0 @X0 1 ef2`uc`ui ]
 {
 [e :U _EEPROM_24C1025_Fill_All ]
 [v _chip_add `uc ~T0 @X0 1 r1 ]
 [v _value `ui ~T0 @X0 1 r2 ]
 [f ]
-"296
-[; ;EEPROM_24C1025.c: 296:      unsigned long mem_add;
+"318
+[; ;EEPROM_24C1025.c: 318:      unsigned long mem_add;
 [v _mem_add `ul ~T0 @X0 1 a ]
-"297
-[; ;EEPROM_24C1025.c: 297:      for(mem_add=0;mem_add<=0x3FF;mem_add+=2)
+"319
+[; ;EEPROM_24C1025.c: 319:      for(mem_add=0;mem_add<=0x3FF;mem_add+=2)
 {
 [e = _mem_add -> -> -> 0 `i `l `ul ]
-[e $ <= _mem_add -> -> -> 1023 `i `l `ul 339  ]
-[e $U 340  ]
-[e :U 339 ]
-"298
-[; ;EEPROM_24C1025.c: 298:         {
+[e $ <= _mem_add -> -> -> 1023 `i `l `ul 334  ]
+[e $U 335  ]
+[e :U 334 ]
+"320
+[; ;EEPROM_24C1025.c: 320:         {
 {
-"299
-[; ;EEPROM_24C1025.c: 299:         EEPROM_24C1025_Write_Int(chip_add, mem_add, value);
+"321
+[; ;EEPROM_24C1025.c: 321:         EEPROM_24C1025_Write_Int(chip_add, mem_add, value);
 [e ( _EEPROM_24C1025_Write_Int (3 , , _chip_add _mem_add -> _value `i ]
-"300
-[; ;EEPROM_24C1025.c: 300:         __asm("CLRWDT");
+"322
+[; ;EEPROM_24C1025.c: 322:         __asm("CLRWDT");
 [; <" CLRWDT ;# ">
-"301
-[; ;EEPROM_24C1025.c: 301:         }
+"323
+[; ;EEPROM_24C1025.c: 323:         }
 }
 [e =+ _mem_add -> -> -> 2 `i `l `ul ]
-[e $ <= _mem_add -> -> -> 1023 `i `l `ul 339  ]
-[e :U 340 ]
+[e $ <= _mem_add -> -> -> 1023 `i `l `ul 334  ]
+[e :U 335 ]
 }
-"302
-[; ;EEPROM_24C1025.c: 302: }
-[e :UE 338 ]
+"324
+[; ;EEPROM_24C1025.c: 324: }
+[e :UE 333 ]
 }

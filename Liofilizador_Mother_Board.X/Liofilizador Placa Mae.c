@@ -272,46 +272,7 @@ void main(void)
      my_delay_ms_CLRWDT(500);
      
     //--------------------------------------------------------------------------
-     
-     
-     
-     
-     //while(1){
-     //    asm("CLRWDT");
-     //    ouve_comunicacao();
-     //}
-     
-     
-     
-     /*
-     while(1)
-     {
-     PROCULUS_OK();
-     __delay_ms(500);
-     EEPROM_24C1025_Write_Long(0,0,12345);
-     //__delay_ms(50);
-     if(EEPROM_24C1025_Read_Long(0,0)==12345)
-       {  
-       PROCULUS_Buzzer(100)  ;
-       __delay_ms(100);
-       PROCULUS_Buzzer(100)  ;
-       __delay_ms(100);
-       PROCULUS_Buzzer(100)  ;
-       __delay_ms(100);
-       PROCULUS_Buzzer(100)  ;
-       __delay_ms(100);
-       PROCULUS_Buzzer(100)  ;
-       __delay_ms(100);
-       }
-     else
-       {
-       PROCULUS_Buzzer(100)  ;
-       __delay_ms(100);         
-       }   
-     my_delay_ms_CLRWDT(1000);
-     
-     }
-     */
+
      
      
      
@@ -357,19 +318,91 @@ void main(void)
      
      
      
-     
-     
-     
-     
-//     //------------------------------------------------------------------------- 
-//     statuspower.bits=EEPROM_Read_Byte(16); //StatusPower
-//     if(statuspower.bits==0) 
-//       {
-//       clear_screen();
-//       PROCULUS_Show_Screen(0);   
-//       }  
+  /*  
+    {
+    char bb[50];
+
+    bb[0]=0; //Chip
+    bb[1]=0; //
+    bb[2]=0; //ENDERECO
+    bb[3]=0; //
+    bb[4]=0; //    
+    while(1){
+        Send_To_Slave(1,COMMAND_EEE_R_STR,5,bb);
+        my_delay_ms_CLRWDT(1000);
+        }
+    }
+    
+    while(1)
+         {
          
-     //fat_processo.
+         bb[0]=0; //Chip
+         bb[1]=0; //
+         bb[2]=0; //ENDERECO
+         bb[3]=0; //
+         bb[4]=0; //
+         
+         bb[5]=31;//DADOS        
+         bb[6]=31;        
+         bb[7]=31;        
+         bb[8]=31;        
+         bb[9]=31;        
+         bb[10]=31;        
+         bb[11]=31;        
+         bb[12]=31;        
+         bb[13]=31;        
+         bb[14]=31;        
+         bb[15]=31;        
+         bb[16]=31;        
+         bb[17]=31;        
+         bb[18]=31;        
+         bb[19]=31;        
+         bb[20]=31;        
+         bb[21]=31;        
+         bb[22]=31;        
+         bb[23]=31;        
+         bb[24]=31;        
+         bb[25]=31;        
+         bb[26]=31;        
+         bb[27]=31;        
+         bb[28]=31;        
+         bb[29]=31;        
+         bb[30]=31;        
+         bb[31]=31;        
+         bb[32]=31;        
+         bb[33]=31;        
+         bb[34]=31;        
+         bb[35]=31;        
+         bb[36]=0;
+         
+         Send_To_Slave(1,COMMAND_EEE_W_STR,37,bb);         
+         
+         USART_to_Protocol(&usart_protocol);
+         USART_put_int(HEADER_LIOFILIZADOR);
+         USART_putc(0x01);
+         USART_putc(0xC0);
+         USART_putc(usart_protocol.command);
+         USART_putc(usart_protocol.size+3);                                                         
+         for(char i=0;i<usart_protocol.size;i++)
+               USART_putc(usart_protocol.value[i]);
+         
+         my_delay_ms_CLRWDT(1000);
+         }
+    }
+
+    */ 
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
      {
      //-----------TOTALIZADOR DE RESET-------------         
      unsigned int reset;    
@@ -439,19 +472,19 @@ void main(void)
      Carregar_tempo_de_datalog(); //Intervalo de capturas
      add_datalog=EEPROM_24C1025_Read_Long (0,2); //Inicializa add_datalog
      //-------------------------------------------------------------------------     
-     print("Testando Memoria Externa...");
-     if(TesteMemoria24C1025())
-        print("->Memoria OK!") ;
-     else
-        { 
-        print("->Memoria ERRO!");
-        PROCULUS_Buzzer(1000);
-        __delay_ms(1000);
-        PROCULUS_Buzzer(1000);
-        __delay_ms(1000);
-        PROCULUS_Buzzer(1000);
-        my_delay_ms_CLRWDT(2000);
-        }
+//     print("Testando Memoria Externa...");
+//     if(TesteMemoria24C1025())
+//        print("->Memoria OK!") ;
+//     else
+//        { 
+//        print("->Memoria ERRO!");
+//        PROCULUS_Buzzer(1000);
+//        __delay_ms(1000);
+//        PROCULUS_Buzzer(1000);
+//        __delay_ms(1000);
+//        PROCULUS_Buzzer(1000);
+//        my_delay_ms_CLRWDT(2000);
+//        }
      
      //------------Valores Iniciais da tela Principal---------------------------
      print("Analisando dados...");  
@@ -907,38 +940,65 @@ unsigned char countboard()
      unsigned int contador;
      int retorno;
      char i;
+     signed char sizereturn;
+     //-------------------------------------------------------------------------
+
+     if(comando==COMMAND_EEE_R_BUF)
+        sizereturn=buffer[5]; //Pega o tamanho do buffer em EEE_R_BUF 
+     else
+        sizereturn=-1; 
      
+     //-------------------------------------------------------------------------
      USART_put_int(HEADER_LIOFILIZADOR);
      USART_putc(BOARD_ADD);
      USART_putc(destino);
      USART_putc(comando);
      USART_putc(size);
      for(i=0;i<size;i++)
-          USART_putc(buffer[i]);     
-     __delay_us(80); //Para efeito de debug, vizualiza após ultimo byte ser enviado
+          USART_putc(buffer[i]);  //Envia os bytes com o tamanho do buffer   
+     //-------------------------------------------------------------------------
+     //Aguarda o retorno da placa filha, que deve vir acompanhada de 0 quando 
+     //for string.
      
      flag_usart_rx=0;
-     usart_buffer[5]=2;    //Size
-     usart_buffer[6]=0xFF; //Resposta Padrao HI
-     usart_buffer[7]=0xFF; //Resposta Padrao LO   
-     retorno=-1;
+     usart_buffer[5]=0;
      
      for(int contador=0;contador<RX_MAX_WAIT_TIME;contador++)
          {
-          __delay_us(200);
+          __delay_us(200);          
           if(flag_usart_rx==1)
-             {
-             //__delay_ms(2); 
+             {            
              flag_usart_rx=0;
-             size=usart_buffer[5];
+             if(sizereturn!=-1) 
+                usart_buffer[5]=sizereturn;              
+             else
+                usart_buffer[5]=2; 
+             //for(i=0;i<sizereturn;i++) buffer[i]=usart_buffer[i+6]
+             //usart_buffer[5]=sizereturn; 
              retorno = (usart_buffer[6]<<8)|(usart_buffer[7]);
-             for(i=0;i<size;i++)
-                 buffer[i]=usart_buffer[i+6];          
              contador=0;
              break;
              }
           }
-     return retorno;
+     
+     /*
+     if(usart_buffer[5]==0) //Sem Resposta
+       {  
+       if(sizereturn!=-1)  
+          { 
+          usart_buffer[5]=sizereturn;
+          for(i=0;i<sizereturn;i++) usart_buffer[6+i]=0xFF;
+          }
+       else
+          { 
+          usart_buffer[5]=2;    //Size
+          usart_buffer[6]=0xFF; //Resposta Padrao HI
+          usart_buffer[7]=0xFF; //Resposta Padrao LO   
+          retorno=-1;           
+          }
+       }
+      */ 
+    return retorno;
 }
 
 
@@ -1842,7 +1902,7 @@ void SEND_REPLY_OK(void){
 
 void Comando_Protocolo_Serial(void){
  //======================= COMUNICACAO COM O PC =========================
-        unsigned char size, i, DestinoMemo;
+        unsigned char size, i, DestinoMemo, ComandoMemo;
                
         USART_to_Protocol(&usart_protocol);
         if(usart_protocol.header==HEADER_LIOFILIZADOR)   
@@ -1861,10 +1921,9 @@ void Comando_Protocolo_Serial(void){
                    Origem = 0XC0
                    Destino= 0X01 a 0X0F
                    */
-                    
-                   
                    
                    DestinoMemo=usart_protocol.destino;
+                   ComandoMemo=usart_protocol.command;
                    Send_To_Slave(usart_protocol.destino,
                                  usart_protocol.command,
                                  usart_protocol.size,
@@ -1885,14 +1944,15 @@ void Comando_Protocolo_Serial(void){
                    USART_putc(usart_protocol.command);
                    USART_putc(usart_protocol.size+3);                                                         
                    for(i=0;i<usart_protocol.size;i++)
-                         USART_putc(usart_protocol.value[i]);
-                   SEND_REPLY_OK();
-                   
-//                   for(char i=0;i<usart_protocol.size;i++)
-//                      {
-//                      PROCULUS_Buzzer(100) ;
-//                      my_delay_ms_CLRWDT(200);
-//                      }                   
+                      { 
+                      USART_putc(usart_protocol.value[i]);                      
+                      if((usart_protocol.value[i]==0) &&
+                        ((ComandoMemo==COMMAND_IEE_R_STR) ||
+                         (ComandoMemo==COMMAND_EEE_R_STR) ||
+                         (ComandoMemo==COMMAND_LCD_R_VP_STR)))
+                          break;                        
+                      }
+                   if(usart_protocol.size<3)SEND_REPLY_OK();
                    
                    flag_usart_rx=0;               
                    }
@@ -1900,6 +1960,10 @@ void Comando_Protocolo_Serial(void){
         flag_usart_rx=0;     
         }//HEADER_LIOFILIZADOR
 }
+
+
+
+
 
 
 void Formatar_Banco_de_Dados(char inicio, char total){

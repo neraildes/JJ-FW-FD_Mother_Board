@@ -19,7 +19,7 @@
 #include <xc.h>
 #include "protocolo.h"
 
-#define USART_BUFFER_SIZE 32+10  //32 bytes uteis
+#define USART_BUFFER_SIZE 32+20  //32 bytes uteis
 #define USART_LINE_BUFFER_SIZE 2 //Linhas de buffer
 #define RX_MAX_WAIT_TIME  400    //Loops de recepcao serial
 #define TIME_ACQUIRE_MS   2      //Tempo em ms para aguardar resposta 

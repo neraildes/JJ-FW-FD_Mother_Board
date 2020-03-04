@@ -4521,268 +4521,14 @@ unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_a
 void EEPROM_24C1025_Write_Long(unsigned char chip_add, unsigned long mem_add, long data);
 unsigned long EEPROM_24C1025_Read_Long(unsigned char chip_add, unsigned long mem_add);
 
-char TesteMemoria24C1025(void);
 void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value);
 # 5 "EEPROM_24C1025.c" 2
-
-# 1 "./timedate.h" 1
-# 13 "./timedate.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 1 3
-# 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
-
-
-
-
-
-typedef void * va_list[1];
-
-
-
-
-typedef void * __isoc_va_list[1];
-# 137 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long ssize_t;
-# 246 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long long off_t;
-# 399 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef struct _IO_FILE FILE;
-# 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 2 3
-# 52 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 3
-typedef union _G_fpos64_t {
- char __opaque[16];
- double __align;
-} fpos_t;
-
-extern FILE *const stdin;
-extern FILE *const stdout;
-extern FILE *const stderr;
-
-
-
-
-
-FILE *fopen(const char *restrict, const char *restrict);
-FILE *freopen(const char *restrict, const char *restrict, FILE *restrict);
-int fclose(FILE *);
-
-int remove(const char *);
-int rename(const char *, const char *);
-
-int feof(FILE *);
-int ferror(FILE *);
-int fflush(FILE *);
-void clearerr(FILE *);
-
-int fseek(FILE *, long, int);
-long ftell(FILE *);
-void rewind(FILE *);
-
-int fgetpos(FILE *restrict, fpos_t *restrict);
-int fsetpos(FILE *, const fpos_t *);
-
-size_t fread(void *restrict, size_t, size_t, FILE *restrict);
-size_t fwrite(const void *restrict, size_t, size_t, FILE *restrict);
-
-int fgetc(FILE *);
-int getc(FILE *);
-int getchar(void);
-int ungetc(int, FILE *);
-
-int fputc(int, FILE *);
-int putc(int, FILE *);
-int putchar(int);
-
-char *fgets(char *restrict, int, FILE *restrict);
-
-char *gets(char *);
-
-
-int fputs(const char *restrict, FILE *restrict);
-int puts(const char *);
-
-#pragma printf_check(printf) const
-#pragma printf_check(vprintf) const
-#pragma printf_check(sprintf) const
-#pragma printf_check(snprintf) const
-#pragma printf_check(vsprintf) const
-#pragma printf_check(vsnprintf) const
-
-int printf(const char *restrict, ...);
-int fprintf(FILE *restrict, const char *restrict, ...);
-int sprintf(char *restrict, const char *restrict, ...);
-int snprintf(char *restrict, size_t, const char *restrict, ...);
-
-int vprintf(const char *restrict, __isoc_va_list);
-int vfprintf(FILE *restrict, const char *restrict, __isoc_va_list);
-int vsprintf(char *restrict, const char *restrict, __isoc_va_list);
-int vsnprintf(char *restrict, size_t, const char *restrict, __isoc_va_list);
-
-int scanf(const char *restrict, ...);
-int fscanf(FILE *restrict, const char *restrict, ...);
-int sscanf(const char *restrict, const char *restrict, ...);
-int vscanf(const char *restrict, __isoc_va_list);
-int vfscanf(FILE *restrict, const char *restrict, __isoc_va_list);
-int vsscanf(const char *restrict, const char *restrict, __isoc_va_list);
-
-void perror(const char *);
-
-int setvbuf(FILE *restrict, char *restrict, int, size_t);
-void setbuf(FILE *restrict, char *restrict);
-
-char *tmpnam(char *);
-FILE *tmpfile(void);
-
-
-
-
-FILE *fmemopen(void *restrict, size_t, const char *restrict);
-FILE *open_memstream(char **, size_t *);
-FILE *fdopen(int, const char *);
-FILE *popen(const char *, const char *);
-int pclose(FILE *);
-int fileno(FILE *);
-int fseeko(FILE *, off_t, int);
-off_t ftello(FILE *);
-int dprintf(int, const char *restrict, ...);
-int vdprintf(int, const char *restrict, __isoc_va_list);
-void flockfile(FILE *);
-int ftrylockfile(FILE *);
-void funlockfile(FILE *);
-int getc_unlocked(FILE *);
-int getchar_unlocked(void);
-int putc_unlocked(int, FILE *);
-int putchar_unlocked(int);
-ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict);
-ssize_t getline(char **restrict, size_t *restrict, FILE *restrict);
-int renameat(int, const char *, int, const char *);
-char *ctermid(char *);
-
-
-
-
-
-
-
-char *tempnam(const char *, const char *);
-# 13 "./timedate.h" 2
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 1 3
-# 33 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
-# 76 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long long time_t;
-# 293 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef void * timer_t;
-
-
-
-
-typedef int clockid_t;
-
-
-
-
-typedef long clock_t;
-# 313 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-struct timespec { time_t tv_sec; long tv_nsec; };
-
-
-
-
-
-typedef int pid_t;
-# 411 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef struct __locale_struct * locale_t;
-# 33 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 2 3
-
-
-
-
-
-
-
-struct tm {
- int tm_sec;
- int tm_min;
- int tm_hour;
- int tm_mday;
- int tm_mon;
- int tm_year;
- int tm_wday;
- int tm_yday;
- int tm_isdst;
- long __tm_gmtoff;
- const char *__tm_zone;
-};
-
-clock_t clock (void);
-time_t time (time_t *);
-double difftime (time_t, time_t);
-time_t mktime (struct tm *);
-size_t strftime (char *restrict, size_t, const char *restrict, const struct tm *restrict);
-struct tm *gmtime (const time_t *);
-struct tm *localtime (const time_t *);
-char *asctime (const struct tm *);
-char *ctime (const time_t *);
-int timespec_get(struct timespec *, int);
-# 73 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 3
-size_t strftime_l (char * restrict, size_t, const char * restrict, const struct tm * restrict, locale_t);
-
-struct tm *gmtime_r (const time_t *restrict, struct tm *restrict);
-struct tm *localtime_r (const time_t *restrict, struct tm *restrict);
-char *asctime_r (const struct tm *restrict, char *restrict);
-char *ctime_r (const time_t *, char *);
-
-void tzset (void);
-
-struct itimerspec {
- struct timespec it_interval;
- struct timespec it_value;
-};
-# 102 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\time.h" 3
-int nanosleep (const struct timespec *, struct timespec *);
-int clock_getres (clockid_t, struct timespec *);
-int clock_gettime (clockid_t, struct timespec *);
-int clock_settime (clockid_t, const struct timespec *);
-int clock_nanosleep (clockid_t, int, const struct timespec *, struct timespec *);
-int clock_getcpuclockid (pid_t, clockid_t *);
-
-struct sigevent;
-int timer_create (clockid_t, struct sigevent *restrict, timer_t *restrict);
-int timer_delete (timer_t);
-int timer_settime (timer_t, int, const struct itimerspec *restrict, struct itimerspec *restrict);
-int timer_gettime (timer_t, struct itimerspec *);
-int timer_getoverrun (timer_t);
-
-extern char *tzname[2];
-
-
-
-
-
-char *strptime (const char *restrict, const char *restrict, struct tm *restrict);
-extern int daylight;
-extern long timezone;
-extern int getdate_err;
-struct tm *getdate (const char *);
-# 14 "./timedate.h" 2
-
-
-
-
-
-void my_delay_ms(long time);
-void my_delay_ms_TMR1(long time);
-void my_delay_ms_CLRWDT(long time);
-# 6 "EEPROM_24C1025.c" 2
-
 
 
 
 extern volatile unsigned int Delay_Led_Memory;
 
-extern char buffer[32];
+extern char buffer[64];
 
 
 void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
@@ -4810,14 +4556,13 @@ void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
      I2C_Master_Write(((char *)&mem_add)[0]);
      for(count=0;count<(sizedata-1);count++)
           {
-          __asm("CLRWDT");
           if(mem_add>0x1FFFF) return;
           if((mem_add+1)%128==0)
             {
             I2C_Master_Write(*data);
             I2C_Master_Stop();
 
-            my_delay_ms_CLRWDT(5);
+            _delay((unsigned long)((5)*(32000000/4000.0)));
             mem_add++;
             data++;
             if(mem_add>0xFFFF) range=0x08; else range=0x00;
@@ -4840,8 +4585,7 @@ void EEPROM_24C1025_Write_Buffer(unsigned char chip_add,
      }
      I2C_Master_Write(*data);
      I2C_Master_Stop();
-
-     my_delay_ms_WDT(5);
+     _delay((unsigned long)((5)*(32000000/4000.0)));
 }
 
 
@@ -4877,14 +4621,13 @@ void EEPROM_24C1025_Read_Buffer(unsigned char chip_add,
 
      for(char cnt=0;cnt<(sizedata);cnt++)
         {
-           __asm("CLRWDT");
            if(mem_add>0x1FFFF) break;
            if((mem_add+1)%128==0)
              {
              (*data)=I2C_Master_Read(0);
              I2C_Master_Stop();
 
-             my_delay_ms_WDT(5);
+             _delay((unsigned long)((5)*(32000000/4000.0)));
              mem_add++;
              data++;
              if(mem_add>0xFFFF) range=0x08; else range=0x00;
@@ -4935,14 +4678,13 @@ void EEPROM_24C1025_Write_Str(unsigned char chip_add, unsigned long mem_add,char
      I2C_Master_Write(((char *)&mem_add)[0]);
      while(*data)
           {
-          __asm("CLRWDT");
           if(mem_add>0x1FFFF) return;
           if((mem_add+1)%128==0)
             {
             I2C_Master_Write(*data);
             I2C_Master_Stop();
 
-            my_delay_ms_WDT(5);
+            _delay((unsigned long)((5)*(32000000/4000.0)));
             mem_add++;
             data++;
             if(mem_add>0xFFFF) range=0x08; else range=0x00;
@@ -4965,7 +4707,7 @@ void EEPROM_24C1025_Write_Str(unsigned char chip_add, unsigned long mem_add,char
      }
      I2C_Master_Write(0);
      I2C_Master_Stop();
-     my_delay_ms_WDT(5);
+     _delay((unsigned long)((5)*(32000000/4000.0)));
 
 }
 
@@ -4995,14 +4737,13 @@ void EEPROM_24C1025_Read_Str(unsigned char chip_add, unsigned long mem_add,char 
 
      cnt=0;
      do{
-           __asm("CLRWDT");
            if(mem_add>0x1FFFF) break;
            if((mem_add+1)%128==0)
              {
              (*texto)=I2C_Master_Read(0);
              I2C_Master_Stop();
 
-             my_delay_ms_WDT(5);
+             _delay((unsigned long)((5)*(32000000/4000.0)));
              mem_add++;
              texto++;
              if(mem_add>0xFFFF) range=0x08; else range=0x00;
@@ -5050,6 +4791,7 @@ unsigned char EEPROM_24C1025_Read_Byte(unsigned char chip_add, unsigned long mem
     return data;
 }
 
+
 void EEPROM_24C1025_Write_Int(unsigned char chip_add, unsigned long mem_add, int data){
      char local[2];
      local[0]=((char *)&data)[1];
@@ -5065,6 +4807,27 @@ unsigned int EEPROM_24C1025_Read_Int(unsigned char chip_add, unsigned long mem_a
 }
 
 
+
+void EEPROM_24C1025_Write_Long(unsigned char chip_add, unsigned long mem_add, long data){
+     char local[4];
+     local[0]=((char *)&data)[3];
+     local[1]=((char *)&data)[2];
+     local[2]=((char *)&data)[1];
+     local[3]=((char *)&data)[0];
+     EEPROM_24C1025_Write_Buffer(chip_add, mem_add, 4, local);
+}
+
+unsigned long EEPROM_24C1025_Read_Long(unsigned char chip_add, unsigned long mem_add){
+    char data[4];
+    long resultado;
+    EEPROM_24C1025_Read_Buffer(chip_add, mem_add, 4, data);
+    resultado=((long)data[0]<<24)|
+              ((long)data[1]<<16)|
+              ((long)data[2]<<8) |
+              ((long)data[3]<<0) ;
+    return resultado;
+}
+# 317 "EEPROM_24C1025.c"
 void EEPROM_24C1025_Fill_All(unsigned char chip_add, unsigned int value){
      unsigned long mem_add;
      for(mem_add=0;mem_add<=0x3FF;mem_add+=2)

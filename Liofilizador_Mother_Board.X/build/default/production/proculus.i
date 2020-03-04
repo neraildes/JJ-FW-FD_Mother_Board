@@ -5408,7 +5408,7 @@ void my_delay_ms_CLRWDT(long time);
 # 9 "proculus.c" 2
 
 
-extern volatile unsigned char usart_buffer[32+10];
+extern volatile unsigned char usart_buffer[32+20];
 volatile unsigned int tempodecorrido;
 
 

@@ -4850,8 +4850,8 @@ void Grava_Info_Aquecimento(char tupla);
 
 
 
-extern volatile unsigned char usart_buffer[32+10];
-extern volatile unsigned char usart_buffer_fila[2][32+10];
+extern volatile unsigned char usart_buffer[32+20];
+extern volatile unsigned char usart_buffer_fila[2][32+20];
 # 21 "isr.c"
 extern volatile unsigned int tempodecorrido ;
 extern volatile unsigned int tempocaptura ;
@@ -4924,7 +4924,7 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
                 PORTDbits.RD6=0;
                 PORTDbits.RD6=1;
                 (*pointer)=RCREG;
-                if(count<32+10 -1)
+                if(count<32+20 -1)
                    {
                    count++;
                    pointer++;

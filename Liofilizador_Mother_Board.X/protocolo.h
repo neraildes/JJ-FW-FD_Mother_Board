@@ -96,6 +96,4 @@ typedef struct {
 
 
 
-
-
 #endif	/* PROTOCOLO_H */
