@@ -961,9 +961,10 @@ unsigned char countboard()
      //for string.
      
      flag_usart_rx=0;
-     usart_buffer[5]=0;
+     //usart_buffer[5]=0;
      
      
+     flag_usart_rx=0;
      for(int contador=0;contador<RX_MAX_WAIT_TIME;contador++)
          {
           __delay_us(200);
@@ -978,7 +979,8 @@ unsigned char countboard()
              contador=0;
              break;
              }
-          }      
+          } 
+     return retorno;     
      
      
      
