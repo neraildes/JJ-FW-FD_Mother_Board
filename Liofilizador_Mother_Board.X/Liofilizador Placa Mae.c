@@ -936,6 +936,71 @@ unsigned char countboard()
 
 //------------------------------------------------------------------------------
 //SEND TO SLAVE
+ int  Send_To_Slave(char destino, char comando, char size, char * buffer)
+{
+     unsigned int contador;
+     int retorno=-1;
+     signed char sizereturn;
+     
+     char i;
+     
+     if(comando==COMMAND_EEE_R_BUF)
+        sizereturn=buffer[5]; //Pega o tamanho do buffer em EEE_R_BUF 
+     else
+        sizereturn=-1;     
+     
+     USART_put_int(HEADER_LIOFILIZADOR);
+     USART_putc(BOARD_ADD);
+     USART_putc(destino);
+     USART_putc(comando);
+     USART_putc(size);
+     for(i=0;i<size;i++)
+          USART_putc(buffer[i]);     
+     __delay_us(80); //Para efeito de debug, vizualiza após ultimo byte ser enviado
+     
+     
+     flag_usart_rx=0;
+     usart_buffer[5]=0;
+     
+     for(int contador=0;contador<RX_MAX_WAIT_TIME;contador++)
+         {
+          __delay_us(200);
+          if(flag_usart_rx==1)
+             {
+             __delay_ms(2); 
+             flag_usart_rx=0;
+             if(sizereturn!=-1)
+                size=sizereturn; 
+             else    
+                size=usart_buffer[5];
+             
+             for(i=0;i<size;i++)
+                 buffer[i]=usart_buffer[i+6]; 
+             retorno = (usart_buffer[6]<<8)|(usart_buffer[7]);
+             contador=0;
+             break;
+             }
+          } 
+     
+     if(usart_buffer[5]==0) //Sem Resposta
+       {  
+       if(sizereturn!=-1)  
+          { 
+          usart_buffer[5]=sizereturn;
+          for(i=0;i<sizereturn;i++) usart_buffer[6+i]=0xFF;
+          }
+       else
+          { 
+          usart_buffer[5]=2;    //Size
+          usart_buffer[6]=0xFF; //Resposta Padrao HI
+          usart_buffer[7]=0xFF; //Resposta Padrao LO   
+          retorno=-1;           
+          }
+       }     
+     
+     
+     return retorno;
+}
 
 
 
@@ -1852,7 +1917,35 @@ void Comando_Protocolo_Serial(void){
                    }
                 else //Destino Placa Filha
                    { 
-                  
+                   /*
+                   Origem = 0XC0
+                   Destino= 0X01 a 0X0F
+                   */
+                   DestinoMemo=usart_protocol.destino;
+                   Send_To_Slave(usart_protocol.destino,
+                                 usart_protocol.command,
+                                 usart_protocol.size,
+                                 usart_protocol.value
+                                 );
+                   flag_usart_rx=0;
+                   
+                   /*
+                   Origem = 0x01 a 0x0F
+                   Destino = 0x00                  
+                   */
+                   
+                   
+                   USART_to_Protocol(&usart_protocol);
+                   USART_put_int(HEADER_LIOFILIZADOR);
+                   USART_putc(DestinoMemo);//usart_protocol.origem);// 0X01 a 0x0F
+                   USART_putc(0xC0);
+                   USART_putc(usart_protocol.command);
+                   USART_putc(usart_protocol.size+3);                                                         
+                   for(i=0;i<usart_protocol.size;i++)
+                         USART_putc(usart_protocol.value[i]);
+                   SEND_REPLY_OK();
+                   
+                   flag_usart_rx=0;               
                    }
                 }
         flag_usart_rx=0;     
