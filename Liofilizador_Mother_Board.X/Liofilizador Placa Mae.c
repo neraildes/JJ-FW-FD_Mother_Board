@@ -939,7 +939,7 @@ unsigned char countboard()
  int  Send_To_Slave(char destino, char comando, char size, char * buffer)
 {
      unsigned int contador;
-     int retorno=-1;
+     int retorno=0xFFFF;
      signed char sizereturn;
      char flag_is_buffer;
      
@@ -964,15 +964,12 @@ unsigned char countboard()
      
      
      flag_usart_rx=0;
-     usart_buffer[5]=0;
-     
      for(int contador=0;contador<RX_MAX_WAIT_TIME;contador++)
          {
           __delay_us(200);
           if(flag_usart_rx==1)
              {
-             __delay_ms(2); 
-             flag_usart_rx=0;
+             __delay_ms(2);             
              if(flag_is_buffer) 
                 usart_buffer[5]=sizereturn;
              else
@@ -986,23 +983,20 @@ unsigned char countboard()
              }
           } 
      
-     if(usart_buffer[5]==0) //Sem Resposta
-       {  
-       if(sizereturn!=-1)  
-          { 
-          usart_buffer[5]=sizereturn;
-          for(i=0;i<sizereturn;i++) usart_buffer[6+i]=0xFF;
-          }
-       else
-          { 
-          usart_buffer[5]=2;    //Size
-          usart_buffer[6]=0xFF; //Resposta Padrao HI
-          usart_buffer[7]=0xFF; //Resposta Padrao LO   
-          retorno=-1;           
-          }
-       }     
-     
-     
+
+       if(flag_usart_rx==0) 
+         {
+         usart_buffer[5]=2;  
+         usart_buffer[6]=0xFF;
+         usart_buffer[7]=0xFF;
+         retorno=0xFFFF; 
+         if(flag_is_buffer)     
+           {  
+           usart_buffer[5]=sizereturn;
+           for(i=0;i<sizereturn;i++) usart_buffer[6+i]=0xFF;                       
+           }
+         }  
+     flag_usart_rx=0;           
      return retorno;
 }
 
@@ -1944,10 +1938,10 @@ void Comando_Protocolo_Serial(void){
                    USART_putc(DestinoMemo);//usart_protocol.origem);// 0X01 a 0x0F
                    USART_putc(0xC0);
                    USART_putc(usart_protocol.command);
-                   USART_putc(usart_protocol.size+3);                                                         
+                   USART_putc(usart_protocol.size);                                                         
                    for(i=0;i<usart_protocol.size;i++)
                          USART_putc(usart_protocol.value[i]);
-                   SEND_REPLY_OK();
+                   //SEND_REPLY_OK();
                    
                    flag_usart_rx=0;               
                    }
