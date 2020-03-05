@@ -941,13 +941,17 @@ unsigned char countboard()
      unsigned int contador;
      int retorno=-1;
      signed char sizereturn;
+     char flag_is_buffer;
      
      char i;
      
-     if(comando==COMMAND_EEE_R_BUF)
-        sizereturn=buffer[5]; //Pega o tamanho do buffer em EEE_R_BUF 
-     else
-        sizereturn=-1;     
+     flag_is_buffer=0;
+     if((comando==COMMAND_EEE_R_BUF)||(comando==COMMAND_EEE_R_STR))
+       { 
+       flag_is_buffer=1;  
+       sizereturn=buffer[5]; //Pega o tamanho do buffer em EEE_R_BUF 
+       } 
+       
      
      USART_put_int(HEADER_LIOFILIZADOR);
      USART_putc(BOARD_ADD);
@@ -969,12 +973,12 @@ unsigned char countboard()
              {
              __delay_ms(2); 
              flag_usart_rx=0;
-             if(sizereturn!=-1)
-                size=sizereturn; 
-             else    
-                size=usart_buffer[5];
+             if(flag_is_buffer) 
+                usart_buffer[5]=sizereturn;
+             else
+                usart_buffer[5]=2;
              
-             for(i=0;i<size;i++)
+             for(i=0;i<usart_buffer[5];i++)
                  buffer[i]=usart_buffer[i+6]; 
              retorno = (usart_buffer[6]<<8)|(usart_buffer[7]);
              contador=0;
