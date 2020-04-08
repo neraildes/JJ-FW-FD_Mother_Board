@@ -3,7 +3,7 @@
  * DATA 05/01/2019
  * COMPILADOR XC8 Free
  * NIVEL DE OTIMIZAÇÃO  2
- * 
+ * MICROCONTROLADOR - PIC18F4620
 ------------------------------------------------------------------------------*/
 
 #include <xc.h>
@@ -29,26 +29,29 @@
 #include "versao.h"
 
 //------------------------TUPLA DE AQUECIMENTO----------------------------------
+//EEPROM INTERNA (0x3FF)
 #define OFFSET_EEPROM       52     //Deslocamento para deixar os primeiros bytes livres (10)
 #define TUPLA_EEPROM_SIZE   18     //Tamanho maximo de uma tupla na eeprom (18)
 #define TUPLA_VP_SIZE       12     //Tamanho maximo de uma tupla no display(12)
 
 
 //-------------------------TUPLA DE FAT8----------------------------------------
+//EEPROM EXTERNA (0x1FFFF)
 #define FAT8_VP_SIZE       30
 #define OFFSET_EEPROM_FAT8 0x10
 #define EEPROM_FAT8_SIZE   54
 
 
 
-#define CLK at PORTCbits.RD3       //
-#define DTA at PORTCbits.RD4       //
+#define CLK at PORTCbits.RD3       //I2C CLOCK
+#define DTA at PORTCbits.RD4       //I2C DATA
 
 #define FORMAT 0  //
 #define LOAD   1  // Constantes do TrendCurveFuncao
 #define SAVE   2  //
 
-#define PPCANAL 1789
+//-----------------------------TREND CURVE--------------------------------------
+#define PPCANAL 1789 
 #define PPCOR   1787
 
 #define FATOR_PADRAO 1.0
@@ -119,7 +122,7 @@ t_receita        receita;
 
 
 t_fat8           fat8;
-//char             fat8_index;
+//char           fat8_index;
 
 //------------------------------------------------------------------------------
 
@@ -318,79 +321,40 @@ void main(void)
      
      
      
-  /*  
-    {
-    char bb[50];
-
-    bb[0]=0; //Chip
-    bb[1]=0; //
-    bb[2]=0; //ENDERECO
-    bb[3]=0; //
-    bb[4]=0; //    
-    while(1){
-        Send_To_Slave(1,COMMAND_EEE_R_STR,5,bb);
-        my_delay_ms_CLRWDT(1000);
-        }
-    }
-    
     while(1)
-         {
-         
-         bb[0]=0; //Chip
-         bb[1]=0; //
-         bb[2]=0; //ENDERECO
-         bb[3]=0; //
-         bb[4]=0; //
-         
-         bb[5]=31;//DADOS        
-         bb[6]=31;        
-         bb[7]=31;        
-         bb[8]=31;        
-         bb[9]=31;        
-         bb[10]=31;        
-         bb[11]=31;        
-         bb[12]=31;        
-         bb[13]=31;        
-         bb[14]=31;        
-         bb[15]=31;        
-         bb[16]=31;        
-         bb[17]=31;        
-         bb[18]=31;        
-         bb[19]=31;        
-         bb[20]=31;        
-         bb[21]=31;        
-         bb[22]=31;        
-         bb[23]=31;        
-         bb[24]=31;        
-         bb[25]=31;        
-         bb[26]=31;        
-         bb[27]=31;        
-         bb[28]=31;        
-         bb[29]=31;        
-         bb[30]=31;        
-         bb[31]=31;        
-         bb[32]=31;        
-         bb[33]=31;        
-         bb[34]=31;        
-         bb[35]=31;        
-         bb[36]=0;
-         
-         Send_To_Slave(1,COMMAND_EEE_W_STR,37,bb);         
-         
-         USART_to_Protocol(&usart_protocol);
-         USART_put_int(HEADER_LIOFILIZADOR);
-         USART_putc(0x01);
-         USART_putc(0xC0);
-         USART_putc(usart_protocol.command);
-         USART_putc(usart_protocol.size+3);                                                         
-         for(char i=0;i<usart_protocol.size;i++)
-               USART_putc(usart_protocol.value[i]);
-         
-         my_delay_ms_CLRWDT(1000);
-         }
+    {
+    my_delay_ms_CLRWDT(1000);
+    ouve_comunicacao();
     }
 
-    */ 
+    
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
      
      
      
@@ -618,7 +582,7 @@ void main(void)
                 
                 if(memo_statuspower!=statuspower.bits) 
                   { 
-                  PROCULUS_OK();
+                  //PROCULUS_OK();
                   EEPROM_Write_Byte(16,statuspower.bits);  //Todos os Status  
                   memo_statuspower=statuspower.bits;
                   }        
@@ -946,7 +910,13 @@ unsigned char countboard()
      char i;
      
      flag_is_buffer=0;
-     if((comando==COMMAND_EEE_R_BUF)||(comando==COMMAND_EEE_R_STR))
+     if(
+       (comando==COMMAND_IEE_R_BUF)||
+       (comando==COMMAND_IEE_R_STR)||
+       (comando==COMMAND_EEE_R_BUF)||
+       (comando==COMMAND_EEE_R_STR)||
+       (comando==COMMAND_VERSION)       
+       )
        { 
        flag_is_buffer=1;  
        sizereturn=buffer[5]; //Pega o tamanho do buffer em EEE_R_BUF 
@@ -1220,6 +1190,7 @@ void FAT8_Save(unsigned char tupla){
      if(tupla>(maxlineDATALOG-1)) 
        {  
        PROCULUS_Buzzer(1000);
+       PROCULUS_VP_Write_UInt16(2,0);
        return;
        }        
 
@@ -1700,16 +1671,13 @@ void Decodify_Command(void){
         case COMMAND_EEE_R_BUF:
              {                 
              char sizedata;
-             sizedata=usart_protocol.value[5];             
-             EEPROM_24C1025_Read_Buffer(add_Chip,     //CHIP NUMBER
-                                        add_24LCxxxx, //Add of memory
-                                        sizedata,     //SIZEDATA
-                                        buffer);      //Buffer of data 
-             
-            
-             
-             Send_to_PC(sizedata);
-             USART_put_buffer(buffer,sizedata); 
+             sizedata=usart_protocol.value[5];
+             Send_to_PC(sizedata);             
+             EEPROM_24C1025_Read_Buffer_to_USART(add_Chip,     //CHIP NUMBER
+                                                 add_24LCxxxx, //Add of memory
+                                                 sizedata,     //SIZEDATA
+                                                 buffer);      //Buffer of data              
+             //USART_put_buffer(buffer,sizedata); 
              }
              break;
              
@@ -1856,6 +1824,11 @@ void Decodify_Command(void){
              ShowStaticValueGrid(usart_protocol.value[0]+4);
              Send_to_PC(3);
              SEND_REPLY_OK();            
+             break;
+        
+        case COMMAND_READ_TOTALBOARD:
+             Send_to_PC(1);
+             USART_putc(totalboard);
              break;
              
         case COMMAND_FORMAT:
@@ -2153,16 +2126,15 @@ void global_vacuo(void){
                 
                 if(PROCULUS_VP_Read_UInt16(6)==240)//sim
                      { 
-                     Contagem_Tempo_de_Processo(FALSE);
                      processo_hora=0;
-                     processo_minuto=0;                     
+                     processo_minuto=0;                    
+                     Contagem_Tempo_de_Processo(FALSE);
+                     Exibe_Tempo_de_Processo();
                      PROCULUS_OK();               
-                     PROCULUS_OK();
-                     PROCULUS_OK();
                      } 
-                else
+                else if (PROCULUS_VP_Read_UInt16(6)==250)//nao
                      {
-                     PROCULUS_Buzzer(15000);
+                     PROCULUS_Buzzer(15000); //Não
                      }
 
                                    
@@ -3121,8 +3093,8 @@ char menorValorDisponivel(char * trendCurve){
 
 
 void Exibe_Tempo_de_Processo(void){
-     if(flag_time_process)
-       {
+     //if(flag_time_process)
+     //  {
        char temp0,temp1;  
        
        temp0=processo_hora/10;
@@ -3136,7 +3108,7 @@ void Exibe_Tempo_de_Processo(void){
        temp1=processo_minuto%10;
        PROCULUS_VP_Write_UInt16(43,temp0);
        PROCULUS_VP_Write_UInt16(44,temp1);                          
-       }
+      // }
 }
 
 
@@ -3776,6 +3748,7 @@ void Recarregar_Parametros_de_Configuracao(void){
 
 
 void ouve_comunicacao(void){
+            __delay_ms(100);     
             flag_recomunication =TRUE;
       while(flag_recomunication==TRUE){ 
             flag_recomunication =FALSE;    

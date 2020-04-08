@@ -81,13 +81,15 @@ void __interrupt(low_priority) isr(void)
         count=0;
         cntAbandona=255;
         flag_usart_rx=TRUE;
-        pointer=usart_buffer;        
+        pointer=usart_buffer;  
+        TRISDbits.RD4=0;
+        PORTDbits.RD4=1;
         while(tempo)
         {    
             if (PIR1bits.RCIF) 
             {     
-                PORTDbits.RD6=0;
-                PORTDbits.RD6=1;
+                PORTDbits.RD4=0;
+                PORTDbits.RD4=1;
                 (*pointer)=RCREG;
                 if(count<USART_BUFFER_SIZE-1) 
                    {  
@@ -103,7 +105,7 @@ void __interrupt(low_priority) isr(void)
 
         }           
         //(*pointer)=0;
-        PORTDbits.RD6=0;
+        PORTDbits.RD4=0;
         
         if(RCSTAbits.OERR)
            {

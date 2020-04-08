@@ -4917,12 +4917,14 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
         cntAbandona=255;
         statusgen.flag_usart_rx=1;
         pointer=usart_buffer;
+        TRISDbits.RD4=0;
+        PORTDbits.RD4=1;
         while(tempo)
         {
             if (PIR1bits.RCIF)
             {
-                PORTDbits.RD6=0;
-                PORTDbits.RD6=1;
+                PORTDbits.RD4=0;
+                PORTDbits.RD4=1;
                 (*pointer)=RCREG;
                 if(count<32+20 -1)
                    {
@@ -4938,7 +4940,7 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
 
         }
 
-        PORTDbits.RD6=0;
+        PORTDbits.RD4=0;
 
         if(RCSTAbits.OERR)
            {
