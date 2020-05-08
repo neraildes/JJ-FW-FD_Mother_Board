@@ -5601,7 +5601,7 @@ typedef struct {
         char destino;
         char command;
         char size;
-        char value[74];
+        char value[256];
 } t_usart_protocol;
 # 20 "./usart.h" 2
 # 35 "./usart.h"
@@ -5741,7 +5741,7 @@ const char *boardtype[5]={"Mother Board",
                           "NTC Board   ",
                           "Relay_Board "};
 # 77 "Liofilizador Placa Mae.c"
-volatile unsigned char usart_buffer[32+20];
+volatile unsigned char usart_buffer[10+256];
 # 87 "Liofilizador Placa Mae.c"
 volatile unsigned int tempodecorrido ;
 volatile unsigned int tempocaptura ;
@@ -5921,12 +5921,6 @@ void main(void)
      My_ADC_init();
      I2C_Master_Init(100000);
      my_delay_ms_CLRWDT(500);
-# 324 "Liofilizador Placa Mae.c"
-    while(1)
-    {
-    my_delay_ms_CLRWDT(1000);
-    ouve_comunicacao();
-    }
 # 370 "Liofilizador Placa Mae.c"
      {
 
@@ -7190,6 +7184,13 @@ void Decodify_Command(void){
              SEND_REPLY_OK();
              break;
 
+        case 0X28:
+             tempint=EEPROM_Read_Integer(0x09);
+             Send_to_PC(2);
+             USART_put_int(tempint);
+
+             break;
+
         case 0x42:
 
              ShowStaticValueGrid(usart_protocol.value[0]+4);
@@ -7876,7 +7877,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2516 "Liofilizador Placa Mae.c"
+# 2523 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -8028,7 +8029,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2675 "Liofilizador Placa Mae.c"
+# 2682 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
@@ -8327,7 +8328,7 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 
      PROCULUS_graphic_plot(LCDchannel, value);
 }
-# 3002 "Liofilizador Placa Mae.c"
+# 3009 "Liofilizador Placa Mae.c"
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd)
      {
      char txt[30];
@@ -8643,7 +8644,7 @@ void ShowHardwareInfo(){
      totalboard=0;
      strcpy(texto,"");
      strcat(texto,"* : Mother Board ");
-     strcat(texto,"v1.0.18");
+     strcat(texto,"v1.0.20");
      print(texto);
      for(destino=1;destino<15;destino++)
         {
@@ -9078,6 +9079,9 @@ void Recarregar_Parametros_de_Configuracao(void){
 
 void ouve_comunicacao(void){
             _delay((unsigned long)((100)*(32000000/4000.0)));
+
+
+
             statusgen1.flag_recomunication =1;
       while(statusgen1.flag_recomunication==1){
             statusgen1.flag_recomunication =0;
@@ -9106,7 +9110,6 @@ void ouve_comunicacao(void){
               Comando_Display();
               statusgen1.flag_recomunication=1;
               }
-
       }
 
 }

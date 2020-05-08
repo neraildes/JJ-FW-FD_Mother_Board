@@ -4612,7 +4612,7 @@ typedef struct {
         char destino;
         char command;
         char size;
-        char value[74];
+        char value[256];
 } t_usart_protocol;
 # 20 "./usart.h" 2
 # 35 "./usart.h"
@@ -4850,8 +4850,7 @@ void Grava_Info_Aquecimento(char tupla);
 
 
 
-extern volatile unsigned char usart_buffer[32+20];
-extern volatile unsigned char usart_buffer_fila[2][32+20];
+extern volatile unsigned char usart_buffer[10+256];
 # 21 "isr.c"
 extern volatile unsigned int tempodecorrido ;
 extern volatile unsigned int tempocaptura ;
@@ -4926,12 +4925,15 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
                 PORTDbits.RD4=0;
                 PORTDbits.RD4=1;
                 (*pointer)=RCREG;
-                if(count<32+20 -1)
+                if(count<10+256 -1)
                    {
                    count++;
                    pointer++;
                    }
-                tempo=400;
+                if(usart_buffer[4]==0x18)
+                   tempo=400*20;
+                else
+                   tempo=400;
             }
             else
             {

@@ -320,13 +320,13 @@ void main(void)
      
      
      
-     
+    /* 
     while(1)
     {
     my_delay_ms_CLRWDT(1000);
     ouve_comunicacao();
     }
-
+    */
     
      
      
@@ -1817,6 +1817,13 @@ void Decodify_Command(void){
              PROCULUS_Popup(usart_protocol.value[0]);
              Send_to_PC(3);
              SEND_REPLY_OK();         
+             break;
+        
+        case COMMAND_READ_INTERVAL:
+             tempint=EEPROM_Read_Integer(0x09);             
+             Send_to_PC(2);
+             USART_put_int(tempint);
+             //SEND_REPLY_OK();             
              break;
              
         case COMMAND_SHOW_PROGRAM:
@@ -3749,9 +3756,12 @@ void Recarregar_Parametros_de_Configuracao(void){
 
 void ouve_comunicacao(void){
             __delay_ms(100);     
-            flag_recomunication =TRUE;
+
+            
+
+            flag_recomunication =TRUE; 
       while(flag_recomunication==TRUE){ 
-            flag_recomunication =FALSE;    
+            flag_recomunication =FALSE;   
            __delay_ms(200);
 
            USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
@@ -3776,8 +3786,7 @@ void ouve_comunicacao(void){
               { 
               Comando_Display();
               flag_recomunication=TRUE;
-              }//flag_usart_rx                       
-
+              }//flag_usart_rx    
       } 
-
+        
 }

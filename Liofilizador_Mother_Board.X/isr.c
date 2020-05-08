@@ -9,7 +9,7 @@
 
 /*----------------------------------------------------------------------------*/
 extern volatile unsigned char usart_buffer[USART_BUFFER_SIZE];
-extern volatile unsigned char usart_buffer_fila[USART_LINE_BUFFER_SIZE][USART_BUFFER_SIZE];
+//extern volatile unsigned char usart_buffer_fila[USART_LINE_BUFFER_SIZE][USART_BUFFER_SIZE];
 
 ////-----------------timer1-----------------------
 //extern volatile unsigned int  milisegundo ;
@@ -96,7 +96,10 @@ void __interrupt(low_priority) isr(void)
                    count++; 
                    pointer++;                
                    }
-                tempo=RX_MAX_WAIT_TIME; 
+                if(usart_buffer[4]==COMMAND_EEE_R_BUF)
+                   tempo=RX_MAX_WAIT_TIME*20; 
+                else
+                   tempo=RX_MAX_WAIT_TIME;  
             }
             else    
             {

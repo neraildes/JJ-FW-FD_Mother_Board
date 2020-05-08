@@ -4539,7 +4539,7 @@ typedef struct {
         char destino;
         char command;
         char size;
-        char value[74];
+        char value[256];
 } t_usart_protocol;
 # 20 "./usart.h" 2
 # 35 "./usart.h"

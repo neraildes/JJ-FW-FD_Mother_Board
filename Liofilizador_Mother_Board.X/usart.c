@@ -8,7 +8,7 @@
 
 
 extern volatile unsigned char usart_buffer[USART_BUFFER_SIZE]; 
-extern volatile unsigned char usart_buffer_fila[USART_LINE_BUFFER_SIZE][USART_BUFFER_SIZE];
+//extern volatile unsigned char usart_buffer_fila[USART_LINE_BUFFER_SIZE][USART_BUFFER_SIZE];
 extern volatile unsigned int tmr_led_usart;
 extern volatile unsigned int Delay_Led_Usart;
 

@@ -4496,7 +4496,7 @@ typedef struct {
         char destino;
         char command;
         char size;
-        char value[74];
+        char value[256];
 } t_usart_protocol;
 # 20 "./usart.h" 2
 # 35 "./usart.h"
@@ -4625,8 +4625,8 @@ void PROCULUS_Clean_All_Line_Graphic();
 
 
 
-extern volatile unsigned char usart_buffer[32+20];
-extern volatile unsigned char usart_buffer_fila[2][32+20];
+extern volatile unsigned char usart_buffer[10+256];
+
 extern volatile unsigned int tmr_led_usart;
 extern volatile unsigned int Delay_Led_Usart;
 

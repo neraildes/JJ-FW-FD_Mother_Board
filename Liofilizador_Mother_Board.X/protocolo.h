@@ -10,7 +10,7 @@
 #ifndef PROTOCOLO_H
 #define	PROTOCOLO_H
 
-#define SIZE_VETOR_PROTOCOL 74
+#define SIZE_VETOR_PROTOCOL 256
 
 #define ON  1
 #define OFF 0
@@ -74,6 +74,7 @@ typedef struct {
 #define COMMAND_LDC_PAGE        0X25
 #define COMMAND_CONTROL_ACTIVE  0X26
 #define COMMAND_READ_TOTALBOARD 0X27
+#define COMMAND_READ_INTERVAL   0X28   //LÊ O INTERVALO DAS AQUISICOES
 //...
 #define COMMAND_PROC_CLOCK_R    0X2D
 #define COMMAND_CLK_RTC_R       0X2E
