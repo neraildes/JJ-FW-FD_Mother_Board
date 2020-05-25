@@ -137,8 +137,7 @@ unsigned int  paginamemo=15;
 
 
 //------------------------------------------------------------------------------
-char datefim[10];
-char timefim[10];
+
 
 
 //------------------------------------------------------------------------------
@@ -412,6 +411,20 @@ void main(void)
      if(EEPROM_Read_Byte(OFFSET_EEPROM)==0xFF)
        {         
        print("Formatando memoria principal..."); 
+       
+//       {
+//       unsigned long mem_add;
+//       for(mem_add=0;mem_add<0x1FFFF;mem_add++)
+//          {
+//          EEPROM_24C1025_Write_Byte(0,mem_add,0xFF);
+//          asm("CLRWDT");
+//          }        
+//       }
+//       PROCULUS_Buzzer(3000);
+       
+       
+       
+       
        Formatar_Banco_de_Dados(0,10);
        Formatar_Lista_de_Receitas();
        Formatar_Dados_de_Seguranca();
@@ -2053,7 +2066,7 @@ void global_datalog(void){
                 }
             else //O computador está executando o trabalho
                 {    
-                FAT8_Write_Process_Inicialize();  
+                FAT8_Write_Process_Inicialize();              
                 Grava_Info_Aquecimento(Find_Fat8_Free()-1);//Grava info para relatorio                
                 }
             
@@ -3677,25 +3690,15 @@ void FAT8_Write_Process_Finalize(){
     char date[10];
     
     fat8.index=Find_Fat8_Running();
-    FAT8_Load(fat8.index);   
-   
-    //if(flag_pc_conected==TRUE)
-    //  {  
-    //  strcpy(date,fat8.processo.inicio.date);
-    //  strcpy(time,fat8.processo.inicio.time);
-    //  }
-    //else
-    //  {  
-      PROCULUS_Read_RTC(date,time);    
-      strcpy(fat8.processo.fim.date,date);
-      strcpy(fat8.processo.fim.time,time);                  
-    //  }
+    FAT8_Load(fat8.index);    
+
+    PROCULUS_Read_RTC(date,time);    
 
     //fat8.processo.processo_number=NumProcesso;    
-    //strcpy(fat8.processo.inicio.date,date);
-    //strcpy(fat8.processo.inicio.time,time);    
-    //*strcpy(fat8.processo.fim.date,date);
-    //*strcpy(fat8.processo.fim.time,time);            
+    //strcpy(fat8_processo.inicio.date,date);
+    //strcpy(fat8_processo.inicio.time,time);    
+    strcpy(fat8.processo.fim.date,date);
+    strcpy(fat8.processo.fim.time,time);            
     //fat8.processo.amostra=EEPROM_Read_Integer(0x09);
     //fat8.processo.add_start=0;        
     fat8.processo.add_end=add_datalog;
@@ -3705,9 +3708,9 @@ void FAT8_Write_Process_Finalize(){
     fat8.processo.flag_view=0;
     fat8.processo.flag_finalized=1;
     FAT8_Save(fat8.index);
-    FAT8_Show();     
-    EEPROM_24C1025_Write_Long (0,2,add_datalog); //Armazena add_datalog
+    FAT8_Show(); 
     add_datalog+=2;
+    EEPROM_24C1025_Write_Long (0,2,add_datalog); //Armazena add_datalog
     
 }
 
