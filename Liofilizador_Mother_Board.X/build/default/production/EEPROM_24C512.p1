@@ -13,14 +13,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S12 . bits . ]
 "277
 [; ;./global.h: 277: struct{
-[s S14 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S14 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication ]
-"295
-[; ;./global.h: 295: struct{
+[s S14 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S14 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication flag_pc_conected ]
+"297
+[; ;./global.h: 297: struct{
 [s S15 :1 `uc 1 ]
 [n S15 . flag_main_loop_WDT ]
-"300
-[; ;./global.h: 300: typedef struct{
+"302
+[; ;./global.h: 302: typedef struct{
 [s S16 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S16 . milisegundo segundo minuto hora ]
 "14 ./I2C.h
@@ -41,9 +41,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "18
 [; ;./I2C.h: 18: unsigned short I2C_Master_Read(unsigned short a);
 [v _I2C_Master_Read `(us ~T0 @X0 0 ef1`us ]
-[v F2848 `(v ~T0 @X0 1 tf1`ul ]
+[v F2849 `(v ~T0 @X0 1 tf1`ul ]
 "187 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18.h
-[v __delay `JF2848 ~T0 @X0 0 e ]
+[v __delay `JF2849 ~T0 @X0 0 e ]
 [p i __delay ]
 "20 ./global.h
 [p x OSC = INTIO67 ]
@@ -117,14 +117,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "266
 [; ;./global.h: 266:       } statuspower;
 [v _statuspower `S12 ~T0 @X0 1 e ]
-"285
-[; ;./global.h: 285: }statusgen1;
+"286
+[; ;./global.h: 286: }statusgen1;
 [v _statusgen1 `S14 ~T0 @X0 1 e ]
-"297
-[; ;./global.h: 297: }statusWDT;
+"299
+[; ;./global.h: 299: }statusWDT;
 [v _statusWDT `S15 ~T0 @X0 1 e ]
-"307
-[; ;./global.h: 307: volatile t_rtc rtc;
+"309
+[; ;./global.h: 309: volatile t_rtc rtc;
 [v _rtc `VS16 ~T0 @X0 1 e ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 54: __asm("PORTA equ 0F80h");

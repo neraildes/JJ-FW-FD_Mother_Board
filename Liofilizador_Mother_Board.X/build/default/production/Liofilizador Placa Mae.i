@@ -5237,8 +5237,9 @@ struct{
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
         unsigned flag_recomunication :1;
+        unsigned flag_pc_conected :1;
 }statusgen1;
-# 295 "./global.h"
+# 297 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -5793,7 +5794,12 @@ char buffer[74];
 char maincnt;
 unsigned int pagina=15;
 unsigned int paginamemo=15;
-# 149 "Liofilizador Placa Mae.c"
+
+
+
+char datefim[10];
+char timefim[10];
+# 150 "Liofilizador Placa Mae.c"
 volatile unsigned char flag_senha_global_liberada;
 volatile unsigned char flag_senha_liberada;
 volatile unsigned char totalboard;
@@ -5921,7 +5927,7 @@ void main(void)
      My_ADC_init();
      I2C_Master_Init(100000);
      my_delay_ms_CLRWDT(500);
-# 370 "Liofilizador Placa Mae.c"
+# 371 "Liofilizador Placa Mae.c"
      {
 
      unsigned int reset;
@@ -5990,7 +5996,7 @@ void main(void)
      Carregar_Parametros_de_Seguranca();
      Carregar_tempo_de_datalog();
      add_datalog=EEPROM_24C1025_Read_Long (0,2);
-# 454 "Liofilizador Placa Mae.c"
+# 455 "Liofilizador Placa Mae.c"
      print("Analisando dados...");
      for(char i=0;i<15;i++)
         {
@@ -6048,7 +6054,7 @@ void main(void)
      processo_segundo=0;
      memo_statuspower=statuspower.bits;
      delay_condensador=0;
-# 539 "Liofilizador Placa Mae.c"
+# 540 "Liofilizador Placa Mae.c"
         FAT8_Show();
 
 
@@ -6085,6 +6091,7 @@ void main(void)
                 Gerenciador_de_Senha();
                 Gerenciador_de_Senha_Global();
 
+
                 global_datalog();
                 global_vacuo();
                 global_aquecimento();
@@ -6099,8 +6106,8 @@ void main(void)
                   EEPROM_Write_Byte(16,statuspower.bits);
                   memo_statuspower=statuspower.bits;
                   }
-# 610 "Liofilizador Placa Mae.c"
-                Check_And_Send_Capture_Datalog();
+# 612 "Liofilizador Placa Mae.c"
+                if(statusgen1.flag_pc_conected==0) Check_And_Send_Capture_Datalog();
                 statusgen1.flag_proculus_hs=0;
 
 
@@ -6374,6 +6381,7 @@ void main(void)
                           break;
                   }
 
+
                 ouve_comunicacao();
         }
 
@@ -6509,7 +6517,7 @@ int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
     }
     return 0;
 }
-# 1027 "Liofilizador Placa Mae.c"
+# 1030 "Liofilizador Placa Mae.c"
 void ShowSensorRealTimeHS(void)
      {
      char bb[3];
@@ -6573,7 +6581,7 @@ void ShowSensorRealTimeHS(void)
       statusgen1.flag_proculus_hs=0;
 
      }
-# 1099 "Liofilizador Placa Mae.c"
+# 1102 "Liofilizador Placa Mae.c"
 void Carrega_Tupla_Receita(char index, t_receita *receita){
      unsigned int addeeprom;
 
@@ -6622,7 +6630,7 @@ void Exibe_Receita(int index){
      texto[8]=0;
      PROCULUS_VP_Write_String(vp+4,texto);
 }
-# 1165 "Liofilizador Placa Mae.c"
+# 1168 "Liofilizador Placa Mae.c"
 void DataBaseBackupMain(unsigned char tupla)
       {
       unsigned int vp;
@@ -6737,7 +6745,7 @@ void FAT8_Show(){
         }
 
 }
-# 1291 "Liofilizador Placa Mae.c"
+# 1294 "Liofilizador Placa Mae.c"
  void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
       {
       char CanalAD;
@@ -6777,7 +6785,7 @@ void FAT8_Show(){
       EEPROM_Read_String(addEEPROM + 6,liofilizador->receita);
       liofilizador->status = EEPROM_Read_Integer(addEEPROM+16);
       }
-# 1344 "Liofilizador Placa Mae.c"
+# 1347 "Liofilizador Placa Mae.c"
  void Set_Receita(unsigned char index, char status)
       {
       int vp;
@@ -6837,7 +6845,7 @@ void FAT8_Show(){
          PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
          }
 }
-# 1411 "Liofilizador Placa Mae.c"
+# 1414 "Liofilizador Placa Mae.c"
 void save_datalog(unsigned long add_datalog){
      char index;
      char bb[4];
@@ -6850,6 +6858,7 @@ void save_datalog(unsigned long add_datalog){
      bb[3]=((char *)&add_datalog)[0];
      Send_To_Slave(0xFF, 0x02 , 4, bb);
 
+
      for(index=0;index<(totalboard*2);index++)
   {
          if(mapa.entrada[index]!=((void*)0))
@@ -6858,7 +6867,7 @@ void save_datalog(unsigned long add_datalog){
             }
          }
 }
-# 1440 "Liofilizador Placa Mae.c"
+# 1444 "Liofilizador Placa Mae.c"
  void ShowAndSetSlaveParameters(unsigned char tupla)
       {
       unsigned char CanalAD;
@@ -6890,7 +6899,7 @@ void save_datalog(unsigned long add_datalog){
       PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
 
       }
-# 1480 "Liofilizador Placa Mae.c"
+# 1484 "Liofilizador Placa Mae.c"
 void Send_to_PC(unsigned char size){
 
 
@@ -6899,7 +6908,7 @@ void Send_to_PC(unsigned char size){
      USART_putc(usart_protocol.origem);
      USART_putc(usart_protocol.command);
      USART_putc(size);
-# 1498 "Liofilizador Placa Mae.c"
+# 1502 "Liofilizador Placa Mae.c"
 }
 
 
@@ -6936,7 +6945,7 @@ void Decodify_Command(void){
 
 
     switch(usart_protocol.command){
-# 1565 "Liofilizador Placa Mae.c"
+# 1569 "Liofilizador Placa Mae.c"
         case 0x08:
              EEPROM_Write_Byte((int)usart_protocol.value[0]<<8 |
                                (int)usart_protocol.value[1]<<0,
@@ -7163,7 +7172,7 @@ void Decodify_Command(void){
              PORTDbits.RD5=0;
              break;
              }
-# 1802 "Liofilizador Placa Mae.c"
+# 1806 "Liofilizador Placa Mae.c"
         case 0X24:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
@@ -7390,32 +7399,40 @@ void global_datalog(void){
            {
             char bb[2];
             statuspower.flag_global_datalog=1;
-
-            Send_To_Slave(0xFF, 0x00 , 0, bb);
-            Carregar_tempo_de_datalog();
-            if(Find_Fat8_Running()==-1)
-              {
-              PROCULUS_Clean_All_Line_Graphic();
-              FAT8_Write_Process_Inicialize();
-              Grava_Info_Aquecimento(Find_Fat8_Free()-1);
-              }
+            if(statusgen1.flag_pc_conected==0)
+                {
+                Send_To_Slave(0xFF, 0x00 , 0, bb);
+                Carregar_tempo_de_datalog();
+                if(Find_Fat8_Running()==-1)
+                  {
+                  PROCULUS_Clean_All_Line_Graphic();
+                  FAT8_Write_Process_Inicialize();
+                  Grava_Info_Aquecimento(Find_Fat8_Free()-1);
+                  }
+                else
+                  {
+                  fat8.index=Find_Fat8_Running();
+                  if(fat8.index!=-1)
+                     {
+                     FAT8_Load(fat8.index);
+                     add_datalog=EEPROM_24C1025_Read_Long (0,2);
+                     processo_totalminuto=EEPROM_24C1025_Read_Int(0,6);
+                     fat8.processo.add_end=add_datalog;
+                     }
+                  }
+                }
             else
-              {
-              fat8.index=Find_Fat8_Running();
-              if(fat8.index!=-1)
-                 {
-                 FAT8_Load(fat8.index);
-                 add_datalog=EEPROM_24C1025_Read_Long (0,2);
-                 processo_totalminuto=EEPROM_24C1025_Read_Int(0,6);
-                 fat8.processo.add_end=add_datalog;
-                 }
-              }
+                {
+                FAT8_Write_Process_Inicialize();
+                Grava_Info_Aquecimento(Find_Fat8_Free()-1);
+                }
+
            }
         else if((PROCULUS_VP_Read_UInt16(2)==0)&&(statuspower.flag_global_datalog==1))
                {
 
-               FAT8_Write_Process_Finalize();
                statuspower.flag_global_datalog=0;
+               if(statusgen1.flag_pc_conected==0) FAT8_Write_Process_Finalize();
                }
 }
 
@@ -7877,7 +7894,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2523 "Liofilizador Placa Mae.c"
+# 2535 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -8029,7 +8046,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2682 "Liofilizador Placa Mae.c"
+# 2694 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
@@ -8328,7 +8345,7 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 
      PROCULUS_graphic_plot(LCDchannel, value);
 }
-# 3009 "Liofilizador Placa Mae.c"
+# 3021 "Liofilizador Placa Mae.c"
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd)
      {
      char txt[30];
@@ -8989,16 +9006,11 @@ void FAT8_Write_Process_Finalize(){
 
     fat8.index=Find_Fat8_Running();
     FAT8_Load(fat8.index);
-
-    PROCULUS_Read_RTC(date,time);
-
-
-
-
-    strcpy(fat8.processo.fim.date,date);
-    strcpy(fat8.processo.fim.time,time);
-
-
+# 3689 "Liofilizador Placa Mae.c"
+      PROCULUS_Read_RTC(date,time);
+      strcpy(fat8.processo.fim.date,date);
+      strcpy(fat8.processo.fim.time,time);
+# 3701 "Liofilizador Placa Mae.c"
     fat8.processo.add_end=add_datalog;
     fat8.processo.minutes=processo_totalminuto;
     fat8.processo.flag_running=0;
@@ -9007,8 +9019,8 @@ void FAT8_Write_Process_Finalize(){
     fat8.processo.flag_finalized=1;
     FAT8_Save(fat8.index);
     FAT8_Show();
-    add_datalog+=2;
     EEPROM_24C1025_Write_Long (0,2,add_datalog);
+    add_datalog+=2;
 
 }
 
@@ -9078,10 +9090,18 @@ void Recarregar_Parametros_de_Configuracao(void){
 
 
 void ouve_comunicacao(void){
-            _delay((unsigned long)((100)*(32000000/4000.0)));
 
 
 
+
+
+
+
+     static char count=0;
+     _delay((unsigned long)((100)*(32000000/4000.0)));
+
+
+      statusgen1.flag_pc_conected=0;
             statusgen1.flag_recomunication =1;
       while(statusgen1.flag_recomunication==1){
             statusgen1.flag_recomunication =0;
@@ -9102,6 +9122,8 @@ void ouve_comunicacao(void){
               {
               Comando_Protocolo_Serial();
               statusgen1.flag_recomunication=1;
+              if(count<3)count++;
+
               }
 
 
@@ -9109,7 +9131,10 @@ void ouve_comunicacao(void){
               {
               Comando_Display();
               statusgen1.flag_recomunication=1;
-              }
-      }
+              if(count<3)count++;
 
+              }
+
+      }
+# 3840 "Liofilizador Placa Mae.c"
 }

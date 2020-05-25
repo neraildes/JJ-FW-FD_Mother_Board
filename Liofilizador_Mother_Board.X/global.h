@@ -282,6 +282,7 @@ struct{
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico            :1;
         unsigned flag_recomunication      :1;
+        unsigned flag_pc_conected         :1;
 }statusgen1;
 
 #define flag_save_time           statusgen1.flag_save_time
@@ -291,6 +292,7 @@ struct{
 #define flag_Vacuo_estava_ligado statusgen1.flag_Vacuo_estava_ligado
 #define flag_generico            statusgen1.flag_generico
 #define flag_recomunication      statusgen1.flag_recomunication
+#define flag_pc_conected         statusgen1.flag_pc_conected
 //------------------------------------------------------------------------------
 struct{
         unsigned flag_main_loop_WDT :1;    

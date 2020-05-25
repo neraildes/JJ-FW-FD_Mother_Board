@@ -137,7 +137,8 @@ unsigned int  paginamemo=15;
 
 
 //------------------------------------------------------------------------------
-
+char datefim[10];
+char timefim[10];
 
 
 //------------------------------------------------------------------------------
@@ -324,7 +325,7 @@ void main(void)
     while(1)
     {
     my_delay_ms_CLRWDT(1000);
-    ouve_comunicacao();
+    ouve_comunicacao();    
     }
     */
     
@@ -572,6 +573,7 @@ void main(void)
                 Gerenciador_de_Senha();  //Habilita acesso global por 30 segundos
                 Gerenciador_de_Senha_Global(); //Libera Senha Global eternamente                 
                 
+                
                 global_datalog(); // LEITURA DOS SENSORES                 
                 global_vacuo(); 
                 global_aquecimento();
@@ -607,7 +609,7 @@ void main(void)
                 --------------------------------------------------------------*/
                    
                            
-                Check_And_Send_Capture_Datalog();
+                if(flag_pc_conected==FALSE) Check_And_Send_Capture_Datalog();
                 flag_proculus_hs=FALSE;
                 
                 //------------------CODIGO RAPIDO---------------------
@@ -881,6 +883,7 @@ void main(void)
                           break;
                   }//switch pagina          
             
+                
                 ouve_comunicacao(); 
         }
       
@@ -1420,6 +1423,7 @@ void save_datalog(unsigned long add_datalog){
      bb[3]=Lo   (add_datalog);
      Send_To_Slave(TODOS, COMMAND_SAVE_LOG , 4, bb);
      //===================================================================================
+     //Faz o grafico em tempo real
      for(index=0;index<(totalboard*2);index++)
 	 {
          if(mapa.entrada[index]!=NULL) 
@@ -2025,32 +2029,40 @@ void global_datalog(void){
            {
             char bb[2];
             flag_global_datalog=1;           
-                        
-            Send_To_Slave(TODOS, COMMAND_SYNCRONIZE , 0, bb);
-            Carregar_tempo_de_datalog(); 
-            if(Find_Fat8_Running()==-1) //Se nao está rodando datalog
-              {                
-              PROCULUS_Clean_All_Line_Graphic();                
-              FAT8_Write_Process_Inicialize();              
-              Grava_Info_Aquecimento(Find_Fat8_Free()-1);//Grava info para relatorio
-              }
-            else
-              {  
-              fat8.index=Find_Fat8_Running();
-              if(fat8.index!=-1)
-                 {                                     
-                 FAT8_Load(fat8.index); 
-                 add_datalog=EEPROM_24C1025_Read_Long (0,2); 
-                 processo_totalminuto=EEPROM_24C1025_Read_Int(0,6);
-                 fat8.processo.add_end=add_datalog;
-                 }              
-              }
+            if(flag_pc_conected==FALSE)
+                {    
+                Send_To_Slave(TODOS, COMMAND_SYNCRONIZE , 0, bb);
+                Carregar_tempo_de_datalog(); 
+                if(Find_Fat8_Running()==-1) //Se nao está rodando datalog
+                  {                
+                  PROCULUS_Clean_All_Line_Graphic();                
+                  FAT8_Write_Process_Inicialize();              
+                  Grava_Info_Aquecimento(Find_Fat8_Free()-1);//Grava info para relatorio
+                  }
+                else
+                  {  
+                  fat8.index=Find_Fat8_Running();
+                  if(fat8.index!=-1)
+                     {                                     
+                     FAT8_Load(fat8.index); 
+                     add_datalog=EEPROM_24C1025_Read_Long (0,2); 
+                     processo_totalminuto=EEPROM_24C1025_Read_Int(0,6);
+                     fat8.processo.add_end=add_datalog;
+                     }              
+                  }
+                }
+            else //O computador está executando o trabalho
+                {    
+                FAT8_Write_Process_Inicialize();  
+                Grava_Info_Aquecimento(Find_Fat8_Free()-1);//Grava info para relatorio                
+                }
+            
            }
         else if((PROCULUS_VP_Read_UInt16(2)==0)&&(flag_global_datalog==1))
                {
                //Instruçoes aqui ao desligar 
-               FAT8_Write_Process_Finalize();
-               flag_global_datalog=0;               
+               flag_global_datalog=0;
+               if(flag_pc_conected==FALSE) FAT8_Write_Process_Finalize();               
                }       
 }
 
@@ -3665,15 +3677,25 @@ void FAT8_Write_Process_Finalize(){
     char date[10];
     
     fat8.index=Find_Fat8_Running();
-    FAT8_Load(fat8.index);    
-
-    PROCULUS_Read_RTC(date,time);    
+    FAT8_Load(fat8.index);   
+   
+    //if(flag_pc_conected==TRUE)
+    //  {  
+    //  strcpy(date,fat8.processo.inicio.date);
+    //  strcpy(time,fat8.processo.inicio.time);
+    //  }
+    //else
+    //  {  
+      PROCULUS_Read_RTC(date,time);    
+      strcpy(fat8.processo.fim.date,date);
+      strcpy(fat8.processo.fim.time,time);                  
+    //  }
 
     //fat8.processo.processo_number=NumProcesso;    
-    //strcpy(fat8_processo.inicio.date,date);
-    //strcpy(fat8_processo.inicio.time,time);    
-    strcpy(fat8.processo.fim.date,date);
-    strcpy(fat8.processo.fim.time,time);            
+    //strcpy(fat8.processo.inicio.date,date);
+    //strcpy(fat8.processo.inicio.time,time);    
+    //*strcpy(fat8.processo.fim.date,date);
+    //*strcpy(fat8.processo.fim.time,time);            
     //fat8.processo.amostra=EEPROM_Read_Integer(0x09);
     //fat8.processo.add_start=0;        
     fat8.processo.add_end=add_datalog;
@@ -3683,9 +3705,9 @@ void FAT8_Write_Process_Finalize(){
     fat8.processo.flag_view=0;
     fat8.processo.flag_finalized=1;
     FAT8_Save(fat8.index);
-    FAT8_Show(); 
-    add_datalog+=2;
+    FAT8_Show();     
     EEPROM_24C1025_Write_Long (0,2,add_datalog); //Armazena add_datalog
+    add_datalog+=2;
     
 }
 
@@ -3755,10 +3777,18 @@ void Recarregar_Parametros_de_Configuracao(void){
 
 
 void ouve_comunicacao(void){
-            __delay_ms(100);     
+     /*-------------------------------------------------------------------------
+      Esta função ouve a comunicação do pc para tratar como comando da placa ou
+      comando do display. É necessário saber se o computador está conectado para
+      fazer o gráfico na memória do hardware ou fazer o grafico na memória do pc.
+      Caso count seja zero, não está entrando em execução de comandos e logo o
+      pc está desconectado, caso seja maior que 0, o pc está conectado.
+     --------------------------------------------------------------------------*/
+     static char count=0;
+     __delay_ms(100);     
 
             
-
+      flag_pc_conected=FALSE;
             flag_recomunication =TRUE; 
       while(flag_recomunication==TRUE){ 
             flag_recomunication =FALSE;   
@@ -3779,6 +3809,8 @@ void ouve_comunicacao(void){
               {          
               Comando_Protocolo_Serial(); 
               flag_recomunication=TRUE;
+              if(count<3)count++;
+              //flag_pc_conected=TRUE;              
               }                    
 
            //----------------INTERPRETA COMANDO DO DISPLAY----------------
@@ -3786,7 +3818,23 @@ void ouve_comunicacao(void){
               { 
               Comando_Display();
               flag_recomunication=TRUE;
-              }//flag_usart_rx    
-      } 
-        
+              if(count<3)count++;
+              //flag_pc_conected=TRUE;              
+              }           
+           
+      }
+      //count=0;   
+      /*
+      if(count>0)
+         { 
+         count--;
+         flag_pc_conected=TRUE;
+         PROCULUS_Buzzer(50);
+         }
+      else
+         { 
+         flag_pc_conected=FALSE; 
+         PROCULUS_Buzzer(1000);
+         }  
+      */ 
 }

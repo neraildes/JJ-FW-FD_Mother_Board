@@ -13,14 +13,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S271 . bits . ]
 "277
 [; ;./global.h: 277: struct{
-[s S273 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S273 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication ]
-"295
-[; ;./global.h: 295: struct{
+[s S273 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S273 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication flag_pc_conected ]
+"297
+[; ;./global.h: 297: struct{
 [s S274 :1 `uc 1 ]
 [n S274 . flag_main_loop_WDT ]
-"300
-[; ;./global.h: 300: typedef struct{
+"302
+[; ;./global.h: 302: typedef struct{
 [s S275 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S275 . milisegundo segundo minuto hora ]
 "3031 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
@@ -639,14 +639,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "266
 [; ;./global.h: 266:       } statuspower;
 [v _statuspower `S271 ~T0 @X0 1 e ]
-"285
-[; ;./global.h: 285: }statusgen1;
+"286
+[; ;./global.h: 286: }statusgen1;
 [v _statusgen1 `S273 ~T0 @X0 1 e ]
-"297
-[; ;./global.h: 297: }statusWDT;
+"299
+[; ;./global.h: 299: }statusWDT;
 [v _statusWDT `S274 ~T0 @X0 1 e ]
-"307
-[; ;./global.h: 307: volatile t_rtc rtc;
+"309
+[; ;./global.h: 309: volatile t_rtc rtc;
 [v _rtc `VS275 ~T0 @X0 1 e ]
 "17 usart.c
 [; ;usart.c: 17: void USART_init(unsigned long baudrate)

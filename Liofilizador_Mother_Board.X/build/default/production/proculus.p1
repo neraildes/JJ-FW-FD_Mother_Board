@@ -13,19 +13,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S2 . bits . ]
 "277
 [; ;./global.h: 277: struct{
-[s S4 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S4 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication ]
-"295
-[; ;./global.h: 295: struct{
+[s S4 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S4 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication flag_pc_conected ]
+"297
+[; ;./global.h: 297: struct{
 [s S5 :1 `uc 1 ]
 [n S5 . flag_main_loop_WDT ]
-"300
-[; ;./global.h: 300: typedef struct{
+"302
+[; ;./global.h: 302: typedef struct{
 [s S6 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S6 . milisegundo segundo minuto hora ]
-[v F2575 `(v ~T0 @X0 1 tf1`ul ]
+[v F2576 `(v ~T0 @X0 1 tf1`ul ]
 "187 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18.h
-[v __delay `JF2575 ~T0 @X0 0 e ]
+[v __delay `JF2576 ~T0 @X0 0 e ]
 [p i __delay ]
 "38 ./usart.h
 [; ;./usart.h: 38: void USART_put_int(unsigned int value);
@@ -136,14 +136,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "266
 [; ;./global.h: 266:       } statuspower;
 [v _statuspower `S2 ~T0 @X0 1 e ]
-"285
-[; ;./global.h: 285: }statusgen1;
+"286
+[; ;./global.h: 286: }statusgen1;
 [v _statusgen1 `S4 ~T0 @X0 1 e ]
-"297
-[; ;./global.h: 297: }statusWDT;
+"299
+[; ;./global.h: 299: }statusWDT;
 [v _statusWDT `S5 ~T0 @X0 1 e ]
-"307
-[; ;./global.h: 307: volatile t_rtc rtc;
+"309
+[; ;./global.h: 309: volatile t_rtc rtc;
 [v _rtc `VS6 ~T0 @X0 1 e ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
@@ -1835,8 +1835,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _i `i ~T0 @X0 1 a ]
 "525
 [; ;proculus.c: 525:      static unsigned int retorno=0;
-[v F3862 `ui ~T0 @X0 1 s retorno ]
-[i F3862
+[v F3863 `ui ~T0 @X0 1 s retorno ]
+[i F3863
 -> -> 0 `i `ui
 ]
 "526
@@ -1884,7 +1884,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "546
 [; ;proculus.c: 546:               retorno=(usart_buffer[6]<<8)+usart_buffer[7];
-[e = F3862 -> + << -> *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
+[e = F3863 -> + << -> *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
 "547
 [; ;proculus.c: 547:               break;
 [e $U 362  ]
@@ -1911,7 +1911,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _my_delay_ms (1 -> -> 1 `i `l ]
 "553
 [; ;proculus.c: 553:      return retorno;
-[e ) F3862 ]
+[e ) F3863 ]
 [e $UE 360  ]
 "554
 [; ;proculus.c: 554:      }

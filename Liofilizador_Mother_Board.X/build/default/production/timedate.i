@@ -4758,8 +4758,9 @@ struct{
         unsigned flag_Vacuo_estava_ligado :1;
         unsigned flag_generico :1;
         unsigned flag_recomunication :1;
+        unsigned flag_pc_conected :1;
 }statusgen1;
-# 295 "./global.h"
+# 297 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
