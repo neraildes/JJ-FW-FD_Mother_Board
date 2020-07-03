@@ -4455,10 +4455,11 @@ union {
              unsigned flag_global_vacuo : 1 ;
              unsigned flag_time_process : 1 ;
              unsigned flag_call_work : 1 ;
+             unsigned flag_global_porta : 1 ;
 
              };
       } statuspower;
-# 277 "./global.h"
+# 279 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -4469,7 +4470,7 @@ struct{
         unsigned flag_recomunication :1;
         unsigned flag_pc_conected :1;
 }statusgen1;
-# 297 "./global.h"
+# 299 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -4750,6 +4751,7 @@ void global_datalog(void);
 void global_condensador(void);
 void global_vacuo(void);
 void global_aquecimento(void);
+void global_porta(void);
 
 void Exibe_Hora_Data(char showseconds);
 void Exibe_Tempo_de_Processo(void);

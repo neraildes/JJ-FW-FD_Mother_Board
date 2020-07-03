@@ -384,8 +384,7 @@ void main(void)
      
      
      
-     //======================== INFORMAÇÕES INICIAIS ===========================
-     Tamanho_Display=EEPROM_Read_Integer(0xFA);
+     //======================== INFORMAÇÕES INICIAIS ===========================     
      my_delay_ms_CLRWDT(300); 
      print("JJ Cientifica Ind. e Com. de Eq. Cientificos.");     
      my_delay_ms_CLRWDT(300);
@@ -402,11 +401,7 @@ void main(void)
      //-------------------------------------------------------------------------
      
      
-     if(Tamanho_Display==80)
-        maxlineDATALOG=12;
-     else if(Tamanho_Display==50)
-             maxlineDATALOG=9;
-     
+          
      //-------------------------------------------------------------------------
      if(EEPROM_Read_Byte(OFFSET_EEPROM)==0xFF)
        {         
@@ -414,9 +409,9 @@ void main(void)
        
 //       {
 //       unsigned long mem_add;
-//       for(mem_add=0;mem_add<0x1FFFF;mem_add++)
+//       for(mem_add=0;mem_add<=0x1FFFF;mem_add+=2)
 //          {
-//          EEPROM_24C1025_Write_Byte(0,mem_add,0xFF);
+//          EEPROM_24C1025_Write_Int(0,mem_add,0xFFFF);
 //          asm("CLRWDT");
 //          }        
 //       }
@@ -441,6 +436,7 @@ void main(void)
        Format_FAT8_Table();          //Inicializa tabela de Datalog 
        EEPROM_24C1025_Write_Int (0,0,0); //Inicializa numero de processo
        EEPROM_24C1025_Write_Long(0,2,0); //Inicializa add_datalog
+       EEPROM_Write_Integer(0xFA,50);      //Resolucao padrao do display
        }   
      RecallBlackoutStatus();
      TrendCurveFuncao(LOAD);
@@ -449,6 +445,21 @@ void main(void)
      Carregar_Parametros_de_Seguranca();
      Carregar_tempo_de_datalog(); //Intervalo de capturas
      add_datalog=EEPROM_24C1025_Read_Long (0,2); //Inicializa add_datalog
+     
+     Tamanho_Display=EEPROM_Read_Integer(0xFA);
+     if(Tamanho_Display==80)
+        maxlineDATALOG=12;
+     else if(Tamanho_Display==50)
+             maxlineDATALOG=9;
+     
+
+//    PROCULUS_VP_Write_UInt16(151,Tamanho_Display);
+//    PROCULUS_Buzzer(1000);
+//    my_delay_ms_CLRWDT(10000);      
+     
+     
+          
+     
      //-------------------------------------------------------------------------     
 //     print("Testando Memoria Externa...");
 //     if(TesteMemoria24C1025())
@@ -584,14 +595,13 @@ void main(void)
                 
                 
                 Gerenciador_de_Senha();  //Habilita acesso global por 30 segundos
-                Gerenciador_de_Senha_Global(); //Libera Senha Global eternamente                 
-                
+                Gerenciador_de_Senha_Global(); //Libera Senha Global eternamente                
                 
                 global_datalog(); // LEITURA DOS SENSORES                 
                 global_vacuo(); 
                 global_aquecimento();
                 global_condensador();                 
-                
+                global_porta();
                 
                 flag_proculus_hs=TRUE;
                 
@@ -1205,7 +1215,7 @@ void FAT8_Save(unsigned char tupla){
      
      if(tupla>(maxlineDATALOG-1)) 
        {  
-       PROCULUS_Buzzer(1000);
+       PROCULUS_Buzzer(1234);
        PROCULUS_VP_Write_UInt16(2,0);
        return;
        }        
@@ -2037,6 +2047,27 @@ void ShowMessage(char mensagem[20],unsigned int delay, char SoundType, char rete
 }
 
 
+
+void global_porta(void){
+     char bbb[2];    
+     if((PROCULUS_VP_Read_UInt16(19)==1)&&(flag_global_porta==0))
+       {
+         flag_global_porta=1;
+         bbb[0]=1; //Rele 1 da placa PT100
+         bbb[1]=1; //ESTADO LIGADO             
+         Send_To_Slave(0x02,COMMAND_RELAY,2,bbb);          
+       }
+     
+     if((PROCULUS_VP_Read_UInt16(19)==0)&&(flag_global_porta==1))
+       {  
+         flag_global_porta=0;
+         bbb[0]=1; //Rele 1 da placa PT100
+         bbb[1]=0; //ESTADO DESLIGADO             
+         Send_To_Slave(0x02,COMMAND_RELAY,2,bbb);           
+       }       
+}
+
+
 void global_datalog(void){
         if((PROCULUS_VP_Read_UInt16(2)==1)&&(flag_global_datalog==0))
            {
@@ -2075,7 +2106,8 @@ void global_datalog(void){
                {
                //Instruçoes aqui ao desligar 
                flag_global_datalog=0;
-               if(flag_pc_conected==FALSE) FAT8_Write_Process_Finalize();               
+               //if(flag_pc_conected==FALSE) 
+               FAT8_Write_Process_Finalize();               
                }       
 }
 
@@ -2130,7 +2162,7 @@ void global_vacuo(void){
            flag_global_vacuo=1; 
            if(Condensador<Seg_Condensador)
               { 
-              Vaccum_Switch(TRUE); 
+              Vaccum_Switch(TRUE);              
               Contagem_Tempo_de_Processo(TRUE);              
               }
            else
@@ -2690,9 +2722,12 @@ void Check_And_Send_Capture_Datalog(void){
        if(flag_capture_datalog==1)
          {  
          flag_capture_datalog=0;          
-         __delay_ms(25); //EVITA LEITURA -1.0Volts
-         save_datalog(add_datalog);         
-         add_datalog+=2;
+         if(!flag_pc_conected)
+            { 
+            __delay_ms(25); //EVITA LEITURA -1.0Volts
+            save_datalog(add_datalog);         
+            add_datalog+=2;
+            }
          }
        }
 }
@@ -2737,6 +2772,7 @@ void SaveBlackoutStatusRuning(void){
           EEPROM_Write_Byte(18,processo_minuto);   //Minuto  
           
           fat8.index=Find_Fat8_Running();
+          
           if(fat8.index!=-1)
              { 
              FAT8_Load(fat8.index);                    
@@ -2772,12 +2808,14 @@ void RecallBlackoutStatus(void){
      if(flag_global_condensador) PROCULUS_VP_Write_UInt16(3,1);
      if(flag_global_vacuo) PROCULUS_VP_Write_UInt16(4,1);
      if(flag_global_aquecimento) PROCULUS_VP_Write_UInt16(5,1);
+     if(flag_global_porta) PROCULUS_VP_Write_UInt16(19,1);
      //flag_time_process = autometico ao carregar;
      
      flag_global_datalog=0;     
      flag_global_condensador=0;
      flag_global_vacuo=0; 
      flag_global_aquecimento=0;    
+     flag_global_porta=0;
 }
 
 
@@ -2921,8 +2959,7 @@ void Formatar_Dados_de_Seguranca(void){
      EEPROM_Write_Integer(0x01,-150);    //Condensador
      EEPROM_Write_Integer(0x03,10000);   //Vacuo
      EEPROM_Write_Integer(0x05,-150);    //Condensador aquecimento
-     EEPROM_Write_Integer(0x07,8000);    //Vacuo aquecimento
-     EEPROM_Write_Integer(0xFA,50);      //Resolucao padrao do display
+     EEPROM_Write_Integer(0x07,8000);    //Vacuo aquecimento     
 }
 
 void Carregar_Status_da_Senha_Global(void){
@@ -3287,6 +3324,7 @@ void AcordaFilha(){
      flag_global_condensador=0;
      flag_global_vacuo=0;     
      flag_global_aquecimento=0;         
+     flag_global_porta;
 }
 
 
@@ -3489,6 +3527,7 @@ void Ligar_Cargas_Compassadamente(){
      PROCULUS_VP_Write_UInt16(0x03,0); //CONDENSADOR
      PROCULUS_VP_Write_UInt16(0x04,0); //VACUO
      PROCULUS_VP_Write_UInt16(0x05,0); //AQUECIMENTO
+     PROCULUS_VP_Write_UInt16(0x13,0); //PORTA
      flag_time_process=FALSE;
      
      statuspower.bits=EEPROM_Read_Byte(16); 
@@ -3497,7 +3536,9 @@ void Ligar_Cargas_Compassadamente(){
           print("Cond. de blackout encontrada!");
           print("Acionando Cargas, Aguarde...");          
           
-          Contagem_Tempo_de_Processo(FALSE);          
+          Contagem_Tempo_de_Processo(FALSE);  
+          
+          
           
           if(flag_global_datalog==1)
              {              
@@ -3521,11 +3562,20 @@ void Ligar_Cargas_Compassadamente(){
             {
             flag_global_vacuo=0;
             flag_time_process=TRUE;
-            print("3-Vacuo.");
+            print("3-Porta + Vacuo.");
             PROCULUS_VP_Write_UInt16(0x04,1);  //Vacuo
             global_vacuo();
-            my_delay_ms_CLRWDT(10000);
+            //my_delay_ms_CLRWDT(10000);
             }
+
+          if(flag_global_porta==1)
+            {   
+            flag_global_porta=0;
+            print("5-PORTA");
+            PROCULUS_VP_Write_UInt16(0x13,1);//Porta 
+            global_porta();
+            my_delay_ms_CLRWDT(10000);
+            }            
           
           
           if(flag_global_aquecimento==1)
@@ -3536,6 +3586,10 @@ void Ligar_Cargas_Compassadamente(){
             global_aquecimento();
             my_delay_ms_CLRWDT(10000);
             }
+          
+
+          
+          
           PROCULUS_Show_Screen(15);           
           }
      memo_statuspower=statuspower.bits;     
@@ -3653,7 +3707,7 @@ void FAT8_Write_Process_Inicialize()
     char date[10];
     
     fat8.index=Find_Fat8_Free();
-    
+
     NumProcesso=EEPROM_24C1025_Read_Int (0,0);
     NumProcesso++;
     if(NumProcesso>9999) NumProcesso=0;
@@ -3678,6 +3732,10 @@ void FAT8_Write_Process_Inicialize()
     fat8.processo.flag_view=0;
     fat8.processo.flag_finalized=0;
     fat8.processo.flag_running=1;
+    
+    
+
+          
     FAT8_Save(fat8.index);
     FAT8_Show();
     }
@@ -3691,18 +3749,30 @@ void FAT8_Write_Process_Finalize(){
     
     fat8.index=Find_Fat8_Running();
     FAT8_Load(fat8.index);    
-
-    PROCULUS_Read_RTC(date,time);    
+    
+    if(flag_pc_conected==TRUE)
+      {
+      strcpy(fat8.processo.fim.date,fat8.processo.inicio.date);
+      strcpy(fat8.processo.fim.time,fat8.processo.inicio.time);               
+      fat8.processo.minutes=0;
+      }
+    else
+      {  
+      PROCULUS_Read_RTC(date,time);    
+      strcpy(fat8.processo.fim.date,date);
+      strcpy(fat8.processo.fim.time,time);       
+      fat8.processo.minutes=processo_totalminuto;
+      }
 
     //fat8.processo.processo_number=NumProcesso;    
     //strcpy(fat8_processo.inicio.date,date);
     //strcpy(fat8_processo.inicio.time,time);    
-    strcpy(fat8.processo.fim.date,date);
-    strcpy(fat8.processo.fim.time,time);            
+    //strcpy(fat8.processo.fim.date,date);
+    //strcpy(fat8.processo.fim.time,time);            
     //fat8.processo.amostra=EEPROM_Read_Integer(0x09);
     //fat8.processo.add_start=0;        
     fat8.processo.add_end=add_datalog;
-    fat8.processo.minutes=processo_totalminuto;
+    //fat8.processo.minutes=processo_totalminuto;
     fat8.processo.flag_running=0;
     fat8.processo.flag_download=0;
     fat8.processo.flag_view=0;
@@ -3798,7 +3868,7 @@ void ouve_comunicacao(void){
            __delay_ms(200);
 
            USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
-           USART_putc(0xCD);USART_putc(0xCD);
+           USART_putc(0xCD);USART_putc(0xCD);//USART_putc(0xCD);
 
            for(unsigned int tempo=0; tempo<350; tempo++)
                {
@@ -3812,7 +3882,7 @@ void ouve_comunicacao(void){
               {          
               Comando_Protocolo_Serial(); 
               flag_recomunication=TRUE;
-              if(count<3)count++;
+              if(count<5)count++;
               //flag_pc_conected=TRUE;              
               }                    
 
@@ -3821,23 +3891,25 @@ void ouve_comunicacao(void){
               { 
               Comando_Display();
               flag_recomunication=TRUE;
-              if(count<3)count++;
+              if(count<5)count++;
               //flag_pc_conected=TRUE;              
-              }           
+              }  
+           
+           global_porta();
            
       }
       //count=0;   
-      /*
+      
       if(count>0)
          { 
          count--;
          flag_pc_conected=TRUE;
-         PROCULUS_Buzzer(50);
+         PROCULUS_Buzzer(10);
          }
       else
          { 
          flag_pc_conected=FALSE; 
-         PROCULUS_Buzzer(1000);
+         //PROCULUS_Buzzer(1000);
          }  
-      */ 
+       
 }

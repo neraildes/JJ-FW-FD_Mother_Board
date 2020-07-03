@@ -5,22 +5,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S1 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
 "257
 [; ;./global.h: 257:       struct {
-[s S3 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S3 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work ]
+[s S3 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S3 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work flag_global_porta ]
 "255
 [; ;./global.h: 255: union {
 [u S2 `uc 1 `S3 1 ]
 [n S2 . bits . ]
-"277
-[; ;./global.h: 277: struct{
+"279
+[; ;./global.h: 279: struct{
 [s S4 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S4 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication flag_pc_conected ]
-"297
-[; ;./global.h: 297: struct{
+"299
+[; ;./global.h: 299: struct{
 [s S5 :1 `uc 1 ]
 [n S5 . flag_main_loop_WDT ]
-"302
-[; ;./global.h: 302: typedef struct{
+"304
+[; ;./global.h: 304: typedef struct{
 [s S6 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S6 . milisegundo segundo minuto hora ]
 "16 ./adc.h
@@ -95,17 +95,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 "241
 [; ;./global.h: 241: } statusgen ;
 [v _statusgen `S1 ~T0 @X0 1 e ]
-"266
-[; ;./global.h: 266:       } statuspower;
+"267
+[; ;./global.h: 267:       } statuspower;
 [v _statuspower `S2 ~T0 @X0 1 e ]
-"286
-[; ;./global.h: 286: }statusgen1;
+"288
+[; ;./global.h: 288: }statusgen1;
 [v _statusgen1 `S4 ~T0 @X0 1 e ]
-"299
-[; ;./global.h: 299: }statusWDT;
+"301
+[; ;./global.h: 301: }statusWDT;
 [v _statusWDT `S5 ~T0 @X0 1 e ]
-"309
-[; ;./global.h: 309: volatile t_rtc rtc;
+"311
+[; ;./global.h: 311: volatile t_rtc rtc;
 [v _rtc `VS6 ~T0 @X0 1 e ]
 "5 pt100.c
 [; ;pt100.c: 5: double PT100_Read_Temperature(unsigned char canal){

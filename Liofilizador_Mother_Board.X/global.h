@@ -261,6 +261,7 @@ union {
              unsigned flag_global_vacuo       : 1 ;
              unsigned flag_time_process       : 1 ;
              unsigned flag_call_work          : 1 ;
+             unsigned flag_global_porta       : 1 ;
              
              };      
       } statuspower;    
@@ -272,6 +273,7 @@ union {
 #define flag_global_vacuo        statuspower.flag_global_vacuo
 #define flag_time_process        statuspower.flag_time_process        
 #define flag_call_work           statuspower.flag_call_work
+#define flag_global_porta        statuspower.flag_global_porta      
 
 //------------------------------------------------------------------------------
 struct{
