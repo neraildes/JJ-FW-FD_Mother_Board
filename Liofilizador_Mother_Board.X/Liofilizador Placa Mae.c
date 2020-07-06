@@ -3571,7 +3571,7 @@ void Ligar_Cargas_Compassadamente(){
           if(flag_global_porta==1)
             {   
             flag_global_porta=0;
-            print("5-PORTA");
+            //print("5-PORTA");
             PROCULUS_VP_Write_UInt16(0x13,1);//Porta 
             global_porta();
             my_delay_ms_CLRWDT(10000);
@@ -3867,9 +3867,10 @@ void ouve_comunicacao(void){
             flag_recomunication =FALSE;   
            __delay_ms(200);
 
-           USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
-           USART_putc(0xCD);USART_putc(0xCD);//USART_putc(0xCD);
-
+           USART_putc(0xCD);USART_putc(0xCD);
+           USART_putc(0xCD);USART_putc(0xCD);
+           USART_putc(0xCD);USART_putc(0xCD);
+           
            for(unsigned int tempo=0; tempo<350; tempo++)
                {
                if(flag_usart_rx==TRUE) break;                           

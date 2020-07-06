@@ -8688,7 +8688,7 @@ void ShowHardwareInfo(){
      totalboard=0;
      strcpy(texto,"");
      strcat(texto,"* : Mother Board ");
-     strcat(texto,"v1.0.20");
+     strcat(texto,"v1.0.22");
      print(texto);
      for(destino=1;destino<15;destino++)
         {
@@ -8875,7 +8875,7 @@ void Ligar_Cargas_Compassadamente(){
           if(statuspower.flag_global_porta==1)
             {
             statuspower.flag_global_porta=0;
-            print("5-PORTA");
+
             PROCULUS_VP_Write_UInt16(0x13,1);
             global_porta();
             my_delay_ms_CLRWDT(10000);
@@ -9164,7 +9164,8 @@ void ouve_comunicacao(void){
             statusgen1.flag_recomunication =0;
            _delay((unsigned long)((200)*(32000000/4000.0)));
 
-           USART_putc(0xCD);USART_putc(0xCD);USART_putc(0xCD);
+           USART_putc(0xCD);USART_putc(0xCD);
+           USART_putc(0xCD);USART_putc(0xCD);
            USART_putc(0xCD);USART_putc(0xCD);
 
            for(unsigned int tempo=0; tempo<350; tempo++)
