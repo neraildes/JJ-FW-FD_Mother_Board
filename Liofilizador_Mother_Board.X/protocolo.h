@@ -91,8 +91,10 @@ typedef struct {
 #define COMMAND_UPLOAD_PRG      0x44
 #define COMMAND_EEE_R_32B       0x45  //Ler    32 Bits da memoria 24C1025
 #define COMMAND_EEE_W_32B       0x46  //Gravar 32 Bits da memoria 24C1025
-#define COMMAND_EEE_R_BUF_DIR   0x47  //Ler    Buvffer Direto
-#define COMMAND_EEE_W_BUF_DIR   0x48  //Gravar Buffer Dire
+#define COMMAND_EEE_R_BUF_DIR   0x47  //Ler    Buffer Direto
+#define COMMAND_EEE_W_BUF_DIR   0x48  //Gravar Buffer Direto
+#define COMMAND_READ_PROCESS    0x49  //Lê o numero do processo e incrementa 1
+#define COMMAND_CHANGE_FLAG     0x4A  //Modifica o valor de uma flag
 //...
 //----------------------------------
 

@@ -4,7 +4,7 @@
 # 288 "<built-in>" 3
 # 1 "<command line>" 1
 # 1 "<built-in>" 2
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "ntc10k.c" 2
 # 1 "./global.h" 1
@@ -62,7 +62,7 @@
 
 
 #pragma config EBTRB = OFF
-# 232 "./global.h"
+# 233 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -73,7 +73,25 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 255 "./global.h"
+# 254 "./global.h"
+struct{
+        unsigned flag_save_time :1;
+        unsigned flag_wakeup :1;
+        unsigned flagSendDataFix :1;
+        unsigned flag_proculus_hs :1;
+        unsigned flag_Vacuo_estava_ligado :1;
+        unsigned flag_generico :1;
+        unsigned flag_recomunication :1;
+        unsigned flag_pc_conected :1;
+}statusgen1;
+# 276 "./global.h"
+struct{
+        unsigned flag_autoriza_click_datalog :1;
+        unsigned flag_autoriza_click_condensador :1;
+        unsigned flag_autoriza_click_vacuo :1;
+        unsigned flag_autoriza_click_aquecimento :1;
+}statusgen2;
+# 295 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -87,18 +105,7 @@ union {
 
              };
       } statuspower;
-# 279 "./global.h"
-struct{
-        unsigned flag_save_time :1;
-        unsigned flag_wakeup :1;
-        unsigned flagSendDataFix :1;
-        unsigned flag_proculus_hs :1;
-        unsigned flag_Vacuo_estava_ligado :1;
-        unsigned flag_generico :1;
-        unsigned flag_recomunication :1;
-        unsigned flag_pc_conected :1;
-}statusgen1;
-# 299 "./global.h"
+# 321 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;

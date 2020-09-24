@@ -29,29 +29,28 @@
 #include "versao.h"
 
 //------------------------TUPLA DE AQUECIMENTO----------------------------------
-//EEPROM INTERNA (0x3FF)
+//PARA EEPROM INTERNA (0x3FF)
 #define OFFSET_EEPROM       52     //Deslocamento para deixar os primeiros bytes livres (10)
 #define TUPLA_EEPROM_SIZE   18     //Tamanho maximo de uma tupla na eeprom (18)
 #define TUPLA_VP_SIZE       12     //Tamanho maximo de uma tupla no display(12)
 
 
 //-------------------------TUPLA DE FAT8----------------------------------------
-//EEPROM EXTERNA (0x1FFFF)
+//PARA EEPROM EXTERNA (0x1FFFF)
 #define FAT8_VP_SIZE       30
 #define OFFSET_EEPROM_FAT8 0x10
 #define EEPROM_FAT8_SIZE   54
 
-
-
+//--------------------------COMUNICAÇÃO I2C - Pinos config----------------------
 #define CLK at PORTCbits.RD3       //I2C CLOCK
 #define DTA at PORTCbits.RD4       //I2C DATA
 
-#define FORMAT 0  //
-#define LOAD   1  // Constantes do TrendCurveFuncao
-#define SAVE   2  //
+//------------------Conversaando com o procedimento TrendCurve------------------
+#define FORMAT  0  //
+#define LOAD    1  // Constantes do TrendCurveFuncao
+#define SAVE    2  //
 
-//-----------------------------TREND CURVE--------------------------------------
-#define PPCANAL 1789 
+#define PPCANAL 1789 //O Canal utiliza PP
 #define PPCOR   1787
 
 #define FATOR_PADRAO 1.0
@@ -75,14 +74,6 @@ const char *boardtype[5]={"Mother Board",
 
 /*----------------------------------------------------------------------------*/
 volatile unsigned char usart_buffer[USART_BUFFER_SIZE]; 
-//volatile unsigned char usart_buffer_fila[USART_LINE_BUFFER_SIZE][USART_BUFFER_SIZE];
-
-
-//-----------------timer1-----------------------
-//volatile unsigned int  milisegundo ;
-//volatile unsigned char segundo     ;
-//volatile unsigned char minuto      ;
-//volatile unsigned char hora        ;
 
 volatile unsigned int  tempodecorrido        ;
 volatile unsigned int  tempocaptura          ; //variavel de captura de dados para memoria datalog
@@ -118,12 +109,7 @@ t_proculus       proculus;
 t_liofilizador   liofilizador[10];
 t_receita        receita;
 
-
-
-
 t_fat8           fat8;
-//char           fat8_index;
-
 //------------------------------------------------------------------------------
 
 char  texto[74];
@@ -243,8 +229,6 @@ void main(void)
      T1OSCEN=1;
      PIE1bits.TMR1IE=1;      // Enable interrupt flag_time_process          
      TMR1ON = 1;             // Turn the timer TMR1 on 
-     
-     //-------------------------------------------------------------------------
      //IPEN=1;  //Habilita prioridade na interrupção.    
      
      //-------------------------------------------------------------------------
@@ -256,7 +240,7 @@ void main(void)
      INTCONbits.GIE        =1;  //Global Interrupt 
      //=========================================================================
 
-
+     
      
      //=========================================================================
 
@@ -275,97 +259,6 @@ void main(void)
      my_delay_ms_CLRWDT(500);
      
     //--------------------------------------------------------------------------
-
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-
-
-     
-     
-     
-
-     
-          
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-    /* 
-    while(1)
-    {
-    my_delay_ms_CLRWDT(1000);
-    ouve_comunicacao();    
-    }
-    */
-    
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
      
      {
      //-----------TOTALIZADOR DE RESET-------------         
@@ -406,20 +299,6 @@ void main(void)
      if(EEPROM_Read_Byte(OFFSET_EEPROM)==0xFF)
        {         
        print("Formatando memoria principal..."); 
-       
-//       {
-//       unsigned long mem_add;
-//       for(mem_add=0;mem_add<=0x1FFFF;mem_add+=2)
-//          {
-//          EEPROM_24C1025_Write_Int(0,mem_add,0xFFFF);
-//          asm("CLRWDT");
-//          }        
-//       }
-//       PROCULUS_Buzzer(3000);
-       
-       
-       
-       
        Formatar_Banco_de_Dados(0,10);
        Formatar_Lista_de_Receitas();
        Formatar_Dados_de_Seguranca();
@@ -565,6 +444,15 @@ void main(void)
         
         //add_datalog=0;
         Ligar_Cargas_Compassadamente();
+        
+        PROCULUS_VP_Write_UInt16(0x40,0); //Icone do computador conectado
+        flag_pc_conected                 =FALSE;
+        flag_autoriza_click_datalog      =0;
+        flag_autoriza_click_condensador  =0;
+        flag_autoriza_click_vacuo        =0;
+        flag_autoriza_click_aquecimento  =0;        
+        
+        
         PROCULUS_Show_Screen(15);     
         TRISDbits.TRISD5=0;//fix Apagar Debug
         PORTDbits.RD5=0;//FIX APAGAR
@@ -597,11 +485,13 @@ void main(void)
                 Gerenciador_de_Senha();  //Habilita acesso global por 30 segundos
                 Gerenciador_de_Senha_Global(); //Libera Senha Global eternamente                
                 
+                
                 global_datalog(); // LEITURA DOS SENSORES                 
                 global_vacuo(); 
                 global_aquecimento();
                 global_condensador();                 
                 global_porta();
+                  
                 
                 flag_proculus_hs=TRUE;
                 
@@ -1896,7 +1786,44 @@ void Decodify_Command(void){
              USART_put_string(texto);
              break;
              }
+        case COMMAND_READ_PROCESS:
+             tempint=EEPROM_24C1025_Read_Int (0,0);
+             tempint++;
+             Send_to_PC(2);
+             USART_put_int(tempint);             
+             //EEPROM_24C1025_Write_Int (0,0,tempint);
+             break;
         
+        case COMMAND_CHANGE_FLAG:    
+             switch(usart_protocol.value[0])
+                {  
+                case 2:if(usart_protocol.value[1]>0)
+                          flag_autoriza_click_datalog=1;
+                       else           
+                          flag_autoriza_click_datalog=0;                           
+                       break;
+                       
+                case 3:if(usart_protocol.value[1]>0)
+                          flag_autoriza_click_condensador=1;
+                       else           
+                          flag_autoriza_click_condensador=0;                           
+                       break;
+                       
+                case 4:if(usart_protocol.value[1]>0)
+                          flag_autoriza_click_vacuo=1;
+                       else           
+                          flag_autoriza_click_vacuo=0;                           
+                       break;
+                       
+                case 5:if(usart_protocol.value[1]>0)
+                          flag_autoriza_click_aquecimento=1;
+                       else           
+                          flag_autoriza_click_aquecimento=0;                           
+                       break;                       
+                }
+             Send_to_PC(3);
+             SEND_REPLY_OK();            
+             break;        
     }
 }
 
@@ -2069,9 +1996,11 @@ void global_porta(void){
 
 
 void global_datalog(void){
-        if((PROCULUS_VP_Read_UInt16(2)==1)&&(flag_global_datalog==0))
+    
+        if((PROCULUS_VP_Read_UInt16(2)==1)&&(flag_global_datalog==0)) //LIGAR
            {
-            char bb[2];
+            char bb[2];            
+            if(testa_modo_conectado(2,0)==0) return;
             flag_global_datalog=1;           
             if(flag_pc_conected==FALSE)
                 {    
@@ -2102,11 +2031,11 @@ void global_datalog(void){
                 }
             
            }
-        else if((PROCULUS_VP_Read_UInt16(2)==0)&&(flag_global_datalog==1))
+        else if((PROCULUS_VP_Read_UInt16(2)==0)&&(flag_global_datalog==1)) //Desligar
                {
-               //Instruçoes aqui ao desligar 
+            
+               if(testa_modo_conectado(2,1)==0) return;    
                flag_global_datalog=0;
-               //if(flag_pc_conected==FALSE) 
                FAT8_Write_Process_Finalize();               
                }       
 }
@@ -2132,6 +2061,7 @@ void Vaccum_Switch(unsigned char estado){
 void global_condensador(void){     
         if((PROCULUS_VP_Read_UInt16(0x03)==1)&&(flag_global_condensador==0))
             {
+            if(testa_modo_conectado(3,0)==0) return;
             if(delay_condensador==0)
                {
                flag_global_condensador=1; 
@@ -2145,6 +2075,7 @@ void global_condensador(void){
             }
         if((PROCULUS_VP_Read_UInt16(0x03)==0)&&(flag_global_condensador==1))
            {
+           if(testa_modo_conectado(3,1)==0) return; 
            flag_global_condensador=0; 
            Condensador_Switch(OFF);
            delay_condensador=30; //Intervalo para conseguir religar o condensador
@@ -2158,6 +2089,7 @@ void global_vacuo(void){
         char count;    
         if((PROCULUS_VP_Read_UInt16(0x04)==1)&&(flag_global_vacuo==0)) 
            {  
+           if(testa_modo_conectado(4,0)==0) return; 
            if(flag_global_vacuo==0) PROCULUS_OK(); 
            flag_global_vacuo=1; 
            if(Condensador<Seg_Condensador)
@@ -2173,6 +2105,7 @@ void global_vacuo(void){
            }
         else if((PROCULUS_VP_Read_UInt16(0x04)==0)&&(flag_global_vacuo==1))
                 {                
+                if(testa_modo_conectado(4,1)==0) return;
                 flag_global_vacuo=0;
                 Vaccum_Switch(FALSE); 
                 PROCULUS_VP_Write_UInt16(6,0);
@@ -2234,6 +2167,7 @@ void Global_Aquecimento_Switch(unsigned char estado){
 void global_aquecimento(void){  
         if((PROCULUS_VP_Read_UInt16(5)==1)&&(flag_global_aquecimento==0))
            {            
+           if(testa_modo_conectado(5,0)==0) return; 
            if((Condensador<Seg_Aq_cond)&&(Vacuometro<Seg_Aq_vacuo))
                      {
                      flag_global_aquecimento=1; 
@@ -2242,6 +2176,7 @@ void global_aquecimento(void){
            }
         if((PROCULUS_VP_Read_UInt16(5)==0)&&(flag_global_aquecimento==1))
            {//Desliga Aquecimento no Botão
+           if(testa_modo_conectado(5,1)==0) return; 
            Global_Aquecimento_Switch(OFF);
            flag_global_aquecimento=0;           
            PROCULUS_VP_Write_String(1970,"");           
@@ -3779,7 +3714,7 @@ void FAT8_Write_Process_Finalize(){
     fat8.processo.flag_finalized=1;
     FAT8_Save(fat8.index);
     FAT8_Show(); 
-    add_datalog+=2;
+    if(flag_pc_conected==FALSE) add_datalog+=2;
     EEPROM_24C1025_Write_Long (0,2,add_datalog); //Armazena add_datalog
     
 }
@@ -3898,19 +3833,72 @@ void ouve_comunicacao(void){
            
            global_porta();
            
-      }
-      //count=0;   
+      }  
       
       if(count>0)
          { 
          count--;
          flag_pc_conected=TRUE;
-         PROCULUS_Buzzer(10);
+         PROCULUS_VP_Write_UInt16(0x40,1); //Icone do computador conectado
          }
       else
          { 
          flag_pc_conected=FALSE; 
-         //PROCULUS_Buzzer(1000);
+         PROCULUS_VP_Write_UInt16(0x40,0); //Icone do computador conectado
          }  
+            
+      if(flag_autoriza_click_datalog) PROCULUS_Buzzer(10);
        
 }
+
+
+char testa_modo_conectado(unsigned int add, char estado){
+            
+     if(flag_pc_conected)
+       {               
+       switch(add)
+          {
+           case 2: 
+                 if(!flag_autoriza_click_datalog)
+                    {
+                    PROCULUS_VP_Write_UInt16(add,estado);
+                    PROCULUS_Popup(FUNCAO_INDISP_MODO_CONNECTADO); 
+                    PROCULUS_Buzzer(3000);                
+                    return 0;               
+                    }
+                  flag_autoriza_click_datalog=0; 
+                  break;
+           case 3: 
+                 if(!flag_autoriza_click_condensador)
+                    {
+                    PROCULUS_VP_Write_UInt16(add,estado);
+                    PROCULUS_Popup(FUNCAO_INDISP_MODO_CONNECTADO); 
+                    PROCULUS_Buzzer(3000);                
+                    return 0;               
+                    }               
+                  flag_autoriza_click_condensador=0; break;
+           case 4: 
+                 if(!flag_autoriza_click_vacuo)
+                    {
+                    PROCULUS_VP_Write_UInt16(add,estado);
+                    PROCULUS_Popup(FUNCAO_INDISP_MODO_CONNECTADO); 
+                    PROCULUS_Buzzer(3000);                
+                    return 0;               
+                    }               
+                  flag_autoriza_click_vacuo=0; 
+                  break;
+           case 5: 
+                 if(!flag_autoriza_click_aquecimento)
+                    {
+                    PROCULUS_VP_Write_UInt16(add,estado);
+                    PROCULUS_Popup(FUNCAO_INDISP_MODO_CONNECTADO); 
+                    PROCULUS_Buzzer(3000);                
+                    return 0;               
+                    }               
+                  flag_autoriza_click_aquecimento=0; 
+                  break;
+          }     
+       //flag_autoriza_click=0;
+       }
+     return 1;
+}                

@@ -203,15 +203,16 @@
 
 
 //==============================================================================
-#define SALVO_COM_SUCESSO        0x50
-#define ACESSO_NEGADO            0x52
-#define ACESSO_NEGADO_HIDE       0x53
-#define SENHA_INVALIDA           0X20 
-#define SENHAS_DIFERENTES        0X21
-#define SENHA_CADASTRADA_SUCESSO 0x22
-#define SENHA_ZERO_INVALIDA      0x23
-#define OP_REALIZADA_COM_SUCESSO 0x60 
-#define DESEJA_ENCERRAR_PROCESSO 0x42  
+#define SALVO_COM_SUCESSO               0x50
+#define ACESSO_NEGADO                   0x52
+#define ACESSO_NEGADO_HIDE              0x53
+#define SENHA_INVALIDA                  0x20 
+#define SENHAS_DIFERENTES               0x21
+#define SENHA_CADASTRADA_SUCESSO        0x22
+#define SENHA_ZERO_INVALIDA             0x23
+#define OP_REALIZADA_COM_SUCESSO        0x60 
+#define DESEJA_ENCERRAR_PROCESSO        0x42
+#define FUNCAO_INDISP_MODO_CONNECTADO   0x43
 
 
 
@@ -249,6 +250,45 @@ struct {
 #define flag_capture_datalog  statusgen.flag_capture_datalog 
 #define flag_edit_temperatura statusgen.flag_edit_temperatura 
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+struct{
+        unsigned flag_save_time           :1;
+        unsigned flag_wakeup              :1;
+        unsigned flagSendDataFix          :1;
+        unsigned flag_proculus_hs         :1;  
+        unsigned flag_Vacuo_estava_ligado :1;
+        unsigned flag_generico            :1;
+        unsigned flag_recomunication      :1;
+        unsigned flag_pc_conected         :1;
+}statusgen1;
+
+#define flag_save_time           statusgen1.flag_save_time
+#define flag_wakeup              statusgen1.flag_wakeup
+#define flagSendDataFix          statusgen1.flagSendDataFix
+#define flag_proculus_hs         statusgen1.flag_proculus_hs
+#define flag_Vacuo_estava_ligado statusgen1.flag_Vacuo_estava_ligado
+#define flag_generico            statusgen1.flag_generico
+#define flag_recomunication      statusgen1.flag_recomunication
+#define flag_pc_conected         statusgen1.flag_pc_conected
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+struct{
+        unsigned flag_autoriza_click_datalog      :1;
+        unsigned flag_autoriza_click_condensador  :1;
+        unsigned flag_autoriza_click_vacuo        :1;
+        unsigned flag_autoriza_click_aquecimento  :1;
+}statusgen2;
+
+#define flag_autoriza_click_datalog      statusgen2.flag_autoriza_click_datalog
+#define flag_autoriza_click_condensador  statusgen2.flag_autoriza_click_condensador
+#define flag_autoriza_click_vacuo        statusgen2.flag_autoriza_click_vacuo
+#define flag_autoriza_click_aquecimento  statusgen2.flag_autoriza_click_aquecimento
+
+
+
+
+
 
 //------------------------------------------------------------------------------
 // Serão salvos e recuperados caso desligue o sistema (blackout)
@@ -276,25 +316,7 @@ union {
 #define flag_global_porta        statuspower.flag_global_porta      
 
 //------------------------------------------------------------------------------
-struct{
-        unsigned flag_save_time           :1;
-        unsigned flag_wakeup              :1;
-        unsigned flagSendDataFix          :1;
-        unsigned flag_proculus_hs         :1;  
-        unsigned flag_Vacuo_estava_ligado :1;
-        unsigned flag_generico            :1;
-        unsigned flag_recomunication      :1;
-        unsigned flag_pc_conected         :1;
-}statusgen1;
 
-#define flag_save_time           statusgen1.flag_save_time
-#define flag_wakeup              statusgen1.flag_wakeup
-#define flagSendDataFix          statusgen1.flagSendDataFix
-#define flag_proculus_hs         statusgen1.flag_proculus_hs
-#define flag_Vacuo_estava_ligado statusgen1.flag_Vacuo_estava_ligado
-#define flag_generico            statusgen1.flag_generico
-#define flag_recomunication      statusgen1.flag_recomunication
-#define flag_pc_conected         statusgen1.flag_pc_conected
 //------------------------------------------------------------------------------
 struct{
         unsigned flag_main_loop_WDT :1;    

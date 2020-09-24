@@ -234,5 +234,7 @@ void Plotar_Grafico_Gravado(void);
 void Recarregar_Parametros_de_Configuracao(void);
 void ouve_comunicacao(void);
 void Grava_Info_Aquecimento(char tupla);
+char testa_modo_conectado(unsigned int add, char estado);
+void Monitoramento_de_Botoes();
 #endif	/* LIOFILIZADOR_PLACA_MAE_H */
 
