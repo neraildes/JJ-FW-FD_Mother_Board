@@ -490,7 +490,7 @@ void main(void)
                 global_vacuo(); 
                 global_aquecimento();
                 global_condensador();                 
-                global_porta();
+                //global_porta();
                   
                 
                 flag_proculus_hs=TRUE;
@@ -967,7 +967,7 @@ void ShowSensorRealTimeHS(void)
      
      //------------------------GRAVA NO DISPLAY---------------------------------
      my_delay_ms(50);
-     flag_proculus_hs=TRUE;
+     flag_proculus_hs=TRUE; 
      for(tupla=0;tupla<(totalboard*2);tupla++)
         { 
         switch(tupla)
@@ -2095,11 +2095,14 @@ void global_vacuo(void){
            if(Condensador<Seg_Condensador)
               { 
               Vaccum_Switch(TRUE);              
-              Contagem_Tempo_de_Processo(TRUE);              
+              Contagem_Tempo_de_Processo(TRUE);  
+              Rele_Geral_Aquecimento(TRUE);
+              
               }
            else
               { 
               Vaccum_Switch(FALSE); 
+              Rele_Geral_Aquecimento(FALSE);
               Incrementa_Contador_de_Repique_do_Vacuo();              
               }
            }
@@ -2108,6 +2111,7 @@ void global_vacuo(void){
                 if(testa_modo_conectado(4,1)==0) return;
                 flag_global_vacuo=0;
                 Vaccum_Switch(FALSE); 
+                Rele_Geral_Aquecimento(FALSE);
                 PROCULUS_VP_Write_UInt16(6,0);
 
                 PROCULUS_Popup(DESEJA_ENCERRAR_PROCESSO);
@@ -2743,14 +2747,14 @@ void RecallBlackoutStatus(void){
      if(flag_global_condensador) PROCULUS_VP_Write_UInt16(3,1);
      if(flag_global_vacuo) PROCULUS_VP_Write_UInt16(4,1);
      if(flag_global_aquecimento) PROCULUS_VP_Write_UInt16(5,1);
-     if(flag_global_porta) PROCULUS_VP_Write_UInt16(19,1);
+     //if(flag_global_porta) PROCULUS_VP_Write_UInt16(19,1);
      //flag_time_process = autometico ao carregar;
      
      flag_global_datalog=0;     
      flag_global_condensador=0;
      flag_global_vacuo=0; 
      flag_global_aquecimento=0;    
-     flag_global_porta=0;
+     //flag_global_porta=0;
 }
 
 
@@ -3259,7 +3263,7 @@ void AcordaFilha(){
      flag_global_condensador=0;
      flag_global_vacuo=0;     
      flag_global_aquecimento=0;         
-     flag_global_porta;
+     //flag_global_porta;
 }
 
 
@@ -3315,6 +3319,7 @@ void ShowHardwareInfo(){
      char tipo;
      int  resposta;
      char versao[10];
+     flag_proculus_hs=FALSE;
      Send_To_Slave(destino, COMANDO_QUEM_EH_VOCE, 0, buffer);
      totalboard=0;
      strcpy(texto,"");
@@ -3462,7 +3467,7 @@ void Ligar_Cargas_Compassadamente(){
      PROCULUS_VP_Write_UInt16(0x03,0); //CONDENSADOR
      PROCULUS_VP_Write_UInt16(0x04,0); //VACUO
      PROCULUS_VP_Write_UInt16(0x05,0); //AQUECIMENTO
-     PROCULUS_VP_Write_UInt16(0x13,0); //PORTA
+     //PROCULUS_VP_Write_UInt16(0x13,0); //PORTA
      flag_time_process=FALSE;
      
      statuspower.bits=EEPROM_Read_Byte(16); 
@@ -3497,12 +3502,13 @@ void Ligar_Cargas_Compassadamente(){
             {
             flag_global_vacuo=0;
             flag_time_process=TRUE;
-            print("3-Porta + Vacuo.");
+            print("3-Vacuo.");
             PROCULUS_VP_Write_UInt16(0x04,1);  //Vacuo
             global_vacuo();
             //my_delay_ms_CLRWDT(10000);
             }
-
+          
+          /*
           if(flag_global_porta==1)
             {   
             flag_global_porta=0;
@@ -3511,7 +3517,7 @@ void Ligar_Cargas_Compassadamente(){
             global_porta();
             my_delay_ms_CLRWDT(10000);
             }            
-          
+          */
           
           if(flag_global_aquecimento==1)
             {   
@@ -3831,7 +3837,7 @@ void ouve_comunicacao(void){
               //flag_pc_conected=TRUE;              
               }  
            
-           global_porta();
+           //global_porta();
            
       }  
       
@@ -3902,3 +3908,19 @@ char testa_modo_conectado(unsigned int add, char estado){
        }
      return 1;
 }                
+
+void Rele_Geral_Aquecimento(char status){
+     char bbb[3]; 
+     if(status)
+       {  
+       bbb[0]=1; //Rele 1 da placa PT100
+       bbb[1]=1; //ESTADO LIGADO             
+       Send_To_Slave(0x02,COMMAND_RELAY,2,bbb);    
+       }
+     else
+       {  
+       bbb[0]=1; //Rele 1 da placa PT100
+       bbb[1]=0; //ESTADO DESLIGADO             
+       Send_To_Slave(0x02,COMMAND_RELAY,2,bbb);         
+       }       
+}

@@ -4856,6 +4856,7 @@ void ouve_comunicacao(void);
 void Grava_Info_Aquecimento(char tupla);
 char testa_modo_conectado(unsigned int add, char estado);
 void Monitoramento_de_Botoes();
+void Rele_Geral_Aquecimento(char status);
 # 6 "isr.c" 2
 
 
