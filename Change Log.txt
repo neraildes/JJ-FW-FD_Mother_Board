@@ -4,6 +4,10 @@ Tarefas a serem feitas (em ordem de prioridade)
 
 .........."Placa não conectada" e "Sem sensor" para vacuo e pt100.
 
+Versão 1.0.26 - (Kit em Teste real em São Carlos) 26/10/2020
+        Ignorando erro de comunicação (valor -1) na leitura de condensador (Esse erro provocava delisgamento o condensador e bomba de vácuo).
+	Implementado uma função para usar o rele adicional da placa do condensador. Este relê desliga uma fase/neutro comum para evitar choque do operador.
+
 
 Versão 1.0.18
         Retirado ruido ao ligar condensador (liga vacuo) trocando a ordem de checagem e deixando vacuo por ultimo

@@ -4,6 +4,9 @@
  * COMPILADOR XC8 Free
  * NIVEL DE OTIMIZAÇÃO  2
  * MICROCONTROLADOR - PIC18F4620
+ * 
+ * *NERA-TEMPORARIO - Busca para acertar programa
+ * 
 ------------------------------------------------------------------------------*/
 
 #include <xc.h>
@@ -138,6 +141,11 @@ volatile unsigned char totalboard;
 volatile signed int senhacount;
 unsigned long senha_atual;
 char senhavetor[4];
+
+
+//*NERA-TEMPORARIO
+//Estas variáveis devem ser apagadas
+//int contabilizado =0;     
 
 
 int Condensador     ;       
@@ -948,6 +956,11 @@ void ShowSensorRealTimeHS(void)
      char tupla;
      int  vp, vpicone;
      
+     //*NERA-TEMPORARIO
+     //Estas variáveis devem ser apagadas
+     static char flag_contabilizado=0;     
+     
+     
      //-------------------------LEITURA DAS PLACAS------------------------------
      //Faz leitura de todas as tuplas, inclusive da tupla vazia da placa 2.
      //Inicia no vetor numero zero.
@@ -981,8 +994,16 @@ void ShowSensorRealTimeHS(void)
                      Vacuometro=leitura[tupla];
                      break;  
               case 2:
-                     PROCULUS_VP_Write_UInt16(150,leitura[tupla]); //Condensador  
-                     Condensador=leitura[tupla];
+                     PROCULUS_VP_Write_UInt16(150,leitura[tupla]); //Condensador         
+                     
+                     //--------------------*NERA-TEMPORARIO---------------------
+                     //Condensador=leitura[tupla];                     
+                     if(leitura[tupla]!=-1) 
+                       { 
+                       Condensador=leitura[tupla];
+                       }
+                     //---------------------------------------------------------        
+                     
                      break; 
               case 3:
                      //sem sensor nesta tupla
@@ -2046,7 +2067,7 @@ void global_datalog(void){
 void Condensador_Switch(unsigned char estado){
      char buffer[2];
      buffer[0]=0;
-     buffer[1]=estado;
+     buffer[1]=estado; 
      Send_To_Slave(0x02,COMMAND_RELAY,2,buffer);
 }
 
@@ -2096,13 +2117,13 @@ void global_vacuo(void){
               { 
               Vaccum_Switch(TRUE);              
               Contagem_Tempo_de_Processo(TRUE);  
-              Rele_Geral_Aquecimento(TRUE);
+              //Rele_Geral_Aquecimento(TRUE);
               
               }
            else
               { 
               Vaccum_Switch(FALSE); 
-              Rele_Geral_Aquecimento(FALSE);
+              //Rele_Geral_Aquecimento(FALSE);
               Incrementa_Contador_de_Repique_do_Vacuo();              
               }
            }
@@ -2111,7 +2132,7 @@ void global_vacuo(void){
                 if(testa_modo_conectado(4,1)==0) return;
                 flag_global_vacuo=0;
                 Vaccum_Switch(FALSE); 
-                Rele_Geral_Aquecimento(FALSE);
+                //Rele_Geral_Aquecimento(FALSE);
                 PROCULUS_VP_Write_UInt16(6,0);
 
                 PROCULUS_Popup(DESEJA_ENCERRAR_PROCESSO);
@@ -2149,7 +2170,7 @@ void global_vacuo(void){
                    }
                 else
                    { 
-                   Vaccum_Switch(FALSE);
+                   Vaccum_Switch(FALSE);   
                    Incrementa_Contador_de_Repique_do_Vacuo();
                    }            
                 }
@@ -2159,6 +2180,9 @@ void global_vacuo(void){
 void Global_Aquecimento_Switch(unsigned char estado){
      char buffer[2]; 
      unsigned char board;
+     
+     Rele_Geral_Aquecimento(estado); //Controla o comum do aquecimento
+     
      for(board=3;board<(totalboard*2-1);board++)
         {
         //flag_main_loop_WDT=1; 
@@ -2176,12 +2200,14 @@ void global_aquecimento(void){
                      {
                      flag_global_aquecimento=1; 
                      Global_Aquecimento_Switch(ON);                                          
+                     //Rele_Geral_Aquecimento(TRUE);
                      }
            }
         if((PROCULUS_VP_Read_UInt16(5)==0)&&(flag_global_aquecimento==1))
            {//Desliga Aquecimento no Botão
            if(testa_modo_conectado(5,1)==0) return; 
            Global_Aquecimento_Switch(OFF);
+           //Rele_Geral_Aquecimento(FALSE);
            flag_global_aquecimento=0;           
            PROCULUS_VP_Write_String(1970,"");           
            }        
@@ -2192,7 +2218,8 @@ void global_aquecimento(void){
               flag_global_aquecimento=0;              
               //PROCULUS_VP_Write_String(1970,"");
               //PROCULUS_VP_Write_UInt16(5,0); //APAGA O BOTAO AQUECIMENTO
-              Global_Aquecimento_Switch(OFF);             
+              Global_Aquecimento_Switch(OFF);  
+              //Rele_Geral_Aquecimento(OFF);
               //--------------------------------------------------------          
               }
            }
@@ -3909,18 +3936,15 @@ char testa_modo_conectado(unsigned int add, char estado){
      return 1;
 }                
 
+
+
 void Rele_Geral_Aquecimento(char status){
+    //-------------------------------------------------------------------------
+    //  Controla a ligação comum do aquecimento evitando que o usuário tome 
+    //  choque quando for limpar a máquina.
+    //-------------------------------------------------------------------------
      char bbb[3]; 
-     if(status)
-       {  
-       bbb[0]=1; //Rele 1 da placa PT100
-       bbb[1]=1; //ESTADO LIGADO             
-       Send_To_Slave(0x02,COMMAND_RELAY,2,bbb);    
-       }
-     else
-       {  
-       bbb[0]=1; //Rele 1 da placa PT100
-       bbb[1]=0; //ESTADO DESLIGADO             
-       Send_To_Slave(0x02,COMMAND_RELAY,2,bbb);         
-       }       
+     bbb[0]=1; //Rele 1 da placa PT100
+     bbb[1]=status; //ESTADO LIGADO             
+     Send_To_Slave(0x02,COMMAND_RELAY,2,bbb);    
 }
