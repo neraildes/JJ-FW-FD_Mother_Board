@@ -380,7 +380,7 @@ typedef uint32_t uint_fast32_t;
 #pragma config BORV = 3
 
 
-#pragma config WDT = ON
+#pragma config WDT = OFF
 #pragma config WDTPS = 16384
 
 

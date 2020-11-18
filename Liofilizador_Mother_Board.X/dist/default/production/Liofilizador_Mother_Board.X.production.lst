@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.20 build 20200408173844 
-                                                                                               Tue Nov 10 11:49:02 2020
+                                                                                               Wed Nov 18 11:12:53 2020
 
 Microchip MPLAB XC8 C Compiler v2.20 (Free license) build 20200408173844 Og9 
      1                           	processor	18F4620
@@ -1229,7 +1229,7 @@ Microchip MPLAB XC8 C Compiler v2.20 (Free license) build 20200408173844 Og9
   1215  00FFDC  30                 	db	48	;'0'
   1216  00FFDD  2E                 	db	46
   1217  00FFDE  32                 	db	50	;'2'
-  1218  00FFDF  38                 	db	56	;'8'
+  1218  00FFDF  39                 	db	57	;'9'
   1219  00FFE0  00                 	db	0
   1220  00FFE1  42                 	db	66	;'B'
   1221  00FFE2  4F                 	db	79	;'O'
@@ -16788,7 +16788,7 @@ Microchip MPLAB XC8 C Compiler v2.20 (Free license) build 20200408173844 Og9
  16100  0040A0  6E1A               	movwf	(strcat@src+1)^0,c
  16101  0040A2  EC1E  F048         	call	_strcat	;wreg free
  16102                           
- 16103                           ;Liofilizador Placa Mae.c: 3391:      strcat(texto,"v1.0.28");
+ 16103                           ;Liofilizador Placa Mae.c: 3391:      strcat(texto,"v1.0.29");
  16104  0040A6  0E7C               	movlw	low _texto
  16105  0040A8  6E17               	movwf	strcat@dest^0,c
  16106  0040AA  0E01               	movlw	high _texto
@@ -35004,11 +35004,11 @@ Microchip MPLAB XC8 C Compiler v2.20 (Free license) build 20200408173844 Og9
  33432                           
  33433                           ;Config register CONFIG2H @ 0x300003
  33434                           ;	Watchdog Timer Enable bit
- 33435                           ;	WDT = ON, WDT enabled
+ 33435                           ;	WDT = OFF, WDT disabled (control is placed on the SWDTEN bit)
  33436                           ;	Watchdog Timer Postscale Select bits
  33437                           ;	WDTPS = 16384, 1:16384
  33438  300003                     	org	3145731
- 33439  300003  1D                 	db	29
+ 33439  300003  1C                 	db	28
  33440                           
  33441                           ; Padding undefined space
  33442  300004                     	org	3145732
@@ -42040,7 +42040,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.20 build 20200408173844 
-Symbol Table                                                                                   Tue Nov 10 11:49:02 2020
+Symbol Table                                                                                   Wed Nov 18 11:12:53 2020
 
                                       _USART_putc 9266                          ?_PROCULUS_VP_Read_String 001C  
                                     ___fldiv@aexp 002F                                      ___fldiv@bexp 002E  

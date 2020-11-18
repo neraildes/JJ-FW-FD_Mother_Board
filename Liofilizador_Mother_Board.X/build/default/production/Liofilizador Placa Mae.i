@@ -5154,7 +5154,7 @@ double yn(int, double);
 #pragma config BORV = 3
 
 
-#pragma config WDT = ON
+#pragma config WDT = OFF
 #pragma config WDTPS = 16384
 
 
@@ -8780,7 +8780,7 @@ void ShowHardwareInfo(){
      totalboard=0;
      strcpy(texto,"");
      strcat(texto,"* : Mother Board ");
-     strcat(texto,"v1.0.28");
+     strcat(texto,"v1.0.29");
      print(texto);
      for(destino=1;destino<15;destino++)
         {

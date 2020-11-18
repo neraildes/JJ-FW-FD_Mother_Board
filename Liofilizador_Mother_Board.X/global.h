@@ -27,7 +27,7 @@
         #pragma config BORV = 3         // Brown Out Reset Voltage bits (Minimum setting)
 
         // CONFIG2H
-        #pragma config WDT = ON         // Watchdog Timer Enable bit (WDT disabled (control is placed on the SWDTEN bit))
+        #pragma config WDT = OFF        // Watchdog Timer Enable bit (WDT disabled (control is placed on the SWDTEN bit))
         #pragma config WDTPS = 16384    // Watchdog Timer Postscale Select bits (1:32768) 16384= 1:07 minutos
 
         // CONFIG3H

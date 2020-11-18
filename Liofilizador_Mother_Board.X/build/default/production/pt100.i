@@ -19,7 +19,7 @@
 #pragma config BORV = 3
 
 
-#pragma config WDT = ON
+#pragma config WDT = OFF
 #pragma config WDTPS = 16384
 
 
