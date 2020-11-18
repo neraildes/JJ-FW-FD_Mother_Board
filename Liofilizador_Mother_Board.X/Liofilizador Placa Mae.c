@@ -152,6 +152,8 @@ int Condensador     ;
 int Vacuometro      ;
 int Voltimetro      ;
 
+char MSG_Deseja_Encerrar_Processo;
+
 int Seg_Condensador ;
 int Seg_Vacuo       ;
 int Seg_Aq_cond     ;
@@ -410,6 +412,13 @@ void main(void)
      Vacuometro=0;
      Voltimetro=0;
      Condensador=0;
+     //-----------------------------
+     /*Exibição e controle de mensagem para encerrar o processo. Esta variável
+      permite que o programa rode enquanto é exibida a pergunta para encerrar
+      o processo permitindo que os paramentros de temperatura do condensador e
+      pressão sejam atualizados.
+     */
+     MSG_Deseja_Encerrar_Processo=0;
 
      //--------timer 1----------
      Exibe_Hora_Data(FALSE); //Exibe data e Hora sem os segundos (FALSE)   
@@ -499,6 +508,30 @@ void main(void)
                 global_aquecimento();
                 global_condensador();                 
                 //global_porta();
+                
+                switch(MSG_Deseja_Encerrar_Processo)
+                      {
+                      case 1:PROCULUS_Popup(DESEJA_ENCERRAR_PROCESSO);
+                             PROCULUS_VP_Write_UInt16(0x0016,0); 
+                             MSG_Deseja_Encerrar_Processo=2;
+                             break;
+                      case 2:if(PROCULUS_VP_Read_UInt16(6)==240)//SIM, Encerra
+                               { 
+                               processo_hora=0;
+                               processo_minuto=0;                    
+                               Contagem_Tempo_de_Processo(FALSE);
+                               Exibe_Tempo_de_Processo();
+                               MSG_Deseja_Encerrar_Processo=0;
+                               SaveBlackoutStatusRuning();
+                               PROCULUS_OK();                                     
+                               }  
+                             if (PROCULUS_VP_Read_UInt16(6)==250)//NAO Encerra
+                               {
+                               MSG_Deseja_Encerrar_Processo=0;  
+                               PROCULUS_Buzzer(15000); //Não
+                               }
+                             break;
+                      }                  
                   
                 
                 flag_proculus_hs=TRUE;
@@ -2134,12 +2167,16 @@ void global_vacuo(void){
                 Vaccum_Switch(FALSE); 
                 //Rele_Geral_Aquecimento(FALSE);
                 PROCULUS_VP_Write_UInt16(6,0);
-
+                
+                MSG_Deseja_Encerrar_Processo=1;
+                
+                
+                /*
                 PROCULUS_Popup(DESEJA_ENCERRAR_PROCESSO);
                 PROCULUS_VP_Write_UInt16(0x0016,0);
                 while(TRUE)
                      {
-                     if ((PROCULUS_VP_Read_UInt16(6)==240)|
+                     if ((PROCULUS_VP_Read_UInt16(6)==240)||
                          (PROCULUS_VP_Read_UInt16(6)==241)) break;
                      asm("CLRWDT");
                      ouve_comunicacao();
@@ -2158,7 +2195,7 @@ void global_vacuo(void){
                      {
                      PROCULUS_Buzzer(15000); //Não
                      }
-
+                */ 
                                    
                 }
         else if((PROCULUS_VP_Read_UInt16(0x04)==1)&&(flag_global_vacuo==1))
