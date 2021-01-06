@@ -204,7 +204,13 @@ void main(void)
      OSCCONbits.IRCF0=1; //Frequencia do oscilador interno = 8Mhz
      OSCCONbits.IRCF1=1;
      OSCCONbits.IRCF2=1;
+     OSCCONbits.SCS0 =0;
+     OSCCONbits.SCS1 =0;
      OSCTUNEbits.PLLEN=1; //pll 8*4 = 32Mhz
+     
+     
+     
+     
 
      TRISA=0b11101111;    //Inicializa Portas
      TRISB=0b00000001;
