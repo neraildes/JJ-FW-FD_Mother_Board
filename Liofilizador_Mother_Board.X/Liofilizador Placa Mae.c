@@ -591,10 +591,13 @@ void main(void)
                            //if(maincnt>=15) maincnt=0; 
                                                       
                            //break;
-                  case 19: //------------PAGINA PARA SETAR AQUECIMENTO--------------
-                  case 21: //Exibe somente os 5 primeiros dados da tupla
-                           //Permite rolagem                           
+                  case 132: //------------PAGINA PARA SETAR AQUECIMENTO--------------
+                  case 19:    
+                  case 21:  //Exibe somente os 5 primeiros dados da tupla
+                            //Permite rolagem                           
+                      
                            //---------------------------------------------------
+                  
                            for(char i=0; i<10; i++)
                                {
                                //flag_main_loop_WDT=1;
@@ -617,6 +620,7 @@ void main(void)
                           pagina_19();
                           break;
                   case 23:// Página de parâmetros de segurança                                       
+                  case 135:    
                           if(PROCULUS_VP_Read_UInt16(1)==1)
                              { 
                              PROCULUS_VP_Write_UInt16(1,0);
@@ -675,6 +679,7 @@ void main(void)
                           break;
 
                   case 29: // Ajuste de tempo de captura de datalog
+                  case 133:    
                           {
                           for(char i=0;i<maxlineDATALOG;i++) //Exibe Grafico Armazenado na Memoria  
                              {                                 
@@ -1147,7 +1152,7 @@ void DataBaseBackupMain(unsigned char tupla)
       addEEPROM  = ((tupla)*TUPLA_EEPROM_SIZE)+OFFSET_EEPROM;
       
       
-      EEPROM_Write_Byte   (addEEPROM+0 ,tupla);//PROCULUS_VP_Read_UInt16(vp+0)); //Plataforma
+      //EEPROM_Write_Byte   (addEEPROM+0 ,tupla);//PROCULUS_VP_Read_UInt16(vp+0)); //Plataforma
       //----------------Reservado para leitura em tempo real -------------------
       EEPROM_Write_Integer(addEEPROM+1 ,PROCULUS_VP_Read_UInt16(vp+2)); //Setpoint
       EEPROM_Write_Byte   (addEEPROM+3 ,PROCULUS_VP_Read_UInt16(vp+3)); //Pot>
@@ -1430,7 +1435,7 @@ void save_datalog(unsigned long add_datalog){
       SlaveBoard = (unsigned char) (tupla / 2);
 
       bb[0]      = CanalAD;
-      PROCULUS_VP_Write_UInt16(vp+0,EEPROM_Read_Byte(addEEPROM+0)); //---------------------   //Plataforma
+      //PROCULUS_VP_Write_UInt16(vp+0,EEPROM_Read_Byte(addEEPROM+0)); //---------------------   //Plataforma
       
       //PROCULUS_VP_Write_UInt16(170,((tupla/9.0)*100.0)); //Progresso em porcentagem
       
@@ -2451,7 +2456,8 @@ void pagina_15(void){
 //---------------------------- Pagina 19 ---------------------------------------
 void pagina_19(void)  
 {
-            
+       bool flag_upLoadTambem=false;
+       
        if(PROCULUS_VP_Read_UInt16(168)==1) //UNDO
          {  
          PROCULUS_VP_Write_UInt16(168,0);   
@@ -2484,9 +2490,20 @@ void pagina_19(void)
                  {
                  //flag_main_loop_WDT=1;
                  DataBaseBackupMain(i);
-                 }                                 
-             ShowMessage("SUCESSO!!!",2000,SOUND_OK,FALSE);                               
-             PROCULUS_OK();                                 
+                 }       
+             
+             //ShowMessage("SUCESSO!!!",2000,SOUND_OK,FALSE);                               
+             //PROCULUS_OK();
+             
+             if(Tamanho_Display==50) 
+                {  
+                flag_upLoadTambem=true;
+                }
+             else
+                {
+                PROCULUS_Popup(SALVO_COM_SUCESSO);  
+                }
+             
             }
          else
             { 
@@ -2497,11 +2514,13 @@ void pagina_19(void)
 
 
 
-       if(PROCULUS_VP_Read_UInt16(166)==1) //UPLOAD
-         {  
+       if((PROCULUS_VP_Read_UInt16(166)==1)||(flag_upLoadTambem)) //UPLOAD
+         {
+         flag_upLoadTambem=false;  
          PROCULUS_VP_Write_UInt16(166,0);  
          if(flag_senha_liberada)  
-            {                                                  
+            {      
+             //if(Tamanho_Display==50) PROCULUS_Popup(SALVO_COM_SUCESSO);
              ShowMessage("Descarregando Dados",2000,SOUND_SINGLE,TRUE); 
              Upload_Data_to_Slave();
              ShowMessage("SUCESSO!!!",2000,SOUND_OK,FALSE);                                  
@@ -2509,7 +2528,7 @@ void pagina_19(void)
             }
          else
             { 
-            PROCULUS_Popup(ACESSO_NEGADO);
+            //PROCULUS_Popup(ACESSO_NEGADO);
             PROCULUS_NOK();                                 
             }             
          }
@@ -2930,10 +2949,14 @@ void Icones_de_alarmes(void){
      else         
          PROCULUS_VP_Write_UInt16(176,0);
      //-------------------------------------------------------------------------    
-     if (Vacuometro<Seg_Vacuo)         
+     if (Vacuometro<Seg_Vacuo)  
+     {         
          PROCULUS_VP_Write_UInt16(177,1);         
+     }
      else         
+     {
          PROCULUS_VP_Write_UInt16(177,0);
+     }
      //-------------------------------------------------------------------------
 }
 

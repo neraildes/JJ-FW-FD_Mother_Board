@@ -1,6 +1,6 @@
 // arquivo criado pelo script versionar.sh
-// Neraildes da Silva - Wed, 18 Nov 2020 11:10:47 -0300
+// Neraildes da Silva - Wed, 6 Jan 2021 07:45:15 -0300
 #ifndef VERSAO_H
 #define	VERSAO_H
-#define FVERSION "v1.0.29"
+#define FVERSION "v1.0.30"
 #endif
