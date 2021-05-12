@@ -204,7 +204,7 @@
 
 //==============================================================================
 #define SALVO_COM_SUCESSO               0x50
-#define ACESSO_NEGADO                   0x52
+#define ACESSO_NEGADO                   0X51
 #define ACESSO_NEGADO_HIDE              0x53
 #define SENHA_INVALIDA                  0x20 
 #define SENHAS_DIFERENTES               0x21
@@ -213,7 +213,10 @@
 #define OP_REALIZADA_COM_SUCESSO        0x60 
 #define DESEJA_ENCERRAR_PROCESSO        0x42
 #define FUNCAO_INDISP_MODO_CONNECTADO   0x43
-
+#define LISTA_DE_DATALOG_COMPLETA       0x44
+#define AGUARDE_30_SEGUNDOS             0x45
+#define DISPLAY_BLOQUEADO               0x46
+#define GRAFICO_SOMENTE_NO_PC           0x47
 
 
 

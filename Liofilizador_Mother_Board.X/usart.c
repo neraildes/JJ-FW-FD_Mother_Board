@@ -38,9 +38,9 @@ void USART_init(unsigned long baudrate)
      TRISCbits.TRISC6= 1;
      TRISCbits.TRISC7= 1;
     
-     RCSTAbits.CREN=0;
-     RCSTAbits.CREN=1;
-     for(i=0;i<15;i++) erro=RCREG;
+     //RCSTAbits.CREN=0;
+     //RCSTAbits.CREN=1;
+     //for(i=0;i<15;i++) erro=RCREG;
 }
 
 

@@ -1,30 +1,30 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"233 ./global.h
-[; ;./global.h: 233: struct {
+"236 ./global.h
+[; ;./global.h: 236: struct {
 [s S270 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S270 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"254
-[; ;./global.h: 254: struct{
+"257
+[; ;./global.h: 257: struct{
 [s S271 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S271 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication flag_pc_conected ]
-"276
-[; ;./global.h: 276: struct{
+"279
+[; ;./global.h: 279: struct{
 [s S272 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S272 . flag_autoriza_click_datalog flag_autoriza_click_condensador flag_autoriza_click_vacuo flag_autoriza_click_aquecimento ]
-"297
-[; ;./global.h: 297:       struct {
+"300
+[; ;./global.h: 300:       struct {
 [s S274 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S274 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work flag_global_porta ]
-"295
-[; ;./global.h: 295: union {
+"298
+[; ;./global.h: 298: union {
 [u S273 `uc 1 `S274 1 ]
 [n S273 . bits . ]
-"321
-[; ;./global.h: 321: struct{
+"324
+[; ;./global.h: 324: struct{
 [s S275 :1 `uc 1 ]
 [n S275 . flag_main_loop_WDT ]
-"326
-[; ;./global.h: 326: typedef struct{
+"329
+[; ;./global.h: 329: typedef struct{
 [s S276 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S276 . milisegundo segundo minuto hora ]
 "3031 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
@@ -140,9 +140,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1856
 [; ;C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 1856: extern volatile TRISCbits_t TRISCbits __attribute__((address(0xF94)));
 [v _TRISCbits `VS69 ~T0 @X0 0 e@3988 ]
-"3498
-[; ;C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 3498: extern volatile unsigned char RCREG __attribute__((address(0xFAE)));
-[v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
 "22 ./protocolo.h
 [; ;./protocolo.h: 22: typedef struct {
 [s S277 `i 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc -> 256 `i ]
@@ -637,23 +634,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3  =  OFF       ]
 "72
 [p x EBTRB  =  OFF       ]
-"242
-[; ;./global.h: 242: } statusgen ;
+"245
+[; ;./global.h: 245: } statusgen ;
 [v _statusgen `S270 ~T0 @X0 1 e ]
-"263
-[; ;./global.h: 263: }statusgen1;
+"266
+[; ;./global.h: 266: }statusgen1;
 [v _statusgen1 `S271 ~T0 @X0 1 e ]
-"281
-[; ;./global.h: 281: }statusgen2;
+"284
+[; ;./global.h: 284: }statusgen2;
 [v _statusgen2 `S272 ~T0 @X0 1 e ]
-"307
-[; ;./global.h: 307:       } statuspower;
+"310
+[; ;./global.h: 310:       } statuspower;
 [v _statuspower `S273 ~T0 @X0 1 e ]
-"323
-[; ;./global.h: 323: }statusWDT;
+"326
+[; ;./global.h: 326: }statusWDT;
 [v _statusWDT `S275 ~T0 @X0 1 e ]
-"333
-[; ;./global.h: 333: volatile t_rtc rtc;
+"336
+[; ;./global.h: 336: volatile t_rtc rtc;
 [v _rtc `VS276 ~T0 @X0 1 e ]
 "17 usart.c
 [; ;usart.c: 17: void USART_init(unsigned long baudrate)
@@ -717,24 +714,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "39
 [; ;usart.c: 39:      TRISCbits.TRISC7= 1;
 [e = . . _TRISCbits 0 7 -> -> 1 `i `uc ]
-"41
-[; ;usart.c: 41:      RCSTAbits.CREN=0;
-[e = . . _RCSTAbits 0 4 -> -> 0 `i `uc ]
-"42
-[; ;usart.c: 42:      RCSTAbits.CREN=1;
-[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-"43
-[; ;usart.c: 43:      for(i=0;i<15;i++) erro=RCREG;
-{
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 15 `i 282  ]
-[e $U 283  ]
-[e :U 282 ]
-[e = _erro _RCREG ]
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 15 `i 282  ]
-[e :U 283 ]
-}
 "44
 [; ;usart.c: 44: }
 [e :UE 280 ]
@@ -768,19 +747,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;usart.c: 54:      for(i=0;i<=usart_protocol->size;i++)
 {
 [e = _i -> 0 `i ]
-[e $U 289  ]
-[e :U 286 ]
+[e $U 286  ]
+[e :U 283 ]
 "55
 [; ;usart.c: 55:         usart_protocol->value[i]=(unsigned char) usart_buffer[i+6];
 [e = *U + &U . *U _usart_protocol 5 * -> -> _i `ui `ux -> -> # *U &U . *U _usart_protocol 5 `ui `ux -> *U + &U _usart_buffer * -> -> + _i -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
 [e ++ _i -> 1 `i ]
-[e :U 289 ]
-[e $ <= _i -> . *U _usart_protocol 4 `i 286  ]
-[e :U 287 ]
+[e :U 286 ]
+[e $ <= _i -> . *U _usart_protocol 4 `i 283  ]
+[e :U 284 ]
 }
 "56
 [; ;usart.c: 56: }
-[e :UE 285 ]
+[e :UE 282 ]
 }
 "59
 [; ;usart.c: 59: void USART_putc(unsigned char value)
@@ -797,8 +776,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "61
 [; ;usart.c: 61:     while(!TXSTAbits.TRMT)
-[e $U 291  ]
-[e :U 292 ]
+[e $U 288  ]
+[e :U 289 ]
 "62
 [; ;usart.c: 62:          {
 {
@@ -807,15 +786,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _Delay_Led_Usart -> -> 5 `i `ui ]
 "64
 [; ;usart.c: 64:          continue;
-[e $U 291  ]
+[e $U 288  ]
 "65
 [; ;usart.c: 65:          }
 }
-[e :U 291 ]
+[e :U 288 ]
 "61
 [; ;usart.c: 61:     while(!TXSTAbits.TRMT)
-[e $ ! != -> . . _TXSTAbits 0 1 `i -> 0 `i 292  ]
-[e :U 293 ]
+[e $ ! != -> . . _TXSTAbits 0 1 `i -> 0 `i 289  ]
+[e :U 290 ]
 "66
 [; ;usart.c: 66:     TXREG=value;
 [e = _TXREG _value ]
@@ -824,7 +803,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
 "71
 [; ;usart.c: 71: }
-[e :UE 290 ]
+[e :UE 287 ]
 }
 "74
 [; ;usart.c: 74: void USART_putsc(char value)
@@ -844,12 +823,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _Delay_Led_Usart -> -> 5 `i `ui ]
 "79
 [; ;usart.c: 79:     while(!TXSTAbits.TRMT) continue;
-[e $U 295  ]
-[e :U 296 ]
-[e $U 295  ]
-[e :U 295 ]
-[e $ ! != -> . . _TXSTAbits 0 1 `i -> 0 `i 296  ]
-[e :U 297 ]
+[e $U 292  ]
+[e :U 293 ]
+[e $U 292  ]
+[e :U 292 ]
+[e $ ! != -> . . _TXSTAbits 0 1 `i -> 0 `i 293  ]
+[e :U 294 ]
 "80
 [; ;usart.c: 80:     TXREG=value;
 [e = _TXREG -> _value `uc ]
@@ -858,7 +837,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
 "85
 [; ;usart.c: 85: }
-[e :UE 294 ]
+[e :UE 291 ]
 }
 "88
 [; ;usart.c: 88: void USART_put_buffer(char *vetor, char size){
@@ -880,8 +859,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _ptr _vetor ]
 "93
 [; ;usart.c: 93:     while(loop<size)
-[e $U 299  ]
-[e :U 300 ]
+[e $U 296  ]
+[e :U 297 ]
 "94
 [; ;usart.c: 94:     {
 {
@@ -897,14 +876,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "98
 [; ;usart.c: 98:     }
 }
-[e :U 299 ]
+[e :U 296 ]
 "93
 [; ;usart.c: 93:     while(loop<size)
-[e $ < -> _loop `i -> _size `i 300  ]
-[e :U 301 ]
+[e $ < -> _loop `i -> _size `i 297  ]
+[e :U 298 ]
 "99
 [; ;usart.c: 99: }
-[e :UE 298 ]
+[e :UE 295 ]
 }
 "103
 [; ;usart.c: 103: unsigned char USART_input_buffer(void){
@@ -922,12 +901,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _result -> -> 0 `i `uc ]
 "107
 [; ;usart.c: 107:     while(time<400){
-[e $U 303  ]
-[e :U 304 ]
+[e $U 300  ]
+[e :U 301 ]
 {
 "108
 [; ;usart.c: 108:         if(statusgen.flag_usart_rx==1){
-[e $ ! == -> . _statusgen 0 `i -> 1 `i 306  ]
+[e $ ! == -> . _statusgen 0 `i -> 1 `i 303  ]
 {
 "109
 [; ;usart.c: 109:            statusgen.flag_usart_rx=0;
@@ -937,11 +916,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _result -> -> 1 `i `uc ]
 "111
 [; ;usart.c: 111:            break;
-[e $U 305  ]
+[e $U 302  ]
 "112
 [; ;usart.c: 112:            }
 }
-[e :U 306 ]
+[e :U 303 ]
 "113
 [; ;usart.c: 113:         time++;
 [e ++ _time -> -> 1 `i `ui ]
@@ -951,18 +930,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 "115
 [; ;usart.c: 115:     }
 }
-[e :U 303 ]
+[e :U 300 ]
 "107
 [; ;usart.c: 107:     while(time<400){
-[e $ < _time -> -> 400 `i `ui 304  ]
-[e :U 305 ]
+[e $ < _time -> -> 400 `i `ui 301  ]
+[e :U 302 ]
 "116
 [; ;usart.c: 116:     return result;
 [e ) _result ]
-[e $UE 302  ]
+[e $UE 299  ]
 "117
 [; ;usart.c: 117: }
-[e :UE 302 ]
+[e :UE 299 ]
 }
 "121
 [; ;usart.c: 121: void USART_put_int(unsigned int value){
@@ -979,7 +958,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _USART_putc (1 -> _value `uc ]
 "124
 [; ;usart.c: 124: }
-[e :UE 307 ]
+[e :UE 304 ]
 }
 "128
 [; ;usart.c: 128: void USART_put_sint(int value){
@@ -996,7 +975,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _USART_putsc (1 -> _value `uc ]
 "131
 [; ;usart.c: 131: }
-[e :UE 308 ]
+[e :UE 305 ]
 }
 "134
 [; ;usart.c: 134: void USART_put_long(unsigned long value){
@@ -1019,7 +998,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _USART_putc (1 -> _value `uc ]
 "139
 [; ;usart.c: 139: }
-[e :UE 309 ]
+[e :UE 306 ]
 }
 "142
 [; ;usart.c: 142: void USART_put_float24(float value){
@@ -1045,7 +1024,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _USART_putc (1 *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
 "148
 [; ;usart.c: 148: }
-[e :UE 310 ]
+[e :UE 307 ]
 }
 "151
 [; ;usart.c: 151: void USART_put_string(char *vetor)
@@ -1068,8 +1047,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _ptr _vetor ]
 "155
 [; ;usart.c: 155:     while(*(ptr)){
-[e $U 312  ]
-[e :U 313 ]
+[e $U 309  ]
+[e :U 310 ]
 {
 "156
 [; ;usart.c: 156:         USART_putc(*(ptr));
@@ -1080,15 +1059,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "158
 [; ;usart.c: 158:     }
 }
-[e :U 312 ]
+[e :U 309 ]
 "155
 [; ;usart.c: 155:     while(*(ptr)){
-[e $ != -> *U _ptr `i -> 0 `i 313  ]
-[e :U 314 ]
+[e $ != -> *U _ptr `i -> 0 `i 310  ]
+[e :U 311 ]
 "159
 [; ;usart.c: 159:     USART_putc(*(ptr));
 [e ( _USART_putc (1 -> *U _ptr `uc ]
 "160
 [; ;usart.c: 160: }
-[e :UE 311 ]
+[e :UE 308 ]
 }

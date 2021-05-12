@@ -4439,7 +4439,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 
 
 #pragma config EBTRB = OFF
-# 233 "./global.h"
+# 236 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -4450,7 +4450,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 254 "./global.h"
+# 257 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -4461,14 +4461,14 @@ struct{
         unsigned flag_recomunication :1;
         unsigned flag_pc_conected :1;
 }statusgen1;
-# 276 "./global.h"
+# 279 "./global.h"
 struct{
         unsigned flag_autoriza_click_datalog :1;
         unsigned flag_autoriza_click_condensador :1;
         unsigned flag_autoriza_click_vacuo :1;
         unsigned flag_autoriza_click_aquecimento :1;
 }statusgen2;
-# 295 "./global.h"
+# 298 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -4482,7 +4482,7 @@ union {
 
              };
       } statuspower;
-# 321 "./global.h"
+# 324 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;

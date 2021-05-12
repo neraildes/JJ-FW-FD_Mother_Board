@@ -1,30 +1,30 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"233 ./global.h
-[; ;./global.h: 233: struct {
+"236 ./global.h
+[; ;./global.h: 236: struct {
 [s S1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S1 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"254
-[; ;./global.h: 254: struct{
+"257
+[; ;./global.h: 257: struct{
 [s S2 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S2 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication flag_pc_conected ]
-"276
-[; ;./global.h: 276: struct{
+"279
+[; ;./global.h: 279: struct{
 [s S3 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S3 . flag_autoriza_click_datalog flag_autoriza_click_condensador flag_autoriza_click_vacuo flag_autoriza_click_aquecimento ]
-"297
-[; ;./global.h: 297:       struct {
+"300
+[; ;./global.h: 300:       struct {
 [s S5 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S5 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work flag_global_porta ]
-"295
-[; ;./global.h: 295: union {
+"298
+[; ;./global.h: 298: union {
 [u S4 `uc 1 `S5 1 ]
 [n S4 . bits . ]
-"321
-[; ;./global.h: 321: struct{
+"324
+[; ;./global.h: 324: struct{
 [s S6 :1 `uc 1 ]
 [n S6 . flag_main_loop_WDT ]
-"326
-[; ;./global.h: 326: typedef struct{
+"329
+[; ;./global.h: 329: typedef struct{
 [s S7 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S7 . milisegundo segundo minuto hora ]
 "16 ./adc.h
@@ -96,23 +96,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3  =  OFF       ]
 "72
 [p x EBTRB  =  OFF       ]
-"242
-[; ;./global.h: 242: } statusgen ;
+"245
+[; ;./global.h: 245: } statusgen ;
 [v _statusgen `S1 ~T0 @X0 1 e ]
-"263
-[; ;./global.h: 263: }statusgen1;
+"266
+[; ;./global.h: 266: }statusgen1;
 [v _statusgen1 `S2 ~T0 @X0 1 e ]
-"281
-[; ;./global.h: 281: }statusgen2;
+"284
+[; ;./global.h: 284: }statusgen2;
 [v _statusgen2 `S3 ~T0 @X0 1 e ]
-"307
-[; ;./global.h: 307:       } statuspower;
+"310
+[; ;./global.h: 310:       } statuspower;
 [v _statuspower `S4 ~T0 @X0 1 e ]
-"323
-[; ;./global.h: 323: }statusWDT;
+"326
+[; ;./global.h: 326: }statusWDT;
 [v _statusWDT `S6 ~T0 @X0 1 e ]
-"333
-[; ;./global.h: 333: volatile t_rtc rtc;
+"336
+[; ;./global.h: 336: volatile t_rtc rtc;
 [v _rtc `VS7 ~T0 @X0 1 e ]
 "5 pt100.c
 [; ;pt100.c: 5: double PT100_Read_Temperature(unsigned char canal){

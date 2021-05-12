@@ -12,7 +12,7 @@ void I2C_Master_Init(const unsigned long c)
   SSPCON1 = 0b00101000;            //SSP Module as Master
   #endif
   SSPCON2 = 0;
-  SSPADD = (_XTAL_FREQ /(4*c))-1; //Setting Clock Speed
+  SSPADD = (_XTAL_FREQ /(4.0*c))-1.0; //Setting Clock Speed
   SSPSTAT = 0;
   TRISCbits.TRISC3 = 1;                   //Setting as input as given in datasheet
   TRISCbits.TRISC4 = 1;                   //Setting as input as given in datasheet
@@ -21,7 +21,7 @@ void I2C_Master_Init(const unsigned long c)
 void I2C_Slave_Init(short address) 
 {
   SSPSTAT = 0x80;    
-  SSPADD = address; //Setting address
+  SSPADD = (char)address; //Setting address
   #if ((defined __18F4620) || (defined __18F4525)) 
   SSPCON1 = 0x36;   //As a slave device         
   #endif

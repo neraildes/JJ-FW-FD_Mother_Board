@@ -4438,7 +4438,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 
 
 #pragma config EBTRB = OFF
-# 233 "./global.h"
+# 236 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -4449,7 +4449,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 254 "./global.h"
+# 257 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -4460,14 +4460,14 @@ struct{
         unsigned flag_recomunication :1;
         unsigned flag_pc_conected :1;
 }statusgen1;
-# 276 "./global.h"
+# 279 "./global.h"
 struct{
         unsigned flag_autoriza_click_datalog :1;
         unsigned flag_autoriza_click_condensador :1;
         unsigned flag_autoriza_click_vacuo :1;
         unsigned flag_autoriza_click_aquecimento :1;
 }statusgen2;
-# 295 "./global.h"
+# 298 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -4481,7 +4481,7 @@ union {
 
              };
       } statuspower;
-# 321 "./global.h"
+# 324 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -4534,7 +4534,7 @@ void I2C_Master_Init(const unsigned long c)
   SSPCON1 = 0b00101000;
 
   SSPCON2 = 0;
-  SSPADD = (32000000 /(4*c))-1;
+  SSPADD = (32000000 /(4.0*c))-1.0;
   SSPSTAT = 0;
   TRISCbits.TRISC3 = 1;
   TRISCbits.TRISC4 = 1;
@@ -4543,7 +4543,7 @@ void I2C_Master_Init(const unsigned long c)
 void I2C_Slave_Init(short address)
 {
   SSPSTAT = 0x80;
-  SSPADD = address;
+  SSPADD = (char)address;
 
   SSPCON1 = 0x36;
 

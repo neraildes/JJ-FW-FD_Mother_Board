@@ -5204,7 +5204,7 @@ double yn(int, double);
 
 
 #pragma config EBTRB = OFF
-# 233 "./global.h"
+# 236 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -5215,7 +5215,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 254 "./global.h"
+# 257 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -5226,14 +5226,14 @@ struct{
         unsigned flag_recomunication :1;
         unsigned flag_pc_conected :1;
 }statusgen1;
-# 276 "./global.h"
+# 279 "./global.h"
 struct{
         unsigned flag_autoriza_click_datalog :1;
         unsigned flag_autoriza_click_condensador :1;
         unsigned flag_autoriza_click_vacuo :1;
         unsigned flag_autoriza_click_aquecimento :1;
 }statusgen2;
-# 295 "./global.h"
+# 298 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -5247,7 +5247,7 @@ union {
 
              };
       } statuspower;
-# 321 "./global.h"
+# 324 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -5748,12 +5748,13 @@ int VOLTAGEM_read(char canal);
 # 1 "./versao.h" 1
 # 32 "Liofilizador Placa Mae.c" 2
 # 65 "Liofilizador Placa Mae.c"
-const char *boardtype[5]={"Mother Board",
+const char *boardtype[6]={"Mother Board",
                           "Vaccum Board",
                           "PT100 Board ",
                           "NTC Board   ",
-                          "Relay_Board "};
-# 79 "Liofilizador Placa Mae.c"
+                          "Relay Board ",
+                          "Wifi Board  "};
+# 81 "Liofilizador Placa Mae.c"
 volatile unsigned char usart_buffer[10+256];
 
 volatile unsigned int tempodecorrido ;
@@ -5801,7 +5802,7 @@ char buffer[74];
 char maincnt;
 unsigned int pagina=15;
 unsigned int paginamemo=15;
-# 138 "Liofilizador Placa Mae.c"
+# 140 "Liofilizador Placa Mae.c"
 volatile unsigned char flag_senha_global_liberada;
 volatile unsigned char flag_senha_liberada;
 volatile unsigned char totalboard;
@@ -5820,6 +5821,7 @@ int Vacuometro ;
 int Voltimetro ;
 
 char MSG_Deseja_Encerrar_Processo;
+
 
 int Seg_Condensador ;
 int Seg_Vacuo ;
@@ -5924,9 +5926,11 @@ void main(void)
 
 
 
-
-
-
+     USART_init(115200);
+     My_ADC_init();
+     I2C_Master_Init(100000);
+     my_delay_ms_CLRWDT(500);
+# 275 "Liofilizador Placa Mae.c"
      Delay_Led_Tmr0=0;
      PORTBbits.RB7=0;
      Delay_Led_Usart=0;
@@ -5936,10 +5940,6 @@ void main(void)
 
 
 
-     USART_init(115200);
-     My_ADC_init();
-     I2C_Master_Init(100000);
-     my_delay_ms_CLRWDT(500);
 
 
 
@@ -5957,31 +5957,11 @@ void main(void)
      statusgen1.flag_Vacuo_estava_ligado=0;
 
      }
-
-
-
-
-     my_delay_ms_CLRWDT(300);
-     print("JJ Cientifica Ind. e Com. de Eq. Cientificos.");
-     my_delay_ms_CLRWDT(300);
-     print("Inicializando o Sistema...");
-     my_delay_ms_CLRWDT(300);
-     print("Analisando Hardware. Aguarde...");
-     my_delay_ms_CLRWDT(300);
-     PROCULUS_VP_Read_String(1990, buffer);
-     strcpy(texto,"* : Display      ");
-     strcat(texto,buffer);
-     print(texto);
-     my_delay_ms_CLRWDT(300);
-     ShowHardwareInfo();
-
-
-
-
-
+# 309 "Liofilizador Placa Mae.c"
      if(EEPROM_Read_Byte(52)==0xFF)
        {
-       print("Formatando memoria principal...");
+       print("Aguarde, preparando a máquina para");
+       print("a primeira inicialização.");
        Formatar_Banco_de_Dados(0,10);
        Formatar_Lista_de_Receitas();
        Formatar_Dados_de_Seguranca();
@@ -6000,6 +5980,10 @@ void main(void)
        EEPROM_24C1025_Write_Long(0,2,0);
        EEPROM_Write_Integer(0xFA,50);
        }
+     else
+       {
+       print("Aguarde...");
+       }
      RecallBlackoutStatus();
      TrendCurveFuncao(1);
      senha_atual=EEPROM_Read_Long32(11);
@@ -6013,8 +5997,12 @@ void main(void)
         maxlineDATALOG=12;
      else if(Tamanho_Display==50)
              maxlineDATALOG=9;
-# 374 "Liofilizador Placa Mae.c"
-     print("Analisando dados...");
+
+
+     my_delay_ms_CLRWDT(1000);
+     ShowHardwareInfo();
+     my_delay_ms_CLRWDT(2500);
+# 382 "Liofilizador Placa Mae.c"
      for(char i=0;i<15;i++)
         {
         __asm("CLRWDT");
@@ -6078,7 +6066,7 @@ void main(void)
      processo_segundo=0;
      memo_statuspower=statuspower.bits;
      delay_condensador=0;
-# 466 "Liofilizador Placa Mae.c"
+# 473 "Liofilizador Placa Mae.c"
         FAT8_Show();
 
 
@@ -6131,23 +6119,24 @@ void main(void)
                 global_condensador();
 
 
+
+
                 switch(MSG_Deseja_Encerrar_Processo)
                       {
                       case 1:PROCULUS_Popup(0x42);
                              PROCULUS_VP_Write_UInt16(0x0016,0);
                              MSG_Deseja_Encerrar_Processo=2;
                              break;
-                      case 2:if(PROCULUS_VP_Read_UInt16(6)==240)
+                      case 2:if(PROCULUS_VP_Read_UInt16(6)==250)
                                {
+                               Contagem_Tempo_de_Processo(0);
                                processo_hora=0;
                                processo_minuto=0;
-                               Contagem_Tempo_de_Processo(0);
-                               Exibe_Tempo_de_Processo();
                                MSG_Deseja_Encerrar_Processo=0;
                                SaveBlackoutStatusRuning();
-                               PROCULUS_OK();
+
                                }
-                             if (PROCULUS_VP_Read_UInt16(6)==250)
+                             if (PROCULUS_VP_Read_UInt16(6)==240)
                                {
                                MSG_Deseja_Encerrar_Processo=0;
                                PROCULUS_Buzzer(15000);
@@ -6164,20 +6153,13 @@ void main(void)
                   EEPROM_Write_Byte(16,statuspower.bits);
                   memo_statuspower=statuspower.bits;
                   }
-# 572 "Liofilizador Placa Mae.c"
+# 580 "Liofilizador Placa Mae.c"
                 if(statusgen1.flag_pc_conected==0) Check_And_Send_Capture_Datalog();
                 statusgen1.flag_proculus_hs=0;
 
 
                 ShowSensorRealTimeHS();
-
-
-                showTotalReset();
-
-
-
-
-
+# 593 "Liofilizador Placa Mae.c"
             statusgen1.flag_proculus_hs=1;
             switch(pagina)
                   {
@@ -6331,6 +6313,14 @@ void main(void)
                             static int canal=0;
                             statusgen1.flag_proculus_hs=1;
 
+                            if((statusgen1.flag_pc_conected)&&(statuspower.flag_global_vacuo)&&(statuspower.flag_global_datalog))
+                              {
+                              PROCULUS_Popup(0x47);
+                              PROCULUS_Show_Screen(15);
+                              break;
+                              }
+
+
                             for(trendvp=0x0310;trendvp<0x031D;trendvp++)
                                   {
                                   icone=trendvp-0x0310;
@@ -6377,7 +6367,7 @@ void main(void)
                                                {
                                                PROCULUS_NOK();
                                                PROCULUS_VP_Write_UInt16(trendvp,-1);
-                                               PROCULUS_Popup(0x52);
+                                               PROCULUS_Popup(0X51);
                                                }
                                           }
                                      else
@@ -6407,7 +6397,7 @@ void main(void)
                                           else
                                                {
                                                PROCULUS_NOK();
-                                               PROCULUS_Popup(0x52);
+                                               PROCULUS_Popup(0X51);
                                                if(Tamanho_Display==50)PROCULUS_VP_Write_UInt16(trendvp,mapa.icone[icone]);
                                                if(Tamanho_Display==80)PROCULUS_VP_Write_UInt16(trendvp,mapa.vpIcone[icone]);
                                                }
@@ -6580,7 +6570,7 @@ int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
     }
     return 0;
 }
-# 995 "Liofilizador Placa Mae.c"
+# 1011 "Liofilizador Placa Mae.c"
 void ShowSensorRealTimeHS(void)
      {
      char bb[3];
@@ -6657,7 +6647,7 @@ void ShowSensorRealTimeHS(void)
       statusgen1.flag_proculus_hs=0;
 
      }
-# 1080 "Liofilizador Placa Mae.c"
+# 1096 "Liofilizador Placa Mae.c"
 void Carrega_Tupla_Receita(char index, t_receita *receita){
      unsigned int addeeprom;
 
@@ -6706,7 +6696,7 @@ void Exibe_Receita(int index){
      texto[8]=0;
      PROCULUS_VP_Write_String(vp+4,texto);
 }
-# 1146 "Liofilizador Placa Mae.c"
+# 1162 "Liofilizador Placa Mae.c"
 void DataBaseBackupMain(unsigned char tupla)
       {
       unsigned int vp;
@@ -6734,8 +6724,9 @@ void FAT8_Save(unsigned char tupla){
 
      if(tupla>(maxlineDATALOG-1))
        {
-       PROCULUS_Buzzer(1234);
+       PROCULUS_Buzzer(1000);
        PROCULUS_VP_Write_UInt16(2,0);
+       PROCULUS_Popup(0x44);
        return;
        }
 
@@ -6784,7 +6775,6 @@ void FAT8_Load(unsigned char tupla){
 
      if(tupla>(maxlineDATALOG-1))
        {
-       PROCULUS_Buzzer(1000);
        return;
        }
 
@@ -6821,7 +6811,7 @@ void FAT8_Show(){
         }
 
 }
-# 1272 "Liofilizador Placa Mae.c"
+# 1288 "Liofilizador Placa Mae.c"
  void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
       {
       char CanalAD;
@@ -6861,7 +6851,7 @@ void FAT8_Show(){
       EEPROM_Read_String(addEEPROM + 6,liofilizador->receita);
       liofilizador->status = EEPROM_Read_Integer(addEEPROM+16);
       }
-# 1325 "Liofilizador Placa Mae.c"
+# 1341 "Liofilizador Placa Mae.c"
  void Set_Receita(unsigned char index, char status)
       {
       int vp;
@@ -6921,7 +6911,7 @@ void FAT8_Show(){
          PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
          }
 }
-# 1392 "Liofilizador Placa Mae.c"
+# 1408 "Liofilizador Placa Mae.c"
 void save_datalog(unsigned long add_datalog){
      char index;
      char bb[4];
@@ -6943,7 +6933,7 @@ void save_datalog(unsigned long add_datalog){
             }
          }
 }
-# 1422 "Liofilizador Placa Mae.c"
+# 1438 "Liofilizador Placa Mae.c"
  void ShowAndSetSlaveParameters(unsigned char tupla)
       {
       unsigned char CanalAD;
@@ -6975,7 +6965,7 @@ void save_datalog(unsigned long add_datalog){
       PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
 
       }
-# 1462 "Liofilizador Placa Mae.c"
+# 1478 "Liofilizador Placa Mae.c"
 void Send_to_PC(unsigned char size){
 
 
@@ -6984,7 +6974,7 @@ void Send_to_PC(unsigned char size){
      USART_putc(usart_protocol.origem);
      USART_putc(usart_protocol.command);
      USART_putc(size);
-# 1480 "Liofilizador Placa Mae.c"
+# 1496 "Liofilizador Placa Mae.c"
 }
 
 
@@ -7021,7 +7011,7 @@ void Decodify_Command(void){
 
 
     switch(usart_protocol.command){
-# 1547 "Liofilizador Placa Mae.c"
+# 1563 "Liofilizador Placa Mae.c"
         case 0x08:
              EEPROM_Write_Byte((int)usart_protocol.value[0]<<8 |
                                (int)usart_protocol.value[1]<<0,
@@ -7248,7 +7238,7 @@ void Decodify_Command(void){
              PORTDbits.RD5=0;
              break;
              }
-# 1784 "Liofilizador Placa Mae.c"
+# 1800 "Liofilizador Placa Mae.c"
         case 0X24:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
@@ -7533,7 +7523,11 @@ void global_datalog(void){
         if((PROCULUS_VP_Read_UInt16(2)==1)&&(statuspower.flag_global_datalog==0))
            {
             char bb[2];
-            if(testa_modo_conectado(2,0)==0) return;
+            if(testa_modo_conectado(2,0)==0)
+              {
+              PROCULUS_Popup(0x46);
+              return;
+              }
             statuspower.flag_global_datalog=1;
             if(statusgen1.flag_pc_conected==0)
                 {
@@ -7567,7 +7561,11 @@ void global_datalog(void){
         else if((PROCULUS_VP_Read_UInt16(2)==0)&&(statuspower.flag_global_datalog==1))
                {
 
-               if(testa_modo_conectado(2,1)==0) return;
+               if(testa_modo_conectado(2,1)==0)
+                 {
+                 PROCULUS_Popup(0x46);
+                 return;
+                 }
                statuspower.flag_global_datalog=0;
                FAT8_Write_Process_Finalize();
                }
@@ -7594,7 +7592,11 @@ void Vaccum_Switch(unsigned char estado){
 void global_condensador(void){
         if((PROCULUS_VP_Read_UInt16(0x03)==1)&&(statuspower.flag_global_condensador==0))
             {
-            if(testa_modo_conectado(3,0)==0) return;
+            if(testa_modo_conectado(3,0)==0)
+              {
+              PROCULUS_Popup(0x46);
+              return;
+              }
             if(delay_condensador==0)
                {
                statuspower.flag_global_condensador=1;
@@ -7603,12 +7605,17 @@ void global_condensador(void){
             else
                {
                PROCULUS_Buzzer(1000);
+               PROCULUS_Popup(0x45);
                PROCULUS_VP_Write_UInt16(0x03,0);
                }
             }
         if((PROCULUS_VP_Read_UInt16(0x03)==0)&&(statuspower.flag_global_condensador==1))
            {
-           if(testa_modo_conectado(3,1)==0) return;
+           if(testa_modo_conectado(3,1)==0)
+              {
+              PROCULUS_Popup(0x46);
+              return;
+              }
            statuspower.flag_global_condensador=0;
            Condensador_Switch(0);
            delay_condensador=30;
@@ -7622,7 +7629,12 @@ void global_vacuo(void){
         char count;
         if((PROCULUS_VP_Read_UInt16(0x04)==1)&&(statuspower.flag_global_vacuo==0))
            {
-           if(testa_modo_conectado(4,0)==0) return;
+           if(testa_modo_conectado(4,0)==0)
+             {
+             PROCULUS_Popup(0x46);
+             return;
+             }
+
            if(statuspower.flag_global_vacuo==0) PROCULUS_OK();
            statuspower.flag_global_vacuo=1;
            if(Condensador<Seg_Condensador)
@@ -7641,14 +7653,18 @@ void global_vacuo(void){
            }
         else if((PROCULUS_VP_Read_UInt16(0x04)==0)&&(statuspower.flag_global_vacuo==1))
                 {
-                if(testa_modo_conectado(4,1)==0) return;
+                if(testa_modo_conectado(4,1)==0)
+                  {
+                  PROCULUS_Popup(0x46);
+                  return;
+                  }
                 statuspower.flag_global_vacuo=0;
                 Vaccum_Switch(0);
 
                 PROCULUS_VP_Write_UInt16(6,0);
 
                 MSG_Deseja_Encerrar_Processo=1;
-# 2211 "Liofilizador Placa Mae.c"
+# 2253 "Liofilizador Placa Mae.c"
                 }
         else if((PROCULUS_VP_Read_UInt16(0x04)==1)&&(statuspower.flag_global_vacuo==1))
                 {
@@ -7684,7 +7700,13 @@ void Global_Aquecimento_Switch(unsigned char estado){
 void global_aquecimento(void){
         if((PROCULUS_VP_Read_UInt16(5)==1)&&(statuspower.flag_global_aquecimento==0))
            {
-           if(testa_modo_conectado(5,0)==0) return;
+
+
+
+
+
+
+
            if((Condensador<Seg_Aq_cond)&&(Vacuometro<Seg_Aq_vacuo))
                      {
                      statuspower.flag_global_aquecimento=1;
@@ -7694,7 +7716,13 @@ void global_aquecimento(void){
            }
         if((PROCULUS_VP_Read_UInt16(5)==0)&&(statuspower.flag_global_aquecimento==1))
            {
-           if(testa_modo_conectado(5,1)==0) return;
+
+
+
+
+
+
+
            Global_Aquecimento_Switch(0);
 
            statuspower.flag_global_aquecimento=0;
@@ -7851,7 +7879,7 @@ void pagina_47(void){
          }
      else
          {
-         PROCULUS_Popup(0x52);
+         PROCULUS_Popup(0X51);
          PROCULUS_NOK();
          }
 
@@ -7913,7 +7941,7 @@ void pagina_19(void)
             }
          else
             {
-            PROCULUS_Popup(0x52);
+            PROCULUS_Popup(0X51);
             PROCULUS_NOK();
             }
          }
@@ -7948,7 +7976,7 @@ void pagina_19(void)
             }
          else
             {
-            PROCULUS_Popup(0x52);
+            PROCULUS_Popup(0X51);
             PROCULUS_NOK();
             }
          }
@@ -7966,10 +7994,11 @@ void pagina_19(void)
              Upload_Data_to_Slave();
              ShowMessage("SUCESSO!!!",2000,1,0);
              PROCULUS_OK();
+             if(Tamanho_Display==50) PROCULUS_Popup(0x50);
             }
          else
             {
-
+            PROCULUS_Popup(0X51);
             PROCULUS_NOK();
             }
          }
@@ -8001,7 +8030,7 @@ void pagina_19(void)
             }
          else
             {
-            PROCULUS_Popup(0x52);
+            PROCULUS_Popup(0X51);
             PROCULUS_NOK();
             }
          }
@@ -8034,11 +8063,11 @@ void pagina_23(void)
      }
     else
      {
-     PROCULUS_Popup(0x52);
+     PROCULUS_Popup(0X51);
      PROCULUS_NOK();
      }
 }
-# 2608 "Liofilizador Placa Mae.c"
+# 2663 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -8054,7 +8083,7 @@ void pagina_25(void)
        }
     else
        {
-       PROCULUS_Popup(0x52);
+       PROCULUS_Popup(0X51);
        PROCULUS_NOK();
        }
 
@@ -8074,7 +8103,7 @@ void pagina_29(void)
          }
      else
          {
-         PROCULUS_Popup(0x52);
+         PROCULUS_Popup(0X51);
          PROCULUS_NOK();
          }
   }
@@ -8193,7 +8222,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2770 "Liofilizador Placa Mae.c"
+# 2825 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
@@ -8222,19 +8251,29 @@ void SaveBlackoutStatusRuning(void){
        if(statusgen1.flag_save_time==0)
           {
           statusgen1.flag_save_time=1;
-          PROCULUS_OK();
+
+
+
           EEPROM_Write_Byte(17,processo_hora);
           EEPROM_Write_Byte(18,processo_minuto);
 
+
           fat8.index=Find_Fat8_Running();
+
+
+
 
           if(fat8.index!=-1)
              {
+
              FAT8_Load(fat8.index);
              fat8.processo.add_end=add_datalog;
+
              FAT8_Save(fat8.index);
+
              EEPROM_24C1025_Write_Long (0,2,add_datalog);
              EEPROM_24C1025_Write_Int (0,6,processo_totalminuto);
+
              }
           }
        }
@@ -8242,7 +8281,9 @@ void SaveBlackoutStatusRuning(void){
        {
        statusgen1.flag_save_time=0;
        }
+
 }
+
 
 
 void SaveBlackoutStatus(void){
@@ -8498,7 +8539,7 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 
      PROCULUS_graphic_plot(LCDchannel, value);
 }
-# 3103 "Liofilizador Placa Mae.c"
+# 3170 "Liofilizador Placa Mae.c"
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd)
      {
      char txt[30];
@@ -8812,11 +8853,29 @@ void ShowHardwareInfo(){
      int resposta;
      char versao[10];
      statusgen1.flag_proculus_hs=0;
+
+     clear_screen();
+     my_delay_ms_CLRWDT(300);
+     print("JJ Cientifica Ind. e Com. de Eq. Cient. Ltda.");
+     my_delay_ms_CLRWDT(300);
+     print("CNPJ: 05.678.930/0001-12");
+     my_delay_ms_CLRWDT(3000);
+
+
+     print("Analisando Hardware. Aguarde...");
+     my_delay_ms_CLRWDT(300);
+     PROCULUS_VP_Read_String(1990, buffer);
+     strcpy(texto,"* : Display      ");
+     strcat(texto,buffer);
+     print(texto);
+     my_delay_ms_CLRWDT(300);
+
+
      Send_To_Slave(destino, 0x03, 0, buffer);
      totalboard=0;
      strcpy(texto,"");
      strcat(texto,"* : Mother Board ");
-     strcat(texto,"v1.0.30");
+     strcat(texto,"v1.0.31");
      print(texto);
      for(destino=1;destino<15;destino++)
         {
@@ -8907,12 +8966,12 @@ void Carregar_Display_Schematic_Color(){
 
      if(Tamanho_Display==50){
           TrendColor[0] =0xF800;
-          TrendColor[1] =0x03E0;
+          TrendColor[1] =0x07E0;
           TrendColor[2] =0x001F;
-          TrendColor[3] =0xFFFF;
-          TrendColor[4] =0xFFFF;
-          TrendColor[5] =0xFFFF;
-          TrendColor[6] =0xFFFF;
+          TrendColor[3] =0x0000;
+          TrendColor[4] =0xD540;
+          TrendColor[5] =0xF81F;
+          TrendColor[6] =0xFBE0;
           TrendColor[7] =0xFFFF;
           TrendColor[8] =0xFFFF;
           TrendColor[9] =0xFFFF;
@@ -8999,7 +9058,7 @@ void Ligar_Cargas_Compassadamente(){
             global_vacuo();
 
             }
-# 3615 "Liofilizador Placa Mae.c"
+# 3700 "Liofilizador Placa Mae.c"
           if(statuspower.flag_global_aquecimento==1)
             {
             statuspower.flag_global_aquecimento=0;
@@ -9185,7 +9244,7 @@ void FAT8_Write_Process_Finalize(){
       strcpy(fat8.processo.fim.time,time);
       fat8.processo.minutes=processo_totalminuto;
       }
-# 3808 "Liofilizador Placa Mae.c"
+# 3893 "Liofilizador Placa Mae.c"
     fat8.processo.add_end=add_datalog;
 
     fat8.processo.flag_running=0;

@@ -1,30 +1,30 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"233 ./global.h
-[; ;./global.h: 233: struct {
+"236 ./global.h
+[; ;./global.h: 236: struct {
 [s S270 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S270 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"254
-[; ;./global.h: 254: struct{
+"257
+[; ;./global.h: 257: struct{
 [s S271 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S271 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication flag_pc_conected ]
-"276
-[; ;./global.h: 276: struct{
+"279
+[; ;./global.h: 279: struct{
 [s S272 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S272 . flag_autoriza_click_datalog flag_autoriza_click_condensador flag_autoriza_click_vacuo flag_autoriza_click_aquecimento ]
-"297
-[; ;./global.h: 297:       struct {
+"300
+[; ;./global.h: 300:       struct {
 [s S274 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S274 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work flag_global_porta ]
-"295
-[; ;./global.h: 295: union {
+"298
+[; ;./global.h: 298: union {
 [u S273 `uc 1 `S274 1 ]
 [n S273 . bits . ]
-"321
-[; ;./global.h: 321: struct{
+"324
+[; ;./global.h: 324: struct{
 [s S275 :1 `uc 1 ]
 [n S275 . flag_main_loop_WDT ]
-"326
-[; ;./global.h: 326: typedef struct{
+"329
+[; ;./global.h: 329: typedef struct{
 [s S276 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S276 . milisegundo segundo minuto hora ]
 "4731 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
@@ -601,23 +601,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3  =  OFF       ]
 "72
 [p x EBTRB  =  OFF       ]
-"242
-[; ;./global.h: 242: } statusgen ;
+"245
+[; ;./global.h: 245: } statusgen ;
 [v _statusgen `S270 ~T0 @X0 1 e ]
-"263
-[; ;./global.h: 263: }statusgen1;
+"266
+[; ;./global.h: 266: }statusgen1;
 [v _statusgen1 `S271 ~T0 @X0 1 e ]
-"281
-[; ;./global.h: 281: }statusgen2;
+"284
+[; ;./global.h: 284: }statusgen2;
 [v _statusgen2 `S272 ~T0 @X0 1 e ]
-"307
-[; ;./global.h: 307:       } statuspower;
+"310
+[; ;./global.h: 310:       } statuspower;
 [v _statuspower `S273 ~T0 @X0 1 e ]
-"323
-[; ;./global.h: 323: }statusWDT;
+"326
+[; ;./global.h: 326: }statusWDT;
 [v _statusWDT `S275 ~T0 @X0 1 e ]
-"333
-[; ;./global.h: 333: volatile t_rtc rtc;
+"336
+[; ;./global.h: 336: volatile t_rtc rtc;
 [v _rtc `VS276 ~T0 @X0 1 e ]
 "9 I2C.c
 [; ;I2C.c: 9: void I2C_Master_Init(const unsigned long c)
@@ -639,8 +639,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;I2C.c: 14:   SSPCON2 = 0;
 [e = _SSPCON2 -> -> 0 `i `uc ]
 "15
-[; ;I2C.c: 15:   SSPADD = (32000000 /(4*c))-1;
-[e = _SSPADD -> - / -> -> 32000000 `l `ul * -> -> -> 4 `i `l `ul _c -> -> -> 1 `i `l `ul `uc ]
+[; ;I2C.c: 15:   SSPADD = (32000000 /(4.0*c))-1.0;
+[e = _SSPADD -> - / -> -> 32000000 `l `d * .4.0 -> _c `d .1.0 `uc ]
 "16
 [; ;I2C.c: 16:   SSPSTAT = 0;
 [e = _SSPSTAT -> -> 0 `i `uc ]
@@ -671,8 +671,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;I2C.c: 23:   SSPSTAT = 0x80;
 [e = _SSPSTAT -> -> 128 `i `uc ]
 "24
-[; ;I2C.c: 24:   SSPADD = address;
-[e = _SSPADD -> _address `uc ]
+[; ;I2C.c: 24:   SSPADD = (char)address;
+[e = _SSPADD -> -> _address `uc `uc ]
 "26
 [; ;I2C.c: 26:   SSPCON1 = 0x36;
 [e = _SSPCON1 -> -> 54 `i `uc ]
