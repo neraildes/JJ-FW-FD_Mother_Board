@@ -8875,7 +8875,7 @@ void ShowHardwareInfo(){
      totalboard=0;
      strcpy(texto,"");
      strcat(texto,"* : Mother Board ");
-     strcat(texto,"v1.0.31");
+     strcat(texto,"v1.0.33-beta");
      print(texto);
      for(destino=1;destino<15;destino++)
         {
