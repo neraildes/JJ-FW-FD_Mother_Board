@@ -5,9 +5,19 @@ Previsão para versão
   1.2.0 - Pode ser utilizado o bootloader
 
 
+Versão 1.0.34-beta
+	Aceita display 8.1 (600x800).
 
 
-.........."Placa não conectada" e "Sem sensor" para vacuo e pt100.
+Versão 1.0.33-beta
+	Respeitando a pergunta "Deseja encerrar o processo".
+	Compatível com liofilizador de bancada com 4 plataformas.
+	Corrigido mensagem de erro "acesso negador" nos 3 formatos de displays
+	   a)Display 5" sem aquecimento.
+	   b)Display 5" com 4 plataformas ntc.
+           c)Display 8.0" comum.
+	   d)Display 8.1" na vertical (não existe ainda).
+	Inserido mensagem "Aguardar 30 segundos para ligar o condensador" no display 8".
 
 Versão 1.0.28 -
 	Implementado a alteração de status de sensores enquanto aguarda pressionar uma tecla na tela de pergunta

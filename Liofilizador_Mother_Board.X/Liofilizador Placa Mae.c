@@ -202,6 +202,7 @@ T_mapa mapa;
 
 void main(void) 
 {
+     
      my_delay_ms_CLRWDT(100);
      
      OSCCONbits.IRCF0=1; //Frequencia do oscilador interno = 8Mhz
@@ -267,9 +268,6 @@ void main(void)
      
      
      
-     
-     
-     
      //=========================================================================
 
      Delay_Led_Tmr0=0;
@@ -279,6 +277,12 @@ void main(void)
      Delay_Led_Memory=0;
      flag_led_memory=0; 
      
+     /*
+     while(1){
+         print ("Teste de escrita...");
+         my_delay_ms_CLRWDT(1500);
+     }
+     */
 
 
      
@@ -303,8 +307,6 @@ void main(void)
      //-------------------------------------------------------------------------
 
       
-     
-          
      //-------------------------------------------------------------------------
      if(EEPROM_Read_Byte(OFFSET_EEPROM)==0xFF)
        {         
@@ -340,6 +342,7 @@ void main(void)
      Carregar_tempo_de_datalog(); //Intervalo de capturas
      add_datalog=EEPROM_24C1025_Read_Long (0,2); //Inicializa add_datalog
      
+     
      Tamanho_Display=EEPROM_Read_Integer(0xFA);
      if(Tamanho_Display==80)
         maxlineDATALOG=12;
@@ -356,8 +359,6 @@ void main(void)
 //    PROCULUS_Buzzer(1000);
 //    my_delay_ms_CLRWDT(10000);      
      
-     
-          
      
      //-------------------------------------------------------------------------     
 //     print("Testando Memoria Externa...");
@@ -443,6 +444,7 @@ void main(void)
      memo_statuspower=statuspower.bits;
      delay_condensador=0;
      
+     
      //=========================================================================
      //                              M A I N
      //=========================================================================
@@ -484,8 +486,11 @@ void main(void)
         
         
         PROCULUS_Show_Screen(15);     
+        PROCULUS_VP_Write_UInt16(1,0); //ACENDE ICONE TEIMOSO
         TRISDbits.TRISD5=0;//fix Apagar Debug
         PORTDbits.RD5=0;//FIX APAGAR
+        
+     
         while(1)
              {
              
@@ -530,7 +535,7 @@ void main(void)
                              PROCULUS_VP_Write_UInt16(0x0016,0); 
                              MSG_Deseja_Encerrar_Processo=2;
                              break;
-                      case 2:if(PROCULUS_VP_Read_UInt16(6)==250)//SIM, Encerra
+                      case 2:if(PROCULUS_VP_Read_UInt16(6)==240)//SIM, Encerra
                                { 
                                Contagem_Tempo_de_Processo(FALSE);
                                processo_hora=0;
@@ -539,7 +544,7 @@ void main(void)
                                SaveBlackoutStatusRuning();                                
                                //Exibe_Tempo_de_Processo();
                                }  
-                             if (PROCULUS_VP_Read_UInt16(6)==240)//NAO Encerra
+                             if (PROCULUS_VP_Read_UInt16(6)==250)//NAO Encerra
                                {
                                MSG_Deseja_Encerrar_Processo=0;  
                                PROCULUS_Buzzer(15000); //Não
@@ -633,7 +638,7 @@ void main(void)
                              { 
                              PROCULUS_VP_Write_UInt16(1,0);
                              pagina_23(); //Salva Parametros
-                             }                                                            
+                             }                          
                           break;                        
 
                   case 25: // Ajuste de data e hora
@@ -2546,17 +2551,18 @@ void pagina_19(void)
                  DataBaseBackupMain(i);
                  }       
              
-             //ShowMessage("SUCESSO!!!",2000,SOUND_OK,FALSE);                               
-             //PROCULUS_OK();
+
              
-             if(Tamanho_Display==50) 
-                {  
+             //if(Tamanho_Display==50) 
+             //   {  
                 flag_upLoadTambem=true;
-                }
-             else
-                {
-                PROCULUS_Popup(SALVO_COM_SUCESSO);  
-                }
+             //   }
+             //else
+             //   {
+             //   ShowMessage("SUCESSO!!!",2000,SOUND_OK,FALSE);                               
+             //   PROCULUS_OK();                 
+             //   PROCULUS_Popup(SALVO_COM_SUCESSO);  
+             //   }
              
             }
          else

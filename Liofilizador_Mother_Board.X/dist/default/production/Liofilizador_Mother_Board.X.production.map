@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.32\pic\dat\en_msgs.txt -cn \
   -h+dist/default/production\Liofilizador_Mother_Board.X.production.sym \
   --cmf=dist/default/production\Liofilizador_Mother_Board.X.production.cmf \
-  -z -Q18F4620 -oC:\Users\Nera\AppData\Local\Temp\xcAs1f0.4 \
+  -z -Q18F4620 -oC:\Users\Nera\AppData\Local\Temp\xcAs4a0.4 \
   --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/Liofilizador_Mother_Board.X.production.map -E1 \
   -ver=XC8 Compiler --acfsm=1493 -ASTACK=06BAh-0F7Fh -pstack=STACK \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Nera\AppData\Local\Temp\xcAs1f0.o \
+  C:\Users\Nera\AppData\Local\Temp\xcAs4a0.o \
   dist/default/production\Liofilizador_Mother_Board.X.production.o 
 
 Object code version is 3.11
@@ -36,7 +36,7 @@ Machine type is 18F4620
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Nera\AppData\Local\Temp\xcAs1f0.o
+C:\Users\Nera\AppData\Local\Temp\xcAs4a0.o
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
                 init                                296      296        4        C       0
@@ -58,7 +58,7 @@ dist/default/production\Liofilizador_Mother_Board.X.production.o
                 text159                            7C58     7C58       8C        C       0
                 text158                            8222     8222       62        C       0
                 text157                            442A     442A      194        C       0
-                text156                            2CB6     2CB6      32C        C       0
+                text156                            2CCA     2CCA      32C        C       0
                 text155                            73D6     73D6       BC        C       0
                 text154                            5342     5342      140        C       0
                 text153                            60FA     60FA      108        C       0
@@ -108,8 +108,8 @@ dist/default/production\Liofilizador_Mother_Board.X.production.o
                 text109                            8FBC     8FBC       24        C       0
                 text108                            8718     8718       4C        C       0
                 text107                            474E     474E      18E        C       0
-                text106                            2FE2     2FE2      30C        C       0
-                text105                            3848     3848      288        C       0
+                text106                            2FF6     2FF6      30C        C       0
+                text105                            385C     385C      288        C       0
                 text104                            781A     781A       AC        C       0
                 text103                            7F7A     7F7A       82        C       0
                 text102                            90FA     90FA       1A        C       0
@@ -154,8 +154,8 @@ dist/default/production\Liofilizador_Mother_Board.X.production.o
                 text63                             6CD2     6CD2       D0        C       0
                 text62                             8D8C     8D8C       2E        C       0
                 text61                             8842     8842       46        C       0
-                text60                             2984     2984      332        C       0
-                text59                             1E92     1E92      428        C       0
+                text60                             2998     2998      332        C       0
+                text59                             1EA6     1EA6      428        C       0
                 text58                             7970     7970       A2        C       0
                 text57                             7768     7768       B2        C       0
                 text56                             6DA2     6DA2       CA        C       0
@@ -164,8 +164,8 @@ dist/default/production\Liofilizador_Mother_Board.X.production.o
                 text53                             8078     8078       70        C       0
                 text52                             7BCC     7BCC       8C        C       0
                 text51                             6202     6202       FE        C       0
-                text50                             35A2     35A2      2A6        C       0
-                text49                             32EE     32EE      2B4        C       0
+                text50                             35B6     35B6      2A6        C       0
+                text49                             3302     3302      2B4        C       0
                 text48                             7EF8     7EF8       82        C       0
                 text47                             80E8     80E8       6E        C       0
                 text46                             8F74     8F74       24        C       0
@@ -178,12 +178,12 @@ dist/default/production\Liofilizador_Mother_Board.X.production.o
                 text39                             7AA8     7AA8       94        C       0
                 text38                             4EF6     4EF6      178        C       0
                 text37                             40C8     40C8      1C6        C       0
-                text36                             3AD0     3AD0      220        C       0
+                text36                             3AE4     3AE4      20C        C       0
                 text35                             7256     7256       C2        C       0
                 text34                             55BC     55BC      136        C       0
                 text33                             8D2E     8D2E       30        C       0
                 text32                             8C34     8C34       32        C       0
-                text31                             191E     191E      574        C       0
+                text31                             1932     1932      574        C       0
                 text30                             64E8     64E8       F2        C       0
                 text29                             8F50     8F50       24        C       0
                 text28                             5958     5958      12C        C       0
@@ -192,13 +192,13 @@ dist/default/production\Liofilizador_Mother_Board.X.production.o
                 text25                             89CE     89CE       3C        C       0
                 text24                             8D5E     8D5E       2E        C       0
                 text23                             8E90     8E90       28        C       0
-                text22                             2640     2640      344        C       0
+                text22                             2654     2654      344        C       0
                 text21                             6BFC     6BFC       D6        C       0
                 text20                             7B3C     7B3C       90        C       0
                 text19                             5BAC     5BAC      116        C       0
                 text18                             9148     9148       18        C       0
                 text17                             5A84     5A84      128        C       0
-                text16                             22BA     22BA      386        C       0
+                text16                             22CE     22CE      386        C       0
                 text15                             7CE4     7CE4       88        C       0
                 text14                             853E     853E       50        C       0
                 text13                             428E     428E      19C        C       0
@@ -208,13 +208,13 @@ dist/default/production\Liofilizador_Mother_Board.X.production.o
                 text9                              7D6C     7D6C       84        C       0
                 text8                              91D0     91D0        E        C       0
                 text7                              8B98     8B98       34        C       0
-                text6                              11DE     11DE      740        C       0
+                text6                              11F2     11F2      740        C       0
                 text5                              6B22     6B22       DA        C       0
                 text4                              6F36     6F36       C8        C       0
                 text3                              5FF2     5FF2      108        C       0
                 text2                              8156     8156       66        C       0
                 text1                              63F6     63F6       F2        C       0
-                text0                               29A      29A      F44        C       0
+                text0                               29A      29A      F58        C       0
                 cstackCOMRAM                          1        1       6E        1       1
                 cstackBANK0                          80       80       5B       80       1
                 cstackBANK1                         1E2      1E2        E      100       1
@@ -249,7 +249,7 @@ TOTAL           Name                               Link     Load   Length     Sp
                 text159                            7C58     7C58       8C         0
                 text158                            8222     8222       62         0
                 text157                            442A     442A      194         0
-                text156                            2CB6     2CB6      32C         0
+                text156                            2CCA     2CCA      32C         0
                 text155                            73D6     73D6       BC         0
                 text154                            5342     5342      140         0
                 text153                            60FA     60FA      108         0
@@ -299,8 +299,8 @@ TOTAL           Name                               Link     Load   Length     Sp
                 text109                            8FBC     8FBC       24         0
                 text108                            8718     8718       4C         0
                 text107                            474E     474E      18E         0
-                text106                            2FE2     2FE2      30C         0
-                text105                            3848     3848      288         0
+                text106                            2FF6     2FF6      30C         0
+                text105                            385C     385C      288         0
                 text104                            781A     781A       AC         0
                 text103                            7F7A     7F7A       82         0
                 text102                            90FA     90FA       1A         0
@@ -345,8 +345,8 @@ TOTAL           Name                               Link     Load   Length     Sp
                 text63                             6CD2     6CD2       D0         0
                 text62                             8D8C     8D8C       2E         0
                 text61                             8842     8842       46         0
-                text60                             2984     2984      332         0
-                text59                             1E92     1E92      428         0
+                text60                             2998     2998      332         0
+                text59                             1EA6     1EA6      428         0
                 text58                             7970     7970       A2         0
                 text57                             7768     7768       B2         0
                 text56                             6DA2     6DA2       CA         0
@@ -355,8 +355,8 @@ TOTAL           Name                               Link     Load   Length     Sp
                 text53                             8078     8078       70         0
                 text52                             7BCC     7BCC       8C         0
                 text51                             6202     6202       FE         0
-                text50                             35A2     35A2      2A6         0
-                text49                             32EE     32EE      2B4         0
+                text50                             35B6     35B6      2A6         0
+                text49                             3302     3302      2B4         0
                 text48                             7EF8     7EF8       82         0
                 text47                             80E8     80E8       6E         0
                 text46                             8F74     8F74       24         0
@@ -369,12 +369,12 @@ TOTAL           Name                               Link     Load   Length     Sp
                 text39                             7AA8     7AA8       94         0
                 text38                             4EF6     4EF6      178         0
                 text37                             40C8     40C8      1C6         0
-                text36                             3AD0     3AD0      220         0
+                text36                             3AE4     3AE4      20C         0
                 text35                             7256     7256       C2         0
                 text34                             55BC     55BC      136         0
                 text33                             8D2E     8D2E       30         0
                 text32                             8C34     8C34       32         0
-                text31                             191E     191E      574         0
+                text31                             1932     1932      574         0
                 text30                             64E8     64E8       F2         0
                 text29                             8F50     8F50       24         0
                 text28                             5958     5958      12C         0
@@ -383,13 +383,13 @@ TOTAL           Name                               Link     Load   Length     Sp
                 text25                             89CE     89CE       3C         0
                 text24                             8D5E     8D5E       2E         0
                 text23                             8E90     8E90       28         0
-                text22                             2640     2640      344         0
+                text22                             2654     2654      344         0
                 text21                             6BFC     6BFC       D6         0
                 text20                             7B3C     7B3C       90         0
                 text19                             5BAC     5BAC      116         0
                 text18                             9148     9148       18         0
                 text17                             5A84     5A84      128         0
-                text16                             22BA     22BA      386         0
+                text16                             22CE     22CE      386         0
                 text15                             7CE4     7CE4       88         0
                 text14                             853E     853E       50         0
                 text13                             428E     428E      19C         0
@@ -399,13 +399,13 @@ TOTAL           Name                               Link     Load   Length     Sp
                 text9                              7D6C     7D6C       84         0
                 text8                              91D0     91D0        E         0
                 text7                              8B98     8B98       34         0
-                text6                              11DE     11DE      740         0
+                text6                              11F2     11F2      740         0
                 text5                              6B22     6B22       DA         0
                 text4                              6F36     6F36       C8         0
                 text3                              5FF2     5FF2      108         0
                 text2                              8156     8156       66         0
                 text1                              63F6     63F6       F2         0
-                text0                               29A      29A      F44         0
+                text0                               29A      29A      F58         0
                 cinit                              78C6     78C6       AA         0
                 idataBANK1                         91B0     91B0       10         0
                 idataBANK0                         9226     9226        4         0
@@ -899,7 +899,7 @@ _Condensador                                      bssBANK0     0000E5
 _Condensador_Switch                               text98       009066
 _Contagem_Tempo_de_Processo                       text74       0083F2
 _DataBaseBackupMain                               text42       005CC2
-_Decodify_Command                                 text6        0011DE
+_Decodify_Command                                 text6        0011F2
 _Delay_Led_Memory                                 bssBANK1     000195
 _Delay_Led_Tmr0                                   bssBANK1     000185
 _Delay_Led_Usart                                  bssBANK1     000189
@@ -1004,7 +1004,7 @@ _PROCULUS_VP_Write_String                         text145      008EDE
 _PROCULUS_VP_Write_UInt16                         text162      0090A6
 _PROCULUS_Write_RTC                               text28       005958
 _PROCULUS_graphic_plot                            text158      008222
-_Plotar_Grafico_Gravado                           text59       001E92
+_Plotar_Grafico_Gravado                           text59       001EA6
 _Plotar_Grafico_Gravado$4707                      cstackBANK0  0000BE
 _RBIF                                             (abs)        007F90
 _RCIE                                             (abs)        007CED
@@ -1031,9 +1031,9 @@ _Send_To_Slave                                    text157      00442A
 _Send_to_PC                                       text7        008B98
 _Set_Receita                                      text56       006DA2
 _ShowAndSetSlaveParameters                        text17       005A84
-_ShowHardwareInfo                                 text50       0035A2
+_ShowHardwareInfo                                 text50       0035B6
 _ShowMessage                                      text39       007AA8
-_ShowSensorRealTimeHS                             text49       0032EE
+_ShowSensorRealTimeHS                             text49       003302
 _ShowStaticValueGrid                              text38       004EF6
 _T0CONbits                                        (abs)        000FD5
 _T1CKPS0                                          (abs)        007E6C
@@ -1056,7 +1056,7 @@ _TXREG                                            (abs)        000FAD
 _TXSTAbits                                        (abs)        000FAC
 _Tamanho_Display                                  bssBANK0     0000E1
 _TrendColor                                       bssBANK1     000137
-_TrendCurveFuncao                                 text31       00191E
+_TrendCurveFuncao                                 text31       001932
 _TrendCurveFuncao$2192                            cstackCOMRAM 000035
 _USART_init                                       text47       0080E8
 _USART_input_buffer                               text151      008990
@@ -1580,14 +1580,14 @@ ___awmod@counter                                  cstackCOMRAM 00000D
 ___awmod@dividend                                 cstackCOMRAM 000009
 ___awmod@divisor                                  cstackCOMRAM 00000B
 ___awmod@sign                                     cstackCOMRAM 00000E
-___fladd                                          text106      002FE2
+___fladd                                          text106      002FF6
 ___fladd@a                                        cstackCOMRAM 00004D
 ___fladd@aexp                                     cstackCOMRAM 000056
 ___fladd@b                                        cstackCOMRAM 000049
 ___fladd@bexp                                     cstackCOMRAM 000057
 ___fladd@grs                                      cstackCOMRAM 000058
 ___fladd@signs                                    cstackCOMRAM 000055
-___fldiv                                          text105      003848
+___fldiv                                          text105      00385C
 ___fldiv@a                                        cstackCOMRAM 000034
 ___fldiv@aexp                                     cstackCOMRAM 000048
 ___fldiv@b                                        cstackCOMRAM 000030
@@ -1599,7 +1599,7 @@ ___fldiv@sign                                     cstackCOMRAM 000040
 ___flge                                           text63       006CD2
 ___flge@ff1                                       cstackCOMRAM 000009
 ___flge@ff2                                       cstackCOMRAM 00000D
-___flmul                                          text156      002CB6
+___flmul                                          text156      002CCA
 ___flmul@a                                        cstackCOMRAM 00001B
 ___flmul@aexp                                     cstackCOMRAM 000024
 ___flmul@b                                        cstackCOMRAM 000017
@@ -1669,7 +1669,7 @@ __end_of_Comando_Protocolo_Serial                 text4        006FFE
 __end_of_Condensador_Switch                       text98       009086
 __end_of_Contagem_Tempo_de_Processo               text74       008446
 __end_of_DataBaseBackupMain                       text42       005DD4
-__end_of_Decodify_Command                         text6        00191E
+__end_of_Decodify_Command                         text6        001932
 __end_of_EEPROM_24C1025_Fill_All                  text14       00858E
 __end_of_EEPROM_24C1025_Read_Buffer               text91       004EF6
 __end_of_EEPROM_24C1025_Read_Buffer_to_USART      text13       00442A
@@ -1753,7 +1753,7 @@ __end_of_PROCULUS_VP_Write_String                 text145      008F04
 __end_of_PROCULUS_VP_Write_UInt16                 text162      0090C6
 __end_of_PROCULUS_Write_RTC                       text28       005A84
 __end_of_PROCULUS_graphic_plot                    text158      008284
-__end_of_Plotar_Grafico_Gravado                   text59       0022BA
+__end_of_Plotar_Grafico_Gravado                   text59       0022CE
 __end_of_RecallBlackoutStatus                     text58       007A12
 __end_of_Recarregar_Parametros_de_Configuracao    text10       009226
 __end_of_Rele_Geral_Aquecimento                   text101      0090A6
@@ -1764,11 +1764,11 @@ __end_of_Send_To_Slave                            text157      0045BE
 __end_of_Send_to_PC                               text7        008BCC
 __end_of_Set_Receita                              text56       006E6C
 __end_of_ShowAndSetSlaveParameters                text17       005BAC
-__end_of_ShowHardwareInfo                         text50       003848
+__end_of_ShowHardwareInfo                         text50       00385C
 __end_of_ShowMessage                              text39       007B3C
-__end_of_ShowSensorRealTimeHS                     text49       0035A2
+__end_of_ShowSensorRealTimeHS                     text49       0035B6
 __end_of_ShowStaticValueGrid                      text38       00506E
-__end_of_TrendCurveFuncao                         text31       001E92
+__end_of_TrendCurveFuncao                         text31       001EA6
 __end_of_USART_init                               text47       008156
 __end_of_USART_input_buffer                       text151      0089CE
 __end_of_USART_put_int                            text165      009216
@@ -1779,10 +1779,10 @@ __end_of_Upload_Data_to_Slave                     text37       00428E
 __end_of_Vaccum_Switch                            text72       009066
 __end_of___awdiv                                  text54       007E74
 __end_of___awmod                                  text53       0080E8
-__end_of___fladd                                  text106      0032EE
-__end_of___fldiv                                  text105      003AD0
+__end_of___fladd                                  text106      003302
+__end_of___fldiv                                  text105      003AE4
 __end_of___flge                                   text63       006DA2
-__end_of___flmul                                  text156      002FE2
+__end_of___flmul                                  text156      002FF6
 __end_of___flneg                                  text62       008DBA
 __end_of___flsub                                  text61       008888
 __end_of___fltol                                  text155      007492
@@ -1803,7 +1803,7 @@ __end_of_global_datalog                           text75       005828
 __end_of_global_vacuo                             text71       005EE6
 __end_of_isr                                      intcodelo    000296
 __end_of_itoa                                     text51       006300
-__end_of_main                                     text0        0011DE
+__end_of_main                                     text0        0011F2
 __end_of_my_delay_ms                              text164      0087B0
 __end_of_my_delay_ms_CLRWDT                       text70       0086CA
 __end_of_my_delay_ms_TMR1                         text45       0083F2
@@ -1814,12 +1814,12 @@ __end_of_pagina_19                                text36       003CF0
 __end_of_pagina_23                                text30       0065DA
 __end_of_pagina_25                                text27       0085DE
 __end_of_pagina_29                                text26       0088CC
-__end_of_pagina_31                                text22       002984
+__end_of_pagina_31                                text22       002998
 __end_of_pagina_47                                text20       007BCC
-__end_of_pagina_49                                text16       002640
+__end_of_pagina_49                                text16       002654
 __end_of_print                                    text68       00718E
 __end_of_reverse                                  text52       007C58
-__end_of_roundf                                   text60       002CB6
+__end_of_roundf                                   text60       002CCA
 __end_of_save_datalog                             text153      006202
 __end_of_str2bcd                                  text29       008F74
 __end_of_strcat                                   text147      008F2A
@@ -1855,8 +1855,8 @@ __ptext101                                        text101      009086
 __ptext102                                        text102      0090FA
 __ptext103                                        text103      007F7A
 __ptext104                                        text104      00781A
-__ptext105                                        text105      003848
-__ptext106                                        text106      002FE2
+__ptext105                                        text105      00385C
+__ptext106                                        text106      002FF6
 __ptext107                                        text107      00474E
 __ptext108                                        text108      008718
 __ptext109                                        text109      008FBC
@@ -1911,11 +1911,11 @@ __ptext152                                        text152      0087B0
 __ptext153                                        text153      0060FA
 __ptext154                                        text154      005342
 __ptext155                                        text155      0073D6
-__ptext156                                        text156      002CB6
+__ptext156                                        text156      002CCA
 __ptext157                                        text157      00442A
 __ptext158                                        text158      008222
 __ptext159                                        text159      007C58
-__ptext16                                         text16       0022BA
+__ptext16                                         text16       0022CE
 __ptext160                                        text160      008F2A
 __ptext161                                        text161      007E74
 __ptext162                                        text162      0090A6
@@ -1930,7 +1930,7 @@ __ptext19                                         text19       005BAC
 __ptext2                                          text2        008156
 __ptext20                                         text20       007B3C
 __ptext21                                         text21       006BFC
-__ptext22                                         text22       002640
+__ptext22                                         text22       002654
 __ptext23                                         text23       008E90
 __ptext24                                         text24       008D5E
 __ptext25                                         text25       0089CE
@@ -1940,12 +1940,12 @@ __ptext28                                         text28       005958
 __ptext29                                         text29       008F50
 __ptext3                                          text3        005FF2
 __ptext30                                         text30       0064E8
-__ptext31                                         text31       00191E
+__ptext31                                         text31       001932
 __ptext32                                         text32       008C34
 __ptext33                                         text33       008D2E
 __ptext34                                         text34       0055BC
 __ptext35                                         text35       007256
-__ptext36                                         text36       003AD0
+__ptext36                                         text36       003AE4
 __ptext37                                         text37       0040C8
 __ptext38                                         text38       004EF6
 __ptext39                                         text39       007AA8
@@ -1959,9 +1959,9 @@ __ptext45                                         text45       00839C
 __ptext46                                         text46       008F74
 __ptext47                                         text47       0080E8
 __ptext48                                         text48       007EF8
-__ptext49                                         text49       0032EE
+__ptext49                                         text49       003302
 __ptext5                                          text5        006B22
-__ptext50                                         text50       0035A2
+__ptext50                                         text50       0035B6
 __ptext51                                         text51       006202
 __ptext52                                         text52       007BCC
 __ptext53                                         text53       008078
@@ -1970,9 +1970,9 @@ __ptext55                                         text55       008A0A
 __ptext56                                         text56       006DA2
 __ptext57                                         text57       007768
 __ptext58                                         text58       007970
-__ptext59                                         text59       001E92
-__ptext6                                          text6        0011DE
-__ptext60                                         text60       002984
+__ptext59                                         text59       001EA6
+__ptext6                                          text6        0011F2
+__ptext60                                         text60       002998
 __ptext61                                         text61       008842
 __ptext62                                         text62       008D8C
 __ptext63                                         text63       006CD2
@@ -2226,13 +2226,13 @@ _nabucodonozor                                    bssBANK1     00019A
 _ouve_comunicacao                                 text3        005FF2
 _pagina                                           dataBANK0    0000F8
 _pagina_15                                        text43       008A46
-_pagina_19                                        text36       003AD0
+_pagina_19                                        text36       003AE4
 _pagina_23                                        text30       0064E8
 _pagina_25                                        text27       00858E
 _pagina_29                                        text26       008888
-_pagina_31                                        text22       002640
+_pagina_31                                        text22       002654
 _pagina_47                                        text20       007B3C
-_pagina_49                                        text16       0022BA
+_pagina_49                                        text16       0022CE
 _paginamemo                                       dataBANK1    0001E0
 _pointer                                          bssBANK1     00016F
 _print                                            text68       0070C6
@@ -2244,7 +2244,7 @@ _proculus                                         bssBANK3     00034A
 _receita                                          bssBANK1     0001BD
 _returnToScreen                                   bssBANK0     0000EC
 _reverse                                          text52       007BCC
-_roundf                                           text60       002984
+_roundf                                           text60       002998
 _roundf$4708                                      cstackBANK0  000086
 _roundf$4709                                      cstackBANK0  000080
 _rtc                                              bssBANK1     000160
@@ -2390,7 +2390,7 @@ C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\awdiv.c estimated si
 
 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcadd.c
 		___flsub       		CODE           	8842	0000	70
-		___fladd       		CODE           	2FE2	0000	780
+		___fladd       		CODE           	2FF6	0000	780
 
 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcadd.c estimated size: 850
 
@@ -2497,7 +2497,7 @@ shared
 shared estimated size: 156
 
 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcmul.c
-		___flmul       		CODE           	2CB6	0000	812
+		___flmul       		CODE           	2CCA	0000	812
 
 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcmul.c estimated size: 812
 
@@ -2513,7 +2513,7 @@ Liofilizador Placa Mae.c
 		_Check_And_Send_Capture_Datalog		CODE           	87B0	0000	74
 		_Send_to_PC    		CODE           	8B98	0000	52
 		_FAT8_Show     		CODE           	7318	0000	190
-		_TrendCurveFuncao		CODE           	191E	0000	1396
+		_TrendCurveFuncao		CODE           	1932	0000	1396
 		_Carregar_Display_Schematic_Color		CODE           	55BC	0000	310
 		_SaveLiofilizadorOnMemory		CODE           	65DA	0000	232
 		_Gerenciador_de_Senha_Global		CODE           	474E	0000	398
@@ -2524,33 +2524,33 @@ Liofilizador Placa Mae.c
 		_SaveBlackoutStatusRuning		CODE           	7768	0000	178
 		_FAT8_Save     		CODE           	3CF0	0000	512
 		_Set_Receita   		CODE           	6DA2	0000	202
-		_Plotar_Grafico_Gravado		CODE           	1E92	0000	1064
+		_Plotar_Grafico_Gravado		CODE           	1EA6	0000	1064
 		_Gravar_Status_da_Senha_Global		CODE           	918C	0000	18
 		_MenorCanalLivre		CODE           	862E	0000	78
-		_main          		CODE           	029A	0000	3908
+		_main          		CODE           	029A	0000	3928
 		_Condensador_Switch		CODE           	9066	0000	32
 		_ShowMessage   		CODE           	7AA8	0000	148
 		_LoadLiofilizadorOnMemory		CODE           	67A8	0000	224
-		_Decodify_Command		CODE           	11DE	0000	1856
+		_Decodify_Command		CODE           	11F2	0000	1856
 		_Exibe_Tempo_de_Processo		CODE           	7A12	0000	150
 		_Carregar_Parametros_de_Seguranca		CODE           	7256	0000	194
 		_Ligar_Cargas_Compassadamente		CODE           	506E	0000	372
 		_ouve_comunicacao		CODE           	5FF2	0000	264
 		_Exibe_Hora_Data		CODE           	8952	0000	62
 		_RecallBlackoutStatus		CODE           	7970	0000	162
-		_pagina_31     		CODE           	2640	0000	836
+		_pagina_31     		CODE           	2654	0000	836
 		_pagina_23     		CODE           	64E8	0000	242
 		_pagina_15     		CODE           	8A46	0000	58
 		_pagina_25     		CODE           	858E	0000	80
 		_pagina_47     		CODE           	7B3C	0000	144
-		_pagina_19     		CODE           	3AD0	0000	544
+		_pagina_19     		CODE           	3AE4	0000	524
 		_pagina_29     		CODE           	8888	0000	68
-		_pagina_49     		CODE           	22BA	0000	902
+		_pagina_49     		CODE           	22CE	0000	902
 		_Comando_Display		CODE           	7CE4	0000	136
 		_FAT8_Load     		CODE           	3EF0	0000	472
 		_Grava_Receita 		CODE           	7600	0000	180
-		_ShowHardwareInfo		CODE           	35A2	0000	678
-		_ShowSensorRealTimeHS		CODE           	32EE	0000	692
+		_ShowHardwareInfo		CODE           	35B6	0000	678
+		_ShowSensorRealTimeHS		CODE           	3302	0000	692
 		_Carrega_Tupla_Receita		CODE           	6BFC	0000	214
 		_DataBaseBackupMain		CODE           	5CC2	0000	274
 		_Incrementa_Contador_de_Repique_do_Vacuo		CODE           	8B2C	0000	54
@@ -2585,12 +2585,12 @@ Liofilizador Placa Mae.c
 Liofilizador Placa Mae.c estimated size: 23832
 
 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcdiv.c
-		___fldiv       		CODE           	3848	0000	648
+		___fldiv       		CODE           	385C	0000	648
 
 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcdiv.c estimated size: 648
 
 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\roundf.c
-		_roundf        		CODE           	2984	0000	818
+		_roundf        		CODE           	2998	0000	818
 
 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\roundf.c estimated size: 818
 
