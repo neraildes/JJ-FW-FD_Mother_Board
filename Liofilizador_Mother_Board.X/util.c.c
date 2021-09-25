@@ -24,7 +24,7 @@ extern int Tamanho_Display;
         
         if(Tamanho_Display==50) MAXVP =  2270;
         if(Tamanho_Display==80) MAXVP =  2420;
-   
+        if(Tamanho_Display==81) MAXVP =  2420;
         
         if(vpPrint<=MAXVP)
           { 

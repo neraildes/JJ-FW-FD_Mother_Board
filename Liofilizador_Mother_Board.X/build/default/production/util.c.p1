@@ -1,30 +1,30 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"236 ./global.h
-[; ;./global.h: 236: struct {
+"237 ./global.h
+[; ;./global.h: 237: struct {
 [s S9 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S9 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"257
-[; ;./global.h: 257: struct{
+"258
+[; ;./global.h: 258: struct{
 [s S10 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S10 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication flag_pc_conected ]
-"279
-[; ;./global.h: 279: struct{
+"280
+[; ;./global.h: 280: struct{
 [s S11 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S11 . flag_autoriza_click_datalog flag_autoriza_click_condensador flag_autoriza_click_vacuo flag_autoriza_click_aquecimento ]
-"300
-[; ;./global.h: 300:       struct {
-[s S13 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S13 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work flag_global_porta ]
-"298
-[; ;./global.h: 298: union {
+"301
+[; ;./global.h: 301:       struct {
+[s S13 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S13 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work flag_global_porta flag_regrigeracao_fluido ]
+"299
+[; ;./global.h: 299: union {
 [u S12 `uc 1 `S13 1 ]
 [n S12 . bits . ]
-"324
-[; ;./global.h: 324: struct{
+"327
+[; ;./global.h: 327: struct{
 [s S14 :1 `uc 1 ]
 [n S14 . flag_main_loop_WDT ]
-"329
-[; ;./global.h: 329: typedef struct{
+"332
+[; ;./global.h: 332: typedef struct{
 [s S15 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S15 . milisegundo segundo minuto hora ]
 "15 util.c.c
@@ -114,23 +114,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3  =  OFF       ]
 "72
 [p x EBTRB  =  OFF       ]
-"245
-[; ;./global.h: 245: } statusgen ;
+"246
+[; ;./global.h: 246: } statusgen ;
 [v _statusgen `S9 ~T0 @X0 1 e ]
-"266
-[; ;./global.h: 266: }statusgen1;
+"267
+[; ;./global.h: 267: }statusgen1;
 [v _statusgen1 `S10 ~T0 @X0 1 e ]
-"284
-[; ;./global.h: 284: }statusgen2;
+"285
+[; ;./global.h: 285: }statusgen2;
 [v _statusgen2 `S11 ~T0 @X0 1 e ]
-"310
-[; ;./global.h: 310:       } statuspower;
+"312
+[; ;./global.h: 312:       } statuspower;
 [v _statuspower `S12 ~T0 @X0 1 e ]
-"326
-[; ;./global.h: 326: }statusWDT;
+"329
+[; ;./global.h: 329: }statusWDT;
 [v _statusWDT `S14 ~T0 @X0 1 e ]
-"336
-[; ;./global.h: 336: volatile t_rtc rtc;
+"339
+[; ;./global.h: 339: volatile t_rtc rtc;
 [v _rtc `VS15 ~T0 @X0 1 e ]
 "54 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
@@ -572,9 +572,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == _Tamanho_Display -> 80 `i 285  ]
 [e = _MAXVP -> 2420 `i ]
 [e :U 285 ]
+"27
+[; ;util.c.c: 27:         if(Tamanho_Display==81) MAXVP = 2420;
+[e $ ! == _Tamanho_Display -> 81 `i 286  ]
+[e = _MAXVP -> 2420 `i ]
+[e :U 286 ]
 "29
 [; ;util.c.c: 29:         if(vpPrint<=MAXVP)
-[e $ ! <= _vpPrint -> _MAXVP `ui 286  ]
+[e $ ! <= _vpPrint -> _MAXVP `ui 287  ]
 "30
 [; ;util.c.c: 30:           {
 {
@@ -587,10 +592,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "35
 [; ;util.c.c: 35:           }
 }
-[e $U 287  ]
+[e $U 288  ]
 "36
 [; ;util.c.c: 36:         else
-[e :U 286 ]
+[e :U 287 ]
 "37
 [; ;util.c.c: 37:           {
 {
@@ -598,8 +603,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;util.c.c: 38:           for(vp_roll=2000;vp_roll<=MAXVP;vp_roll+=30)
 {
 [e = _vp_roll -> -> 2000 `i `ui ]
-[e $U 291  ]
-[e :U 288 ]
+[e $U 292  ]
+[e :U 289 ]
 "39
 [; ;util.c.c: 39:              {
 {
@@ -616,9 +621,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;util.c.c: 43:              }
 }
 [e =+ _vp_roll -> -> 30 `i `ui ]
-[e :U 291 ]
-[e $ <= _vp_roll -> _MAXVP `ui 288  ]
-[e :U 289 ]
+[e :U 292 ]
+[e $ <= _vp_roll -> _MAXVP `ui 289  ]
+[e :U 290 ]
 }
 "45
 [; ;util.c.c: 45:           PROCULUS_VP_Write_String(MAXVP, texto);
@@ -626,7 +631,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "47
 [; ;util.c.c: 47:           }
 }
-[e :U 287 ]
+[e :U 288 ]
 "48
 [; ;util.c.c: 48:         statusgen1.flag_proculus_hs=0;
 [e = . _statusgen1 3 -> -> 0 `i `uc ]
@@ -645,22 +650,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [v _i `ui ~T0 @X0 1 a ]
 [e = _i -> -> 2000 `i `ui ]
-[e $ <= _i -> -> 2420 `i `ui 293  ]
-[e $U 294  ]
-[e :U 293 ]
+[e $ <= _i -> -> 2420 `i `ui 294  ]
+[e $U 295  ]
+[e :U 294 ]
 "53
 [; ;util.c.c: 53:         PROCULUS_VP_Write_String(i," ");
 [e ( _PROCULUS_VP_Write_String (2 , _i :s 2C ]
 [e =+ _i -> -> 30 `i `ui ]
-[e $ <= _i -> -> 2420 `i `ui 293  ]
-[e :U 294 ]
+[e $ <= _i -> -> 2420 `i `ui 294  ]
+[e :U 295 ]
 }
 "54
 [; ;util.c.c: 54:     vpPrint=2000;
 [e = _vpPrint -> -> 2000 `i `ui ]
 "55
 [; ;util.c.c: 55: }
-[e :UE 292 ]
+[e :UE 293 ]
 }
 "57
 [; ;util.c.c: 57: void bcd2str(char valor, char *dado){
@@ -681,7 +686,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = *U + _dado * -> -> 2 `i `x -> -> # *U _dado `i `x -> -> 0 `i `uc ]
 "61
 [; ;util.c.c: 61:      }
-[e :UE 296 ]
+[e :UE 297 ]
 }
 "63
 [; ;util.c.c: 63: char str2bcd(char *value){
@@ -693,10 +698,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "64
 [; ;util.c.c: 64:      return ((value[0]<<4)|(0x0F & (value[1])));
 [e ) -> | << -> *U + _value * -> -> 0 `i `x -> -> # *U _value `i `x `i -> 4 `i & -> 15 `i -> *U + _value * -> -> 1 `i `x -> -> # *U _value `i `x `i `uc ]
-[e $UE 297  ]
+[e $UE 298  ]
 "65
 [; ;util.c.c: 65: }
-[e :UE 297 ]
+[e :UE 298 ]
 }
 "70
 [; ;util.c.c: 70: char* itoa(int num, char* str, int base)
@@ -723,7 +728,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _isNegative -> -> 0 `i `uc ]
 "76
 [; ;util.c.c: 76:     if (num == 0)
-[e $ ! == _num -> 0 `i 299  ]
+[e $ ! == _num -> 0 `i 300  ]
 "77
 [; ;util.c.c: 77:     {
 {
@@ -736,14 +741,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "80
 [; ;util.c.c: 80:         return str;
 [e ) _str ]
-[e $UE 298  ]
+[e $UE 299  ]
 "81
 [; ;util.c.c: 81:     }
 }
-[e :U 299 ]
+[e :U 300 ]
 "85
 [; ;util.c.c: 85:     if (num < 0 && base == 10)
-[e $ ! && < _num -> 0 `i == _base -> 10 `i 300  ]
+[e $ ! && < _num -> 0 `i == _base -> 10 `i 301  ]
 "86
 [; ;util.c.c: 86:     {
 {
@@ -756,11 +761,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "89
 [; ;util.c.c: 89:     }
 }
-[e :U 300 ]
+[e :U 301 ]
 "92
 [; ;util.c.c: 92:     while (num != 0)
-[e $U 301  ]
-[e :U 302 ]
+[e $U 302  ]
+[e :U 303 ]
 "93
 [; ;util.c.c: 93:     {
 {
@@ -777,18 +782,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 "97
 [; ;util.c.c: 97:     }
 }
-[e :U 301 ]
+[e :U 302 ]
 "92
 [; ;util.c.c: 92:     while (num != 0)
-[e $ != _num -> 0 `i 302  ]
-[e :U 303 ]
+[e $ != _num -> 0 `i 303  ]
+[e :U 304 ]
 "100
 [; ;util.c.c: 100:     if (isNegative)
-[e $ ! != -> _isNegative `i -> 0 `i 304  ]
+[e $ ! != -> _isNegative `i -> 0 `i 305  ]
 "101
 [; ;util.c.c: 101:         str[i++] = '-';
 [e = *U + _str * -> ++ _i -> 1 `i `x -> -> # *U _str `i `x -> -> 45 `ui `uc ]
-[e :U 304 ]
+[e :U 305 ]
 "103
 [; ;util.c.c: 103:     str[i] = '\0';
 [e = *U + _str * -> _i `x -> -> # *U _str `i `x -> -> 0 `ui `uc ]
@@ -798,10 +803,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "108
 [; ;util.c.c: 108:     return str;
 [e ) _str ]
-[e $UE 298  ]
+[e $UE 299  ]
 "109
 [; ;util.c.c: 109: }
-[e :UE 298 ]
+[e :UE 299 ]
 }
 "113
 [; ;util.c.c: 113: char * reverse( char * s )
@@ -829,8 +834,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;util.c.c: 118:     for (i=0, j=length-1; i<j; i++, j--)
 {
 [e ; = _i -> 0 `i = _j - _length -> 1 `i ]
-[e $U 309  ]
-[e :U 306 ]
+[e $U 310  ]
+[e :U 307 ]
 "119
 [; ;util.c.c: 119:         {
 {
@@ -847,17 +852,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;util.c.c: 123:         }
 }
 [e ; ++ _i -> 1 `i -- _j -> 1 `i ]
-[e :U 309 ]
-[e $ < _i _j 306  ]
-[e :U 307 ]
+[e :U 310 ]
+[e $ < _i _j 307  ]
+[e :U 308 ]
 }
 "124
 [; ;util.c.c: 124:     return s;
 [e ) _s ]
-[e $UE 305  ]
+[e $UE 306  ]
 "125
 [; ;util.c.c: 125: }
-[e :UE 305 ]
+[e :UE 306 ]
 }
 "136
 [; ;util.c.c: 136: char *ultoa(unsigned long num, char *str, int radix) {
@@ -884,40 +889,40 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _str_loc -> 0 `i ]
 "145
 [; ;util.c.c: 145:     do {
-[e :U 313 ]
+[e :U 314 ]
 {
 "146
 [; ;util.c.c: 146:         digit = (unsigned long)num % radix;
 [e = _digit -> % _num -> -> _radix `l `ul `i ]
 "147
 [; ;util.c.c: 147:         if (digit < 10)
-[e $ ! < _digit -> 10 `i 314  ]
+[e $ ! < _digit -> 10 `i 315  ]
 "148
 [; ;util.c.c: 148:             temp[temp_loc++] = digit + '0';
 [e = *U + &U _temp * -> -> ++ _temp_loc -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + -> _digit `ui -> 48 `ui `uc ]
-[e $U 315  ]
+[e $U 316  ]
 "149
 [; ;util.c.c: 149:         else
-[e :U 314 ]
+[e :U 315 ]
 "150
 [; ;util.c.c: 150:             temp[temp_loc++] = digit - 10 + 'A';
 [e = *U + &U _temp * -> -> ++ _temp_loc -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + -> - _digit -> 10 `i `ui -> 65 `ui `uc ]
-[e :U 315 ]
+[e :U 316 ]
 "151
 [; ;util.c.c: 151:                         num = (unsigned long)num /radix;
 [e = _num / _num -> -> _radix `l `ul ]
 "152
 [; ;util.c.c: 152:     } while ((unsigned long)num > 0);
 }
-[e $ > _num -> -> -> 0 `i `l `ul 313  ]
-[e :U 312 ]
+[e $ > _num -> -> -> 0 `i `l `ul 314  ]
+[e :U 313 ]
 "154
 [; ;util.c.c: 154:     temp_loc--;
 [e -- _temp_loc -> 1 `i ]
 "158
 [; ;util.c.c: 158:     while ( temp_loc >=0 ) {
-[e $U 316  ]
-[e :U 317 ]
+[e $U 317  ]
+[e :U 318 ]
 {
 "159
 [; ;util.c.c: 159:         str[str_loc++] = temp[temp_loc--];
@@ -925,21 +930,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "160
 [; ;util.c.c: 160:     }
 }
-[e :U 316 ]
+[e :U 317 ]
 "158
 [; ;util.c.c: 158:     while ( temp_loc >=0 ) {
-[e $ >= _temp_loc -> 0 `i 317  ]
-[e :U 318 ]
+[e $ >= _temp_loc -> 0 `i 318  ]
+[e :U 319 ]
 "161
 [; ;util.c.c: 161:     str[str_loc] = 0;
 [e = *U + _str * -> _str_loc `x -> -> # *U _str `i `x -> -> 0 `i `uc ]
 "163
 [; ;util.c.c: 163:     return str;
 [e ) _str ]
-[e $UE 310  ]
+[e $UE 311  ]
 "164
 [; ;util.c.c: 164: }
-[e :UE 310 ]
+[e :UE 311 ]
 }
 "168
 [; ;util.c.c: 168: int my_pow(int rad, int exp){
@@ -954,15 +959,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _resposta `i ~T0 @X0 1 a ]
 "170
 [; ;util.c.c: 170:     if(exp==0)
-[e $ ! == _exp -> 0 `i 320  ]
+[e $ ! == _exp -> 0 `i 321  ]
 "171
 [; ;util.c.c: 171:        resposta=1;
 [e = _resposta -> 1 `i ]
-[e $U 321  ]
+[e $U 322  ]
 "172
 [; ;util.c.c: 172:     else if(exp==1)
-[e :U 320 ]
-[e $ ! == _exp -> 1 `i 322  ]
+[e :U 321 ]
+[e $ ! == _exp -> 1 `i 323  ]
 "173
 [; ;util.c.c: 173:            {
 {
@@ -972,10 +977,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "175
 [; ;util.c.c: 175:            }
 }
-[e $U 323  ]
+[e $U 324  ]
 "176
 [; ;util.c.c: 176:     else
-[e :U 322 ]
+[e :U 323 ]
 "177
 [; ;util.c.c: 177:        {
 {
@@ -987,8 +992,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $U 327  ]
-[e :U 324 ]
+[e $U 328  ]
+[e :U 325 ]
 "180
 [; ;util.c.c: 180:           {
 {
@@ -999,22 +1004,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;util.c.c: 182:           }
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e :U 327 ]
-[e $ < -> _i `i - _exp -> 1 `i 324  ]
-[e :U 325 ]
+[e :U 328 ]
+[e $ < -> _i `i - _exp -> 1 `i 325  ]
+[e :U 326 ]
 }
 "183
 [; ;util.c.c: 183:        }
 }
-[e :U 323 ]
-[e :U 321 ]
+[e :U 324 ]
+[e :U 322 ]
 "184
 [; ;util.c.c: 184:     return resposta;
 [e ) _resposta ]
-[e $UE 319  ]
+[e $UE 320  ]
 "185
 [; ;util.c.c: 185: }
-[e :UE 319 ]
+[e :UE 320 ]
 }
 [a 2C 32 0 ]
 [a 1C 0 ]

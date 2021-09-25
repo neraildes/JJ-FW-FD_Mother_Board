@@ -151,6 +151,7 @@ char senhavetor[4];
 
 
 int Condensador     ;       
+int CondensadorFluido ;
 int Vacuometro      ;
 int Voltimetro      ;
 
@@ -304,7 +305,6 @@ void main(void)
      }
      
      
-     //-------------------------------------------------------------------------
 
       
      //-------------------------------------------------------------------------
@@ -342,12 +342,13 @@ void main(void)
      Carregar_tempo_de_datalog(); //Intervalo de capturas
      add_datalog=EEPROM_24C1025_Read_Long (0,2); //Inicializa add_datalog
      
-     
      Tamanho_Display=EEPROM_Read_Integer(0xFA);
-     if(Tamanho_Display==80)
+     if(Tamanho_Display==50)
+        maxlineDATALOG=9;     
+     else if(Tamanho_Display==80)
         maxlineDATALOG=12;
-     else if(Tamanho_Display==50)
-             maxlineDATALOG=9;
+     else if(Tamanho_Display==81)
+        maxlineDATALOG=8; 
      
      //-------------------------------------------------------------------------
      my_delay_ms_CLRWDT(1000);
@@ -426,6 +427,7 @@ void main(void)
      Vacuometro=0;
      Voltimetro=0;
      Condensador=0;
+     CondensadorFluido=0;
      //-----------------------------
      /*Exibição e controle de mensagem para encerrar o processo. Esta variável
       permite que o programa rode enquanto é exibida a pergunta para encerrar
@@ -524,7 +526,8 @@ void main(void)
                 global_datalog(); // LEITURA DOS SENSORES                 
                 global_vacuo(); 
                 global_aquecimento();
-                global_condensador();                 
+                global_condensador();   
+                if(Tamanho_Display==81) global_refrigeracao_fluido();                    
                 //global_porta();
 
                 
@@ -1071,6 +1074,11 @@ void ShowSensorRealTimeHS(void)
                      
                      break; 
               case 3:
+                     if(Tamanho_Display==81)
+                       {  
+                       PROCULUS_VP_Write_UInt16(140,leitura[tupla]); //CondensadorFluido 
+                       CondensadorFluido=leitura[tupla];
+                       }
                      //sem sensor nesta tupla
                      break;
               default:
@@ -1189,13 +1197,30 @@ void DataBaseBackupMain(unsigned char tupla)
 void FAT8_Save(unsigned char tupla){
      unsigned long addEEPROM;
      
+     
      if(tupla>(maxlineDATALOG-1)) 
        {  
-       PROCULUS_Buzzer(1000);       
-       PROCULUS_VP_Write_UInt16(2,0);
-       PROCULUS_Popup(LISTA_DE_DATALOG_COMPLETA);
-       return;
-       }        
+       if((PROCULUS_VP_Read_UInt16(2)==1)&&(PROCULUS_Get_Page()!=0))
+         {
+         PROCULUS_Buzzer(1000);       
+         PROCULUS_VP_Write_UInt16(2,0);
+         PROCULUS_Popup(LISTA_DE_DATALOG_COMPLETA);
+         return;
+         }
+       }
+     else
+       {
+       if(PROCULUS_Get_Page()!=0) //Não está inicializando
+          { 
+          if(PROCULUS_VP_Read_UInt16(2)==1) //Está Ligando o Datalog 
+            {  
+            //PROCULUS_Popup(DATALOG_INICIALIZADO_SUCESSO);
+            //PROCULUS_VP_Write_String(1940,"Inicializando o Datalog...");
+            //1940 neera  
+            }
+          }
+       }
+     
 
      //vp         = 0x1000+(tupla*FAT8_VP_SIZE);
      addEEPROM  = (tupla*EEPROM_FAT8_SIZE)+OFFSET_EEPROM_FAT8;
@@ -1210,6 +1235,8 @@ void FAT8_Save(unsigned char tupla){
      EEPROM_24C1025_Write_Long(0,addEEPROM+47, fat8.processo.add_end);          //4
      EEPROM_24C1025_Write_Int (0,addEEPROM+51, fat8.processo.minutes);          //2
      EEPROM_24C1025_Write_Byte(0,addEEPROM+53, fat8.processo.all_flags);        //1
+     
+     //PROCULUS_VP_Write_String(1940,"");
 }
 
 
@@ -2334,7 +2361,41 @@ void global_aquecimento(void){
 }       
 
 
-
+void global_refrigeracao_fluido(void){
+     char bbb[3];
+     
+     if((PROCULUS_VP_Read_UInt16(62)==1)&&(flag_regrigeracao_fluido==0))
+       {  
+       if(testa_modo_conectado(4,0)==0) 
+         {  
+         PROCULUS_Popup(DISPLAY_BLOQUEADO);  
+         return; 
+         }  
+         
+         flag_regrigeracao_fluido=1;
+         bbb[0]=1; //Rele 1 da placa NTC
+         bbb[1]=1; //ESTADO LIGADO             
+         Send_To_Slave(0x03,COMMAND_RELAY,2,bbb);        
+       }
+     
+    
+     if((PROCULUS_VP_Read_UInt16(62)==0)&&(flag_regrigeracao_fluido==1))
+       {  
+       if(testa_modo_conectado(4,0)==0) 
+         {  
+         PROCULUS_Popup(DISPLAY_BLOQUEADO);  
+         return; 
+         }  
+                       
+         flag_regrigeracao_fluido=0;                      
+         char bbb[3];
+         bbb[0]=1; //Rele 1 da placa NTC
+         bbb[1]=0; //ESTADO LIGADO             
+         Send_To_Slave(0x03,COMMAND_RELAY,2,bbb);        
+        
+      }     
+ 
+}
 
 
 
@@ -2351,7 +2412,7 @@ unsigned char i;
      if(proculus.page==0x25) pagina_25();  // Editar e Salvar Data e Hora
      if(proculus.page==0x29) pagina_29();  // Captura de Datalog, alteração de valor   
      if(proculus.page==0x31) pagina_31();  // ALTERAR SENHA 
-     if(proculus.page==0x47) pagina_47();  // Lista de Receita
+    if(proculus.page==0x47) pagina_47();  // Lista de Receita
      if(proculus.page==0x49) pagina_49();  // Edicao de Receita  
      proculus.header=0;
      }//Header                  
@@ -3645,7 +3706,8 @@ void Carregar_Display_Schematic_Color(){
           }     
 }
 
-void Ligar_Cargas_Compassadamente(){
+
+void Ligar_Cargas_Compassadamente(){        
      int valor;
      PROCULUS_VP_Write_UInt16(0x02,0); //DATALOG
      PROCULUS_VP_Write_UInt16(0x03,0); //CONDENSADOR
@@ -3654,7 +3716,8 @@ void Ligar_Cargas_Compassadamente(){
      //PROCULUS_VP_Write_UInt16(0x13,0); //PORTA
      flag_time_process=FALSE;
      
-     statuspower.bits=EEPROM_Read_Byte(16); 
+     statuspower.bits=EEPROM_Read_Byte(16);      
+     
      if(statuspower.bits!=0)
           {   
           print("Cond. de blackout encontrada!");
@@ -3717,7 +3780,7 @@ void Ligar_Cargas_Compassadamente(){
           
           PROCULUS_Show_Screen(15);           
           }
-     memo_statuspower=statuspower.bits;     
+     memo_statuspower=statuspower.bits;      
 }
 
 

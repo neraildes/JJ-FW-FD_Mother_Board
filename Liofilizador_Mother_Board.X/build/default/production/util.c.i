@@ -425,7 +425,7 @@ typedef uint32_t uint_fast32_t;
 
 
 #pragma config EBTRB = OFF
-# 236 "./global.h"
+# 237 "./global.h"
 struct {
     unsigned flag_usart_rx : 1 ;
     unsigned flag_usart_error : 1 ;
@@ -436,7 +436,7 @@ struct {
     unsigned flag_capture_datalog : 1 ;
     unsigned flag_edit_temperatura: 1 ;
 } statusgen ;
-# 257 "./global.h"
+# 258 "./global.h"
 struct{
         unsigned flag_save_time :1;
         unsigned flag_wakeup :1;
@@ -447,14 +447,14 @@ struct{
         unsigned flag_recomunication :1;
         unsigned flag_pc_conected :1;
 }statusgen1;
-# 279 "./global.h"
+# 280 "./global.h"
 struct{
         unsigned flag_autoriza_click_datalog :1;
         unsigned flag_autoriza_click_condensador :1;
         unsigned flag_autoriza_click_vacuo :1;
         unsigned flag_autoriza_click_aquecimento :1;
 }statusgen2;
-# 298 "./global.h"
+# 299 "./global.h"
 union {
       unsigned char bits;
       struct {
@@ -465,10 +465,11 @@ union {
              unsigned flag_time_process : 1 ;
              unsigned flag_call_work : 1 ;
              unsigned flag_global_porta : 1 ;
+             unsigned flag_regrigeracao_fluido : 1 ;
 
              };
       } statuspower;
-# 324 "./global.h"
+# 327 "./global.h"
 struct{
         unsigned flag_main_loop_WDT :1;
 }statusWDT;
@@ -4942,7 +4943,7 @@ extern int Tamanho_Display;
 
         if(Tamanho_Display==50) MAXVP = 2270;
         if(Tamanho_Display==80) MAXVP = 2420;
-
+        if(Tamanho_Display==81) MAXVP = 2420;
 
         if(vpPrint<=MAXVP)
           {

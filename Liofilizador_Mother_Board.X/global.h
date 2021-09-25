@@ -217,6 +217,7 @@
 #define AGUARDE_30_SEGUNDOS             0x45
 #define DISPLAY_BLOQUEADO               0x46
 #define GRAFICO_SOMENTE_NO_PC           0x47
+#define DATALOG_INICIALIZADO_SUCESSO    0x48
 
 
 
@@ -298,13 +299,14 @@ struct{
 union {
       unsigned char bits;
       struct {
-             unsigned flag_global_datalog     : 1 ;
-             unsigned flag_global_aquecimento : 1 ;
-             unsigned flag_global_condensador : 1 ;
-             unsigned flag_global_vacuo       : 1 ;
-             unsigned flag_time_process       : 1 ;
-             unsigned flag_call_work          : 1 ;
-             unsigned flag_global_porta       : 1 ;
+             unsigned flag_global_datalog      : 1 ;
+             unsigned flag_global_aquecimento  : 1 ;
+             unsigned flag_global_condensador  : 1 ;
+             unsigned flag_global_vacuo        : 1 ;
+             unsigned flag_time_process        : 1 ;
+             unsigned flag_call_work           : 1 ;
+             unsigned flag_global_porta        : 1 ;
+             unsigned flag_regrigeracao_fluido : 1 ;
              
              };      
       } statuspower;    
@@ -316,7 +318,8 @@ union {
 #define flag_global_vacuo        statuspower.flag_global_vacuo
 #define flag_time_process        statuspower.flag_time_process        
 #define flag_call_work           statuspower.flag_call_work
-#define flag_global_porta        statuspower.flag_global_porta      
+#define flag_global_porta        statuspower.flag_global_porta  
+#define flag_regrigeracao_fluido statuspower.flag_regrigeracao_fluido
 
 //------------------------------------------------------------------------------
 

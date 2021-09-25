@@ -139,6 +139,7 @@ void global_condensador(void);  //Liga/Desliga condensador
 void global_vacuo(void);        //Liga/Desliga vacuo
 void global_aquecimento(void);  //Liga/Desliga aquecimento
 void global_porta(void);        //Liga/Desliga porta
+void global_refrigeracao_fluido(void);
 
 void Exibe_Hora_Data(char showseconds);     //Faz leitura de tempo do RTC do Display
 void Exibe_Tempo_de_Processo(void);

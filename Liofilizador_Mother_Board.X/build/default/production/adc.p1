@@ -1,30 +1,30 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"236 ./global.h
-[; ;./global.h: 236: struct {
+"237 ./global.h
+[; ;./global.h: 237: struct {
 [s S270 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S270 . flag_usart_rx flag_usart_error flag_power_off flag_led_tmr0 flag_led_usart flag_led_memory flag_capture_datalog flag_edit_temperatura ]
-"257
-[; ;./global.h: 257: struct{
+"258
+[; ;./global.h: 258: struct{
 [s S271 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S271 . flag_save_time flag_wakeup flagSendDataFix flag_proculus_hs flag_Vacuo_estava_ligado flag_generico flag_recomunication flag_pc_conected ]
-"279
-[; ;./global.h: 279: struct{
+"280
+[; ;./global.h: 280: struct{
 [s S272 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S272 . flag_autoriza_click_datalog flag_autoriza_click_condensador flag_autoriza_click_vacuo flag_autoriza_click_aquecimento ]
-"300
-[; ;./global.h: 300:       struct {
-[s S274 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S274 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work flag_global_porta ]
-"298
-[; ;./global.h: 298: union {
+"301
+[; ;./global.h: 301:       struct {
+[s S274 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S274 . flag_global_datalog flag_global_aquecimento flag_global_condensador flag_global_vacuo flag_time_process flag_call_work flag_global_porta flag_regrigeracao_fluido ]
+"299
+[; ;./global.h: 299: union {
 [u S273 `uc 1 `S274 1 ]
 [n S273 . bits . ]
-"324
-[; ;./global.h: 324: struct{
+"327
+[; ;./global.h: 327: struct{
 [s S275 :1 `uc 1 ]
 [n S275 . flag_main_loop_WDT ]
-"329
-[; ;./global.h: 329: typedef struct{
+"332
+[; ;./global.h: 332: typedef struct{
 [s S276 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S276 . milisegundo segundo minuto hora ]
 "4379 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
@@ -571,23 +571,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3  =  OFF       ]
 "72
 [p x EBTRB  =  OFF       ]
-"245
-[; ;./global.h: 245: } statusgen ;
+"246
+[; ;./global.h: 246: } statusgen ;
 [v _statusgen `S270 ~T0 @X0 1 e ]
-"266
-[; ;./global.h: 266: }statusgen1;
+"267
+[; ;./global.h: 267: }statusgen1;
 [v _statusgen1 `S271 ~T0 @X0 1 e ]
-"284
-[; ;./global.h: 284: }statusgen2;
+"285
+[; ;./global.h: 285: }statusgen2;
 [v _statusgen2 `S272 ~T0 @X0 1 e ]
-"310
-[; ;./global.h: 310:       } statuspower;
+"312
+[; ;./global.h: 312:       } statuspower;
 [v _statuspower `S273 ~T0 @X0 1 e ]
-"326
-[; ;./global.h: 326: }statusWDT;
+"329
+[; ;./global.h: 329: }statusWDT;
 [v _statusWDT `S275 ~T0 @X0 1 e ]
-"336
-[; ;./global.h: 336: volatile t_rtc rtc;
+"339
+[; ;./global.h: 339: volatile t_rtc rtc;
 [v _rtc `VS276 ~T0 @X0 1 e ]
 "6 adc.c
 [; ;adc.c: 6: void My_ADC_init(void){
