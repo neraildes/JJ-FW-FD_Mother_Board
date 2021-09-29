@@ -201,6 +201,7 @@ int TrendColor[13];
 T_mapa mapa;
 
 
+
 void main(void) 
 {
      
@@ -493,7 +494,7 @@ void main(void)
         PROCULUS_VP_Write_UInt16(1,0); //ACENDE ICONE TEIMOSO
         TRISDbits.TRISD5=0;//fix Apagar Debug
         PORTDbits.RD5=0;//FIX APAGAR
-        
+        flag_usart_error=0;
      
         while(1)
              {
@@ -531,6 +532,10 @@ void main(void)
                 global_condensador();   
                 if(Tamanho_Display==81) global_refrigeracao_fluido();                    
                 //global_porta();
+                
+                
+                //INDICA SE OCORREU TRAVAMENTO DO RX DAS PLACAS
+                if(flag_usart_error==TRUE) Delay_Led_Memory=200;                 
 
                 
                 
