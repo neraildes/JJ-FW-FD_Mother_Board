@@ -96,6 +96,7 @@ typedef struct {
 #define COMMAND_READ_PROCESS    0x49  //Lê o numero do processo e incrementa 1
 #define COMMAND_CHANGE_FLAG     0x4A  //Modifica o valor de uma flag
 //...
+#define COMMAND_FLUIDO_TERMICO  0x50  //Aquece fluido térmico com placa padrão NTC
 //----------------------------------
 
 

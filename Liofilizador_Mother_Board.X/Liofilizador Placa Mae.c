@@ -348,7 +348,9 @@ void main(void)
      else if(Tamanho_Display==80)
         maxlineDATALOG=12;
      else if(Tamanho_Display==81)
-        maxlineDATALOG=8; 
+            {
+            maxlineDATALOG=8; 
+            }
      
      //-------------------------------------------------------------------------
      my_delay_ms_CLRWDT(1000);
@@ -885,6 +887,7 @@ unsigned char countboard()
          for(char destino=0;destino<0x0F;destino++)
              {
              if(Send_To_Slave(destino, COMANDO_QUEM_EH_VOCE, 0, buffer)!=-1) retorno++;                 
+             my_delay_ms_CLRWDT(100);
              }
          return retorno;
          } 
@@ -2303,7 +2306,7 @@ void Global_Aquecimento_Switch(unsigned char estado){
      char buffer[2]; 
      unsigned char board;
      
-     Rele_Geral_Aquecimento(estado); //Controla o comum do aquecimento
+     //Rele_Geral_Aquecimento(estado); //Controla o comum do aquecimento
      
      for(board=3;board<(totalboard*2-1);board++)
         {
@@ -2362,7 +2365,8 @@ void global_aquecimento(void){
 
 
 void global_refrigeracao_fluido(void){
-     char bbb[3];
+     
+     char bbb[2];
      
      if((PROCULUS_VP_Read_UInt16(62)==1)&&(flag_regrigeracao_fluido==0))
        {  
@@ -2370,15 +2374,26 @@ void global_refrigeracao_fluido(void){
          {  
          PROCULUS_Popup(DISPLAY_BLOQUEADO);  
          return; 
-         }  
+         }      
          
          flag_regrigeracao_fluido=1;
-         bbb[0]=1; //Rele 1 da placa NTC
-         bbb[1]=1; //ESTADO LIGADO             
-         Send_To_Slave(0x03,COMMAND_RELAY,2,bbb);        
+         Rele_Geral_Aquecimento(1); //Controla a saida da estante
+         //bbb[0]=1;
+         //bbb[1]=1;
+         //Send_To_Slave(0x03,COMMAND_RELAY,2,bbb);
+         //Send_To_Slave(0x03,COMMAND_FLUIDO_TERMICO,1,bbb);
+         /*
+         bbb[0]=0x09; //ADD
+         bbb[1]=0x0A; //____T<ON>
+         Send_To_Slave(0x03,COMMAND_IEE_W_BYTE,2,bbb);                 
+                 
+         bbb[0]=0x0A; //ADD
+         bbb[1]=0x00; //____T<OFF>
+         Send_To_Slave(0x03,COMMAND_IEE_W_BYTE,2,bbb); 
+         */                             
        }
      
-    
+     
      if((PROCULUS_VP_Read_UInt16(62)==0)&&(flag_regrigeracao_fluido==1))
        {  
        if(testa_modo_conectado(4,0)==0) 
@@ -2387,14 +2402,26 @@ void global_refrigeracao_fluido(void){
          return; 
          }  
                        
-         flag_regrigeracao_fluido=0;                      
-         char bbb[3];
-         bbb[0]=1; //Rele 1 da placa NTC
-         bbb[1]=0; //ESTADO LIGADO             
-         Send_To_Slave(0x03,COMMAND_RELAY,2,bbb);        
-        
-      }     
- 
+         flag_regrigeracao_fluido=0;    
+         Rele_Geral_Aquecimento(0); //Controla a saida da estante
+         
+         //bbb[0]=1;
+         //bbb[1]=0;
+         //Send_To_Slave(0x03,COMMAND_RELAY,2,bbb);         
+         
+         
+         //bbb[0]=0;
+         //Send_To_Slave(0x03,COMMAND_FLUIDO_TERMICO,1,bbb);         
+         /*
+         bbb[0]=0x09; //ADD
+         bbb[1]=0x00; //____T<ON>
+         Send_To_Slave(0x03,COMMAND_IEE_W_BYTE,2,bbb);                 
+                 
+         bbb[0]=0x0A; //ADD
+         bbb[1]=0x0A; //____T<OFF>
+         Send_To_Slave(0x03,COMMAND_IEE_W_BYTE,2,bbb);                                       
+         */
+      }  
 }
 
 
@@ -3543,8 +3570,8 @@ void showTotalReset(void){
 void ShowHardwareInfo(){
      char i;
      char destino; 
-     char tipo;
-     int  resposta;
+     volatile char tipo;
+     volatile int  resposta;
      char versao[10];
      flag_proculus_hs=FALSE;
      
@@ -3708,15 +3735,17 @@ void Carregar_Display_Schematic_Color(){
 
 
 void Ligar_Cargas_Compassadamente(){        
-     int valor;
+     int valor;    
+     
      PROCULUS_VP_Write_UInt16(0x02,0); //DATALOG
      PROCULUS_VP_Write_UInt16(0x03,0); //CONDENSADOR
      PROCULUS_VP_Write_UInt16(0x04,0); //VACUO
      PROCULUS_VP_Write_UInt16(0x05,0); //AQUECIMENTO
      //PROCULUS_VP_Write_UInt16(0x13,0); //PORTA
      flag_time_process=FALSE;
-     
+
      statuspower.bits=EEPROM_Read_Byte(16);      
+     
      
      if(statuspower.bits!=0)
           {   
@@ -3755,7 +3784,7 @@ void Ligar_Cargas_Compassadamente(){
             //my_delay_ms_CLRWDT(10000);
             }
           
-          /*
+          
           if(flag_global_porta==1)
             {   
             flag_global_porta=0;
@@ -3764,7 +3793,7 @@ void Ligar_Cargas_Compassadamente(){
             global_porta();
             my_delay_ms_CLRWDT(10000);
             }            
-          */
+          
           
           if(flag_global_aquecimento==1)
             {   
@@ -3781,6 +3810,7 @@ void Ligar_Cargas_Compassadamente(){
           PROCULUS_Show_Screen(15);           
           }
      memo_statuspower=statuspower.bits;      
+     
 }
 
 
@@ -4162,6 +4192,7 @@ void Rele_Geral_Aquecimento(char status){
     //-------------------------------------------------------------------------
     //  Controla a ligação comum do aquecimento evitando que o usuário tome 
     //  choque quando for limpar a máquina.
+    //  Este comando é aplicado à placa 2
     //-------------------------------------------------------------------------
      char bbb[3]; 
      bbb[0]=1; //Rele 1 da placa PT100
