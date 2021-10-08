@@ -1093,28 +1093,29 @@ void ShowSensorRealTimeHS(void)
                        
                      //sem sensor nesta tupla
                      break;
-              case 6:       
-                     if(Tamanho_Display==81)
-                       {
-                       PROCULUS_VP_Write_UInt16(140,leitura[tupla]); ////Condensador         
                      
-                       //--------------------*NERA-TEMPORARIO---------------------
-                       //Condensador1=leitura[tupla];                     
-                       if(leitura[tupla]!=-1) 
-                         { 
-                         Condensador1=leitura[tupla];
-                         }
-                       }
               default:
-                  canal=tupla-4;
-                  vp    = 230+(canal*TUPLA_VP_SIZE);
-                  vpicone     = 400+canal;
-                  PROCULUS_VP_Write_UInt16(vp+1,leitura[canal+4]);     
-                  
-                  if(leitura[canal+4]<-400)PROCULUS_VP_Write_UInt16(vpicone,1); //sem sensor
-                  else if(leitura[canal+4]==-1)PROCULUS_VP_Write_UInt16(vpicone,0); //sem placa                 
-                  else PROCULUS_VP_Write_UInt16(vpicone,3); //Temperatura normal                  
-                  
+                  if((Tamanho_Display==81)&&(tupla==6))
+                     {
+                     PROCULUS_VP_Write_UInt16(140,leitura[tupla]); ////Condensador         
+                     //--------------------*NERA-TEMPORARIO---------------------
+                     //Condensador1=leitura[tupla];                     
+                     if(leitura[tupla]!=-1) 
+                       { 
+                       Condensador1=leitura[tupla];
+                       }                     
+                     }
+                  else
+                     {
+                     canal=tupla-4;
+                     vp    = 230+(canal*TUPLA_VP_SIZE);
+                     vpicone     = 400+canal;
+                     PROCULUS_VP_Write_UInt16(vp+1,leitura[canal+4]);     
+ 
+                     if(leitura[canal+4]<-400)PROCULUS_VP_Write_UInt16(vpicone,1); //sem sensor
+                     else if(leitura[canal+4]==-1)PROCULUS_VP_Write_UInt16(vpicone,0); //sem placa                 
+                     else PROCULUS_VP_Write_UInt16(vpicone,3); //Temperatura normal                                        
+                      }                  
                   break;
               }  
         }
@@ -2344,7 +2345,7 @@ void Global_Aquecimento_Switch(unsigned char estado){
      char buffer[2]; 
      unsigned char board;
      
-     //Rele_Geral_Aquecimento(estado); //Controla o comum do aquecimento
+     Rele_Geral_Aquecimento(estado); //Controla o comum do aquecimento
      
      for(board=3;board<(totalboard*2-1);board++)
         {
