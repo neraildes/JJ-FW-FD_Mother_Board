@@ -4823,6 +4823,8 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 
 void Buffer_Manager(void);
 
+unsigned char DelayBackupReturn(unsigned int vp, unsigned int *tempo, char texto[20]);
+
 
 unsigned int Captura_Pagina(void);
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd);
@@ -4863,7 +4865,8 @@ void ouve_comunicacao(void);
 void Grava_Info_Aquecimento(char tupla);
 char testa_modo_conectado(unsigned int add, char estado);
 void Monitoramento_de_Botoes();
-void Rele_Geral_Aquecimento(char status);
+void Rele_Comum_Aquecimento(char status);
+void gravarStatusDosBotoes();
 # 6 "isr.c" 2
 
 

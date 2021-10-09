@@ -133,7 +133,7 @@ unsigned int timerDatalog=0;
 unsigned int timerCondensador=0;
 unsigned int timerVacuo=0;
 unsigned int timerAquecimento=0;
-unsigned int timerFluido=0;
+unsigned int timerEstante=0;
 
 //------------------------------------------------------------------------------
 
@@ -285,6 +285,16 @@ void main(void)
      flag_led_memory=0; 
      
     //--------------------------------------------------------------------------
+     Tamanho_Display=EEPROM_Read_Integer(0xFA);
+     if(Tamanho_Display==50)
+        maxlineDATALOG=9;     
+     else if(Tamanho_Display==80)
+        maxlineDATALOG=12;
+     else if(Tamanho_Display==81)
+            {
+            maxlineDATALOG=8; 
+            }
+     
      
      {
      //-----------TOTALIZADOR DE RESET-------------         
@@ -339,15 +349,7 @@ void main(void)
      Carregar_tempo_de_datalog(); //Intervalo de capturas
      add_datalog=EEPROM_24C1025_Read_Long (0,2); //Inicializa add_datalog
      
-     Tamanho_Display=EEPROM_Read_Integer(0xFA);
-     if(Tamanho_Display==50)
-        maxlineDATALOG=9;     
-     else if(Tamanho_Display==80)
-        maxlineDATALOG=12;
-     else if(Tamanho_Display==81)
-            {
-            maxlineDATALOG=8; 
-            }
+
      
      //-------------------------------------------------------------------------
      my_delay_ms_CLRWDT(1000);
@@ -455,6 +457,8 @@ void main(void)
      processo_segundo=0;
      memo_statuspower=statuspower.bits;
      delay_condensador=0;
+     
+     //PROCULUS_VP_Write_UInt16(62,1);
      
      
      //=========================================================================
@@ -574,13 +578,8 @@ void main(void)
                 
                 flag_proculus_hs=TRUE;
                 
-                if(memo_statuspower!=statuspower.bits) 
-                  { 
-                  //PROCULUS_OK();
-                  EEPROM_Write_Byte(16,statuspower.bits);  //Todos os Status  
-                  memo_statuspower=statuspower.bits;
-                  }        
                 
+                gravarStatusDosBotoes();                
 
                 /*--------------------------------------------------------------
                  * Esta função não pode ser utilizada porque ela restarta o
@@ -2220,29 +2219,13 @@ void global_condensador(void){
               PROCULUS_Popup(DISPLAY_BLOQUEADO);  
               return;
               }
-            if(delay_condensador==0)
+            
+            if(!DelayBackupReturn(0x03, &timerCondensador,"Acionando Condensador! Aguarde...")) return;
+            
+            if(delay_condensador==0) //Aguarda os 30 segundos para ativar condensador
                {
                flag_global_condensador=1; 
-               Condensador_Switch(ON);      
-               
-               if(timerCondensador)
-                    {    
-                    PROCULUS_VP_Write_String(1940,"Condensador acionado. Aguardando estabilizacao...");              
-                    while(timerCondensador)
-                         {                       
-                         my_delay_ms_CLRWDT(1);
-                         timerCondensador--;
-                         if(PROCULUS_VP_Read_UInt16(0x03)!=1)
-                           {  
-                           PROCULUS_VP_Write_UInt16(0x03,0);
-                           Condensador_Switch(OFF);                        
-                           PROCULUS_Buzzer(1000);
-                           timerCondensador=0;
-                           break;
-                           }
-                         }
-                      PROCULUS_VP_Write_String(1940,"");   
-                    }                                 
+               Condensador_Switch(ON);              
                }
             else
                {
@@ -2251,6 +2234,7 @@ void global_condensador(void){
                PROCULUS_VP_Write_UInt16(0x03,0); 
                } 
             }
+        else
         if((PROCULUS_VP_Read_UInt16(0x03)==0)&&(flag_global_condensador==1))
            {
            if(testa_modo_conectado(3,1)==0) 
@@ -2262,7 +2246,17 @@ void global_condensador(void){
            Condensador_Switch(OFF);
            timerCondensador=0;
            delay_condensador=30; //Intervalo para conseguir religar o condensador
-           }       
+           }    
+        else
+        if((PROCULUS_VP_Read_UInt16(0x03)==1)&&(flag_global_condensador==1))        
+           {
+           //Não exite dependência a ser checada 
+           }
+        else
+        if((PROCULUS_VP_Read_UInt16(0x03)==0)&&(flag_global_condensador==0))            
+           {
+           timerCondensador=0; 
+           }
 }
 
 
@@ -2279,33 +2273,12 @@ void global_vacuo(void){
              return; 
              }
                
-           //if(flag_global_vacuo==0) PROCULUS_OK(); 
-     
-           
-           flag_global_vacuo=1; 
            if(Condensador<Seg_Condensador)
-              { 
+              {               
+              if(!DelayBackupReturn(0x04, &timerVacuo,"Acionando Vacuo! Aguarde...")) return;
+              flag_global_vacuo=1;
               Vaccum_Switch(TRUE);              
               Contagem_Tempo_de_Processo(TRUE);               
-              
-              if(timerVacuo)
-                {  
-                PROCULUS_VP_Write_String(1940,"Vacuo acionado. Aguardando estabilizacao...");              
-                while(timerVacuo)
-                     {                       
-                     my_delay_ms_CLRWDT(1);
-                     timerVacuo--;
-                     if(PROCULUS_VP_Read_UInt16(0x04)!=1)
-                       {  
-                       PROCULUS_VP_Write_UInt16(0x04,0);
-                       Vaccum_Switch(FALSE);
-                       PROCULUS_Buzzer(1000);
-                       timerVacuo=0;
-                       break;
-                       }
-                     }
-                  PROCULUS_VP_Write_String(1940,"");
-                }
               }
            else
               { 
@@ -2330,6 +2303,7 @@ void global_vacuo(void){
                 {
                 if(Condensador<Seg_Condensador)
                    { 
+                   //if(!DelayBackupReturn(0x04, &timerVacuo,"Acionando Vacuo! Aguarde...")) return;
                    flag_Vacuo_estava_ligado=1; 
                    Vaccum_Switch(TRUE);                     
                    }
@@ -2339,6 +2313,10 @@ void global_vacuo(void){
                    Incrementa_Contador_de_Repique_do_Vacuo();
                    }            
                 }
+        else if((PROCULUS_VP_Read_UInt16(0x04)==0)&&(flag_global_vacuo==0))
+                {
+                timerVacuo=0; 
+                }
 }        
 
 
@@ -2346,7 +2324,8 @@ void Global_Aquecimento_Switch(unsigned char estado){
      char buffer[2]; 
      unsigned char board;
      
-     Rele_Geral_Aquecimento(estado); //Controla o comum do aquecimento
+     if(Tamanho_Display!=81)     
+         Rele_Comum_Aquecimento(estado); //Controla o comum do aquecimento
      
      for(board=3;board<(totalboard*2-1);board++)
         {
@@ -2366,70 +2345,55 @@ void global_aquecimento(void){
         
         
         if((PROCULUS_VP_Read_UInt16(5)==1)&&(flag_global_aquecimento==0))
-           {             
+           {              
            if((Condensador<Seg_Aq_cond)&&(Vacuometro<Seg_Aq_vacuo)) 
               { 
-              flag_global_aquecimento=1; 
+              if(!DelayBackupReturn(0x05, &timerAquecimento,"Acionando Aquecimento! Aguarde...")) return;               
+              flag_global_aquecimento=1;
               Global_Aquecimento_Switch(ON); 
-              if((Tamanho_Display==80)||(Tamanho_Display==50))
-                  Rele_Geral_Aquecimento(TRUE);
-              
-              if(timerAquecimento)
-                {
-                PROCULUS_VP_Write_String(1940,"Aquecimento acionado. Aguardando estabilizacao...");              
-                while(timerAquecimento)
-                     {                       
-                     my_delay_ms_CLRWDT(1);
-                     timerAquecimento--;
-                     if(PROCULUS_VP_Read_UInt16(0x05)!=1)
-                       {  
-                       PROCULUS_VP_Write_UInt16(0x05,0);
-                       Global_Aquecimento_Switch(OFF); 
-                       if((Tamanho_Display==80)||(Tamanho_Display==50))
-                           Rele_Geral_Aquecimento(FALSE);
-                       PROCULUS_Buzzer(1000);
-                       timerAquecimento=0;
-                       break;
-                       }
-                     }
-                PROCULUS_VP_Write_String(1940,""); 
-                }                            
-            }
+              //if((Tamanho_Display==80)||(Tamanho_Display==50))
+              //    Rele_Comum_Aquecimento(TRUE);
+              }
            else
               {
               flag_global_aquecimento=0; 
               Global_Aquecimento_Switch(OFF); 
-              if((Tamanho_Display==80)||(Tamanho_Display==50))
-                  Rele_Geral_Aquecimento(FALSE);
+              //if((Tamanho_Display==80)||(Tamanho_Display==50))
+              //    Rele_Comum_Aquecimento(FALSE);
               timerAquecimento=0;
               } 
            }    
            
-
+        else
         if((PROCULUS_VP_Read_UInt16(5)==0)&&(flag_global_aquecimento==1))
            {           
            flag_global_aquecimento=0; 
            Global_Aquecimento_Switch(OFF); 
-           if((Tamanho_Display==80)||(Tamanho_Display==50))
-               Rele_Geral_Aquecimento(FALSE);            
+           //if((Tamanho_Display==80)||(Tamanho_Display==50))
+           //    Rele_Comum_Aquecimento(FALSE);            
            }    
-        
+        else
         if((PROCULUS_VP_Read_UInt16(5)==1)&&(flag_global_aquecimento==1))
            {           
            if((Condensador<Seg_Aq_cond)&&(Vacuometro<Seg_Aq_vacuo)) 
-              {               
+              {                
+              //if(!DelayBackupReturn(0x05, &timerAquecimento,"Acionando Aquecimento! Aguarde...")) return;
               Global_Aquecimento_Switch(ON); 
-              if((Tamanho_Display==80)||(Tamanho_Display==50))
-                  Rele_Geral_Aquecimento(TRUE);
+              //if((Tamanho_Display==80)||(Tamanho_Display==50))
+              //    Rele_Comum_Aquecimento(TRUE);
               }
            else
               {             
               Global_Aquecimento_Switch(OFF); 
-              if((Tamanho_Display==80)||(Tamanho_Display==50))
-                  Rele_Geral_Aquecimento(FALSE);
+              //if((Tamanho_Display==80)||(Tamanho_Display==50))
+              //    Rele_Comum_Aquecimento(FALSE);
               } 
-           }      
-        
+           } 
+        else
+        if((PROCULUS_VP_Read_UInt16(5)==0)&&(flag_global_aquecimento==0))
+           {         
+           timerAquecimento=0; 
+           }
 }       
 
 
@@ -2437,22 +2401,18 @@ void global_refrigeracao_fluido(void){
      
      char bbb[2];
      
-     //if(timerFluido)
-     //  {  
-     //  my_delay_ms_CLRWDT(timerFluido);  
-     //  timerFluido=0;
-     //  }
-     
      if((PROCULUS_VP_Read_UInt16(62)==1)&&(flag_regrigeracao_fluido==0))
        {  
        if(testa_modo_conectado(4,0)==0) 
          {  
          PROCULUS_Popup(DISPLAY_BLOQUEADO);  
          return; 
-         }      
+         }     
          
+         if(!DelayBackupReturn(62, &timerEstante,"Acionando Estante! Aguarde...")) return;
          flag_regrigeracao_fluido=1;
-         Rele_Geral_Aquecimento(1); //Controla a saida da estante
+         
+         Rele_Comum_Aquecimento(1); //Controla a saida da estante
          //bbb[0]=1;
          //bbb[1]=1;
          //Send_To_Slave(0x03,COMMAND_RELAY,2,bbb);
@@ -2478,7 +2438,7 @@ void global_refrigeracao_fluido(void){
          }  
                        
          flag_regrigeracao_fluido=0;    
-         Rele_Geral_Aquecimento(0); //Controla a saida da estante
+         Rele_Comum_Aquecimento(0); //Controla a saida da estante
          
          //bbb[0]=1;
          //bbb[1]=0;
@@ -3072,13 +3032,22 @@ void RecallBlackoutStatus(void){
      if(flag_global_condensador) PROCULUS_VP_Write_UInt16(3,1);
      if(flag_global_vacuo) PROCULUS_VP_Write_UInt16(4,1);
      if(flag_global_aquecimento) PROCULUS_VP_Write_UInt16(5,1);
+     
+     if(Tamanho_Display==81)
+       {    
+       if(flag_regrigeracao_fluido) PROCULUS_VP_Write_UInt16(62,1);  
+       flag_regrigeracao_fluido=0;
+       }
+     
      //if(flag_global_porta) PROCULUS_VP_Write_UInt16(19,1);
      //flag_time_process = autometico ao carregar;
      
      flag_global_datalog=0;     
      flag_global_condensador=0;
      flag_global_vacuo=0; 
-     flag_global_aquecimento=0;    
+     flag_global_aquecimento=0;  
+     
+     
      //flag_global_porta=0;
 }
 
@@ -3810,7 +3779,8 @@ void Carregar_Display_Schematic_Color(){
 }
 
 
-void Ligar_Cargas_Compassadamente(){        
+void Ligar_Cargas_Compassadamente(){    
+     #define TIMEBLACKOUT 100
      int valor;    
      
      PROCULUS_VP_Write_UInt16(0x02,0); //DATALOG
@@ -3843,10 +3813,10 @@ void Ligar_Cargas_Compassadamente(){
             flag_regrigeracao_fluido=0;
             print("2-Refrigeracao do fluido sera Ativada.");
             PROCULUS_VP_Write_UInt16(0x13,1);//Porta 
-            timerFluido=200;
+            timerEstante=TIMEBLACKOUT;
             }
           else
-            timerFluido=0;
+            timerEstante=0;
           
 
           
@@ -3855,7 +3825,7 @@ void Ligar_Cargas_Compassadamente(){
             flag_global_condensador=0;
             print("2-Condensador Sera Ativado.");
             PROCULUS_VP_Write_UInt16(0x03,1);  //Condensador
-            timerCondensador=200;
+            timerCondensador=TIMEBLACKOUT;
             }
           else
             timerCondensador=0;
@@ -3867,7 +3837,7 @@ void Ligar_Cargas_Compassadamente(){
             flag_time_process=TRUE;
             print("3-Bomba de Vacuo sera ativada.");
             PROCULUS_VP_Write_UInt16(0x04,1);  //Vacuo
-            timerVacuo=200;
+            timerVacuo=TIMEBLACKOUT;
             }
           else
             timerVacuo=0;
@@ -3877,16 +3847,14 @@ void Ligar_Cargas_Compassadamente(){
             flag_global_aquecimento=0;
             print("4-Aquecimento sera Ativado.");
             PROCULUS_VP_Write_UInt16(0x05,1);//Aquecimento 
-            timerAquecimento=200;
+            timerAquecimento=TIMEBLACKOUT;
             }
           else
+            {  
             timerAquecimento=0;  
+            }
           
-          
-          
-
-          
-          my_delay_ms_CLRWDT(5000);
+          my_delay_ms_CLRWDT(3500);
                      
           }
      //memo_statuspower=statuspower.bits;      
@@ -4268,7 +4236,7 @@ char testa_modo_conectado(unsigned int add, char estado){
 
 
 
-void Rele_Geral_Aquecimento(char status){
+void Rele_Comum_Aquecimento(char status){
     //-------------------------------------------------------------------------
     //  Controla a ligação comum do aquecimento evitando que o usuário tome 
     //  choque quando for limpar a máquina.
@@ -4278,4 +4246,58 @@ void Rele_Geral_Aquecimento(char status){
      bbb[0]=1; //Rele 1 da placa PT100
      bbb[1]=status; //ESTADO LIGADO             
      Send_To_Slave(0x02,COMMAND_RELAY,2,bbb);    
+}
+
+
+//void retornoDeBackup(uint16_t vp, uint16_t *tempo, char texto[30])
+unsigned char DelayBackupReturn(unsigned int vp, unsigned int *tempo, char texto[20])
+{       
+    uint8_t retorno=TRUE;
+    
+    if(*tempo)
+      {
+      PROCULUS_VP_Write_String(1940,texto);
+      while(*tempo)
+           {
+           (*tempo)--;
+           Icones_de_alarmes();           
+           my_delay_ms_CLRWDT(1);
+           if(PROCULUS_VP_Read_UInt16(vp)!=1)
+             {  
+             PROCULUS_VP_Write_UInt16(vp,0);  
+             (*tempo)=0;
+             retorno=FALSE;
+             switch(vp)  
+                {     
+                 case 0x03: Condensador_Switch(OFF); break;  //Condensador
+                 case 0x04:      Vaccum_Switch(OFF); break;  //Vacuo
+                 case 0x05:                                  //Aquecimento
+                            Global_Aquecimento_Switch(OFF); 
+                            //if((Tamanho_Display==80)||(Tamanho_Display==50))
+                            //Rele_Comum_Aquecimento(FALSE);                     
+                            break;
+                } 
+             }  
+           else
+           if(PROCULUS_VP_Read_UInt16(vp)==0)
+             {
+             retorno = FALSE;
+             (*tempo)=0;
+             break;
+             }  
+           }       
+      PROCULUS_VP_Write_String(1940,"");
+     }
+    
+    return retorno;      
+}
+
+
+void gravarStatusDosBotoes()
+{
+if(memo_statuspower!=statuspower.bits) 
+  {                  
+  EEPROM_Write_Byte(16,statuspower.bits);  //Todos os Status  
+  memo_statuspower=statuspower.bits;
+  }        
 }
