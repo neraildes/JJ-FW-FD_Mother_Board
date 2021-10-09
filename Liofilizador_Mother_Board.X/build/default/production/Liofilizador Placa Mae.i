@@ -7684,13 +7684,25 @@ void global_condensador(void){
                {
                statuspower.flag_global_condensador=1;
                Condensador_Switch(1);
-               if(timerCondensador>0)
-                 {
-                 PROCULUS_VP_Write_String(1940,"Condensador Ligado. Aguardando estabilizacao...");
-                 my_delay_ms_CLRWDT(timerCondensador);
-                 timerCondensador=0;
-                 PROCULUS_VP_Write_String(1940,"");
-                 }
+
+               if(timerCondensador)
+                    {
+                    PROCULUS_VP_Write_String(1940,"Condensador acionado. Aguardando estabilizacao...");
+                    while(timerCondensador)
+                         {
+                         my_delay_ms_CLRWDT(1);
+                         timerCondensador--;
+                         if(PROCULUS_VP_Read_UInt16(0x03)!=1)
+                           {
+                           PROCULUS_VP_Write_UInt16(0x03,0);
+                           Condensador_Switch(0);
+                           PROCULUS_Buzzer(1000);
+                           timerCondensador=0;
+                           break;
+                           }
+                         }
+                      PROCULUS_VP_Write_String(1940,"");
+                    }
                }
             else
                {
@@ -7708,6 +7720,7 @@ void global_condensador(void){
               }
            statuspower.flag_global_condensador=0;
            Condensador_Switch(0);
+           timerCondensador=0;
            delay_condensador=30;
            }
 }
@@ -7734,13 +7747,25 @@ void global_vacuo(void){
               {
               Vaccum_Switch(1);
               Contagem_Tempo_de_Processo(1);
-              if(timerVacuo>0)
-                 {
-                 PROCULUS_VP_Write_String(1940,"Vacuo Ligado. Aguardando estabilizacao...");
-                 my_delay_ms_CLRWDT(timerVacuo);
-                 timerVacuo=0;
-                 PROCULUS_VP_Write_String(1940,"");
-                 }
+
+              if(timerVacuo)
+                {
+                PROCULUS_VP_Write_String(1940,"Vacuo acionado. Aguardando estabilizacao...");
+                while(timerVacuo)
+                     {
+                     my_delay_ms_CLRWDT(1);
+                     timerVacuo--;
+                     if(PROCULUS_VP_Read_UInt16(0x04)!=1)
+                       {
+                       PROCULUS_VP_Write_UInt16(0x04,0);
+                       Vaccum_Switch(0);
+                       PROCULUS_Buzzer(1000);
+                       timerVacuo=0;
+                       break;
+                       }
+                     }
+                  PROCULUS_VP_Write_String(1940,"");
+                }
               }
            else
               {
@@ -7757,6 +7782,7 @@ void global_vacuo(void){
                   }
                 statuspower.flag_global_vacuo=0;
                 Vaccum_Switch(0);
+                timerVacuo=0;
                 PROCULUS_VP_Write_UInt16(6,0);
                 MSG_Deseja_Encerrar_Processo=1;
                 }
@@ -7798,13 +7824,6 @@ void global_aquecimento(void){
           return;
           }
 
-       if(timerAquecimento>0)
-         {
-         PROCULUS_VP_Write_String(1940,"Aquecimento Ligado. Aguardando estabilizacao...");
-         my_delay_ms_CLRWDT(timerAquecimento);
-         timerAquecimento=0;
-         PROCULUS_VP_Write_String(1940,"");
-         }
 
         if((PROCULUS_VP_Read_UInt16(5)==1)&&(statuspower.flag_global_aquecimento==0))
            {
@@ -7814,13 +7833,35 @@ void global_aquecimento(void){
               Global_Aquecimento_Switch(1);
               if((Tamanho_Display==80)||(Tamanho_Display==50))
                   Rele_Geral_Aquecimento(1);
-              }
+
+              if(timerAquecimento)
+                {
+                PROCULUS_VP_Write_String(1940,"Aquecimento acionado. Aguardando estabilizacao...");
+                while(timerAquecimento)
+                     {
+                     my_delay_ms_CLRWDT(1);
+                     timerAquecimento--;
+                     if(PROCULUS_VP_Read_UInt16(0x05)!=1)
+                       {
+                       PROCULUS_VP_Write_UInt16(0x05,0);
+                       Global_Aquecimento_Switch(0);
+                       if((Tamanho_Display==80)||(Tamanho_Display==50))
+                           Rele_Geral_Aquecimento(0);
+                       PROCULUS_Buzzer(1000);
+                       timerAquecimento=0;
+                       break;
+                       }
+                     }
+                PROCULUS_VP_Write_String(1940,"");
+                }
+            }
            else
               {
               statuspower.flag_global_aquecimento=0;
               Global_Aquecimento_Switch(0);
               if((Tamanho_Display==80)||(Tamanho_Display==50))
                   Rele_Geral_Aquecimento(0);
+              timerAquecimento=0;
               }
            }
 
@@ -7872,7 +7913,7 @@ void global_refrigeracao_fluido(void){
 
          statuspower.flag_regrigeracao_fluido=1;
          Rele_Geral_Aquecimento(1);
-# 2428 "Liofilizador Placa Mae.c"
+# 2469 "Liofilizador Placa Mae.c"
        }
 
 
@@ -7886,7 +7927,7 @@ void global_refrigeracao_fluido(void){
 
          statuspower.flag_regrigeracao_fluido=0;
          Rele_Geral_Aquecimento(0);
-# 2458 "Liofilizador Placa Mae.c"
+# 2499 "Liofilizador Placa Mae.c"
       }
 }
 
@@ -8110,7 +8151,7 @@ void pagina_19(void)
 
 
                 flag_upLoadTambem=1;
-# 2689 "Liofilizador Placa Mae.c"
+# 2730 "Liofilizador Placa Mae.c"
             }
          else
             {
@@ -8205,7 +8246,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2791 "Liofilizador Placa Mae.c"
+# 2832 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -8360,7 +8401,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2953 "Liofilizador Placa Mae.c"
+# 2994 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
@@ -8677,7 +8718,7 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 
      PROCULUS_graphic_plot(LCDchannel, value);
 }
-# 3298 "Liofilizador Placa Mae.c"
+# 3339 "Liofilizador Placa Mae.c"
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd)
      {
      char txt[30];
@@ -9185,7 +9226,7 @@ void Ligar_Cargas_Compassadamente(){
             statuspower.flag_regrigeracao_fluido=0;
             print("2-Refrigeracao do fluido sera Ativada.");
             PROCULUS_VP_Write_UInt16(0x13,1);
-            timerFluido=10000;
+            timerFluido=200;
             }
           else
             timerFluido=0;
@@ -9197,7 +9238,7 @@ void Ligar_Cargas_Compassadamente(){
             statuspower.flag_global_condensador=0;
             print("2-Condensador Sera Ativado.");
             PROCULUS_VP_Write_UInt16(0x03,1);
-            timerCondensador=10000;
+            timerCondensador=200;
             }
           else
             timerCondensador=0;
@@ -9209,7 +9250,7 @@ void Ligar_Cargas_Compassadamente(){
             statuspower.flag_time_process=1;
             print("3-Bomba de Vacuo sera ativada.");
             PROCULUS_VP_Write_UInt16(0x04,1);
-            timerVacuo=10000;
+            timerVacuo=200;
             }
           else
             timerVacuo=0;
@@ -9219,7 +9260,7 @@ void Ligar_Cargas_Compassadamente(){
             statuspower.flag_global_aquecimento=0;
             print("4-Aquecimento sera Ativado.");
             PROCULUS_VP_Write_UInt16(0x05,1);
-            timerAquecimento=10000;
+            timerAquecimento=200;
             }
           else
             timerAquecimento=0;
@@ -9403,7 +9444,7 @@ void FAT8_Write_Process_Finalize(){
       strcpy(fat8.processo.fim.time,time);
       fat8.processo.minutes=processo_totalminuto;
       }
-# 4031 "Liofilizador Placa Mae.c"
+# 4072 "Liofilizador Placa Mae.c"
     fat8.processo.add_end=add_datalog;
 
     fat8.processo.flag_running=0;
