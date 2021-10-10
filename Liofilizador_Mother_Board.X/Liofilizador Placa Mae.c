@@ -1093,9 +1093,10 @@ void ShowSensorRealTimeHS(void)
                      Vacuometro=leitura[tupla];
                      break;  
               case 2:
-                     if((leitura[tupla]>=10)&&(leitura[tupla<=2000]))
-                       {                         
-                       PROCULUS_VP_Write_UInt16(150,leitura[tupla]); //Condensador  
+                     if((leitura[tupla]>=10)&&(leitura[tupla<=2000])) //Proteção contra erro de comunicação                         
+                       {                                              //Serão considerador somente valores 
+                                                                      //entre 10 e 2000. 
+                       PROCULUS_VP_Write_UInt16(150,leitura[tupla]);  //Se for diferente, reinicia serial.
                        Condensador=leitura[tupla];
                        }      
                      else
@@ -2335,7 +2336,7 @@ void global_vacuo(void){
                 }
         else if((PROCULUS_VP_Read_UInt16(0x04)==1)&&(flag_global_vacuo==1))
                 {
-                if(Condensador<Seg_Condensador)
+                if(Condensador<(Seg_Condensador+3))   //Histerese do condensador = -3
                    { 
                    //if(!DelayBackupReturn(0x04, &timerVacuo,"Acionando Vacuo! Aguarde...")) return;
                    flag_Vacuo_estava_ligado=1; 
@@ -2409,7 +2410,7 @@ void global_aquecimento(void){
         else
         if((PROCULUS_VP_Read_UInt16(5)==1)&&(flag_global_aquecimento==1))
            {           
-           if((Condensador<Seg_Aq_cond)&&(Vacuometro<Seg_Aq_vacuo)) 
+           if((Condensador<Seg_Aq_cond)&&(Vacuometro<(Seg_Aq_vacuo+200.0))) //Histerese do vácuo 200 
               {                
               //if(!DelayBackupReturn(0x05, &timerAquecimento,"Acionando Aquecimento! Aguarde...")) return;
               Global_Aquecimento_Switch(ON); 
