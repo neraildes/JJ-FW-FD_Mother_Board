@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
+$C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
 idloc IDLOC 5 200000 200000 8 1
 init CODE 0 29C 29C 4 1
 reset_vec CODE 0 0 0 4 1
@@ -263,7 +263,7 @@ MEDIUMCONST 971E-FB7F 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Liofilizador_Mother_Board.X.production.o
-18 intcodelo CODE >51064:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
+18 intcodelo CODE >51064:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
 18 intcodelo CODE >72:C:\Indka(R)\17-JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\isr.c
 2E intcodelo CODE >76:C:\Indka(R)\17-JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\isr.c
 32 intcodelo CODE >78:C:\Indka(R)\17-JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\isr.c
@@ -3525,89 +3525,89 @@ FF4 text0 CODE >835:C:\Indka(R)\17-JJCientifica\Liofilizador\Firmware\FD_Mother_
 1214 text0 CODE >887:C:\Indka(R)\17-JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 121A text0 CODE >887:C:\Indka(R)\17-JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 1220 text0 CODE >890:C:\Indka(R)\17-JJCientifica\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
-7D80 cinit CODE >5508:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D80 cinit CODE >5510:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D80 cinit CODE >5513:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D80 cinit CODE >5809:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D82 cinit CODE >5810:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D84 cinit CODE >5811:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D86 cinit CODE >5812:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D88 cinit CODE >5813:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D8A cinit CODE >5814:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D8C cinit CODE >5815:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D90 cinit CODE >5816:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D94 cinit CODE >5817:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D94 cinit CODE >5818:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D96 cinit CODE >5819:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D9A cinit CODE >5820:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D9C cinit CODE >5821:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7D9E cinit CODE >5822:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DA0 cinit CODE >5826:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DA2 cinit CODE >5827:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DA4 cinit CODE >5828:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DA6 cinit CODE >5829:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DA8 cinit CODE >5830:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DAA cinit CODE >5831:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DAC cinit CODE >5832:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DB0 cinit CODE >5833:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DB4 cinit CODE >5834:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DB4 cinit CODE >5835:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DB6 cinit CODE >5836:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DBA cinit CODE >5837:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DBC cinit CODE >5838:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DBE cinit CODE >5839:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DC0 cinit CODE >5843:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DC4 cinit CODE >5844:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DC8 cinit CODE >5845:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DC8 cinit CODE >5846:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DCA cinit CODE >5847:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DCC cinit CODE >5848:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DCE cinit CODE >5849:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DD0 cinit CODE >5850:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DD2 cinit CODE >5851:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DD4 cinit CODE >5854:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DD8 cinit CODE >5855:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DDA cinit CODE >5856:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DDA cinit CODE >5857:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DDC cinit CODE >5858:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DDE cinit CODE >5859:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DE0 cinit CODE >5862:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DE4 cinit CODE >5863:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DE6 cinit CODE >5864:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DE6 cinit CODE >5865:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DE8 cinit CODE >5866:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DEA cinit CODE >5867:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DEC cinit CODE >5870:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DF0 cinit CODE >5871:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DF2 cinit CODE >5872:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DF2 cinit CODE >5873:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DF4 cinit CODE >5874:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DF6 cinit CODE >5875:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DF8 cinit CODE >5878:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DFC cinit CODE >5879:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DFE cinit CODE >5880:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7DFE cinit CODE >5881:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E00 cinit CODE >5882:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E02 cinit CODE >5883:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E04 cinit CODE >5886:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E08 cinit CODE >5887:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E0A cinit CODE >5888:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E0A cinit CODE >5889:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E0C cinit CODE >5890:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E0E cinit CODE >5891:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E10 cinit CODE >5894:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E14 cinit CODE >5895:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E16 cinit CODE >5896:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E16 cinit CODE >5897:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E18 cinit CODE >5898:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E1A cinit CODE >5899:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E1C cinit CODE >5905:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E1C cinit CODE >5907:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E1E cinit CODE >5908:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E20 cinit CODE >5910:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E22 cinit CODE >5911:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E24 cinit CODE >5912:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
-7E26 cinit CODE >5913:C:\Users\Nera\AppData\Local\Temp\xcAs7eg.s
+7D80 cinit CODE >5508:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D80 cinit CODE >5510:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D80 cinit CODE >5513:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D80 cinit CODE >5809:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D82 cinit CODE >5810:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D84 cinit CODE >5811:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D86 cinit CODE >5812:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D88 cinit CODE >5813:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D8A cinit CODE >5814:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D8C cinit CODE >5815:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D90 cinit CODE >5816:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D94 cinit CODE >5817:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D94 cinit CODE >5818:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D96 cinit CODE >5819:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D9A cinit CODE >5820:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D9C cinit CODE >5821:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7D9E cinit CODE >5822:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DA0 cinit CODE >5826:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DA2 cinit CODE >5827:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DA4 cinit CODE >5828:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DA6 cinit CODE >5829:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DA8 cinit CODE >5830:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DAA cinit CODE >5831:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DAC cinit CODE >5832:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DB0 cinit CODE >5833:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DB4 cinit CODE >5834:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DB4 cinit CODE >5835:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DB6 cinit CODE >5836:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DBA cinit CODE >5837:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DBC cinit CODE >5838:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DBE cinit CODE >5839:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DC0 cinit CODE >5843:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DC4 cinit CODE >5844:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DC8 cinit CODE >5845:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DC8 cinit CODE >5846:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DCA cinit CODE >5847:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DCC cinit CODE >5848:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DCE cinit CODE >5849:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DD0 cinit CODE >5850:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DD2 cinit CODE >5851:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DD4 cinit CODE >5854:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DD8 cinit CODE >5855:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DDA cinit CODE >5856:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DDA cinit CODE >5857:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DDC cinit CODE >5858:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DDE cinit CODE >5859:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DE0 cinit CODE >5862:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DE4 cinit CODE >5863:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DE6 cinit CODE >5864:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DE6 cinit CODE >5865:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DE8 cinit CODE >5866:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DEA cinit CODE >5867:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DEC cinit CODE >5870:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DF0 cinit CODE >5871:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DF2 cinit CODE >5872:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DF2 cinit CODE >5873:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DF4 cinit CODE >5874:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DF6 cinit CODE >5875:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DF8 cinit CODE >5878:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DFC cinit CODE >5879:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DFE cinit CODE >5880:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7DFE cinit CODE >5881:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E00 cinit CODE >5882:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E02 cinit CODE >5883:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E04 cinit CODE >5886:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E08 cinit CODE >5887:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E0A cinit CODE >5888:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E0A cinit CODE >5889:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E0C cinit CODE >5890:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E0E cinit CODE >5891:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E10 cinit CODE >5894:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E14 cinit CODE >5895:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E16 cinit CODE >5896:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E16 cinit CODE >5897:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E18 cinit CODE >5898:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E1A cinit CODE >5899:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E1C cinit CODE >5905:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E1C cinit CODE >5907:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E1E cinit CODE >5908:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E20 cinit CODE >5910:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E22 cinit CODE >5911:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E24 cinit CODE >5912:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
+7E26 cinit CODE >5913:C:\Users\Nera\AppData\Local\Temp\xcAs7ts.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -3659,7 +3659,7 @@ __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\Liofilizador_Mother_Boar
 PROCULUS_TPFLAG_Write@value 1A 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 PROCULUS_TPFLAG_Write@vetor 17 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_EEPROM_Read_String 906A 0 CODE 0 text53 dist/default/production\Liofilizador_Mother_Board.X.production.o
-__mediumconst FB80 0 MEDIUMCONST 0 mediumconst C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
+__mediumconst FB80 0 MEDIUMCONST 0 mediumconst C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
 __size_of_gravarStatusDosBotoes 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 ShowStaticValueGrid@bb 23 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ShowStaticValueGrid@vp 26 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3702,7 +3702,7 @@ bcd2str@dado 9 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Moth
 _RBIF 7F90 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 _RCIE 7CED 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 _TMR0 FD6 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
+___sp 0 0 STACK 2 stack C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
 _fat8 100 0 BANK1 1 bssBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _itoa 6770 0 CODE 0 text74 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _main 2A0 0 CODE 0 text0 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3712,7 +3712,7 @@ EEPROM_24C1025_Write_Str@mem_add D 0 COMRAM 1 cstackCOMRAM dist/default/producti
 Send_To_Slave@contador_2017 18 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 _Delay_Led_Memory 19B 0 BANK1 1 bssBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __HbssBIGRAM 0 0 ABS 0 bssBIGRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-start 29C 0 CODE 0 init C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
+start 29C 0 CODE 0 init C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
 ___flmul@aexp 24 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___flmul@bexp 25 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___flmul@prod 2A 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3815,11 +3815,11 @@ __end_of_Contagem_Tempo_de_Processo 8916 0 CODE 0 text105 dist/default/productio
 USART_put_string@vetor A 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_buscaIndex 946A 0 CODE 0 text69 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _PROCULUS_TPFLAG_Read 9692 0 CODE 0 text114 dist/default/production\Liofilizador_Mother_Board.X.production.o
-__accesstop 80 0 ABS 0 - C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
-intlevel0 0 0 CODE 0 text C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
-intlevel1 0 0 CODE 0 text C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
-intlevel2 0 0 CODE 0 text C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
-intlevel3 0 0 CODE 0 text C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
+__accesstop 80 0 ABS 0 - C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
+intlevel0 0 0 CODE 0 text C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
+intlevel1 0 0 CODE 0 text C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
+intlevel2 0 0 CODE 0 text C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
+intlevel3 0 0 CODE 0 text C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
 __end_of_Exibe_Receita 6346 0 CODE 0 text19 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __ptext100 8AFE 0 CODE 0 text100 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __ptext101 420C 0 CODE 0 text101 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -3956,8 +3956,8 @@ USART_input_buffer@time A 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofil
 USART_putc@value 9 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 Find_Fat8_Running@i 49 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 ___awdiv@dividend 9 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-___inthi_sp 0 0 STACK 2 stack C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
-___intlo_sp 0 0 STACK 2 stack C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
 _Tamanho_Display E1 0 BANK0 1 bssBANK0 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_PROCULUS_graphic_plot 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 _timerCondensador 1DE 0 BANK1 1 bssBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4256,7 +4256,7 @@ Find_Fat8_Free@i 49 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador
 _PROCULUS_VP_Read 686E 0 CODE 0 text128 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _PROCULUS_VP_Read_Int16 92E4 0 CODE 0 text12 dist/default/production\Liofilizador_Mother_Board.X.production.o
 Set_Receita@index 24 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
-isa$xinst 0 0 ABS 0 - C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
+isa$xinst 0 0 ABS 0 - C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
 _receita 1C3 0 BANK1 1 bssBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
 my_pow@exp 1D 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 my_pow@rad 1B 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4329,7 +4329,7 @@ _Plotar_Grafico_Gravado 1EDC 0 CODE 0 text91 dist/default/production\Liofilizado
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\Liofilizador_Mother_Board.X.production.o
 __Hbigram 0 0 ABS 0 bigram dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_PROCULUS_Buzzer 919C 0 CODE 0 text132 dist/default/production\Liofilizador_Mother_Board.X.production.o
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
 Grava_Info_Aquecimento@addEEPROM 2E 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_Comando_Display 8118 0 CODE 0 text15 dist/default/production\Liofilizador_Mother_Board.X.production.o
 PROCULUS_VP_Write@i 19 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4868,7 +4868,7 @@ _strlen 8D9C 0 CODE 0 text151 dist/default/production\Liofilizador_Mother_Board.
 __end_of_Formatar_Lista_de_Receitas 8D12 0 CODE 0 text118 dist/default/production\Liofilizador_Mother_Board.X.production.o
 main@reset 1F7 0 BANK1 1 cstackBANK1 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\Liofilizador_Mother_Board.X.production.o
-isa$std 1 0 ABS 0 - C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
+isa$std 1 0 ABS 0 - C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
 Send_To_Slave@size D 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_Gerenciador_de_Senha 54E4 0 CODE 0 text112 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_RecallBlackoutStatus 77C8 0 CODE 0 text90 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -4888,8 +4888,8 @@ __size_of_global_datalog 0 0 ABS 0 - dist/default/production\Liofilizador_Mother
 EEPROM_Write_Byte@last_GIE 27 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 save_datalog@index A5 0 BANK0 1 cstackBANK0 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _USART_put_string 8230 0 CODE 0 text9 dist/default/production\Liofilizador_Mother_Board.X.production.o
-stackhi F7F 0 ABS 0 - C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
-stacklo 6BA 0 ABS 0 - C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
+stackhi F7F 0 ABS 0 - C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
+stacklo 6BA 0 ABS 0 - C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
 EEPROM_Read_Long32@addr D 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_Formatar_Banco_de_Dados 6D18 0 CODE 0 text40 dist/default/production\Liofilizador_Mother_Board.X.production.o
 __end_of_PROCULUS_VP_Read_Int16 930E 0 CODE 0 text12 dist/default/production\Liofilizador_Mother_Board.X.production.o
@@ -5148,7 +5148,7 @@ my_delay_ms@time 9 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_
 __size_of_Upload_Data_to_Slave 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_SaveBlackoutStatusRuning 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
 __size_of_EEPROM_24C1025_Write_Buffer 0 0 ABS 0 - dist/default/production\Liofilizador_Mother_Board.X.production.o
-__ramtop 1000 0 RAM 0 ramtop C:\Users\Nera\AppData\Local\Temp\xcAs7eg.o
+__ramtop 1000 0 RAM 0 ramtop C:\Users\Nera\AppData\Local\Temp\xcAs7ts.o
 Send_To_Slave@flag_is_buffer 17 0 COMRAM 1 cstackCOMRAM dist/default/production\Liofilizador_Mother_Board.X.production.o
 _PROCULUS_graphic_plot 8752 0 CODE 0 text161 dist/default/production\Liofilizador_Mother_Board.X.production.o
 _my_delay_ms_CLRWDT 8B4C 0 CODE 0 text104 dist/default/production\Liofilizador_Mother_Board.X.production.o
