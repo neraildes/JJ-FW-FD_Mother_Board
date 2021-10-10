@@ -3615,9 +3615,6 @@ char MenorCanalLivre()
 	 }
 
 
-
-
-
 void Incrementa_Contador_de_Repique_do_Vacuo(){
      int valor;
      if(flag_Vacuo_estava_ligado==1)
@@ -3664,7 +3661,23 @@ void Carregar_Display_Schematic_Color(){
           TrendColor[10]=0x07E0; //Verde Claro
           TrendColor[11]=0x001F; //Azul 
           TrendColor[12]=0xF81F; //Roxo
-          }                     
+          }     
+     else if(Tamanho_Display==81)
+          { 
+          TrendColor[0] =0xF800; //Vermelho vivo
+          TrendColor[1] =0x07E0; //Verde Claro
+          TrendColor[2] =0x001F; //Azul                              
+          TrendColor[3] =0x0000; //Preto         
+          TrendColor[4] =0xF800; //Vermelho vivo          
+          TrendColor[5] =0xFFFF; //BRANCO
+          TrendColor[6] =0xFFFF; //BRANCO
+          TrendColor[7] =0xFFFF; //BRANCO
+          TrendColor[8] =0xFFFF; //BRANCO
+          TrendColor[9] =0xFFFF; //BRANCO
+          TrendColor[10]=0xFFFF; //BRANCO
+          TrendColor[11]=0xFFFF; //BRANCO
+          TrendColor[12]=0xFFFF; //BRANCO                    
+          }
      else {
           TrendColor[0] =0xFFFF; //BRANCO
           TrendColor[1] =0xFFFF; //BRANCO
@@ -3679,7 +3692,6 @@ void Carregar_Display_Schematic_Color(){
           TrendColor[10]=0xFFFF; //BRANCO
           TrendColor[11]=0xFFFF; //BRANCO
           TrendColor[12]=0xFFFF; //BRANCO          
-          
           }     
 }
 

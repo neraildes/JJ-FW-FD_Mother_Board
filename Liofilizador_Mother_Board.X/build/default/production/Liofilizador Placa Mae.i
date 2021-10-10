@@ -8884,11 +8884,11 @@ void TrendCurveFuncao(char funcao){
                           canal=mapa.canal[i];
      if((canal>=0)&&(canal<=7))
         {
-                             PROCULUS_VP_Write_UInt16((i*10+1789),(canal<<8)|(0x0001));
-               }
+                 PROCULUS_VP_Write_UInt16((i*10+1789),(canal<<8)|(0x0001));
+           }
      else
-               {
-                             PROCULUS_VP_Write_UInt16((i*10+1789),0x0A00);
+           {
+                 PROCULUS_VP_Write_UInt16((i*10+1789),0x0A00);
         }
      }
 
@@ -9046,6 +9046,8 @@ void ShowHardwareInfo(){
             }
         }
 
+     print("-------------------------------");
+
      if(totalboard==0)
         {
         print("Nenhuma Placa conectada!");
@@ -9089,9 +9091,6 @@ char MenorCanalLivre()
 
   return canal;
   }
-
-
-
 
 
 void Incrementa_Contador_de_Repique_do_Vacuo(){
@@ -9141,6 +9140,22 @@ void Carregar_Display_Schematic_Color(){
           TrendColor[11]=0x001F;
           TrendColor[12]=0xF81F;
           }
+     else if(Tamanho_Display==81)
+          {
+          TrendColor[0] =0xF800;
+          TrendColor[1] =0x07E0;
+          TrendColor[2] =0x001F;
+          TrendColor[3] =0x0000;
+          TrendColor[4] =0xF800;
+          TrendColor[5] =0xFFFF;
+          TrendColor[6] =0xFFFF;
+          TrendColor[7] =0xFFFF;
+          TrendColor[8] =0xFFFF;
+          TrendColor[9] =0xFFFF;
+          TrendColor[10]=0xFFFF;
+          TrendColor[11]=0xFFFF;
+          TrendColor[12]=0xFFFF;
+          }
      else {
           TrendColor[0] =0xFFFF;
           TrendColor[1] =0xFFFF;
@@ -9155,7 +9170,6 @@ void Carregar_Display_Schematic_Color(){
           TrendColor[10]=0xFFFF;
           TrendColor[11]=0xFFFF;
           TrendColor[12]=0xFFFF;
-
           }
 }
 
@@ -9410,7 +9424,7 @@ void FAT8_Write_Process_Finalize(){
       strcpy(fat8.processo.fim.time,time);
       fat8.processo.minutes=processo_totalminuto;
       }
-# 3943 "Liofilizador Placa Mae.c"
+# 3957 "Liofilizador Placa Mae.c"
     fat8.processo.add_end=add_datalog;
 
     fat8.processo.flag_running=0;
