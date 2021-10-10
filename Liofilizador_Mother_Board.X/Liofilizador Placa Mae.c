@@ -149,6 +149,8 @@ volatile signed int senhacount;
 unsigned long senha_atual;
 char senhavetor[4];
 
+unsigned char erroSemPlaca[14]={0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
 
 //*NERA-TEMPORARIO
 //Estas variáveis devem ser apagadas
@@ -1057,6 +1059,20 @@ void ShowSensorRealTimeHS(void)
         bb[0]=canal; 
         leitura[tupla]=Send_To_Slave(SlaveBoard, COMMAND_READ_ANALOG, 1, bb); //Alternar com EMULA
         
+        if(leitura[tupla]==-1)         //Se a leitura der SEM PLACA
+           {  
+           if(erroSemPlaca[tupla]<10)  //Se o contador for menor que 10
+             {  
+             erroSemPlaca[tupla]++;    //Incrementar contador
+             leitura[tupla]=0;         //Leitura da tupla igual a zero
+             }
+           }
+        else
+           {
+           erroSemPlaca[tupla]=0;      //Se leitura de placa for valor válido
+                                       //Zerar contador de erros e apresentar
+                                       //a leitura.
+           }        
         flag_array_slave_WDT[SlaveBoard]=TRUE;
         }
      
@@ -1113,14 +1129,14 @@ void ShowSensorRealTimeHS(void)
                      break;
                      
               default:
-                  if((Tamanho_Display==81)&&(tupla==6))
-                     {
+                  if((Tamanho_Display==81)&&(tupla==6))  //Se houver uma placa de condensador com ID 4 (4a posicao)
+                     {                                   //Então é liofilizador de 400 KG.
                      PROCULUS_VP_Write_UInt16(140,leitura[tupla]); ////Condensador         
                      //--------------------*NERA-TEMPORARIO---------------------
                      //Condensador1=leitura[tupla];                     
-                     if(leitura[tupla]!=-1) 
-                       { 
-                       Condensador1=leitura[tupla];
+                     if(leitura[tupla]!=-1)         //Caso ocorra erro de comunicação,
+                       {                            //Jamais considerar -1 como valor válido
+                       Condensador1=leitura[tupla]; //Para não desligar o vácuo.
                        }                     
                      }
                   else
