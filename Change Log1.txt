@@ -1,11 +1,13 @@
-Tarefas a serem feitas (em ordem de prioridade)
+Lista de Alterações
 
-Previsão para versão
-  1.1.0 - Aceita placa de rede
-  1.2.0 - Pode ser utilizado o bootloader
 
+
+----------------------------------------------------------------------------------------------------------------
 Versão v1.0.41
-
+	const volatile char *boardtype[6]...  //Não aparecer Mother Board no lugar do nome da placa.
+	Mensagem original com o nome do fabricante do hardware.
+	Limpeza do código.
+	Adição de comentários.
 
 Versão v1.0.40
 	Histerese no Condensador e no Vácuo.
@@ -123,4 +125,12 @@ OK........Salvar Status de botoes para toda modificação, Salvar tempo de 10 em 1
 OK........Padrobizar Sonorização.
 OK........Versão das placas filha juntamente com identificador de modelo.
 
+
+-------------------------------------------------------------------------------------------------------
+Previsão para versão
+  1.1.0 - Aceita placa de rede
+  1.2.0 - Pode ser utilizado o bootloader
+
+ToDoList
+	Exibir mensagem de 30 segundos para condensador.
 

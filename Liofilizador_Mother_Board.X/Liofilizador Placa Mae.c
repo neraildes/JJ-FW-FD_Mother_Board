@@ -63,12 +63,12 @@
 
 //------------------------------------------------------------------------------
 
-const char *boardtype[6]={"Mother Board",
-                          "Vaccum Board",
-                          "PT100 Board ",
-                          "NTC Board   ",
-                          "Relay Board ",
-                          "Wifi Board  "}; 
+const volatile char *boardtype[6]={"Mother Board",
+                                   "Vaccum Board",
+                                   "PT100 Board ",
+                                   "NTC Board   ",
+                                   "Relay Board ",
+                                   "Wifi Board  "}; 
 
 #define Mother_Board 0
 #define Vaccum_Board 1
@@ -129,7 +129,8 @@ unsigned int  paginamemo=15;
 
 
 //------------------------------------------------------------------------------
-
+//Tempo entre ligamento de dispositivos após retorno de blackout
+//A definição está na função Ligar_Cargas_Compassadamente().
 unsigned int timerDatalog=0;
 unsigned int timerCondensador=0;
 unsigned int timerVacuo=0;
@@ -137,10 +138,6 @@ unsigned int timerAquecimento=0;
 unsigned int timerEstante=0;
 
 //------------------------------------------------------------------------------
-
-
-
-
 
 volatile unsigned char flag_senha_global_liberada;
 volatile unsigned char flag_senha_liberada;
@@ -151,23 +148,17 @@ char senhavetor[4];
 
 unsigned char erroSemPlaca[14]={0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-
-//*NERA-TEMPORARIO
-//Estas variáveis devem ser apagadas
-//int contabilizado =0;     
-
-
+//------------------------------------------------------------------------------
 int Condensador     ; 
 int Condensador1    ;
-int CondensadorFluido ;
 int Vacuometro      ;
 int Voltimetro      ;
 
 char MSG_Deseja_Encerrar_Processo;
 
 
-int Seg_Condensador ;
-int Seg_Vacuo       ;
+int Seg_Condensador ;   //Valor mínimo necessário para ligar o vácuo
+int Seg_Vacuo       ;   //Valor mínimo necessário para ligar o aquecimento
 int Seg_Aq_cond     ;
 int Seg_Aq_vacuo    ;
 int leitura[0x0F]   ;
@@ -183,14 +174,9 @@ char returnToScreen;
 
 volatile char MonitorBuffer;
 
-//char trendCurve[15];
-//char trendChannel[15];
 char trendExist;
 int  trendvp=0x0310;
 char icone ; 
-
-
-unsigned char nabucodonozor=0;
 
 unsigned int vpPrint=2000;
 
@@ -198,7 +184,7 @@ volatile unsigned char flag_array_slave_WDT[15];
 
 unsigned char memo_statuspower;
 
-volatile unsigned char delay_condensador;
+volatile unsigned char delay_condensador;  //Tempo de 30 Segundos para Religar Condensador.
 
 int index;
 int  Tamanho_Display;
@@ -207,8 +193,6 @@ char maxlineDATALOG;
 int TrendColor[13];
 
 T_mapa mapa;
-
-
 
 void main(void) 
 {
@@ -221,17 +205,12 @@ void main(void)
      OSCCONbits.SCS0 =0;
      OSCCONbits.SCS1 =0;
      OSCTUNEbits.PLLEN=1; //pll 8*4 = 32Mhz
-     
-     
-     
-     
-
+      
      TRISA=0b11101111;    //Inicializa Portas
      TRISB=0b00000001;
      TRISC=0b11110000;
      TRISD=0b11100011;
      TRISE=0xFF;
-
     
      //-------------------------------------------------------------------------
      T0CONbits.T0CS  = 0;
@@ -245,7 +224,7 @@ void main(void)
      
      //-------------------------------------------------------------------------
      RBIF=0;
-     INTCONbits.INT0IE   =0;  //Interrupção em RB0
+     INTCONbits.INT0IE   =0;  //Interrupção em RB0 desligada
      
      //-------------------------------------------------------------------------
      PIR1bits.TMR1IF = 0;   // Reset the TMR1IF flag bit
@@ -274,12 +253,9 @@ void main(void)
      USART_init(115200);
      My_ADC_init();
      I2C_Master_Init(100000);
-     my_delay_ms_CLRWDT(500);     
-     
-     
+     my_delay_ms_CLRWDT(500);          
      
      //=========================================================================
-
      Delay_Led_Tmr0=0;
      flag_led_tmr0=0;
      Delay_Led_Usart=0;
@@ -311,12 +287,8 @@ void main(void)
      reset++;
      EEPROM_Write_Integer(34,reset);
      flag_Vacuo_estava_ligado=0;
-     //PROCULUS_VP_Write_UInt16(0x6BBB,reset);
      }
      
-     
-
-      
      //-------------------------------------------------------------------------
      if(EEPROM_Read_Byte(OFFSET_EEPROM)==0xFF)
        {         
@@ -342,7 +314,11 @@ void main(void)
        } 
      else
        {
-       print("Aguarde...");  
+       print("INDKA Sistema Operacional.");  
+       print("Desenvolvimento de Hardware e Software");
+       print("www.indka.com.br");
+       print("Tel. (16) 99600-9172");
+       my_delay_ms_CLRWDT(2000);
        }   
      RecallBlackoutStatus();
      TrendCurveFuncao(LOAD);
@@ -355,46 +331,16 @@ void main(void)
 
      
      //-------------------------------------------------------------------------
-     my_delay_ms_CLRWDT(1000);
+     //my_delay_ms_CLRWDT(1000);
      ShowHardwareInfo();  
      
-     //while(1)
-     //{
-     //    PROCULUS_Show_Screen(15);
-     //    asm("CLRWDT");
-     // }
-     
-     
-     
-     
      my_delay_ms_CLRWDT(2500);
-     
-
-//    PROCULUS_VP_Write_UInt16(151,Tamanho_Display);
-//    PROCULUS_Buzzer(1000);
-//    my_delay_ms_CLRWDT(10000);      
-     
-     
-     //-------------------------------------------------------------------------     
-//     print("Testando Memoria Externa...");
-//     if(TesteMemoria24C1025())
-//        print("->Memoria OK!") ;
-//     else
-//        { 
-//        print("->Memoria ERRO!");
-//        PROCULUS_Buzzer(1000);
-//        __delay_ms(1000);
-//        PROCULUS_Buzzer(1000);
-//        __delay_ms(1000);
-//        PROCULUS_Buzzer(1000);
-//        my_delay_ms_CLRWDT(2000);
-//        }
-     
+ 
      //------------Valores Iniciais da tela Principal---------------------------
 
      
      //======================== INFORMAÇÕES INICIAIS ===========================     
-     //print("Analisando dados...");  
+     print("Analisando dados...");  
      for(char i=0;i<15;i++)
         {
         asm("CLRWDT"); 
@@ -441,8 +387,8 @@ void main(void)
      Vacuometro=0;
      Voltimetro=0;
      Condensador=0;
-     Condensador1=0;
-     CondensadorFluido=0;
+     Condensador1=0;  //Utilizado em máquinas com 2 condensadores
+
      //-----------------------------
      /*Exibição e controle de mensagem para encerrar o processo. Esta variável
       permite que o programa rode enquanto é exibida a pergunta para encerrar
@@ -467,33 +413,8 @@ void main(void)
      //=========================================================================
      //                              M A I N
      //=========================================================================
-        //Teste24cXXXX();
-         
-//        EEPROM_24C1025_Write_Int (0,0,1);
-//        fat8.processo.processo_number=123;    
-//        strcpy(fat8.processo.inicio.date,"Neraildo");
-//        strcpy(fat8.processo.inicio.time,"the best");    
-//        strcpy(fat8.processo.fim.date,"Nera");
-//        strcpy(fat8.processo.fim.time,"the best");            
-//        fat8.processo.amostra=0;
-//        fat8.processo.add_start=2;        
-//        fat8.processo.add_end=150;
-//        fat8.processo.flag_download=0;
-//        fat8.processo.flag_finalized=0;
-//        fat8.processo.flag_running=1;
-//        fat8.processo.flag_view=0;
-//        FAT8_Save(0);
-
-        
-     
-
-     
-        //fat8.index=Find_Fat8_Stoped();
-        //FAT8_Load(fat8.index);
-    
         FAT8_Show();
         
-        //add_datalog=0;
         Ligar_Cargas_Compassadamente();
         PROCULUS_Show_Screen(15);
         
@@ -507,8 +428,6 @@ void main(void)
         
         PROCULUS_Show_Screen(15);     
         PROCULUS_VP_Write_UInt16(1,0); //ACENDE ICONE TEIMOSO
-        TRISDbits.TRISD5=0;//fix Apagar Debug
-        PORTDbits.RD5=0;//FIX APAGAR
         flag_usart_error=0;
      
         while(1)
@@ -527,7 +446,7 @@ void main(void)
                   paginamemo=pagina;                  
                   }//pagina!= 
                }              
-             flag_proculus_hs=FALSE;
+             //flag_proculus_hs=FALSE;
              //-----------------------------------------------------------------
                 flag_proculus_hs=TRUE;
                 if(rtc.segundo<5) if(pagina!=25) Exibe_Hora_Data(FALSE); //Exibe data e hora sem segundos
@@ -2174,12 +2093,6 @@ void global_datalog(void){
            {
             char bb[2];            
             
-            //if(timerDatalog>0)
-            //  {
-            //   my_delay_ms_CLRWDT(timerDatalog);  
-            //   timerDatalog=0;
-            //  }
-            
             if(testa_modo_conectado(2,0)==0) 
               {  
               PROCULUS_Popup(DISPLAY_BLOQUEADO);
@@ -2336,9 +2249,8 @@ void global_vacuo(void){
                 }
         else if((PROCULUS_VP_Read_UInt16(0x04)==1)&&(flag_global_vacuo==1))
                 {
-                if(Condensador<(Seg_Condensador+3))   //Histerese do condensador = -3
-                   { 
-                   //if(!DelayBackupReturn(0x04, &timerVacuo,"Acionando Vacuo! Aguarde...")) return;
+                if(Condensador<(Seg_Condensador+3.0))   //Histerese do condensador = -3
+                   {                    
                    flag_Vacuo_estava_ligado=1; 
                    Vaccum_Switch(TRUE);                     
                    }
@@ -2364,7 +2276,6 @@ void Global_Aquecimento_Switch(unsigned char estado){
      
      for(board=3;board<(totalboard*2-1);board++)
         {
-        //flag_main_loop_WDT=1; 
         buffer[0]=estado;
         Send_To_Slave(board,COMMAND_GLOBAL_HOT,1,buffer);               
         }     
@@ -2386,15 +2297,11 @@ void global_aquecimento(void){
               if(!DelayBackupReturn(0x05, &timerAquecimento,"Acionando Aquecimento! Aguarde...")) return;               
               flag_global_aquecimento=1;
               Global_Aquecimento_Switch(ON); 
-              //if((Tamanho_Display==80)||(Tamanho_Display==50))
-              //    Rele_Comum_Aquecimento(TRUE);
               }
            else
               {
               flag_global_aquecimento=0; 
               Global_Aquecimento_Switch(OFF); 
-              //if((Tamanho_Display==80)||(Tamanho_Display==50))
-              //    Rele_Comum_Aquecimento(FALSE);
               timerAquecimento=0;
               } 
            }    
@@ -2412,16 +2319,11 @@ void global_aquecimento(void){
            {           
            if((Condensador<Seg_Aq_cond)&&(Vacuometro<(Seg_Aq_vacuo+200.0))) //Histerese do vácuo 200 
               {                
-              //if(!DelayBackupReturn(0x05, &timerAquecimento,"Acionando Aquecimento! Aguarde...")) return;
               Global_Aquecimento_Switch(ON); 
-              //if((Tamanho_Display==80)||(Tamanho_Display==50))
-              //    Rele_Comum_Aquecimento(TRUE);
               }
            else
               {             
               Global_Aquecimento_Switch(OFF); 
-              //if((Tamanho_Display==80)||(Tamanho_Display==50))
-              //    Rele_Comum_Aquecimento(FALSE);
               } 
            } 
         else
@@ -2445,22 +2347,8 @@ void global_refrigeracao_fluido(void){
          }     
          
          if(!DelayBackupReturn(62, &timerEstante,"Acionando Estante! Aguarde...")) return;
-         flag_regrigeracao_fluido=1;
-         
+         flag_regrigeracao_fluido=1;         
          Rele_Comum_Aquecimento(1); //Controla a saida da estante
-         //bbb[0]=1;
-         //bbb[1]=1;
-         //Send_To_Slave(0x03,COMMAND_RELAY,2,bbb);
-         //Send_To_Slave(0x03,COMMAND_FLUIDO_TERMICO,1,bbb);
-         /*
-         bbb[0]=0x09; //ADD
-         bbb[1]=0x0A; //____T<ON>
-         Send_To_Slave(0x03,COMMAND_IEE_W_BYTE,2,bbb);                 
-                 
-         bbb[0]=0x0A; //ADD
-         bbb[1]=0x00; //____T<OFF>
-         Send_To_Slave(0x03,COMMAND_IEE_W_BYTE,2,bbb); 
-         */                             
        }
      
      
@@ -2470,27 +2358,9 @@ void global_refrigeracao_fluido(void){
          {  
          PROCULUS_Popup(DISPLAY_BLOQUEADO);  
          return; 
-         }  
-                       
+         }                         
          flag_regrigeracao_fluido=0;    
          Rele_Comum_Aquecimento(0); //Controla a saida da estante
-         
-         //bbb[0]=1;
-         //bbb[1]=0;
-         //Send_To_Slave(0x03,COMMAND_RELAY,2,bbb);         
-         
-         
-         //bbb[0]=0;
-         //Send_To_Slave(0x03,COMMAND_FLUIDO_TERMICO,1,bbb);         
-         /*
-         bbb[0]=0x09; //ADD
-         bbb[1]=0x00; //____T<ON>
-         Send_To_Slave(0x03,COMMAND_IEE_W_BYTE,2,bbb);                 
-                 
-         bbb[0]=0x0A; //ADD
-         bbb[1]=0x0A; //____T<OFF>
-         Send_To_Slave(0x03,COMMAND_IEE_W_BYTE,2,bbb);                                       
-         */
       }  
 }
 
@@ -2516,7 +2386,7 @@ unsigned char i;
 } //funcao   
 
 
-void pagina_49(void){     
+void pagina_49(void){ //EDIÇÃO DE 1 RECEITA COM OPÇÕES    
      t_liofilizador liofilizador;
      
      if(PROCULUS_VP_Read_UInt16(390)==1)
@@ -2611,7 +2481,7 @@ void pagina_49(void){
 }
 
 
-void pagina_47(void){  //Carregar receita para Edicao;
+void pagina_47(void){  //Selecionar uma receita da lista para edição
      t_receita receita;
      if(flag_senha_liberada)
          { 
@@ -2640,7 +2510,7 @@ void pagina_47(void){  //Carregar receita para Edicao;
 
 //-----------------------------------Pagina 15----------------------------------
 //Exibe todos os parâmetros.
-void pagina_15(void){                     
+void pagina_15(void){  //Tela Principal
    if(proculus.button==3)
       { 
       PROCULUS_Buzzer(2000); 
@@ -2671,7 +2541,7 @@ void pagina_15(void){
 
 
 //---------------------------- Pagina 19 ---------------------------------------
-void pagina_19(void)  
+void pagina_19(void)  //Setar e gravar individualmente aquecimento
 {
        bool flag_upLoadTambem=false;
        
@@ -2788,7 +2658,7 @@ void pagina_19(void)
 
 //-----------------------------Pagina 23----------------------------------------
 //Salva dados de Segurança.
-void pagina_23(void)                    
+void pagina_23(void)  //Salvar Parametros *Obs. Aqui escolhe o subtipo de placa                  
 { 
     if(flag_senha_liberada)
       {  
@@ -2824,7 +2694,7 @@ void pagina_23(void)
 
 
 //------------------------------- Pagina 25-------------------------------------
-void pagina_25(void)                   
+void pagina_25(void)  //SALVAR DATA E HORA
 {
 
     if(flag_senha_liberada)                           
@@ -2848,7 +2718,7 @@ void pagina_25(void)
 
 
 //---------------------------- pagina 29----------------------------------------
-void pagina_29(void)    
+void pagina_29(void) //VISUALIZAR GRAFICO DE LISTA DE GRAFICOS SALVOS.   
   { 
     if(flag_senha_liberada)
          {
@@ -2866,7 +2736,7 @@ void pagina_29(void)
 
 
 //----------------------------ALTERAR SENHA-----------------------------------
-void pagina_31(void){
+void pagina_31(void){  //Manipulação de senha local e global
          unsigned long nova_senha, confirma_senha;
          char senhavetor[4];
          
@@ -3536,11 +3406,11 @@ void TrendCurveFuncao(char funcao){
                           canal=mapa.canal[i];
 			  if((canal>=0)&&(canal<=7))
 			     {
-                             PROCULUS_VP_Write_UInt16((i*10+PPCANAL),(canal<<8)|(0x0001)); //Canal Associado                             						     	
-		             }
+                 PROCULUS_VP_Write_UInt16((i*10+PPCANAL),(canal<<8)|(0x0001)); //Canal Associado                             						     	
+		         }
 			  else	 
-		             {							 
-                             PROCULUS_VP_Write_UInt16((i*10+PPCANAL),0x0A00); //Canal                             
+		         {							 
+                 PROCULUS_VP_Write_UInt16((i*10+PPCANAL),0x0A00); //Canal                             
 			     }
 			  }
 					      
@@ -3654,8 +3524,8 @@ void ShowHardwareInfo(){
      char versao[10];
      flag_proculus_hs=FALSE;
      
-     PROCULUS_Show_Screen(0);
      clear_screen();
+     PROCULUS_Show_Screen(0);     
      my_delay_ms_CLRWDT(300); 
      print("JJ Cientifica Ind. e Com. de Eq. Cient. Ltda.");     
      my_delay_ms_CLRWDT(300);
@@ -3698,8 +3568,8 @@ void ShowHardwareInfo(){
             }
         }
       
-
-     //totalboard=7; //fix apagar
+     print("-------------------------------");
+     
      if(totalboard==0)
         { 
         print("Nenhuma Placa conectada!");        
