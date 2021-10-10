@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
+#include <proc/pic18f4620.h>
 #include "global.h"
 #include "Liofilizador Placa Mae.h"
 #include "isr.h"
@@ -1076,16 +1077,33 @@ void ShowSensorRealTimeHS(void)
                      Vacuometro=leitura[tupla];
                      break;  
               case 2:
-                     PROCULUS_VP_Write_UInt16(150,leitura[tupla]); //Condensador         
-                     
-                     //--------------------*NERA-TEMPORARIO---------------------
-                     //Condensador=leitura[tupla];                     
-                     if(leitura[tupla]!=-1) 
-                       { 
+                     if((leitura[tupla]>=10)&&(leitura[tupla<=2000]))
+                       {                         
+                       PROCULUS_VP_Write_UInt16(150,leitura[tupla]); //Condensador  
                        Condensador=leitura[tupla];
-                       }
-                     //---------------------------------------------------------        
-                     
+                       }      
+                     else
+                       {
+                       //=================REINICIAR SERIAL======================                         
+                         char erro;                            
+                         INTCONbits.PEIE=0;                         
+                         RCSTAbits.SPEN=0;
+                         RCSTAbits.CREN=0;
+                         RCSTAbits.FERR=0;
+                         RCSTAbits.OERR=0;
+                         TXSTAbits.TXEN=0;                         
+                         erro=RCREG;
+                         erro=RCREG;
+                         erro=RCREG;                         
+                         usart_buffer[0]=0;
+                         TRISCbits.RC6=1;
+                         TRISCbits.RC7=1;
+                         my_delay_ms_CLRWDT(250);                         
+                         INTCONbits.PEIE=1;                         
+                         //- - - - - - - - - - - - - - - - - - - - - - - - - - -
+                         USART_init(115200);
+                         //- - - - - - - - - - - - - - - - - - - - - - - - - - -                         
+                       }  
                      break; 
               case 3:
                        //---------------------------------------------------------                          
@@ -3780,7 +3798,7 @@ void Carregar_Display_Schematic_Color(){
 
 
 void Ligar_Cargas_Compassadamente(){    
-     #define TIMEBLACKOUT 100
+     #define TIMEBLACKOUT 80
      int valor;    
      
      PROCULUS_VP_Write_UInt16(0x02,0); //DATALOG
@@ -3795,7 +3813,7 @@ void Ligar_Cargas_Compassadamente(){
      
      if(statuspower.bits!=0)
           {   
-          print("Cond. de blackout encontrada!");
+          print("Condicao de blackout encontrada!");
           print("Listando Cargas que serao ativadas...");          
           
           Contagem_Tempo_de_Processo(FALSE);  
@@ -3803,7 +3821,7 @@ void Ligar_Cargas_Compassadamente(){
           if(flag_global_datalog==1)
              {              
              flag_global_datalog=0;
-             print("1-DataLog Sera Ativado.");
+             print("1-DataLog sera ativado.");
              PROCULUS_VP_Write_UInt16(0x02,1); //Datalog
              timerDatalog=0;             
              }          
@@ -3823,7 +3841,7 @@ void Ligar_Cargas_Compassadamente(){
           if(flag_global_condensador==1)
             { 
             flag_global_condensador=0;
-            print("2-Condensador Sera Ativado.");
+            print("2-Condensador sera Ativado.");
             PROCULUS_VP_Write_UInt16(0x03,1);  //Condensador
             timerCondensador=TIMEBLACKOUT;
             }
@@ -3835,7 +3853,7 @@ void Ligar_Cargas_Compassadamente(){
             {
             flag_global_vacuo=0;
             flag_time_process=TRUE;
-            print("3-Bomba de Vacuo sera ativada.");
+            print("3-Bomba de vacuo sera ativada.");
             PROCULUS_VP_Write_UInt16(0x04,1);  //Vacuo
             timerVacuo=TIMEBLACKOUT;
             }
@@ -3845,7 +3863,7 @@ void Ligar_Cargas_Compassadamente(){
           if(flag_global_aquecimento==1)
             {   
             flag_global_aquecimento=0;
-            print("4-Aquecimento sera Ativado.");
+            print("4-Aquecimento sera ativado.");
             PROCULUS_VP_Write_UInt16(0x05,1);//Aquecimento 
             timerAquecimento=TIMEBLACKOUT;
             }
