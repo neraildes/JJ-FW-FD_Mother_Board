@@ -340,4 +340,21 @@ volatile t_rtc rtc;
 
 //==============================================================================
 
+//------------------------------------------------------------------------------
+
+const char *boardtype[6]={{"Mother Board"},
+                          {"Vaccum Board"},
+                          {"PT100 Board "},
+                          {"NTC Board   "},
+                          {"Relay Board "},
+                          {"Wifi Board  "}}; 
+
+#define Mother_Board 0
+#define Vaccum_Board 1
+#define PT100_Board  2
+#define NTC_Board    3 
+#define Relay_Board  4
+#define Wifi_Board   5
+//------------------------------------------------------------------------------
+
 #endif

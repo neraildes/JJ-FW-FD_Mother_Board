@@ -61,22 +61,7 @@
 #define FATOR_TENSAO 0.4546
 #define FATOR_VACUO  0.05
 
-//------------------------------------------------------------------------------
 
-const volatile char *boardtype[6]={"Mother Board",
-                                   "Vaccum Board",
-                                   "PT100 Board ",
-                                   "NTC Board   ",
-                                   "Relay Board ",
-                                   "Wifi Board  "}; 
-
-#define Mother_Board 0
-#define Vaccum_Board 1
-#define PT100_Board  2
-#define NTC_Board    3 
-#define Relay_Board  4
-#define Wifi_Board   5
-//------------------------------------------------------------------------------
 
 /*----------------------------------------------------------------------------*/
 volatile unsigned char usart_buffer[USART_BUFFER_SIZE]; 
@@ -282,11 +267,11 @@ void main(void)
      if(reset==0xFFFF)
        {  
        EEPROM_Write_Integer(34,0);   //Totalizador de Reset
-       EEPROM_Write_Integer(0xE8,0); //Totalizador de repique do vacuo;
+       //EEPROM_Write_Integer(0xE8,0); //Totalizador de repique do vacuo;
        }
-     reset++;
-     EEPROM_Write_Integer(34,reset);
-     flag_Vacuo_estava_ligado=0;
+     //reset++;
+     //EEPROM_Write_Integer(34,reset);
+     //flag_Vacuo_estava_ligado=0;
      }
      
      //-------------------------------------------------------------------------
@@ -331,8 +316,19 @@ void main(void)
 
      
      //-------------------------------------------------------------------------
-     //my_delay_ms_CLRWDT(1000);
+     flag_proculus_hs=FALSE;     
+     clear_screen();
+     PROCULUS_Show_Screen(0);     
+     my_delay_ms_CLRWDT(300); 
+     print("JJ Cientifica Ind. e Com. de Eq. Cient. Ltda.");     
+     my_delay_ms_CLRWDT(300);
+     print("CNPJ: 05.678.930/0001-12");     
+     my_delay_ms_CLRWDT(3000);     
+     //print("Inicializando o Sistema...");
+     //my_delay_ms_CLRWDT(300);
+     print("Analisando Hardware. Aguarde...");     
      ShowHardwareInfo();  
+     
      
      my_delay_ms_CLRWDT(2500);
  
@@ -468,6 +464,10 @@ void main(void)
                 global_condensador();   
                 global_vacuo(); 
                 global_aquecimento();                                
+                
+                
+                if(PROCULUS_VP_Read_UInt16(100)==1) RelatorioTecnico(); //Exibe relatório técnico
+                
                 
                 //INDICA SE OCORREU TRAVAMENTO DO RX DAS PLACAS
                 if(flag_usart_error==TRUE) Delay_Led_Memory=200;                 
@@ -1022,6 +1022,7 @@ void ShowSensorRealTimeHS(void)
                        {
                        //=================REINICIAR SERIAL======================                         
                          char erro;                            
+                         unsigned int reset;
                          INTCONbits.PEIE=0;                         
                          RCSTAbits.SPEN=0;
                          RCSTAbits.CREN=0;
@@ -1034,11 +1035,17 @@ void ShowSensorRealTimeHS(void)
                          usart_buffer[0]=0;
                          TRISCbits.RC6=1;
                          TRISCbits.RC7=1;
-                         my_delay_ms_CLRWDT(250);                         
+                         //- - - - - - - - - - - - - - - - - -                         
+                         reset=EEPROM_Read_Integer(34);
+                         reset++;
+                         EEPROM_Write_Integer(34,reset);
+                         //- - - - - - - - - - - - - - - - - -                         
+                         my_delay_ms_CLRWDT(250);            
                          INTCONbits.PEIE=1;                         
                          //- - - - - - - - - - - - - - - - - - - - - - - - - - -
                          USART_init(115200);
-                         //- - - - - - - - - - - - - - - - - - - - - - - - - - -                         
+                         //- - - - - - - - - - - - - - - - - - - - - - - - - - -    
+                         
                        }  
                      break; 
               case 3:
@@ -2249,7 +2256,7 @@ void global_vacuo(void){
                 }
         else if((PROCULUS_VP_Read_UInt16(0x04)==1)&&(flag_global_vacuo==1))
                 {
-                if(Condensador<(Seg_Condensador+3.0))   //Histerese do condensador = -3
+                if(Condensador<(Seg_Condensador))   //Histerese do condensador = -3
                    {                    
                    flag_Vacuo_estava_ligado=1; 
                    Vaccum_Switch(TRUE);                     
@@ -2271,8 +2278,7 @@ void Global_Aquecimento_Switch(unsigned char estado){
      char buffer[2]; 
      unsigned char board;
      
-     if(Tamanho_Display!=81)     
-         Rele_Comum_Aquecimento(estado); //Controla o comum do aquecimento
+     if(Tamanho_Display!=81) Rele_Comum_Aquecimento(estado);
      
      for(board=3;board<(totalboard*2-1);board++)
         {
@@ -2295,6 +2301,7 @@ void global_aquecimento(void){
            if((Condensador<Seg_Aq_cond)&&(Vacuometro<Seg_Aq_vacuo)) 
               { 
               if(!DelayBackupReturn(0x05, &timerAquecimento,"Acionando Aquecimento! Aguarde...")) return;               
+              
               flag_global_aquecimento=1;
               Global_Aquecimento_Switch(ON); 
               }
@@ -2317,7 +2324,7 @@ void global_aquecimento(void){
         else
         if((PROCULUS_VP_Read_UInt16(5)==1)&&(flag_global_aquecimento==1))
            {           
-           if((Condensador<Seg_Aq_cond)&&(Vacuometro<(Seg_Aq_vacuo+200.0))) //Histerese do vácuo 200 
+           if((Condensador<Seg_Aq_cond)&&(Vacuometro<(Seg_Aq_vacuo))) //Histerese do vácuo 200 
               {                
               Global_Aquecimento_Switch(ON); 
               }
@@ -3470,10 +3477,40 @@ void AcordaFilha(){
 }
 
 
-void showTotalReset(void){
-    clear_screen();
-    print("-----RELATORIO TECNICO----");
-    //ShowHardwareInfo();
+void RelatorioTecnico(void){
+     int  valor;
+     PROCULUS_Show_Screen(0);
+     clear_screen();
+     print("-----RELATORIO TECNICO----");
+     ShowHardwareInfo();
+     valor=EEPROM_Read_Integer(34);
+     itoa(valor,buffer,10);
+     strcpy(texto,"SERIAL MODULE UPDATE = ");
+     strcat(texto,buffer);
+     print(texto);
+     
+     my_delay_ms_CLRWDT(10000);
+     PROCULUS_VP_Write_UInt16(100,0);
+     PROCULUS_Show_Screen(15);     
+     
+     /*
+     print("SERIAL MODULE UPDATE = ")
+             
+             
+             
+     print("Serao impressas informacoes");
+     print("sobre este hardware...");
+     
+     
+     
+     my_delay_ms_CLRWDT(10000);
+     PROCULUS_VP_Write_UInt16(100,0);
+     PROCULUS_Show_Screen(15);
+     /*     
+     
+     
+     
+     
     print("Reinicializacoes:");
     if(PROCULUS_VP_Read_UInt16(0x00AA)==1)                   
       {
@@ -3512,6 +3549,8 @@ void showTotalReset(void){
       my_delay_ms_CLRWDT(15000);
       PROCULUS_Show_Screen(15);
       }
+       
+    */ 
             
 }
 
@@ -3519,21 +3558,11 @@ void showTotalReset(void){
 void ShowHardwareInfo(){
      char i;
      char destino; 
-     volatile char tipo;
-     volatile int  resposta;
+     char tipo;
+     int  resposta;
      char versao[10];
-     flag_proculus_hs=FALSE;
+
      
-     clear_screen();
-     PROCULUS_Show_Screen(0);     
-     my_delay_ms_CLRWDT(300); 
-     print("JJ Cientifica Ind. e Com. de Eq. Cient. Ltda.");     
-     my_delay_ms_CLRWDT(300);
-     print("CNPJ: 05.678.930/0001-12");     
-     my_delay_ms_CLRWDT(3000);     
-     //print("Inicializando o Sistema...");
-     //my_delay_ms_CLRWDT(300);
-     print("Analisando Hardware. Aguarde...");
      my_delay_ms_CLRWDT(300);
      PROCULUS_VP_Read_String(1990, buffer);
      strcpy(texto,"* : Display      ");
@@ -3551,10 +3580,11 @@ void ShowHardwareInfo(){
      for(destino=1;destino<15;destino++)
         {
         my_delay_ms_CLRWDT(100); 
-        resposta = Send_To_Slave(destino, COMANDO_QUEM_EH_VOCE, 0, buffer);  
-        tipo=Hi(resposta);
-        if(resposta!=-1)
-            {            
+        resposta = Send_To_Slave(destino, COMANDO_QUEM_EH_VOCE, 0, buffer);
+        
+        if(resposta>-1)
+            {
+            tipo=Lo(resposta);
             totalboard++;
             strcpy(texto,"");
             itoa(destino,texto,10); 
@@ -3697,7 +3727,7 @@ void Carregar_Display_Schematic_Color(){
 
 
 void Ligar_Cargas_Compassadamente(){    
-     #define TIMEBLACKOUT 80
+     #define TIMEBLACKOUT 30
      int valor;    
      
      PROCULUS_VP_Write_UInt16(0x02,0); //DATALOG
@@ -4177,8 +4207,9 @@ unsigned char DelayBackupReturn(unsigned int vp, unsigned int *tempo, char texto
       while(*tempo)
            {
            (*tempo)--;
-           Icones_de_alarmes();           
-           my_delay_ms_CLRWDT(1);
+           Icones_de_alarmes();      
+           ShowSensorRealTimeHS();
+           asm("CLRWDT");           
            if(PROCULUS_VP_Read_UInt16(vp)!=1)
              {  
              PROCULUS_VP_Write_UInt16(vp,0);  
@@ -4186,13 +4217,9 @@ unsigned char DelayBackupReturn(unsigned int vp, unsigned int *tempo, char texto
              retorno=FALSE;
              switch(vp)  
                 {     
-                 case 0x03: Condensador_Switch(OFF); break;  //Condensador
-                 case 0x04:      Vaccum_Switch(OFF); break;  //Vacuo
-                 case 0x05:                                  //Aquecimento
-                            Global_Aquecimento_Switch(OFF); 
-                            //if((Tamanho_Display==80)||(Tamanho_Display==50))
-                            //Rele_Comum_Aquecimento(FALSE);                     
-                            break;
+                 case 0x03: Condensador_Switch(OFF); break;       //Condensador
+                 case 0x04:      Vaccum_Switch(OFF); break;       //Vacuo
+                 case 0x05: Global_Aquecimento_Switch(OFF); break; //Aquecimento
                 } 
              }  
            else

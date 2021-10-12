@@ -117,7 +117,7 @@ unsigned char countboard(void);
 int  Send_To_Slave(char destino, char comando, char size, char * buffer); //Comando padrao para conversar com escravo.
 int  Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer); //Comando padrao para conversar com escravo.
 void ShowSensorRealTimeHS(void);
-void showTotalReset(void);
+void RelatorioTecnico(void);
 void AcordaFilha(void);
 
 
