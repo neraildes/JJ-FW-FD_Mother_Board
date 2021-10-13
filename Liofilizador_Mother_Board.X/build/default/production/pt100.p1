@@ -114,6 +114,32 @@ Version 4.0 HI-TECH Software Intermediate Code
 "339
 [; ;./global.h: 339: volatile t_rtc rtc;
 [v _rtc `VS7 ~T0 @X0 1 e ]
+[v F52 `*Cuc ~T0 @X0 -> 15 `i t ]
+"345
+[; ;./global.h: 345: const char *boardtype[6][15]={{"Mother Board"},
+[v _boardtype `F52 ~T0 @X0 -> 6 `i e ]
+[i _boardtype
+:U ..
+:U ..
+:s 1C
+..
+:U ..
+:s 2C
+..
+:U ..
+:s 3C
+..
+:U ..
+:s 4C
+..
+:U ..
+:s 5C
+..
+:U ..
+:s 6C
+..
+..
+]
 "5 pt100.c
 [; ;pt100.c: 5: double PT100_Read_Temperature(unsigned char canal){
 [v _PT100_Read_Temperature `(d ~T0 @X0 1 ef1`uc ]
@@ -129,3 +155,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;pt100.c: 10: }
 [e :UE 8 ]
 }
+[a 1C 77 111 116 104 101 114 32 66 111 97 114 100 0 ]
+[a 2C 86 97 99 99 117 109 32 66 111 97 114 100 0 ]
+[a 5C 82 101 108 97 121 32 66 111 97 114 100 32 0 ]
+[a 3C 80 84 49 48 48 32 66 111 97 114 100 32 0 ]
+[a 6C 87 105 102 105 32 66 111 97 114 100 32 32 0 ]
+[a 4C 78 84 67 32 66 111 97 114 100 32 32 32 0 ]

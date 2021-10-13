@@ -342,12 +342,12 @@ volatile t_rtc rtc;
 
 //------------------------------------------------------------------------------
 
-const char *boardtype[6]={{"Mother Board"},
-                          {"Vaccum Board"},
-                          {"PT100 Board "},
-                          {"NTC Board   "},
-                          {"Relay Board "},
-                          {"Wifi Board  "}}; 
+const char *boardtype[6][15]={{"Mother Board"},
+                              {"Vaccum Board"},
+                              {"PT100 Board "},
+                              {"NTC Board   "},
+                              {"Relay Board "},
+                              {"Wifi Board  "}}; 
 
 #define Mother_Board 0
 #define Vaccum_Board 1

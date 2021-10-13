@@ -1,6 +1,9 @@
 Lista de Revisões
 
 ----------------------------------------------------------------------------------------------------------------
+Versão v1.0.42
+	Exibe corretamente o nome e versão de todas as placas filhas em qualquer situação (placasFilhasInit() criado).
+
 Versão v1.0.41
 	const volatile char *boardtype[6]...  //Não aparecer Mother Board no lugar do nome da placa.
 	Mensagem original com o nome do fabricante do hardware.
@@ -9,6 +12,7 @@ Versão v1.0.41
 	Escolha das cores do grafico para o modelo 400Kg.
 	Implementado contador de reset do módulo serial.
 	Três pontos = RELATÓRIO TÉCNICO.
+
 
 Versão v1.0.40
 	Histerese no Condensador e no Vácuo.

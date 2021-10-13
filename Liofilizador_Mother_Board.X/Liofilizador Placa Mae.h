@@ -168,7 +168,8 @@ void Carregar_tempo_de_datalog(void);
 
 void Carrega_Tupla_Receita(char index, t_receita *receita);
 
-void ShowHardwareInfo(void);
+void placasFilhasInit();
+void ShowHardwareInfo();
 
 void Global_Aquecimento_Switch(unsigned char estado);
 void Gerenciador_de_Senha(void);

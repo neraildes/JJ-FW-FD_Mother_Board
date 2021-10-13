@@ -121,6 +121,17 @@ typedef struct{
 }t_rtc;
 
 volatile t_rtc rtc;
+
+
+
+
+
+const char *boardtype[6][15]={{"Mother Board"},
+                              {"Vaccum Board"},
+                              {"PT100 Board "},
+                              {"NTC Board   "},
+                              {"Relay Board "},
+                              {"Wifi Board  "}};
 # 2 "proculus.c" 2
 
 # 1 "./proculus.h" 1

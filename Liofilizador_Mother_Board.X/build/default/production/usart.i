@@ -4499,6 +4499,17 @@ typedef struct{
 }t_rtc;
 
 volatile t_rtc rtc;
+
+
+
+
+
+const char *boardtype[6][15]={{"Mother Board"},
+                              {"Vaccum Board"},
+                              {"PT100 Board "},
+                              {"NTC Board   "},
+                              {"Relay Board "},
+                              {"Wifi Board  "}};
 # 5 "usart.c" 2
 
 # 1 "./usart.h" 1

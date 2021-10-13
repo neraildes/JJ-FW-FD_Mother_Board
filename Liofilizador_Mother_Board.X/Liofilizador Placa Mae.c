@@ -323,14 +323,10 @@ void main(void)
      print("JJ Cientifica Ind. e Com. de Eq. Cient. Ltda.");     
      my_delay_ms_CLRWDT(300);
      print("CNPJ: 05.678.930/0001-12");     
-     my_delay_ms_CLRWDT(3000);     
+//     my_delay_ms_CLRWDT(3000);     
      //print("Inicializando o Sistema...");
      //my_delay_ms_CLRWDT(300);
-     print("Analisando Hardware. Aguarde...");     
-     ShowHardwareInfo();  
-     
-     
-     my_delay_ms_CLRWDT(2500);
+
  
      //------------Valores Iniciais da tela Principal---------------------------
 
@@ -411,9 +407,7 @@ void main(void)
      //=========================================================================
         FAT8_Show();
         
-        Ligar_Cargas_Compassadamente();
-        PROCULUS_Show_Screen(15);
-        
+       
         PROCULUS_VP_Write_UInt16(0x40,0); //Icone do computador conectado
         flag_pc_conected                 =FALSE;
         flag_autoriza_click_datalog      =0;
@@ -422,9 +416,15 @@ void main(void)
         flag_autoriza_click_aquecimento  =0;        
         
         
-        PROCULUS_Show_Screen(15);     
+        //PROCULUS_Show_Screen(15);     
         PROCULUS_VP_Write_UInt16(1,0); //ACENDE ICONE TEIMOSO
         flag_usart_error=0;
+        
+     print("Analisando Hardware. Aguarde...");     
+     ShowHardwareInfo();       
+     Ligar_Cargas_Compassadamente();
+     PROCULUS_Show_Screen(15);     
+     my_delay_ms_CLRWDT(2500);        
      
         while(1)
              {
@@ -467,6 +467,8 @@ void main(void)
                 
                 
                 if(PROCULUS_VP_Read_UInt16(100)==1) RelatorioTecnico(); //Exibe relatório técnico
+                
+               
                 
                 
                 //INDICA SE OCORREU TRAVAMENTO DO RX DAS PLACAS
@@ -3555,41 +3557,56 @@ void RelatorioTecnico(void){
 }
 
 
+
 void ShowHardwareInfo(){
      char i;
-     char destino; 
-     char tipo;
+     char destino;   
+     char tipo=0;
      int  resposta;
      char versao[10];
-
      
+     placasFilhasInit();  //Inicializa comunicação com Placas Filhas;
      my_delay_ms_CLRWDT(300);
      PROCULUS_VP_Read_String(1990, buffer);
      strcpy(texto,"* : Display      ");
      strcat(texto,buffer);
      print(texto);
-     my_delay_ms_CLRWDT(300);     
+     my_delay_ms_CLRWDT(500);     
      
      
      Send_To_Slave(destino, COMANDO_QUEM_EH_VOCE, 0, buffer);
+     
+     
      totalboard=0;
      strcpy(texto,"");
      strcat(texto,"* : Mother Board ");
      strcat(texto,FVERSION);
      print(texto);
+     
      for(destino=1;destino<15;destino++)
         {
         my_delay_ms_CLRWDT(100); 
+        //flag_proculus_hs=FALSE;
         resposta = Send_To_Slave(destino, COMANDO_QUEM_EH_VOCE, 0, buffer);
         
-        if(resposta>-1)
+        if(resposta!=-1)
             {
             tipo=Lo(resposta);
+            
+            
+            for(char c=0;c<tipo;c++){
+                PROCULUS_Buzzer(200);       
+                my_delay_ms_CLRWDT(300);
+            }
+            my_delay_ms_CLRWDT(3000);
+            
+            
+            
             totalboard++;
             strcpy(texto,"");
             itoa(destino,texto,10); 
             strcat(texto," : ");             
-            strcat(texto, boardtype[tipo]);
+            strcat(texto, boardtype[tipo][0]);
             strcat(texto," ");
             strcpy(buffer," ");
             Send_To_Slave(destino, COMMAND_VERSION, 0, buffer);
@@ -4244,4 +4261,11 @@ if(memo_statuspower!=statuspower.bits)
   EEPROM_Write_Byte(16,statuspower.bits);  //Todos os Status  
   memo_statuspower=statuspower.bits;
   }        
+}
+
+void placasFilhasInit(){
+     for(char i=0;i<15;i++){
+         my_delay_ms_CLRWDT(300);
+         Send_To_Slave(i, COMANDO_QUEM_EH_VOCE, 0, buffer); 
+     }    
 }

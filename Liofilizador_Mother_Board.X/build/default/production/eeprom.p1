@@ -575,6 +575,32 @@ Version 4.0 HI-TECH Software Intermediate Code
 "339
 [; ;./global.h: 339: volatile t_rtc rtc;
 [v _rtc `VS276 ~T0 @X0 1 e ]
+[v F2482 `*Cuc ~T0 @X0 -> 15 `i t ]
+"345
+[; ;./global.h: 345: const char *boardtype[6][15]={{"Mother Board"},
+[v _boardtype `F2482 ~T0 @X0 -> 6 `i e ]
+[i _boardtype
+:U ..
+:U ..
+:s 1C
+..
+:U ..
+:s 2C
+..
+:U ..
+:s 3C
+..
+:U ..
+:s 4C
+..
+:U ..
+:s 5C
+..
+:U ..
+:s 6C
+..
+..
+]
 "20 eeprom.c
 [; ;eeprom.c: 20: void EEPROM_Write_Byte(unsigned int addr, unsigned char dado)
 [v _EEPROM_Write_Byte `(v ~T0 @X0 1 ef2`ui`uc ]
@@ -1340,3 +1366,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;eeprom.c: 265: }
 [e :UE 336 ]
 }
+[a 1C 77 111 116 104 101 114 32 66 111 97 114 100 0 ]
+[a 2C 86 97 99 99 117 109 32 66 111 97 114 100 0 ]
+[a 5C 82 101 108 97 121 32 66 111 97 114 100 32 0 ]
+[a 3C 80 84 49 48 48 32 66 111 97 114 100 32 0 ]
+[a 6C 87 105 102 105 32 66 111 97 114 100 32 32 0 ]
+[a 4C 78 84 67 32 66 111 97 114 100 32 32 32 0 ]

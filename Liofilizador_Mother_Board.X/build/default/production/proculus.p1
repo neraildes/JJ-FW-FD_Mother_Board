@@ -27,9 +27,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./global.h: 332: typedef struct{
 [s S7 `ui 1 `uc 1 `uc 1 `uc 1 ]
 [n S7 . milisegundo segundo minuto hora ]
-[v F2584 `(v ~T0 @X0 1 tf1`ul ]
+[v F2586 `(v ~T0 @X0 1 tf1`ul ]
 "203 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
-[v __delay `JF2584 ~T0 @X0 0 e ]
+[v __delay `JF2586 ~T0 @X0 0 e ]
 [p i __delay ]
 "38 ./usart.h
 [; ;./usart.h: 38: void USART_put_int(unsigned int value);
@@ -152,6 +152,32 @@ Version 4.0 HI-TECH Software Intermediate Code
 "339
 [; ;./global.h: 339: volatile t_rtc rtc;
 [v _rtc `VS7 ~T0 @X0 1 e ]
+[v F52 `*Cuc ~T0 @X0 -> 15 `i t ]
+"345
+[; ;./global.h: 345: const char *boardtype[6][15]={{"Mother Board"},
+[v _boardtype `F52 ~T0 @X0 -> 6 `i e ]
+[i _boardtype
+:U ..
+:U ..
+:s 1C
+..
+:U ..
+:s 2C
+..
+:U ..
+:s 3C
+..
+:U ..
+:s 4C
+..
+:U ..
+:s 5C
+..
+:U ..
+:s 6C
+..
+..
+]
 "54 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -1037,19 +1063,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _bcd2str (2 , *U + &U _retorno * -> -> -> 2 `i `ui `ux -> -> # *U &U _retorno `ui `ux &U _day ]
 "163
 [; ;proculus.c: 163:         strcpy(date,"");
-[e ( _strcpy (2 , _date :s 1C ]
+[e ( _strcpy (2 , _date :s 7C ]
 "164
 [; ;proculus.c: 164:         strcat(date,day);
 [e ( _strcat (2 , _date -> &U _day `*Cuc ]
 "165
 [; ;proculus.c: 165:         strcat(date,"/");
-[e ( _strcat (2 , _date :s 2C ]
+[e ( _strcat (2 , _date :s 8C ]
 "166
 [; ;proculus.c: 166:         strcat(date,month);
 [e ( _strcat (2 , _date -> &U _month `*Cuc ]
 "167
 [; ;proculus.c: 167:         strcat(date,"/");
-[e ( _strcat (2 , _date :s 3C ]
+[e ( _strcat (2 , _date :s 9C ]
 "168
 [; ;proculus.c: 168:         strcat(date,year);
 [e ( _strcat (2 , _date -> &U _year `*Cuc ]
@@ -1064,19 +1090,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _bcd2str (2 , *U + &U _retorno * -> -> -> 6 `i `ui `ux -> -> # *U &U _retorno `ui `ux &U _second ]
 "174
 [; ;proculus.c: 174:         strcpy(time,"");
-[e ( _strcpy (2 , _time :s 4C ]
+[e ( _strcpy (2 , _time :s 10C ]
 "175
 [; ;proculus.c: 175:         strcat(time,hour);
 [e ( _strcat (2 , _time -> &U _hour `*Cuc ]
 "176
 [; ;proculus.c: 176:         strcat(time,":");
-[e ( _strcat (2 , _time :s 5C ]
+[e ( _strcat (2 , _time :s 11C ]
 "177
 [; ;proculus.c: 177:         strcat(time,minute);
 [e ( _strcat (2 , _time -> &U _minute `*Cuc ]
 "178
 [; ;proculus.c: 178:         strcat(time,":");
-[e ( _strcat (2 , _time :s 6C ]
+[e ( _strcat (2 , _time :s 12C ]
 "179
 [; ;proculus.c: 179:         strcat(time,second);
 [e ( _strcat (2 , _time -> &U _second `*Cuc ]
@@ -1842,8 +1868,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _i `i ~T0 @X0 1 a ]
 "525
 [; ;proculus.c: 525:      static unsigned int retorno=0;
-[v F3873 `ui ~T0 @X0 1 s retorno ]
-[i F3873
+[v F3875 `ui ~T0 @X0 1 s retorno ]
+[i F3875
 -> -> 0 `i `ui
 ]
 "526
@@ -1891,7 +1917,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "546
 [; ;proculus.c: 546:               retorno=(usart_buffer[6]<<8)+usart_buffer[7];
-[e = F3873 -> + << -> *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
+[e = F3875 -> + << -> *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
 "547
 [; ;proculus.c: 547:               break;
 [e $U 363  ]
@@ -1918,7 +1944,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _my_delay_ms (1 -> -> 1 `i `l ]
 "553
 [; ;proculus.c: 553:      return retorno;
-[e ) F3873 ]
+[e ) F3875 ]
 [e $UE 361  ]
 "554
 [; ;proculus.c: 554:      }
@@ -2066,9 +2092,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;proculus.c: 622: }
 [e :UE 372 ]
 }
-[a 5C 58 0 ]
-[a 6C 58 0 ]
-[a 2C 47 0 ]
-[a 3C 47 0 ]
-[a 1C 0 ]
-[a 4C 0 ]
+[a 1C 77 111 116 104 101 114 32 66 111 97 114 100 0 ]
+[a 2C 86 97 99 99 117 109 32 66 111 97 114 100 0 ]
+[a 11C 58 0 ]
+[a 12C 58 0 ]
+[a 8C 47 0 ]
+[a 9C 47 0 ]
+[a 5C 82 101 108 97 121 32 66 111 97 114 100 32 0 ]
+[a 3C 80 84 49 48 48 32 66 111 97 114 100 32 0 ]
+[a 6C 87 105 102 105 32 66 111 97 114 100 32 32 0 ]
+[a 4C 78 84 67 32 66 111 97 114 100 32 32 32 0 ]
+[a 7C 0 ]
+[a 10C 0 ]

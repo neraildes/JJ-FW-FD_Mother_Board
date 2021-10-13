@@ -4497,6 +4497,17 @@ typedef struct{
 }t_rtc;
 
 volatile t_rtc rtc;
+
+
+
+
+
+const char *boardtype[6][15]={{"Mother Board"},
+                              {"Vaccum Board"},
+                              {"PT100 Board "},
+                              {"NTC Board   "},
+                              {"Relay Board "},
+                              {"Wifi Board  "}};
 # 3 "isr.c" 2
 
 # 1 "./isr.h" 1
@@ -4794,7 +4805,8 @@ void Carregar_tempo_de_datalog(void);
 
 void Carrega_Tupla_Receita(char index, t_receita *receita);
 
-void ShowHardwareInfo(void);
+void placasFilhasInit();
+void ShowHardwareInfo();
 
 void Global_Aquecimento_Switch(unsigned char estado);
 void Gerenciador_de_Senha(void);
