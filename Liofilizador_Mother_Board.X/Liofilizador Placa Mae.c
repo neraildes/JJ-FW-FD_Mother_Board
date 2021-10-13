@@ -259,26 +259,31 @@ void main(void)
             maxlineDATALOG=8; 
             }
      
-     
+
+     //-------------------------------------------------------------------------
+     flag_proculus_hs=FALSE;     
+     clear_screen();
+     PROCULUS_Show_Screen(0);     
+     my_delay_ms_CLRWDT(300); 
+     print("JJ Cientifica Ind. e Com. de Eq. Cient. Ltda.");     
+     my_delay_ms_CLRWDT(300);
+     print("CNPJ: 05.678.930/0001-12");     
+     //-------------------------------------------------------------------------     
      {
-     //-----------TOTALIZADOR DE RESET-------------         
-     unsigned int reset;    
-     reset=EEPROM_Read_Integer(34);
-     if(reset==0xFFFF)
+     //-----------TOTALIZADOR DE REINICIO DE MODULO USART -------------              
+     unsigned int reset_usart;    
+     reset_usart=EEPROM_Read_Integer(34);
+     if(reset_usart==0xFFFF)
        {  
        EEPROM_Write_Integer(34,0);   //Totalizador de Reset
-       //EEPROM_Write_Integer(0xE8,0); //Totalizador de repique do vacuo;
        }
-     //reset++;
-     //EEPROM_Write_Integer(34,reset);
-     //flag_Vacuo_estava_ligado=0;
      }
      
      //-------------------------------------------------------------------------
      if(EEPROM_Read_Byte(OFFSET_EEPROM)==0xFF)
        {         
-       print("Aguarde, preparando a máquina para"); 
-       print("a primeira inicialização.");
+       print("Aguarde, preparando a maquina para"); 
+       print("a primeira inicializacao.");
        Formatar_Banco_de_Dados(0,10);
        Formatar_Lista_de_Receitas();
        Formatar_Dados_de_Seguranca();
@@ -297,42 +302,26 @@ void main(void)
        EEPROM_24C1025_Write_Long(0,2,0); //Inicializa add_datalog
        EEPROM_Write_Integer(0xFA,50);      //Resolucao padrao do display
        } 
-     else
-       {
-       print("INDKA Sistema Operacional.");  
-       print("Desenvolvimento de Hardware e Software");
-       print("www.indka.com.br");
-       print("Tel. (16) 99600-9172");
-       my_delay_ms_CLRWDT(2000);
-       }   
-     RecallBlackoutStatus();
+     //print("Analisando status de blackout...");
+     RecallBlackoutStatus();     
      TrendCurveFuncao(LOAD);
      senha_atual=EEPROM_Read_Long32(11);
      Carregar_Status_da_Senha_Global(); 
+     print("Carregando parametros de seguranca...");
      Carregar_Parametros_de_Seguranca();
      Carregar_tempo_de_datalog(); //Intervalo de capturas
+     print("Inicializando datalog...");
      add_datalog=EEPROM_24C1025_Read_Long (0,2); //Inicializa add_datalog
      
 
      
-     //-------------------------------------------------------------------------
-     flag_proculus_hs=FALSE;     
-     clear_screen();
-     PROCULUS_Show_Screen(0);     
-     my_delay_ms_CLRWDT(300); 
-     print("JJ Cientifica Ind. e Com. de Eq. Cient. Ltda.");     
-     my_delay_ms_CLRWDT(300);
-     print("CNPJ: 05.678.930/0001-12");     
-//     my_delay_ms_CLRWDT(3000);     
-     //print("Inicializando o Sistema...");
-     //my_delay_ms_CLRWDT(300);
 
  
      //------------Valores Iniciais da tela Principal---------------------------
 
      
      //======================== INFORMAÇÕES INICIAIS ===========================     
-     print("Analisando dados...");  
+     print("Analisando dados, aguarde...");  
      for(char i=0;i<15;i++)
         {
         asm("CLRWDT"); 
@@ -420,11 +409,14 @@ void main(void)
         PROCULUS_VP_Write_UInt16(1,0); //ACENDE ICONE TEIMOSO
         flag_usart_error=0;
         
-     print("Analisando Hardware. Aguarde...");     
+     print("Analisando Hardware. Aguarde..."); 
+     placasFilhasInit();  //Inicializa comunicação com Placas Filhas;
      ShowHardwareInfo();       
      Ligar_Cargas_Compassadamente();
-     PROCULUS_Show_Screen(15);     
      my_delay_ms_CLRWDT(2500);        
+     PROCULUS_Show_Screen(15);     
+     
+     
      
         while(1)
              {
@@ -3563,9 +3555,8 @@ void ShowHardwareInfo(){
      char destino;   
      char tipo=0;
      int  resposta;
-     char versao[10];
+     char versao[10];     
      
-     placasFilhasInit();  //Inicializa comunicação com Placas Filhas;
      my_delay_ms_CLRWDT(300);
      PROCULUS_VP_Read_String(1990, buffer);
      strcpy(texto,"* : Display      ");
@@ -3592,16 +3583,6 @@ void ShowHardwareInfo(){
         if(resposta!=-1)
             {
             tipo=Lo(resposta);
-            
-            
-            for(char c=0;c<tipo;c++){
-                PROCULUS_Buzzer(200);       
-                my_delay_ms_CLRWDT(300);
-            }
-            my_delay_ms_CLRWDT(3000);
-            
-            
-            
             totalboard++;
             strcpy(texto,"");
             itoa(destino,texto,10); 
@@ -3759,15 +3740,15 @@ void Ligar_Cargas_Compassadamente(){
      
      if(statuspower.bits!=0)
           {   
-          print("Condicao de blackout encontrada!");
-          print("Listando Cargas que serao ativadas...");          
+          print("Houve BLACKOUT!");
+          print("Ativando Recuperacao!");          
           
           Contagem_Tempo_de_Processo(FALSE);  
           
           if(flag_global_datalog==1)
              {              
              flag_global_datalog=0;
-             print("1-DataLog sera ativado.");
+             print("1-DataLog.");
              PROCULUS_VP_Write_UInt16(0x02,1); //Datalog
              timerDatalog=0;             
              }          
@@ -3775,7 +3756,7 @@ void Ligar_Cargas_Compassadamente(){
           if((Tamanho_Display==81)&&(flag_regrigeracao_fluido))
             {   
             flag_regrigeracao_fluido=0;
-            print("2-Refrigeracao do fluido sera Ativada.");
+            print("2-Estante.");
             PROCULUS_VP_Write_UInt16(0x13,1);//Porta 
             timerEstante=TIMEBLACKOUT;
             }
@@ -3787,7 +3768,7 @@ void Ligar_Cargas_Compassadamente(){
           if(flag_global_condensador==1)
             { 
             flag_global_condensador=0;
-            print("2-Condensador sera Ativado.");
+            print("2-Condensador.");
             PROCULUS_VP_Write_UInt16(0x03,1);  //Condensador
             timerCondensador=TIMEBLACKOUT;
             }
@@ -3799,7 +3780,7 @@ void Ligar_Cargas_Compassadamente(){
             {
             flag_global_vacuo=0;
             flag_time_process=TRUE;
-            print("3-Bomba de vacuo sera ativada.");
+            print("3-Bomba de vacuo.");
             PROCULUS_VP_Write_UInt16(0x04,1);  //Vacuo
             timerVacuo=TIMEBLACKOUT;
             }
@@ -3809,7 +3790,7 @@ void Ligar_Cargas_Compassadamente(){
           if(flag_global_aquecimento==1)
             {   
             flag_global_aquecimento=0;
-            print("4-Aquecimento sera ativado.");
+            print("4-Aquecimento.");
             PROCULUS_VP_Write_UInt16(0x05,1);//Aquecimento 
             timerAquecimento=TIMEBLACKOUT;
             }
