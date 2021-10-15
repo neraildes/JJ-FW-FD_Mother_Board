@@ -6364,7 +6364,10 @@ void main(void)
                                                {
 
                                                if(Tamanho_Display==50)canal=icone;
+                                               else
                                                if(Tamanho_Display==80)canal=MenorCanalLivre();
+                                               else
+                                               if(Tamanho_Display==81)canal=MenorCanalLivre();
 
                                                if(canal<8)
                                                   {
@@ -6605,7 +6608,7 @@ int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
     }
     return 0;
 }
-# 949 "Liofilizador Placa Mae.c"
+# 952 "Liofilizador Placa Mae.c"
 void ShowSensorRealTimeHS(void)
      {
      char bb[3];
@@ -6737,7 +6740,7 @@ void ShowSensorRealTimeHS(void)
       statusgen1.flag_proculus_hs=0;
 
      }
-# 1089 "Liofilizador Placa Mae.c"
+# 1092 "Liofilizador Placa Mae.c"
 void Carrega_Tupla_Receita(char index, t_receita *receita){
      unsigned int addeeprom;
 
@@ -6786,7 +6789,7 @@ void Exibe_Receita(int index){
      texto[8]=0;
      PROCULUS_VP_Write_String(vp+4,texto);
 }
-# 1155 "Liofilizador Placa Mae.c"
+# 1158 "Liofilizador Placa Mae.c"
 void DataBaseBackupMain(unsigned char tupla)
       {
       unsigned int vp;
@@ -6920,7 +6923,7 @@ void FAT8_Show(){
         }
 
 }
-# 1300 "Liofilizador Placa Mae.c"
+# 1303 "Liofilizador Placa Mae.c"
  void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
       {
       char CanalAD;
@@ -6960,7 +6963,7 @@ void FAT8_Show(){
       EEPROM_Read_String(addEEPROM + 6,liofilizador->receita);
       liofilizador->status = EEPROM_Read_Integer(addEEPROM+16);
       }
-# 1353 "Liofilizador Placa Mae.c"
+# 1356 "Liofilizador Placa Mae.c"
  void Set_Receita(unsigned char index, char status)
       {
       int vp;
@@ -7020,7 +7023,7 @@ void FAT8_Show(){
          PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
          }
 }
-# 1420 "Liofilizador Placa Mae.c"
+# 1423 "Liofilizador Placa Mae.c"
 void save_datalog(unsigned long add_datalog){
      char index;
      char bb[4];
@@ -7042,7 +7045,7 @@ void save_datalog(unsigned long add_datalog){
             }
          }
 }
-# 1450 "Liofilizador Placa Mae.c"
+# 1453 "Liofilizador Placa Mae.c"
  void ShowAndSetSlaveParameters(unsigned char tupla)
       {
       unsigned char CanalAD;
@@ -7074,7 +7077,7 @@ void save_datalog(unsigned long add_datalog){
       PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
 
       }
-# 1490 "Liofilizador Placa Mae.c"
+# 1493 "Liofilizador Placa Mae.c"
 void Send_to_PC(unsigned char size){
 
 
@@ -7083,7 +7086,7 @@ void Send_to_PC(unsigned char size){
      USART_putc(usart_protocol.origem);
      USART_putc(usart_protocol.command);
      USART_putc(size);
-# 1508 "Liofilizador Placa Mae.c"
+# 1511 "Liofilizador Placa Mae.c"
 }
 
 
@@ -7120,7 +7123,7 @@ void Decodify_Command(void){
 
 
     switch(usart_protocol.command){
-# 1575 "Liofilizador Placa Mae.c"
+# 1578 "Liofilizador Placa Mae.c"
         case 0x08:
              EEPROM_Write_Byte((int)usart_protocol.value[0]<<8 |
                                (int)usart_protocol.value[1]<<0,
@@ -7347,7 +7350,7 @@ void Decodify_Command(void){
              PORTDbits.RD5=0;
              break;
              }
-# 1812 "Liofilizador Placa Mae.c"
+# 1815 "Liofilizador Placa Mae.c"
         case 0X24:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
@@ -8124,7 +8127,7 @@ void pagina_19(void)
 
 
                 flag_upLoadTambem=1;
-# 2596 "Liofilizador Placa Mae.c"
+# 2599 "Liofilizador Placa Mae.c"
             }
          else
             {
@@ -8219,7 +8222,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2698 "Liofilizador Placa Mae.c"
+# 2701 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -8374,7 +8377,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2860 "Liofilizador Placa Mae.c"
+# 2863 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
@@ -8700,7 +8703,7 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 
      PROCULUS_graphic_plot(LCDchannel, value);
 }
-# 3214 "Liofilizador Placa Mae.c"
+# 3217 "Liofilizador Placa Mae.c"
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd)
      {
      char txt[30];
@@ -8976,7 +8979,7 @@ void RelatorioTecnico(void){
      my_delay_ms_CLRWDT(10000);
      PROCULUS_VP_Write_UInt16(100,0);
      PROCULUS_Show_Screen(15);
-# 3549 "Liofilizador Placa Mae.c"
+# 3552 "Liofilizador Placa Mae.c"
 }
 
 
@@ -9088,12 +9091,15 @@ void Incrementa_Contador_de_Repique_do_Vacuo(){
 
 void Carregar_Display_Schematic_Color(){
 
+
+
+
      Tamanho_Display=EEPROM_Read_Integer(0xFA);
      PROCULUS_VP_Write_UInt16(214,Tamanho_Display);
 
      if(Tamanho_Display==50){
           TrendColor[0] =0xF800;
-          TrendColor[1] =0x07E0;
+          TrendColor[1] =0x05A0;
           TrendColor[2] =0x001F;
           TrendColor[3] =0x0000;
           TrendColor[4] =0xD540;
@@ -9117,14 +9123,14 @@ void Carregar_Display_Schematic_Color(){
           TrendColor[7] =0xFBF7;
           TrendColor[8] =0xD540;
           TrendColor[9] =0x03E0;
-          TrendColor[10]=0x07E0;
+          TrendColor[10]=0x05A0;
           TrendColor[11]=0x001F;
           TrendColor[12]=0xF81F;
           }
      else if(Tamanho_Display==81)
           {
-          TrendColor[0] =0xF800;
-          TrendColor[1] =0x07E0;
+          TrendColor[0] =0xFBF7;
+          TrendColor[1] =0x05A0;
           TrendColor[2] =0x001F;
           TrendColor[3] =0x0000;
           TrendColor[4] =0xF800;
@@ -9405,7 +9411,7 @@ void FAT8_Write_Process_Finalize(){
       strcpy(fat8.processo.fim.time,time);
       fat8.processo.minutes=processo_totalminuto;
       }
-# 3985 "Liofilizador Placa Mae.c"
+# 3991 "Liofilizador Placa Mae.c"
     fat8.processo.add_end=add_datalog;
 
     fat8.processo.flag_running=0;

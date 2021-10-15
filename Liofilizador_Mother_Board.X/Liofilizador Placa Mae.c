@@ -697,7 +697,10 @@ void main(void)
                                                {
 
                                                if(Tamanho_Display==50)canal=icone;
+                                               else
                                                if(Tamanho_Display==80)canal=MenorCanalLivre();
+                                               else
+                                               if(Tamanho_Display==81)canal=MenorCanalLivre();
 
                                                if(canal<8)
                                                   { 											                                                                 
@@ -3656,13 +3659,16 @@ void Incrementa_Contador_de_Repique_do_Vacuo(){
 
 
 void Carregar_Display_Schematic_Color(){
+    
+    //Para escolher uma cor, visite o site:
+    // http://www.rinkydinkelectronics.com/calc_rgb565.php
      
      Tamanho_Display=EEPROM_Read_Integer(0xFA);     
      PROCULUS_VP_Write_UInt16(214,Tamanho_Display);
      
      if(Tamanho_Display==50){               
           TrendColor[0] =0xF800; //Vermelho vivo
-          TrendColor[1] =0x07E0; //Verde Claro
+          TrendColor[1] =0x05A0; //Verde Claro
           TrendColor[2] =0x001F; //Azul                              
           TrendColor[3] =0x0000; //Preto
           TrendColor[4] =0xD540; //Amarelo Escuro
@@ -3686,14 +3692,14 @@ void Carregar_Display_Schematic_Color(){
           TrendColor[7] =0xFBF7; //Rosa
           TrendColor[8] =0xD540; //Amarelo Escuro
           TrendColor[9] =0x03E0; //Verde Escuro
-          TrendColor[10]=0x07E0; //Verde Claro
+          TrendColor[10]=0x05A0; //Verde Claro 
           TrendColor[11]=0x001F; //Azul 
           TrendColor[12]=0xF81F; //Roxo
           }     
      else if(Tamanho_Display==81)
           { 
-          TrendColor[0] =0xF800; //Vermelho vivo
-          TrendColor[1] =0x07E0; //Verde Claro
+          TrendColor[0] =0xFBF7; //Rosa          
+          TrendColor[1] =0x05A0; //Verde
           TrendColor[2] =0x001F; //Azul                              
           TrendColor[3] =0x0000; //Preto         
           TrendColor[4] =0xF800; //Vermelho vivo          
