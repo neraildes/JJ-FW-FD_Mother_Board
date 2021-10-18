@@ -993,6 +993,11 @@ void ShowSensorRealTimeHS(void)
         }
      
      //-------------------------------------------------------------------------
+     if(Tamanho_Display==81)
+       {      
+       leitura[5]=leitura[6];  
+       }
+     
      //APAGAR ESTE TESTE
      /*
      leitura[0]=800;
@@ -3711,9 +3716,9 @@ void Carregar_Display_Schematic_Color(){
           { 
           TrendColor[0] =0xFBF7; //Rosa          
           TrendColor[1] =0x05A0; //Verde
-          TrendColor[2] =0x001F; //Azul                              
-          TrendColor[3] =0x0000; //Preto         
-          TrendColor[4] =0xF800; //Vermelho vivo          
+          TrendColor[2] =0x001F; //Azul  
+          TrendColor[3] =0xF800; //Vermelho vivo 
+          TrendColor[4] =0x0000; //Preto                   
           TrendColor[5] =0xFFFF; //BRANCO
           TrendColor[6] =0xFFFF; //BRANCO
           TrendColor[7] =0xFFFF; //BRANCO
