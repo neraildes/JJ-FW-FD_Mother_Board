@@ -992,6 +992,17 @@ void ShowSensorRealTimeHS(void)
         flag_array_slave_WDT[SlaveBoard]=TRUE;
         }
      
+     //-------------------------------------------------------------------------
+     //APAGAR ESTE TESTE
+     /*
+     leitura[0]=800;
+     leitura[1]=700;
+     leitura[2]=600;
+     leitura[3]=500;
+     leitura[4]=400;
+     leitura[5]=300;
+     leitura[6]=200;
+     */
      
      //------------------------GRAVA NO DISPLAY---------------------------------
      my_delay_ms(50);
