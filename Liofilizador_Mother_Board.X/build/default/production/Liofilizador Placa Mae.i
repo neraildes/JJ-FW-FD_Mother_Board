@@ -9299,13 +9299,13 @@ void Plotar_Grafico_Gravado(void)
 
 
           _delay((unsigned long)((50)*(32000000/4000.0)));
-          for(char i=0;i<totalboard*2;i++)
+          for(char i=0;i<totalboard*2;i)
              {
-             switch(i)
+             switch(i++)
                    {
-                   case 0: PROCULUS_graphic_plot(i+1,(leitura[i]*0.4546));break;
-                   case 1: PROCULUS_graphic_plot(i+1,(leitura[i]*0.05));break;
-                  default: PROCULUS_graphic_plot(i+1,(leitura[i]*1.0));break;
+                   case 0: PROCULUS_graphic_plot(i,(leitura[i]*0.4546));break;
+                   case 1: PROCULUS_graphic_plot(i,(leitura[i]*0.05));break;
+                  default: PROCULUS_graphic_plot(i,(leitura[i]*1.0));break;
                    }
              }
 

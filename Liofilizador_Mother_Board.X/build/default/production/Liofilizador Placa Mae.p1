@@ -10212,7 +10212,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 3882:           _delay((unsigned long)((50)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "3883
-[; ;Liofilizador Placa Mae.c: 3883:           for(char i=0;i<totalboard*2;i++)
+[; ;Liofilizador Placa Mae.c: 3883:           for(char i=0;i<totalboard*2;i)
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -10222,39 +10222,39 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 3884:              {
 {
 "3885
-[; ;Liofilizador Placa Mae.c: 3885:              switch(i)
+[; ;Liofilizador Placa Mae.c: 3885:              switch(i++)
 [e $U 928  ]
 "3886
 [; ;Liofilizador Placa Mae.c: 3886:                    {
 {
 "3887
-[; ;Liofilizador Placa Mae.c: 3887:                    case 0: PROCULUS_graphic_plot(i+1,(leitura[i]*0.4546));break;
+[; ;Liofilizador Placa Mae.c: 3887:                    case 0: PROCULUS_graphic_plot(i,(leitura[i]*0.4546));break;
 [e :U 929 ]
-[e ( _PROCULUS_graphic_plot (2 , -> + -> _i `i -> 1 `i `uc -> * -> *U + &U _leitura * -> _i `ux -> -> # *U &U _leitura `ui `ux `d .0.4546 `ui ]
+[e ( _PROCULUS_graphic_plot (2 , -> _i `uc -> * -> *U + &U _leitura * -> _i `ux -> -> # *U &U _leitura `ui `ux `d .0.4546 `ui ]
 [e $U 927  ]
 "3888
-[; ;Liofilizador Placa Mae.c: 3888:                    case 1: PROCULUS_graphic_plot(i+1,(leitura[i]*0.05));break;
+[; ;Liofilizador Placa Mae.c: 3888:                    case 1: PROCULUS_graphic_plot(i,(leitura[i]*0.05));break;
 [e :U 930 ]
-[e ( _PROCULUS_graphic_plot (2 , -> + -> _i `i -> 1 `i `uc -> * -> *U + &U _leitura * -> _i `ux -> -> # *U &U _leitura `ui `ux `d .0.05 `ui ]
+[e ( _PROCULUS_graphic_plot (2 , -> _i `uc -> * -> *U + &U _leitura * -> _i `ux -> -> # *U &U _leitura `ui `ux `d .0.05 `ui ]
 [e $U 927  ]
 "3889
-[; ;Liofilizador Placa Mae.c: 3889:                   default: PROCULUS_graphic_plot(i+1,(leitura[i]*1.0));break;
+[; ;Liofilizador Placa Mae.c: 3889:                   default: PROCULUS_graphic_plot(i,(leitura[i]*1.0));break;
 [e :U 931 ]
-[e ( _PROCULUS_graphic_plot (2 , -> + -> _i `i -> 1 `i `uc -> * -> *U + &U _leitura * -> _i `ux -> -> # *U &U _leitura `ui `ux `d .1.0 `ui ]
+[e ( _PROCULUS_graphic_plot (2 , -> _i `uc -> * -> *U + &U _leitura * -> _i `ux -> -> # *U &U _leitura `ui `ux `d .1.0 `ui ]
 [e $U 927  ]
 "3890
 [; ;Liofilizador Placa Mae.c: 3890:                    }
 }
 [e $U 927  ]
 [e :U 928 ]
-[e [\ -> _i `i , $ -> 0 `i 929
+[e [\ -> ++ _i -> -> 1 `i `uc `i , $ -> 0 `i 929
  , $ -> 1 `i 930
  931 ]
 [e :U 927 ]
 "3891
 [; ;Liofilizador Placa Mae.c: 3891:              }
 }
-[e ++ _i -> -> 1 `i `uc ]
+[e _i ]
 [e :U 926 ]
 [e $ < -> _i `i * -> _totalboard `i -> 2 `i 923  ]
 [e :U 924 ]

@@ -704,7 +704,7 @@ void main(void)
 
                                                if(canal<8)
                                                   { 											                                                                 
-                                                  PROCULUS_VP_Write_UInt16(0x310+icone,icone+1); //Colore o quadrado com uma cor fixa                                           
+                                                  PROCULUS_VP_Write_UInt16(0x310+icone,icone+1); //Colore o quadrado com uma cor fixa 
                                                   PROCULUS_VP_Write_UInt16((canal*10+PPCANAL),(canal<<8)|(0x0001)); //Seta um canal para um dos 13 icones
                                                   PROCULUS_VP_Write_UInt16((canal*10+PPCOR),TrendColor[icone]);     //Seta uma cor de linha do grafico											                                             
 
@@ -3880,13 +3880,13 @@ void Plotar_Grafico_Gravado(void)
           
           //  plotando no grafico
           __delay_ms(50);
-          for(char i=0;i<totalboard*2;i++)
+          for(char i=0;i<totalboard*2;i)
              {
-             switch(i)
+             switch(i++)
                    {
-                   case 0: PROCULUS_graphic_plot(i+1,(leitura[i]*FATOR_TENSAO));break;
-                   case 1: PROCULUS_graphic_plot(i+1,(leitura[i]*FATOR_VACUO));break;
-                  default: PROCULUS_graphic_plot(i+1,(leitura[i]*FATOR_PADRAO));break;
+                   case 0: PROCULUS_graphic_plot(i,(leitura[i]*FATOR_TENSAO));break;
+                   case 1: PROCULUS_graphic_plot(i,(leitura[i]*FATOR_VACUO));break;
+                  default: PROCULUS_graphic_plot(i,(leitura[i]*FATOR_PADRAO));break;
                    }               
              }  
 
