@@ -1062,8 +1062,8 @@ void ShowSensorRealTimeHS(void)
                        }  
                      break; 
               case 3:
-                       //---------------------------------------------------------                          
-                       //com sensor de condensador 1
+                     //---------------------------------------------------------                          
+                     //com sensor de condensador 1
                        
                      //sem sensor nesta tupla
                      break;
@@ -3770,7 +3770,7 @@ void Ligar_Cargas_Compassadamente(){
           if(flag_global_datalog==1)
              {              
              flag_global_datalog=0;
-             print("1-DataLog.");
+             print("-DataLog.");
              PROCULUS_VP_Write_UInt16(0x02,1); //Datalog
              timerDatalog=0;             
              }          
@@ -3778,7 +3778,7 @@ void Ligar_Cargas_Compassadamente(){
           if((Tamanho_Display==81)&&(flag_regrigeracao_fluido))
             {   
             flag_regrigeracao_fluido=0;
-            print("2-Estante.");
+            print("-Estante.");
             PROCULUS_VP_Write_UInt16(0x13,1);//Porta 
             timerEstante=TIMEBLACKOUT;
             }
@@ -3790,7 +3790,7 @@ void Ligar_Cargas_Compassadamente(){
           if(flag_global_condensador==1)
             { 
             flag_global_condensador=0;
-            print("2-Condensador.");
+            print("-Condensador.");
             PROCULUS_VP_Write_UInt16(0x03,1);  //Condensador
             timerCondensador=TIMEBLACKOUT;
             }
@@ -3802,7 +3802,7 @@ void Ligar_Cargas_Compassadamente(){
             {
             flag_global_vacuo=0;
             flag_time_process=TRUE;
-            print("3-Bomba de vacuo.");
+            print("-Bomba de vacuo.");
             PROCULUS_VP_Write_UInt16(0x04,1);  //Vacuo
             timerVacuo=TIMEBLACKOUT;
             }
@@ -3812,7 +3812,7 @@ void Ligar_Cargas_Compassadamente(){
           if(flag_global_aquecimento==1)
             {   
             flag_global_aquecimento=0;
-            print("4-Aquecimento.");
+            print("-Aquecimento.");
             PROCULUS_VP_Write_UInt16(0x05,1);//Aquecimento 
             timerAquecimento=TIMEBLACKOUT;
             }

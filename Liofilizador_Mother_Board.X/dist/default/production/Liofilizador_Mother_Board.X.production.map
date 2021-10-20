@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.32\pic\dat\en_msgs.txt -cn \
   -h+dist/default/production\Liofilizador_Mother_Board.X.production.sym \
   --cmf=dist/default/production\Liofilizador_Mother_Board.X.production.cmf \
-  -z -Q18F4620 -oC:\Users\Nera\AppData\Local\Temp\xcAs29c.4 \
+  -z -Q18F4620 -oC:\Users\Nera\AppData\Local\Temp\xcAs3nc.4 \
   --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/Liofilizador_Mother_Board.X.production.map -E1 \
   -ver=XC8 Compiler --acfsm=1493 -ASTACK=07C4h-0F7Fh -pstack=STACK \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Nera\AppData\Local\Temp\xcAs29c.o \
+  C:\Users\Nera\AppData\Local\Temp\xcAs3nc.o \
   dist/default/production\Liofilizador_Mother_Board.X.production.o 
 
 Object code version is 3.11
@@ -36,7 +36,7 @@ Machine type is 18F4620
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Nera\AppData\Local\Temp\xcAs29c.o
+C:\Users\Nera\AppData\Local\Temp\xcAs3nc.o
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
                 init                                29C      29C        4        C       0
@@ -46,7 +46,7 @@ dist/default/production\Liofilizador_Mother_Board.X.production.o
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
                 temp                                 77       77        1        1       1
-                mediumconst                        FB9C     FB9C      464     7DCE       0
+                mediumconst                        FBA2     FBA2      45E     7DD1       0
                 text172                            9236     9236       38        C       0
                 text171                            9892     9892       1A        C       0
                 text170                            995C     995C        E        C       0
@@ -428,7 +428,7 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   SMALLCONST     
 
         CLASS   MEDIUMCONST    
-                mediumconst                        FB9C     FB9C      464         0
+                mediumconst                        FBA2     FBA2      45E         0
 
         CLASS   COMRAM         
                 temp                                 77       77        1         1
@@ -510,7 +510,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
                 bssBANK4                       000400  0000AA  0004AA       400       1  BANK4   
                 dataBANK5                      000500  0000B4  0005B4       500       1  BANK5   
                 bssBIGRAM                      0005B4  000210  0007C4       5B4       1  BIGRAM  
-                mediumconst                    00FB9C  000464  010000      7DCE       0  MEDIUMCO
+                mediumconst                    00FBA2  00045E  010000      7DD1       0  MEDIUMCO
 
 
 UNUSED ADDRESS RANGES
@@ -538,12 +538,12 @@ UNUSED ADDRESS RANGES
                          0004AA-0004FF               56
                          0007C4-000F7F              7BC
         CODE             000004-000017               14
-                         009982-00FB9B             621A
+                         009982-00FBA1             6220
         COMRAM           000078-00007F                8
         CONST            000004-000017               14
-                         009982-00FB9B             621A
+                         009982-00FBA1             6220
         EEDATA           F00000-F003FF              400
-        MEDIUMCONST      009982-00FB9B             621A
+        MEDIUMCONST      009982-00FBA1             6220
         RAM              0000FA-0000FF                6
                          0001FD-0001FF                3
                          0002EF-0002FF               11
@@ -551,7 +551,7 @@ UNUSED ADDRESS RANGES
                          0004AA-0004FF               56
                          0007C4-000F7F              100
         SFR              000F80-000FFF               80
-        SMALLCONST       009982-00FB9B              100
+        SMALLCONST       009982-00FBA1              100
         STACK            0007C4-000F7F              7BC
 
                                   Symbol Table
@@ -1409,7 +1409,7 @@ __Lintentry                                       intentry     000000
 __Lintret                                         intret       000000
 __Lintsave_regs                                   intsave_regs 000000
 __Lirdata                                         irdata       000000
-__Lmediumconst                                    mediumconst  00FB9C
+__Lmediumconst                                    mediumconst  00FBA2
 __LnvFARRAM                                       nvFARRAM     000000
 __Lnvbit                                          nvbit        000000
 __Lnvrram                                         nvrram       000000
@@ -1872,10 +1872,10 @@ __end_of_strcat                                   text152      00966C
 __end_of_strcpy                                   text154      008BA2
 __end_of_strlen                                   text153      009018
 __end_of_testa_modo_conectado                     text62       007482
-__end_of_toint                                    mediumconst  00FBA1
+__end_of_toint                                    mediumconst  00FBA7
 __end_of_ultoa                                    text1        006B02
 __initialization                                  cinit        007482
-__mediumconst                                     mediumconst  00FB9C
+__mediumconst                                     mediumconst  00FBA2
 __pbssBANK0                                       bssBANK0     0000DB
 __pbssBANK1                                       bssBANK1     000100
 __pbssBANK2                                       bssBANK2     000200
@@ -1894,7 +1894,7 @@ __pidataBANK0                                     idataBANK0   00997A
 __pidataBANK1                                     idataBANK1   00997E
 __pidataBANK5                                     idataBANK5   007CE8
 __pintcodelo                                      intcodelo    000018
-__pmediumconst                                    mediumconst  00FB9C
+__pmediumconst                                    mediumconst  00FBA2
 __ptext0                                          text0        0002A0
 __ptext1                                          text1        006A10
 __ptext10                                         text10       008468

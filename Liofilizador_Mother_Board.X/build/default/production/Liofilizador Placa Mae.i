@@ -9189,7 +9189,7 @@ void Ligar_Cargas_Compassadamente(){
           if(statuspower.flag_global_datalog==1)
              {
              statuspower.flag_global_datalog=0;
-             print("1-DataLog.");
+             print("-DataLog.");
              PROCULUS_VP_Write_UInt16(0x02,1);
              timerDatalog=0;
              }
@@ -9197,7 +9197,7 @@ void Ligar_Cargas_Compassadamente(){
           if((Tamanho_Display==81)&&(statuspower.flag_regrigeracao_fluido))
             {
             statuspower.flag_regrigeracao_fluido=0;
-            print("2-Estante.");
+            print("-Estante.");
             PROCULUS_VP_Write_UInt16(0x13,1);
             timerEstante=30;
             }
@@ -9209,7 +9209,7 @@ void Ligar_Cargas_Compassadamente(){
           if(statuspower.flag_global_condensador==1)
             {
             statuspower.flag_global_condensador=0;
-            print("2-Condensador.");
+            print("-Condensador.");
             PROCULUS_VP_Write_UInt16(0x03,1);
             timerCondensador=30;
             }
@@ -9221,7 +9221,7 @@ void Ligar_Cargas_Compassadamente(){
             {
             statuspower.flag_global_vacuo=0;
             statuspower.flag_time_process=1;
-            print("3-Bomba de vacuo.");
+            print("-Bomba de vacuo.");
             PROCULUS_VP_Write_UInt16(0x04,1);
             timerVacuo=30;
             }
@@ -9231,7 +9231,7 @@ void Ligar_Cargas_Compassadamente(){
           if(statuspower.flag_global_aquecimento==1)
             {
             statuspower.flag_global_aquecimento=0;
-            print("4-Aquecimento.");
+            print("-Aquecimento.");
             PROCULUS_VP_Write_UInt16(0x05,1);
             timerAquecimento=30;
             }

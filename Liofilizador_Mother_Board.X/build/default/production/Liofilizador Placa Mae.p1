@@ -9931,7 +9931,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 3772:              statuspower.flag_global_datalog=0;
 [e = . . _statuspower 1 0 -> -> 0 `i `uc ]
 "3773
-[; ;Liofilizador Placa Mae.c: 3773:              print("1-DataLog.");
+[; ;Liofilizador Placa Mae.c: 3773:              print("-DataLog.");
 [e ( _print (1 :s 70C ]
 "3774
 [; ;Liofilizador Placa Mae.c: 3774:              PROCULUS_VP_Write_UInt16(0x02,1);
@@ -9953,7 +9953,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 3780:             statuspower.flag_regrigeracao_fluido=0;
 [e = . . _statuspower 1 7 -> -> 0 `i `uc ]
 "3781
-[; ;Liofilizador Placa Mae.c: 3781:             print("2-Estante.");
+[; ;Liofilizador Placa Mae.c: 3781:             print("-Estante.");
 [e ( _print (1 :s 71C ]
 "3782
 [; ;Liofilizador Placa Mae.c: 3782:             PROCULUS_VP_Write_UInt16(0x13,1);
@@ -9982,7 +9982,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 3792:             statuspower.flag_global_condensador=0;
 [e = . . _statuspower 1 2 -> -> 0 `i `uc ]
 "3793
-[; ;Liofilizador Placa Mae.c: 3793:             print("2-Condensador.");
+[; ;Liofilizador Placa Mae.c: 3793:             print("-Condensador.");
 [e ( _print (1 :s 72C ]
 "3794
 [; ;Liofilizador Placa Mae.c: 3794:             PROCULUS_VP_Write_UInt16(0x03,1);
@@ -10014,7 +10014,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 3804:             statuspower.flag_time_process=1;
 [e = . . _statuspower 1 4 -> -> 1 `i `uc ]
 "3805
-[; ;Liofilizador Placa Mae.c: 3805:             print("3-Bomba de vacuo.");
+[; ;Liofilizador Placa Mae.c: 3805:             print("-Bomba de vacuo.");
 [e ( _print (1 :s 73C ]
 "3806
 [; ;Liofilizador Placa Mae.c: 3806:             PROCULUS_VP_Write_UInt16(0x04,1);
@@ -10043,7 +10043,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 3814:             statuspower.flag_global_aquecimento=0;
 [e = . . _statuspower 1 1 -> -> 0 `i `uc ]
 "3815
-[; ;Liofilizador Placa Mae.c: 3815:             print("4-Aquecimento.");
+[; ;Liofilizador Placa Mae.c: 3815:             print("-Aquecimento.");
 [e ( _print (1 :s 74C ]
 "3816
 [; ;Liofilizador Placa Mae.c: 3816:             PROCULUS_VP_Write_UInt16(0x05,1);
@@ -11322,12 +11322,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 8C 67 78 80 74 58 32 48 53 46 54 55 56 46 57 51 48 47 48 48 48 49 45 49 50 0 ]
 [a 53C 32 73 103 117 97 105 115 46 0 ]
 [a 54C 32 100 105 102 101 114 101 110 116 101 115 46 0 ]
-[a 72C 50 45 67 111 110 100 101 110 115 97 100 111 114 46 0 ]
-[a 73C 51 45 66 111 109 98 97 32 100 101 32 118 97 99 117 111 46 0 ]
-[a 74C 52 45 65 113 117 101 99 105 109 101 110 116 111 46 0 ]
+[a 72C 45 67 111 110 100 101 110 115 97 100 111 114 46 0 ]
+[a 73C 45 66 111 109 98 97 32 100 101 32 118 97 99 117 111 46 0 ]
+[a 74C 45 65 113 117 101 99 105 109 101 110 116 111 46 0 ]
 [a 10C 97 32 112 114 105 109 101 105 114 97 32 105 110 105 99 105 97 108 105 122 97 99 97 111 46 0 ]
-[a 70C 49 45 68 97 116 97 76 111 103 46 0 ]
-[a 71C 50 45 69 115 116 97 110 116 101 46 0 ]
+[a 70C 45 68 97 116 97 76 111 103 46 0 ]
+[a 71C 45 69 115 116 97 110 116 101 46 0 ]
 [a 7C 74 74 32 67 105 101 110 116 105 102 105 99 97 32 73 110 100 46 32 101 32 67 111 109 46 32 100 101 32 69 113 46 32 67 105 101 110 116 46 32 76 116 100 97 46 0 ]
 [a 44C 69 120 101 99 117 116 97 110 100 111 32 80 114 111 99 101 115 115 111 46 46 46 0 ]
 [a 12C 73 110 105 99 105 97 108 105 122 97 110 100 111 32 100 97 116 97 108 111 103 46 46 46 0 ]
