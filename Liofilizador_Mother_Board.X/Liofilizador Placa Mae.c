@@ -3498,7 +3498,7 @@ void RelatorioTecnico(void){
      ShowHardwareInfo();
      valor=EEPROM_Read_Integer(34);
      itoa(valor,buffer,10);
-     strcpy(texto,"SERIAL MODULE UPDATE = ");
+     strcpy(texto,"SERIAL MODULE RECOVER = ");
      strcat(texto,buffer);
      print(texto);
      
