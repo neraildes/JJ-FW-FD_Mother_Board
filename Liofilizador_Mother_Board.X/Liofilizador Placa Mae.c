@@ -1016,20 +1016,15 @@ void ShowSensorRealTimeHS(void)
         { 
         switch(tupla)
               {
-              case 0:
-                     PROCULUS_VP_Write_UInt16(153,leitura[tupla]); //Voltimetro 
+              case 0://PLACA 1 CANAL 0 - VOLTIMETRO
+                     PROCULUS_VP_Write_UInt16(153,leitura[tupla]);
                      Voltimetro=leitura[tupla];                     
                      break;               
-              case 1:
-                     PROCULUS_VP_Write_UInt16(151,leitura[tupla]); //Vacuometro 
-                     Vacuometro=leitura[tupla];
-                     break;  
-              case 2:
+              case 1://PLACA 1 CANAL 1 - VACUOMETRO
                      if((leitura[tupla]>=10)&&(leitura[tupla<=2000])) //Proteção contra erro de comunicação                         
-                       {                                              //Serão considerador somente valores 
-                                                                      //entre 10 e 2000. 
-                       PROCULUS_VP_Write_UInt16(150,leitura[tupla]);  //Se for diferente, reinicia serial.
-                       Condensador=leitura[tupla];
+                       {                   
+                       PROCULUS_VP_Write_UInt16(151,leitura[tupla]); //Vacuometro 
+                       Vacuometro=leitura[tupla];
                        }      
                      else
                        {
@@ -1057,11 +1052,16 @@ void ShowSensorRealTimeHS(void)
                          INTCONbits.PEIE=1;                         
                          //- - - - - - - - - - - - - - - - - - - - - - - - - - -
                          USART_init(115200);
-                         //- - - - - - - - - - - - - - - - - - - - - - - - - - -    
-                         
+                         //- - - - - - - - - - - - - - - - - - - - - - - - - - -                          
                        }  
+                       
+                     break;  
+              case 2://Placa 2 Canal 0 - CONDENSADOR
+                                                                   
+                    PROCULUS_VP_Write_UInt16(150,leitura[tupla]);  
+                    Condensador=leitura[tupla];
                      break; 
-              case 3:
+              case 3://Placa 2 Canal 1 - RESERVADO (UTILIZA O COMUM NO RELE)
                      //---------------------------------------------------------                          
                      //com sensor de condensador 1
                        
