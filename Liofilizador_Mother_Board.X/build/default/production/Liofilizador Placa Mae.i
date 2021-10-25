@@ -8978,6 +8978,7 @@ void RelatorioTecnico(void){
      clear_screen();
      print("-----RELATORIO TECNICO----");
      ShowHardwareInfo();
+     showMemoryInfo();
      valor=EEPROM_Read_Integer(34);
      itoa(valor,buffer,10);
      strcpy(texto,"SERIAL MODULE RECOVER = ");
@@ -8987,7 +8988,7 @@ void RelatorioTecnico(void){
      my_delay_ms_CLRWDT(10000);
      PROCULUS_VP_Write_UInt16(100,0);
      PROCULUS_Show_Screen(15);
-# 3569 "Liofilizador Placa Mae.c"
+# 3570 "Liofilizador Placa Mae.c"
 }
 
 
@@ -9418,7 +9419,7 @@ void FAT8_Write_Process_Finalize(){
       strcpy(fat8.processo.fim.time,time);
       fat8.processo.minutes=processo_totalminuto;
       }
-# 4007 "Liofilizador Placa Mae.c"
+# 4008 "Liofilizador Placa Mae.c"
     fat8.processo.add_end=add_datalog;
 
     fat8.processo.flag_running=0;
@@ -9719,20 +9720,35 @@ void showMemoryInfo()
           strcat(msg,texto);
           strcat(msg," erro! ");
 
-          if(
-            !((Tamanho_Display!=81)&&(placa==0)&&(canal==1)) &&
-            !((Tamanho_Display!=81)&&(placa==2)&&(canal==1)) &&
-            !((Tamanho_Display==81)&&(placa==4)&&(canal==1))
-            )
-                {
-                  if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==0)
-                    {
-                    print(msg);
-                    falha++;
-                    my_delay_ms_CLRWDT(3000);
-                    }
-                }
 
+          if(Tamanho_Display!=81)
+            {
+            if(!((placa==0)&&(canal==1)) &&
+               !((placa==2)&&(canal==1)))
+               {
+               if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==0)
+                 {
+                 print(msg);
+                 falha++;
+                 }
+               }
+            }
+          else
+            {
+            if(
+              !((placa==0)&&(canal==1)) &&
+              !((placa==2)&&(canal==1)) &&
+              !((placa==4)&&(canal==1))
+              )
+              {
+               if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==0)
+                 {
+                 print(msg);
+                 falha++;
+                 }
+              }
+            }
+# 4353 "Liofilizador Placa Mae.c"
           }
 
        }

@@ -9355,864 +9355,867 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 3499:      ShowHardwareInfo();
 [e ( _ShowHardwareInfo ..  ]
 "3500
-[; ;Liofilizador Placa Mae.c: 3500:      valor=EEPROM_Read_Integer(34);
-[e = _valor ( _EEPROM_Read_Integer (1 -> -> 34 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3500:      showMemoryInfo();
+[e ( _showMemoryInfo ..  ]
 "3501
-[; ;Liofilizador Placa Mae.c: 3501:      itoa(valor,buffer,10);
-[e ( _itoa (3 , , _valor &U _buffer -> 10 `i ]
+[; ;Liofilizador Placa Mae.c: 3501:      valor=EEPROM_Read_Integer(34);
+[e = _valor ( _EEPROM_Read_Integer (1 -> -> 34 `i `ui ]
 "3502
-[; ;Liofilizador Placa Mae.c: 3502:      strcpy(texto,"SERIAL MODULE RECOVER = ");
-[e ( _strcpy (2 , &U _texto :s 56C ]
+[; ;Liofilizador Placa Mae.c: 3502:      itoa(valor,buffer,10);
+[e ( _itoa (3 , , _valor &U _buffer -> 10 `i ]
 "3503
-[; ;Liofilizador Placa Mae.c: 3503:      strcat(texto,buffer);
-[e ( _strcat (2 , &U _texto -> &U _buffer `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 3503:      strcpy(texto,"SERIAL MODULE RECOVER = ");
+[e ( _strcpy (2 , &U _texto :s 56C ]
 "3504
-[; ;Liofilizador Placa Mae.c: 3504:      print(texto);
+[; ;Liofilizador Placa Mae.c: 3504:      strcat(texto,buffer);
+[e ( _strcat (2 , &U _texto -> &U _buffer `*Cuc ]
+"3505
+[; ;Liofilizador Placa Mae.c: 3505:      print(texto);
 [e ( _print (1 &U _texto ]
-"3506
-[; ;Liofilizador Placa Mae.c: 3506:      my_delay_ms_CLRWDT(10000);
-[e ( _my_delay_ms_CLRWDT (1 -> -> 10000 `i `l ]
 "3507
-[; ;Liofilizador Placa Mae.c: 3507:      PROCULUS_VP_Write_UInt16(100,0);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 100 `i `ui -> -> 0 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3507:      my_delay_ms_CLRWDT(10000);
+[e ( _my_delay_ms_CLRWDT (1 -> -> 10000 `i `l ]
 "3508
-[; ;Liofilizador Placa Mae.c: 3508:      PROCULUS_Show_Screen(15);
+[; ;Liofilizador Placa Mae.c: 3508:      PROCULUS_VP_Write_UInt16(100,0);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 100 `i `ui -> -> 0 `i `ui ]
+"3509
+[; ;Liofilizador Placa Mae.c: 3509:      PROCULUS_Show_Screen(15);
 [e ( _PROCULUS_Show_Screen (1 -> -> 15 `i `ui ]
-"3569
-[; ;Liofilizador Placa Mae.c: 3569: }
+"3570
+[; ;Liofilizador Placa Mae.c: 3570: }
 [e :UE 874 ]
 }
-"3573
-[; ;Liofilizador Placa Mae.c: 3573: void ShowHardwareInfo(){
+"3574
+[; ;Liofilizador Placa Mae.c: 3574: void ShowHardwareInfo(){
 [v _ShowHardwareInfo `(v ~T0 @X0 1 ef ]
 {
 [e :U _ShowHardwareInfo ]
 [f ]
-"3574
-[; ;Liofilizador Placa Mae.c: 3574:      char i;
-[v _i `uc ~T0 @X0 1 a ]
 "3575
-[; ;Liofilizador Placa Mae.c: 3575:      char destino;
-[v _destino `uc ~T0 @X0 1 a ]
+[; ;Liofilizador Placa Mae.c: 3575:      char i;
+[v _i `uc ~T0 @X0 1 a ]
 "3576
-[; ;Liofilizador Placa Mae.c: 3576:      char tipo=0;
+[; ;Liofilizador Placa Mae.c: 3576:      char destino;
+[v _destino `uc ~T0 @X0 1 a ]
+"3577
+[; ;Liofilizador Placa Mae.c: 3577:      char tipo=0;
 [v _tipo `uc ~T0 @X0 1 a ]
 [e = _tipo -> -> 0 `i `uc ]
-"3577
-[; ;Liofilizador Placa Mae.c: 3577:      int resposta;
-[v _resposta `i ~T0 @X0 1 a ]
 "3578
-[; ;Liofilizador Placa Mae.c: 3578:      char versao[10];
+[; ;Liofilizador Placa Mae.c: 3578:      int resposta;
+[v _resposta `i ~T0 @X0 1 a ]
+"3579
+[; ;Liofilizador Placa Mae.c: 3579:      char versao[10];
 [v _versao `uc ~T0 @X0 -> 10 `i a ]
-"3580
-[; ;Liofilizador Placa Mae.c: 3580:      my_delay_ms_CLRWDT(300);
-[e ( _my_delay_ms_CLRWDT (1 -> -> 300 `i `l ]
 "3581
-[; ;Liofilizador Placa Mae.c: 3581:      PROCULUS_VP_Read_String(1990, buffer);
-[e ( _PROCULUS_VP_Read_String (2 , -> -> 1990 `i `ui &U _buffer ]
+[; ;Liofilizador Placa Mae.c: 3581:      my_delay_ms_CLRWDT(300);
+[e ( _my_delay_ms_CLRWDT (1 -> -> 300 `i `l ]
 "3582
-[; ;Liofilizador Placa Mae.c: 3582:      strcpy(texto,"* : Display      ");
-[e ( _strcpy (2 , &U _texto :s 57C ]
+[; ;Liofilizador Placa Mae.c: 3582:      PROCULUS_VP_Read_String(1990, buffer);
+[e ( _PROCULUS_VP_Read_String (2 , -> -> 1990 `i `ui &U _buffer ]
 "3583
-[; ;Liofilizador Placa Mae.c: 3583:      strcat(texto,buffer);
-[e ( _strcat (2 , &U _texto -> &U _buffer `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 3583:      strcpy(texto,"* : Display      ");
+[e ( _strcpy (2 , &U _texto :s 57C ]
 "3584
-[; ;Liofilizador Placa Mae.c: 3584:      print(texto);
-[e ( _print (1 &U _texto ]
+[; ;Liofilizador Placa Mae.c: 3584:      strcat(texto,buffer);
+[e ( _strcat (2 , &U _texto -> &U _buffer `*Cuc ]
 "3585
-[; ;Liofilizador Placa Mae.c: 3585:      my_delay_ms_CLRWDT(500);
-[e ( _my_delay_ms_CLRWDT (1 -> -> 500 `i `l ]
-"3588
-[; ;Liofilizador Placa Mae.c: 3588:      Send_To_Slave(destino, 0x03, 0, buffer);
-[e ( _Send_To_Slave (4 , , , _destino -> -> 3 `i `uc -> -> 0 `i `uc &U _buffer ]
-"3591
-[; ;Liofilizador Placa Mae.c: 3591:      totalboard=0;
-[e = _totalboard -> -> 0 `i `uc ]
-"3592
-[; ;Liofilizador Placa Mae.c: 3592:      strcpy(texto,"");
-[e ( _strcpy (2 , &U _texto :s 58C ]
-"3593
-[; ;Liofilizador Placa Mae.c: 3593:      strcat(texto,"* : Mother Board ");
-[e ( _strcat (2 , &U _texto :s 59C ]
-"3594
-[; ;Liofilizador Placa Mae.c: 3594:      strcat(texto,"v1.0.43");
-[e ( _strcat (2 , &U _texto :s 60C ]
-"3595
-[; ;Liofilizador Placa Mae.c: 3595:      print(texto);
+[; ;Liofilizador Placa Mae.c: 3585:      print(texto);
 [e ( _print (1 &U _texto ]
-"3597
-[; ;Liofilizador Placa Mae.c: 3597:      for(destino=1;destino<15;destino++)
+"3586
+[; ;Liofilizador Placa Mae.c: 3586:      my_delay_ms_CLRWDT(500);
+[e ( _my_delay_ms_CLRWDT (1 -> -> 500 `i `l ]
+"3589
+[; ;Liofilizador Placa Mae.c: 3589:      Send_To_Slave(destino, 0x03, 0, buffer);
+[e ( _Send_To_Slave (4 , , , _destino -> -> 3 `i `uc -> -> 0 `i `uc &U _buffer ]
+"3592
+[; ;Liofilizador Placa Mae.c: 3592:      totalboard=0;
+[e = _totalboard -> -> 0 `i `uc ]
+"3593
+[; ;Liofilizador Placa Mae.c: 3593:      strcpy(texto,"");
+[e ( _strcpy (2 , &U _texto :s 58C ]
+"3594
+[; ;Liofilizador Placa Mae.c: 3594:      strcat(texto,"* : Mother Board ");
+[e ( _strcat (2 , &U _texto :s 59C ]
+"3595
+[; ;Liofilizador Placa Mae.c: 3595:      strcat(texto,"v1.0.43");
+[e ( _strcat (2 , &U _texto :s 60C ]
+"3596
+[; ;Liofilizador Placa Mae.c: 3596:      print(texto);
+[e ( _print (1 &U _texto ]
+"3598
+[; ;Liofilizador Placa Mae.c: 3598:      for(destino=1;destino<15;destino++)
 {
 [e = _destino -> -> 1 `i `uc ]
 [e $ < -> _destino `i -> 15 `i 876  ]
 [e $U 877  ]
 [e :U 876 ]
-"3598
-[; ;Liofilizador Placa Mae.c: 3598:         {
-{
 "3599
-[; ;Liofilizador Placa Mae.c: 3599:         my_delay_ms_CLRWDT(100);
-[e ( _my_delay_ms_CLRWDT (1 -> -> 100 `i `l ]
-"3601
-[; ;Liofilizador Placa Mae.c: 3601:         resposta = Send_To_Slave(destino, 0x03, 0, buffer);
-[e = _resposta ( _Send_To_Slave (4 , , , _destino -> -> 3 `i `uc -> -> 0 `i `uc &U _buffer ]
-"3603
-[; ;Liofilizador Placa Mae.c: 3603:         if(resposta!=-1)
-[e $ ! != _resposta -U -> 1 `i 879  ]
-"3604
-[; ;Liofilizador Placa Mae.c: 3604:             {
+[; ;Liofilizador Placa Mae.c: 3599:         {
 {
+"3600
+[; ;Liofilizador Placa Mae.c: 3600:         my_delay_ms_CLRWDT(100);
+[e ( _my_delay_ms_CLRWDT (1 -> -> 100 `i `l ]
+"3602
+[; ;Liofilizador Placa Mae.c: 3602:         resposta = Send_To_Slave(destino, 0x03, 0, buffer);
+[e = _resposta ( _Send_To_Slave (4 , , , _destino -> -> 3 `i `uc -> -> 0 `i `uc &U _buffer ]
+"3604
+[; ;Liofilizador Placa Mae.c: 3604:         if(resposta!=-1)
+[e $ ! != _resposta -U -> 1 `i 879  ]
 "3605
-[; ;Liofilizador Placa Mae.c: 3605:             tipo=((char *)&resposta)[0];
-[e = _tipo *U + -> &U _resposta `*uc * -> -> 0 `i `x -> -> # *U -> &U _resposta `*uc `i `x ]
+[; ;Liofilizador Placa Mae.c: 3605:             {
+{
 "3606
-[; ;Liofilizador Placa Mae.c: 3606:             totalboard++;
-[e ++ _totalboard -> -> 1 `i `Vuc ]
+[; ;Liofilizador Placa Mae.c: 3606:             tipo=((char *)&resposta)[0];
+[e = _tipo *U + -> &U _resposta `*uc * -> -> 0 `i `x -> -> # *U -> &U _resposta `*uc `i `x ]
 "3607
-[; ;Liofilizador Placa Mae.c: 3607:             strcpy(texto,"");
-[e ( _strcpy (2 , &U _texto :s 61C ]
+[; ;Liofilizador Placa Mae.c: 3607:             totalboard++;
+[e ++ _totalboard -> -> 1 `i `Vuc ]
 "3608
-[; ;Liofilizador Placa Mae.c: 3608:             itoa(destino,texto,10);
-[e ( _itoa (3 , , -> _destino `i &U _texto -> 10 `i ]
+[; ;Liofilizador Placa Mae.c: 3608:             strcpy(texto,"");
+[e ( _strcpy (2 , &U _texto :s 61C ]
 "3609
-[; ;Liofilizador Placa Mae.c: 3609:             strcat(texto," : ");
-[e ( _strcat (2 , &U _texto :s 62C ]
+[; ;Liofilizador Placa Mae.c: 3609:             itoa(destino,texto,10);
+[e ( _itoa (3 , , -> _destino `i &U _texto -> 10 `i ]
 "3610
-[; ;Liofilizador Placa Mae.c: 3610:             strcat(texto, boardtype[tipo][0]);
-[e ( _strcat (2 , &U _texto *U + &U *U + &U _boardtype * -> _tipo `ux -> * -> # *U &U *U &U _boardtype `ui -> -> 15 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _boardtype * -> _tipo `ux -> * -> # *U &U *U &U _boardtype `ui -> -> 15 `i `ui `ux `ui `ux ]
+[; ;Liofilizador Placa Mae.c: 3610:             strcat(texto," : ");
+[e ( _strcat (2 , &U _texto :s 62C ]
 "3611
-[; ;Liofilizador Placa Mae.c: 3611:             strcat(texto," ");
-[e ( _strcat (2 , &U _texto :s 63C ]
+[; ;Liofilizador Placa Mae.c: 3611:             strcat(texto, boardtype[tipo][0]);
+[e ( _strcat (2 , &U _texto *U + &U *U + &U _boardtype * -> _tipo `ux -> * -> # *U &U *U &U _boardtype `ui -> -> 15 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _boardtype * -> _tipo `ux -> * -> # *U &U *U &U _boardtype `ui -> -> 15 `i `ui `ux `ui `ux ]
 "3612
-[; ;Liofilizador Placa Mae.c: 3612:             strcpy(buffer," ");
-[e ( _strcpy (2 , &U _buffer :s 64C ]
+[; ;Liofilizador Placa Mae.c: 3612:             strcat(texto," ");
+[e ( _strcat (2 , &U _texto :s 63C ]
 "3613
-[; ;Liofilizador Placa Mae.c: 3613:             Send_To_Slave(destino, 0x41, 0, buffer);
-[e ( _Send_To_Slave (4 , , , _destino -> -> 65 `i `uc -> -> 0 `i `uc &U _buffer ]
+[; ;Liofilizador Placa Mae.c: 3613:             strcpy(buffer," ");
+[e ( _strcpy (2 , &U _buffer :s 64C ]
 "3614
-[; ;Liofilizador Placa Mae.c: 3614:             strcat(texto,buffer);
-[e ( _strcat (2 , &U _texto -> &U _buffer `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 3614:             Send_To_Slave(destino, 0x41, 0, buffer);
+[e ( _Send_To_Slave (4 , , , _destino -> -> 65 `i `uc -> -> 0 `i `uc &U _buffer ]
 "3615
-[; ;Liofilizador Placa Mae.c: 3615:             print(texto);
-[e ( _print (1 &U _texto ]
+[; ;Liofilizador Placa Mae.c: 3615:             strcat(texto,buffer);
+[e ( _strcat (2 , &U _texto -> &U _buffer `*Cuc ]
 "3616
-[; ;Liofilizador Placa Mae.c: 3616:             }
+[; ;Liofilizador Placa Mae.c: 3616:             print(texto);
+[e ( _print (1 &U _texto ]
+"3617
+[; ;Liofilizador Placa Mae.c: 3617:             }
 }
 [e :U 879 ]
-"3617
-[; ;Liofilizador Placa Mae.c: 3617:         }
+"3618
+[; ;Liofilizador Placa Mae.c: 3618:         }
 }
 [e ++ _destino -> -> 1 `i `uc ]
 [e $ < -> _destino `i -> 15 `i 876  ]
 [e :U 877 ]
 }
-"3619
-[; ;Liofilizador Placa Mae.c: 3619:      print("..................................");
+"3620
+[; ;Liofilizador Placa Mae.c: 3620:      print("..................................");
 [e ( _print (1 :s 65C ]
-"3621
-[; ;Liofilizador Placa Mae.c: 3621:      if(totalboard==0)
-[e $ ! == -> _totalboard `i -> 0 `i 880  ]
 "3622
-[; ;Liofilizador Placa Mae.c: 3622:         {
-{
+[; ;Liofilizador Placa Mae.c: 3622:      if(totalboard==0)
+[e $ ! == -> _totalboard `i -> 0 `i 880  ]
 "3623
-[; ;Liofilizador Placa Mae.c: 3623:         print("Nenhuma Placa conectada!");
-[e ( _print (1 :s 66C ]
+[; ;Liofilizador Placa Mae.c: 3623:         {
+{
 "3624
-[; ;Liofilizador Placa Mae.c: 3624:         }
+[; ;Liofilizador Placa Mae.c: 3624:         print("Nenhuma Placa conectada!");
+[e ( _print (1 :s 66C ]
+"3625
+[; ;Liofilizador Placa Mae.c: 3625:         }
 }
 [e $U 881  ]
-"3625
-[; ;Liofilizador Placa Mae.c: 3625:      else
-[e :U 880 ]
 "3626
-[; ;Liofilizador Placa Mae.c: 3626:         {
-{
+[; ;Liofilizador Placa Mae.c: 3626:      else
+[e :U 880 ]
 "3627
-[; ;Liofilizador Placa Mae.c: 3627:         itoa(totalboard,texto,10);
-[e ( _itoa (3 , , -> _totalboard `i &U _texto -> 10 `i ]
+[; ;Liofilizador Placa Mae.c: 3627:         {
+{
 "3628
-[; ;Liofilizador Placa Mae.c: 3628:         strcat(texto," placa(s) encontrada(s).");
-[e ( _strcat (2 , &U _texto :s 67C ]
+[; ;Liofilizador Placa Mae.c: 3628:         itoa(totalboard,texto,10);
+[e ( _itoa (3 , , -> _totalboard `i &U _texto -> 10 `i ]
 "3629
-[; ;Liofilizador Placa Mae.c: 3629:         print(texto);
-[e ( _print (1 &U _texto ]
+[; ;Liofilizador Placa Mae.c: 3629:         strcat(texto," placa(s) encontrada(s).");
+[e ( _strcat (2 , &U _texto :s 67C ]
 "3630
-[; ;Liofilizador Placa Mae.c: 3630:         }
+[; ;Liofilizador Placa Mae.c: 3630:         print(texto);
+[e ( _print (1 &U _texto ]
+"3631
+[; ;Liofilizador Placa Mae.c: 3631:         }
 }
 [e :U 881 ]
-"3631
-[; ;Liofilizador Placa Mae.c: 3631:     print("----------------------------------");
-[e ( _print (1 :s 68C ]
 "3632
-[; ;Liofilizador Placa Mae.c: 3632: }
+[; ;Liofilizador Placa Mae.c: 3632:     print("----------------------------------");
+[e ( _print (1 :s 68C ]
+"3633
+[; ;Liofilizador Placa Mae.c: 3633: }
 [e :UE 875 ]
 }
-"3634
-[; ;Liofilizador Placa Mae.c: 3634: char MenorCanalLivre()
-[v _MenorCanalLivre `(uc ~T0 @X0 1 ef ]
 "3635
-[; ;Liofilizador Placa Mae.c: 3635:      {
+[; ;Liofilizador Placa Mae.c: 3635: char MenorCanalLivre()
+[v _MenorCanalLivre `(uc ~T0 @X0 1 ef ]
+"3636
+[; ;Liofilizador Placa Mae.c: 3636:      {
 {
 [e :U _MenorCanalLivre ]
 [f ]
-"3636
-[; ;Liofilizador Placa Mae.c: 3636:      unsigned char canal, canalLivre, canalBusca, busca, Exist;
+"3637
+[; ;Liofilizador Placa Mae.c: 3637:      unsigned char canal, canalLivre, canalBusca, busca, Exist;
 [v _canal `uc ~T0 @X0 1 a ]
 [v _canalLivre `uc ~T0 @X0 1 a ]
 [v _canalBusca `uc ~T0 @X0 1 a ]
 [v _busca `uc ~T0 @X0 1 a ]
 [v _Exist `uc ~T0 @X0 1 a ]
-"3637
-[; ;Liofilizador Placa Mae.c: 3637:      canal=0x0A;
-[e = _canal -> -> 10 `i `uc ]
 "3638
-[; ;Liofilizador Placa Mae.c: 3638:      for(canalLivre=0;canalLivre<8;canalLivre++)
+[; ;Liofilizador Placa Mae.c: 3638:      canal=0x0A;
+[e = _canal -> -> 10 `i `uc ]
+"3639
+[; ;Liofilizador Placa Mae.c: 3639:      for(canalLivre=0;canalLivre<8;canalLivre++)
 {
 [e = _canalLivre -> -> 0 `i `uc ]
 [e $ < -> _canalLivre `i -> 8 `i 883  ]
 [e $U 884  ]
 [e :U 883 ]
-"3639
-[; ;Liofilizador Placa Mae.c: 3639:      {
+"3640
+[; ;Liofilizador Placa Mae.c: 3640:      {
 {
-"3641
-[; ;Liofilizador Placa Mae.c: 3641:      Exist=0;
-[e = _Exist -> -> 0 `i `uc ]
 "3642
-[; ;Liofilizador Placa Mae.c: 3642:      for(canalBusca=0;canalBusca<13;canalBusca++)
+[; ;Liofilizador Placa Mae.c: 3642:      Exist=0;
+[e = _Exist -> -> 0 `i `uc ]
+"3643
+[; ;Liofilizador Placa Mae.c: 3643:      for(canalBusca=0;canalBusca<13;canalBusca++)
 {
 [e = _canalBusca -> -> 0 `i `uc ]
 [e $ < -> _canalBusca `i -> 13 `i 886  ]
 [e $U 887  ]
 [e :U 886 ]
-"3643
-[; ;Liofilizador Placa Mae.c: 3643:         {
-{
 "3644
-[; ;Liofilizador Placa Mae.c: 3644:         busca=mapa.canal[canalBusca];
-[e = _busca -> *U + &U . _mapa 2 * -> _canalBusca `ux -> -> # *U &U . _mapa 2 `ui `ux `uc ]
-"3646
-[; ;Liofilizador Placa Mae.c: 3646:      if(canalLivre==busca)
-[e $ ! == -> _canalLivre `i -> _busca `i 889  ]
-"3647
-[; ;Liofilizador Placa Mae.c: 3647:     {
+[; ;Liofilizador Placa Mae.c: 3644:         {
 {
-"3649
-[; ;Liofilizador Placa Mae.c: 3649:     Exist=1;
-[e = _Exist -> -> 1 `i `uc ]
+"3645
+[; ;Liofilizador Placa Mae.c: 3645:         busca=mapa.canal[canalBusca];
+[e = _busca -> *U + &U . _mapa 2 * -> _canalBusca `ux -> -> # *U &U . _mapa 2 `ui `ux `uc ]
+"3647
+[; ;Liofilizador Placa Mae.c: 3647:      if(canalLivre==busca)
+[e $ ! == -> _canalLivre `i -> _busca `i 889  ]
+"3648
+[; ;Liofilizador Placa Mae.c: 3648:     {
+{
 "3650
-[; ;Liofilizador Placa Mae.c: 3650:     break;
-[e $U 887  ]
+[; ;Liofilizador Placa Mae.c: 3650:     Exist=1;
+[e = _Exist -> -> 1 `i `uc ]
 "3651
-[; ;Liofilizador Placa Mae.c: 3651:     }
+[; ;Liofilizador Placa Mae.c: 3651:     break;
+[e $U 887  ]
+"3652
+[; ;Liofilizador Placa Mae.c: 3652:     }
 }
 [e :U 889 ]
-"3652
-[; ;Liofilizador Placa Mae.c: 3652:      }
+"3653
+[; ;Liofilizador Placa Mae.c: 3653:      }
 }
 [e ++ _canalBusca -> -> 1 `i `uc ]
 [e $ < -> _canalBusca `i -> 13 `i 886  ]
 [e :U 887 ]
 }
-"3653
-[; ;Liofilizador Placa Mae.c: 3653:   if(Exist==0)
-[e $ ! == -> _Exist `i -> 0 `i 890  ]
 "3654
-[; ;Liofilizador Placa Mae.c: 3654:     {
+[; ;Liofilizador Placa Mae.c: 3654:   if(Exist==0)
+[e $ ! == -> _Exist `i -> 0 `i 890  ]
+"3655
+[; ;Liofilizador Placa Mae.c: 3655:     {
 {
-"3656
-[; ;Liofilizador Placa Mae.c: 3656:     canal=canalLivre;
-[e = _canal _canalLivre ]
 "3657
-[; ;Liofilizador Placa Mae.c: 3657:     break;
-[e $U 884  ]
+[; ;Liofilizador Placa Mae.c: 3657:     canal=canalLivre;
+[e = _canal _canalLivre ]
 "3658
-[; ;Liofilizador Placa Mae.c: 3658:     }
+[; ;Liofilizador Placa Mae.c: 3658:     break;
+[e $U 884  ]
+"3659
+[; ;Liofilizador Placa Mae.c: 3659:     }
 }
 [e :U 890 ]
-"3659
-[; ;Liofilizador Placa Mae.c: 3659:   }
+"3660
+[; ;Liofilizador Placa Mae.c: 3660:   }
 }
 [e ++ _canalLivre -> -> 1 `i `uc ]
 [e $ < -> _canalLivre `i -> 8 `i 883  ]
 [e :U 884 ]
 }
-"3661
-[; ;Liofilizador Placa Mae.c: 3661:   return canal;
+"3662
+[; ;Liofilizador Placa Mae.c: 3662:   return canal;
 [e ) -> _canal `uc ]
 [e $UE 882  ]
-"3662
-[; ;Liofilizador Placa Mae.c: 3662:   }
+"3663
+[; ;Liofilizador Placa Mae.c: 3663:   }
 [e :UE 882 ]
 }
-"3665
-[; ;Liofilizador Placa Mae.c: 3665: void Incrementa_Contador_de_Repique_do_Vacuo(){
+"3666
+[; ;Liofilizador Placa Mae.c: 3666: void Incrementa_Contador_de_Repique_do_Vacuo(){
 [v _Incrementa_Contador_de_Repique_do_Vacuo `(v ~T0 @X0 1 ef ]
 {
 [e :U _Incrementa_Contador_de_Repique_do_Vacuo ]
 [f ]
-"3666
-[; ;Liofilizador Placa Mae.c: 3666:      int valor;
-[v _valor `i ~T0 @X0 1 a ]
 "3667
-[; ;Liofilizador Placa Mae.c: 3667:      if(statusgen1.flag_Vacuo_estava_ligado==1)
-[e $ ! == -> . _statusgen1 4 `i -> 1 `i 892  ]
+[; ;Liofilizador Placa Mae.c: 3667:      int valor;
+[v _valor `i ~T0 @X0 1 a ]
 "3668
-[; ;Liofilizador Placa Mae.c: 3668:        {
-{
+[; ;Liofilizador Placa Mae.c: 3668:      if(statusgen1.flag_Vacuo_estava_ligado==1)
+[e $ ! == -> . _statusgen1 4 `i -> 1 `i 892  ]
 "3669
-[; ;Liofilizador Placa Mae.c: 3669:        statusgen1.flag_Vacuo_estava_ligado=0;
-[e = . _statusgen1 4 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3669:        {
+{
 "3670
-[; ;Liofilizador Placa Mae.c: 3670:        valor=EEPROM_Read_Integer(0xE8);
-[e = _valor ( _EEPROM_Read_Integer (1 -> -> 232 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3670:        statusgen1.flag_Vacuo_estava_ligado=0;
+[e = . _statusgen1 4 -> -> 0 `i `uc ]
 "3671
-[; ;Liofilizador Placa Mae.c: 3671:        valor++;
-[e ++ _valor -> 1 `i ]
+[; ;Liofilizador Placa Mae.c: 3671:        valor=EEPROM_Read_Integer(0xE8);
+[e = _valor ( _EEPROM_Read_Integer (1 -> -> 232 `i `ui ]
 "3672
-[; ;Liofilizador Placa Mae.c: 3672:        EEPROM_Write_Integer(0xE8,valor);
-[e ( _EEPROM_Write_Integer (2 , -> -> 232 `i `ui -> _valor `ui ]
+[; ;Liofilizador Placa Mae.c: 3672:        valor++;
+[e ++ _valor -> 1 `i ]
 "3673
-[; ;Liofilizador Placa Mae.c: 3673:        }
+[; ;Liofilizador Placa Mae.c: 3673:        EEPROM_Write_Integer(0xE8,valor);
+[e ( _EEPROM_Write_Integer (2 , -> -> 232 `i `ui -> _valor `ui ]
+"3674
+[; ;Liofilizador Placa Mae.c: 3674:        }
 }
 [e :U 892 ]
-"3674
-[; ;Liofilizador Placa Mae.c: 3674: }
+"3675
+[; ;Liofilizador Placa Mae.c: 3675: }
 [e :UE 891 ]
 }
-"3677
-[; ;Liofilizador Placa Mae.c: 3677: void Carregar_Display_Schematic_Color(){
+"3678
+[; ;Liofilizador Placa Mae.c: 3678: void Carregar_Display_Schematic_Color(){
 [v _Carregar_Display_Schematic_Color `(v ~T0 @X0 1 ef ]
 {
 [e :U _Carregar_Display_Schematic_Color ]
 [f ]
-"3682
-[; ;Liofilizador Placa Mae.c: 3682:      Tamanho_Display=EEPROM_Read_Integer(0xFA);
-[e = _Tamanho_Display ( _EEPROM_Read_Integer (1 -> -> 250 `i `ui ]
 "3683
-[; ;Liofilizador Placa Mae.c: 3683:      PROCULUS_VP_Write_UInt16(214,Tamanho_Display);
+[; ;Liofilizador Placa Mae.c: 3683:      Tamanho_Display=EEPROM_Read_Integer(0xFA);
+[e = _Tamanho_Display ( _EEPROM_Read_Integer (1 -> -> 250 `i `ui ]
+"3684
+[; ;Liofilizador Placa Mae.c: 3684:      PROCULUS_VP_Write_UInt16(214,Tamanho_Display);
 [e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 214 `i `ui -> _Tamanho_Display `ui ]
-"3685
-[; ;Liofilizador Placa Mae.c: 3685:      if(Tamanho_Display==50){
+"3686
+[; ;Liofilizador Placa Mae.c: 3686:      if(Tamanho_Display==50){
 [e $ ! == _Tamanho_Display -> 50 `i 894  ]
 {
-"3686
-[; ;Liofilizador Placa Mae.c: 3686:           TrendColor[0] =0xF800;
-[e = *U + &U _TrendColor * -> -> -> 0 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 63488 `ui `i ]
 "3687
-[; ;Liofilizador Placa Mae.c: 3687:           TrendColor[1] =0x05A0;
-[e = *U + &U _TrendColor * -> -> -> 1 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 1440 `i ]
+[; ;Liofilizador Placa Mae.c: 3687:           TrendColor[0] =0xF800;
+[e = *U + &U _TrendColor * -> -> -> 0 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 63488 `ui `i ]
 "3688
-[; ;Liofilizador Placa Mae.c: 3688:           TrendColor[2] =0x001F;
-[e = *U + &U _TrendColor * -> -> -> 2 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 31 `i ]
+[; ;Liofilizador Placa Mae.c: 3688:           TrendColor[1] =0x05A0;
+[e = *U + &U _TrendColor * -> -> -> 1 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 1440 `i ]
 "3689
-[; ;Liofilizador Placa Mae.c: 3689:           TrendColor[3] =0x0000;
-[e = *U + &U _TrendColor * -> -> -> 3 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 0 `i ]
+[; ;Liofilizador Placa Mae.c: 3689:           TrendColor[2] =0x001F;
+[e = *U + &U _TrendColor * -> -> -> 2 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 31 `i ]
 "3690
-[; ;Liofilizador Placa Mae.c: 3690:           TrendColor[4] =0xD540;
-[e = *U + &U _TrendColor * -> -> -> 4 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 54592 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3690:           TrendColor[3] =0x0000;
+[e = *U + &U _TrendColor * -> -> -> 3 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 0 `i ]
 "3691
-[; ;Liofilizador Placa Mae.c: 3691:           TrendColor[5] =0xF81F;
-[e = *U + &U _TrendColor * -> -> -> 5 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 63519 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3691:           TrendColor[4] =0xD540;
+[e = *U + &U _TrendColor * -> -> -> 4 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 54592 `ui `i ]
 "3692
-[; ;Liofilizador Placa Mae.c: 3692:           TrendColor[6] =0xFBE0;
-[e = *U + &U _TrendColor * -> -> -> 6 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 64480 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3692:           TrendColor[5] =0xF81F;
+[e = *U + &U _TrendColor * -> -> -> 5 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 63519 `ui `i ]
 "3693
-[; ;Liofilizador Placa Mae.c: 3693:           TrendColor[7] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 7 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3693:           TrendColor[6] =0xFBE0;
+[e = *U + &U _TrendColor * -> -> -> 6 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 64480 `ui `i ]
 "3694
-[; ;Liofilizador Placa Mae.c: 3694:           TrendColor[8] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 8 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3694:           TrendColor[7] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 7 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3695
-[; ;Liofilizador Placa Mae.c: 3695:           TrendColor[9] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 9 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3695:           TrendColor[8] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 8 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3696
-[; ;Liofilizador Placa Mae.c: 3696:           TrendColor[10]=0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 10 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3696:           TrendColor[9] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 9 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3697
-[; ;Liofilizador Placa Mae.c: 3697:           TrendColor[11]=0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 11 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3697:           TrendColor[10]=0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 10 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3698
-[; ;Liofilizador Placa Mae.c: 3698:           TrendColor[12]=0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 12 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3698:           TrendColor[11]=0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 11 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3699
-[; ;Liofilizador Placa Mae.c: 3699:      }
+[; ;Liofilizador Placa Mae.c: 3699:           TrendColor[12]=0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 12 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+"3700
+[; ;Liofilizador Placa Mae.c: 3700:      }
 }
 [e $U 895  ]
-"3700
-[; ;Liofilizador Placa Mae.c: 3700:      else if(Tamanho_Display==80){
+"3701
+[; ;Liofilizador Placa Mae.c: 3701:      else if(Tamanho_Display==80){
 [e :U 894 ]
 [e $ ! == _Tamanho_Display -> 80 `i 896  ]
 {
-"3701
-[; ;Liofilizador Placa Mae.c: 3701:           TrendColor[0] =0x0000;
-[e = *U + &U _TrendColor * -> -> -> 0 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 0 `i ]
 "3702
-[; ;Liofilizador Placa Mae.c: 3702:           TrendColor[1] =0x39E7;
-[e = *U + &U _TrendColor * -> -> -> 1 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 14823 `i ]
+[; ;Liofilizador Placa Mae.c: 3702:           TrendColor[0] =0x0000;
+[e = *U + &U _TrendColor * -> -> -> 0 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 0 `i ]
 "3703
-[; ;Liofilizador Placa Mae.c: 3703:           TrendColor[2] =0x6B6D;
-[e = *U + &U _TrendColor * -> -> -> 2 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 27501 `i ]
+[; ;Liofilizador Placa Mae.c: 3703:           TrendColor[1] =0x39E7;
+[e = *U + &U _TrendColor * -> -> -> 1 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 14823 `i ]
 "3704
-[; ;Liofilizador Placa Mae.c: 3704:           TrendColor[3] =0x7800;
-[e = *U + &U _TrendColor * -> -> -> 3 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 30720 `i ]
+[; ;Liofilizador Placa Mae.c: 3704:           TrendColor[2] =0x6B6D;
+[e = *U + &U _TrendColor * -> -> -> 2 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 27501 `i ]
 "3705
-[; ;Liofilizador Placa Mae.c: 3705:           TrendColor[4] =0x9A23;
-[e = *U + &U _TrendColor * -> -> -> 4 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 39459 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3705:           TrendColor[3] =0x7800;
+[e = *U + &U _TrendColor * -> -> -> 3 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 30720 `i ]
 "3706
-[; ;Liofilizador Placa Mae.c: 3706:           TrendColor[5] =0xF800;
-[e = *U + &U _TrendColor * -> -> -> 5 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 63488 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3706:           TrendColor[4] =0x9A23;
+[e = *U + &U _TrendColor * -> -> -> 4 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 39459 `ui `i ]
 "3707
-[; ;Liofilizador Placa Mae.c: 3707:           TrendColor[6] =0xFBE0;
-[e = *U + &U _TrendColor * -> -> -> 6 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 64480 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3707:           TrendColor[5] =0xF800;
+[e = *U + &U _TrendColor * -> -> -> 5 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 63488 `ui `i ]
 "3708
-[; ;Liofilizador Placa Mae.c: 3708:           TrendColor[7] =0xFBF7;
-[e = *U + &U _TrendColor * -> -> -> 7 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 64503 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3708:           TrendColor[6] =0xFBE0;
+[e = *U + &U _TrendColor * -> -> -> 6 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 64480 `ui `i ]
 "3709
-[; ;Liofilizador Placa Mae.c: 3709:           TrendColor[8] =0xD540;
-[e = *U + &U _TrendColor * -> -> -> 8 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 54592 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3709:           TrendColor[7] =0xFBF7;
+[e = *U + &U _TrendColor * -> -> -> 7 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 64503 `ui `i ]
 "3710
-[; ;Liofilizador Placa Mae.c: 3710:           TrendColor[9] =0x03E0;
-[e = *U + &U _TrendColor * -> -> -> 9 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 992 `i ]
+[; ;Liofilizador Placa Mae.c: 3710:           TrendColor[8] =0xD540;
+[e = *U + &U _TrendColor * -> -> -> 8 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 54592 `ui `i ]
 "3711
-[; ;Liofilizador Placa Mae.c: 3711:           TrendColor[10]=0x05A0;
-[e = *U + &U _TrendColor * -> -> -> 10 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 1440 `i ]
+[; ;Liofilizador Placa Mae.c: 3711:           TrendColor[9] =0x03E0;
+[e = *U + &U _TrendColor * -> -> -> 9 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 992 `i ]
 "3712
-[; ;Liofilizador Placa Mae.c: 3712:           TrendColor[11]=0x001F;
-[e = *U + &U _TrendColor * -> -> -> 11 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 31 `i ]
+[; ;Liofilizador Placa Mae.c: 3712:           TrendColor[10]=0x05A0;
+[e = *U + &U _TrendColor * -> -> -> 10 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 1440 `i ]
 "3713
-[; ;Liofilizador Placa Mae.c: 3713:           TrendColor[12]=0xF81F;
-[e = *U + &U _TrendColor * -> -> -> 12 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 63519 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3713:           TrendColor[11]=0x001F;
+[e = *U + &U _TrendColor * -> -> -> 11 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 31 `i ]
 "3714
-[; ;Liofilizador Placa Mae.c: 3714:           }
+[; ;Liofilizador Placa Mae.c: 3714:           TrendColor[12]=0xF81F;
+[e = *U + &U _TrendColor * -> -> -> 12 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 63519 `ui `i ]
+"3715
+[; ;Liofilizador Placa Mae.c: 3715:           }
 }
 [e $U 897  ]
-"3715
-[; ;Liofilizador Placa Mae.c: 3715:      else if(Tamanho_Display==81)
+"3716
+[; ;Liofilizador Placa Mae.c: 3716:      else if(Tamanho_Display==81)
 [e :U 896 ]
 [e $ ! == _Tamanho_Display -> 81 `i 898  ]
-"3716
-[; ;Liofilizador Placa Mae.c: 3716:           {
-{
 "3717
-[; ;Liofilizador Placa Mae.c: 3717:           TrendColor[0] =0xFBF7;
-[e = *U + &U _TrendColor * -> -> -> 0 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 64503 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3717:           {
+{
 "3718
-[; ;Liofilizador Placa Mae.c: 3718:           TrendColor[1] =0x05A0;
-[e = *U + &U _TrendColor * -> -> -> 1 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 1440 `i ]
+[; ;Liofilizador Placa Mae.c: 3718:           TrendColor[0] =0xFBF7;
+[e = *U + &U _TrendColor * -> -> -> 0 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 64503 `ui `i ]
 "3719
-[; ;Liofilizador Placa Mae.c: 3719:           TrendColor[2] =0x001F;
-[e = *U + &U _TrendColor * -> -> -> 2 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 31 `i ]
+[; ;Liofilizador Placa Mae.c: 3719:           TrendColor[1] =0x05A0;
+[e = *U + &U _TrendColor * -> -> -> 1 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 1440 `i ]
 "3720
-[; ;Liofilizador Placa Mae.c: 3720:           TrendColor[3] =0xF800;
-[e = *U + &U _TrendColor * -> -> -> 3 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 63488 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3720:           TrendColor[2] =0x001F;
+[e = *U + &U _TrendColor * -> -> -> 2 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 31 `i ]
 "3721
-[; ;Liofilizador Placa Mae.c: 3721:           TrendColor[4] =0x0000;
-[e = *U + &U _TrendColor * -> -> -> 4 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 0 `i ]
+[; ;Liofilizador Placa Mae.c: 3721:           TrendColor[3] =0xF800;
+[e = *U + &U _TrendColor * -> -> -> 3 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 63488 `ui `i ]
 "3722
-[; ;Liofilizador Placa Mae.c: 3722:           TrendColor[5] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 5 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3722:           TrendColor[4] =0x0000;
+[e = *U + &U _TrendColor * -> -> -> 4 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> 0 `i ]
 "3723
-[; ;Liofilizador Placa Mae.c: 3723:           TrendColor[6] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 6 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3723:           TrendColor[5] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 5 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3724
-[; ;Liofilizador Placa Mae.c: 3724:           TrendColor[7] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 7 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3724:           TrendColor[6] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 6 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3725
-[; ;Liofilizador Placa Mae.c: 3725:           TrendColor[8] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 8 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3725:           TrendColor[7] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 7 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3726
-[; ;Liofilizador Placa Mae.c: 3726:           TrendColor[9] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 9 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3726:           TrendColor[8] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 8 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3727
-[; ;Liofilizador Placa Mae.c: 3727:           TrendColor[10]=0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 10 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3727:           TrendColor[9] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 9 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3728
-[; ;Liofilizador Placa Mae.c: 3728:           TrendColor[11]=0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 11 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3728:           TrendColor[10]=0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 10 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3729
-[; ;Liofilizador Placa Mae.c: 3729:           TrendColor[12]=0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 12 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3729:           TrendColor[11]=0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 11 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3730
-[; ;Liofilizador Placa Mae.c: 3730:           }
+[; ;Liofilizador Placa Mae.c: 3730:           TrendColor[12]=0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 12 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+"3731
+[; ;Liofilizador Placa Mae.c: 3731:           }
 }
 [e $U 899  ]
-"3731
-[; ;Liofilizador Placa Mae.c: 3731:      else {
+"3732
+[; ;Liofilizador Placa Mae.c: 3732:      else {
 [e :U 898 ]
 {
-"3732
-[; ;Liofilizador Placa Mae.c: 3732:           TrendColor[0] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 0 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3733
-[; ;Liofilizador Placa Mae.c: 3733:           TrendColor[1] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 1 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3733:           TrendColor[0] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 0 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3734
-[; ;Liofilizador Placa Mae.c: 3734:           TrendColor[2] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 2 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3734:           TrendColor[1] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 1 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3735
-[; ;Liofilizador Placa Mae.c: 3735:           TrendColor[3] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 3 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3735:           TrendColor[2] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 2 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3736
-[; ;Liofilizador Placa Mae.c: 3736:           TrendColor[4] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 4 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3736:           TrendColor[3] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 3 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3737
-[; ;Liofilizador Placa Mae.c: 3737:           TrendColor[5] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 5 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3737:           TrendColor[4] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 4 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3738
-[; ;Liofilizador Placa Mae.c: 3738:           TrendColor[6] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 6 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3738:           TrendColor[5] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 5 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3739
-[; ;Liofilizador Placa Mae.c: 3739:           TrendColor[7] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 7 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3739:           TrendColor[6] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 6 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3740
-[; ;Liofilizador Placa Mae.c: 3740:           TrendColor[8] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 8 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3740:           TrendColor[7] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 7 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3741
-[; ;Liofilizador Placa Mae.c: 3741:           TrendColor[9] =0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 9 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3741:           TrendColor[8] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 8 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3742
-[; ;Liofilizador Placa Mae.c: 3742:           TrendColor[10]=0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 10 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3742:           TrendColor[9] =0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 9 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3743
-[; ;Liofilizador Placa Mae.c: 3743:           TrendColor[11]=0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 11 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3743:           TrendColor[10]=0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 10 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3744
-[; ;Liofilizador Placa Mae.c: 3744:           TrendColor[12]=0xFFFF;
-[e = *U + &U _TrendColor * -> -> -> 12 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+[; ;Liofilizador Placa Mae.c: 3744:           TrendColor[11]=0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 11 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
 "3745
-[; ;Liofilizador Placa Mae.c: 3745:           }
+[; ;Liofilizador Placa Mae.c: 3745:           TrendColor[12]=0xFFFF;
+[e = *U + &U _TrendColor * -> -> -> 12 `i `ui `ux -> -> # *U &U _TrendColor `ui `ux -> -> 65535 `ui `i ]
+"3746
+[; ;Liofilizador Placa Mae.c: 3746:           }
 }
 [e :U 899 ]
 [e :U 897 ]
 [e :U 895 ]
-"3746
-[; ;Liofilizador Placa Mae.c: 3746: }
+"3747
+[; ;Liofilizador Placa Mae.c: 3747: }
 [e :UE 893 ]
 }
-"3749
-[; ;Liofilizador Placa Mae.c: 3749: void Ligar_Cargas_Compassadamente(){
+"3750
+[; ;Liofilizador Placa Mae.c: 3750: void Ligar_Cargas_Compassadamente(){
 [v _Ligar_Cargas_Compassadamente `(v ~T0 @X0 1 ef ]
 {
 [e :U _Ligar_Cargas_Compassadamente ]
 [f ]
-"3751
-[; ;Liofilizador Placa Mae.c: 3751:      int valor;
+"3752
+[; ;Liofilizador Placa Mae.c: 3752:      int valor;
 [v _valor `i ~T0 @X0 1 a ]
-"3753
-[; ;Liofilizador Placa Mae.c: 3753:      PROCULUS_VP_Write_UInt16(0x02,0);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 2 `i `ui -> -> 0 `i `ui ]
 "3754
-[; ;Liofilizador Placa Mae.c: 3754:      PROCULUS_VP_Write_UInt16(0x03,0);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 3 `i `ui -> -> 0 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3754:      PROCULUS_VP_Write_UInt16(0x02,0);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 2 `i `ui -> -> 0 `i `ui ]
 "3755
-[; ;Liofilizador Placa Mae.c: 3755:      PROCULUS_VP_Write_UInt16(0x04,0);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 4 `i `ui -> -> 0 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3755:      PROCULUS_VP_Write_UInt16(0x03,0);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 3 `i `ui -> -> 0 `i `ui ]
 "3756
-[; ;Liofilizador Placa Mae.c: 3756:      PROCULUS_VP_Write_UInt16(0x05,0);
+[; ;Liofilizador Placa Mae.c: 3756:      PROCULUS_VP_Write_UInt16(0x04,0);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 4 `i `ui -> -> 0 `i `ui ]
+"3757
+[; ;Liofilizador Placa Mae.c: 3757:      PROCULUS_VP_Write_UInt16(0x05,0);
 [e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 5 `i `ui -> -> 0 `i `ui ]
-"3758
-[; ;Liofilizador Placa Mae.c: 3758:      statuspower.flag_time_process=0;
+"3759
+[; ;Liofilizador Placa Mae.c: 3759:      statuspower.flag_time_process=0;
 [e = . . _statuspower 1 4 -> -> 0 `i `uc ]
-"3760
-[; ;Liofilizador Placa Mae.c: 3760:      statuspower.bits=EEPROM_Read_Byte(16);
+"3761
+[; ;Liofilizador Placa Mae.c: 3761:      statuspower.bits=EEPROM_Read_Byte(16);
 [e = . _statuspower 0 ( _EEPROM_Read_Byte (1 -> -> 16 `i `ui ]
-"3763
-[; ;Liofilizador Placa Mae.c: 3763:      if(statuspower.bits!=0)
-[e $ ! != -> . _statuspower 0 `i -> 0 `i 901  ]
 "3764
-[; ;Liofilizador Placa Mae.c: 3764:           {
-{
+[; ;Liofilizador Placa Mae.c: 3764:      if(statuspower.bits!=0)
+[e $ ! != -> . _statuspower 0 `i -> 0 `i 901  ]
 "3765
-[; ;Liofilizador Placa Mae.c: 3765:           print("Houve BLACKOUT!");
-[e ( _print (1 :s 69C ]
-"3766
-[; ;Liofilizador Placa Mae.c: 3766:           print("Ativando Recuperacao!");
-[e ( _print (1 :s 70C ]
-"3768
-[; ;Liofilizador Placa Mae.c: 3768:           Contagem_Tempo_de_Processo(0);
-[e ( _Contagem_Tempo_de_Processo (1 -> -> 0 `i `uc ]
-"3770
-[; ;Liofilizador Placa Mae.c: 3770:           if(statuspower.flag_global_datalog==1)
-[e $ ! == -> . . _statuspower 1 0 `i -> 1 `i 902  ]
-"3771
-[; ;Liofilizador Placa Mae.c: 3771:              {
+[; ;Liofilizador Placa Mae.c: 3765:           {
 {
+"3766
+[; ;Liofilizador Placa Mae.c: 3766:           print("Houve BLACKOUT!");
+[e ( _print (1 :s 69C ]
+"3767
+[; ;Liofilizador Placa Mae.c: 3767:           print("Ativando Recuperacao!");
+[e ( _print (1 :s 70C ]
+"3769
+[; ;Liofilizador Placa Mae.c: 3769:           Contagem_Tempo_de_Processo(0);
+[e ( _Contagem_Tempo_de_Processo (1 -> -> 0 `i `uc ]
+"3771
+[; ;Liofilizador Placa Mae.c: 3771:           if(statuspower.flag_global_datalog==1)
+[e $ ! == -> . . _statuspower 1 0 `i -> 1 `i 902  ]
 "3772
-[; ;Liofilizador Placa Mae.c: 3772:              statuspower.flag_global_datalog=0;
-[e = . . _statuspower 1 0 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3772:              {
+{
 "3773
-[; ;Liofilizador Placa Mae.c: 3773:              print("-DataLog.");
-[e ( _print (1 :s 71C ]
+[; ;Liofilizador Placa Mae.c: 3773:              statuspower.flag_global_datalog=0;
+[e = . . _statuspower 1 0 -> -> 0 `i `uc ]
 "3774
-[; ;Liofilizador Placa Mae.c: 3774:              PROCULUS_VP_Write_UInt16(0x02,1);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 2 `i `ui -> -> 1 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3774:              print("-DataLog.");
+[e ( _print (1 :s 71C ]
 "3775
-[; ;Liofilizador Placa Mae.c: 3775:              timerDatalog=0;
-[e = _timerDatalog -> -> 0 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3775:              PROCULUS_VP_Write_UInt16(0x02,1);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 2 `i `ui -> -> 1 `i `ui ]
 "3776
-[; ;Liofilizador Placa Mae.c: 3776:              }
+[; ;Liofilizador Placa Mae.c: 3776:              timerDatalog=0;
+[e = _timerDatalog -> -> 0 `i `ui ]
+"3777
+[; ;Liofilizador Placa Mae.c: 3777:              }
 }
 [e :U 902 ]
-"3778
-[; ;Liofilizador Placa Mae.c: 3778:           if((Tamanho_Display==81)&&(statuspower.flag_regrigeracao_fluido))
-[e $ ! && == _Tamanho_Display -> 81 `i != -> . . _statuspower 1 7 `i -> 0 `i 903  ]
 "3779
-[; ;Liofilizador Placa Mae.c: 3779:             {
-{
+[; ;Liofilizador Placa Mae.c: 3779:           if((Tamanho_Display==81)&&(statuspower.flag_regrigeracao_fluido))
+[e $ ! && == _Tamanho_Display -> 81 `i != -> . . _statuspower 1 7 `i -> 0 `i 903  ]
 "3780
-[; ;Liofilizador Placa Mae.c: 3780:             statuspower.flag_regrigeracao_fluido=0;
-[e = . . _statuspower 1 7 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3780:             {
+{
 "3781
-[; ;Liofilizador Placa Mae.c: 3781:             print("-Estante.");
-[e ( _print (1 :s 72C ]
+[; ;Liofilizador Placa Mae.c: 3781:             statuspower.flag_regrigeracao_fluido=0;
+[e = . . _statuspower 1 7 -> -> 0 `i `uc ]
 "3782
-[; ;Liofilizador Placa Mae.c: 3782:             PROCULUS_VP_Write_UInt16(0x13,1);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 19 `i `ui -> -> 1 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3782:             print("-Estante.");
+[e ( _print (1 :s 72C ]
 "3783
-[; ;Liofilizador Placa Mae.c: 3783:             timerEstante=30;
-[e = _timerEstante -> -> 30 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3783:             PROCULUS_VP_Write_UInt16(0x13,1);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 19 `i `ui -> -> 1 `i `ui ]
 "3784
-[; ;Liofilizador Placa Mae.c: 3784:             }
+[; ;Liofilizador Placa Mae.c: 3784:             timerEstante=30;
+[e = _timerEstante -> -> 30 `i `ui ]
+"3785
+[; ;Liofilizador Placa Mae.c: 3785:             }
 }
 [e $U 904  ]
-"3785
-[; ;Liofilizador Placa Mae.c: 3785:           else
-[e :U 903 ]
 "3786
-[; ;Liofilizador Placa Mae.c: 3786:             timerEstante=0;
+[; ;Liofilizador Placa Mae.c: 3786:           else
+[e :U 903 ]
+"3787
+[; ;Liofilizador Placa Mae.c: 3787:             timerEstante=0;
 [e = _timerEstante -> -> 0 `i `ui ]
 [e :U 904 ]
-"3790
-[; ;Liofilizador Placa Mae.c: 3790:           if(statuspower.flag_global_condensador==1)
-[e $ ! == -> . . _statuspower 1 2 `i -> 1 `i 905  ]
 "3791
-[; ;Liofilizador Placa Mae.c: 3791:             {
-{
+[; ;Liofilizador Placa Mae.c: 3791:           if(statuspower.flag_global_condensador==1)
+[e $ ! == -> . . _statuspower 1 2 `i -> 1 `i 905  ]
 "3792
-[; ;Liofilizador Placa Mae.c: 3792:             statuspower.flag_global_condensador=0;
-[e = . . _statuspower 1 2 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3792:             {
+{
 "3793
-[; ;Liofilizador Placa Mae.c: 3793:             print("-Condensador.");
-[e ( _print (1 :s 73C ]
+[; ;Liofilizador Placa Mae.c: 3793:             statuspower.flag_global_condensador=0;
+[e = . . _statuspower 1 2 -> -> 0 `i `uc ]
 "3794
-[; ;Liofilizador Placa Mae.c: 3794:             PROCULUS_VP_Write_UInt16(0x03,1);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 3 `i `ui -> -> 1 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3794:             print("-Condensador.");
+[e ( _print (1 :s 73C ]
 "3795
-[; ;Liofilizador Placa Mae.c: 3795:             timerCondensador=30;
-[e = _timerCondensador -> -> 30 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3795:             PROCULUS_VP_Write_UInt16(0x03,1);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 3 `i `ui -> -> 1 `i `ui ]
 "3796
-[; ;Liofilizador Placa Mae.c: 3796:             }
+[; ;Liofilizador Placa Mae.c: 3796:             timerCondensador=30;
+[e = _timerCondensador -> -> 30 `i `ui ]
+"3797
+[; ;Liofilizador Placa Mae.c: 3797:             }
 }
 [e $U 906  ]
-"3797
-[; ;Liofilizador Placa Mae.c: 3797:           else
-[e :U 905 ]
 "3798
-[; ;Liofilizador Placa Mae.c: 3798:             timerCondensador=0;
+[; ;Liofilizador Placa Mae.c: 3798:           else
+[e :U 905 ]
+"3799
+[; ;Liofilizador Placa Mae.c: 3799:             timerCondensador=0;
 [e = _timerCondensador -> -> 0 `i `ui ]
 [e :U 906 ]
-"3801
-[; ;Liofilizador Placa Mae.c: 3801:           if(statuspower.flag_global_vacuo==1)
-[e $ ! == -> . . _statuspower 1 3 `i -> 1 `i 907  ]
 "3802
-[; ;Liofilizador Placa Mae.c: 3802:             {
-{
+[; ;Liofilizador Placa Mae.c: 3802:           if(statuspower.flag_global_vacuo==1)
+[e $ ! == -> . . _statuspower 1 3 `i -> 1 `i 907  ]
 "3803
-[; ;Liofilizador Placa Mae.c: 3803:             statuspower.flag_global_vacuo=0;
-[e = . . _statuspower 1 3 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3803:             {
+{
 "3804
-[; ;Liofilizador Placa Mae.c: 3804:             statuspower.flag_time_process=1;
-[e = . . _statuspower 1 4 -> -> 1 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3804:             statuspower.flag_global_vacuo=0;
+[e = . . _statuspower 1 3 -> -> 0 `i `uc ]
 "3805
-[; ;Liofilizador Placa Mae.c: 3805:             print("-Bomba de vacuo.");
-[e ( _print (1 :s 74C ]
+[; ;Liofilizador Placa Mae.c: 3805:             statuspower.flag_time_process=1;
+[e = . . _statuspower 1 4 -> -> 1 `i `uc ]
 "3806
-[; ;Liofilizador Placa Mae.c: 3806:             PROCULUS_VP_Write_UInt16(0x04,1);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 4 `i `ui -> -> 1 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3806:             print("-Bomba de vacuo.");
+[e ( _print (1 :s 74C ]
 "3807
-[; ;Liofilizador Placa Mae.c: 3807:             timerVacuo=30;
-[e = _timerVacuo -> -> 30 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3807:             PROCULUS_VP_Write_UInt16(0x04,1);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 4 `i `ui -> -> 1 `i `ui ]
 "3808
-[; ;Liofilizador Placa Mae.c: 3808:             }
+[; ;Liofilizador Placa Mae.c: 3808:             timerVacuo=30;
+[e = _timerVacuo -> -> 30 `i `ui ]
+"3809
+[; ;Liofilizador Placa Mae.c: 3809:             }
 }
 [e $U 908  ]
-"3809
-[; ;Liofilizador Placa Mae.c: 3809:           else
-[e :U 907 ]
 "3810
-[; ;Liofilizador Placa Mae.c: 3810:             timerVacuo=0;
+[; ;Liofilizador Placa Mae.c: 3810:           else
+[e :U 907 ]
+"3811
+[; ;Liofilizador Placa Mae.c: 3811:             timerVacuo=0;
 [e = _timerVacuo -> -> 0 `i `ui ]
 [e :U 908 ]
-"3812
-[; ;Liofilizador Placa Mae.c: 3812:           if(statuspower.flag_global_aquecimento==1)
-[e $ ! == -> . . _statuspower 1 1 `i -> 1 `i 909  ]
 "3813
-[; ;Liofilizador Placa Mae.c: 3813:             {
-{
+[; ;Liofilizador Placa Mae.c: 3813:           if(statuspower.flag_global_aquecimento==1)
+[e $ ! == -> . . _statuspower 1 1 `i -> 1 `i 909  ]
 "3814
-[; ;Liofilizador Placa Mae.c: 3814:             statuspower.flag_global_aquecimento=0;
-[e = . . _statuspower 1 1 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3814:             {
+{
 "3815
-[; ;Liofilizador Placa Mae.c: 3815:             print("-Aquecimento.");
-[e ( _print (1 :s 75C ]
+[; ;Liofilizador Placa Mae.c: 3815:             statuspower.flag_global_aquecimento=0;
+[e = . . _statuspower 1 1 -> -> 0 `i `uc ]
 "3816
-[; ;Liofilizador Placa Mae.c: 3816:             PROCULUS_VP_Write_UInt16(0x05,1);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 5 `i `ui -> -> 1 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3816:             print("-Aquecimento.");
+[e ( _print (1 :s 75C ]
 "3817
-[; ;Liofilizador Placa Mae.c: 3817:             timerAquecimento=30;
-[e = _timerAquecimento -> -> 30 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3817:             PROCULUS_VP_Write_UInt16(0x05,1);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 5 `i `ui -> -> 1 `i `ui ]
 "3818
-[; ;Liofilizador Placa Mae.c: 3818:             }
+[; ;Liofilizador Placa Mae.c: 3818:             timerAquecimento=30;
+[e = _timerAquecimento -> -> 30 `i `ui ]
+"3819
+[; ;Liofilizador Placa Mae.c: 3819:             }
 }
 [e $U 910  ]
-"3819
-[; ;Liofilizador Placa Mae.c: 3819:           else
-[e :U 909 ]
 "3820
-[; ;Liofilizador Placa Mae.c: 3820:             {
-{
+[; ;Liofilizador Placa Mae.c: 3820:           else
+[e :U 909 ]
 "3821
-[; ;Liofilizador Placa Mae.c: 3821:             timerAquecimento=0;
-[e = _timerAquecimento -> -> 0 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3821:             {
+{
 "3822
-[; ;Liofilizador Placa Mae.c: 3822:             }
+[; ;Liofilizador Placa Mae.c: 3822:             timerAquecimento=0;
+[e = _timerAquecimento -> -> 0 `i `ui ]
+"3823
+[; ;Liofilizador Placa Mae.c: 3823:             }
 }
 [e :U 910 ]
-"3824
-[; ;Liofilizador Placa Mae.c: 3824:           my_delay_ms_CLRWDT(3500);
+"3825
+[; ;Liofilizador Placa Mae.c: 3825:           my_delay_ms_CLRWDT(3500);
 [e ( _my_delay_ms_CLRWDT (1 -> -> 3500 `i `l ]
-"3826
-[; ;Liofilizador Placa Mae.c: 3826:           }
+"3827
+[; ;Liofilizador Placa Mae.c: 3827:           }
 }
 [e :U 901 ]
-"3829
-[; ;Liofilizador Placa Mae.c: 3829: }
+"3830
+[; ;Liofilizador Placa Mae.c: 3830: }
 [e :UE 900 ]
 }
-"3835
-[; ;Liofilizador Placa Mae.c: 3835: void Plotar_Grafico_Gravado(void)
-[v _Plotar_Grafico_Gravado `(v ~T0 @X0 1 ef ]
 "3836
-[; ;Liofilizador Placa Mae.c: 3836: {
+[; ;Liofilizador Placa Mae.c: 3836: void Plotar_Grafico_Gravado(void)
+[v _Plotar_Grafico_Gravado `(v ~T0 @X0 1 ef ]
+"3837
+[; ;Liofilizador Placa Mae.c: 3837: {
 {
 [e :U _Plotar_Grafico_Gravado ]
 [f ]
-"3840
-[; ;Liofilizador Placa Mae.c: 3840:      float RESOLUCAOX;
-[v _RESOLUCAOX `f ~T0 @X0 1 a ]
 "3841
-[; ;Liofilizador Placa Mae.c: 3841:      char bb[5];
-[v _bb `uc ~T0 @X0 -> 5 `i a ]
+[; ;Liofilizador Placa Mae.c: 3841:      float RESOLUCAOX;
+[v _RESOLUCAOX `f ~T0 @X0 1 a ]
 "3842
-[; ;Liofilizador Placa Mae.c: 3842:      char SlaveBoard;
-[v _SlaveBoard `uc ~T0 @X0 1 a ]
+[; ;Liofilizador Placa Mae.c: 3842:      char bb[5];
+[v _bb `uc ~T0 @X0 -> 5 `i a ]
 "3843
-[; ;Liofilizador Placa Mae.c: 3843:      char canal;
-[v _canal `uc ~T0 @X0 1 a ]
+[; ;Liofilizador Placa Mae.c: 3843:      char SlaveBoard;
+[v _SlaveBoard `uc ~T0 @X0 1 a ]
 "3844
-[; ;Liofilizador Placa Mae.c: 3844:      char tupla;
-[v _tupla `uc ~T0 @X0 1 a ]
+[; ;Liofilizador Placa Mae.c: 3844:      char canal;
+[v _canal `uc ~T0 @X0 1 a ]
 "3845
-[; ;Liofilizador Placa Mae.c: 3845:      unsigned long add_datalog;
+[; ;Liofilizador Placa Mae.c: 3845:      char tupla;
+[v _tupla `uc ~T0 @X0 1 a ]
+"3846
+[; ;Liofilizador Placa Mae.c: 3846:      unsigned long add_datalog;
 [v _add_datalog `ul ~T0 @X0 1 a ]
-"3847
-[; ;Liofilizador Placa Mae.c: 3847:      if(Tamanho_Display==80)
-[e $ ! == _Tamanho_Display -> 80 `i 912  ]
 "3848
-[; ;Liofilizador Placa Mae.c: 3848:         RESOLUCAOX=566.0 ;
+[; ;Liofilizador Placa Mae.c: 3848:      if(Tamanho_Display==80)
+[e $ ! == _Tamanho_Display -> 80 `i 912  ]
+"3849
+[; ;Liofilizador Placa Mae.c: 3849:         RESOLUCAOX=566.0 ;
 [e = _RESOLUCAOX -> .566.0 `f ]
 [e $U 913  ]
-"3849
-[; ;Liofilizador Placa Mae.c: 3849:      else if(Tamanho_Display==50)
+"3850
+[; ;Liofilizador Placa Mae.c: 3850:      else if(Tamanho_Display==50)
 [e :U 912 ]
 [e $ ! == _Tamanho_Display -> 50 `i 914  ]
-"3850
-[; ;Liofilizador Placa Mae.c: 3850:              RESOLUCAOX=321.0 ;
+"3851
+[; ;Liofilizador Placa Mae.c: 3851:              RESOLUCAOX=321.0 ;
 [e = _RESOLUCAOX -> .321.0 `f ]
 [e :U 914 ]
 [e :U 913 ]
-"3852
-[; ;Liofilizador Placa Mae.c: 3852:      char flag_exit;
-[v _flag_exit `uc ~T0 @X0 1 a ]
 "3853
-[; ;Liofilizador Placa Mae.c: 3853:      int leitura[14];
-[v _leitura `i ~T0 @X0 -> 14 `i a ]
+[; ;Liofilizador Placa Mae.c: 3853:      char flag_exit;
+[v _flag_exit `uc ~T0 @X0 1 a ]
 "3854
-[; ;Liofilizador Placa Mae.c: 3854:      float tempfloat;
-[v _tempfloat `f ~T0 @X0 1 a ]
+[; ;Liofilizador Placa Mae.c: 3854:      int leitura[14];
+[v _leitura `i ~T0 @X0 -> 14 `i a ]
 "3855
-[; ;Liofilizador Placa Mae.c: 3855:      unsigned long value;
+[; ;Liofilizador Placa Mae.c: 3855:      float tempfloat;
+[v _tempfloat `f ~T0 @X0 1 a ]
+"3856
+[; ;Liofilizador Placa Mae.c: 3856:      unsigned long value;
 [v _value `ul ~T0 @X0 1 a ]
-"3857
-[; ;Liofilizador Placa Mae.c: 3857:      PROCULUS_Show_Screen(35);
-[e ( _PROCULUS_Show_Screen (1 -> -> 35 `i `ui ]
 "3858
-[; ;Liofilizador Placa Mae.c: 3858:      PROCULUS_OK();
-[e ( _PROCULUS_OK ..  ]
+[; ;Liofilizador Placa Mae.c: 3858:      PROCULUS_Show_Screen(35);
+[e ( _PROCULUS_Show_Screen (1 -> -> 35 `i `ui ]
 "3859
-[; ;Liofilizador Placa Mae.c: 3859:      add_datalog=fat8.processo.add_start;
-[e = _add_datalog . . _fat8 1 4 ]
+[; ;Liofilizador Placa Mae.c: 3859:      PROCULUS_OK();
+[e ( _PROCULUS_OK ..  ]
 "3860
-[; ;Liofilizador Placa Mae.c: 3860:      tempfloat=0.0;
-[e = _tempfloat -> .0.0 `f ]
+[; ;Liofilizador Placa Mae.c: 3860:      add_datalog=fat8.processo.add_start;
+[e = _add_datalog . . _fat8 1 4 ]
 "3861
-[; ;Liofilizador Placa Mae.c: 3861:      flag_exit=0;
-[e = _flag_exit -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3861:      tempfloat=0.0;
+[e = _tempfloat -> .0.0 `f ]
 "3862
-[; ;Liofilizador Placa Mae.c: 3862:      do{
+[; ;Liofilizador Placa Mae.c: 3862:      flag_exit=0;
+[e = _flag_exit -> -> 0 `i `uc ]
+"3863
+[; ;Liofilizador Placa Mae.c: 3863:      do{
 [e :U 917 ]
 {
-"3864
-[; ;Liofilizador Placa Mae.c: 3864:           _delay((unsigned long)((50)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "3865
-[; ;Liofilizador Placa Mae.c: 3865:           flag_exit=0;
-[e = _flag_exit -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3865:           _delay((unsigned long)((50)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "3866
-[; ;Liofilizador Placa Mae.c: 3866:           for(tupla=0;tupla<(totalboard*2);tupla++)
+[; ;Liofilizador Placa Mae.c: 3866:           flag_exit=0;
+[e = _flag_exit -> -> 0 `i `uc ]
+"3867
+[; ;Liofilizador Placa Mae.c: 3867:           for(tupla=0;tupla<(totalboard*2);tupla++)
 {
 [e = _tupla -> -> 0 `i `uc ]
 [e $U 921  ]
 [e :U 918 ]
-"3867
-[; ;Liofilizador Placa Mae.c: 3867:              {
-{
 "3868
-[; ;Liofilizador Placa Mae.c: 3868:              if(tupla==3)continue;
+[; ;Liofilizador Placa Mae.c: 3868:              {
+{
+"3869
+[; ;Liofilizador Placa Mae.c: 3869:              if(tupla==3)continue;
 [e $ ! == -> _tupla `i -> 3 `i 922  ]
 [e $U 920  ]
 [e :U 922 ]
-"3869
-[; ;Liofilizador Placa Mae.c: 3869:              SlaveBoard = (tupla / 2)+1;
-[e = _SlaveBoard -> + / -> _tupla `i -> 2 `i -> 1 `i `uc ]
 "3870
-[; ;Liofilizador Placa Mae.c: 3870:              canal = tupla % 2;
+[; ;Liofilizador Placa Mae.c: 3870:              SlaveBoard = (tupla / 2)+1;
+[e = _SlaveBoard -> + / -> _tupla `i -> 2 `i -> 1 `i `uc ]
+"3871
+[; ;Liofilizador Placa Mae.c: 3871:              canal = tupla % 2;
 [e = _canal -> % -> _tupla `i -> 2 `i `uc ]
-"3872
-[; ;Liofilizador Placa Mae.c: 3872:              bb[0]=canal;
-[e = *U + &U _bb * -> -> -> 0 `i `ui `ux -> -> # *U &U _bb `ui `ux _canal ]
 "3873
-[; ;Liofilizador Placa Mae.c: 3873:              bb[1]=((char *)&add_datalog)[3];
-[e = *U + &U _bb * -> -> -> 1 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_datalog `*uc * -> -> 3 `i `x -> -> # *U -> &U _add_datalog `*uc `i `x ]
+[; ;Liofilizador Placa Mae.c: 3873:              bb[0]=canal;
+[e = *U + &U _bb * -> -> -> 0 `i `ui `ux -> -> # *U &U _bb `ui `ux _canal ]
 "3874
-[; ;Liofilizador Placa Mae.c: 3874:              bb[2]=((char *)&add_datalog)[2];
-[e = *U + &U _bb * -> -> -> 2 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_datalog `*uc * -> -> 2 `i `x -> -> # *U -> &U _add_datalog `*uc `i `x ]
+[; ;Liofilizador Placa Mae.c: 3874:              bb[1]=((char *)&add_datalog)[3];
+[e = *U + &U _bb * -> -> -> 1 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_datalog `*uc * -> -> 3 `i `x -> -> # *U -> &U _add_datalog `*uc `i `x ]
 "3875
-[; ;Liofilizador Placa Mae.c: 3875:              bb[3]=((char *)&add_datalog)[1];
-[e = *U + &U _bb * -> -> -> 3 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_datalog `*uc * -> -> 1 `i `x -> -> # *U -> &U _add_datalog `*uc `i `x ]
+[; ;Liofilizador Placa Mae.c: 3875:              bb[2]=((char *)&add_datalog)[2];
+[e = *U + &U _bb * -> -> -> 2 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_datalog `*uc * -> -> 2 `i `x -> -> # *U -> &U _add_datalog `*uc `i `x ]
 "3876
-[; ;Liofilizador Placa Mae.c: 3876:              bb[4]=((char *)&add_datalog)[0];
-[e = *U + &U _bb * -> -> -> 4 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_datalog `*uc * -> -> 0 `i `x -> -> # *U -> &U _add_datalog `*uc `i `x ]
+[; ;Liofilizador Placa Mae.c: 3876:              bb[3]=((char *)&add_datalog)[1];
+[e = *U + &U _bb * -> -> -> 3 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_datalog `*uc * -> -> 1 `i `x -> -> # *U -> &U _add_datalog `*uc `i `x ]
 "3877
-[; ;Liofilizador Placa Mae.c: 3877:              leitura[tupla]=Send_To_Slave(SlaveBoard, 0x14, 5, bb);
-[e = *U + &U _leitura * -> _tupla `ux -> -> # *U &U _leitura `ui `ux ( _Send_To_Slave (4 , , , _SlaveBoard -> -> 20 `i `uc -> -> 5 `i `uc &U _bb ]
+[; ;Liofilizador Placa Mae.c: 3877:              bb[4]=((char *)&add_datalog)[0];
+[e = *U + &U _bb * -> -> -> 4 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add_datalog `*uc * -> -> 0 `i `x -> -> # *U -> &U _add_datalog `*uc `i `x ]
 "3878
-[; ;Liofilizador Placa Mae.c: 3878:              __asm("CLRWDT");
-[; <" CLRWDT ;# ">
+[; ;Liofilizador Placa Mae.c: 3878:              leitura[tupla]=Send_To_Slave(SlaveBoard, 0x14, 5, bb);
+[e = *U + &U _leitura * -> _tupla `ux -> -> # *U &U _leitura `ui `ux ( _Send_To_Slave (4 , , , _SlaveBoard -> -> 20 `i `uc -> -> 5 `i `uc &U _bb ]
 "3879
-[; ;Liofilizador Placa Mae.c: 3879:              }
+[; ;Liofilizador Placa Mae.c: 3879:              __asm("CLRWDT");
+[; <" CLRWDT ;# ">
+"3880
+[; ;Liofilizador Placa Mae.c: 3880:              }
 }
 [e :U 920 ]
 [e ++ _tupla -> -> 1 `i `uc ]
@@ -10220,42 +10223,42 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ < -> _tupla `i * -> _totalboard `i -> 2 `i 918  ]
 [e :U 919 ]
 }
-"3882
-[; ;Liofilizador Placa Mae.c: 3882:           _delay((unsigned long)((50)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "3883
-[; ;Liofilizador Placa Mae.c: 3883:           for(char i=0;i<totalboard*2;i)
+[; ;Liofilizador Placa Mae.c: 3883:           _delay((unsigned long)((50)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"3884
+[; ;Liofilizador Placa Mae.c: 3884:           for(char i=0;i<totalboard*2;i)
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
 [e $U 926  ]
 [e :U 923 ]
-"3884
-[; ;Liofilizador Placa Mae.c: 3884:              {
-{
 "3885
-[; ;Liofilizador Placa Mae.c: 3885:              switch(i++)
-[e $U 928  ]
-"3886
-[; ;Liofilizador Placa Mae.c: 3886:                    {
+[; ;Liofilizador Placa Mae.c: 3885:              {
 {
+"3886
+[; ;Liofilizador Placa Mae.c: 3886:              switch(i++)
+[e $U 928  ]
 "3887
-[; ;Liofilizador Placa Mae.c: 3887:                    case 0: PROCULUS_graphic_plot(i,(leitura[i]*0.4546));break;
+[; ;Liofilizador Placa Mae.c: 3887:                    {
+{
+"3888
+[; ;Liofilizador Placa Mae.c: 3888:                    case 0: PROCULUS_graphic_plot(i,(leitura[i]*0.4546));break;
 [e :U 929 ]
 [e ( _PROCULUS_graphic_plot (2 , -> _i `uc -> * -> *U + &U _leitura * -> _i `ux -> -> # *U &U _leitura `ui `ux `d .0.4546 `ui ]
 [e $U 927  ]
-"3888
-[; ;Liofilizador Placa Mae.c: 3888:                    case 1: PROCULUS_graphic_plot(i,(leitura[i]*0.05));break;
+"3889
+[; ;Liofilizador Placa Mae.c: 3889:                    case 1: PROCULUS_graphic_plot(i,(leitura[i]*0.05));break;
 [e :U 930 ]
 [e ( _PROCULUS_graphic_plot (2 , -> _i `uc -> * -> *U + &U _leitura * -> _i `ux -> -> # *U &U _leitura `ui `ux `d .0.05 `ui ]
 [e $U 927  ]
-"3889
-[; ;Liofilizador Placa Mae.c: 3889:                   default: PROCULUS_graphic_plot(i,(leitura[i]*1.0));break;
+"3890
+[; ;Liofilizador Placa Mae.c: 3890:                   default: PROCULUS_graphic_plot(i,(leitura[i]*1.0));break;
 [e :U 931 ]
 [e ( _PROCULUS_graphic_plot (2 , -> _i `uc -> * -> *U + &U _leitura * -> _i `ux -> -> # *U &U _leitura `ui `ux `d .1.0 `ui ]
 [e $U 927  ]
-"3890
-[; ;Liofilizador Placa Mae.c: 3890:                    }
+"3891
+[; ;Liofilizador Placa Mae.c: 3891:                    }
 }
 [e $U 927  ]
 [e :U 928 ]
@@ -10263,110 +10266,110 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 1 `i 930
  931 ]
 [e :U 927 ]
-"3891
-[; ;Liofilizador Placa Mae.c: 3891:              }
+"3892
+[; ;Liofilizador Placa Mae.c: 3892:              }
 }
 [e _i ]
 [e :U 926 ]
 [e $ < -> _i `i * -> _totalboard `i -> 2 `i 923  ]
 [e :U 924 ]
 }
-"3893
-[; ;Liofilizador Placa Mae.c: 3893:           tempfloat+=((fat8.processo.add_end-fat8.processo.add_start)/2.0)/RESOLUCAOX;
-[e =+ _tempfloat -> / / -> - . . _fat8 1 5 . . _fat8 1 4 `d .2.0 -> _RESOLUCAOX `d `f ]
 "3894
-[; ;Liofilizador Placa Mae.c: 3894:           value= roundf(tempfloat);
-[e = _value -> ( _roundf (1 _tempfloat `ul ]
+[; ;Liofilizador Placa Mae.c: 3894:           tempfloat+=((fat8.processo.add_end-fat8.processo.add_start)/2.0)/RESOLUCAOX;
+[e =+ _tempfloat -> / / -> - . . _fat8 1 5 . . _fat8 1 4 `d .2.0 -> _RESOLUCAOX `d `f ]
 "3895
-[; ;Liofilizador Placa Mae.c: 3895:           add_datalog=(value*2)+fat8.processo.add_start;
+[; ;Liofilizador Placa Mae.c: 3895:           value= roundf(tempfloat);
+[e = _value -> ( _roundf (1 _tempfloat `ul ]
+"3896
+[; ;Liofilizador Placa Mae.c: 3896:           add_datalog=(value*2)+fat8.processo.add_start;
 [e = _add_datalog + * _value -> -> -> 2 `i `l `ul . . _fat8 1 4 ]
-"3897
-[; ;Liofilizador Placa Mae.c: 3897:           TRISDbits.RD6=0;
-[e = . . _TRISDbits 1 6 -> -> 0 `i `uc ]
 "3898
-[; ;Liofilizador Placa Mae.c: 3898:           PORTDbits.RD6=1;
-[e = . . _PORTDbits 0 6 -> -> 1 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3898:           TRISDbits.RD6=0;
+[e = . . _TRISDbits 1 6 -> -> 0 `i `uc ]
 "3899
-[; ;Liofilizador Placa Mae.c: 3899:           if(PROCULUS_Get_Page()!=35)
-[e $ ! != ( _PROCULUS_Get_Page ..  -> -> 35 `i `ui 932  ]
+[; ;Liofilizador Placa Mae.c: 3899:           PORTDbits.RD6=1;
+[e = . . _PORTDbits 0 6 -> -> 1 `i `uc ]
 "3900
-[; ;Liofilizador Placa Mae.c: 3900:             {
-{
+[; ;Liofilizador Placa Mae.c: 3900:           if(PROCULUS_Get_Page()!=35)
+[e $ ! != ( _PROCULUS_Get_Page ..  -> -> 35 `i `ui 932  ]
 "3901
-[; ;Liofilizador Placa Mae.c: 3901:             PORTDbits.RD6=0;
-[e = . . _PORTDbits 0 6 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3901:             {
+{
 "3902
-[; ;Liofilizador Placa Mae.c: 3902:             TRISDbits.RD7=0;
-[e = . . _TRISDbits 1 7 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3902:             PORTDbits.RD6=0;
+[e = . . _PORTDbits 0 6 -> -> 0 `i `uc ]
 "3903
-[; ;Liofilizador Placa Mae.c: 3903:             PORTDbits.RD7=1;
-[e = . . _PORTDbits 0 7 -> -> 1 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3903:             TRISDbits.RD7=0;
+[e = . . _TRISDbits 1 7 -> -> 0 `i `uc ]
 "3904
-[; ;Liofilizador Placa Mae.c: 3904:             _delay((unsigned long)((500)*(32000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;Liofilizador Placa Mae.c: 3904:             PORTDbits.RD7=1;
+[e = . . _PORTDbits 0 7 -> -> 1 `i `uc ]
 "3905
-[; ;Liofilizador Placa Mae.c: 3905:             PORTDbits.RD7=0;
-[e = . . _PORTDbits 0 7 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3905:             _delay((unsigned long)((500)*(32000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
 "3906
-[; ;Liofilizador Placa Mae.c: 3906:             PROCULUS_Clean_All_Line_Graphic();
-[e ( _PROCULUS_Clean_All_Line_Graphic ..  ]
+[; ;Liofilizador Placa Mae.c: 3906:             PORTDbits.RD7=0;
+[e = . . _PORTDbits 0 7 -> -> 0 `i `uc ]
 "3907
-[; ;Liofilizador Placa Mae.c: 3907:             break;
-[e $U 916  ]
+[; ;Liofilizador Placa Mae.c: 3907:             PROCULUS_Clean_All_Line_Graphic();
+[e ( _PROCULUS_Clean_All_Line_Graphic ..  ]
 "3908
-[; ;Liofilizador Placa Mae.c: 3908:             }
+[; ;Liofilizador Placa Mae.c: 3908:             break;
+[e $U 916  ]
+"3909
+[; ;Liofilizador Placa Mae.c: 3909:             }
 }
 [e :U 932 ]
-"3909
-[; ;Liofilizador Placa Mae.c: 3909:           PORTDbits.RD6=0;
+"3910
+[; ;Liofilizador Placa Mae.c: 3910:           PORTDbits.RD6=0;
 [e = . . _PORTDbits 0 6 -> -> 0 `i `uc ]
-"3911
-[; ;Liofilizador Placa Mae.c: 3911:        }while(add_datalog<fat8.processo.add_end);
+"3912
+[; ;Liofilizador Placa Mae.c: 3912:        }while(add_datalog<fat8.processo.add_end);
 }
 [e $ < _add_datalog . . _fat8 1 5 917  ]
 [e :U 916 ]
-"3912
-[; ;Liofilizador Placa Mae.c: 3912: }
+"3913
+[; ;Liofilizador Placa Mae.c: 3913: }
 [e :UE 911 ]
 }
-"3915
-[; ;Liofilizador Placa Mae.c: 3915: void Format_FAT8_Table(){
+"3916
+[; ;Liofilizador Placa Mae.c: 3916: void Format_FAT8_Table(){
 [v _Format_FAT8_Table `(v ~T0 @X0 1 ef ]
 {
 [e :U _Format_FAT8_Table ]
 [f ]
-"3917
-[; ;Liofilizador Placa Mae.c: 3917:     fat8.processo.processo_number=0;
-[e = . . _fat8 1 0 -> -> 0 `i `ui ]
 "3918
-[; ;Liofilizador Placa Mae.c: 3918:     strcpy(fat8.processo.inicio.date," ");
-[e ( _strcpy (2 , &U . . . _fat8 1 1 0 :s 76C ]
+[; ;Liofilizador Placa Mae.c: 3918:     fat8.processo.processo_number=0;
+[e = . . _fat8 1 0 -> -> 0 `i `ui ]
 "3919
-[; ;Liofilizador Placa Mae.c: 3919:     strcpy(fat8.processo.inicio.time," ");
-[e ( _strcpy (2 , &U . . . _fat8 1 1 1 :s 77C ]
+[; ;Liofilizador Placa Mae.c: 3919:     strcpy(fat8.processo.inicio.date," ");
+[e ( _strcpy (2 , &U . . . _fat8 1 1 0 :s 76C ]
 "3920
-[; ;Liofilizador Placa Mae.c: 3920:     strcpy(fat8.processo.fim.date," ");
-[e ( _strcpy (2 , &U . . . _fat8 1 2 0 :s 78C ]
+[; ;Liofilizador Placa Mae.c: 3920:     strcpy(fat8.processo.inicio.time," ");
+[e ( _strcpy (2 , &U . . . _fat8 1 1 1 :s 77C ]
 "3921
-[; ;Liofilizador Placa Mae.c: 3921:     strcpy(fat8.processo.fim.time," ");
-[e ( _strcpy (2 , &U . . . _fat8 1 2 1 :s 79C ]
+[; ;Liofilizador Placa Mae.c: 3921:     strcpy(fat8.processo.fim.date," ");
+[e ( _strcpy (2 , &U . . . _fat8 1 2 0 :s 78C ]
 "3922
-[; ;Liofilizador Placa Mae.c: 3922:     fat8.processo.amostra=0;
-[e = . . _fat8 1 3 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3922:     strcpy(fat8.processo.fim.time," ");
+[e ( _strcpy (2 , &U . . . _fat8 1 2 1 :s 79C ]
 "3923
-[; ;Liofilizador Placa Mae.c: 3923:     fat8.processo.add_start=0;
-[e = . . _fat8 1 4 -> -> -> 0 `i `l `ul ]
+[; ;Liofilizador Placa Mae.c: 3923:     fat8.processo.amostra=0;
+[e = . . _fat8 1 3 -> -> 0 `i `uc ]
 "3924
-[; ;Liofilizador Placa Mae.c: 3924:     fat8.processo.add_end=0;
-[e = . . _fat8 1 5 -> -> -> 0 `i `l `ul ]
+[; ;Liofilizador Placa Mae.c: 3924:     fat8.processo.add_start=0;
+[e = . . _fat8 1 4 -> -> -> 0 `i `l `ul ]
 "3925
-[; ;Liofilizador Placa Mae.c: 3925:     fat8.processo.minutes=0;
-[e = . . _fat8 1 6 -> -> 0 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3925:     fat8.processo.add_end=0;
+[e = . . _fat8 1 5 -> -> -> 0 `i `l `ul ]
 "3926
-[; ;Liofilizador Placa Mae.c: 3926:     fat8.processo.all_flags=0;
+[; ;Liofilizador Placa Mae.c: 3926:     fat8.processo.minutes=0;
+[e = . . _fat8 1 6 -> -> 0 `i `ui ]
+"3927
+[; ;Liofilizador Placa Mae.c: 3927:     fat8.processo.all_flags=0;
 [e = . . . _fat8 1 7 0 -> -> 0 `i `uc ]
-"3928
-[; ;Liofilizador Placa Mae.c: 3928:     for(char tupla=0;tupla<maxlineDATALOG;tupla++) FAT8_Save(tupla);
+"3929
+[; ;Liofilizador Placa Mae.c: 3929:     for(char tupla=0;tupla<maxlineDATALOG;tupla++) FAT8_Save(tupla);
 {
 [v _tupla `uc ~T0 @X0 1 a ]
 [e = _tupla -> -> 0 `i `uc ]
@@ -10378,427 +10381,423 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ < -> _tupla `i -> _maxlineDATALOG `i 934  ]
 [e :U 935 ]
 }
-"3930
-[; ;Liofilizador Placa Mae.c: 3930:     EEPROM_24C1025_Write_Long (0,2,0);
-[e ( _EEPROM_24C1025_Write_Long (3 , , -> -> 0 `i `uc -> -> -> 2 `i `l `ul -> -> 0 `i `l ]
 "3931
-[; ;Liofilizador Placa Mae.c: 3931:     add_datalog=0;
-[e = _add_datalog -> -> -> 0 `i `l `ul ]
+[; ;Liofilizador Placa Mae.c: 3931:     EEPROM_24C1025_Write_Long (0,2,0);
+[e ( _EEPROM_24C1025_Write_Long (3 , , -> -> 0 `i `uc -> -> -> 2 `i `l `ul -> -> 0 `i `l ]
 "3932
-[; ;Liofilizador Placa Mae.c: 3932: }
+[; ;Liofilizador Placa Mae.c: 3932:     add_datalog=0;
+[e = _add_datalog -> -> -> 0 `i `l `ul ]
+"3933
+[; ;Liofilizador Placa Mae.c: 3933: }
 [e :UE 933 ]
 }
-"3936
-[; ;Liofilizador Placa Mae.c: 3936: void FAT8_Write_Process_Inicialize()
-[v _FAT8_Write_Process_Inicialize `(v ~T0 @X0 1 ef ]
 "3937
-[; ;Liofilizador Placa Mae.c: 3937:     {
+[; ;Liofilizador Placa Mae.c: 3937: void FAT8_Write_Process_Inicialize()
+[v _FAT8_Write_Process_Inicialize `(v ~T0 @X0 1 ef ]
+"3938
+[; ;Liofilizador Placa Mae.c: 3938:     {
 {
 [e :U _FAT8_Write_Process_Inicialize ]
 [f ]
-"3938
-[; ;Liofilizador Placa Mae.c: 3938:     unsigned int NumProcesso;
-[v _NumProcesso `ui ~T0 @X0 1 a ]
 "3939
-[; ;Liofilizador Placa Mae.c: 3939:     char time[10];
-[v _time `uc ~T0 @X0 -> 10 `i a ]
+[; ;Liofilizador Placa Mae.c: 3939:     unsigned int NumProcesso;
+[v _NumProcesso `ui ~T0 @X0 1 a ]
 "3940
-[; ;Liofilizador Placa Mae.c: 3940:     char date[10];
+[; ;Liofilizador Placa Mae.c: 3940:     char time[10];
+[v _time `uc ~T0 @X0 -> 10 `i a ]
+"3941
+[; ;Liofilizador Placa Mae.c: 3941:     char date[10];
 [v _date `uc ~T0 @X0 -> 10 `i a ]
-"3942
-[; ;Liofilizador Placa Mae.c: 3942:     fat8.index=Find_Fat8_Free();
+"3943
+[; ;Liofilizador Placa Mae.c: 3943:     fat8.index=Find_Fat8_Free();
 [e = . _fat8 0 -> ( _Find_Fat8_Free ..  `c ]
-"3944
-[; ;Liofilizador Placa Mae.c: 3944:     NumProcesso=EEPROM_24C1025_Read_Int (0,0);
-[e = _NumProcesso ( _EEPROM_24C1025_Read_Int (2 , -> -> 0 `i `uc -> -> -> 0 `i `l `ul ]
 "3945
-[; ;Liofilizador Placa Mae.c: 3945:     NumProcesso++;
-[e ++ _NumProcesso -> -> 1 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3945:     NumProcesso=EEPROM_24C1025_Read_Int (0,0);
+[e = _NumProcesso ( _EEPROM_24C1025_Read_Int (2 , -> -> 0 `i `uc -> -> -> 0 `i `l `ul ]
 "3946
-[; ;Liofilizador Placa Mae.c: 3946:     if(NumProcesso>9999) NumProcesso=0;
+[; ;Liofilizador Placa Mae.c: 3946:     NumProcesso++;
+[e ++ _NumProcesso -> -> 1 `i `ui ]
+"3947
+[; ;Liofilizador Placa Mae.c: 3947:     if(NumProcesso>9999) NumProcesso=0;
 [e $ ! > _NumProcesso -> -> 9999 `i `ui 939  ]
 [e = _NumProcesso -> -> 0 `i `ui ]
 [e :U 939 ]
-"3947
-[; ;Liofilizador Placa Mae.c: 3947:     EEPROM_24C1025_Write_Int (0,0,NumProcesso);
+"3948
+[; ;Liofilizador Placa Mae.c: 3948:     EEPROM_24C1025_Write_Int (0,0,NumProcesso);
 [e ( _EEPROM_24C1025_Write_Int (3 , , -> -> 0 `i `uc -> -> -> 0 `i `l `ul -> _NumProcesso `i ]
-"3949
-[; ;Liofilizador Placa Mae.c: 3949:     PROCULUS_Read_RTC(date,time);
+"3950
+[; ;Liofilizador Placa Mae.c: 3950:     PROCULUS_Read_RTC(date,time);
 [e ( _PROCULUS_Read_RTC (2 , &U _date &U _time ]
-"3951
-[; ;Liofilizador Placa Mae.c: 3951:     processo_totalminuto=0;
+"3952
+[; ;Liofilizador Placa Mae.c: 3952:     processo_totalminuto=0;
 [e = _processo_totalminuto -> -> 0 `i `ui ]
-"3953
-[; ;Liofilizador Placa Mae.c: 3953:     add_datalog=EEPROM_24C1025_Read_Long (0,2);
+"3954
+[; ;Liofilizador Placa Mae.c: 3954:     add_datalog=EEPROM_24C1025_Read_Long (0,2);
 [e = _add_datalog ( _EEPROM_24C1025_Read_Long (2 , -> -> 0 `i `uc -> -> -> 2 `i `l `ul ]
-"3955
-[; ;Liofilizador Placa Mae.c: 3955:     fat8.processo.processo_number=NumProcesso;
-[e = . . _fat8 1 0 _NumProcesso ]
 "3956
-[; ;Liofilizador Placa Mae.c: 3956:     strcpy(fat8.processo.inicio.date,date);
-[e ( _strcpy (2 , &U . . . _fat8 1 1 0 -> &U _date `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 3956:     fat8.processo.processo_number=NumProcesso;
+[e = . . _fat8 1 0 _NumProcesso ]
 "3957
-[; ;Liofilizador Placa Mae.c: 3957:     strcpy(fat8.processo.inicio.time,time);
-[e ( _strcpy (2 , &U . . . _fat8 1 1 1 -> &U _time `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 3957:     strcpy(fat8.processo.inicio.date,date);
+[e ( _strcpy (2 , &U . . . _fat8 1 1 0 -> &U _date `*Cuc ]
 "3958
-[; ;Liofilizador Placa Mae.c: 3958:     strcpy(fat8.processo.fim.date,"");
-[e ( _strcpy (2 , &U . . . _fat8 1 2 0 :s 80C ]
+[; ;Liofilizador Placa Mae.c: 3958:     strcpy(fat8.processo.inicio.time,time);
+[e ( _strcpy (2 , &U . . . _fat8 1 1 1 -> &U _time `*Cuc ]
 "3959
-[; ;Liofilizador Placa Mae.c: 3959:     strcpy(fat8.processo.fim.time,"");
-[e ( _strcpy (2 , &U . . . _fat8 1 2 1 :s 81C ]
+[; ;Liofilizador Placa Mae.c: 3959:     strcpy(fat8.processo.fim.date,"");
+[e ( _strcpy (2 , &U . . . _fat8 1 2 0 :s 80C ]
 "3960
-[; ;Liofilizador Placa Mae.c: 3960:     fat8.processo.amostra=EEPROM_Read_Integer(0x09);
-[e = . . _fat8 1 3 -> ( _EEPROM_Read_Integer (1 -> -> 9 `i `ui `uc ]
+[; ;Liofilizador Placa Mae.c: 3960:     strcpy(fat8.processo.fim.time,"");
+[e ( _strcpy (2 , &U . . . _fat8 1 2 1 :s 81C ]
 "3961
-[; ;Liofilizador Placa Mae.c: 3961:     fat8.processo.add_start=add_datalog;
-[e = . . _fat8 1 4 _add_datalog ]
+[; ;Liofilizador Placa Mae.c: 3961:     fat8.processo.amostra=EEPROM_Read_Integer(0x09);
+[e = . . _fat8 1 3 -> ( _EEPROM_Read_Integer (1 -> -> 9 `i `ui `uc ]
 "3962
-[; ;Liofilizador Placa Mae.c: 3962:     fat8.processo.add_end=0;
-[e = . . _fat8 1 5 -> -> -> 0 `i `l `ul ]
+[; ;Liofilizador Placa Mae.c: 3962:     fat8.processo.add_start=add_datalog;
+[e = . . _fat8 1 4 _add_datalog ]
 "3963
-[; ;Liofilizador Placa Mae.c: 3963:     fat8.processo.minutes=0;
-[e = . . _fat8 1 6 -> -> 0 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3963:     fat8.processo.add_end=0;
+[e = . . _fat8 1 5 -> -> -> 0 `i `l `ul ]
 "3964
-[; ;Liofilizador Placa Mae.c: 3964:     fat8.processo.flag_download=0;
-[e = . . . . _fat8 1 7 1 3 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3964:     fat8.processo.minutes=0;
+[e = . . _fat8 1 6 -> -> 0 `i `ui ]
 "3965
-[; ;Liofilizador Placa Mae.c: 3965:     fat8.processo.flag_view=0;
-[e = . . . . _fat8 1 7 1 2 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3965:     fat8.processo.flag_download=0;
+[e = . . . . _fat8 1 7 1 3 -> -> 0 `i `uc ]
 "3966
-[; ;Liofilizador Placa Mae.c: 3966:     fat8.processo.flag_finalized=0;
-[e = . . . . _fat8 1 7 1 1 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 3966:     fat8.processo.flag_view=0;
+[e = . . . . _fat8 1 7 1 2 -> -> 0 `i `uc ]
 "3967
-[; ;Liofilizador Placa Mae.c: 3967:     fat8.processo.flag_running=1;
+[; ;Liofilizador Placa Mae.c: 3967:     fat8.processo.flag_finalized=0;
+[e = . . . . _fat8 1 7 1 1 -> -> 0 `i `uc ]
+"3968
+[; ;Liofilizador Placa Mae.c: 3968:     fat8.processo.flag_running=1;
 [e = . . . . _fat8 1 7 1 0 -> -> 1 `i `uc ]
-"3972
-[; ;Liofilizador Placa Mae.c: 3972:     FAT8_Save(fat8.index);
-[e ( _FAT8_Save (1 -> . _fat8 0 `uc ]
 "3973
-[; ;Liofilizador Placa Mae.c: 3973:     FAT8_Show();
-[e ( _FAT8_Show ..  ]
+[; ;Liofilizador Placa Mae.c: 3973:     FAT8_Save(fat8.index);
+[e ( _FAT8_Save (1 -> . _fat8 0 `uc ]
 "3974
-[; ;Liofilizador Placa Mae.c: 3974:     }
+[; ;Liofilizador Placa Mae.c: 3974:     FAT8_Show();
+[e ( _FAT8_Show ..  ]
+"3975
+[; ;Liofilizador Placa Mae.c: 3975:     }
 [e :UE 938 ]
 }
-"3977
-[; ;Liofilizador Placa Mae.c: 3977: void FAT8_Write_Process_Finalize(){
+"3978
+[; ;Liofilizador Placa Mae.c: 3978: void FAT8_Write_Process_Finalize(){
 [v _FAT8_Write_Process_Finalize `(v ~T0 @X0 1 ef ]
 {
 [e :U _FAT8_Write_Process_Finalize ]
 [f ]
-"3978
-[; ;Liofilizador Placa Mae.c: 3978:     unsigned char NumProcesso;
-[v _NumProcesso `uc ~T0 @X0 1 a ]
 "3979
-[; ;Liofilizador Placa Mae.c: 3979:     unsigned char index;
-[v _index `uc ~T0 @X0 1 a ]
+[; ;Liofilizador Placa Mae.c: 3979:     unsigned char NumProcesso;
+[v _NumProcesso `uc ~T0 @X0 1 a ]
 "3980
-[; ;Liofilizador Placa Mae.c: 3980:     char time[10];
-[v _time `uc ~T0 @X0 -> 10 `i a ]
+[; ;Liofilizador Placa Mae.c: 3980:     unsigned char index;
+[v _index `uc ~T0 @X0 1 a ]
 "3981
-[; ;Liofilizador Placa Mae.c: 3981:     char date[10];
+[; ;Liofilizador Placa Mae.c: 3981:     char time[10];
+[v _time `uc ~T0 @X0 -> 10 `i a ]
+"3982
+[; ;Liofilizador Placa Mae.c: 3982:     char date[10];
 [v _date `uc ~T0 @X0 -> 10 `i a ]
-"3983
-[; ;Liofilizador Placa Mae.c: 3983:     fat8.index=Find_Fat8_Running();
-[e = . _fat8 0 ( _Find_Fat8_Running ..  ]
 "3984
-[; ;Liofilizador Placa Mae.c: 3984:     FAT8_Load(fat8.index);
+[; ;Liofilizador Placa Mae.c: 3984:     fat8.index=Find_Fat8_Running();
+[e = . _fat8 0 ( _Find_Fat8_Running ..  ]
+"3985
+[; ;Liofilizador Placa Mae.c: 3985:     FAT8_Load(fat8.index);
 [e ( _FAT8_Load (1 -> . _fat8 0 `uc ]
-"3986
-[; ;Liofilizador Placa Mae.c: 3986:     if(statusgen1.flag_pc_conected==1)
-[e $ ! == -> . _statusgen1 7 `i -> 1 `i 941  ]
 "3987
-[; ;Liofilizador Placa Mae.c: 3987:       {
-{
+[; ;Liofilizador Placa Mae.c: 3987:     if(statusgen1.flag_pc_conected==1)
+[e $ ! == -> . _statusgen1 7 `i -> 1 `i 941  ]
 "3988
-[; ;Liofilizador Placa Mae.c: 3988:       strcpy(fat8.processo.fim.date,fat8.processo.inicio.date);
-[e ( _strcpy (2 , &U . . . _fat8 1 2 0 -> &U . . . _fat8 1 1 0 `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 3988:       {
+{
 "3989
-[; ;Liofilizador Placa Mae.c: 3989:       strcpy(fat8.processo.fim.time,fat8.processo.inicio.time);
-[e ( _strcpy (2 , &U . . . _fat8 1 2 1 -> &U . . . _fat8 1 1 1 `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 3989:       strcpy(fat8.processo.fim.date,fat8.processo.inicio.date);
+[e ( _strcpy (2 , &U . . . _fat8 1 2 0 -> &U . . . _fat8 1 1 0 `*Cuc ]
 "3990
-[; ;Liofilizador Placa Mae.c: 3990:       fat8.processo.minutes=0;
-[e = . . _fat8 1 6 -> -> 0 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 3990:       strcpy(fat8.processo.fim.time,fat8.processo.inicio.time);
+[e ( _strcpy (2 , &U . . . _fat8 1 2 1 -> &U . . . _fat8 1 1 1 `*Cuc ]
 "3991
-[; ;Liofilizador Placa Mae.c: 3991:       }
+[; ;Liofilizador Placa Mae.c: 3991:       fat8.processo.minutes=0;
+[e = . . _fat8 1 6 -> -> 0 `i `ui ]
+"3992
+[; ;Liofilizador Placa Mae.c: 3992:       }
 }
 [e $U 942  ]
-"3992
-[; ;Liofilizador Placa Mae.c: 3992:     else
-[e :U 941 ]
 "3993
-[; ;Liofilizador Placa Mae.c: 3993:       {
-{
+[; ;Liofilizador Placa Mae.c: 3993:     else
+[e :U 941 ]
 "3994
-[; ;Liofilizador Placa Mae.c: 3994:       PROCULUS_Read_RTC(date,time);
-[e ( _PROCULUS_Read_RTC (2 , &U _date &U _time ]
+[; ;Liofilizador Placa Mae.c: 3994:       {
+{
 "3995
-[; ;Liofilizador Placa Mae.c: 3995:       strcpy(fat8.processo.fim.date,date);
-[e ( _strcpy (2 , &U . . . _fat8 1 2 0 -> &U _date `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 3995:       PROCULUS_Read_RTC(date,time);
+[e ( _PROCULUS_Read_RTC (2 , &U _date &U _time ]
 "3996
-[; ;Liofilizador Placa Mae.c: 3996:       strcpy(fat8.processo.fim.time,time);
-[e ( _strcpy (2 , &U . . . _fat8 1 2 1 -> &U _time `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 3996:       strcpy(fat8.processo.fim.date,date);
+[e ( _strcpy (2 , &U . . . _fat8 1 2 0 -> &U _date `*Cuc ]
 "3997
-[; ;Liofilizador Placa Mae.c: 3997:       fat8.processo.minutes=processo_totalminuto;
-[e = . . _fat8 1 6 _processo_totalminuto ]
+[; ;Liofilizador Placa Mae.c: 3997:       strcpy(fat8.processo.fim.time,time);
+[e ( _strcpy (2 , &U . . . _fat8 1 2 1 -> &U _time `*Cuc ]
 "3998
-[; ;Liofilizador Placa Mae.c: 3998:       }
+[; ;Liofilizador Placa Mae.c: 3998:       fat8.processo.minutes=processo_totalminuto;
+[e = . . _fat8 1 6 _processo_totalminuto ]
+"3999
+[; ;Liofilizador Placa Mae.c: 3999:       }
 }
 [e :U 942 ]
-"4007
-[; ;Liofilizador Placa Mae.c: 4007:     fat8.processo.add_end=add_datalog;
+"4008
+[; ;Liofilizador Placa Mae.c: 4008:     fat8.processo.add_end=add_datalog;
 [e = . . _fat8 1 5 _add_datalog ]
-"4009
-[; ;Liofilizador Placa Mae.c: 4009:     fat8.processo.flag_running=0;
-[e = . . . . _fat8 1 7 1 0 -> -> 0 `i `uc ]
 "4010
-[; ;Liofilizador Placa Mae.c: 4010:     fat8.processo.flag_download=0;
-[e = . . . . _fat8 1 7 1 3 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4010:     fat8.processo.flag_running=0;
+[e = . . . . _fat8 1 7 1 0 -> -> 0 `i `uc ]
 "4011
-[; ;Liofilizador Placa Mae.c: 4011:     fat8.processo.flag_view=0;
-[e = . . . . _fat8 1 7 1 2 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4011:     fat8.processo.flag_download=0;
+[e = . . . . _fat8 1 7 1 3 -> -> 0 `i `uc ]
 "4012
-[; ;Liofilizador Placa Mae.c: 4012:     fat8.processo.flag_finalized=1;
-[e = . . . . _fat8 1 7 1 1 -> -> 1 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4012:     fat8.processo.flag_view=0;
+[e = . . . . _fat8 1 7 1 2 -> -> 0 `i `uc ]
 "4013
-[; ;Liofilizador Placa Mae.c: 4013:     FAT8_Save(fat8.index);
-[e ( _FAT8_Save (1 -> . _fat8 0 `uc ]
+[; ;Liofilizador Placa Mae.c: 4013:     fat8.processo.flag_finalized=1;
+[e = . . . . _fat8 1 7 1 1 -> -> 1 `i `uc ]
 "4014
-[; ;Liofilizador Placa Mae.c: 4014:     FAT8_Show();
-[e ( _FAT8_Show ..  ]
+[; ;Liofilizador Placa Mae.c: 4014:     FAT8_Save(fat8.index);
+[e ( _FAT8_Save (1 -> . _fat8 0 `uc ]
 "4015
-[; ;Liofilizador Placa Mae.c: 4015:     if(statusgen1.flag_pc_conected==0) add_datalog+=2;
+[; ;Liofilizador Placa Mae.c: 4015:     FAT8_Show();
+[e ( _FAT8_Show ..  ]
+"4016
+[; ;Liofilizador Placa Mae.c: 4016:     if(statusgen1.flag_pc_conected==0) add_datalog+=2;
 [e $ ! == -> . _statusgen1 7 `i -> 0 `i 943  ]
 [e =+ _add_datalog -> -> -> 2 `i `l `ul ]
 [e :U 943 ]
-"4016
-[; ;Liofilizador Placa Mae.c: 4016:     EEPROM_24C1025_Write_Long (0,2,add_datalog);
+"4017
+[; ;Liofilizador Placa Mae.c: 4017:     EEPROM_24C1025_Write_Long (0,2,add_datalog);
 [e ( _EEPROM_24C1025_Write_Long (3 , , -> -> 0 `i `uc -> -> -> 2 `i `l `ul -> _add_datalog `l ]
-"4018
-[; ;Liofilizador Placa Mae.c: 4018: }
+"4019
+[; ;Liofilizador Placa Mae.c: 4019: }
 [e :UE 940 ]
 }
-"4022
-[; ;Liofilizador Placa Mae.c: 4022: char Find_Fat8_Free(){
+"4023
+[; ;Liofilizador Placa Mae.c: 4023: char Find_Fat8_Free(){
 [v _Find_Fat8_Free `(uc ~T0 @X0 1 ef ]
 {
 [e :U _Find_Fat8_Free ]
 [f ]
-"4023
-[; ;Liofilizador Placa Mae.c: 4023:      char i;
-[v _i `uc ~T0 @X0 1 a ]
 "4024
-[; ;Liofilizador Placa Mae.c: 4024:      char resultado=-1;
+[; ;Liofilizador Placa Mae.c: 4024:      char i;
+[v _i `uc ~T0 @X0 1 a ]
+"4025
+[; ;Liofilizador Placa Mae.c: 4025:      char resultado=-1;
 [v _resultado `uc ~T0 @X0 1 a ]
 [e = _resultado -> -U -> 1 `i `uc ]
-"4026
-[; ;Liofilizador Placa Mae.c: 4026:      for(i=0;i<maxlineDATALOG;i++)
+"4027
+[; ;Liofilizador Placa Mae.c: 4027:      for(i=0;i<maxlineDATALOG;i++)
 {
 [e = _i -> -> 0 `i `uc ]
 [e $U 948  ]
 [e :U 945 ]
-"4027
-[; ;Liofilizador Placa Mae.c: 4027:         {
-{
 "4028
-[; ;Liofilizador Placa Mae.c: 4028:         FAT8_Load(i);
-[e ( _FAT8_Load (1 -> _i `uc ]
-"4029
-[; ;Liofilizador Placa Mae.c: 4029:         if((fat8.processo.flag_running==0)&&(!fat8.processo.flag_finalized))
-[e $ ! && == -> . . . . _fat8 1 7 1 0 `i -> 0 `i ! != -> . . . . _fat8 1 7 1 1 `i -> 0 `i 949  ]
-"4030
-[; ;Liofilizador Placa Mae.c: 4030:            {
+[; ;Liofilizador Placa Mae.c: 4028:         {
 {
+"4029
+[; ;Liofilizador Placa Mae.c: 4029:         FAT8_Load(i);
+[e ( _FAT8_Load (1 -> _i `uc ]
+"4030
+[; ;Liofilizador Placa Mae.c: 4030:         if((fat8.processo.flag_running==0)&&(!fat8.processo.flag_finalized))
+[e $ ! && == -> . . . . _fat8 1 7 1 0 `i -> 0 `i ! != -> . . . . _fat8 1 7 1 1 `i -> 0 `i 949  ]
 "4031
-[; ;Liofilizador Placa Mae.c: 4031:             resultado=i;
-[e = _resultado _i ]
+[; ;Liofilizador Placa Mae.c: 4031:            {
+{
 "4032
-[; ;Liofilizador Placa Mae.c: 4032:             break;
-[e $U 946  ]
+[; ;Liofilizador Placa Mae.c: 4032:             resultado=i;
+[e = _resultado _i ]
 "4033
-[; ;Liofilizador Placa Mae.c: 4033:            }
+[; ;Liofilizador Placa Mae.c: 4033:             break;
+[e $U 946  ]
+"4034
+[; ;Liofilizador Placa Mae.c: 4034:            }
 }
 [e :U 949 ]
-"4034
-[; ;Liofilizador Placa Mae.c: 4034:         }
+"4035
+[; ;Liofilizador Placa Mae.c: 4035:         }
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e :U 948 ]
 [e $ < -> _i `i -> _maxlineDATALOG `i 945  ]
 [e :U 946 ]
 }
-"4035
-[; ;Liofilizador Placa Mae.c: 4035:      return resultado;
+"4036
+[; ;Liofilizador Placa Mae.c: 4036:      return resultado;
 [e ) _resultado ]
 [e $UE 944  ]
-"4036
-[; ;Liofilizador Placa Mae.c: 4036: }
+"4037
+[; ;Liofilizador Placa Mae.c: 4037: }
 [e :UE 944 ]
 }
-"4039
-[; ;Liofilizador Placa Mae.c: 4039: signed char Find_Fat8_Running(){
+"4040
+[; ;Liofilizador Placa Mae.c: 4040: signed char Find_Fat8_Running(){
 [v _Find_Fat8_Running `(c ~T0 @X0 1 ef ]
 {
 [e :U _Find_Fat8_Running ]
 [f ]
-"4040
-[; ;Liofilizador Placa Mae.c: 4040:      char i;
-[v _i `uc ~T0 @X0 1 a ]
 "4041
-[; ;Liofilizador Placa Mae.c: 4041:      signed char resultado=-1;
+[; ;Liofilizador Placa Mae.c: 4041:      char i;
+[v _i `uc ~T0 @X0 1 a ]
+"4042
+[; ;Liofilizador Placa Mae.c: 4042:      signed char resultado=-1;
 [v _resultado `c ~T0 @X0 1 a ]
 [e = _resultado -> -U -> 1 `i `c ]
-"4043
-[; ;Liofilizador Placa Mae.c: 4043:      for(i=0;i<maxlineDATALOG;i++)
+"4044
+[; ;Liofilizador Placa Mae.c: 4044:      for(i=0;i<maxlineDATALOG;i++)
 {
 [e = _i -> -> 0 `i `uc ]
 [e $U 954  ]
 [e :U 951 ]
-"4044
-[; ;Liofilizador Placa Mae.c: 4044:         {
-{
 "4045
-[; ;Liofilizador Placa Mae.c: 4045:         FAT8_Load(i);
-[e ( _FAT8_Load (1 -> _i `uc ]
-"4046
-[; ;Liofilizador Placa Mae.c: 4046:         if(fat8.processo.flag_running)
-[e $ ! != -> . . . . _fat8 1 7 1 0 `i -> 0 `i 955  ]
-"4047
-[; ;Liofilizador Placa Mae.c: 4047:           {
+[; ;Liofilizador Placa Mae.c: 4045:         {
 {
+"4046
+[; ;Liofilizador Placa Mae.c: 4046:         FAT8_Load(i);
+[e ( _FAT8_Load (1 -> _i `uc ]
+"4047
+[; ;Liofilizador Placa Mae.c: 4047:         if(fat8.processo.flag_running)
+[e $ ! != -> . . . . _fat8 1 7 1 0 `i -> 0 `i 955  ]
 "4048
-[; ;Liofilizador Placa Mae.c: 4048:           resultado=i;
-[e = _resultado -> _i `c ]
+[; ;Liofilizador Placa Mae.c: 4048:           {
+{
 "4049
-[; ;Liofilizador Placa Mae.c: 4049:           break;
-[e $U 952  ]
+[; ;Liofilizador Placa Mae.c: 4049:           resultado=i;
+[e = _resultado -> _i `c ]
 "4050
-[; ;Liofilizador Placa Mae.c: 4050:           }
+[; ;Liofilizador Placa Mae.c: 4050:           break;
+[e $U 952  ]
+"4051
+[; ;Liofilizador Placa Mae.c: 4051:           }
 }
 [e :U 955 ]
-"4051
-[; ;Liofilizador Placa Mae.c: 4051:         }
+"4052
+[; ;Liofilizador Placa Mae.c: 4052:         }
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e :U 954 ]
 [e $ < -> _i `i -> _maxlineDATALOG `i 951  ]
 [e :U 952 ]
 }
-"4052
-[; ;Liofilizador Placa Mae.c: 4052:      return resultado;
+"4053
+[; ;Liofilizador Placa Mae.c: 4053:      return resultado;
 [e ) _resultado ]
 [e $UE 950  ]
-"4053
-[; ;Liofilizador Placa Mae.c: 4053: }
+"4054
+[; ;Liofilizador Placa Mae.c: 4054: }
 [e :UE 950 ]
 }
-"4057
-[; ;Liofilizador Placa Mae.c: 4057: void Preenche_Dados_da_FAT8(){
+"4058
+[; ;Liofilizador Placa Mae.c: 4058: void Preenche_Dados_da_FAT8(){
 [v _Preenche_Dados_da_FAT8 `(v ~T0 @X0 1 ef ]
 {
 [e :U _Preenche_Dados_da_FAT8 ]
 [f ]
-"4058
-[; ;Liofilizador Placa Mae.c: 4058:      char time[10];
-[v _time `uc ~T0 @X0 -> 10 `i a ]
 "4059
-[; ;Liofilizador Placa Mae.c: 4059:      char date[10];
+[; ;Liofilizador Placa Mae.c: 4059:      char time[10];
+[v _time `uc ~T0 @X0 -> 10 `i a ]
+"4060
+[; ;Liofilizador Placa Mae.c: 4060:      char date[10];
 [v _date `uc ~T0 @X0 -> 10 `i a ]
-"4061
-[; ;Liofilizador Placa Mae.c: 4061:      PROCULUS_Read_RTC(date,time);
+"4062
+[; ;Liofilizador Placa Mae.c: 4062:      PROCULUS_Read_RTC(date,time);
 [e ( _PROCULUS_Read_RTC (2 , &U _date &U _time ]
-"4063
-[; ;Liofilizador Placa Mae.c: 4063:      fat8.processo.processo_number=0;
-[e = . . _fat8 1 0 -> -> 0 `i `ui ]
 "4064
-[; ;Liofilizador Placa Mae.c: 4064:      strcpy(fat8.processo.inicio.date,date);
-[e ( _strcpy (2 , &U . . . _fat8 1 1 0 -> &U _date `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 4064:      fat8.processo.processo_number=0;
+[e = . . _fat8 1 0 -> -> 0 `i `ui ]
 "4065
-[; ;Liofilizador Placa Mae.c: 4065:      strcpy(fat8.processo.inicio.time,time);
-[e ( _strcpy (2 , &U . . . _fat8 1 1 1 -> &U _time `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 4065:      strcpy(fat8.processo.inicio.date,date);
+[e ( _strcpy (2 , &U . . . _fat8 1 1 0 -> &U _date `*Cuc ]
 "4066
-[; ;Liofilizador Placa Mae.c: 4066:      strcpy(fat8.processo.fim.date,date);
-[e ( _strcpy (2 , &U . . . _fat8 1 2 0 -> &U _date `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 4066:      strcpy(fat8.processo.inicio.time,time);
+[e ( _strcpy (2 , &U . . . _fat8 1 1 1 -> &U _time `*Cuc ]
 "4067
-[; ;Liofilizador Placa Mae.c: 4067:      strcpy(fat8.processo.fim.time,time);
-[e ( _strcpy (2 , &U . . . _fat8 1 2 1 -> &U _time `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 4067:      strcpy(fat8.processo.fim.date,date);
+[e ( _strcpy (2 , &U . . . _fat8 1 2 0 -> &U _date `*Cuc ]
 "4068
-[; ;Liofilizador Placa Mae.c: 4068:      fat8.processo.amostra=0;
-[e = . . _fat8 1 3 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4068:      strcpy(fat8.processo.fim.time,time);
+[e ( _strcpy (2 , &U . . . _fat8 1 2 1 -> &U _time `*Cuc ]
 "4069
-[; ;Liofilizador Placa Mae.c: 4069:      fat8.processo.add_start=0;
-[e = . . _fat8 1 4 -> -> -> 0 `i `l `ul ]
+[; ;Liofilizador Placa Mae.c: 4069:      fat8.processo.amostra=0;
+[e = . . _fat8 1 3 -> -> 0 `i `uc ]
 "4070
-[; ;Liofilizador Placa Mae.c: 4070:      fat8.processo.add_end=add_datalog;
-[e = . . _fat8 1 5 _add_datalog ]
+[; ;Liofilizador Placa Mae.c: 4070:      fat8.processo.add_start=0;
+[e = . . _fat8 1 4 -> -> -> 0 `i `l `ul ]
 "4071
-[; ;Liofilizador Placa Mae.c: 4071:      fat8.processo.minutes=0;
-[e = . . _fat8 1 6 -> -> 0 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 4071:      fat8.processo.add_end=add_datalog;
+[e = . . _fat8 1 5 _add_datalog ]
 "4072
-[; ;Liofilizador Placa Mae.c: 4072:      fat8.processo.flag_running=0;
-[e = . . . . _fat8 1 7 1 0 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4072:      fat8.processo.minutes=0;
+[e = . . _fat8 1 6 -> -> 0 `i `ui ]
 "4073
-[; ;Liofilizador Placa Mae.c: 4073:      fat8.processo.flag_download=0;
-[e = . . . . _fat8 1 7 1 3 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4073:      fat8.processo.flag_running=0;
+[e = . . . . _fat8 1 7 1 0 -> -> 0 `i `uc ]
 "4074
-[; ;Liofilizador Placa Mae.c: 4074:      fat8.processo.flag_view=0;
-[e = . . . . _fat8 1 7 1 2 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4074:      fat8.processo.flag_download=0;
+[e = . . . . _fat8 1 7 1 3 -> -> 0 `i `uc ]
 "4075
-[; ;Liofilizador Placa Mae.c: 4075:      fat8.processo.flag_finalized=0;
-[e = . . . . _fat8 1 7 1 1 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4075:      fat8.processo.flag_view=0;
+[e = . . . . _fat8 1 7 1 2 -> -> 0 `i `uc ]
 "4076
-[; ;Liofilizador Placa Mae.c: 4076: }
+[; ;Liofilizador Placa Mae.c: 4076:      fat8.processo.flag_finalized=0;
+[e = . . . . _fat8 1 7 1 1 -> -> 0 `i `uc ]
+"4077
+[; ;Liofilizador Placa Mae.c: 4077: }
 [e :UE 956 ]
 }
-"4079
-[; ;Liofilizador Placa Mae.c: 4079: void Recarregar_Parametros_de_Configuracao(void){
+"4080
+[; ;Liofilizador Placa Mae.c: 4080: void Recarregar_Parametros_de_Configuracao(void){
 [v _Recarregar_Parametros_de_Configuracao `(v ~T0 @X0 1 ef ]
 {
 [e :U _Recarregar_Parametros_de_Configuracao ]
 [f ]
-"4080
-[; ;Liofilizador Placa Mae.c: 4080:      Carregar_Parametros_de_Seguranca();
-[e ( _Carregar_Parametros_de_Seguranca ..  ]
 "4081
-[; ;Liofilizador Placa Mae.c: 4081: }
+[; ;Liofilizador Placa Mae.c: 4081:      Carregar_Parametros_de_Seguranca();
+[e ( _Carregar_Parametros_de_Seguranca ..  ]
+"4082
+[; ;Liofilizador Placa Mae.c: 4082: }
 [e :UE 957 ]
 }
-"4085
-[; ;Liofilizador Placa Mae.c: 4085: void ouve_comunicacao(void){
+"4086
+[; ;Liofilizador Placa Mae.c: 4086: void ouve_comunicacao(void){
 [v _ouve_comunicacao `(v ~T0 @X0 1 ef ]
 {
 [e :U _ouve_comunicacao ]
 [f ]
-"4093
-[; ;Liofilizador Placa Mae.c: 4093:      static char count=0;
+"4094
+[; ;Liofilizador Placa Mae.c: 4094:      static char count=0;
 [v F4479 `uc ~T0 @X0 1 s count ]
 [i F4479
 -> -> 0 `i `uc
 ]
-"4094
-[; ;Liofilizador Placa Mae.c: 4094:      _delay((unsigned long)((100)*(32000000/4000.0)));
+"4095
+[; ;Liofilizador Placa Mae.c: 4095:      _delay((unsigned long)((100)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"4097
-[; ;Liofilizador Placa Mae.c: 4097:       statusgen1.flag_pc_conected=0;
-[e = . _statusgen1 7 -> -> 0 `i `uc ]
 "4098
-[; ;Liofilizador Placa Mae.c: 4098:             statusgen1.flag_recomunication =1;
-[e = . _statusgen1 6 -> -> 1 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4098:       statusgen1.flag_pc_conected=0;
+[e = . _statusgen1 7 -> -> 0 `i `uc ]
 "4099
-[; ;Liofilizador Placa Mae.c: 4099:       while(statusgen1.flag_recomunication==1){
+[; ;Liofilizador Placa Mae.c: 4099:             statusgen1.flag_recomunication =1;
+[e = . _statusgen1 6 -> -> 1 `i `uc ]
+"4100
+[; ;Liofilizador Placa Mae.c: 4100:       while(statusgen1.flag_recomunication==1){
 [e $U 959  ]
 [e :U 960 ]
 {
-"4100
-[; ;Liofilizador Placa Mae.c: 4100:             statusgen1.flag_recomunication =0;
-[e = . _statusgen1 6 -> -> 0 `i `uc ]
 "4101
-[; ;Liofilizador Placa Mae.c: 4101:            _delay((unsigned long)((200)*(32000000/4000.0)));
+[; ;Liofilizador Placa Mae.c: 4101:             statusgen1.flag_recomunication =0;
+[e = . _statusgen1 6 -> -> 0 `i `uc ]
+"4102
+[; ;Liofilizador Placa Mae.c: 4102:            _delay((unsigned long)((200)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"4103
-[; ;Liofilizador Placa Mae.c: 4103:            USART_putc(0xCD);USART_putc(0xCD);
-[e ( _USART_putc (1 -> -> 205 `i `uc ]
-[e ( _USART_putc (1 -> -> 205 `i `uc ]
 "4104
 [; ;Liofilizador Placa Mae.c: 4104:            USART_putc(0xCD);USART_putc(0xCD);
 [e ( _USART_putc (1 -> -> 205 `i `uc ]
@@ -10807,274 +10806,278 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 4105:            USART_putc(0xCD);USART_putc(0xCD);
 [e ( _USART_putc (1 -> -> 205 `i `uc ]
 [e ( _USART_putc (1 -> -> 205 `i `uc ]
-"4107
-[; ;Liofilizador Placa Mae.c: 4107:            for(unsigned int tempo=0; tempo<350; tempo++)
+"4106
+[; ;Liofilizador Placa Mae.c: 4106:            USART_putc(0xCD);USART_putc(0xCD);
+[e ( _USART_putc (1 -> -> 205 `i `uc ]
+[e ( _USART_putc (1 -> -> 205 `i `uc ]
+"4108
+[; ;Liofilizador Placa Mae.c: 4108:            for(unsigned int tempo=0; tempo<350; tempo++)
 {
 [v _tempo `ui ~T0 @X0 1 a ]
 [e = _tempo -> -> 0 `i `ui ]
 [e $ < _tempo -> -> 350 `i `ui 962  ]
 [e $U 963  ]
 [e :U 962 ]
-"4108
-[; ;Liofilizador Placa Mae.c: 4108:                {
-{
 "4109
-[; ;Liofilizador Placa Mae.c: 4109:                if(statusgen.flag_usart_rx==1) break;
+[; ;Liofilizador Placa Mae.c: 4109:                {
+{
+"4110
+[; ;Liofilizador Placa Mae.c: 4110:                if(statusgen.flag_usart_rx==1) break;
 [e $ ! == -> . _statusgen 0 `i -> 1 `i 965  ]
 [e $U 963  ]
 [e :U 965 ]
-"4110
-[; ;Liofilizador Placa Mae.c: 4110:                my_delay_ms_CLRWDT(1);
-[e ( _my_delay_ms_CLRWDT (1 -> -> 1 `i `l ]
 "4111
-[; ;Liofilizador Placa Mae.c: 4111:                }
+[; ;Liofilizador Placa Mae.c: 4111:                my_delay_ms_CLRWDT(1);
+[e ( _my_delay_ms_CLRWDT (1 -> -> 1 `i `l ]
+"4112
+[; ;Liofilizador Placa Mae.c: 4112:                }
 }
 [e ++ _tempo -> -> 1 `i `ui ]
 [e $ < _tempo -> -> 350 `i `ui 962  ]
 [e :U 963 ]
 }
-"4115
-[; ;Liofilizador Placa Mae.c: 4115:            if(statusgen.flag_usart_rx)
-[e $ ! != -> . _statusgen 0 `i -> 0 `i 966  ]
 "4116
-[; ;Liofilizador Placa Mae.c: 4116:               {
-{
+[; ;Liofilizador Placa Mae.c: 4116:            if(statusgen.flag_usart_rx)
+[e $ ! != -> . _statusgen 0 `i -> 0 `i 966  ]
 "4117
-[; ;Liofilizador Placa Mae.c: 4117:               Comando_Protocolo_Serial();
-[e ( _Comando_Protocolo_Serial ..  ]
+[; ;Liofilizador Placa Mae.c: 4117:               {
+{
 "4118
-[; ;Liofilizador Placa Mae.c: 4118:               statusgen1.flag_recomunication=1;
-[e = . _statusgen1 6 -> -> 1 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4118:               Comando_Protocolo_Serial();
+[e ( _Comando_Protocolo_Serial ..  ]
 "4119
-[; ;Liofilizador Placa Mae.c: 4119:               if(count<5)count++;
+[; ;Liofilizador Placa Mae.c: 4119:               statusgen1.flag_recomunication=1;
+[e = . _statusgen1 6 -> -> 1 `i `uc ]
+"4120
+[; ;Liofilizador Placa Mae.c: 4120:               if(count<5)count++;
 [e $ ! < -> F4479 `i -> 5 `i 967  ]
 [e ++ F4479 -> -> 1 `i `uc ]
 [e :U 967 ]
-"4121
-[; ;Liofilizador Placa Mae.c: 4121:               }
+"4122
+[; ;Liofilizador Placa Mae.c: 4122:               }
 }
 [e :U 966 ]
-"4124
-[; ;Liofilizador Placa Mae.c: 4124:            if(statusgen.flag_usart_rx)
-[e $ ! != -> . _statusgen 0 `i -> 0 `i 968  ]
 "4125
-[; ;Liofilizador Placa Mae.c: 4125:               {
-{
+[; ;Liofilizador Placa Mae.c: 4125:            if(statusgen.flag_usart_rx)
+[e $ ! != -> . _statusgen 0 `i -> 0 `i 968  ]
 "4126
-[; ;Liofilizador Placa Mae.c: 4126:               Comando_Display();
-[e ( _Comando_Display ..  ]
+[; ;Liofilizador Placa Mae.c: 4126:               {
+{
 "4127
-[; ;Liofilizador Placa Mae.c: 4127:               statusgen1.flag_recomunication=1;
-[e = . _statusgen1 6 -> -> 1 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4127:               Comando_Display();
+[e ( _Comando_Display ..  ]
 "4128
-[; ;Liofilizador Placa Mae.c: 4128:               if(count<5)count++;
+[; ;Liofilizador Placa Mae.c: 4128:               statusgen1.flag_recomunication=1;
+[e = . _statusgen1 6 -> -> 1 `i `uc ]
+"4129
+[; ;Liofilizador Placa Mae.c: 4129:               if(count<5)count++;
 [e $ ! < -> F4479 `i -> 5 `i 969  ]
 [e ++ F4479 -> -> 1 `i `uc ]
 [e :U 969 ]
-"4130
-[; ;Liofilizador Placa Mae.c: 4130:               }
+"4131
+[; ;Liofilizador Placa Mae.c: 4131:               }
 }
 [e :U 968 ]
-"4134
-[; ;Liofilizador Placa Mae.c: 4134:       }
+"4135
+[; ;Liofilizador Placa Mae.c: 4135:       }
 }
 [e :U 959 ]
-"4099
-[; ;Liofilizador Placa Mae.c: 4099:       while(statusgen1.flag_recomunication==1){
+"4100
+[; ;Liofilizador Placa Mae.c: 4100:       while(statusgen1.flag_recomunication==1){
 [e $ == -> . _statusgen1 6 `i -> 1 `i 960  ]
 [e :U 961 ]
-"4136
-[; ;Liofilizador Placa Mae.c: 4136:       if(count>0)
-[e $ ! > -> F4479 `i -> 0 `i 970  ]
 "4137
-[; ;Liofilizador Placa Mae.c: 4137:          {
-{
+[; ;Liofilizador Placa Mae.c: 4137:       if(count>0)
+[e $ ! > -> F4479 `i -> 0 `i 970  ]
 "4138
-[; ;Liofilizador Placa Mae.c: 4138:          count--;
-[e -- F4479 -> -> 1 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4138:          {
+{
 "4139
-[; ;Liofilizador Placa Mae.c: 4139:          statusgen1.flag_pc_conected=1;
-[e = . _statusgen1 7 -> -> 1 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4139:          count--;
+[e -- F4479 -> -> 1 `i `uc ]
 "4140
-[; ;Liofilizador Placa Mae.c: 4140:          PROCULUS_VP_Write_UInt16(0x40,1);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 64 `i `ui -> -> 1 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 4140:          statusgen1.flag_pc_conected=1;
+[e = . _statusgen1 7 -> -> 1 `i `uc ]
 "4141
-[; ;Liofilizador Placa Mae.c: 4141:          }
+[; ;Liofilizador Placa Mae.c: 4141:          PROCULUS_VP_Write_UInt16(0x40,1);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 64 `i `ui -> -> 1 `i `ui ]
+"4142
+[; ;Liofilizador Placa Mae.c: 4142:          }
 }
 [e $U 971  ]
-"4142
-[; ;Liofilizador Placa Mae.c: 4142:       else
-[e :U 970 ]
 "4143
-[; ;Liofilizador Placa Mae.c: 4143:          {
-{
+[; ;Liofilizador Placa Mae.c: 4143:       else
+[e :U 970 ]
 "4144
-[; ;Liofilizador Placa Mae.c: 4144:          statusgen1.flag_pc_conected=0;
-[e = . _statusgen1 7 -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4144:          {
+{
 "4145
-[; ;Liofilizador Placa Mae.c: 4145:          PROCULUS_VP_Write_UInt16(0x40,0);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 64 `i `ui -> -> 0 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 4145:          statusgen1.flag_pc_conected=0;
+[e = . _statusgen1 7 -> -> 0 `i `uc ]
 "4146
-[; ;Liofilizador Placa Mae.c: 4146:          }
+[; ;Liofilizador Placa Mae.c: 4146:          PROCULUS_VP_Write_UInt16(0x40,0);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> -> 64 `i `ui -> -> 0 `i `ui ]
+"4147
+[; ;Liofilizador Placa Mae.c: 4147:          }
 }
 [e :U 971 ]
-"4148
-[; ;Liofilizador Placa Mae.c: 4148:       if(statusgen2.flag_autoriza_click_datalog) PROCULUS_Buzzer(10);
+"4149
+[; ;Liofilizador Placa Mae.c: 4149:       if(statusgen2.flag_autoriza_click_datalog) PROCULUS_Buzzer(10);
 [e $ ! != -> . _statusgen2 0 `i -> 0 `i 972  ]
 [e ( _PROCULUS_Buzzer (1 -> -> 10 `i `ui ]
 [e :U 972 ]
-"4150
-[; ;Liofilizador Placa Mae.c: 4150: }
+"4151
+[; ;Liofilizador Placa Mae.c: 4151: }
 [e :UE 958 ]
 }
-"4153
-[; ;Liofilizador Placa Mae.c: 4153: char testa_modo_conectado(unsigned int add, char estado){
+"4154
+[; ;Liofilizador Placa Mae.c: 4154: char testa_modo_conectado(unsigned int add, char estado){
 [v _testa_modo_conectado `(uc ~T0 @X0 1 ef2`ui`uc ]
 {
 [e :U _testa_modo_conectado ]
 [v _add `ui ~T0 @X0 1 r1 ]
 [v _estado `uc ~T0 @X0 1 r2 ]
 [f ]
-"4155
-[; ;Liofilizador Placa Mae.c: 4155:      if(statusgen1.flag_pc_conected)
-[e $ ! != -> . _statusgen1 7 `i -> 0 `i 974  ]
 "4156
-[; ;Liofilizador Placa Mae.c: 4156:        {
-{
+[; ;Liofilizador Placa Mae.c: 4156:      if(statusgen1.flag_pc_conected)
+[e $ ! != -> . _statusgen1 7 `i -> 0 `i 974  ]
 "4157
-[; ;Liofilizador Placa Mae.c: 4157:        switch(add)
-[e $U 976  ]
+[; ;Liofilizador Placa Mae.c: 4157:        {
+{
 "4158
-[; ;Liofilizador Placa Mae.c: 4158:           {
-{
+[; ;Liofilizador Placa Mae.c: 4158:        switch(add)
+[e $U 976  ]
 "4159
-[; ;Liofilizador Placa Mae.c: 4159:            case 2:
-[e :U 977 ]
-"4160
-[; ;Liofilizador Placa Mae.c: 4160:                  if(!statusgen2.flag_autoriza_click_datalog)
-[e $ ! ! != -> . _statusgen2 0 `i -> 0 `i 978  ]
-"4161
-[; ;Liofilizador Placa Mae.c: 4161:                     {
+[; ;Liofilizador Placa Mae.c: 4159:           {
 {
+"4160
+[; ;Liofilizador Placa Mae.c: 4160:            case 2:
+[e :U 977 ]
+"4161
+[; ;Liofilizador Placa Mae.c: 4161:                  if(!statusgen2.flag_autoriza_click_datalog)
+[e $ ! ! != -> . _statusgen2 0 `i -> 0 `i 978  ]
 "4162
-[; ;Liofilizador Placa Mae.c: 4162:                     PROCULUS_VP_Write_UInt16(add,estado);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , _add -> _estado `ui ]
+[; ;Liofilizador Placa Mae.c: 4162:                     {
+{
 "4163
-[; ;Liofilizador Placa Mae.c: 4163:                     PROCULUS_Popup(0x43);
-[e ( _PROCULUS_Popup (1 -> -> 67 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4163:                     PROCULUS_VP_Write_UInt16(add,estado);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , _add -> _estado `ui ]
 "4164
-[; ;Liofilizador Placa Mae.c: 4164:                     PROCULUS_Buzzer(3000);
-[e ( _PROCULUS_Buzzer (1 -> -> 3000 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 4164:                     PROCULUS_Popup(0x43);
+[e ( _PROCULUS_Popup (1 -> -> 67 `i `uc ]
 "4165
-[; ;Liofilizador Placa Mae.c: 4165:                     return 0;
+[; ;Liofilizador Placa Mae.c: 4165:                     PROCULUS_Buzzer(3000);
+[e ( _PROCULUS_Buzzer (1 -> -> 3000 `i `ui ]
+"4166
+[; ;Liofilizador Placa Mae.c: 4166:                     return 0;
 [e ) -> -> 0 `i `uc ]
 [e $UE 973  ]
-"4166
-[; ;Liofilizador Placa Mae.c: 4166:                     }
+"4167
+[; ;Liofilizador Placa Mae.c: 4167:                     }
 }
 [e :U 978 ]
-"4167
-[; ;Liofilizador Placa Mae.c: 4167:                   statusgen2.flag_autoriza_click_datalog=0;
-[e = . _statusgen2 0 -> -> 0 `i `uc ]
 "4168
-[; ;Liofilizador Placa Mae.c: 4168:                   break;
-[e $U 975  ]
+[; ;Liofilizador Placa Mae.c: 4168:                   statusgen2.flag_autoriza_click_datalog=0;
+[e = . _statusgen2 0 -> -> 0 `i `uc ]
 "4169
-[; ;Liofilizador Placa Mae.c: 4169:            case 3:
-[e :U 979 ]
+[; ;Liofilizador Placa Mae.c: 4169:                   break;
+[e $U 975  ]
 "4170
-[; ;Liofilizador Placa Mae.c: 4170:                  if(!statusgen2.flag_autoriza_click_condensador)
-[e $ ! ! != -> . _statusgen2 1 `i -> 0 `i 980  ]
+[; ;Liofilizador Placa Mae.c: 4170:            case 3:
+[e :U 979 ]
 "4171
-[; ;Liofilizador Placa Mae.c: 4171:                     {
-{
+[; ;Liofilizador Placa Mae.c: 4171:                  if(!statusgen2.flag_autoriza_click_condensador)
+[e $ ! ! != -> . _statusgen2 1 `i -> 0 `i 980  ]
 "4172
-[; ;Liofilizador Placa Mae.c: 4172:                     PROCULUS_VP_Write_UInt16(add,estado);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , _add -> _estado `ui ]
+[; ;Liofilizador Placa Mae.c: 4172:                     {
+{
 "4173
-[; ;Liofilizador Placa Mae.c: 4173:                     PROCULUS_Popup(0x43);
-[e ( _PROCULUS_Popup (1 -> -> 67 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4173:                     PROCULUS_VP_Write_UInt16(add,estado);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , _add -> _estado `ui ]
 "4174
-[; ;Liofilizador Placa Mae.c: 4174:                     PROCULUS_Buzzer(3000);
-[e ( _PROCULUS_Buzzer (1 -> -> 3000 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 4174:                     PROCULUS_Popup(0x43);
+[e ( _PROCULUS_Popup (1 -> -> 67 `i `uc ]
 "4175
-[; ;Liofilizador Placa Mae.c: 4175:                     return 0;
+[; ;Liofilizador Placa Mae.c: 4175:                     PROCULUS_Buzzer(3000);
+[e ( _PROCULUS_Buzzer (1 -> -> 3000 `i `ui ]
+"4176
+[; ;Liofilizador Placa Mae.c: 4176:                     return 0;
 [e ) -> -> 0 `i `uc ]
 [e $UE 973  ]
-"4176
-[; ;Liofilizador Placa Mae.c: 4176:                     }
+"4177
+[; ;Liofilizador Placa Mae.c: 4177:                     }
 }
 [e :U 980 ]
-"4177
-[; ;Liofilizador Placa Mae.c: 4177:                   statusgen2.flag_autoriza_click_condensador=0; break;
+"4178
+[; ;Liofilizador Placa Mae.c: 4178:                   statusgen2.flag_autoriza_click_condensador=0; break;
 [e = . _statusgen2 1 -> -> 0 `i `uc ]
 [e $U 975  ]
-"4178
-[; ;Liofilizador Placa Mae.c: 4178:            case 4:
-[e :U 981 ]
 "4179
-[; ;Liofilizador Placa Mae.c: 4179:                  if(!statusgen2.flag_autoriza_click_vacuo)
-[e $ ! ! != -> . _statusgen2 2 `i -> 0 `i 982  ]
+[; ;Liofilizador Placa Mae.c: 4179:            case 4:
+[e :U 981 ]
 "4180
-[; ;Liofilizador Placa Mae.c: 4180:                     {
-{
+[; ;Liofilizador Placa Mae.c: 4180:                  if(!statusgen2.flag_autoriza_click_vacuo)
+[e $ ! ! != -> . _statusgen2 2 `i -> 0 `i 982  ]
 "4181
-[; ;Liofilizador Placa Mae.c: 4181:                     PROCULUS_VP_Write_UInt16(add,estado);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , _add -> _estado `ui ]
+[; ;Liofilizador Placa Mae.c: 4181:                     {
+{
 "4182
-[; ;Liofilizador Placa Mae.c: 4182:                     PROCULUS_Popup(0x43);
-[e ( _PROCULUS_Popup (1 -> -> 67 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4182:                     PROCULUS_VP_Write_UInt16(add,estado);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , _add -> _estado `ui ]
 "4183
-[; ;Liofilizador Placa Mae.c: 4183:                     PROCULUS_Buzzer(3000);
-[e ( _PROCULUS_Buzzer (1 -> -> 3000 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 4183:                     PROCULUS_Popup(0x43);
+[e ( _PROCULUS_Popup (1 -> -> 67 `i `uc ]
 "4184
-[; ;Liofilizador Placa Mae.c: 4184:                     return 0;
+[; ;Liofilizador Placa Mae.c: 4184:                     PROCULUS_Buzzer(3000);
+[e ( _PROCULUS_Buzzer (1 -> -> 3000 `i `ui ]
+"4185
+[; ;Liofilizador Placa Mae.c: 4185:                     return 0;
 [e ) -> -> 0 `i `uc ]
 [e $UE 973  ]
-"4185
-[; ;Liofilizador Placa Mae.c: 4185:                     }
+"4186
+[; ;Liofilizador Placa Mae.c: 4186:                     }
 }
 [e :U 982 ]
-"4186
-[; ;Liofilizador Placa Mae.c: 4186:                   statusgen2.flag_autoriza_click_vacuo=0;
-[e = . _statusgen2 2 -> -> 0 `i `uc ]
 "4187
-[; ;Liofilizador Placa Mae.c: 4187:                   break;
-[e $U 975  ]
+[; ;Liofilizador Placa Mae.c: 4187:                   statusgen2.flag_autoriza_click_vacuo=0;
+[e = . _statusgen2 2 -> -> 0 `i `uc ]
 "4188
-[; ;Liofilizador Placa Mae.c: 4188:            case 5:
-[e :U 983 ]
+[; ;Liofilizador Placa Mae.c: 4188:                   break;
+[e $U 975  ]
 "4189
-[; ;Liofilizador Placa Mae.c: 4189:                  if(!statusgen2.flag_autoriza_click_aquecimento)
-[e $ ! ! != -> . _statusgen2 3 `i -> 0 `i 984  ]
+[; ;Liofilizador Placa Mae.c: 4189:            case 5:
+[e :U 983 ]
 "4190
-[; ;Liofilizador Placa Mae.c: 4190:                     {
-{
+[; ;Liofilizador Placa Mae.c: 4190:                  if(!statusgen2.flag_autoriza_click_aquecimento)
+[e $ ! ! != -> . _statusgen2 3 `i -> 0 `i 984  ]
 "4191
-[; ;Liofilizador Placa Mae.c: 4191:                     PROCULUS_VP_Write_UInt16(add,estado);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , _add -> _estado `ui ]
+[; ;Liofilizador Placa Mae.c: 4191:                     {
+{
 "4192
-[; ;Liofilizador Placa Mae.c: 4192:                     PROCULUS_Popup(0x43);
-[e ( _PROCULUS_Popup (1 -> -> 67 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4192:                     PROCULUS_VP_Write_UInt16(add,estado);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , _add -> _estado `ui ]
 "4193
-[; ;Liofilizador Placa Mae.c: 4193:                     PROCULUS_Buzzer(3000);
-[e ( _PROCULUS_Buzzer (1 -> -> 3000 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 4193:                     PROCULUS_Popup(0x43);
+[e ( _PROCULUS_Popup (1 -> -> 67 `i `uc ]
 "4194
-[; ;Liofilizador Placa Mae.c: 4194:                     return 0;
+[; ;Liofilizador Placa Mae.c: 4194:                     PROCULUS_Buzzer(3000);
+[e ( _PROCULUS_Buzzer (1 -> -> 3000 `i `ui ]
+"4195
+[; ;Liofilizador Placa Mae.c: 4195:                     return 0;
 [e ) -> -> 0 `i `uc ]
 [e $UE 973  ]
-"4195
-[; ;Liofilizador Placa Mae.c: 4195:                     }
+"4196
+[; ;Liofilizador Placa Mae.c: 4196:                     }
 }
 [e :U 984 ]
-"4196
-[; ;Liofilizador Placa Mae.c: 4196:                   statusgen2.flag_autoriza_click_aquecimento=0;
-[e = . _statusgen2 3 -> -> 0 `i `uc ]
 "4197
-[; ;Liofilizador Placa Mae.c: 4197:                   break;
-[e $U 975  ]
+[; ;Liofilizador Placa Mae.c: 4197:                   statusgen2.flag_autoriza_click_aquecimento=0;
+[e = . _statusgen2 3 -> -> 0 `i `uc ]
 "4198
-[; ;Liofilizador Placa Mae.c: 4198:           }
+[; ;Liofilizador Placa Mae.c: 4198:                   break;
+[e $U 975  ]
+"4199
+[; ;Liofilizador Placa Mae.c: 4199:           }
 }
 [e $U 975  ]
 [e :U 976 ]
@@ -11084,126 +11087,126 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> -> 5 `i `ui 983
  975 ]
 [e :U 975 ]
-"4200
-[; ;Liofilizador Placa Mae.c: 4200:        }
+"4201
+[; ;Liofilizador Placa Mae.c: 4201:        }
 }
 [e :U 974 ]
-"4201
-[; ;Liofilizador Placa Mae.c: 4201:      return 1;
+"4202
+[; ;Liofilizador Placa Mae.c: 4202:      return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 973  ]
-"4202
-[; ;Liofilizador Placa Mae.c: 4202: }
+"4203
+[; ;Liofilizador Placa Mae.c: 4203: }
 [e :UE 973 ]
 }
-"4206
-[; ;Liofilizador Placa Mae.c: 4206: void Rele_Comum_Aquecimento(char status){
+"4207
+[; ;Liofilizador Placa Mae.c: 4207: void Rele_Comum_Aquecimento(char status){
 [v _Rele_Comum_Aquecimento `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _Rele_Comum_Aquecimento ]
 [v _status `uc ~T0 @X0 1 r1 ]
 [f ]
-"4212
-[; ;Liofilizador Placa Mae.c: 4212:      char bbb[3];
-[v _bbb `uc ~T0 @X0 -> 3 `i a ]
 "4213
-[; ;Liofilizador Placa Mae.c: 4213:      bbb[0]=1;
-[e = *U + &U _bbb * -> -> -> 0 `i `ui `ux -> -> # *U &U _bbb `ui `ux -> -> 1 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4213:      char bbb[3];
+[v _bbb `uc ~T0 @X0 -> 3 `i a ]
 "4214
-[; ;Liofilizador Placa Mae.c: 4214:      bbb[1]=status;
-[e = *U + &U _bbb * -> -> -> 1 `i `ui `ux -> -> # *U &U _bbb `ui `ux _status ]
+[; ;Liofilizador Placa Mae.c: 4214:      bbb[0]=1;
+[e = *U + &U _bbb * -> -> -> 0 `i `ui `ux -> -> # *U &U _bbb `ui `ux -> -> 1 `i `uc ]
 "4215
-[; ;Liofilizador Placa Mae.c: 4215:      Send_To_Slave(0x02,0x30,2,bbb);
-[e ( _Send_To_Slave (4 , , , -> -> 2 `i `uc -> -> 48 `i `uc -> -> 2 `i `uc &U _bbb ]
+[; ;Liofilizador Placa Mae.c: 4215:      bbb[1]=status;
+[e = *U + &U _bbb * -> -> -> 1 `i `ui `ux -> -> # *U &U _bbb `ui `ux _status ]
 "4216
-[; ;Liofilizador Placa Mae.c: 4216: }
+[; ;Liofilizador Placa Mae.c: 4216:      Send_To_Slave(0x02,0x30,2,bbb);
+[e ( _Send_To_Slave (4 , , , -> -> 2 `i `uc -> -> 48 `i `uc -> -> 2 `i `uc &U _bbb ]
+"4217
+[; ;Liofilizador Placa Mae.c: 4217: }
 [e :UE 985 ]
 }
-"4220
-[; ;Liofilizador Placa Mae.c: 4220: unsigned char DelayBackupReturn(unsigned int vp, unsigned int *tempo, char texto[20])
-[v _DelayBackupReturn `(uc ~T0 @X0 1 ef3`ui`*ui`*uc ]
 "4221
-[; ;Liofilizador Placa Mae.c: 4221: {
+[; ;Liofilizador Placa Mae.c: 4221: unsigned char DelayBackupReturn(unsigned int vp, unsigned int *tempo, char texto[20])
+[v _DelayBackupReturn `(uc ~T0 @X0 1 ef3`ui`*ui`*uc ]
+"4222
+[; ;Liofilizador Placa Mae.c: 4222: {
 {
 [e :U _DelayBackupReturn ]
-"4220
-[; ;Liofilizador Placa Mae.c: 4220: unsigned char DelayBackupReturn(unsigned int vp, unsigned int *tempo, char texto[20])
+"4221
+[; ;Liofilizador Placa Mae.c: 4221: unsigned char DelayBackupReturn(unsigned int vp, unsigned int *tempo, char texto[20])
 [v _vp `ui ~T0 @X0 1 r1 ]
 [v _tempo `*ui ~T0 @X0 1 r2 ]
 [v _texto `*uc ~T0 @X0 1 r3 ]
-"4221
-[; ;Liofilizador Placa Mae.c: 4221: {
-[f ]
 "4222
-[; ;Liofilizador Placa Mae.c: 4222:     uint8_t retorno=1;
+[; ;Liofilizador Placa Mae.c: 4222: {
+[f ]
+"4223
+[; ;Liofilizador Placa Mae.c: 4223:     uint8_t retorno=1;
 [v _retorno `uc ~T0 @X0 1 a ]
 [e = _retorno -> -> 1 `i `uc ]
-"4224
-[; ;Liofilizador Placa Mae.c: 4224:     if(*tempo)
-[e $ ! != *U _tempo -> -> 0 `i `ui 987  ]
 "4225
-[; ;Liofilizador Placa Mae.c: 4225:       {
-{
+[; ;Liofilizador Placa Mae.c: 4225:     if(*tempo)
+[e $ ! != *U _tempo -> -> 0 `i `ui 987  ]
 "4226
-[; ;Liofilizador Placa Mae.c: 4226:       PROCULUS_VP_Write_String(1940,texto);
-[e ( _PROCULUS_VP_Write_String (2 , -> -> 1940 `i `ui _texto ]
+[; ;Liofilizador Placa Mae.c: 4226:       {
+{
 "4227
-[; ;Liofilizador Placa Mae.c: 4227:       while(*tempo)
+[; ;Liofilizador Placa Mae.c: 4227:       PROCULUS_VP_Write_String(1940,texto);
+[e ( _PROCULUS_VP_Write_String (2 , -> -> 1940 `i `ui _texto ]
+"4228
+[; ;Liofilizador Placa Mae.c: 4228:       while(*tempo)
 [e $U 988  ]
 [e :U 989 ]
-"4228
-[; ;Liofilizador Placa Mae.c: 4228:            {
-{
 "4229
-[; ;Liofilizador Placa Mae.c: 4229:            (*tempo)--;
-[e -- *U _tempo -> -> 1 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 4229:            {
+{
 "4230
-[; ;Liofilizador Placa Mae.c: 4230:            Icones_de_alarmes();
-[e ( _Icones_de_alarmes ..  ]
+[; ;Liofilizador Placa Mae.c: 4230:            (*tempo)--;
+[e -- *U _tempo -> -> 1 `i `ui ]
 "4231
-[; ;Liofilizador Placa Mae.c: 4231:            ShowSensorRealTimeHS();
-[e ( _ShowSensorRealTimeHS ..  ]
+[; ;Liofilizador Placa Mae.c: 4231:            Icones_de_alarmes();
+[e ( _Icones_de_alarmes ..  ]
 "4232
-[; ;Liofilizador Placa Mae.c: 4232:            __asm("CLRWDT");
-[; <" CLRWDT ;# ">
+[; ;Liofilizador Placa Mae.c: 4232:            ShowSensorRealTimeHS();
+[e ( _ShowSensorRealTimeHS ..  ]
 "4233
-[; ;Liofilizador Placa Mae.c: 4233:            if(PROCULUS_VP_Read_UInt16(vp)!=1)
-[e $ ! != ( _PROCULUS_VP_Read_UInt16 (1 _vp -> -> 1 `i `ui 991  ]
+[; ;Liofilizador Placa Mae.c: 4233:            __asm("CLRWDT");
+[; <" CLRWDT ;# ">
 "4234
-[; ;Liofilizador Placa Mae.c: 4234:              {
-{
+[; ;Liofilizador Placa Mae.c: 4234:            if(PROCULUS_VP_Read_UInt16(vp)!=1)
+[e $ ! != ( _PROCULUS_VP_Read_UInt16 (1 _vp -> -> 1 `i `ui 991  ]
 "4235
-[; ;Liofilizador Placa Mae.c: 4235:              PROCULUS_VP_Write_UInt16(vp,0);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , _vp -> -> 0 `i `ui ]
-"4236
-[; ;Liofilizador Placa Mae.c: 4236:              (*tempo)=0;
-[e = *U _tempo -> -> 0 `i `ui ]
-"4237
-[; ;Liofilizador Placa Mae.c: 4237:              retorno=0;
-[e = _retorno -> -> 0 `i `uc ]
-"4238
-[; ;Liofilizador Placa Mae.c: 4238:              switch(vp)
-[e $U 993  ]
-"4239
-[; ;Liofilizador Placa Mae.c: 4239:                 {
+[; ;Liofilizador Placa Mae.c: 4235:              {
 {
+"4236
+[; ;Liofilizador Placa Mae.c: 4236:              PROCULUS_VP_Write_UInt16(vp,0);
+[e ( _PROCULUS_VP_Write_UInt16 (2 , _vp -> -> 0 `i `ui ]
+"4237
+[; ;Liofilizador Placa Mae.c: 4237:              (*tempo)=0;
+[e = *U _tempo -> -> 0 `i `ui ]
+"4238
+[; ;Liofilizador Placa Mae.c: 4238:              retorno=0;
+[e = _retorno -> -> 0 `i `uc ]
+"4239
+[; ;Liofilizador Placa Mae.c: 4239:              switch(vp)
+[e $U 993  ]
 "4240
-[; ;Liofilizador Placa Mae.c: 4240:                  case 0x03: Condensador_Switch(0); break;
+[; ;Liofilizador Placa Mae.c: 4240:                 {
+{
+"4241
+[; ;Liofilizador Placa Mae.c: 4241:                  case 0x03: Condensador_Switch(0); break;
 [e :U 994 ]
 [e ( _Condensador_Switch (1 -> -> 0 `i `uc ]
 [e $U 992  ]
-"4241
-[; ;Liofilizador Placa Mae.c: 4241:                  case 0x04: Vaccum_Switch(0); break;
+"4242
+[; ;Liofilizador Placa Mae.c: 4242:                  case 0x04: Vaccum_Switch(0); break;
 [e :U 995 ]
 [e ( _Vaccum_Switch (1 -> -> 0 `i `uc ]
 [e $U 992  ]
-"4242
-[; ;Liofilizador Placa Mae.c: 4242:                  case 0x05: Global_Aquecimento_Switch(0); break;
+"4243
+[; ;Liofilizador Placa Mae.c: 4243:                  case 0x05: Global_Aquecimento_Switch(0); break;
 [e :U 996 ]
 [e ( _Global_Aquecimento_Switch (1 -> -> 0 `i `uc ]
 [e $U 992  ]
-"4243
-[; ;Liofilizador Placa Mae.c: 4243:                 }
+"4244
+[; ;Liofilizador Placa Mae.c: 4244:                 }
 }
 [e $U 992  ]
 [e :U 993 ]
@@ -11212,92 +11215,92 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> -> 5 `i `ui 996
  992 ]
 [e :U 992 ]
-"4244
-[; ;Liofilizador Placa Mae.c: 4244:              }
+"4245
+[; ;Liofilizador Placa Mae.c: 4245:              }
 }
 [e $U 997  ]
-"4245
-[; ;Liofilizador Placa Mae.c: 4245:            else
-[e :U 991 ]
 "4246
-[; ;Liofilizador Placa Mae.c: 4246:            if(PROCULUS_VP_Read_UInt16(vp)==0)
-[e $ ! == ( _PROCULUS_VP_Read_UInt16 (1 _vp -> -> 0 `i `ui 998  ]
+[; ;Liofilizador Placa Mae.c: 4246:            else
+[e :U 991 ]
 "4247
-[; ;Liofilizador Placa Mae.c: 4247:              {
-{
+[; ;Liofilizador Placa Mae.c: 4247:            if(PROCULUS_VP_Read_UInt16(vp)==0)
+[e $ ! == ( _PROCULUS_VP_Read_UInt16 (1 _vp -> -> 0 `i `ui 998  ]
 "4248
-[; ;Liofilizador Placa Mae.c: 4248:              retorno = 0;
-[e = _retorno -> -> 0 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4248:              {
+{
 "4249
-[; ;Liofilizador Placa Mae.c: 4249:              (*tempo)=0;
-[e = *U _tempo -> -> 0 `i `ui ]
+[; ;Liofilizador Placa Mae.c: 4249:              retorno = 0;
+[e = _retorno -> -> 0 `i `uc ]
 "4250
-[; ;Liofilizador Placa Mae.c: 4250:              break;
-[e $U 990  ]
+[; ;Liofilizador Placa Mae.c: 4250:              (*tempo)=0;
+[e = *U _tempo -> -> 0 `i `ui ]
 "4251
-[; ;Liofilizador Placa Mae.c: 4251:              }
+[; ;Liofilizador Placa Mae.c: 4251:              break;
+[e $U 990  ]
+"4252
+[; ;Liofilizador Placa Mae.c: 4252:              }
 }
 [e :U 998 ]
 [e :U 997 ]
-"4252
-[; ;Liofilizador Placa Mae.c: 4252:            }
+"4253
+[; ;Liofilizador Placa Mae.c: 4253:            }
 }
 [e :U 988 ]
-"4227
-[; ;Liofilizador Placa Mae.c: 4227:       while(*tempo)
+"4228
+[; ;Liofilizador Placa Mae.c: 4228:       while(*tempo)
 [e $ != *U _tempo -> -> 0 `i `ui 989  ]
 [e :U 990 ]
-"4253
-[; ;Liofilizador Placa Mae.c: 4253:       PROCULUS_VP_Write_String(1940,"");
-[e ( _PROCULUS_VP_Write_String (2 , -> -> 1940 `i `ui :s 82C ]
 "4254
-[; ;Liofilizador Placa Mae.c: 4254:      }
+[; ;Liofilizador Placa Mae.c: 4254:       PROCULUS_VP_Write_String(1940,"");
+[e ( _PROCULUS_VP_Write_String (2 , -> -> 1940 `i `ui :s 82C ]
+"4255
+[; ;Liofilizador Placa Mae.c: 4255:      }
 }
 [e :U 987 ]
-"4256
-[; ;Liofilizador Placa Mae.c: 4256:     return retorno;
+"4257
+[; ;Liofilizador Placa Mae.c: 4257:     return retorno;
 [e ) _retorno ]
 [e $UE 986  ]
-"4257
-[; ;Liofilizador Placa Mae.c: 4257: }
+"4258
+[; ;Liofilizador Placa Mae.c: 4258: }
 [e :UE 986 ]
 }
-"4260
-[; ;Liofilizador Placa Mae.c: 4260: void gravarStatusDosBotoes()
-[v _gravarStatusDosBotoes `(v ~T0 @X0 1 ef ]
 "4261
-[; ;Liofilizador Placa Mae.c: 4261: {
+[; ;Liofilizador Placa Mae.c: 4261: void gravarStatusDosBotoes()
+[v _gravarStatusDosBotoes `(v ~T0 @X0 1 ef ]
+"4262
+[; ;Liofilizador Placa Mae.c: 4262: {
 {
 [e :U _gravarStatusDosBotoes ]
 [f ]
-"4262
-[; ;Liofilizador Placa Mae.c: 4262: if(memo_statuspower!=statuspower.bits)
-[e $ ! != -> _memo_statuspower `i -> . _statuspower 0 `i 1000  ]
 "4263
-[; ;Liofilizador Placa Mae.c: 4263:   {
-{
+[; ;Liofilizador Placa Mae.c: 4263: if(memo_statuspower!=statuspower.bits)
+[e $ ! != -> _memo_statuspower `i -> . _statuspower 0 `i 1000  ]
 "4264
-[; ;Liofilizador Placa Mae.c: 4264:   EEPROM_Write_Byte(16,statuspower.bits);
-[e ( _EEPROM_Write_Byte (2 , -> -> 16 `i `ui . _statuspower 0 ]
+[; ;Liofilizador Placa Mae.c: 4264:   {
+{
 "4265
-[; ;Liofilizador Placa Mae.c: 4265:   memo_statuspower=statuspower.bits;
-[e = _memo_statuspower . _statuspower 0 ]
+[; ;Liofilizador Placa Mae.c: 4265:   EEPROM_Write_Byte(16,statuspower.bits);
+[e ( _EEPROM_Write_Byte (2 , -> -> 16 `i `ui . _statuspower 0 ]
 "4266
-[; ;Liofilizador Placa Mae.c: 4266:   }
+[; ;Liofilizador Placa Mae.c: 4266:   memo_statuspower=statuspower.bits;
+[e = _memo_statuspower . _statuspower 0 ]
+"4267
+[; ;Liofilizador Placa Mae.c: 4267:   }
 }
 [e :U 1000 ]
-"4267
-[; ;Liofilizador Placa Mae.c: 4267: }
+"4268
+[; ;Liofilizador Placa Mae.c: 4268: }
 [e :UE 999 ]
 }
-"4269
-[; ;Liofilizador Placa Mae.c: 4269: void placasFilhasInit(){
+"4270
+[; ;Liofilizador Placa Mae.c: 4270: void placasFilhasInit(){
 [v _placasFilhasInit `(v ~T0 @X0 1 ef ]
 {
 [e :U _placasFilhasInit ]
 [f ]
-"4270
-[; ;Liofilizador Placa Mae.c: 4270:      for(char i=0;i<15;i++){
+"4271
+[; ;Liofilizador Placa Mae.c: 4271:      for(char i=0;i<15;i++){
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -11305,305 +11308,348 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 1003  ]
 [e :U 1002 ]
 {
-"4271
-[; ;Liofilizador Placa Mae.c: 4271:          my_delay_ms_CLRWDT(300);
-[e ( _my_delay_ms_CLRWDT (1 -> -> 300 `i `l ]
 "4272
-[; ;Liofilizador Placa Mae.c: 4272:          Send_To_Slave(i, 0x03, 0, buffer);
-[e ( _Send_To_Slave (4 , , , _i -> -> 3 `i `uc -> -> 0 `i `uc &U _buffer ]
+[; ;Liofilizador Placa Mae.c: 4272:          my_delay_ms_CLRWDT(300);
+[e ( _my_delay_ms_CLRWDT (1 -> -> 300 `i `l ]
 "4273
-[; ;Liofilizador Placa Mae.c: 4273:      }
+[; ;Liofilizador Placa Mae.c: 4273:          Send_To_Slave(i, 0x03, 0, buffer);
+[e ( _Send_To_Slave (4 , , , _i -> -> 3 `i `uc -> -> 0 `i `uc &U _buffer ]
+"4274
+[; ;Liofilizador Placa Mae.c: 4274:      }
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 15 `i 1002  ]
 [e :U 1003 ]
 }
-"4274
-[; ;Liofilizador Placa Mae.c: 4274: }
+"4275
+[; ;Liofilizador Placa Mae.c: 4275: }
 [e :UE 1001 ]
 }
-"4278
-[; ;Liofilizador Placa Mae.c: 4278: void showMemoryInfo()
-[v _showMemoryInfo `(v ~T0 @X0 1 ef ]
 "4279
-[; ;Liofilizador Placa Mae.c: 4279: {
+[; ;Liofilizador Placa Mae.c: 4279: void showMemoryInfo()
+[v _showMemoryInfo `(v ~T0 @X0 1 ef ]
+"4280
+[; ;Liofilizador Placa Mae.c: 4280: {
 {
 [e :U _showMemoryInfo ]
 [f ]
-"4280
-[; ;Liofilizador Placa Mae.c: 4280:     char texto[50];
-[v _texto `uc ~T0 @X0 -> 50 `i a ]
 "4281
-[; ;Liofilizador Placa Mae.c: 4281:     char msg[50];
-[v _msg `uc ~T0 @X0 -> 50 `i a ]
+[; ;Liofilizador Placa Mae.c: 4281:     char texto[50];
+[v _texto `uc ~T0 @X0 -> 50 `i a ]
 "4282
-[; ;Liofilizador Placa Mae.c: 4282:     int tmpValue;
-[v _tmpValue `i ~T0 @X0 1 a ]
+[; ;Liofilizador Placa Mae.c: 4282:     char msg[50];
+[v _msg `uc ~T0 @X0 -> 50 `i a ]
 "4283
-[; ;Liofilizador Placa Mae.c: 4283:     int compara;
-[v _compara `i ~T0 @X0 1 a ]
+[; ;Liofilizador Placa Mae.c: 4283:     int tmpValue;
+[v _tmpValue `i ~T0 @X0 1 a ]
 "4284
-[; ;Liofilizador Placa Mae.c: 4284:     char falha=0;
+[; ;Liofilizador Placa Mae.c: 4284:     int compara;
+[v _compara `i ~T0 @X0 1 a ]
+"4285
+[; ;Liofilizador Placa Mae.c: 4285:     char falha=0;
 [v _falha `uc ~T0 @X0 1 a ]
 [e = _falha -> -> 0 `i `uc ]
-"4287
-[; ;Liofilizador Placa Mae.c: 4287:     print("TESTE DE MEMORIA.");
-[e ( _print (1 :s 83C ]
 "4288
-[; ;Liofilizador Placa Mae.c: 4288:     for(char placa=0;placa<=totalboard;placa++)
+[; ;Liofilizador Placa Mae.c: 4288:     print("TESTE DE MEMORIA.");
+[e ( _print (1 :s 83C ]
+"4289
+[; ;Liofilizador Placa Mae.c: 4289:     for(char placa=0;placa<=totalboard;placa++)
 {
 [v _placa `uc ~T0 @X0 1 a ]
 [e = _placa -> -> 0 `i `uc ]
 [e $U 1009  ]
 [e :U 1006 ]
-"4289
-[; ;Liofilizador Placa Mae.c: 4289:        {
-{
 "4290
-[; ;Liofilizador Placa Mae.c: 4290:        for(char canal=0;canal<2;canal++)
+[; ;Liofilizador Placa Mae.c: 4290:        {
+{
+"4291
+[; ;Liofilizador Placa Mae.c: 4291:        for(char canal=0;canal<2;canal++)
 {
 [v _canal `uc ~T0 @X0 1 a ]
 [e = _canal -> -> 0 `i `uc ]
 [e $ < -> _canal `i -> 2 `i 1010  ]
 [e $U 1011  ]
 [e :U 1010 ]
-"4291
-[; ;Liofilizador Placa Mae.c: 4291:           {
-{
 "4292
-[; ;Liofilizador Placa Mae.c: 4292:           strcpy(msg,"");
-[e ( _strcpy (2 , &U _msg :s 84C ]
+[; ;Liofilizador Placa Mae.c: 4292:           {
+{
 "4293
-[; ;Liofilizador Placa Mae.c: 4293:           strcpy(texto,"");
-[e ( _strcpy (2 , &U _texto :s 85C ]
+[; ;Liofilizador Placa Mae.c: 4293:           strcpy(msg,"");
+[e ( _strcpy (2 , &U _msg :s 84C ]
 "4294
-[; ;Liofilizador Placa Mae.c: 4294:           itoa(placa,texto,10);
-[e ( _itoa (3 , , -> _placa `i &U _texto -> 10 `i ]
+[; ;Liofilizador Placa Mae.c: 4294:           strcpy(texto,"");
+[e ( _strcpy (2 , &U _texto :s 85C ]
 "4295
-[; ;Liofilizador Placa Mae.c: 4295:           if(placa<10) strcat(msg,"0");
+[; ;Liofilizador Placa Mae.c: 4295:           itoa(placa,texto,10);
+[e ( _itoa (3 , , -> _placa `i &U _texto -> 10 `i ]
+"4296
+[; ;Liofilizador Placa Mae.c: 4296:           if(placa<10) strcat(msg,"0");
 [e $ ! < -> _placa `i -> 10 `i 1013  ]
 [e ( _strcat (2 , &U _msg :s 86C ]
 [e :U 1013 ]
-"4296
-[; ;Liofilizador Placa Mae.c: 4296:           strcat(msg, texto);
-[e ( _strcat (2 , &U _msg -> &U _texto `*Cuc ]
 "4297
-[; ;Liofilizador Placa Mae.c: 4297:           strcat(msg, " : ");
-[e ( _strcat (2 , &U _msg :s 87C ]
+[; ;Liofilizador Placa Mae.c: 4297:           strcat(msg, texto);
+[e ( _strcat (2 , &U _msg -> &U _texto `*Cuc ]
 "4298
-[; ;Liofilizador Placa Mae.c: 4298:           strcpy(texto, boardtype[placa][0]);
-[e ( _strcpy (2 , &U _texto *U + &U *U + &U _boardtype * -> _placa `ux -> * -> # *U &U *U &U _boardtype `ui -> -> 15 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _boardtype * -> _placa `ux -> * -> # *U &U *U &U _boardtype `ui -> -> 15 `i `ui `ux `ui `ux ]
+[; ;Liofilizador Placa Mae.c: 4298:           strcat(msg, " : ");
+[e ( _strcat (2 , &U _msg :s 87C ]
 "4299
-[; ;Liofilizador Placa Mae.c: 4299:           strcat(msg,texto);
+[; ;Liofilizador Placa Mae.c: 4299:           strcpy(texto, boardtype[placa][0]);
+[e ( _strcpy (2 , &U _texto *U + &U *U + &U _boardtype * -> _placa `ux -> * -> # *U &U *U &U _boardtype `ui -> -> 15 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _boardtype * -> _placa `ux -> * -> # *U &U *U &U _boardtype `ui -> -> 15 `i `ui `ux `ui `ux ]
+"4300
+[; ;Liofilizador Placa Mae.c: 4300:           strcat(msg,texto);
 [e ( _strcat (2 , &U _msg -> &U _texto `*Cuc ]
-"4301
-[; ;Liofilizador Placa Mae.c: 4301:           strcat(msg," ch:");
-[e ( _strcat (2 , &U _msg :s 88C ]
 "4302
-[; ;Liofilizador Placa Mae.c: 4302:           strcpy(texto,"");
-[e ( _strcpy (2 , &U _texto :s 89C ]
+[; ;Liofilizador Placa Mae.c: 4302:           strcat(msg," ch:");
+[e ( _strcat (2 , &U _msg :s 88C ]
 "4303
-[; ;Liofilizador Placa Mae.c: 4303:           itoa(canal,texto,10);
-[e ( _itoa (3 , , -> _canal `i &U _texto -> 10 `i ]
+[; ;Liofilizador Placa Mae.c: 4303:           strcpy(texto,"");
+[e ( _strcpy (2 , &U _texto :s 89C ]
 "4304
-[; ;Liofilizador Placa Mae.c: 4304:           strcat(msg,texto);
-[e ( _strcat (2 , &U _msg -> &U _texto `*Cuc ]
+[; ;Liofilizador Placa Mae.c: 4304:           itoa(canal,texto,10);
+[e ( _itoa (3 , , -> _canal `i &U _texto -> 10 `i ]
 "4305
-[; ;Liofilizador Placa Mae.c: 4305:           strcat(msg," erro! ");
+[; ;Liofilizador Placa Mae.c: 4305:           strcat(msg,texto);
+[e ( _strcat (2 , &U _msg -> &U _texto `*Cuc ]
+"4306
+[; ;Liofilizador Placa Mae.c: 4306:           strcat(msg," erro! ");
 [e ( _strcat (2 , &U _msg :s 90C ]
-"4307
-[; ;Liofilizador Placa Mae.c: 4307:           if(
-[e $ ! && && ! && && != _Tamanho_Display -> 81 `i == -> _placa `i -> 0 `i == -> _canal `i -> 1 `i ! && && != _Tamanho_Display -> 81 `i == -> _placa `i -> 2 `i == -> _canal `i -> 1 `i ! && && == _Tamanho_Display -> 81 `i == -> _placa `i -> 4 `i == -> _canal `i -> 1 `i 1014  ]
-"4312
-[; ;Liofilizador Placa Mae.c: 4312:                 {
+"4309
+[; ;Liofilizador Placa Mae.c: 4309:           if(Tamanho_Display!=81)
+[e $ ! != _Tamanho_Display -> 81 `i 1014  ]
+"4310
+[; ;Liofilizador Placa Mae.c: 4310:             {
 {
+"4311
+[; ;Liofilizador Placa Mae.c: 4311:             if(!((placa==0)&&(canal==1)) &&
+[e $ ! && ! && == -> _placa `i -> 0 `i == -> _canal `i -> 1 `i ! && == -> _placa `i -> 2 `i == -> _canal `i -> 1 `i 1015  ]
 "4313
-[; ;Liofilizador Placa Mae.c: 4313:                   if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==0)
-[e $ ! == -> ( _gravaFilhaConfere (4 , , , _placa _canal -> -> -> 0 `i `l `ul -> -> 43981 `ui `i `i -> 0 `i 1015  ]
-"4314
-[; ;Liofilizador Placa Mae.c: 4314:                     {
+[; ;Liofilizador Placa Mae.c: 4313:                {
 {
+"4314
+[; ;Liofilizador Placa Mae.c: 4314:                if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==0)
+[e $ ! == -> ( _gravaFilhaConfere (4 , , , _placa _canal -> -> -> 0 `i `l `ul -> -> 43981 `ui `i `i -> 0 `i 1016  ]
 "4315
-[; ;Liofilizador Placa Mae.c: 4315:                     print(msg);
-[e ( _print (1 &U _msg ]
+[; ;Liofilizador Placa Mae.c: 4315:                  {
+{
 "4316
-[; ;Liofilizador Placa Mae.c: 4316:                     falha++;
-[e ++ _falha -> -> 1 `i `uc ]
+[; ;Liofilizador Placa Mae.c: 4316:                  print(msg);
+[e ( _print (1 &U _msg ]
 "4317
-[; ;Liofilizador Placa Mae.c: 4317:                     my_delay_ms_CLRWDT(3000);
-[e ( _my_delay_ms_CLRWDT (1 -> -> 3000 `i `l ]
+[; ;Liofilizador Placa Mae.c: 4317:                  falha++;
+[e ++ _falha -> -> 1 `i `uc ]
 "4318
-[; ;Liofilizador Placa Mae.c: 4318:                     }
+[; ;Liofilizador Placa Mae.c: 4318:                  }
+}
+[e :U 1016 ]
+"4319
+[; ;Liofilizador Placa Mae.c: 4319:                }
 }
 [e :U 1015 ]
-"4319
-[; ;Liofilizador Placa Mae.c: 4319:                 }
+"4320
+[; ;Liofilizador Placa Mae.c: 4320:             }
 }
-[e :U 1014 ]
+[e $U 1017  ]
 "4321
-[; ;Liofilizador Placa Mae.c: 4321:           }
+[; ;Liofilizador Placa Mae.c: 4321:           else
+[e :U 1014 ]
+"4322
+[; ;Liofilizador Placa Mae.c: 4322:             {
+{
+"4323
+[; ;Liofilizador Placa Mae.c: 4323:             if(
+[e $ ! && && ! && == -> _placa `i -> 0 `i == -> _canal `i -> 1 `i ! && == -> _placa `i -> 2 `i == -> _canal `i -> 1 `i ! && == -> _placa `i -> 4 `i == -> _canal `i -> 1 `i 1018  ]
+"4328
+[; ;Liofilizador Placa Mae.c: 4328:               {
+{
+"4329
+[; ;Liofilizador Placa Mae.c: 4329:                if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==0)
+[e $ ! == -> ( _gravaFilhaConfere (4 , , , _placa _canal -> -> -> 0 `i `l `ul -> -> 43981 `ui `i `i -> 0 `i 1019  ]
+"4330
+[; ;Liofilizador Placa Mae.c: 4330:                  {
+{
+"4331
+[; ;Liofilizador Placa Mae.c: 4331:                  print(msg);
+[e ( _print (1 &U _msg ]
+"4332
+[; ;Liofilizador Placa Mae.c: 4332:                  falha++;
+[e ++ _falha -> -> 1 `i `uc ]
+"4333
+[; ;Liofilizador Placa Mae.c: 4333:                  }
+}
+[e :U 1019 ]
+"4334
+[; ;Liofilizador Placa Mae.c: 4334:               }
+}
+[e :U 1018 ]
+"4335
+[; ;Liofilizador Placa Mae.c: 4335:             }
+}
+[e :U 1017 ]
+"4353
+[; ;Liofilizador Placa Mae.c: 4353:           }
 }
 [e ++ _canal -> -> 1 `i `uc ]
 [e $ < -> _canal `i -> 2 `i 1010  ]
 [e :U 1011 ]
 }
-"4323
-[; ;Liofilizador Placa Mae.c: 4323:        }
+"4355
+[; ;Liofilizador Placa Mae.c: 4355:        }
 }
 [e ++ _placa -> -> 1 `i `uc ]
 [e :U 1009 ]
 [e $ <= -> _placa `i -> _totalboard `i 1006  ]
 [e :U 1007 ]
 }
-"4325
-[; ;Liofilizador Placa Mae.c: 4325:     print("..................................");
+"4357
+[; ;Liofilizador Placa Mae.c: 4357:     print("..................................");
 [e ( _print (1 :s 91C ]
-"4326
-[; ;Liofilizador Placa Mae.c: 4326:     if(falha>0)
-[e $ ! > -> _falha `i -> 0 `i 1016  ]
-"4327
-[; ;Liofilizador Placa Mae.c: 4327:       {
+"4358
+[; ;Liofilizador Placa Mae.c: 4358:     if(falha>0)
+[e $ ! > -> _falha `i -> 0 `i 1020  ]
+"4359
+[; ;Liofilizador Placa Mae.c: 4359:       {
 {
-"4328
-[; ;Liofilizador Placa Mae.c: 4328:       strcpy(msg,"Falha de memoria = ");
+"4360
+[; ;Liofilizador Placa Mae.c: 4360:       strcpy(msg,"Falha de memoria = ");
 [e ( _strcpy (2 , &U _msg :s 92C ]
-"4329
-[; ;Liofilizador Placa Mae.c: 4329:       itoa(falha,texto,10);
+"4361
+[; ;Liofilizador Placa Mae.c: 4361:       itoa(falha,texto,10);
 [e ( _itoa (3 , , -> _falha `i &U _texto -> 10 `i ]
-"4330
-[; ;Liofilizador Placa Mae.c: 4330:       strcat(msg,texto);
+"4362
+[; ;Liofilizador Placa Mae.c: 4362:       strcat(msg,texto);
 [e ( _strcat (2 , &U _msg -> &U _texto `*Cuc ]
-"4331
-[; ;Liofilizador Placa Mae.c: 4331:       strcat(msg,".");
+"4363
+[; ;Liofilizador Placa Mae.c: 4363:       strcat(msg,".");
 [e ( _strcat (2 , &U _msg :s 93C ]
-"4332
-[; ;Liofilizador Placa Mae.c: 4332:       print(msg);
+"4364
+[; ;Liofilizador Placa Mae.c: 4364:       print(msg);
 [e ( _print (1 &U _msg ]
-"4333
-[; ;Liofilizador Placa Mae.c: 4333:       }
+"4365
+[; ;Liofilizador Placa Mae.c: 4365:       }
 }
-[e $U 1017  ]
-"4334
-[; ;Liofilizador Placa Mae.c: 4334:     else
-[e :U 1016 ]
-"4335
-[; ;Liofilizador Placa Mae.c: 4335:       {
+[e $U 1021  ]
+"4366
+[; ;Liofilizador Placa Mae.c: 4366:     else
+[e :U 1020 ]
+"4367
+[; ;Liofilizador Placa Mae.c: 4367:       {
 {
-"4336
-[; ;Liofilizador Placa Mae.c: 4336:       print("Nenhuma falha nas memorias!");
+"4368
+[; ;Liofilizador Placa Mae.c: 4368:       print("Nenhuma falha nas memorias!");
 [e ( _print (1 :s 94C ]
-"4337
-[; ;Liofilizador Placa Mae.c: 4337:       }
+"4369
+[; ;Liofilizador Placa Mae.c: 4369:       }
 }
-[e :U 1017 ]
-"4338
-[; ;Liofilizador Placa Mae.c: 4338:     print("Fim do teste de memoria.");
+[e :U 1021 ]
+"4370
+[; ;Liofilizador Placa Mae.c: 4370:     print("Fim do teste de memoria.");
 [e ( _print (1 :s 95C ]
-"4339
-[; ;Liofilizador Placa Mae.c: 4339:     print("----------------------------------");
+"4371
+[; ;Liofilizador Placa Mae.c: 4371:     print("----------------------------------");
 [e ( _print (1 :s 96C ]
-"4340
-[; ;Liofilizador Placa Mae.c: 4340:     my_delay_ms_CLRWDT(4000);
+"4372
+[; ;Liofilizador Placa Mae.c: 4372:     my_delay_ms_CLRWDT(4000);
 [e ( _my_delay_ms_CLRWDT (1 -> -> 4000 `i `l ]
-"4341
-[; ;Liofilizador Placa Mae.c: 4341: }
+"4373
+[; ;Liofilizador Placa Mae.c: 4373: }
 [e :UE 1005 ]
 }
-"4345
-[; ;Liofilizador Placa Mae.c: 4345: _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite)
+"4377
+[; ;Liofilizador Placa Mae.c: 4377: _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite)
 [v _gravaFilhaConfere `(a ~T0 @X0 1 ef4`uc`uc`ul`i ]
-"4346
-[; ;Liofilizador Placa Mae.c: 4346: {
+"4378
+[; ;Liofilizador Placa Mae.c: 4378: {
 {
 [e :U _gravaFilhaConfere ]
-"4345
-[; ;Liofilizador Placa Mae.c: 4345: _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite)
+"4377
+[; ;Liofilizador Placa Mae.c: 4377: _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite)
 [v _placa `uc ~T0 @X0 1 r1 ]
 [v _chip `uc ~T0 @X0 1 r2 ]
 [v _add `ul ~T0 @X0 1 r3 ]
 [v _valueWrite `i ~T0 @X0 1 r4 ]
-"4346
-[; ;Liofilizador Placa Mae.c: 4346: {
-[f ]
-"4347
-[; ;Liofilizador Placa Mae.c: 4347:      int tempValue;
-[v _tempValue `i ~T0 @X0 1 a ]
-"4348
-[; ;Liofilizador Placa Mae.c: 4348:      int confere;
-[v _confere `i ~T0 @X0 1 a ]
-"4349
-[; ;Liofilizador Placa Mae.c: 4349:      char bb[7];
-[v _bb `uc ~T0 @X0 -> 7 `i a ]
-"4352
-[; ;Liofilizador Placa Mae.c: 4352:      bb[0]=chip;
-[e = *U + &U _bb * -> -> -> 0 `i `ui `ux -> -> # *U &U _bb `ui `ux _chip ]
-"4354
-[; ;Liofilizador Placa Mae.c: 4354:      bb[1]=((char *)&add)[3];
-[e = *U + &U _bb * -> -> -> 1 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add `*uc * -> -> 3 `i `x -> -> # *U -> &U _add `*uc `i `x ]
-"4355
-[; ;Liofilizador Placa Mae.c: 4355:      bb[2]=((char *)&add)[2];
-[e = *U + &U _bb * -> -> -> 2 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add `*uc * -> -> 2 `i `x -> -> # *U -> &U _add `*uc `i `x ]
-"4356
-[; ;Liofilizador Placa Mae.c: 4356:      bb[3]=((char *)&add)[1];
-[e = *U + &U _bb * -> -> -> 3 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add `*uc * -> -> 1 `i `x -> -> # *U -> &U _add `*uc `i `x ]
-"4357
-[; ;Liofilizador Placa Mae.c: 4357:      bb[4]=((char *)&add)[0];
-[e = *U + &U _bb * -> -> -> 4 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add `*uc * -> -> 0 `i `x -> -> # *U -> &U _add `*uc `i `x ]
-"4359
-[; ;Liofilizador Placa Mae.c: 4359:      bb[5]=((char *)&valueWrite)[0];
-[e = *U + &U _bb * -> -> -> 5 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _valueWrite `*uc * -> -> 0 `i `x -> -> # *U -> &U _valueWrite `*uc `i `x ]
-"4360
-[; ;Liofilizador Placa Mae.c: 4360:      bb[6]=((char *)&valueWrite)[1];
-[e = *U + &U _bb * -> -> -> 6 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _valueWrite `*uc * -> -> 1 `i `x -> -> # *U -> &U _valueWrite `*uc `i `x ]
-"4363
-[; ;Liofilizador Placa Mae.c: 4363:      tempValue=Send_To_Slave(placa, 0x14, 5, bb);
-[e = _tempValue ( _Send_To_Slave (4 , , , _placa -> -> 20 `i `uc -> -> 5 `i `uc &U _bb ]
-"4365
-[; ;Liofilizador Placa Mae.c: 4365:      Send_To_Slave(placa, 0x13, 7, bb);
-[e ( _Send_To_Slave (4 , , , _placa -> -> 19 `i `uc -> -> 7 `i `uc &U _bb ]
-"4367
-[; ;Liofilizador Placa Mae.c: 4367:      confere=Send_To_Slave(placa, 0x14, 5, bb);
-[e = _confere ( _Send_To_Slave (4 , , , _placa -> -> 20 `i `uc -> -> 5 `i `uc &U _bb ]
-"4369
-[; ;Liofilizador Placa Mae.c: 4369:      if(valueWrite==confere)
-[e $ ! == _valueWrite _confere 1019  ]
-"4370
-[; ;Liofilizador Placa Mae.c: 4370:        {
-{
-"4371
-[; ;Liofilizador Placa Mae.c: 4371:        bb[5]=((char *)&tempValue)[0];
-[e = *U + &U _bb * -> -> -> 5 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _tempValue `*uc * -> -> 0 `i `x -> -> # *U -> &U _tempValue `*uc `i `x ]
-"4372
-[; ;Liofilizador Placa Mae.c: 4372:        bb[6]=((char *)&tempValue)[1];
-[e = *U + &U _bb * -> -> -> 6 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _tempValue `*uc * -> -> 1 `i `x -> -> # *U -> &U _tempValue `*uc `i `x ]
-"4374
-[; ;Liofilizador Placa Mae.c: 4374:        Send_To_Slave(placa, 0x13, 7, bb);
-[e ( _Send_To_Slave (4 , , , _placa -> -> 19 `i `uc -> -> 7 `i `uc &U _bb ]
-"4375
-[; ;Liofilizador Placa Mae.c: 4375:        return 1;
-[e ) -> -> 1 `i `a ]
-[e $UE 1018  ]
-"4376
-[; ;Liofilizador Placa Mae.c: 4376:        }
-}
-[e $U 1020  ]
-"4377
-[; ;Liofilizador Placa Mae.c: 4377:      else
-[e :U 1019 ]
 "4378
-[; ;Liofilizador Placa Mae.c: 4378:        {
-{
+[; ;Liofilizador Placa Mae.c: 4378: {
+[f ]
 "4379
-[; ;Liofilizador Placa Mae.c: 4379:        return 0;
-[e ) -> -> 0 `i `a ]
-[e $UE 1018  ]
+[; ;Liofilizador Placa Mae.c: 4379:      int tempValue;
+[v _tempValue `i ~T0 @X0 1 a ]
 "4380
-[; ;Liofilizador Placa Mae.c: 4380:        }
+[; ;Liofilizador Placa Mae.c: 4380:      int confere;
+[v _confere `i ~T0 @X0 1 a ]
+"4381
+[; ;Liofilizador Placa Mae.c: 4381:      char bb[7];
+[v _bb `uc ~T0 @X0 -> 7 `i a ]
+"4384
+[; ;Liofilizador Placa Mae.c: 4384:      bb[0]=chip;
+[e = *U + &U _bb * -> -> -> 0 `i `ui `ux -> -> # *U &U _bb `ui `ux _chip ]
+"4386
+[; ;Liofilizador Placa Mae.c: 4386:      bb[1]=((char *)&add)[3];
+[e = *U + &U _bb * -> -> -> 1 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add `*uc * -> -> 3 `i `x -> -> # *U -> &U _add `*uc `i `x ]
+"4387
+[; ;Liofilizador Placa Mae.c: 4387:      bb[2]=((char *)&add)[2];
+[e = *U + &U _bb * -> -> -> 2 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add `*uc * -> -> 2 `i `x -> -> # *U -> &U _add `*uc `i `x ]
+"4388
+[; ;Liofilizador Placa Mae.c: 4388:      bb[3]=((char *)&add)[1];
+[e = *U + &U _bb * -> -> -> 3 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add `*uc * -> -> 1 `i `x -> -> # *U -> &U _add `*uc `i `x ]
+"4389
+[; ;Liofilizador Placa Mae.c: 4389:      bb[4]=((char *)&add)[0];
+[e = *U + &U _bb * -> -> -> 4 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _add `*uc * -> -> 0 `i `x -> -> # *U -> &U _add `*uc `i `x ]
+"4391
+[; ;Liofilizador Placa Mae.c: 4391:      bb[5]=((char *)&valueWrite)[0];
+[e = *U + &U _bb * -> -> -> 5 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _valueWrite `*uc * -> -> 0 `i `x -> -> # *U -> &U _valueWrite `*uc `i `x ]
+"4392
+[; ;Liofilizador Placa Mae.c: 4392:      bb[6]=((char *)&valueWrite)[1];
+[e = *U + &U _bb * -> -> -> 6 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _valueWrite `*uc * -> -> 1 `i `x -> -> # *U -> &U _valueWrite `*uc `i `x ]
+"4395
+[; ;Liofilizador Placa Mae.c: 4395:      tempValue=Send_To_Slave(placa, 0x14, 5, bb);
+[e = _tempValue ( _Send_To_Slave (4 , , , _placa -> -> 20 `i `uc -> -> 5 `i `uc &U _bb ]
+"4397
+[; ;Liofilizador Placa Mae.c: 4397:      Send_To_Slave(placa, 0x13, 7, bb);
+[e ( _Send_To_Slave (4 , , , _placa -> -> 19 `i `uc -> -> 7 `i `uc &U _bb ]
+"4399
+[; ;Liofilizador Placa Mae.c: 4399:      confere=Send_To_Slave(placa, 0x14, 5, bb);
+[e = _confere ( _Send_To_Slave (4 , , , _placa -> -> 20 `i `uc -> -> 5 `i `uc &U _bb ]
+"4401
+[; ;Liofilizador Placa Mae.c: 4401:      if(valueWrite==confere)
+[e $ ! == _valueWrite _confere 1023  ]
+"4402
+[; ;Liofilizador Placa Mae.c: 4402:        {
+{
+"4403
+[; ;Liofilizador Placa Mae.c: 4403:        bb[5]=((char *)&tempValue)[0];
+[e = *U + &U _bb * -> -> -> 5 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _tempValue `*uc * -> -> 0 `i `x -> -> # *U -> &U _tempValue `*uc `i `x ]
+"4404
+[; ;Liofilizador Placa Mae.c: 4404:        bb[6]=((char *)&tempValue)[1];
+[e = *U + &U _bb * -> -> -> 6 `i `ui `ux -> -> # *U &U _bb `ui `ux *U + -> &U _tempValue `*uc * -> -> 1 `i `x -> -> # *U -> &U _tempValue `*uc `i `x ]
+"4406
+[; ;Liofilizador Placa Mae.c: 4406:        Send_To_Slave(placa, 0x13, 7, bb);
+[e ( _Send_To_Slave (4 , , , _placa -> -> 19 `i `uc -> -> 7 `i `uc &U _bb ]
+"4407
+[; ;Liofilizador Placa Mae.c: 4407:        return 1;
+[e ) -> -> 1 `i `a ]
+[e $UE 1022  ]
+"4408
+[; ;Liofilizador Placa Mae.c: 4408:        }
 }
-[e :U 1020 ]
-"4382
-[; ;Liofilizador Placa Mae.c: 4382: }
-[e :UE 1018 ]
+[e $U 1024  ]
+"4409
+[; ;Liofilizador Placa Mae.c: 4409:      else
+[e :U 1023 ]
+"4410
+[; ;Liofilizador Placa Mae.c: 4410:        {
+{
+"4411
+[; ;Liofilizador Placa Mae.c: 4411:        return 0;
+[e ) -> -> 0 `i `a ]
+[e $UE 1022  ]
+"4412
+[; ;Liofilizador Placa Mae.c: 4412:        }
+}
+[e :U 1024 ]
+"4414
+[; ;Liofilizador Placa Mae.c: 4414: }
+[e :UE 1022 ]
 }
 [a 51C 87 32 48 120 0 ]
 [a 40C 68 101 115 99 97 114 114 101 103 97 110 100 111 32 68 97 100 111 115 0 ]

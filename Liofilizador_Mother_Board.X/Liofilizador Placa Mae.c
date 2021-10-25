@@ -3497,6 +3497,7 @@ void RelatorioTecnico(void){
      clear_screen();
      print("-----RELATORIO TECNICO----");
      ShowHardwareInfo();
+     showMemoryInfo();
      valor=EEPROM_Read_Integer(34);
      itoa(valor,buffer,10);
      strcpy(texto,"SERIAL MODULE RECOVER = ");
@@ -4304,9 +4305,39 @@ void showMemoryInfo()
           strcat(msg,texto);
           strcat(msg," erro! ");
           
+          
+          if(Tamanho_Display!=81)
+            {  
+            if(!((placa==0)&&(canal==1)) &&
+               !((placa==2)&&(canal==1)))
+               {
+               if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==false)
+                 {  
+                 print(msg);
+                 falha++;
+                 }                
+               }
+            }  
+          else
+            {  
+            if(
+              !((placa==0)&&(canal==1)) &&
+              !((placa==2)&&(canal==1)) &&                                   
+              !((placa==4)&&(canal==1))                    
+              )
+              {  
+               if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==false)
+                 {  
+                 print(msg);
+                 falha++;
+                 }                                
+              }
+            }
+          
+          /*
           if(                  
-            !((Tamanho_Display!=81)&&(placa==0)&&(canal==1)) &&
-            !((Tamanho_Display!=81)&&(placa==2)&&(canal==1)) &&
+            (!((Tamanho_Display!=81)&&(placa==0)&&(canal==1)) &&
+            !((Tamanho_Display!=81)&&(placa==2)&&(canal==1))) &&
             !((Tamanho_Display==81)&&(placa==4)&&(canal==1))
             )   
                 { 
@@ -4317,6 +4348,7 @@ void showMemoryInfo()
                     my_delay_ms_CLRWDT(3000);
                     }                                        
                 }
+          */ 
           
           }
        
