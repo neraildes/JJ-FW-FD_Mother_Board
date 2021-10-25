@@ -412,7 +412,7 @@ void main(void)
      print("Analisando Hardware. Aguarde..."); 
      placasFilhasInit();  //Inicializa comunicação com Placas Filhas;
      ShowHardwareInfo();   
-     showMemoryInfo();
+     //showMemoryInfo();
      Ligar_Cargas_Compassadamente();
      my_delay_ms_CLRWDT(2500);        
      PROCULUS_Show_Screen(15);     
@@ -4291,7 +4291,7 @@ void showMemoryInfo()
     strcpy(msg,"00 : ");
     strcat(msg,texto);
     strcat(msg," ch:0");
-    if(gravaFilhaConfere(0,0,0x00,0xABCD)==false)        
+    if(gravaMaeConfere(0,0x00,0xABCD)==false)        
       {  
       strcat(msg," erro!");
       falha++;
@@ -4367,55 +4367,13 @@ void showMemoryInfo()
 
 
 
-_Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite)
+_Bool gravaFilhaConfere(char placa,char chip, unsigned long add, int valueWrite)
 {
      int tempValue;
      unsigned int confere;
      char bb[7];
-     
-       char msg[30];    //APAGAR
-       char texto[30];  //APAGAR    
-     
-     //-------------------------------------------------------------------
-     int oldValue=1234;
-     bb[0]=chip;            //Numero do Chip     
-     bb[1]=High(add);
-     bb[2]=Lower(add);
-     bb[3]=Hi(add);         //Endereço destino 
-     bb[4]=Lo(add);     
-     bb[5]=Hi(oldValue);  //Valor a ser gravado  
-     bb[6]=Lo(oldValue); 
-     Send_To_Slave(placa, COMMAND_EEE_W_INT, 7, bb);     
-     //--------------------------------------------------------------------
-     
-     my_delay_ms_CLRWDT(100); 
-     bb[0]=chip;            //Numero do Chip     
-     bb[1]=High(add);
-     bb[2]=Lower(add);
-     bb[3]=Hi(add);         //Endereço destino 
-     bb[4]=Lo(add);     
-     confere=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, bb);     
-     
-     /*
-       strcpy(msg,"oldValue = "); 
-       strcpy(texto,"");
-       itoa(oldValue,texto,10);
-       strcat(msg,texto);
-       print(msg);
-       
-       strcpy(msg,"confere = ");       
-       strcpy(texto,"");
-       itoa(confere,texto,10);
-       strcat(msg,texto);
-       print(msg);       
-       my_delay_ms_CLRWDT(6000);    
-       
-       return true;
-     */
-     
-     
-     
-     
+
+     //Armazena valor temporario para posterior restauração
      my_delay_ms_CLRWDT(100);
      bb[0]=chip;            //Numero do Chip     
      bb[1]=High(add);
@@ -4424,6 +4382,8 @@ _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite
      bb[4]=Lo(add);      
      tempValue=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, bb);           
      
+     
+     //Grava um valor inteiro para ser comparado com sua leitura
      my_delay_ms_CLRWDT(100);
      bb[0]=chip;            //Numero do Chip     
      bb[1]=High(add);
@@ -4434,6 +4394,7 @@ _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite
      bb[6]=Lo(valueWrite); 
      Send_To_Slave(placa, COMMAND_EEE_W_INT, 7, bb);
      
+     //Lê o valor inteiro e guarda em 'confere'.
      my_delay_ms_CLRWDT(100); 
      bb[0]=chip;            //Numero do Chip     
      bb[1]=High(add);
@@ -4447,6 +4408,7 @@ _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite
      
      if(valueWrite==confere)
        {  
+       //Restaura o valor original daquele endereço de memória  
        my_delay_ms_CLRWDT(100);  
        bb[0]=chip;            //Numero do Chip     
        bb[1]=High(add);
@@ -4456,38 +4418,36 @@ _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite
        bb[5]=Hi(tempValue);
        bb[6]=Lo(tempValue);
        Send_To_Slave(placa, COMMAND_EEE_W_INT, 7, bb);  
-       
-       
-       //-----------------------------------------------------------------------
-       my_delay_ms_CLRWDT(100); 
-       bb[0]=chip;            //Numero do Chip     
-       bb[1]=High(add);
-       bb[2]=Lower(add); 
-       bb[3]=Hi(add);         //Endereço destino 
-       bb[4]=Lo(add);     
-       confere=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, bb);      
-       //-----------------------------------------------------------------------
-       
-       /*
-       strcpy(msg,"oldValue = "); 
-       strcpy(texto,"");
-       itoa(oldValue,texto,10);
-       strcat(msg,texto);
-       print(msg);
-       */
-       strcpy(msg,"regravado = ");       
-       strcpy(texto,"");
-       itoa(confere,texto,10);
-       strcat(msg,texto);
-       print(msg);       
-       my_delay_ms_CLRWDT(6000);    
-       
-       
        return true;  
        }
      else
-       {  
+       {         
        return false;
        }
      //print("............................");
+}
+
+
+
+_Bool gravaMaeConfere(char chip, unsigned long add, int valueWrite)
+{
+    int tempValue;
+    int compara;
+    
+    tempValue=EEPROM_24C1025_Read_Int (chip,add);
+    my_delay_ms_CLRWDT(100); 
+    EEPROM_24C1025_Write_Int(chip,add,valueWrite);
+    my_delay_ms_CLRWDT(100); 
+    compara=EEPROM_24C1025_Read_Int (chip,add);
+    my_delay_ms_CLRWDT(100); 
+    
+    if(valueWrite==compara)
+      {  
+      EEPROM_24C1025_Write_Int(chip,add,tempValue);  
+      return true;
+      }
+    else
+      {
+      return false;  
+      }
 }

@@ -172,6 +172,7 @@ void placasFilhasInit();
 void ShowHardwareInfo();
 void showMemoryInfo();
 _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite);
+_Bool gravaMaeConfere(char chip, unsigned long add, int valueWrite);
 
 
 void Global_Aquecimento_Switch(unsigned char estado);

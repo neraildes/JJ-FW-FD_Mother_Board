@@ -5431,6 +5431,7 @@ void placasFilhasInit();
 void ShowHardwareInfo();
 void showMemoryInfo();
 _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite);
+_Bool gravaMaeConfere(char chip, unsigned long add, int valueWrite);
 
 
 void Global_Aquecimento_Switch(unsigned char estado);
@@ -6109,7 +6110,7 @@ void main(void)
      print("Analisando Hardware. Aguarde...");
      placasFilhasInit();
      ShowHardwareInfo();
-     showMemoryInfo();
+
      Ligar_Cargas_Compassadamente();
      my_delay_ms_CLRWDT(2500);
      PROCULUS_Show_Screen(15);
@@ -9706,7 +9707,7 @@ void showMemoryInfo()
     strcpy(msg,"00 : ");
     strcat(msg,texto);
     strcat(msg," ch:0");
-    if(gravaFilhaConfere(0,0,0x00,0xABCD)==0)
+    if(gravaMaeConfere(0,0x00,0xABCD)==0)
       {
       strcat(msg," erro!");
       falha++;
@@ -9782,35 +9783,14 @@ void showMemoryInfo()
 
 
 
-_Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite)
+_Bool gravaFilhaConfere(char placa,char chip, unsigned long add, int valueWrite)
 {
      int tempValue;
      unsigned int confere;
      char bb[7];
 
-       char msg[30];
-       char texto[30];
 
-
-     int oldValue=1234;
-     bb[0]=chip;
-     bb[1]=((char *)&add)[3];
-     bb[2]=((char *)&add)[2];
-     bb[3]=((char *)&add)[1];
-     bb[4]=((char *)&add)[0];
-     bb[5]=((char *)&oldValue)[1];
-     bb[6]=((char *)&oldValue)[0];
-     Send_To_Slave(placa, 0x13, 7, bb);
-
-
-     my_delay_ms_CLRWDT(200);
-     bb[0]=chip;
-     bb[1]=((char *)&add)[3];
-     bb[2]=((char *)&add)[2];
-     bb[3]=((char *)&add)[1];
-     bb[4]=((char *)&add)[0];
-     confere=Send_To_Slave(placa, 0x14, 5, bb);
-# 4420 "Liofilizador Placa Mae.c"
+     my_delay_ms_CLRWDT(100);
      bb[0]=chip;
      bb[1]=((char *)&add)[3];
      bb[2]=((char *)&add)[2];
@@ -9818,6 +9798,9 @@ _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite
      bb[4]=((char *)&add)[0];
      tempValue=Send_To_Slave(placa, 0x14, 5, bb);
 
+
+
+     my_delay_ms_CLRWDT(100);
      bb[0]=chip;
      bb[1]=((char *)&add)[3];
      bb[2]=((char *)&add)[2];
@@ -9827,7 +9810,8 @@ _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite
      bb[6]=((char *)&valueWrite)[0];
      Send_To_Slave(placa, 0x13, 7, bb);
 
-     my_delay_ms_CLRWDT(200);
+
+     my_delay_ms_CLRWDT(100);
      bb[0]=chip;
      bb[1]=((char *)&add)[3];
      bb[2]=((char *)&add)[2];
@@ -9840,6 +9824,8 @@ _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite
 
      if(valueWrite==confere)
        {
+
+       my_delay_ms_CLRWDT(100);
        bb[0]=chip;
        bb[1]=((char *)&add)[3];
        bb[2]=((char *)&add)[2];
@@ -9848,25 +9834,6 @@ _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite
        bb[5]=((char *)&tempValue)[1];
        bb[6]=((char *)&tempValue)[0];
        Send_To_Slave(placa, 0x13, 7, bb);
-
-
-
-       my_delay_ms_CLRWDT(200);
-       bb[0]=chip;
-       bb[1]=((char *)&add)[3];
-       bb[2]=((char *)&add)[2];
-       bb[3]=((char *)&add)[1];
-       bb[4]=((char *)&add)[0];
-       confere=Send_To_Slave(placa, 0x14, 5, bb);
-# 4476 "Liofilizador Placa Mae.c"
-       strcpy(msg,"regravado = ");
-       strcpy(texto,"");
-       itoa(confere,texto,10);
-       strcat(msg,texto);
-       print(msg);
-       my_delay_ms_CLRWDT(6000);
-
-
        return 1;
        }
      else
@@ -9874,4 +9841,29 @@ _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite
        return 0;
        }
 
+}
+
+
+
+_Bool gravaMaeConfere(char chip, unsigned long add, int valueWrite)
+{
+    int tempValue;
+    int compara;
+
+    tempValue=EEPROM_24C1025_Read_Int (chip,add);
+    my_delay_ms_CLRWDT(100);
+    EEPROM_24C1025_Write_Int(chip,add,valueWrite);
+    my_delay_ms_CLRWDT(100);
+    compara=EEPROM_24C1025_Read_Int (chip,add);
+    my_delay_ms_CLRWDT(100);
+
+    if(valueWrite==compara)
+      {
+      EEPROM_24C1025_Write_Int(chip,add,tempValue);
+      return 1;
+      }
+    else
+      {
+      return 0;
+      }
 }
