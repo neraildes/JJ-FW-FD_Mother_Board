@@ -3615,9 +3615,9 @@ void ShowHardwareInfo(){
             print(texto);
             }
         }
-      
-     print("-------------------------------");
-     
+
+     print("..................................");     
+          
      if(totalboard==0)
         { 
         print("Nenhuma Placa conectada!");        
@@ -3627,9 +3627,8 @@ void ShowHardwareInfo(){
         itoa(totalboard,texto,10);
         strcat(texto," placa(s) encontrada(s).");
         print(texto);
-        }
-     
-    
+        }     
+    print("----------------------------------");
 }
 
 char MenorCanalLivre()
@@ -4323,6 +4322,7 @@ void showMemoryInfo()
        
        }
     
+    print("..................................");
     if(falha>0)
       {  
       strcpy(msg,"Falha de memoria = ");
@@ -4336,7 +4336,7 @@ void showMemoryInfo()
       print("Nenhuma falha nas memorias!");
       }  
     print("Fim do teste de memoria.");
-    print(".................................");
+    print("----------------------------------");
     my_delay_ms_CLRWDT(4000);      
 }
 

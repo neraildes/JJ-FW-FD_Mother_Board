@@ -9038,7 +9038,7 @@ void ShowHardwareInfo(){
             }
         }
 
-     print("-------------------------------");
+     print("..................................");
 
      if(totalboard==0)
         {
@@ -9050,8 +9050,7 @@ void ShowHardwareInfo(){
         strcat(texto," placa(s) encontrada(s).");
         print(texto);
         }
-
-
+    print("----------------------------------");
 }
 
 char MenorCanalLivre()
@@ -9419,7 +9418,7 @@ void FAT8_Write_Process_Finalize(){
       strcpy(fat8.processo.fim.time,time);
       fat8.processo.minutes=processo_totalminuto;
       }
-# 4008 "Liofilizador Placa Mae.c"
+# 4007 "Liofilizador Placa Mae.c"
     fat8.processo.add_end=add_datalog;
 
     fat8.processo.flag_running=0;
@@ -9738,6 +9737,7 @@ void showMemoryInfo()
 
        }
 
+    print("..................................");
     if(falha>0)
       {
       strcpy(msg,"Falha de memoria = ");
@@ -9751,7 +9751,7 @@ void showMemoryInfo()
       print("Nenhuma falha nas memorias!");
       }
     print("Fim do teste de memoria.");
-    print(".................................");
+    print("----------------------------------");
     my_delay_ms_CLRWDT(4000);
 }
 
