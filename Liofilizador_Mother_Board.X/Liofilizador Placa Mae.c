@@ -4370,33 +4370,119 @@ void showMemoryInfo()
 _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite)
 {
      int tempValue;
-     int confere;
+     unsigned int confere;
      char bb[7];
-   
      
-     bb[0]=chip;            //Numero do Chip
+       char msg[30];    //APAGAR
+       char texto[30];  //APAGAR    
      
+     //-------------------------------------------------------------------
+     int oldValue=1234;
+     bb[0]=chip;            //Numero do Chip     
      bb[1]=High(add);
      bb[2]=Lower(add);
      bb[3]=Hi(add);         //Endereço destino 
-     bb[4]=Lo(add);
+     bb[4]=Lo(add);     
+     bb[5]=Hi(oldValue);  //Valor a ser gravado  
+     bb[6]=Lo(oldValue); 
+     Send_To_Slave(placa, COMMAND_EEE_W_INT, 7, bb);     
+     //--------------------------------------------------------------------
      
-     bb[5]=Lo(valueWrite);  //Valor a ser gravado  
-     bb[6]=Hi(valueWrite); 
+     my_delay_ms_CLRWDT(100); 
+     bb[0]=chip;            //Numero do Chip     
+     bb[1]=High(add);
+     bb[2]=Lower(add);
+     bb[3]=Hi(add);         //Endereço destino 
+     bb[4]=Lo(add);     
+     confere=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, bb);     
      
-     //print("Guardando dado.");
-     tempValue=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, bb);
-     //print("Escrevendo.");
+     /*
+       strcpy(msg,"oldValue = "); 
+       strcpy(texto,"");
+       itoa(oldValue,texto,10);
+       strcat(msg,texto);
+       print(msg);
+       
+       strcpy(msg,"confere = ");       
+       strcpy(texto,"");
+       itoa(confere,texto,10);
+       strcat(msg,texto);
+       print(msg);       
+       my_delay_ms_CLRWDT(6000);    
+       
+       return true;
+     */
+     
+     
+     
+     
+     my_delay_ms_CLRWDT(100);
+     bb[0]=chip;            //Numero do Chip     
+     bb[1]=High(add);
+     bb[2]=Lower(add);
+     bb[3]=Hi(add);         //Endereço destino 
+     bb[4]=Lo(add);      
+     tempValue=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, bb);           
+     
+     my_delay_ms_CLRWDT(100);
+     bb[0]=chip;            //Numero do Chip     
+     bb[1]=High(add);
+     bb[2]=Lower(add);
+     bb[3]=Hi(add);         //Endereço destino 
+     bb[4]=Lo(add);     
+     bb[5]=Hi(valueWrite);  //Valor a ser gravado  
+     bb[6]=Lo(valueWrite); 
      Send_To_Slave(placa, COMMAND_EEE_W_INT, 7, bb);
-     //print("Lendo dado escrito");
+     
+     my_delay_ms_CLRWDT(100); 
+     bb[0]=chip;            //Numero do Chip     
+     bb[1]=High(add);
+     bb[2]=Lower(add);
+     bb[3]=Hi(add);         //Endereço destino 
+     bb[4]=Lo(add);     
      confere=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, bb);
-     //print("Comparando Dado...");
+     
+
+
+     
      if(valueWrite==confere)
        {  
-       bb[5]=Lo(tempValue);
-       bb[6]=Hi(tempValue); 
-       //print("Restaurando dado");
+       my_delay_ms_CLRWDT(100);  
+       bb[0]=chip;            //Numero do Chip     
+       bb[1]=High(add);
+       bb[2]=Lower(add);
+       bb[3]=Hi(add);         //Endereço destino 
+       bb[4]=Lo(add);         
+       bb[5]=Hi(tempValue);
+       bb[6]=Lo(tempValue);
        Send_To_Slave(placa, COMMAND_EEE_W_INT, 7, bb);  
+       
+       
+       //-----------------------------------------------------------------------
+       my_delay_ms_CLRWDT(100); 
+       bb[0]=chip;            //Numero do Chip     
+       bb[1]=High(add);
+       bb[2]=Lower(add); 
+       bb[3]=Hi(add);         //Endereço destino 
+       bb[4]=Lo(add);     
+       confere=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, bb);      
+       //-----------------------------------------------------------------------
+       
+       /*
+       strcpy(msg,"oldValue = "); 
+       strcpy(texto,"");
+       itoa(oldValue,texto,10);
+       strcat(msg,texto);
+       print(msg);
+       */
+       strcpy(msg,"regravado = ");       
+       strcpy(texto,"");
+       itoa(confere,texto,10);
+       strcat(msg,texto);
+       print(msg);       
+       my_delay_ms_CLRWDT(6000);    
+       
+       
        return true;  
        }
      else

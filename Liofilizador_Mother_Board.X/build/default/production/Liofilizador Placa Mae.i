@@ -9014,7 +9014,7 @@ void ShowHardwareInfo(){
      totalboard=0;
      strcpy(texto,"");
      strcat(texto,"* : Mother Board ");
-     strcat(texto,"v1.0.43");
+     strcat(texto,"v1.0.46");
      print(texto);
 
      for(destino=1;destino<15;destino++)
@@ -9785,33 +9785,88 @@ void showMemoryInfo()
 _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite)
 {
      int tempValue;
-     int confere;
+     unsigned int confere;
      char bb[7];
 
+       char msg[30];
+       char texto[30];
 
+
+     int oldValue=1234;
      bb[0]=chip;
-
      bb[1]=((char *)&add)[3];
      bb[2]=((char *)&add)[2];
      bb[3]=((char *)&add)[1];
      bb[4]=((char *)&add)[0];
-
-     bb[5]=((char *)&valueWrite)[0];
-     bb[6]=((char *)&valueWrite)[1];
-
-
-     tempValue=Send_To_Slave(placa, 0x14, 5, bb);
-
+     bb[5]=((char *)&oldValue)[1];
+     bb[6]=((char *)&oldValue)[0];
      Send_To_Slave(placa, 0x13, 7, bb);
 
+
+     my_delay_ms_CLRWDT(200);
+     bb[0]=chip;
+     bb[1]=((char *)&add)[3];
+     bb[2]=((char *)&add)[2];
+     bb[3]=((char *)&add)[1];
+     bb[4]=((char *)&add)[0];
      confere=Send_To_Slave(placa, 0x14, 5, bb);
+# 4420 "Liofilizador Placa Mae.c"
+     bb[0]=chip;
+     bb[1]=((char *)&add)[3];
+     bb[2]=((char *)&add)[2];
+     bb[3]=((char *)&add)[1];
+     bb[4]=((char *)&add)[0];
+     tempValue=Send_To_Slave(placa, 0x14, 5, bb);
+
+     bb[0]=chip;
+     bb[1]=((char *)&add)[3];
+     bb[2]=((char *)&add)[2];
+     bb[3]=((char *)&add)[1];
+     bb[4]=((char *)&add)[0];
+     bb[5]=((char *)&valueWrite)[1];
+     bb[6]=((char *)&valueWrite)[0];
+     Send_To_Slave(placa, 0x13, 7, bb);
+
+     my_delay_ms_CLRWDT(200);
+     bb[0]=chip;
+     bb[1]=((char *)&add)[3];
+     bb[2]=((char *)&add)[2];
+     bb[3]=((char *)&add)[1];
+     bb[4]=((char *)&add)[0];
+     confere=Send_To_Slave(placa, 0x14, 5, bb);
+
+
+
 
      if(valueWrite==confere)
        {
-       bb[5]=((char *)&tempValue)[0];
-       bb[6]=((char *)&tempValue)[1];
-
+       bb[0]=chip;
+       bb[1]=((char *)&add)[3];
+       bb[2]=((char *)&add)[2];
+       bb[3]=((char *)&add)[1];
+       bb[4]=((char *)&add)[0];
+       bb[5]=((char *)&tempValue)[1];
+       bb[6]=((char *)&tempValue)[0];
        Send_To_Slave(placa, 0x13, 7, bb);
+
+
+
+       my_delay_ms_CLRWDT(200);
+       bb[0]=chip;
+       bb[1]=((char *)&add)[3];
+       bb[2]=((char *)&add)[2];
+       bb[3]=((char *)&add)[1];
+       bb[4]=((char *)&add)[0];
+       confere=Send_To_Slave(placa, 0x14, 5, bb);
+# 4476 "Liofilizador Placa Mae.c"
+       strcpy(msg,"regravado = ");
+       strcpy(texto,"");
+       itoa(confere,texto,10);
+       strcat(msg,texto);
+       print(msg);
+       my_delay_ms_CLRWDT(6000);
+
+
        return 1;
        }
      else
