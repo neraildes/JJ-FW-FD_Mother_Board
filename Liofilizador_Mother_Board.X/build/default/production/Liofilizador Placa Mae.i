@@ -9709,6 +9709,7 @@ void showMemoryInfo()
     if(gravaFilhaConfere(0,0,0x00,0xABCD)==0)
       {
       strcat(msg," erro!");
+      falha++;
       print(msg);
       }
 
@@ -9735,8 +9736,7 @@ void showMemoryInfo()
 
           if(Tamanho_Display!=81)
             {
-            if(!((placa==0)&&(canal==1)) &&
-               !((placa==2)&&(canal==1)))
+            if(!((placa==2)&&(canal==1)))
                {
                if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==0)
                  {
@@ -9748,7 +9748,6 @@ void showMemoryInfo()
           else
             {
             if(
-              !((placa==0)&&(canal==1)) &&
               !((placa==2)&&(canal==1)) &&
               !((placa==4)&&(canal==1))
               )

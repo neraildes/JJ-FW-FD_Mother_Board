@@ -285,7 +285,7 @@
 [v _placasFilhasInit placasFilhasInit `(v  1 e 1 0 ]
 "4279
 [v _showMemoryInfo showMemoryInfo `(v  1 e 1 0 ]
-"4371
+"4370
 [v _gravaFilhaConfere gravaFilhaConfere `(a  1 e 1 0 ]
 "16 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
 [v _PROCULUS_REG_Write PROCULUS_REG_Write `(v  1 e 1 0 ]
@@ -1939,9 +1939,9 @@
 "4279
 [v _showMemoryInfo showMemoryInfo `(v  1 e 1 0 ]
 {
-"4302
+"4303
 [v showMemoryInfo@canal canal `uc  1 a 1 102 ]
-"4300
+"4301
 [v showMemoryInfo@placa placa `uc  1 a 1 103 ]
 "4283
 [v showMemoryInfo@msg msg `[50]uc  1 a 50 50 ]
@@ -1951,26 +1951,26 @@
 [v showMemoryInfo@falha falha `uc  1 a 1 101 ]
 "4287
 [v showMemoryInfo@tipo tipo `uc  1 a 1 100 ]
-"4367
+"4366
 } 0
-"4371
+"4370
 [v _gravaFilhaConfere gravaFilhaConfere `(a  1 e 1 0 ]
 {
 [v gravaFilhaConfere@placa placa `uc  1 a 1 wreg ]
-"4375
-[v gravaFilhaConfere@bb bb `[7]uc  1 a 7 36 ]
-"4373
-[v gravaFilhaConfere@tempValue tempValue `i  1 a 2 43 ]
 "4374
+[v gravaFilhaConfere@bb bb `[7]uc  1 a 7 36 ]
+"4372
+[v gravaFilhaConfere@tempValue tempValue `i  1 a 2 43 ]
+"4373
 [v gravaFilhaConfere@confere confere `i  1 a 2 34 ]
-"4371
+"4370
 [v gravaFilhaConfere@placa placa `uc  1 a 1 wreg ]
 [v gravaFilhaConfere@chip chip `uc  1 p 1 27 ]
 [v gravaFilhaConfere@add add `ul  1 p 4 28 ]
 [v gravaFilhaConfere@valueWrite valueWrite `i  1 p 2 32 ]
-"4378
+"4377
 [v gravaFilhaConfere@placa placa `uc  1 a 1 45 ]
-"4408
+"4407
 } 0
 "51 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _clear_screen clear_screen `(v  1 e 1 0 ]
