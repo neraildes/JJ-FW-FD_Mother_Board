@@ -411,7 +411,8 @@ void main(void)
         
      print("Analisando Hardware. Aguarde..."); 
      placasFilhasInit();  //Inicializa comunicação com Placas Filhas;
-     ShowHardwareInfo();       
+     ShowHardwareInfo();   
+     showMemoryInfo();
      Ligar_Cargas_Compassadamente();
      my_delay_ms_CLRWDT(2500);        
      PROCULUS_Show_Screen(15);     
@@ -4271,4 +4272,111 @@ void placasFilhasInit(){
          my_delay_ms_CLRWDT(300);
          Send_To_Slave(i, COMANDO_QUEM_EH_VOCE, 0, buffer); 
      }    
+}
+
+
+
+void showMemoryInfo()    
+{
+    char texto[50];
+    char msg[50];
+    int  tmpValue;
+    int  compara;
+    char falha=0;
+    
+    
+    print("TESTE DE MEMORIA.");
+    for(char placa=0;placa<=totalboard;placa++)
+       {       
+       for(char canal=0;canal<2;canal++)
+          {
+          strcpy(msg,"");
+          strcpy(texto,"");
+          itoa(placa,texto,10);
+          if(placa<10) strcat(msg,"0");              
+          strcat(msg, texto);
+          strcat(msg, " : ");           
+          strcpy(texto, boardtype[placa][0]);
+          strcat(msg,texto);           
+           
+          strcat(msg," ch:");
+          strcpy(texto,"");
+          itoa(canal,texto,10);
+          strcat(msg,texto);
+          strcat(msg," erro! ");
+          
+          if(                  
+            !((Tamanho_Display!=81)&&(placa==0)&&(canal==1)) &&
+            !((Tamanho_Display!=81)&&(placa==2)&&(canal==1)) &&
+            !((Tamanho_Display==81)&&(placa==4)&&(canal==1))
+            )   
+                { 
+                  if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==false)
+                    {  
+                    print(msg);
+                    falha++;
+                    my_delay_ms_CLRWDT(3000);
+                    }                                        
+                }
+          
+          }
+       
+       }
+    
+    if(falha>0)
+      {  
+      strcpy(msg,"Falha de memoria = ");
+      itoa(falha,texto,10);
+      strcat(msg,texto);      
+      strcat(msg,".");
+      print(msg);
+      }
+    else
+      {
+      print("Nenhuma falha nas memorias!");
+      }  
+    print("Fim do teste de memoria.");
+    print(".................................");
+    my_delay_ms_CLRWDT(4000);      
+}
+
+
+
+_Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite)
+{
+     int tempValue;
+     int confere;
+     char bb[7];
+   
+     
+     bb[0]=chip;            //Numero do Chip
+     
+     bb[1]=High(add);
+     bb[2]=Lower(add);
+     bb[3]=Hi(add);         //Endereço destino 
+     bb[4]=Lo(add);
+     
+     bb[5]=Lo(valueWrite);  //Valor a ser gravado  
+     bb[6]=Hi(valueWrite); 
+     
+     //print("Guardando dado.");
+     tempValue=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, bb);
+     //print("Escrevendo.");
+     Send_To_Slave(placa, COMMAND_EEE_W_INT, 7, bb);
+     //print("Lendo dado escrito");
+     confere=Send_To_Slave(placa, COMMAND_EEE_R_INT, 5, bb);
+     //print("Comparando Dado...");
+     if(valueWrite==confere)
+       {  
+       bb[5]=Lo(tempValue);
+       bb[6]=Hi(tempValue); 
+       //print("Restaurando dado");
+       Send_To_Slave(placa, COMMAND_EEE_W_INT, 7, bb);  
+       return true;  
+       }
+     else
+       {  
+       return false;
+       }
+     //print("............................");
 }

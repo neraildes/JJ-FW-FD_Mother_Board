@@ -5429,6 +5429,9 @@ void Carrega_Tupla_Receita(char index, t_receita *receita);
 
 void placasFilhasInit();
 void ShowHardwareInfo();
+void showMemoryInfo();
+_Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite);
+
 
 void Global_Aquecimento_Switch(unsigned char estado);
 void Gerenciador_de_Senha(void);
@@ -6106,6 +6109,7 @@ void main(void)
      print("Analisando Hardware. Aguarde...");
      placasFilhasInit();
      ShowHardwareInfo();
+     showMemoryInfo();
      Ligar_Cargas_Compassadamente();
      my_delay_ms_CLRWDT(2500);
      PROCULUS_Show_Screen(15);
@@ -6190,10 +6194,10 @@ void main(void)
 
 
                 gravarStatusDosBotoes();
-# 519 "Liofilizador Placa Mae.c"
+# 520 "Liofilizador Placa Mae.c"
                 if(statusgen1.flag_pc_conected==0) Check_And_Send_Capture_Datalog();
                 statusgen1.flag_proculus_hs=0;
-# 530 "Liofilizador Placa Mae.c"
+# 531 "Liofilizador Placa Mae.c"
             statusgen1.flag_proculus_hs=1;
             switch(pagina)
                   {
@@ -6608,7 +6612,7 @@ int Send_To_Slave_EMULA(char destino, char comando, char size, char * buffer)
     }
     return 0;
 }
-# 952 "Liofilizador Placa Mae.c"
+# 953 "Liofilizador Placa Mae.c"
 void ShowSensorRealTimeHS(void)
      {
      char bb[3];
@@ -6657,7 +6661,7 @@ void ShowSensorRealTimeHS(void)
        {
        leitura[5]=leitura[6];
        }
-# 1013 "Liofilizador Placa Mae.c"
+# 1014 "Liofilizador Placa Mae.c"
      my_delay_ms(50);
      statusgen1.flag_proculus_hs=1;
      for(tupla=0;tupla<(totalboard*2);tupla++)
@@ -6744,7 +6748,7 @@ void ShowSensorRealTimeHS(void)
       statusgen1.flag_proculus_hs=0;
 
      }
-# 1108 "Liofilizador Placa Mae.c"
+# 1109 "Liofilizador Placa Mae.c"
 void Carrega_Tupla_Receita(char index, t_receita *receita){
      unsigned int addeeprom;
 
@@ -6793,7 +6797,7 @@ void Exibe_Receita(int index){
      texto[8]=0;
      PROCULUS_VP_Write_String(vp+4,texto);
 }
-# 1174 "Liofilizador Placa Mae.c"
+# 1175 "Liofilizador Placa Mae.c"
 void DataBaseBackupMain(unsigned char tupla)
       {
       unsigned int vp;
@@ -6927,7 +6931,7 @@ void FAT8_Show(){
         }
 
 }
-# 1319 "Liofilizador Placa Mae.c"
+# 1320 "Liofilizador Placa Mae.c"
  void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
       {
       char CanalAD;
@@ -6967,7 +6971,7 @@ void FAT8_Show(){
       EEPROM_Read_String(addEEPROM + 6,liofilizador->receita);
       liofilizador->status = EEPROM_Read_Integer(addEEPROM+16);
       }
-# 1372 "Liofilizador Placa Mae.c"
+# 1373 "Liofilizador Placa Mae.c"
  void Set_Receita(unsigned char index, char status)
       {
       int vp;
@@ -7027,7 +7031,7 @@ void FAT8_Show(){
          PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
          }
 }
-# 1439 "Liofilizador Placa Mae.c"
+# 1440 "Liofilizador Placa Mae.c"
 void save_datalog(unsigned long add_datalog){
      char index;
      char bb[4];
@@ -7049,7 +7053,7 @@ void save_datalog(unsigned long add_datalog){
             }
          }
 }
-# 1469 "Liofilizador Placa Mae.c"
+# 1470 "Liofilizador Placa Mae.c"
  void ShowAndSetSlaveParameters(unsigned char tupla)
       {
       unsigned char CanalAD;
@@ -7081,7 +7085,7 @@ void save_datalog(unsigned long add_datalog){
       PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
 
       }
-# 1509 "Liofilizador Placa Mae.c"
+# 1510 "Liofilizador Placa Mae.c"
 void Send_to_PC(unsigned char size){
 
 
@@ -7090,7 +7094,7 @@ void Send_to_PC(unsigned char size){
      USART_putc(usart_protocol.origem);
      USART_putc(usart_protocol.command);
      USART_putc(size);
-# 1527 "Liofilizador Placa Mae.c"
+# 1528 "Liofilizador Placa Mae.c"
 }
 
 
@@ -7127,7 +7131,7 @@ void Decodify_Command(void){
 
 
     switch(usart_protocol.command){
-# 1594 "Liofilizador Placa Mae.c"
+# 1595 "Liofilizador Placa Mae.c"
         case 0x08:
              EEPROM_Write_Byte((int)usart_protocol.value[0]<<8 |
                                (int)usart_protocol.value[1]<<0,
@@ -7354,7 +7358,7 @@ void Decodify_Command(void){
              PORTDbits.RD5=0;
              break;
              }
-# 1831 "Liofilizador Placa Mae.c"
+# 1832 "Liofilizador Placa Mae.c"
         case 0X24:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
@@ -8131,7 +8135,7 @@ void pagina_19(void)
 
 
                 flag_upLoadTambem=1;
-# 2615 "Liofilizador Placa Mae.c"
+# 2616 "Liofilizador Placa Mae.c"
             }
          else
             {
@@ -8226,7 +8230,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2717 "Liofilizador Placa Mae.c"
+# 2718 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -8381,7 +8385,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2879 "Liofilizador Placa Mae.c"
+# 2880 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
@@ -8707,7 +8711,7 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 
      PROCULUS_graphic_plot(LCDchannel, value);
 }
-# 3233 "Liofilizador Placa Mae.c"
+# 3234 "Liofilizador Placa Mae.c"
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd)
      {
      char txt[30];
@@ -8983,7 +8987,7 @@ void RelatorioTecnico(void){
      my_delay_ms_CLRWDT(10000);
      PROCULUS_VP_Write_UInt16(100,0);
      PROCULUS_Show_Screen(15);
-# 3568 "Liofilizador Placa Mae.c"
+# 3569 "Liofilizador Placa Mae.c"
 }
 
 
@@ -9415,7 +9419,7 @@ void FAT8_Write_Process_Finalize(){
       strcpy(fat8.processo.fim.time,time);
       fat8.processo.minutes=processo_totalminuto;
       }
-# 4007 "Liofilizador Placa Mae.c"
+# 4008 "Liofilizador Placa Mae.c"
     fat8.processo.add_end=add_datalog;
 
     fat8.processo.flag_running=0;
@@ -9683,4 +9687,111 @@ void placasFilhasInit(){
          my_delay_ms_CLRWDT(300);
          Send_To_Slave(i, 0x03, 0, buffer);
      }
+}
+
+
+
+void showMemoryInfo()
+{
+    char texto[50];
+    char msg[50];
+    int tmpValue;
+    int compara;
+    char falha=0;
+
+
+    print("TESTE DE MEMORIA.");
+    for(char placa=0;placa<=totalboard;placa++)
+       {
+       for(char canal=0;canal<2;canal++)
+          {
+          strcpy(msg,"");
+          strcpy(texto,"");
+          itoa(placa,texto,10);
+          if(placa<10) strcat(msg,"0");
+          strcat(msg, texto);
+          strcat(msg, " : ");
+          strcpy(texto, boardtype[placa][0]);
+          strcat(msg,texto);
+
+          strcat(msg," ch:");
+          strcpy(texto,"");
+          itoa(canal,texto,10);
+          strcat(msg,texto);
+          strcat(msg," erro! ");
+
+          if(
+            !((Tamanho_Display!=81)&&(placa==0)&&(canal==1)) &&
+            !((Tamanho_Display!=81)&&(placa==2)&&(canal==1)) &&
+            !((Tamanho_Display==81)&&(placa==4)&&(canal==1))
+            )
+                {
+                  if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==0)
+                    {
+                    print(msg);
+                    falha++;
+                    my_delay_ms_CLRWDT(3000);
+                    }
+                }
+
+          }
+
+       }
+
+    if(falha>0)
+      {
+      strcpy(msg,"Falha de memoria = ");
+      itoa(falha,texto,10);
+      strcat(msg,texto);
+      strcat(msg,".");
+      print(msg);
+      }
+    else
+      {
+      print("Nenhuma falha nas memorias!");
+      }
+    print("Fim do teste de memoria.");
+    print(".................................");
+    my_delay_ms_CLRWDT(4000);
+}
+
+
+
+_Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite)
+{
+     int tempValue;
+     int confere;
+     char bb[7];
+
+
+     bb[0]=chip;
+
+     bb[1]=((char *)&add)[3];
+     bb[2]=((char *)&add)[2];
+     bb[3]=((char *)&add)[1];
+     bb[4]=((char *)&add)[0];
+
+     bb[5]=((char *)&valueWrite)[0];
+     bb[6]=((char *)&valueWrite)[1];
+
+
+     tempValue=Send_To_Slave(placa, 0x14, 5, bb);
+
+     Send_To_Slave(placa, 0x13, 7, bb);
+
+     confere=Send_To_Slave(placa, 0x14, 5, bb);
+
+     if(valueWrite==confere)
+       {
+       bb[5]=((char *)&tempValue)[0];
+       bb[6]=((char *)&tempValue)[1];
+
+       Send_To_Slave(placa, 0x13, 7, bb);
+       return 1;
+       }
+     else
+       {
+       return 0;
+       }
+
 }

@@ -4807,6 +4807,9 @@ void Carrega_Tupla_Receita(char index, t_receita *receita);
 
 void placasFilhasInit();
 void ShowHardwareInfo();
+void showMemoryInfo();
+_Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite);
+
 
 void Global_Aquecimento_Switch(unsigned char estado);
 void Gerenciador_de_Senha(void);
