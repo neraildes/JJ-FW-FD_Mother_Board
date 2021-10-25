@@ -285,7 +285,7 @@
 [v _placasFilhasInit placasFilhasInit `(v  1 e 1 0 ]
 "4279
 [v _showMemoryInfo showMemoryInfo `(v  1 e 1 0 ]
-"4377
+"4371
 [v _gravaFilhaConfere gravaFilhaConfere `(a  1 e 1 0 ]
 "16 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
 [v _PROCULUS_REG_Write PROCULUS_REG_Write `(v  1 e 1 0 ]
@@ -716,7 +716,7 @@
 ]
 [u S474 . 1 `S461 1 . 1 0 `S470 1 . 1 0 ]
 [v _PIR1bits PIR1bits `VES474  1 e 1 @3998 ]
-[s S2908 . 1 `uc 1 RD 1 0 :1:0 
+[s S2912 . 1 `uc 1 RD 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
 `uc 1 WRERR 1 0 :1:3 
@@ -726,11 +726,11 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 "2947
-[s S2917 . 1 `uc 1 . 1 0 :6:0 
+[s S2921 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 EEFS 1 0 :1:6 
 ]
-[u S2920 . 1 `S2908 1 . 1 0 `S2917 1 . 1 0 ]
-[v _EECON1bits EECON1bits `VES2920  1 e 1 @4006 ]
+[u S2924 . 1 `S2912 1 . 1 0 `S2921 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES2924  1 e 1 @4006 ]
 "2992
 [v _EECON2 EECON2 `VEuc  1 e 1 @4007 ]
 "2999
@@ -743,7 +743,7 @@
 [v _TXREG TXREG `VEuc  1 e 1 @4013 ]
 "3510
 [v _SPBRG SPBRG `VEuc  1 e 1 @4015 ]
-[s S3877 . 1 `uc 1 ABDEN 1 0 :1:0 
+[s S3881 . 1 `uc 1 ABDEN 1 0 :1:0 
 `uc 1 WUE 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 BRG16 1 0 :1:3 
@@ -753,65 +753,65 @@
 `uc 1 ABDOVF 1 0 :1:7 
 ]
 "4015
-[s S3886 . 1 `uc 1 . 1 0 :4:0 
+[s S3890 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 SCKP 1 0 :1:4 
 `uc 1 RXCKP 1 0 :1:5 
 `uc 1 RCMT 1 0 :1:6 
 ]
-[s S3891 . 1 `uc 1 . 1 0 :1:0 
+[s S3895 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 W4E 1 0 :1:1 
 ]
-[u S3894 . 1 `S3877 1 . 1 0 `S3886 1 . 1 0 `S3891 1 . 1 0 ]
-[v _BAUDCONbits BAUDCONbits `VES3894  1 e 1 @4024 ]
-[s S2726 . 1 `uc 1 ADCS 1 0 :3:0 
+[u S3898 . 1 `S3881 1 . 1 0 `S3890 1 . 1 0 `S3895 1 . 1 0 ]
+[v _BAUDCONbits BAUDCONbits `VES3898  1 e 1 @4024 ]
+[s S2730 . 1 `uc 1 ADCS 1 0 :3:0 
 `uc 1 ACQT 1 0 :3:3 
 `uc 1 . 1 0 :1:6 
 `uc 1 ADFM 1 0 :1:7 
 ]
 "4394
-[s S2731 . 1 `uc 1 ADCS0 1 0 :1:0 
+[s S2735 . 1 `uc 1 ADCS0 1 0 :1:0 
 `uc 1 ADCS1 1 0 :1:1 
 `uc 1 ADCS2 1 0 :1:2 
 `uc 1 ACQT0 1 0 :1:3 
 `uc 1 ACQT1 1 0 :1:4 
 `uc 1 ACQT2 1 0 :1:5 
 ]
-[u S2738 . 1 `S2726 1 . 1 0 `S2731 1 . 1 0 ]
-[v _ADCON2bits ADCON2bits `VES2738  1 e 1 @4032 ]
+[u S2742 . 1 `S2730 1 . 1 0 `S2735 1 . 1 0 ]
+[v _ADCON2bits ADCON2bits `VES2742  1 e 1 @4032 ]
 "4444
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
-[s S2755 . 1 `uc 1 . 1 0 :1:0 
+[s S2759 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "4573
-[s S2758 . 1 `uc 1 ADON 1 0 :1:0 
+[s S2762 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 ]
-[s S2762 . 1 `uc 1 . 1 0 :1:0 
+[s S2766 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
 `uc 1 CHS2 1 0 :1:4 
 `uc 1 CHS3 1 0 :1:5 
 ]
-[s S2769 . 1 `uc 1 . 1 0 :1:0 
+[s S2773 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S2772 . 1 `uc 1 . 1 0 :1:0 
+[s S2776 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S2775 . 1 `uc 1 . 1 0 :1:0 
+[s S2779 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S2778 . 1 `uc 1 . 1 0 :1:0 
+[s S2782 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[s S2781 . 1 `uc 1 . 1 0 :1:0 
+[s S2785 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S2784 . 1 `S2755 1 . 1 0 `S2758 1 . 1 0 `S2762 1 . 1 0 `S2769 1 . 1 0 `S2772 1 . 1 0 `S2775 1 . 1 0 `S2778 1 . 1 0 `S2781 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES2784  1 e 1 @4034 ]
+[u S2788 . 1 `S2759 1 . 1 0 `S2762 1 . 1 0 `S2766 1 . 1 0 `S2773 1 . 1 0 `S2776 1 . 1 0 `S2779 1 . 1 0 `S2782 1 . 1 0 `S2785 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES2788  1 e 1 @4034 ]
 "4669
 [v _SSPCON2 SSPCON2 `VEuc  1 e 1 @4037 ]
 [s S524 . 1 `uc 1 SEN 1 0 :1:0 
@@ -1933,42 +1933,44 @@
 [v _RelatorioTecnico RelatorioTecnico `(v  1 e 1 0 ]
 {
 "3495
-[v RelatorioTecnico@valor valor `i  1 a 2 103 ]
+[v RelatorioTecnico@valor valor `i  1 a 2 104 ]
 "3570
 } 0
 "4279
 [v _showMemoryInfo showMemoryInfo `(v  1 e 1 0 ]
 {
-"4291
-[v showMemoryInfo@canal canal `uc  1 a 1 101 ]
-"4289
-[v showMemoryInfo@placa placa `uc  1 a 1 102 ]
-"4281
-[v showMemoryInfo@texto texto `[50]uc  1 a 50 50 ]
+"4302
+[v showMemoryInfo@canal canal `uc  1 a 1 102 ]
+"4300
+[v showMemoryInfo@placa placa `uc  1 a 1 103 ]
+"4283
+[v showMemoryInfo@msg msg `[50]uc  1 a 50 50 ]
 "4282
-[v showMemoryInfo@msg msg `[50]uc  1 a 50 0 ]
-"4285
-[v showMemoryInfo@falha falha `uc  1 a 1 100 ]
-"4373
+[v showMemoryInfo@texto texto `[50]uc  1 a 50 0 ]
+"4286
+[v showMemoryInfo@falha falha `uc  1 a 1 101 ]
+"4287
+[v showMemoryInfo@tipo tipo `uc  1 a 1 100 ]
+"4367
 } 0
-"4377
+"4371
 [v _gravaFilhaConfere gravaFilhaConfere `(a  1 e 1 0 ]
 {
 [v gravaFilhaConfere@placa placa `uc  1 a 1 wreg ]
-"4381
+"4375
 [v gravaFilhaConfere@bb bb `[7]uc  1 a 7 36 ]
-"4379
+"4373
 [v gravaFilhaConfere@tempValue tempValue `i  1 a 2 43 ]
-"4380
+"4374
 [v gravaFilhaConfere@confere confere `i  1 a 2 34 ]
-"4377
+"4371
 [v gravaFilhaConfere@placa placa `uc  1 a 1 wreg ]
 [v gravaFilhaConfere@chip chip `uc  1 p 1 27 ]
 [v gravaFilhaConfere@add add `ul  1 p 4 28 ]
 [v gravaFilhaConfere@valueWrite valueWrite `i  1 p 2 32 ]
-"4384
+"4378
 [v gravaFilhaConfere@placa placa `uc  1 a 1 45 ]
-"4414
+"4408
 } 0
 "51 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _clear_screen clear_screen `(v  1 e 1 0 ]
@@ -2084,15 +2086,15 @@
 {
 "16
 [v roundf@y y `f  1 a 4 14 ]
-[u S4584 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+[u S4588 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
 "14
-[v roundf@u u `S4584  1 a 4 10 ]
+[v roundf@u u `S4588  1 a 4 10 ]
 "15
 [v roundf@e e `i  1 a 2 4 ]
 "12
 [v roundf@x x `f  1 p 4 96 ]
 "13
-[v roundf@F528 F528 `S4584  1 s 4 F528 ]
+[v roundf@F528 F528 `S4588  1 s 4 F528 ]
 "36
 } 0
 "245 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcadd.c
@@ -2742,17 +2744,17 @@
 "8 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S4449 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S4453 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S4454 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
-[u S4457 . 4 `l 1 i 4 0 `d 1 f 4 0 `S4449 1 fAsBytes 4 0 `S4454 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S4457  1 a 4 41 ]
+[s S4458 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
+[u S4461 . 4 `l 1 i 4 0 `d 1 f 4 0 `S4453 1 fAsBytes 4 0 `S4458 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S4461  1 a 4 41 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 37 ]
-[s S4525 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S4529 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S4528 . 2 `s 1 i 2 0 `us 1 n 2 0 `S4525 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S4528  1 a 2 45 ]
+[u S4532 . 2 `s 1 i 2 0 `us 1 n 2 0 `S4529 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S4532  1 a 2 45 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 36 ]
 "11

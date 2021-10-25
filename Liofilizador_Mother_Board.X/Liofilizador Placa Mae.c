@@ -4278,15 +4278,26 @@ void placasFilhasInit(){
 
 void showMemoryInfo()    
 {
+
     char texto[50];
     char msg[50];
     int  tmpValue;
     int  compara;
     char falha=0;
-    
+    char tipo;    
     
     print("TESTE DE MEMORIA.");
-    for(char placa=0;placa<=totalboard;placa++)
+    strcpy(texto,boardtype[0][0]);
+    strcpy(msg,"00 : ");
+    strcat(msg,texto);
+    strcat(msg," ch:0");
+    if(gravaFilhaConfere(0,0,0x00,0xABCD)==false)        
+      {  
+      strcat(msg," erro!");
+      print(msg);
+      }       
+    
+    for(char placa=1;placa<=totalboard;placa++)
        {       
        for(char canal=0;canal<2;canal++)
           {
@@ -4296,7 +4307,8 @@ void showMemoryInfo()
           if(placa<10) strcat(msg,"0");              
           strcat(msg, texto);
           strcat(msg, " : ");           
-          strcpy(texto, boardtype[placa][0]);
+          tipo = Send_To_Slave(placa, COMANDO_QUEM_EH_VOCE, 0, buffer);
+          strcpy(texto, boardtype[tipo][0]);
           strcat(msg,texto);           
            
           strcat(msg," ch:");
@@ -4327,31 +4339,13 @@ void showMemoryInfo()
               )
               {  
                if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==false)
-                 {  
-                 print(msg);
-                 falha++;
-                 }                                
+                {  
+                print(msg);
+                falha++;
+                }                                
               }
-            }
-          
-          /*
-          if(                  
-            (!((Tamanho_Display!=81)&&(placa==0)&&(canal==1)) &&
-            !((Tamanho_Display!=81)&&(placa==2)&&(canal==1))) &&
-            !((Tamanho_Display==81)&&(placa==4)&&(canal==1))
-            )   
-                { 
-                  if(gravaFilhaConfere(placa,canal,0x00,0xABCD)==false)
-                    {  
-                    print(msg);
-                    falha++;
-                    my_delay_ms_CLRWDT(3000);
-                    }                                        
-                }
-          */ 
-          
-          }
-       
+            }          
+          }       
        }
     
     print("..................................");
