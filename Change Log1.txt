@@ -1,6 +1,18 @@
 Lista de Revisões
 
 ----------------------------------------------------------------------------------------------------------------
+Versão v1.0.47
+	VERSÃO SERÁ INSTALADA NO RIO DE JANEIRO PARA LIOFILIZAÇÃO DE COLOSTRO.
+	*Tecnicamente esta versão possui os seguintes recursos
+		-Não exibe a mensagem "sem placa" caso a temperatura atinja -0.1°C.
+		-Exibe relatório técnico para ser analisado pelo programador.
+			-Versões dos firmwares de todas as placas.
+			-Teste de memória.
+			-Total de vezes que se recuperou de um travamento.
+		-Não trava.
+		-Recuperação eficiente após um blackout.
+		-Gráfico com verde escuro
+		-Compatível com todas as versões de liofilizadores.
 Versão v1.0.46
 	git push origin v1.0.46
 	Corrigido teste de memórial. Método totalmente Funcional.
