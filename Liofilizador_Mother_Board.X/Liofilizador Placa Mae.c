@@ -4350,7 +4350,7 @@ void showMemoryInfo()
     print("..................................");
     if(falha>0)
       {  
-      strcpy(msg,"Falha de memoria = ");
+      strcpy(msg,"Falha em memoria(s) = ");
       itoa(falha,texto,10);
       strcat(msg,texto);      
       strcat(msg,".");
