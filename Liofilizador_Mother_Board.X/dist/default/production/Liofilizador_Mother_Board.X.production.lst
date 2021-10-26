@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.32 build 20210201212658 
-                                                                                               Mon Oct 25 22:51:06 2021
+                                                                                               Mon Oct 25 22:58:53 2021
 
 Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og9 
      1                           	processor	18F4620
@@ -1784,7 +1784,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og9
   1770  00FFD0  30                 	db	48	;'0'
   1771  00FFD1  2E                 	db	46
   1772  00FFD2  34                 	db	52	;'4'
-  1773  00FFD3  37                 	db	55	;'7'
+  1773  00FFD3  38                 	db	56	;'8'
   1774  00FFD4  00                 	db	0
   1775  00FFD5  42                 	db	66	;'B'
   1776  00FFD6  4F                 	db	79	;'O'
@@ -24201,7 +24201,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og9
  23122  003DBC  6E1A               	movwf	(strcat@src+1)^0,c
  23123  003DBE  EC87  F04D         	call	_strcat	;wreg free
  23124                           
- 23125                           ;Liofilizador Placa Mae.c: 3595:      strcat(texto,"v1.0.47");
+ 23125                           ;Liofilizador Placa Mae.c: 3595:      strcat(texto,"v1.0.48");
  23126  003DC2  0EB3               	movlw	low _texto
  23127  003DC4  6E17               	movwf	strcat@dest^0,c
  23128  003DC6  0E02               	movlw	high _texto
@@ -40536,7 +40536,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.32 build 20210201212658 
-Symbol Table                                                                                   Mon Oct 25 22:51:06 2021
+Symbol Table                                                                                   Mon Oct 25 22:58:53 2021
 
                                       _USART_putc 9D5A                          ?_PROCULUS_VP_Read_String 001C  
                                     ___fldiv@aexp 0048                                      ___fldiv@bexp 0047  
