@@ -65,6 +65,7 @@ char str2bcd(char *value){
 }
 
 
+
 #if ((defined __18F4620) || (defined __18F4525))  
 // Implementation of itoa() 
 char* itoa(int num, char* str, int base) 

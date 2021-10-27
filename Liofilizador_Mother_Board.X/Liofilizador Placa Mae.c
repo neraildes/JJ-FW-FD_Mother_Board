@@ -1049,7 +1049,7 @@ void ShowSensorRealTimeHS(void)
                          reset++;
                          EEPROM_Write_Integer(34,reset);
                          //- - - - - - - - - - - - - - - - - -                         
-                         my_delay_ms_CLRWDT(250);            
+                         my_delay_ms_CLRWDT(1000);            
                          INTCONbits.PEIE=1;                         
                          //- - - - - - - - - - - - - - - - - - - - - - - - - - -
                          USART_init(115200);

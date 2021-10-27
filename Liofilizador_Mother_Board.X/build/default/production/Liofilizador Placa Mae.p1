@@ -9438,7 +9438,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 3594:      strcat(texto,"* : Mother Board ");
 [e ( _strcat (2 , &U _texto :s 59C ]
 "3595
-[; ;Liofilizador Placa Mae.c: 3595:      strcat(texto,"v1.0.49");
+[; ;Liofilizador Placa Mae.c: 3595:      strcat(texto,"master");
 [e ( _strcat (2 , &U _texto :s 60C ]
 "3596
 [; ;Liofilizador Placa Mae.c: 3596:      print(texto);
@@ -11821,6 +11821,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [a 51C 87 32 48 120 0 ]
 [a 40C 68 101 115 99 97 114 114 101 103 97 110 100 111 32 68 97 100 111 115 0 ]
+[a 60C 109 97 115 116 101 114 0 ]
 [a 42C 70 111 114 109 97 116 97 110 100 111 0 ]
 [a 1C 77 111 116 104 101 114 32 66 111 97 114 100 0 ]
 [a 2C 86 97 99 99 117 109 32 66 111 97 114 100 0 ]
@@ -11828,7 +11829,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 16C 79 75 0 ]
 [a 50C 66 79 65 82 68 32 61 0 ]
 [a 91C 32 99 104 58 0 ]
-[a 60C 118 49 46 48 46 52 57 0 ]
 [a 8C 67 78 80 74 58 32 48 53 46 54 55 56 46 57 51 48 47 48 48 48 49 45 49 50 0 ]
 [a 85C 32 99 104 58 48 0 ]
 [a 89C 48 0 ]

@@ -729,169 +729,169 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;util.c.c: 65: }
 [e :UE 298 ]
 }
-"70
-[; ;util.c.c: 70: char* itoa(int num, char* str, int base)
-[v _itoa `(*uc ~T0 @X0 1 ef3`i`*uc`i ]
 "71
-[; ;util.c.c: 71: {
+[; ;util.c.c: 71: char* itoa(int num, char* str, int base)
+[v _itoa `(*uc ~T0 @X0 1 ef3`i`*uc`i ]
+"72
+[; ;util.c.c: 72: {
 {
 [e :U _itoa ]
-"70
-[; ;util.c.c: 70: char* itoa(int num, char* str, int base)
+"71
+[; ;util.c.c: 71: char* itoa(int num, char* str, int base)
 [v _num `i ~T0 @X0 1 r1 ]
 [v _str `*uc ~T0 @X0 1 r2 ]
 [v _base `i ~T0 @X0 1 r3 ]
-"71
-[; ;util.c.c: 71: {
-[f ]
 "72
-[; ;util.c.c: 72:     int i = 0;
+[; ;util.c.c: 72: {
+[f ]
+"73
+[; ;util.c.c: 73:     int i = 0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-"73
-[; ;util.c.c: 73:     char isNegative = 0;
+"74
+[; ;util.c.c: 74:     char isNegative = 0;
 [v _isNegative `uc ~T0 @X0 1 a ]
 [e = _isNegative -> -> 0 `i `uc ]
-"76
-[; ;util.c.c: 76:     if (num == 0)
-[e $ ! == _num -> 0 `i 300  ]
 "77
-[; ;util.c.c: 77:     {
-{
+[; ;util.c.c: 77:     if (num == 0)
+[e $ ! == _num -> 0 `i 300  ]
 "78
-[; ;util.c.c: 78:         str[i++] = '0';
-[e = *U + _str * -> ++ _i -> 1 `i `x -> -> # *U _str `i `x -> -> 48 `ui `uc ]
+[; ;util.c.c: 78:     {
+{
 "79
-[; ;util.c.c: 79:         str[i] = '\0';
-[e = *U + _str * -> _i `x -> -> # *U _str `i `x -> -> 0 `ui `uc ]
+[; ;util.c.c: 79:         str[i++] = '0';
+[e = *U + _str * -> ++ _i -> 1 `i `x -> -> # *U _str `i `x -> -> 48 `ui `uc ]
 "80
-[; ;util.c.c: 80:         return str;
+[; ;util.c.c: 80:         str[i] = '\0';
+[e = *U + _str * -> _i `x -> -> # *U _str `i `x -> -> 0 `ui `uc ]
+"81
+[; ;util.c.c: 81:         return str;
 [e ) _str ]
 [e $UE 299  ]
-"81
-[; ;util.c.c: 81:     }
+"82
+[; ;util.c.c: 82:     }
 }
 [e :U 300 ]
-"85
-[; ;util.c.c: 85:     if (num < 0 && base == 10)
-[e $ ! && < _num -> 0 `i == _base -> 10 `i 301  ]
 "86
-[; ;util.c.c: 86:     {
-{
+[; ;util.c.c: 86:     if (num < 0 && base == 10)
+[e $ ! && < _num -> 0 `i == _base -> 10 `i 301  ]
 "87
-[; ;util.c.c: 87:         isNegative = 1;
-[e = _isNegative -> -> 1 `i `uc ]
+[; ;util.c.c: 87:     {
+{
 "88
-[; ;util.c.c: 88:         num = -num;
-[e = _num -U _num ]
+[; ;util.c.c: 88:         isNegative = 1;
+[e = _isNegative -> -> 1 `i `uc ]
 "89
-[; ;util.c.c: 89:     }
+[; ;util.c.c: 89:         num = -num;
+[e = _num -U _num ]
+"90
+[; ;util.c.c: 90:     }
 }
 [e :U 301 ]
-"92
-[; ;util.c.c: 92:     while (num != 0)
+"93
+[; ;util.c.c: 93:     while (num != 0)
 [e $U 302  ]
 [e :U 303 ]
-"93
-[; ;util.c.c: 93:     {
-{
 "94
-[; ;util.c.c: 94:         int rem = num % base;
+[; ;util.c.c: 94:     {
+{
+"95
+[; ;util.c.c: 95:         int rem = num % base;
 [v _rem `i ~T0 @X0 1 a ]
 [e = _rem % _num _base ]
-"95
-[; ;util.c.c: 95:         str[i++] = (rem > 9)? (rem-10) + 'a' : rem + '0';
-[e = *U + _str * -> ++ _i -> 1 `i `x -> -> # *U _str `i `x -> ? > _rem -> 9 `i : + -> - _rem -> 10 `i `ui -> 97 `ui + -> _rem `ui -> 48 `ui `uc ]
 "96
-[; ;util.c.c: 96:         num = num/base;
-[e = _num / _num _base ]
+[; ;util.c.c: 96:         str[i++] = (rem > 9)? (rem-10) + 'a' : rem + '0';
+[e = *U + _str * -> ++ _i -> 1 `i `x -> -> # *U _str `i `x -> ? > _rem -> 9 `i : + -> - _rem -> 10 `i `ui -> 97 `ui + -> _rem `ui -> 48 `ui `uc ]
 "97
-[; ;util.c.c: 97:     }
+[; ;util.c.c: 97:         num = num/base;
+[e = _num / _num _base ]
+"98
+[; ;util.c.c: 98:     }
 }
 [e :U 302 ]
-"92
-[; ;util.c.c: 92:     while (num != 0)
+"93
+[; ;util.c.c: 93:     while (num != 0)
 [e $ != _num -> 0 `i 303  ]
 [e :U 304 ]
-"100
-[; ;util.c.c: 100:     if (isNegative)
-[e $ ! != -> _isNegative `i -> 0 `i 305  ]
 "101
-[; ;util.c.c: 101:         str[i++] = '-';
+[; ;util.c.c: 101:     if (isNegative)
+[e $ ! != -> _isNegative `i -> 0 `i 305  ]
+"102
+[; ;util.c.c: 102:         str[i++] = '-';
 [e = *U + _str * -> ++ _i -> 1 `i `x -> -> # *U _str `i `x -> -> 45 `ui `uc ]
 [e :U 305 ]
-"103
-[; ;util.c.c: 103:     str[i] = '\0';
+"104
+[; ;util.c.c: 104:     str[i] = '\0';
 [e = *U + _str * -> _i `x -> -> # *U _str `i `x -> -> 0 `ui `uc ]
-"106
-[; ;util.c.c: 106:     reverse(str);
+"107
+[; ;util.c.c: 107:     reverse(str);
 [e ( _reverse (1 _str ]
-"108
-[; ;util.c.c: 108:     return str;
+"109
+[; ;util.c.c: 109:     return str;
 [e ) _str ]
 [e $UE 299  ]
-"109
-[; ;util.c.c: 109: }
+"110
+[; ;util.c.c: 110: }
 [e :UE 299 ]
 }
-"113
-[; ;util.c.c: 113: char * reverse( char * s )
-[v _reverse `(*uc ~T0 @X0 1 ef1`*uc ]
 "114
-[; ;util.c.c: 114: {
+[; ;util.c.c: 114: char * reverse( char * s )
+[v _reverse `(*uc ~T0 @X0 1 ef1`*uc ]
+"115
+[; ;util.c.c: 115: {
 {
 [e :U _reverse ]
-"113
-[; ;util.c.c: 113: char * reverse( char * s )
-[v _s `*uc ~T0 @X0 1 r1 ]
 "114
-[; ;util.c.c: 114: {
-[f ]
+[; ;util.c.c: 114: char * reverse( char * s )
+[v _s `*uc ~T0 @X0 1 r1 ]
 "115
-[; ;util.c.c: 115:     int length = strlen(s) ;
+[; ;util.c.c: 115: {
+[f ]
+"116
+[; ;util.c.c: 116:     int length = strlen(s) ;
 [v _length `i ~T0 @X0 1 a ]
 [e = _length -> ( _strlen (1 -> _s `*Cuc `i ]
-"116
-[; ;util.c.c: 116:     int c, i, j;
+"117
+[; ;util.c.c: 117:     int c, i, j;
 [v _c `i ~T0 @X0 1 a ]
 [v _i `i ~T0 @X0 1 a ]
 [v _j `i ~T0 @X0 1 a ]
-"118
-[; ;util.c.c: 118:     for (i=0, j=length-1; i<j; i++, j--)
+"119
+[; ;util.c.c: 119:     for (i=0, j=length-1; i<j; i++, j--)
 {
 [e ; = _i -> 0 `i = _j - _length -> 1 `i ]
 [e $U 310  ]
 [e :U 307 ]
-"119
-[; ;util.c.c: 119:         {
-{
 "120
-[; ;util.c.c: 120:         c=s[i];
-[e = _c -> *U + _s * -> _i `x -> -> # *U _s `i `x `i ]
+[; ;util.c.c: 120:         {
+{
 "121
-[; ;util.c.c: 121:         s[i]=s[j];
-[e = *U + _s * -> _i `x -> -> # *U _s `i `x *U + _s * -> _j `x -> -> # *U _s `i `x ]
+[; ;util.c.c: 121:         c=s[i];
+[e = _c -> *U + _s * -> _i `x -> -> # *U _s `i `x `i ]
 "122
-[; ;util.c.c: 122:         s[j]=c;
-[e = *U + _s * -> _j `x -> -> # *U _s `i `x -> _c `uc ]
+[; ;util.c.c: 122:         s[i]=s[j];
+[e = *U + _s * -> _i `x -> -> # *U _s `i `x *U + _s * -> _j `x -> -> # *U _s `i `x ]
 "123
-[; ;util.c.c: 123:         }
+[; ;util.c.c: 123:         s[j]=c;
+[e = *U + _s * -> _j `x -> -> # *U _s `i `x -> _c `uc ]
+"124
+[; ;util.c.c: 124:         }
 }
 [e ; ++ _i -> 1 `i -- _j -> 1 `i ]
 [e :U 310 ]
 [e $ < _i _j 307  ]
 [e :U 308 ]
 }
-"124
-[; ;util.c.c: 124:     return s;
+"125
+[; ;util.c.c: 125:     return s;
 [e ) _s ]
 [e $UE 306  ]
-"125
-[; ;util.c.c: 125: }
+"126
+[; ;util.c.c: 126: }
 [e :UE 306 ]
 }
-"136
-[; ;util.c.c: 136: char *ultoa(unsigned long num, char *str, int radix) {
+"137
+[; ;util.c.c: 137: char *ultoa(unsigned long num, char *str, int radix) {
 [v _ultoa `(*uc ~T0 @X0 1 ef3`ul`*uc`i ]
 {
 [e :U _ultoa ]
@@ -899,152 +899,152 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _str `*uc ~T0 @X0 1 r2 ]
 [v _radix `i ~T0 @X0 1 r3 ]
 [f ]
-"137
-[; ;util.c.c: 137:     char temp[33];
+"138
+[; ;util.c.c: 138:     char temp[33];
 [v _temp `uc ~T0 @X0 -> 33 `i a ]
-"140
-[; ;util.c.c: 140:     int temp_loc = 0;
+"141
+[; ;util.c.c: 141:     int temp_loc = 0;
 [v _temp_loc `i ~T0 @X0 1 a ]
 [e = _temp_loc -> 0 `i ]
-"141
-[; ;util.c.c: 141:     int digit;
-[v _digit `i ~T0 @X0 1 a ]
 "142
-[; ;util.c.c: 142:     int str_loc = 0;
+[; ;util.c.c: 142:     int digit;
+[v _digit `i ~T0 @X0 1 a ]
+"143
+[; ;util.c.c: 143:     int str_loc = 0;
 [v _str_loc `i ~T0 @X0 1 a ]
 [e = _str_loc -> 0 `i ]
-"145
-[; ;util.c.c: 145:     do {
+"146
+[; ;util.c.c: 146:     do {
 [e :U 314 ]
 {
-"146
-[; ;util.c.c: 146:         digit = (unsigned long)num % radix;
-[e = _digit -> % _num -> -> _radix `l `ul `i ]
 "147
-[; ;util.c.c: 147:         if (digit < 10)
-[e $ ! < _digit -> 10 `i 315  ]
+[; ;util.c.c: 147:         digit = (unsigned long)num % radix;
+[e = _digit -> % _num -> -> _radix `l `ul `i ]
 "148
-[; ;util.c.c: 148:             temp[temp_loc++] = digit + '0';
+[; ;util.c.c: 148:         if (digit < 10)
+[e $ ! < _digit -> 10 `i 315  ]
+"149
+[; ;util.c.c: 149:             temp[temp_loc++] = digit + '0';
 [e = *U + &U _temp * -> -> ++ _temp_loc -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + -> _digit `ui -> 48 `ui `uc ]
 [e $U 316  ]
-"149
-[; ;util.c.c: 149:         else
-[e :U 315 ]
 "150
-[; ;util.c.c: 150:             temp[temp_loc++] = digit - 10 + 'A';
+[; ;util.c.c: 150:         else
+[e :U 315 ]
+"151
+[; ;util.c.c: 151:             temp[temp_loc++] = digit - 10 + 'A';
 [e = *U + &U _temp * -> -> ++ _temp_loc -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + -> - _digit -> 10 `i `ui -> 65 `ui `uc ]
 [e :U 316 ]
-"151
-[; ;util.c.c: 151:                         num = (unsigned long)num /radix;
-[e = _num / _num -> -> _radix `l `ul ]
 "152
-[; ;util.c.c: 152:     } while ((unsigned long)num > 0);
+[; ;util.c.c: 152:                         num = (unsigned long)num /radix;
+[e = _num / _num -> -> _radix `l `ul ]
+"153
+[; ;util.c.c: 153:     } while ((unsigned long)num > 0);
 }
 [e $ > _num -> -> -> 0 `i `l `ul 314  ]
 [e :U 313 ]
-"154
-[; ;util.c.c: 154:     temp_loc--;
+"155
+[; ;util.c.c: 155:     temp_loc--;
 [e -- _temp_loc -> 1 `i ]
-"158
-[; ;util.c.c: 158:     while ( temp_loc >=0 ) {
+"159
+[; ;util.c.c: 159:     while ( temp_loc >=0 ) {
 [e $U 317  ]
 [e :U 318 ]
 {
-"159
-[; ;util.c.c: 159:         str[str_loc++] = temp[temp_loc--];
-[e = *U + _str * -> ++ _str_loc -> 1 `i `x -> -> # *U _str `i `x *U + &U _temp * -> -> -- _temp_loc -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux ]
 "160
-[; ;util.c.c: 160:     }
+[; ;util.c.c: 160:         str[str_loc++] = temp[temp_loc--];
+[e = *U + _str * -> ++ _str_loc -> 1 `i `x -> -> # *U _str `i `x *U + &U _temp * -> -> -- _temp_loc -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux ]
+"161
+[; ;util.c.c: 161:     }
 }
 [e :U 317 ]
-"158
-[; ;util.c.c: 158:     while ( temp_loc >=0 ) {
+"159
+[; ;util.c.c: 159:     while ( temp_loc >=0 ) {
 [e $ >= _temp_loc -> 0 `i 318  ]
 [e :U 319 ]
-"161
-[; ;util.c.c: 161:     str[str_loc] = 0;
+"162
+[; ;util.c.c: 162:     str[str_loc] = 0;
 [e = *U + _str * -> _str_loc `x -> -> # *U _str `i `x -> -> 0 `i `uc ]
-"163
-[; ;util.c.c: 163:     return str;
+"164
+[; ;util.c.c: 164:     return str;
 [e ) _str ]
 [e $UE 311  ]
-"164
-[; ;util.c.c: 164: }
+"165
+[; ;util.c.c: 165: }
 [e :UE 311 ]
 }
-"168
-[; ;util.c.c: 168: int my_pow(int rad, int exp){
+"169
+[; ;util.c.c: 169: int my_pow(int rad, int exp){
 [v _my_pow `(i ~T0 @X0 1 ef2`i`i ]
 {
 [e :U _my_pow ]
 [v _rad `i ~T0 @X0 1 r1 ]
 [v _exp `i ~T0 @X0 1 r2 ]
 [f ]
-"169
-[; ;util.c.c: 169:     int resposta;
-[v _resposta `i ~T0 @X0 1 a ]
 "170
-[; ;util.c.c: 170:     if(exp==0)
-[e $ ! == _exp -> 0 `i 321  ]
+[; ;util.c.c: 170:     int resposta;
+[v _resposta `i ~T0 @X0 1 a ]
 "171
-[; ;util.c.c: 171:        resposta=1;
+[; ;util.c.c: 171:     if(exp==0)
+[e $ ! == _exp -> 0 `i 321  ]
+"172
+[; ;util.c.c: 172:        resposta=1;
 [e = _resposta -> 1 `i ]
 [e $U 322  ]
-"172
-[; ;util.c.c: 172:     else if(exp==1)
+"173
+[; ;util.c.c: 173:     else if(exp==1)
 [e :U 321 ]
 [e $ ! == _exp -> 1 `i 323  ]
-"173
-[; ;util.c.c: 173:            {
-{
 "174
-[; ;util.c.c: 174:            resposta=rad;
-[e = _resposta _rad ]
+[; ;util.c.c: 174:            {
+{
 "175
-[; ;util.c.c: 175:            }
+[; ;util.c.c: 175:            resposta=rad;
+[e = _resposta _rad ]
+"176
+[; ;util.c.c: 176:            }
 }
 [e $U 324  ]
-"176
-[; ;util.c.c: 176:     else
-[e :U 323 ]
 "177
-[; ;util.c.c: 177:        {
-{
+[; ;util.c.c: 177:     else
+[e :U 323 ]
 "178
-[; ;util.c.c: 178:        resposta=rad;
-[e = _resposta _rad ]
+[; ;util.c.c: 178:        {
+{
 "179
-[; ;util.c.c: 179:        for(char i=0;i<exp-1;i++)
+[; ;util.c.c: 179:        resposta=rad;
+[e = _resposta _rad ]
+"180
+[; ;util.c.c: 180:        for(char i=0;i<exp-1;i++)
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
 [e $U 328  ]
 [e :U 325 ]
-"180
-[; ;util.c.c: 180:           {
-{
 "181
-[; ;util.c.c: 181:           resposta*=rad;
-[e =* _resposta _rad ]
+[; ;util.c.c: 181:           {
+{
 "182
-[; ;util.c.c: 182:           }
+[; ;util.c.c: 182:           resposta*=rad;
+[e =* _resposta _rad ]
+"183
+[; ;util.c.c: 183:           }
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e :U 328 ]
 [e $ < -> _i `i - _exp -> 1 `i 325  ]
 [e :U 326 ]
 }
-"183
-[; ;util.c.c: 183:        }
+"184
+[; ;util.c.c: 184:        }
 }
 [e :U 324 ]
 [e :U 322 ]
-"184
-[; ;util.c.c: 184:     return resposta;
+"185
+[; ;util.c.c: 185:     return resposta;
 [e ) _resposta ]
 [e $UE 320  ]
-"185
-[; ;util.c.c: 185: }
+"186
+[; ;util.c.c: 186: }
 [e :UE 320 ]
 }
 [a 1C 77 111 116 104 101 114 32 66 111 97 114 100 0 ]

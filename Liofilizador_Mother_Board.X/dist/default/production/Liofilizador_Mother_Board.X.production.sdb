@@ -371,13 +371,13 @@
 [v _bcd2str bcd2str `(v  1 e 1 0 ]
 "63
 [v _str2bcd str2bcd `(uc  1 e 1 0 ]
-"70
+"71
 [v _itoa itoa `(*.39uc  1 e 2 0 ]
-"113
+"114
 [v _reverse reverse `(*.39uc  1 e 2 0 ]
-"136
+"137
 [v _ultoa ultoa `(*.39uc  1 e 2 0 ]
-"168
+"169
 [v _my_pow my_pow `(i  1 e 2 0 ]
 [s S24 . 1 `uc 1 flag_usart_rx 1 0 :1:0 
 `uc 1 flag_usart_error 1 0 :1:1 
@@ -1041,22 +1041,22 @@
 [v main@canal canal `i  1 s 2 canal ]
 "812
 } 0
-"136 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+"137 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _ultoa ultoa `(*.39uc  1 e 2 0 ]
 {
-"137
+"138
 [v ultoa@temp temp `[33]uc  1 a 33 29 ]
-"140
-[v ultoa@temp_loc temp_loc `i  1 a 2 66 ]
 "141
-[v ultoa@digit digit `i  1 a 2 64 ]
+[v ultoa@temp_loc temp_loc `i  1 a 2 66 ]
 "142
+[v ultoa@digit digit `i  1 a 2 64 ]
+"143
 [v ultoa@str_loc str_loc `i  1 a 2 62 ]
-"136
+"137
 [v ultoa@num num `ul  1 p 4 21 ]
 [v ultoa@str str `*.39uc  1 p 2 25 ]
 [v ultoa@radix radix `i  1 p 2 27 ]
-"164
+"165
 } 0
 "7 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\llmod.c
 [v ___llmod __llmod `(ul  1 e 4 0 ]
@@ -2008,33 +2008,33 @@
 [v ShowHardwareInfo@tipo tipo `uc  1 a 1 0 ]
 "3633
 } 0
-"70 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+"71 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _itoa itoa `(*.39uc  1 e 2 0 ]
 {
-"94
+"95
 [v itoa@rem rem `i  1 a 2 32 ]
-"72
-[v itoa@i i `i  1 a 2 34 ]
 "73
+[v itoa@i i `i  1 a 2 34 ]
+"74
 [v itoa@isNegative isNegative `uc  1 a 1 31 ]
-"70
+"71
 [v itoa@num num `i  1 p 2 23 ]
 [v itoa@str str `*.39uc  1 p 2 25 ]
 [v itoa@base base `i  1 p 2 27 ]
-"109
+"110
 } 0
-"113
+"114
 [v _reverse reverse `(*.39uc  1 e 2 0 ]
 {
-"116
+"117
 [v reverse@j j `i  1 a 2 21 ]
 [v reverse@i i `i  1 a 2 19 ]
 [v reverse@c c `i  1 a 2 17 ]
-"115
+"116
 [v reverse@length length `i  1 a 2 15 ]
-"113
+"114
 [v reverse@s s `*.39uc  1 p 2 12 ]
-"125
+"126
 } 0
 "7 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
@@ -2820,17 +2820,17 @@
 [v PROCULUS_graphic_plot@lcd_channel lcd_channel `uc  1 a 1 25 ]
 "607
 } 0
-"168 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
+"169 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _my_pow my_pow `(i  1 e 2 0 ]
 {
-"179
+"180
 [v my_pow@i i `uc  1 a 1 37 ]
-"169
+"170
 [v my_pow@resposta resposta `i  1 a 2 38 ]
-"168
+"169
 [v my_pow@rad rad `i  1 p 2 26 ]
 [v my_pow@exp exp `i  1 p 2 28 ]
-"185
+"186
 } 0
 "15 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
