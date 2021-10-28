@@ -1022,11 +1022,11 @@ void ShowSensorRealTimeHS(void)
                      Voltimetro=leitura[tupla];                     
                      break;               
               case 1://PLACA 1 CANAL 1 - VACUOMETRO
-                     if((leitura[tupla]>=10)&&(leitura[tupla<=2000])) //Proteção contra erro de comunicação                         
+                     if((leitura[tupla]!=-1)&&(leitura[tupla]!=0)) //Proteção contra erro de comunicação                         
                        {                   
                        PROCULUS_VP_Write_UInt16(151,leitura[tupla]); //Vacuometro 
                        Vacuometro=leitura[tupla];
-                       }      
+                       }                       
                      else
                        {
                        //=================REINICIAR SERIAL======================                         
@@ -1054,8 +1054,7 @@ void ShowSensorRealTimeHS(void)
                          //- - - - - - - - - - - - - - - - - - - - - - - - - - -
                          USART_init(115200);
                          //- - - - - - - - - - - - - - - - - - - - - - - - - - -                          
-                       }  
-                       
+                       }                       
                      break;  
               case 2://Placa 2 Canal 0 - CONDENSADOR
                                                                    
