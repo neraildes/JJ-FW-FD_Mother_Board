@@ -273,21 +273,21 @@
 [v _Recarregar_Parametros_de_Configuracao Recarregar_Parametros_de_Configuracao `(v  1 e 1 0 ]
 "4086
 [v _ouve_comunicacao ouve_comunicacao `(v  1 e 1 0 ]
-"4154
+"4170
 [v _testa_modo_conectado testa_modo_conectado `(uc  1 e 1 0 ]
-"4207
+"4223
 [v _Rele_Comum_Aquecimento Rele_Comum_Aquecimento `(v  1 e 1 0 ]
-"4221
+"4237
 [v _DelayBackupReturn DelayBackupReturn `(uc  1 e 1 0 ]
-"4261
+"4277
 [v _gravarStatusDosBotoes gravarStatusDosBotoes `(v  1 e 1 0 ]
-"4270
+"4286
 [v _placasFilhasInit placasFilhasInit `(v  1 e 1 0 ]
-"4279
+"4295
 [v _showMemoryInfo showMemoryInfo `(v  1 e 1 0 ]
-"4370
+"4386
 [v _gravaFilhaConfere gravaFilhaConfere `(a  1 e 1 0 ]
-"4432
+"4448
 [v _gravaMaeConfere gravaMaeConfere `(a  1 e 1 0 ]
 "16 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\proculus.c
 [v _PROCULUS_REG_Write PROCULUS_REG_Write `(v  1 e 1 0 ]
@@ -438,7 +438,7 @@
 `uc 1 RB6 1 0 :1:6 
 `uc 1 RB7 1 0 :1:7 
 ]
-"230 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
+"230 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
 [s S972 . 1 `uc 1 INT0 1 0 :1:0 
 `uc 1 INT1 1 0 :1:1 
 `uc 1 INT2 1 0 :1:2 
@@ -674,7 +674,7 @@
 `uc 1 TRISC6 1 0 :1:6 
 `uc 1 TRISC7 1 0 :1:7 
 ]
-"1856 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+"1856 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [s S381 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
@@ -1068,21 +1068,21 @@
 [v ___llmod@divisor divisor `ul  1 p 4 12 ]
 "25
 } 0
-"4270 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
+"4286 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 [v _placasFilhasInit placasFilhasInit `(v  1 e 1 0 ]
 {
-"4271
+"4287
 [v placasFilhasInit@i i `uc  1 a 1 27 ]
-"4275
+"4291
 } 0
 "4086
 [v _ouve_comunicacao ouve_comunicacao `(v  1 e 1 0 ]
 {
-"4108
+"4115
 [v ouve_comunicacao@tempo tempo `ui  1 a 2 61 ]
 "4094
 [v ouve_comunicacao@count count `uc  1 s 1 count ]
-"4151
+"4167
 } 0
 "1948
 [v _Comando_Protocolo_Serial Comando_Protocolo_Serial `(v  1 e 1 0 ]
@@ -1554,10 +1554,10 @@
 [v my_delay_ms_TMR1@time time `l  1 p 4 8 ]
 "25
 } 0
-"4261 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
+"4277 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 [v _gravarStatusDosBotoes gravarStatusDosBotoes `(v  1 e 1 0 ]
 {
-"4268
+"4284
 } 0
 "2234
 [v _global_vacuo global_vacuo `(v  1 e 1 0 ]
@@ -1676,23 +1676,23 @@
 {
 "2355
 } 0
-"4154
+"4170
 [v _testa_modo_conectado testa_modo_conectado `(uc  1 e 1 0 ]
 {
 [v testa_modo_conectado@add add `ui  1 p 2 32 ]
 [v testa_modo_conectado@estado estado `uc  1 p 1 34 ]
-"4203
+"4219
 } 0
-"4221
+"4237
 [v _DelayBackupReturn DelayBackupReturn `(uc  1 e 1 0 ]
 {
-"4223
+"4239
 [v DelayBackupReturn@retorno retorno `uc  1 a 1 68 ]
-"4221
+"4237
 [v DelayBackupReturn@vp vp `ui  1 p 2 60 ]
 [v DelayBackupReturn@tempo tempo `*.39ui  1 p 2 62 ]
 [v DelayBackupReturn@texto texto `*.25uc  1 p 2 64 ]
-"4258
+"4274
 } 0
 "2175
 [v _Vaccum_Switch Vaccum_Switch `(v  1 e 1 0 ]
@@ -1763,17 +1763,17 @@
 [v Global_Aquecimento_Switch@estado estado `uc  1 a 1 40 ]
 "2302
 } 0
-"4207
+"4223
 [v _Rele_Comum_Aquecimento Rele_Comum_Aquecimento `(v  1 e 1 0 ]
 {
 [v Rele_Comum_Aquecimento@status status `uc  1 a 1 wreg ]
-"4213
+"4229
 [v Rele_Comum_Aquecimento@bbb bbb `[3]uc  1 a 3 28 ]
-"4207
+"4223
 [v Rele_Comum_Aquecimento@status status `uc  1 a 1 wreg ]
-"4214
+"4230
 [v Rele_Comum_Aquecimento@status status `uc  1 a 1 27 ]
-"4217
+"4233
 } 0
 "2168
 [v _Condensador_Switch Condensador_Switch `(v  1 e 1 0 ]
@@ -1889,38 +1889,38 @@
 [v RelatorioTecnico@valor valor `i  1 a 2 104 ]
 "3570
 } 0
-"4279
+"4295
 [v _showMemoryInfo showMemoryInfo `(v  1 e 1 0 ]
 {
-"4303
+"4319
 [v showMemoryInfo@canal canal `uc  1 a 1 102 ]
-"4301
+"4317
 [v showMemoryInfo@placa placa `uc  1 a 1 103 ]
-"4283
+"4299
 [v showMemoryInfo@msg msg `[50]uc  1 a 50 50 ]
-"4282
+"4298
 [v showMemoryInfo@texto texto `[50]uc  1 a 50 0 ]
-"4286
+"4302
 [v showMemoryInfo@falha falha `uc  1 a 1 101 ]
-"4287
+"4303
 [v showMemoryInfo@tipo tipo `uc  1 a 1 100 ]
-"4366
+"4382
 } 0
-"4432
+"4448
 [v _gravaMaeConfere gravaMaeConfere `(a  1 e 1 0 ]
 {
 [v gravaMaeConfere@chip chip `uc  1 a 1 wreg ]
-"4435
+"4451
 [v gravaMaeConfere@compara compara `i  1 a 2 47 ]
-"4434
+"4450
 [v gravaMaeConfere@tempValue tempValue `i  1 a 2 45 ]
-"4432
+"4448
 [v gravaMaeConfere@chip chip `uc  1 a 1 wreg ]
 [v gravaMaeConfere@add add `ul  1 p 4 39 ]
 [v gravaMaeConfere@valueWrite valueWrite `i  1 p 2 43 ]
-"4437
-[v gravaMaeConfere@chip chip `uc  1 a 1 49 ]
 "4453
+[v gravaMaeConfere@chip chip `uc  1 a 1 49 ]
+"4469
 } 0
 "355 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\EEPROM_24C1025.c
 [v _EEPROM_24C1025_Read_Int EEPROM_24C1025_Read_Int `(ui  1 e 2 0 ]
@@ -1971,24 +1971,24 @@
 [v I2C_Master_Read@a a `us  1 p 2 10 ]
 "107
 } 0
-"4370 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
+"4386 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\Liofilizador Placa Mae.c
 [v _gravaFilhaConfere gravaFilhaConfere `(a  1 e 1 0 ]
 {
 [v gravaFilhaConfere@placa placa `uc  1 a 1 wreg ]
-"4374
+"4390
 [v gravaFilhaConfere@bb bb `[7]uc  1 a 7 39 ]
-"4372
+"4388
 [v gravaFilhaConfere@tempValue tempValue `i  1 a 2 36 ]
-"4373
+"4389
 [v gravaFilhaConfere@confere confere `ui  1 a 2 34 ]
-"4370
+"4386
 [v gravaFilhaConfere@placa placa `uc  1 a 1 wreg ]
 [v gravaFilhaConfere@chip chip `uc  1 p 1 27 ]
 [v gravaFilhaConfere@add add `ul  1 p 4 28 ]
 [v gravaFilhaConfere@valueWrite valueWrite `i  1 p 2 32 ]
-"4377
+"4393
 [v gravaFilhaConfere@placa placa `uc  1 a 1 38 ]
-"4428
+"4444
 } 0
 "51 C:\Indka(R)\17-JJCientifica ($)\Liofilizador\Firmware\FD_Mother_Board\Liofilizador_Mother_Board.X\util.c.c
 [v _clear_screen clear_screen `(v  1 e 1 0 ]
