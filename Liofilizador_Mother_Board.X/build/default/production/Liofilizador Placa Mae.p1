@@ -71,7 +71,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "21 ./timedate.h
 [; ;./timedate.h: 21: void my_delay_ms_CLRWDT(long time);
 [v _my_delay_ms_CLRWDT `(v ~T0 @X0 0 ef1`l ]
-"5785 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
+"5785 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
 [s S247 :2 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
 [n S247 . SCS IOFS OSTS IRCF IDLEN ]
 "5792
@@ -202,7 +202,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "11 ./I2C.h
 [; ;./I2C.h: 11: void I2C_Master_Init(const unsigned long c);
 [v _I2C_Master_Init `(v ~T0 @X0 0 ef1`Cul ]
-"195 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
+"195 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
 [s S16 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S16 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
 "205
@@ -442,13 +442,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./usart.h: 37: void USART_putc(unsigned char value);
 [v _USART_putc `(v ~T0 @X0 0 ef1`uc ]
 [v F2424 `(v ~T0 @X0 1 tf1`ul ]
-"203 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
+"203 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
 [v __delay `JF2424 ~T0 @X0 0 e ]
 [p i __delay ]
 "19 ./timedate.h
 [; ;./timedate.h: 19: void my_delay_ms(long time);
 [v _my_delay_ms `(v ~T0 @X0 0 ef1`l ]
-"3031 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
+"3031 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
 [s S112 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S112 . RX9D OERR FERR ADDEN CREN SREN RX9 SPEN ]
 "3041
@@ -567,7 +567,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "106
 [; ;./proculus.h: 106: void PROCULUS_VP_Write_Int16(unsigned int vp, int value);
 [v _PROCULUS_VP_Write_Int16 `(v ~T0 @X0 0 ef2`ui`i ]
-"541 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
+"541 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
 [s S27 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S27 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
 "551
@@ -659,7 +659,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "343 C:\Program Files\Microchip\xc8\v2.32\pic\include\c99\math.h
 [; ;C:\Program Files\Microchip\xc8\v2.32\pic\include\c99\math.h: 343: float roundf(float);
 [v _roundf `(f ~T0 @X0 0 ef1`f ]
-"2057 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
+"2057 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
 [s S76 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S76 . TRISD0 TRISD1 TRISD2 TRISD3 TRISD4 TRISD5 TRISD6 TRISD7 ]
 "2067
@@ -676,7 +676,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "174
 [; ;./Liofilizador Placa Mae.h: 174: _Bool gravaFilhaConfere(char placa, char chip, unsigned long add, int valueWrite);
 [v _gravaFilhaConfere `(a ~T0 @X0 0 ef4`uc`uc`ul`i ]
-"54 C:/Users/Nera/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
+"54 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc/pic18f4620.h
 [; <" PORTA equ 0F80h ;# ">
 "191
 [; <" PORTB equ 0F81h ;# ">
