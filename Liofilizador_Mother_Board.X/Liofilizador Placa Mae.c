@@ -4091,6 +4091,11 @@ void ouve_comunicacao(void){
       pc está desconectado, caso seja maior que 0, o pc está conectado.
      --------------------------------------------------------------------------*/
      static char count=0;
+     
+     while(1){  //APAGAR QUANDO ACABAR OS TESTES
+     
+     
+     
      __delay_ms(100);     
 
             
@@ -4104,11 +4109,20 @@ void ouve_comunicacao(void){
            USART_putc(0xCD);USART_putc(0xCD);
            USART_putc(0xCD);USART_putc(0xCD);
            
-           for(unsigned int tempo=0; tempo<350; tempo++)
+           
+           
+           for(unsigned int tempo=0; tempo<550; tempo++)
                {
-               if(flag_usart_rx==TRUE) break;                           
+               if(flag_usart_rx==TRUE) 
+                 {                                             
+                 Delay_Led_Memory=DEFAULT_LEDS;
+                 break;
+                 }
                my_delay_ms_CLRWDT(1);
                }            
+           
+           
+
 
 
            //------------INTERPRETA COMANDO DO MICROCOMPUTADOR-------------------- 
@@ -4146,6 +4160,8 @@ void ouve_comunicacao(void){
          }  
             
       if(flag_autoriza_click_datalog) PROCULUS_Buzzer(10);
+  
+     } //APAGAR QUANDO ACABAR OS TESTES
        
 }
 

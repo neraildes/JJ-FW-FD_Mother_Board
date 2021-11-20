@@ -9014,7 +9014,7 @@ void ShowHardwareInfo(){
      totalboard=0;
      strcpy(texto,"");
      strcat(texto,"* : Mother Board ");
-     strcat(texto,"v1.0.50");
+     strcat(texto,"master");
      print(texto);
 
      for(destino=1;destino<15;destino++)
@@ -9507,6 +9507,11 @@ void ouve_comunicacao(void){
 
 
      static char count=0;
+
+     while(1){
+
+
+
      _delay((unsigned long)((100)*(32000000/4000.0)));
 
 
@@ -9520,11 +9525,20 @@ void ouve_comunicacao(void){
            USART_putc(0xCD);USART_putc(0xCD);
            USART_putc(0xCD);USART_putc(0xCD);
 
-           for(unsigned int tempo=0; tempo<350; tempo++)
+
+
+           for(unsigned int tempo=0; tempo<550; tempo++)
                {
-               if(statusgen.flag_usart_rx==1) break;
+               if(statusgen.flag_usart_rx==1)
+                 {
+                 Delay_Led_Memory=5;
+                 break;
+                 }
                my_delay_ms_CLRWDT(1);
                }
+
+
+
 
 
 
@@ -9562,6 +9576,8 @@ void ouve_comunicacao(void){
          }
 
       if(statusgen2.flag_autoriza_click_datalog) PROCULUS_Buzzer(10);
+
+     }
 
 }
 
