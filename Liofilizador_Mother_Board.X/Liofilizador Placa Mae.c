@@ -805,8 +805,14 @@ void main(void)
                           break;
                   }//switch pagina          
             
-                
+            //while(1)
+                //{
+                ////PROCULUS_Buzzer(100);
+                ////my_delay_ms_CLRWDT(3000);                
                 ouve_comunicacao(); 
+                //my_delay_ms_CLRWDT(3000);
+                //}
+                
         }
       
 }
@@ -2303,15 +2309,14 @@ void Global_Aquecimento_Switch(unsigned char estado){
 
 
 void global_aquecimento(void){  
-        if(testa_modo_conectado(5,1)==0)
-          {  
-          PROCULUS_Popup(DISPLAY_BLOQUEADO);  
-          return;
-          }    
-        
-        
         if((PROCULUS_VP_Read_UInt16(5)==1)&&(flag_global_aquecimento==0))
-           {              
+           {            
+           if(testa_modo_conectado(5,1)==0)
+             {  
+             PROCULUS_Popup(DISPLAY_BLOQUEADO);  
+             return;
+             }  
+        
            if((Condensador<Seg_Aq_cond)&&(Vacuometro<Seg_Aq_vacuo)) 
               { 
               if(!DelayBackupReturn(0x05, &timerAquecimento,"Acionando Aquecimento! Aguarde...")) return;               
@@ -2330,6 +2335,12 @@ void global_aquecimento(void){
         else
         if((PROCULUS_VP_Read_UInt16(5)==0)&&(flag_global_aquecimento==1))
            {           
+           if(testa_modo_conectado(5,1)==0)
+             {  
+             PROCULUS_Popup(DISPLAY_BLOQUEADO);  
+             return;
+             }            
+            
            flag_global_aquecimento=0; 
            Global_Aquecimento_Switch(OFF); 
            //if((Tamanho_Display==80)||(Tamanho_Display==50))
@@ -4107,18 +4118,19 @@ void ouve_comunicacao(void){
            
            for(unsigned int tempo=0; tempo<350; tempo++)
                {
-               if(flag_usart_rx==TRUE) break;                           
+               if(flag_usart_rx==TRUE)
+                 {
+                 break;                           
+                 }
                my_delay_ms_CLRWDT(1);
-               }            
-
-
+               }
+           
            //------------INTERPRETA COMANDO DO MICROCOMPUTADOR-------------------- 
            if(flag_usart_rx)
-              {          
-              Comando_Protocolo_Serial(); 
+              {  
+              Comando_Protocolo_Serial();               
               flag_recomunication=TRUE;
               if(count<5)count++;
-              //flag_pc_conected=TRUE;              
               }                    
 
            //----------------INTERPRETA COMANDO DO DISPLAY----------------
@@ -4127,11 +4139,7 @@ void ouve_comunicacao(void){
               Comando_Display();
               flag_recomunication=TRUE;
               if(count<5)count++;
-              //flag_pc_conected=TRUE;              
               }  
-           
-           //global_porta();
-           
       }  
       
       if(count>0)
