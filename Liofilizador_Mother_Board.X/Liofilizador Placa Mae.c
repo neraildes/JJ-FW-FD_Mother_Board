@@ -1048,15 +1048,21 @@ void ShowSensorRealTimeHS(void)
                          erro=RCREG;
                          erro=RCREG;                         
                          usart_buffer[0]=0;
-                         TRISCbits.RC6=1;
-                         TRISCbits.RC7=1;
+                         
+                         
+                         TRISCbits.RC6=0;
+                         TRISCbits.RC7=0;                         
+                         PORTCbits.RC6=1;
+                         PORTCbits.RC7=1;
+                         Delay_Led_Usart=DEFAULT_LEDS;
+                         my_delay_ms_CLRWDT(500);                         
                          //- - - - - - - - - - - - - - - - - -                         
                          reset=EEPROM_Read_Integer(34);
                          reset++;
                          EEPROM_Write_Integer(34,reset);
                          //- - - - - - - - - - - - - - - - - -                         
-                         my_delay_ms_CLRWDT(1000);            
-                         INTCONbits.PEIE=1;                         
+                         my_delay_ms_CLRWDT(1000);
+                         INTCONbits.PEIE=1;
                          //- - - - - - - - - - - - - - - - - - - - - - - - - - -
                          USART_init(115200);
                          //- - - - - - - - - - - - - - - - - - - - - - - - - - -                          
