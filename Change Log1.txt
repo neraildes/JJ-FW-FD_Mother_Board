@@ -1,6 +1,17 @@
 Lista de Revisões
 
 ----------------------------------------------------------------------------------------------------------------
+Versão v1.0.56
+	Anti-Travamento - Caso o led da comunicação fique x segundos sem acender, haverá o 
+        reset automatico do sistema, mas antes salva o tempo de processo.
+Versão v1.0.55
+	Anti-Travamento. Reseta o microcontrolador com sucesso. Salva tempo de processo antes.
+Versão v1.0.54
+	Anti-Travamento. Reseta o microcontrolador com sucesso!
+Versão v1.0.53
+ 	Anti-Travamento. Reseta o microcontrolador (com falha de lógica).
+Versão v1.0.52
+	Anti-Travamento. Reseta somente módulo serial
 Versão v1.0.51
 	Corrigido bug de comunicação onde o aquecimento ligava e sinalizava sozinho.
 Versão v1.0.50
