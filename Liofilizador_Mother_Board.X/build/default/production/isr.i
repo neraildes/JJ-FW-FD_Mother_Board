@@ -4942,6 +4942,8 @@ volatile unsigned char ClrReset;
 
 extern volatile unsigned char delay_condensador;
 
+extern int maxTimeWithoutLedTX;
+
 void __attribute__((picinterrupt(("low_priority")))) isr(void)
 {
 
@@ -5106,8 +5108,11 @@ void __attribute__((picinterrupt(("low_priority")))) isr(void)
                 INTCONbits.T0IF=0;
 
 
+                  maxTimeWithoutLedTX++;
+
                   if(Delay_Led_Usart>0){
                      Delay_Led_Usart--;
+                     maxTimeWithoutLedTX=0;
                      PORTBbits.RB6=1;
                      }
                   else{

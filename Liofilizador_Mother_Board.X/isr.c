@@ -69,6 +69,8 @@ volatile unsigned char ClrReset;
 
 extern volatile unsigned char delay_condensador;
 
+extern int maxTimeWithoutLedTX; //Temporario para resetar caso não comunique 
+
 void __interrupt(low_priority) isr(void)
 {
     
@@ -233,8 +235,11 @@ void __interrupt(low_priority) isr(void)
                 INTCONbits.T0IF=0;     //Precisão
 
                //-----------------------------------------------------------------------
+                  maxTimeWithoutLedTX++;
+                  
                   if(Delay_Led_Usart>0){
                      Delay_Led_Usart--;
+                     maxTimeWithoutLedTX=0;
                      flag_led_usart=1;
                      }
                   else{

@@ -179,6 +179,8 @@ int TrendColor[13];
 
 T_mapa mapa;
 
+int maxTimeWithoutLedTX; //Temporário para resetar se não houver comunicação
+
 void main(void) 
 {
      
@@ -418,6 +420,7 @@ void main(void)
      PROCULUS_Show_Screen(15);     
      
      
+     maxTimeWithoutLedTX=0; //Temporario para resetar se não houver comunicação.
      
         while(1)
              {
@@ -465,7 +468,17 @@ void main(void)
                 
                 
                 //INDICA SE OCORREU TRAVAMENTO DO RX DAS PLACAS
-                if(flag_usart_error==TRUE) Delay_Led_Memory=200;                 
+                if(flag_usart_error==TRUE) Delay_Led_Memory=200;   
+                
+                //--------------------------------------------------------------
+                //Caso não haja comunicação serial por 3 segundos, resetar...
+                if(maxTimeWithoutLedTX>=3000)
+                  {  
+                  EEPROM_Write_Byte(17,processo_hora);     //Hora
+                  EEPROM_Write_Byte(18,processo_minuto);   //Minuto    
+                  asm("RESET");
+                  }
+                //--------------------------------------------------------------
 
                 
                 
@@ -1024,8 +1037,11 @@ void ShowSensorRealTimeHS(void)
         switch(tupla)
               {
               case 0://PLACA 1 CANAL 0 - VOLTIMETRO
-                     PROCULUS_VP_Write_UInt16(153,leitura[tupla]);
-                     Voltimetro=leitura[tupla];                     
+                    if(leitura[tupla]>=0)
+                      {  
+                      PROCULUS_VP_Write_UInt16(153,leitura[tupla]);
+                      Voltimetro=leitura[tupla];                     
+                      }
                      break;               
               case 1://PLACA 1 CANAL 1 - VACUOMETRO
                      if((leitura[tupla]>=10)&&(leitura[tupla<=2000])) //Proteção contra erro de comunicação                         
@@ -1033,41 +1049,6 @@ void ShowSensorRealTimeHS(void)
                        PROCULUS_VP_Write_UInt16(151,leitura[tupla]); //Vacuometro 
                        Vacuometro=leitura[tupla];
                        }      
-                     else
-                       {
-                       //=================REINICIAR SERIAL======================                         
-                         char erro;                            
-                         unsigned int reset;
-                         INTCONbits.PEIE=0;                         
-                         RCSTAbits.SPEN=0;
-                         RCSTAbits.CREN=0;
-                         RCSTAbits.FERR=0;
-                         RCSTAbits.OERR=0;
-                         TXSTAbits.TXEN=0;                         
-                         erro=RCREG;
-                         erro=RCREG;
-                         erro=RCREG;                         
-                         usart_buffer[0]=0;
-                         
-                         
-                         TRISCbits.RC6=0;
-                         TRISCbits.RC7=0;                         
-                         PORTCbits.RC6=1;
-                         PORTCbits.RC7=1;
-                         Delay_Led_Usart=DEFAULT_LEDS;
-                         my_delay_ms_CLRWDT(500);                         
-                         //- - - - - - - - - - - - - - - - - -                         
-                         reset=EEPROM_Read_Integer(34);
-                         reset++;
-                         EEPROM_Write_Integer(34,reset);
-                         //- - - - - - - - - - - - - - - - - -                         
-                         my_delay_ms_CLRWDT(1000);
-                         INTCONbits.PEIE=1;
-                         //- - - - - - - - - - - - - - - - - - - - - - - - - - -
-                         USART_init(115200);
-                         //- - - - - - - - - - - - - - - - - - - - - - - - - - -                          
-                       }  
-                       
                      break;  
               case 2://Placa 2 Canal 0 - CONDENSADOR
                                                                    
@@ -3523,67 +3504,8 @@ void RelatorioTecnico(void){
      
      my_delay_ms_CLRWDT(10000);
      PROCULUS_VP_Write_UInt16(100,0);
-     PROCULUS_Show_Screen(15);     
-     
-     /*
-     print("SERIAL MODULE UPDATE = ")
-             
-             
-             
-     print("Serao impressas informacoes");
-     print("sobre este hardware...");
-     
-     
-     
-     my_delay_ms_CLRWDT(10000);
-     PROCULUS_VP_Write_UInt16(100,0);
-     PROCULUS_Show_Screen(15);
-     /*     
-     
-     
-     
-     
-    print("Reinicializacoes:");
-    if(PROCULUS_VP_Read_UInt16(0x00AA)==1)                   
-      {
-      char bb[3];
-      int  valor; 
-      char placa;
-      char vetor[3];                              
-      PROCULUS_VP_Write_UInt16(0x00AA,0);      
-      PROCULUS_Show_Screen(0);
-      valor=EEPROM_Read_Integer(34);
-      itoa(valor,buffer,10);
-      strcpy(texto,"Placa 0 = ");
-      strcat(texto,buffer);
-      print(texto);
-      for(placa=1;placa<=totalboard;placa++)
-          {  
-          //flag_main_loop_WDT=1;
-          strcpy(texto,"Placa ");
-          itoa(placa,buffer,10); 
-          strcat(texto,buffer);
-          strcpy(buffer," = ");
-          strcat(texto,buffer);
-          bb[0]=0x10;
-          valor=Send_To_Slave(placa,COMMAND_IEE_R_INT,1,bb);
-          itoa(valor,buffer,10);                                  
-          strcat(texto,buffer);
-          print(texto);                            
-          }
-
-      print("Desligar do Vacuo:");
-      valor=EEPROM_Read_Integer(0xE8);
-      itoa(valor,texto,10);
-      strcat(texto," vez(es).");
-      print(texto);      
-
-      my_delay_ms_CLRWDT(15000);
-      PROCULUS_Show_Screen(15);
-      }
-       
-    */ 
-            
+     PROCULUS_Show_Screen(15);  
+     maxTimeWithoutLedTX=0; //Temporario para resetar caso não comunique      
 }
 
 
@@ -3840,7 +3762,7 @@ void Ligar_Cargas_Compassadamente(){
             }
           
           my_delay_ms_CLRWDT(3500);
-                     
+          maxTimeWithoutLedTX=0; //Temporario para resetar caso não comunique                     
           }
      //memo_statuspower=statuspower.bits;      
      
