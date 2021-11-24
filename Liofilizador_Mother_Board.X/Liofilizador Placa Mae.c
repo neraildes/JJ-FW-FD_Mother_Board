@@ -179,7 +179,8 @@ int TrendColor[13];
 
 T_mapa mapa;
 
-int maxTimeWithoutLedTX; //Temporário para resetar se não houver comunicação
+int  maxTimeWithoutLedTX; //Temporário para resetar se não houver comunicação
+char showScreenReset;
 
 void main(void) 
 {
@@ -265,8 +266,11 @@ void main(void)
      //-------------------------------------------------------------------------
      flag_proculus_hs=FALSE;     
      clear_screen();
-     PROCULUS_Show_Screen(0);     
-     my_delay_ms_CLRWDT(300); 
+     showScreenReset=EEPROM_Read_Byte(33);
+     if(showScreenReset)PROCULUS_Show_Screen(0);     
+     my_delay_ms_CLRWDT(300);      
+     
+     //-------------------------------------------------------------------------
      print("JJ Cientifica Ind. e Com. de Eq. Cient. Ltda.");     
      my_delay_ms_CLRWDT(300);
      print("CNPJ: 05.678.930/0001-12");     
