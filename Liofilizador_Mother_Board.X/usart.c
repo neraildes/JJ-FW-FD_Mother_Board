@@ -19,7 +19,7 @@ void USART_init(unsigned long baudrate)
      unsigned char erro;
      unsigned char i;
     
-     if(baudrate==115200)
+     //if(baudrate==115200)
           {
           //................................USART...............................
           RCSTAbits.SPEN = 1;
@@ -57,17 +57,19 @@ void USART_to_Protocol(t_usart_protocol *usart_protocol){
 
 
 void USART_putc(unsigned char value)
-{      
-    while(!TXSTAbits.TRMT)
+{   
+    uint16_t counter=0;
+    Delay_Led_Usart=DEFAULT_LEDS;
+    while(!PIR1.TXIF) 
          {
-         Delay_Led_Usart=DEFAULT_LEDS;
+         counter++;
+         if(counter>500) break;
          continue;//Registrador vazio
+         __delay_ms(1);
          }
     TXREG=value;           
-    TXSTAbits.TXEN  = 1;
-    
-    //TXSTA.TXEN  = 0;
-    
+    //TXSTAbits.TXEN  = 1;    
+    //TXSTA.TXEN  = 0;    
 }
 
 
@@ -76,9 +78,10 @@ void USART_putsc(char value)
     
     //tmr_led_usart=LED_CONSTANT;
     Delay_Led_Usart=DEFAULT_LEDS;
-    while(!TXSTAbits.TRMT) continue;//Registrador vazio
-    TXREG=value;           
-    TXSTAbits.TXEN  = 1;
+    putc(value);
+    //while(!TXSTAbits.TRMT) continue;//Registrador vazio
+    //TXREG=value;           
+    //TXSTAbits.TXEN  = 1;
     
     //TXSTA.TXEN  = 0;
     

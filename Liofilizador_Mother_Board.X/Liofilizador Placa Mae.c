@@ -267,7 +267,14 @@ void main(void)
      flag_proculus_hs=FALSE;     
      clear_screen();
      showScreenReset=EEPROM_Read_Byte(33);
-     if(showScreenReset)PROCULUS_Show_Screen(0);     
+     if(showScreenReset)
+       {  
+       PROCULUS_Show_Screen(0);     
+       }
+     else
+       {
+       PROCULUS_VP_Write_String(1940,"Aguarde... REINICIANDO!");  
+       }  
      my_delay_ms_CLRWDT(300);      
      
      //-------------------------------------------------------------------------
@@ -420,8 +427,21 @@ void main(void)
      ShowHardwareInfo();   
      //showMemoryInfo();
      Ligar_Cargas_Compassadamente();
-     my_delay_ms_CLRWDT(2500);        
-     PROCULUS_Show_Screen(15);     
+     //my_delay_ms_CLRWDT(2500);        
+     
+     
+     
+     //-------------------------------------------------------------------------
+     if(showScreenReset)
+       {  
+       PROCULUS_Show_Screen(15);     
+       }
+     else
+       {
+       PROCULUS_VP_Write_String(1940,"");  
+       }  
+     showScreenReset=0xFF;
+     EEPROM_Write_Byte(33,showScreenReset);      
      
      
      maxTimeWithoutLedTX=0; //Temporario para resetar se não houver comunicação.
@@ -480,6 +500,8 @@ void main(void)
                   {  
                   EEPROM_Write_Byte(17,processo_hora);     //Hora
                   EEPROM_Write_Byte(18,processo_minuto);   //Minuto    
+                  showScreenReset=0x00;
+                  EEPROM_Write_Byte(33,showScreenReset);                  
                   asm("RESET");
                   }
                 //--------------------------------------------------------------
