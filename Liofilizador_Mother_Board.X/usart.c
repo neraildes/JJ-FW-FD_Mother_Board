@@ -18,31 +18,36 @@ void USART_init(unsigned long baudrate)
      {
      unsigned char erro;
      unsigned char i;
-    
-     //if(baudrate==115200)
-          {
-          //................................USART...............................
-          RCSTAbits.SPEN = 1;
-          RCSTAbits.CREN = 1;
-          
-          TXSTAbits.BRGH    = 1; //Trasmitter hight speeed  
-          BAUDCONbits.BRG16 = 0;
-          TXSTAbits.SYNC    = 0; //Async mode                                          |
-          TXSTAbits.TX9     = 0; //without 9o bit                                      |
-          SPBRG             = ((_XTAL_FREQ)/(16*baudrate))-1  ; //spbrg=16                                           |
-          INTCONbits.PEIE   = 1; //Periferical Interrupt Enable                        |
-          //PIE1bits.RCIE     = 1; //USART receiver RX                                   |
-          RCIE=1;   //Habilista interrupção 
-          }     
+     
+     //................................USART...............................
+     RCSTAbits.SPEN = 1;
+     RCSTAbits.CREN = 1;
+
+     TXSTAbits.BRGH    = 1; //Trasmitter hight speeed  
+     BAUDCONbits.BRG16 = 0;
+     TXSTAbits.SYNC    = 0; //Async mode                                          |
+     TXSTAbits.TX9     = 0; //without 9o bit                                      |
+     SPBRG             = ((_XTAL_FREQ)/(16*baudrate))-1  ; //spbrg=16                                           |
+     INTCONbits.PEIE   = 1; //Periferical Interrupt Enable                        |
+     //PIE1bits.RCIE     = 1; //USART receiver RX                                   |
+     RCIE=1;   //Habilista interrupção 
+     TXEN=1;
+         
      
      TRISCbits.TRISC6= 1;
      TRISCbits.TRISC7= 1;
     
-     //RCSTAbits.CREN=0;
-     //RCSTAbits.CREN=1;
-     //for(i=0;i<15;i++) erro=RCREG;
+     for(i=0;i<15;i++) erro=RCREG;
 }
 
+void USART_restart(unsigned long baudrate)
+{
+     RCSTAbits.SPEN = 0;
+     RCSTAbits.CREN = 0; 
+     TRISCbits.TRISC6= 0;
+     TRISCbits.TRISC7= 0;    
+     USART_init(baudrate);
+}
 
 void USART_to_Protocol(t_usart_protocol *usart_protocol){
      int i;
@@ -58,33 +63,28 @@ void USART_to_Protocol(t_usart_protocol *usart_protocol){
 
 void USART_putc(unsigned char value)
 {   
-    uint16_t counter=0;
+    
+    unsigned int counter=0;    
     Delay_Led_Usart=DEFAULT_LEDS;
-    while(!PIR1.TXIF) 
+    while(!PIR1bits.TXIF) 
          {
          counter++;
-         if(counter>500) break;
+         if(counter>500)
+           {  
+           USART_restart(115200);
+           counter=0;  
+           break;
+           }
          continue;//Registrador vazio
          __delay_ms(1);
          }
     TXREG=value;           
-    //TXSTAbits.TXEN  = 1;    
-    //TXSTA.TXEN  = 0;    
 }
 
 
 void USART_putsc(char value)
 {   
-    
-    //tmr_led_usart=LED_CONSTANT;
-    Delay_Led_Usart=DEFAULT_LEDS;
     putc(value);
-    //while(!TXSTAbits.TRMT) continue;//Registrador vazio
-    //TXREG=value;           
-    //TXSTAbits.TXEN  = 1;
-    
-    //TXSTA.TXEN  = 0;
-    
 }
 
 

@@ -4528,6 +4528,7 @@ typedef struct {
 # 35 "./usart.h"
 void USART_to_Protocol(t_usart_protocol *usart_protocol);
 void USART_init(unsigned long baudrate);
+void USART_restart(unsigned long baudrate);
 void USART_putc(unsigned char value);
 void USART_put_int(unsigned int value);
 void USART_put_sint(int value);
@@ -4663,30 +4664,35 @@ void USART_init(unsigned long baudrate)
      unsigned char erro;
      unsigned char i;
 
-     if(baudrate==115200)
-          {
 
-          RCSTAbits.SPEN = 1;
-          RCSTAbits.CREN = 1;
+     RCSTAbits.SPEN = 1;
+     RCSTAbits.CREN = 1;
 
-          TXSTAbits.BRGH = 1;
-          BAUDCONbits.BRG16 = 0;
-          TXSTAbits.SYNC = 0;
-          TXSTAbits.TX9 = 0;
-          SPBRG = ((32000000)/(16*baudrate))-1 ;
-          INTCONbits.PEIE = 1;
+     TXSTAbits.BRGH = 1;
+     BAUDCONbits.BRG16 = 0;
+     TXSTAbits.SYNC = 0;
+     TXSTAbits.TX9 = 0;
+     SPBRG = ((32000000)/(16*baudrate))-1 ;
+     INTCONbits.PEIE = 1;
 
-          RCIE=1;
-          }
+     RCIE=1;
+     TXEN=1;
+
 
      TRISCbits.TRISC6= 1;
      TRISCbits.TRISC7= 1;
 
-
-
-
+     for(i=0;i<15;i++) erro=RCREG;
 }
 
+void USART_restart(unsigned long baudrate)
+{
+     RCSTAbits.SPEN = 0;
+     RCSTAbits.CREN = 0;
+     TRISCbits.TRISC6= 0;
+     TRISCbits.TRISC7= 0;
+     USART_init(baudrate);
+}
 
 void USART_to_Protocol(t_usart_protocol *usart_protocol){
      int i;
@@ -4702,30 +4708,28 @@ void USART_to_Protocol(t_usart_protocol *usart_protocol){
 
 void USART_putc(unsigned char value)
 {
-    while(!TXSTAbits.TRMT)
+
+    unsigned int counter=0;
+    Delay_Led_Usart=5;
+    while(!PIR1bits.TXIF)
          {
-         Delay_Led_Usart=5;
+         counter++;
+         if(counter>500)
+           {
+           USART_restart(115200);
+           counter=0;
+           break;
+           }
          continue;
+         _delay((unsigned long)((1)*(32000000/4000.0)));
          }
     TXREG=value;
-    TXSTAbits.TXEN = 1;
-
-
-
 }
 
 
 void USART_putsc(char value)
 {
-
-
-    Delay_Led_Usart=5;
-    while(!TXSTAbits.TRMT) continue;
-    TXREG=value;
-    TXSTAbits.TXEN = 1;
-
-
-
+    putc(value);
 }
 
 
