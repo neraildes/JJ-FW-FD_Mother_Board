@@ -182,7 +182,7 @@ T_mapa mapa;
 int  maxTimeWithoutLedTX; //Temporário para resetar se não houver comunicação
 char showScreenReset;
 
-void main(void) 
+int main(int argc, char** argv) 
 {
      
      my_delay_ms_CLRWDT(100);
@@ -3713,7 +3713,7 @@ void Carregar_Display_Schematic_Color(){
 
 
 void Ligar_Cargas_Compassadamente(){    
-     #define TIMEBLACKOUT 30
+     #define TIMEBLACKOUT 20 //Não corresponde a tempo.
      int valor;    
      
      PROCULUS_VP_Write_UInt16(0x02,0); //DATALOG

@@ -5889,7 +5889,7 @@ T_mapa mapa;
 int maxTimeWithoutLedTX;
 char showScreenReset;
 
-void main(void)
+int main(int argc, char** argv)
 {
 
      my_delay_ms_CLRWDT(100);

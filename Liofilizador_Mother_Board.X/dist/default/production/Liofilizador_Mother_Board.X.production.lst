@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.32 build 20210201212658 
-                                                                                               Thu Nov 25 06:33:48 2021
+                                                                                               Fri Nov 26 06:50:51 2021
 
 Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og9 
      1                           	processor	18F4620
@@ -27259,11 +27259,11 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og9
  26065  004714  6E32               	movwf	PROCULUS_VP_Write_UInt16@value^0,c
  26066  004716  EC17  F04F         	call	_PROCULUS_VP_Write_UInt16	;wreg free
  26067                           
- 26068                           ;Liofilizador Placa Mae.c: 3749:             timerEstante=30;
+ 26068                           ;Liofilizador Placa Mae.c: 3749:             timerEstante=20;
  26069  00471A  0E00               	movlw	0
  26070  00471C  0101               	movlb	1	; () banked
  26071  00471E  6F84               	movwf	(_timerEstante+1)& (0+255),b
- 26072  004720  0E1E               	movlw	30
+ 26072  004720  0E14               	movlw	20
  26073  004722  D004               	goto	L13
  26074  004724                     l19792:
  26075                           
@@ -27307,11 +27307,11 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og9
  26112  004750  6E32               	movwf	PROCULUS_VP_Write_UInt16@value^0,c
  26113  004752  EC17  F04F         	call	_PROCULUS_VP_Write_UInt16	;wreg free
  26114                           
- 26115                           ;Liofilizador Placa Mae.c: 3761:             timerCondensador=30;
+ 26115                           ;Liofilizador Placa Mae.c: 3761:             timerCondensador=20;
  26116  004756  0E00               	movlw	0
  26117  004758  0101               	movlb	1	; () banked
  26118  00475A  6F8A               	movwf	(_timerCondensador+1)& (0+255),b
- 26119  00475C  0E1E               	movlw	30
+ 26119  00475C  0E14               	movlw	20
  26120  00475E  D004               	goto	L14
  26121  004760                     l19804:
  26122                           
@@ -27358,11 +27358,11 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og9
  26162  00478E  6E32               	movwf	PROCULUS_VP_Write_UInt16@value^0,c
  26163  004790  EC17  F04F         	call	_PROCULUS_VP_Write_UInt16	;wreg free
  26164                           
- 26165                           ;Liofilizador Placa Mae.c: 3773:             timerVacuo=30;
+ 26165                           ;Liofilizador Placa Mae.c: 3773:             timerVacuo=20;
  26166  004794  0E00               	movlw	0
  26167  004796  0101               	movlb	1	; () banked
  26168  004798  6F88               	movwf	(_timerVacuo+1)& (0+255),b
- 26169  00479A  0E1E               	movlw	30
+ 26169  00479A  0E14               	movlw	20
  26170  00479C  D004               	goto	L15
  26171  00479E                     l19816:
  26172                           
@@ -27406,11 +27406,11 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og9
  26209  0047CA  6E32               	movwf	PROCULUS_VP_Write_UInt16@value^0,c
  26210  0047CC  EC17  F04F         	call	_PROCULUS_VP_Write_UInt16	;wreg free
  26211                           
- 26212                           ;Liofilizador Placa Mae.c: 3783:             timerAquecimento=30;
+ 26212                           ;Liofilizador Placa Mae.c: 3783:             timerAquecimento=20;
  26213  0047D0  0E00               	movlw	0
  26214  0047D2  0101               	movlb	1	; () banked
  26215  0047D4  6F86               	movwf	(_timerAquecimento+1)& (0+255),b
- 26216  0047D6  0E1E               	movlw	30
+ 26216  0047D6  0E14               	movlw	20
  26217  0047D8  D004               	goto	L16
  26218  0047DA                     l19828:
  26219                           
@@ -41043,7 +41043,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.32 build 20210201212658 
-Symbol Table                                                                                   Thu Nov 25 06:33:48 2021
+Symbol Table                                                                                   Fri Nov 26 06:50:51 2021
 
                                       _USART_putc 956E                          ?_PROCULUS_VP_Read_String 0032  
                                     ___fldiv@aexp 0048                                      ___fldiv@bexp 0047  
