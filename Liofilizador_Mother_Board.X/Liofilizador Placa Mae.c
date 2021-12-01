@@ -1044,17 +1044,7 @@ void ShowSensorRealTimeHS(void)
        leitura[5]=leitura[6];  
        }
      
-     //APAGAR ESTE TESTE
-     /*
-     leitura[0]=800;
-     leitura[1]=700;
-     leitura[2]=600;
-     leitura[3]=500;
-     leitura[4]=400;
-     leitura[5]=300;
-     leitura[6]=200;
-     */
-     
+
      //------------------------GRAVA NO DISPLAY---------------------------------
      my_delay_ms(50);
      flag_proculus_hs=TRUE; 
@@ -1073,7 +1063,7 @@ void ShowSensorRealTimeHS(void)
                      if((leitura[tupla]>=10)&&(leitura[tupla<=2000])) //Proteção contra erro de comunicação                         
                        {                   
                        PROCULUS_VP_Write_UInt16(151,leitura[tupla]); //Vacuometro 
-                       Vacuometro=leitura[tupla];
+                       Vacuometro=leitura[tupla];                       
                        }      
                      break;  
               case 2://Placa 2 Canal 0 - CONDENSADOR
@@ -3595,6 +3585,8 @@ void ShowHardwareInfo(){
         print(texto);
         }     
     print("----------------------------------");
+    
+    my_delay_ms_CLRWDT(5000);
 }
 
 char MenorCanalLivre()
