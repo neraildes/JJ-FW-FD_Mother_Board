@@ -4720,7 +4720,7 @@ void USART_putc(unsigned char value)
            counter=0;
            break;
            }
-         continue;
+
          _delay((unsigned long)((1)*(32000000/4000.0)));
          }
     TXREG=value;

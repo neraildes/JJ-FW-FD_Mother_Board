@@ -1063,7 +1063,8 @@ void ShowSensorRealTimeHS(void)
                      if((leitura[tupla]>=10)&&(leitura[tupla<=2000])) //Proteção contra erro de comunicação                         
                        {                   
                        PROCULUS_VP_Write_UInt16(151,leitura[tupla]); //Vacuometro 
-                       Vacuometro=leitura[tupla];                       
+                       //Vacuometro=leitura[tupla];
+                       Vacuometro=(float)leitura[tupla]-((2000.0-(float)leitura[tupla])*2.35);                                              
                        }      
                      break;  
               case 2://Placa 2 Canal 0 - CONDENSADOR

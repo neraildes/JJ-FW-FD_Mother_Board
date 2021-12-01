@@ -897,9 +897,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;usart.c: 77:            }
 }
 [e :U 294 ]
-"78
-[; ;usart.c: 78:          continue;
-[e $U 291  ]
 "79
 [; ;usart.c: 79:          _delay((unsigned long)((1)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]

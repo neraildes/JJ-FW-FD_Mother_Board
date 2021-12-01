@@ -75,7 +75,7 @@ void USART_putc(unsigned char value)
            counter=0;  
            break;
            }
-         continue;//Registrador vazio
+         //continue;//Registrador vazio
          __delay_ms(1);
          }
     TXREG=value;           
