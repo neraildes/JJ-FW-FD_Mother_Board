@@ -4528,6 +4528,7 @@ typedef struct {
 # 35 "./usart.h"
 void USART_to_Protocol(t_usart_protocol *usart_protocol);
 void USART_init(unsigned long baudrate);
+void flashIndcateReset(int flashes);
 void USART_restart(unsigned long baudrate);
 void USART_putc(unsigned char value);
 void USART_put_int(unsigned int value);
@@ -4685,12 +4686,28 @@ void USART_init(unsigned long baudrate)
      for(i=0;i<15;i++) erro=RCREG;
 }
 
+void flashIndcateReset(int flashes){
+     int count;
+     for(count=0; count<flashes; count++)
+        {
+        PORTBbits.RB6 = 1;
+        PORTBbits.RB5 = 0;
+        _delay((unsigned long)((500)*(32000000/4000.0)));
+        __asm("CLRWDT");
+        PORTBbits.RB6 = 0;
+        PORTBbits.RB5 = 1;
+        _delay((unsigned long)((500)*(32000000/4000.0)));
+        __asm("CLRWDT");
+        }
+}
+
 void USART_restart(unsigned long baudrate)
 {
      RCSTAbits.SPEN = 0;
      RCSTAbits.CREN = 0;
-     TRISCbits.TRISC6= 0;
-     TRISCbits.TRISC7= 0;
+     TRISCbits.TRISC6= 1;
+     TRISCbits.TRISC7= 1;
+     flashIndcateReset(15);
      USART_init(baudrate);
 }
 
@@ -4714,13 +4731,13 @@ void USART_putc(unsigned char value)
     while(!PIR1bits.TXIF)
          {
          counter++;
-         if(counter>500)
+         if(counter>2500)
            {
            USART_restart(115200);
            counter=0;
            break;
            }
-
+         continue;
          _delay((unsigned long)((1)*(32000000/4000.0)));
          }
     TXREG=value;

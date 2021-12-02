@@ -233,7 +233,7 @@ void __interrupt(low_priority) isr(void)
                 __delay_us(5);
                 TMR0=0xE1;             //Uma interrupção a cada 1.0005ms
                 INTCONbits.T0IF=0;     //Precisão
-
+                
                //-----------------------------------------------------------------------
                   maxTimeWithoutLedTX++;
                   

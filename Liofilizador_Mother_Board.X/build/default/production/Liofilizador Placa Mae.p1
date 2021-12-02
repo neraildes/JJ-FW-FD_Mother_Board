@@ -435,11 +435,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "117
 [; ;./Liofilizador Placa Mae.h: 117: int Send_To_Slave(char destino, char comando, char size, char * buffer);
 [v _Send_To_Slave `(i ~T0 @X0 0 ef4`uc`uc`uc`*uc ]
-"39 ./usart.h
-[; ;./usart.h: 39: void USART_put_int(unsigned int value);
+"40 ./usart.h
+[; ;./usart.h: 40: void USART_put_int(unsigned int value);
 [v _USART_put_int `(v ~T0 @X0 0 ef1`ui ]
-"38
-[; ;./usart.h: 38: void USART_putc(unsigned char value);
+"39
+[; ;./usart.h: 39: void USART_putc(unsigned char value);
 [v _USART_putc `(v ~T0 @X0 0 ef1`uc ]
 [v F2424 `(v ~T0 @X0 1 tf1`ul ]
 "203 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
@@ -490,8 +490,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "242
 [; ;./Liofilizador Placa Mae.h: 242: void Recarregar_Parametros_de_Configuracao(void);
 [v _Recarregar_Parametros_de_Configuracao `(v ~T0 @X0 0 ef ]
-"43 ./usart.h
-[; ;./usart.h: 43: void USART_put_string(char *vetor);
+"44 ./usart.h
+[; ;./usart.h: 44: void USART_put_string(char *vetor);
 [v _USART_put_string `(v ~T0 @X0 0 ef1`*uc ]
 "26 ./EEPROM_24C1025.h
 [; ;./EEPROM_24C1025.h: 26: void EEPROM_24C1025_Read_Buffer_to_USART(unsigned char chip_add,
@@ -2430,8 +2430,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _total `uc ~T0 @X0 1 a ]
 "720
 [; ;Liofilizador Placa Mae.c: 720:                             static int canal=0;
-[v F4176 `i ~T0 @X0 1 s canal ]
-[i F4176
+[v F4178 `i ~T0 @X0 1 s canal ]
+[i F4178
 -> 0 `i
 ]
 "721
@@ -2484,7 +2484,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "739
 [; ;Liofilizador Placa Mae.c: 739:                                                if(Tamanho_Display==50)canal=icone;
 [e $ ! == _Tamanho_Display -> 50 `i 379  ]
-[e = F4176 -> _icone `i ]
+[e = F4178 -> _icone `i ]
 [e $U 380  ]
 "740
 [; ;Liofilizador Placa Mae.c: 740:                                                else
@@ -2492,7 +2492,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "741
 [; ;Liofilizador Placa Mae.c: 741:                                                if(Tamanho_Display==80)canal=MenorCanalLivre();
 [e $ ! == _Tamanho_Display -> 80 `i 381  ]
-[e = F4176 -> ( _MenorCanalLivre ..  `i ]
+[e = F4178 -> ( _MenorCanalLivre ..  `i ]
 [e $U 382  ]
 "742
 [; ;Liofilizador Placa Mae.c: 742:                                                else
@@ -2500,13 +2500,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "743
 [; ;Liofilizador Placa Mae.c: 743:                                                if(Tamanho_Display==81)canal=MenorCanalLivre();
 [e $ ! == _Tamanho_Display -> 81 `i 383  ]
-[e = F4176 -> ( _MenorCanalLivre ..  `i ]
+[e = F4178 -> ( _MenorCanalLivre ..  `i ]
 [e :U 383 ]
 [e :U 382 ]
 [e :U 380 ]
 "745
 [; ;Liofilizador Placa Mae.c: 745:                                                if(canal<8)
-[e $ ! < F4176 -> 8 `i 384  ]
+[e $ ! < F4178 -> 8 `i 384  ]
 "746
 [; ;Liofilizador Placa Mae.c: 746:                                                   {
 {
@@ -2515,40 +2515,40 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _PROCULUS_VP_Write_UInt16 (2 , -> + -> 784 `i -> _icone `i `ui -> + -> _icone `i -> 1 `i `ui ]
 "748
 [; ;Liofilizador Placa Mae.c: 748:                                                   PROCULUS_VP_Write_UInt16((canal*10+1789),(canal<<8)|(0x0001));
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> + * F4176 -> 10 `i -> 1789 `i `ui -> | << F4176 -> 8 `i -> 1 `i `ui ]
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> + * F4178 -> 10 `i -> 1789 `i `ui -> | << F4178 -> 8 `i -> 1 `i `ui ]
 "749
 [; ;Liofilizador Placa Mae.c: 749:                                                   PROCULUS_VP_Write_UInt16((canal*10+1787),TrendColor[icone]);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> + * F4176 -> 10 `i -> 1787 `i `ui -> *U + &U _TrendColor * -> _icone `ux -> -> # *U &U _TrendColor `ui `ux `ui ]
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> + * F4178 -> 10 `i -> 1787 `i `ui -> *U + &U _TrendColor * -> _icone `ux -> -> # *U &U _TrendColor `ui `ux `ui ]
 "752
 [; ;Liofilizador Placa Mae.c: 752:                                                   mapa.canal[canal]=canal;
-[e = *U + &U . _mapa 2 * -> -> F4176 `ui `ux -> -> # *U &U . _mapa 2 `ui `ux -> F4176 `uc ]
+[e = *U + &U . _mapa 2 * -> -> F4178 `ui `ux -> -> # *U &U . _mapa 2 `ui `ux -> F4178 `uc ]
 "753
 [; ;Liofilizador Placa Mae.c: 753:                                                   mapa.icone[canal]=icone+1;
-[e = *U + &U . _mapa 3 * -> -> F4176 `ui `ux -> -> # *U &U . _mapa 3 `ui `ux -> + -> _icone `i -> 1 `i `uc ]
+[e = *U + &U . _mapa 3 * -> -> F4178 `ui `ux -> -> # *U &U . _mapa 3 `ui `ux -> + -> _icone `i -> 1 `i `uc ]
 "754
 [; ;Liofilizador Placa Mae.c: 754:                                                   mapa.vpIcone[icone]=icone+1;
 [e = *U + &U . _mapa 4 * -> _icone `ux -> -> # *U &U . _mapa 4 `ui `ux -> + -> _icone `i -> 1 `i `uc ]
 "755
 [; ;Liofilizador Placa Mae.c: 755:                                                   mapa.cor[canal]=TrendColor[icone];
-[e = *U + &U . _mapa 5 * -> -> F4176 `ui `ux -> -> # *U &U . _mapa 5 `ui `ux *U + &U _TrendColor * -> _icone `ux -> -> # *U &U _TrendColor `ui `ux ]
+[e = *U + &U . _mapa 5 * -> -> F4178 `ui `ux -> -> # *U &U . _mapa 5 `ui `ux *U + &U _TrendColor * -> _icone `ux -> -> # *U &U _TrendColor `ui `ux ]
 "756
 [; ;Liofilizador Placa Mae.c: 756:                                                   mapa.fator[canal]=1.0;
-[e = *U + &U . _mapa 1 * -> -> F4176 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .1.0 `f ]
+[e = *U + &U . _mapa 1 * -> -> F4178 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .1.0 `f ]
 "757
 [; ;Liofilizador Placa Mae.c: 757:                                                   mapa.entrada[canal]=&leitura[(icone<3)?(icone):((icone)+1)];
-[e = *U + &U . _mapa 0 * -> -> F4176 `ui `ux -> -> # *U &U . _mapa 0 `ui `ux &U *U + &U _leitura * -> -> ? < -> _icone `i -> 3 `i : -> _icone `i + -> _icone `i -> 1 `i `ui `ux -> -> # *U &U _leitura `ui `ux ]
+[e = *U + &U . _mapa 0 * -> -> F4178 `ui `ux -> -> # *U &U . _mapa 0 `ui `ux &U *U + &U _leitura * -> -> ? < -> _icone `i -> 3 `i : -> _icone `i + -> _icone `i -> 1 `i `ui `ux -> -> # *U &U _leitura `ui `ux ]
 "759
 [; ;Liofilizador Placa Mae.c: 759:                                                   mapa.fator[canal]=1.0;
-[e = *U + &U . _mapa 1 * -> -> F4176 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .1.0 `f ]
+[e = *U + &U . _mapa 1 * -> -> F4178 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .1.0 `f ]
 "761
 [; ;Liofilizador Placa Mae.c: 761:                                                   if(icone==0)mapa.fator[canal]=0.4546;
 [e $ ! == -> _icone `i -> 0 `i 385  ]
-[e = *U + &U . _mapa 1 * -> -> F4176 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .0.4546 `f ]
+[e = *U + &U . _mapa 1 * -> -> F4178 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .0.4546 `f ]
 [e :U 385 ]
 "762
 [; ;Liofilizador Placa Mae.c: 762:                                                   if(icone==1)mapa.fator[canal]=0.05;
 [e $ ! == -> _icone `i -> 1 `i 386  ]
-[e = *U + &U . _mapa 1 * -> -> F4176 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .0.05 `f ]
+[e = *U + &U . _mapa 1 * -> -> F4178 `ui `ux -> -> # *U &U . _mapa 1 `ui `ux -> .0.05 `f ]
 [e :U 386 ]
 "767
 [; ;Liofilizador Placa Mae.c: 767:                                                   TrendCurveFuncao(2);
@@ -2565,10 +2565,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "771
 [; ;Liofilizador Placa Mae.c: 771:                                                   PROCULUS_VP_Write_UInt16((canal*10+1789),(canal<<8)|(0x0A00));
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> + * F4176 -> 10 `i -> 1789 `i `ui -> | << F4176 -> 8 `i -> 2560 `i `ui ]
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> + * F4178 -> 10 `i -> 1789 `i `ui -> | << F4178 -> 8 `i -> 2560 `i `ui ]
 "772
 [; ;Liofilizador Placa Mae.c: 772:                                                   PROCULUS_VP_Write_UInt16((canal*10+1787),0xFFFF);
-[e ( _PROCULUS_VP_Write_UInt16 (2 , -> + * F4176 -> 10 `i -> 1787 `i `ui -> 65535 `ui ]
+[e ( _PROCULUS_VP_Write_UInt16 (2 , -> + * F4178 -> 10 `i -> 1787 `i `ui -> 65535 `ui ]
 "773
 [; ;Liofilizador Placa Mae.c: 773:                                                   PROCULUS_VP_Write_UInt16(trendvp,-1);
 [e ( _PROCULUS_VP_Write_UInt16 (2 , -> _trendvp `ui -> -U -> 1 `i `ui ]
@@ -3283,8 +3283,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _vpicone `i ~T0 @X0 1 a ]
 "1008
 [; ;Liofilizador Placa Mae.c: 1008:      static char flag_contabilizado=0;
-[v F4205 `uc ~T0 @X0 1 s flag_contabilizado ]
-[i F4205
+[v F4207 `uc ~T0 @X0 1 s flag_contabilizado ]
+[i F4207
 -> -> 0 `i `uc
 ]
 "1015
@@ -9436,7 +9436,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Liofilizador Placa Mae.c: 3550:      strcat(texto,"* : Mother Board ");
 [e ( _strcat (2 , &U _texto :s 61C ]
 "3551
-[; ;Liofilizador Placa Mae.c: 3551:      strcat(texto,"v1.0.56 (RST_LED)");
+[; ;Liofilizador Placa Mae.c: 3551:      strcat(texto,"v1.0.60");
 [e ( _strcat (2 , &U _texto :s 62C ]
 "3552
 [; ;Liofilizador Placa Mae.c: 3552:      print(texto);
@@ -10778,8 +10778,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "4052
 [; ;Liofilizador Placa Mae.c: 4052:      static char count=0;
-[v F4487 `uc ~T0 @X0 1 s count ]
-[i F4487
+[v F4489 `uc ~T0 @X0 1 s count ]
+[i F4489
 -> -> 0 `i `uc
 ]
 "4053
@@ -10862,8 +10862,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . _statusgen1 6 -> -> 1 `i `uc ]
 "4080
 [; ;Liofilizador Placa Mae.c: 4080:               if(count<5)count++;
-[e $ ! < -> F4487 `i -> 5 `i 973  ]
-[e ++ F4487 -> -> 1 `i `uc ]
+[e $ ! < -> F4489 `i -> 5 `i 973  ]
+[e ++ F4489 -> -> 1 `i `uc ]
 [e :U 973 ]
 "4081
 [; ;Liofilizador Placa Mae.c: 4081:               }
@@ -10883,8 +10883,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . _statusgen1 6 -> -> 1 `i `uc ]
 "4088
 [; ;Liofilizador Placa Mae.c: 4088:               if(count<5)count++;
-[e $ ! < -> F4487 `i -> 5 `i 975  ]
-[e ++ F4487 -> -> 1 `i `uc ]
+[e $ ! < -> F4489 `i -> 5 `i 975  ]
+[e ++ F4489 -> -> 1 `i `uc ]
 [e :U 975 ]
 "4089
 [; ;Liofilizador Placa Mae.c: 4089:               }
@@ -10900,13 +10900,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 967 ]
 "4092
 [; ;Liofilizador Placa Mae.c: 4092:       if(count>0)
-[e $ ! > -> F4487 `i -> 0 `i 976  ]
+[e $ ! > -> F4489 `i -> 0 `i 976  ]
 "4093
 [; ;Liofilizador Placa Mae.c: 4093:          {
 {
 "4094
 [; ;Liofilizador Placa Mae.c: 4094:          count--;
-[e -- F4487 -> -> 1 `i `uc ]
+[e -- F4489 -> -> 1 `i `uc ]
 "4095
 [; ;Liofilizador Placa Mae.c: 4095:          statusgen1.flag_pc_conected=1;
 [e = . _statusgen1 7 -> -> 1 `i `uc ]
@@ -11842,6 +11842,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 93C 32 99 104 58 0 ]
 [a 9C 67 78 80 74 58 32 48 53 46 54 55 56 46 57 51 48 47 48 48 48 49 45 49 50 0 ]
 [a 87C 32 99 104 58 48 0 ]
+[a 62C 118 49 46 48 46 54 48 0 ]
 [a 91C 48 0 ]
 [a 55C 32 73 103 117 97 105 115 46 0 ]
 [a 56C 32 100 105 102 101 114 101 110 116 101 115 46 0 ]
@@ -11874,7 +11875,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 57C 45 45 45 45 45 82 69 76 65 84 79 82 73 79 32 84 69 67 78 73 67 79 45 45 45 45 0 ]
 [a 70C 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 0 ]
 [a 101C 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 45 0 ]
-[a 62C 118 49 46 48 46 53 54 32 40 82 83 84 95 76 69 68 41 0 ]
 [a 37C 65 103 117 97 114 100 101 46 46 46 32 65 114 109 97 122 101 110 97 110 100 111 32 68 97 100 111 115 33 0 ]
 [a 36C 65 103 117 97 114 100 101 46 46 46 32 67 97 114 114 101 103 97 110 100 111 32 68 97 100 111 115 33 0 ]
 [a 38C 65 103 117 97 114 100 101 46 46 46 32 84 114 97 110 115 102 101 114 105 110 100 111 32 100 97 100 111 115 32 112 97 114 97 32 112 108 97 99 97 115 32 101 120 116 101 114 110 97 115 33 0 ]

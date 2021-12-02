@@ -40,12 +40,28 @@ void USART_init(unsigned long baudrate)
      for(i=0;i<15;i++) erro=RCREG;
 }
 
+void flashIndcateReset(int flashes){
+     int count;
+     for(count=0; count<flashes; count++)
+        { 
+        flag_led_usart  = 1;              
+        flag_led_memory = 0;
+        __delay_ms(500);
+        asm("CLRWDT");
+        flag_led_usart  = 0;              
+        flag_led_memory = 1;
+        __delay_ms(500);
+        asm("CLRWDT");         
+        }
+}
+
 void USART_restart(unsigned long baudrate)
 {
      RCSTAbits.SPEN = 0;
      RCSTAbits.CREN = 0; 
-     TRISCbits.TRISC6= 0;
-     TRISCbits.TRISC7= 0;    
+     TRISCbits.TRISC6= 1;
+     TRISCbits.TRISC7= 1;    
+     flashIndcateReset(15);
      USART_init(baudrate);
 }
 
@@ -69,13 +85,13 @@ void USART_putc(unsigned char value)
     while(!PIR1bits.TXIF) 
          {
          counter++;
-         if(counter>500)
+         if(counter>2500)
            {  
            USART_restart(115200);
            counter=0;  
            break;
            }
-         //continue;//Registrador vazio
+         continue;//Registrador vazio
          __delay_ms(1);
          }
     TXREG=value;           
