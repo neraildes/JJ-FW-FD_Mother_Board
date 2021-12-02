@@ -12,6 +12,8 @@ extern volatile unsigned char usart_buffer[USART_BUFFER_SIZE];
 extern volatile unsigned int tmr_led_usart;
 extern volatile unsigned int Delay_Led_Usart;
 
+extern int ResetSerial;
+
 
 /*----------------------------------------------------------------------------*/
 void USART_init(unsigned long baudrate)
@@ -57,6 +59,7 @@ void flashIndcateReset(int flashes){
 
 void USART_restart(unsigned long baudrate)
 {
+     ResetSerial++;
      RCSTAbits.SPEN = 0;
      RCSTAbits.CREN = 0; 
      TRISCbits.TRISC6= 1;

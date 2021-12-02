@@ -181,6 +181,7 @@ T_mapa mapa;
 
 int  maxTimeWithoutLedTX; //Temporário para resetar se não houver comunicação
 char showScreenReset;
+int  ResetSerial=0;
 
 int main(int argc, char** argv) 
 {
@@ -447,8 +448,7 @@ int main(int argc, char** argv)
      maxTimeWithoutLedTX=0; //Temporario para resetar se não houver comunicação.
      
         while(1)
-             {
-             
+             {             
              flag_main_loop_WDT=TRUE;       
              
              //=========================SELECAO DE PAGINA============================
@@ -496,6 +496,7 @@ int main(int argc, char** argv)
                 
                 //--------------------------------------------------------------
                 //Caso não haja comunicação serial por 3 segundos, resetar...
+                /*
                 if(maxTimeWithoutLedTX>=3000)
                   {  
                   EEPROM_Write_Byte(17,processo_hora);     //Hora
@@ -504,6 +505,7 @@ int main(int argc, char** argv)
                   EEPROM_Write_Byte(33,showScreenReset);                  
                   asm("RESET");
                   }
+                */ 
                 //--------------------------------------------------------------
 
                 
