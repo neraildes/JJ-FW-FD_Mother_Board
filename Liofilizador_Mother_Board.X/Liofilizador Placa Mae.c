@@ -1070,7 +1070,11 @@ void ShowSensorRealTimeHS(void)
                        }  
                      else
                        {  
-                       USART_restart(115200);  
+                       EEPROM_Write_Byte(17, processo_hora);     //Hora                    
+                       EEPROM_Write_Byte(18,processo_minuto);   //Minuto    
+                       showScreenReset=0x00;
+                       EEPROM_Write_Byte(33,showScreenReset);                  
+                       asm("RESET");                                                
                        }
                      break;  
               case 2://Placa 2 Canal 0 - CONDENSADOR
