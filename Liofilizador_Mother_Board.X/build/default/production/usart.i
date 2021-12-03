@@ -4690,17 +4690,28 @@ void USART_init(unsigned long baudrate)
 
 void flashIndcateReset(int flashes){
      int count;
+
+     TRISCbits.TRISC7= 0;
      for(count=0; count<flashes; count++)
         {
         PORTBbits.RB6 = 1;
         PORTBbits.RB5 = 0;
-        _delay((unsigned long)((500)*(32000000/4000.0)));
+        PORTCbits.RC7=0;
+        _delay((unsigned long)((10)*(32000000/4000.0)));
+        PORTCbits.RC7=1;
+        _delay((unsigned long)((10)*(32000000/4000.0)));
         __asm("CLRWDT");
         PORTBbits.RB6 = 0;
         PORTBbits.RB5 = 1;
-        _delay((unsigned long)((500)*(32000000/4000.0)));
+        PORTCbits.RC7=0;
+        _delay((unsigned long)((10)*(32000000/4000.0)));
+        PORTCbits.RC7=1;
+        _delay((unsigned long)((10)*(32000000/4000.0)));
         __asm("CLRWDT");
         }
+     PORTCbits.RC7=1;
+     _delay((unsigned long)((100)*(32000000/4000.0)));
+     TRISCbits.TRISC7= 1;
 }
 
 void USART_restart(unsigned long baudrate)
@@ -4708,10 +4719,10 @@ void USART_restart(unsigned long baudrate)
      ResetSerial++;
      RCSTAbits.SPEN = 0;
      RCSTAbits.CREN = 0;
-     TRISCbits.TRISC6= 1;
-     TRISCbits.TRISC7= 1;
-     flashIndcateReset(15);
+     flashIndcateReset(30);
      USART_init(baudrate);
+     _delay((unsigned long)((1000)*(32000000/4000.0)));
+
 }
 
 void USART_to_Protocol(t_usart_protocol *usart_protocol){
