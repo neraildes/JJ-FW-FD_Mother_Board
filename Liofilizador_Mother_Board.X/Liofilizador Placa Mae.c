@@ -1004,7 +1004,7 @@ void ShowSensorRealTimeHS(void)
      char canal;
      char tupla;
      int  vp, vpicone;
-     static char totalFalha=0;
+     //static char totalFalha=0;
      
      //*NERA-TEMPORARIO
      //Estas variáveis devem ser apagadas
@@ -1056,36 +1056,28 @@ void ShowSensorRealTimeHS(void)
         switch(tupla)
               {
               case 0://PLACA 1 CANAL 0 - VOLTIMETRO
-                    if(leitura[tupla]>=0)
-                      {  
-                      PROCULUS_VP_Write_UInt16(153,leitura[tupla]);
-                      Voltimetro=leitura[tupla];                     
-                      }
+                     Voltimetro=leitura[tupla];
+                     if(Tamanho_Display==81) Voltimetro*=0.92; //Exibe algo em torno de 220V
+                     PROCULUS_VP_Write_UInt16(153,Voltimetro);
+                                          
                      break;               
               case 1://PLACA 1 CANAL 1 - VACUOMETRO
-                     if((leitura[tupla]>=10)&&(leitura[tupla]<=2000)) //Proteção contra erro de comunicação                         
-                       {                   
-                       PROCULUS_VP_Write_UInt16(151,leitura[tupla]); //Vacuometro 
-                       //Vacuometro=leitura[tupla];
-                       Vacuometro=(float)leitura[tupla]-((2000.0-(float)leitura[tupla])*2.35);                                              
-                       totalFalha=0;
+                     {
+                     int art;                     
+                     if(leitura[tupla]>=10)                          
+                       {                  
+                       art=leitura[tupla]-((20000-leitura[tupla])*0.6);
+                       if(art<2537) art=2537;                            
+                       Vacuometro = art ;
+                       PROCULUS_VP_Write_UInt16(151, art ); //Vacuometro                          
                        }  
                      else
                        {  
-                       totalFalha++;
-                       if(totalFalha>=3)
-                         {  
-                         totalFalha=0;  
-                         EEPROM_Write_Byte(17, processo_hora);     //Hora                    
-                         EEPROM_Write_Byte(18,processo_minuto);   //Minuto    
-                         showScreenReset=0x00;
-                         EEPROM_Write_Byte(33,showScreenReset);                  
-                         asm("RESET");                                                
-                         }
-                       }
+                       USART_restart(115200);
+                       }                      
+                     }
                      break;  
-              case 2://Placa 2 Canal 0 - CONDENSADOR
-                                                                   
+              case 2://Placa 2 Canal 0 - CONDENSADOR                                                                   
                     PROCULUS_VP_Write_UInt16(150,leitura[tupla]);  
                     Condensador=leitura[tupla];
                      break; 

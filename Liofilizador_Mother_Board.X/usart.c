@@ -12,6 +12,8 @@ extern volatile unsigned char usart_buffer[USART_BUFFER_SIZE];
 extern volatile unsigned int tmr_led_usart;
 extern volatile unsigned int Delay_Led_Usart;
 
+extern volatile unsigned int Delay_Led_Memory;
+
 extern int ResetSerial;
 
 
@@ -71,8 +73,9 @@ void USART_restart(unsigned long baudrate)
      ResetSerial++;
      RCSTAbits.SPEN = 0;
      RCSTAbits.CREN = 0;   
-     flashIndcateReset(30);
+     flashIndcateReset(60);
      USART_init(baudrate);
+     Delay_Led_Memory=DEFAULT_LEDS;
      __delay_ms(1000);
      
 }
@@ -92,23 +95,22 @@ void USART_to_Protocol(t_usart_protocol *usart_protocol){
 
 
 void USART_putc(unsigned char value)
-{   
-    
+{       
     unsigned int counter=0;    
     Delay_Led_Usart=DEFAULT_LEDS;
+    TXREG=value;
     while(!PIR1bits.TXIF) 
          {
          counter++;
          if(counter>2500)
-           {  
+           {               
            USART_restart(115200);
            counter=0;  
            break;
            }
          continue;//Registrador vazio
          __delay_ms(1);
-         }
-    TXREG=value;           
+         }               
 }
 
 

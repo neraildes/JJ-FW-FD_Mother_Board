@@ -4717,7 +4717,7 @@ void USART_restart(unsigned long baudrate)
      ResetSerial++;
      RCSTAbits.SPEN = 0;
      RCSTAbits.CREN = 0;
-     flashIndcateReset(30);
+     flashIndcateReset(60);
      USART_init(baudrate);
      _delay((unsigned long)((1000)*(32000000/4000.0)));
 

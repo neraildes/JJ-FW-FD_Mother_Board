@@ -931,8 +931,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;usart.c: 73:      RCSTAbits.CREN = 0;
 [e = . . _RCSTAbits 0 4 -> -> 0 `i `uc ]
 "74
-[; ;usart.c: 74:      flashIndcateReset(30);
-[e ( _flashIndcateReset (1 -> 30 `i ]
+[; ;usart.c: 74:      flashIndcateReset(60);
+[e ( _flashIndcateReset (1 -> 60 `i ]
 "75
 [; ;usart.c: 75:      USART_init(baudrate);
 [e ( _USART_init (1 _baudrate ]
