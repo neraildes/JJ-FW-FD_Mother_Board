@@ -200,9 +200,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "203 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
 [v __delay `JF2424 ~T0 @X0 0 e ]
 [p i __delay ]
-"15 usart.c
-[; ;usart.c: 15: extern int ResetSerial;
+"17 usart.c
+[; ;usart.c: 17: extern int ResetSerial;
 [v _ResetSerial `i ~T0 @X0 0 e ]
+"15
+[; ;usart.c: 15: extern volatile unsigned int Delay_Led_Memory;
+[v _Delay_Led_Memory `Vui ~T0 @X0 0 e ]
 "22 ./protocolo.h
 [; ;./protocolo.h: 22: typedef struct {
 [s S277 `i 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc -> 256 `i ]
@@ -213,7 +216,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "13
 [; ;usart.c: 13: extern volatile unsigned int Delay_Led_Usart;
 [v _Delay_Led_Usart `Vui ~T0 @X0 0 e ]
-"2580 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+"3486 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+[; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 3486: extern volatile unsigned char TXREG __attribute__((address(0xFAD)));
+[v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
+"2580
 [; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2580:     struct {
 [s S94 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S94 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF PSPIF ]
@@ -228,11 +234,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2596
 [; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2596: extern volatile PIR1bits_t PIR1bits __attribute__((address(0xF9E)));
 [v _PIR1bits `VS93 ~T0 @X0 0 e@3998 ]
-"3486
-[; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 3486: extern volatile unsigned char TXREG __attribute__((address(0xFAD)));
-[v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
-"117 usart.c
-[; ;usart.c: 117:     putc(value);
+"119 usart.c
+[; ;usart.c: 119:     putc(value);
 [v _putc `(i ~T0 @X0 0 e? ]
 "54 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
@@ -755,63 +758,63 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ..
 ]
-"19 usart.c
-[; ;usart.c: 19: void USART_init(unsigned long baudrate)
+"21 usart.c
+[; ;usart.c: 21: void USART_init(unsigned long baudrate)
 [v _USART_init `(v ~T0 @X0 1 ef1`ul ]
-"20
-[; ;usart.c: 20:      {
+"22
+[; ;usart.c: 22:      {
 {
 [e :U _USART_init ]
-"19
-[; ;usart.c: 19: void USART_init(unsigned long baudrate)
-[v _baudrate `ul ~T0 @X0 1 r1 ]
-"20
-[; ;usart.c: 20:      {
-[f ]
 "21
-[; ;usart.c: 21:      unsigned char erro;
-[v _erro `uc ~T0 @X0 1 a ]
+[; ;usart.c: 21: void USART_init(unsigned long baudrate)
+[v _baudrate `ul ~T0 @X0 1 r1 ]
 "22
-[; ;usart.c: 22:      unsigned char i;
+[; ;usart.c: 22:      {
+[f ]
+"23
+[; ;usart.c: 23:      unsigned char erro;
+[v _erro `uc ~T0 @X0 1 a ]
+"24
+[; ;usart.c: 24:      unsigned char i;
 [v _i `uc ~T0 @X0 1 a ]
-"25
-[; ;usart.c: 25:      RCSTAbits.SPEN = 1;
+"27
+[; ;usart.c: 27:      RCSTAbits.SPEN = 1;
 [e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
-"26
-[; ;usart.c: 26:      RCSTAbits.CREN = 1;
-[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
 "28
-[; ;usart.c: 28:      TXSTAbits.BRGH = 1;
-[e = . . _TXSTAbits 0 2 -> -> 1 `i `uc ]
-"29
-[; ;usart.c: 29:      BAUDCONbits.BRG16 = 0;
-[e = . . _BAUDCONbits 0 3 -> -> 0 `i `uc ]
+[; ;usart.c: 28:      RCSTAbits.CREN = 1;
+[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
 "30
-[; ;usart.c: 30:      TXSTAbits.SYNC = 0;
-[e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
+[; ;usart.c: 30:      TXSTAbits.BRGH = 1;
+[e = . . _TXSTAbits 0 2 -> -> 1 `i `uc ]
 "31
-[; ;usart.c: 31:      TXSTAbits.TX9 = 0;
-[e = . . _TXSTAbits 0 6 -> -> 0 `i `uc ]
+[; ;usart.c: 31:      BAUDCONbits.BRG16 = 0;
+[e = . . _BAUDCONbits 0 3 -> -> 0 `i `uc ]
 "32
-[; ;usart.c: 32:      SPBRG = ((32000000)/(16*baudrate))-1 ;
-[e = _SPBRG -> - / -> -> 32000000 `l `ul * -> -> -> 16 `i `l `ul _baudrate -> -> -> 1 `i `l `ul `uc ]
+[; ;usart.c: 32:      TXSTAbits.SYNC = 0;
+[e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
 "33
-[; ;usart.c: 33:      INTCONbits.PEIE = 1;
-[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
+[; ;usart.c: 33:      TXSTAbits.TX9 = 0;
+[e = . . _TXSTAbits 0 6 -> -> 0 `i `uc ]
+"34
+[; ;usart.c: 34:      SPBRG = ((32000000)/(16*baudrate))-1 ;
+[e = _SPBRG -> - / -> -> 32000000 `l `ul * -> -> -> 16 `i `l `ul _baudrate -> -> -> 1 `i `l `ul `uc ]
 "35
-[; ;usart.c: 35:      RCIE=1;
+[; ;usart.c: 35:      INTCONbits.PEIE = 1;
+[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
+"37
+[; ;usart.c: 37:      RCIE=1;
 [e = _RCIE -> -> 1 `i `b ]
-"36
-[; ;usart.c: 36:      TXEN=1;
+"38
+[; ;usart.c: 38:      TXEN=1;
 [e = _TXEN -> -> 1 `i `b ]
-"39
-[; ;usart.c: 39:      TRISCbits.TRISC6= 1;
+"41
+[; ;usart.c: 41:      TRISCbits.TRISC6= 1;
 [e = . . _TRISCbits 0 6 -> -> 1 `i `uc ]
-"40
-[; ;usart.c: 40:      TRISCbits.TRISC7= 1;
-[e = . . _TRISCbits 0 7 -> -> 1 `i `uc ]
 "42
-[; ;usart.c: 42:      for(i=0;i<15;i++) erro=RCREG;
+[; ;usart.c: 42:      TRISCbits.TRISC7= 1;
+[e = . . _TRISCbits 0 7 -> -> 1 `i `uc ]
+"44
+[; ;usart.c: 44:      for(i=0;i<15;i++) erro=RCREG;
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 15 `i 281  ]
@@ -822,490 +825,493 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ < -> _i `i -> 15 `i 281  ]
 [e :U 282 ]
 }
-"43
-[; ;usart.c: 43: }
+"45
+[; ;usart.c: 45: }
 [e :UE 280 ]
 }
-"45
-[; ;usart.c: 45: void flashIndcateReset(int flashes){
+"47
+[; ;usart.c: 47: void flashIndcateReset(int flashes){
 [v _flashIndcateReset `(v ~T0 @X0 1 ef1`i ]
 {
 [e :U _flashIndcateReset ]
 [v _flashes `i ~T0 @X0 1 r1 ]
 [f ]
-"46
-[; ;usart.c: 46:      int count;
-[v _count `i ~T0 @X0 1 a ]
-"47
-[; ;usart.c: 47:      TRISCbits.TRISC6= 0;
-[e = . . _TRISCbits 0 6 -> -> 0 `i `uc ]
 "48
-[; ;usart.c: 48:      for(count=0; count<flashes; count++)
+[; ;usart.c: 48:      int count;
+[v _count `i ~T0 @X0 1 a ]
+"49
+[; ;usart.c: 49:      TRISCbits.TRISC6= 0;
+[e = . . _TRISCbits 0 6 -> -> 0 `i `uc ]
+"50
+[; ;usart.c: 50:      for(count=0; count<flashes; count++)
 {
 [e = _count -> 0 `i ]
 [e $U 288  ]
 [e :U 285 ]
-"49
-[; ;usart.c: 49:         {
-{
-"50
-[; ;usart.c: 50:         PORTBbits.RB6 = 1;
-[e = . . _PORTBbits 0 6 -> -> 1 `i `uc ]
 "51
-[; ;usart.c: 51:         PORTBbits.RB5 = 0;
-[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
+[; ;usart.c: 51:         {
+{
 "52
-[; ;usart.c: 52:         PORTCbits.RC6=0;
-[e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
+[; ;usart.c: 52:         PORTBbits.RB6 = 1;
+[e = . . _PORTBbits 0 6 -> -> 1 `i `uc ]
 "53
-[; ;usart.c: 53:         _delay((unsigned long)((10)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;usart.c: 53:         PORTBbits.RB5 = 0;
+[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
 "54
-[; ;usart.c: 54:         PORTCbits.RC6=1;
-[e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
+[; ;usart.c: 54:         PORTCbits.RC6=0;
+[e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
 "55
 [; ;usart.c: 55:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "56
-[; ;usart.c: 56:         __asm("CLRWDT");
-[; <" CLRWDT ;# ">
-"57
-[; ;usart.c: 57:         PORTBbits.RB6 = 0;
-[e = . . _PORTBbits 0 6 -> -> 0 `i `uc ]
-"58
-[; ;usart.c: 58:         PORTBbits.RB5 = 1;
-[e = . . _PORTBbits 0 5 -> -> 1 `i `uc ]
-"59
-[; ;usart.c: 59:         PORTCbits.RC6=0;
-[e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
-"60
-[; ;usart.c: 60:         _delay((unsigned long)((10)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"61
-[; ;usart.c: 61:         PORTCbits.RC6=1;
+[; ;usart.c: 56:         PORTCbits.RC6=1;
 [e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
+"57
+[; ;usart.c: 57:         _delay((unsigned long)((10)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"58
+[; ;usart.c: 58:         __asm("CLRWDT");
+[; <" CLRWDT ;# ">
+"59
+[; ;usart.c: 59:         PORTBbits.RB6 = 0;
+[e = . . _PORTBbits 0 6 -> -> 0 `i `uc ]
+"60
+[; ;usart.c: 60:         PORTBbits.RB5 = 1;
+[e = . . _PORTBbits 0 5 -> -> 1 `i `uc ]
+"61
+[; ;usart.c: 61:         PORTCbits.RC6=0;
+[e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
 "62
 [; ;usart.c: 62:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "63
-[; ;usart.c: 63:         __asm("CLRWDT");
-[; <" CLRWDT ;# ">
+[; ;usart.c: 63:         PORTCbits.RC6=1;
+[e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
 "64
-[; ;usart.c: 64:         }
+[; ;usart.c: 64:         _delay((unsigned long)((10)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"65
+[; ;usart.c: 65:         __asm("CLRWDT");
+[; <" CLRWDT ;# ">
+"66
+[; ;usart.c: 66:         }
 }
 [e ++ _count -> 1 `i ]
 [e :U 288 ]
 [e $ < _count _flashes 285  ]
 [e :U 286 ]
 }
-"65
-[; ;usart.c: 65:      PORTCbits.RC6=1;
-[e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
-"66
-[; ;usart.c: 66:      _delay((unsigned long)((100)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "67
-[; ;usart.c: 67: }
+[; ;usart.c: 67:      PORTCbits.RC6=1;
+[e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
+"68
+[; ;usart.c: 68:      _delay((unsigned long)((100)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"69
+[; ;usart.c: 69: }
 [e :UE 284 ]
 }
-"69
-[; ;usart.c: 69: void USART_restart(unsigned long baudrate)
+"71
+[; ;usart.c: 71: void USART_restart(unsigned long baudrate)
 [v _USART_restart `(v ~T0 @X0 1 ef1`ul ]
-"70
-[; ;usart.c: 70: {
+"72
+[; ;usart.c: 72: {
 {
 [e :U _USART_restart ]
-"69
-[; ;usart.c: 69: void USART_restart(unsigned long baudrate)
-[v _baudrate `ul ~T0 @X0 1 r1 ]
-"70
-[; ;usart.c: 70: {
-[f ]
 "71
-[; ;usart.c: 71:      ResetSerial++;
-[e ++ _ResetSerial -> 1 `i ]
+[; ;usart.c: 71: void USART_restart(unsigned long baudrate)
+[v _baudrate `ul ~T0 @X0 1 r1 ]
 "72
-[; ;usart.c: 72:      RCSTAbits.SPEN = 0;
-[e = . . _RCSTAbits 0 7 -> -> 0 `i `uc ]
+[; ;usart.c: 72: {
+[f ]
 "73
-[; ;usart.c: 73:      RCSTAbits.CREN = 0;
-[e = . . _RCSTAbits 0 4 -> -> 0 `i `uc ]
+[; ;usart.c: 73:      ResetSerial++;
+[e ++ _ResetSerial -> 1 `i ]
 "74
-[; ;usart.c: 74:      flashIndcateReset(60);
-[e ( _flashIndcateReset (1 -> 60 `i ]
+[; ;usart.c: 74:      RCSTAbits.SPEN = 0;
+[e = . . _RCSTAbits 0 7 -> -> 0 `i `uc ]
 "75
-[; ;usart.c: 75:      USART_init(baudrate);
-[e ( _USART_init (1 _baudrate ]
+[; ;usart.c: 75:      RCSTAbits.CREN = 0;
+[e = . . _RCSTAbits 0 4 -> -> 0 `i `uc ]
 "76
-[; ;usart.c: 76:      _delay((unsigned long)((1000)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;usart.c: 76:      flashIndcateReset(60);
+[e ( _flashIndcateReset (1 -> 60 `i ]
+"77
+[; ;usart.c: 77:      USART_init(baudrate);
+[e ( _USART_init (1 _baudrate ]
 "78
-[; ;usart.c: 78: }
+[; ;usart.c: 78:      Delay_Led_Memory=5;
+[e = _Delay_Led_Memory -> -> 5 `i `ui ]
+"79
+[; ;usart.c: 79:      _delay((unsigned long)((1000)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"81
+[; ;usart.c: 81: }
 [e :UE 289 ]
 }
-"82
-[; ;usart.c: 82: void USART_to_Protocol(t_usart_protocol *usart_protocol){
+"85
+[; ;usart.c: 85: void USART_to_Protocol(t_usart_protocol *usart_protocol){
 [v _USART_to_Protocol `(v ~T0 @X0 1 ef1`*S277 ]
 {
 [e :U _USART_to_Protocol ]
 [v _usart_protocol `*S277 ~T0 @X0 1 r1 ]
 [f ]
-"83
-[; ;usart.c: 83:      int i;
-[v _i `i ~T0 @X0 1 a ]
-"84
-[; ;usart.c: 84:      usart_protocol->header=(usart_buffer[0]<<8)+usart_buffer[1];
-[e = . *U _usart_protocol 0 + << -> *U + &U _usart_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i ]
-"85
-[; ;usart.c: 85:      usart_protocol->origem=usart_buffer[2];
-[e = . *U _usart_protocol 1 -> *U + &U _usart_buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
 "86
-[; ;usart.c: 86:      usart_protocol->destino=usart_buffer[3];
-[e = . *U _usart_protocol 2 -> *U + &U _usart_buffer * -> -> -> 3 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
+[; ;usart.c: 86:      int i;
+[v _i `i ~T0 @X0 1 a ]
 "87
-[; ;usart.c: 87:      usart_protocol->command=usart_buffer[4];
-[e = . *U _usart_protocol 3 -> *U + &U _usart_buffer * -> -> -> 4 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
+[; ;usart.c: 87:      usart_protocol->header=(usart_buffer[0]<<8)+usart_buffer[1];
+[e = . *U _usart_protocol 0 + << -> *U + &U _usart_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i ]
 "88
-[; ;usart.c: 88:      usart_protocol->size=usart_buffer[5];
-[e = . *U _usart_protocol 4 -> *U + &U _usart_buffer * -> -> -> 5 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
+[; ;usart.c: 88:      usart_protocol->origem=usart_buffer[2];
+[e = . *U _usart_protocol 1 -> *U + &U _usart_buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
 "89
-[; ;usart.c: 89:      for(i=0;i<=usart_protocol->size;i++)
+[; ;usart.c: 89:      usart_protocol->destino=usart_buffer[3];
+[e = . *U _usart_protocol 2 -> *U + &U _usart_buffer * -> -> -> 3 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
+"90
+[; ;usart.c: 90:      usart_protocol->command=usart_buffer[4];
+[e = . *U _usart_protocol 3 -> *U + &U _usart_buffer * -> -> -> 4 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
+"91
+[; ;usart.c: 91:      usart_protocol->size=usart_buffer[5];
+[e = . *U _usart_protocol 4 -> *U + &U _usart_buffer * -> -> -> 5 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
+"92
+[; ;usart.c: 92:      for(i=0;i<=usart_protocol->size;i++)
 {
 [e = _i -> 0 `i ]
 [e $U 294  ]
 [e :U 291 ]
-"90
-[; ;usart.c: 90:         usart_protocol->value[i]=(unsigned char) usart_buffer[i+6];
+"93
+[; ;usart.c: 93:         usart_protocol->value[i]=(unsigned char) usart_buffer[i+6];
 [e = *U + &U . *U _usart_protocol 5 * -> -> _i `ui `ux -> -> # *U &U . *U _usart_protocol 5 `ui `ux -> *U + &U _usart_buffer * -> -> + _i -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `uc ]
 [e ++ _i -> 1 `i ]
 [e :U 294 ]
 [e $ <= _i -> . *U _usart_protocol 4 `i 291  ]
 [e :U 292 ]
 }
-"91
-[; ;usart.c: 91: }
+"94
+[; ;usart.c: 94: }
 [e :UE 290 ]
 }
-"94
-[; ;usart.c: 94: void USART_putc(unsigned char value)
+"97
+[; ;usart.c: 97: void USART_putc(unsigned char value)
 [v _USART_putc `(v ~T0 @X0 1 ef1`uc ]
-"95
-[; ;usart.c: 95: {
+"98
+[; ;usart.c: 98: {
 {
 [e :U _USART_putc ]
-"94
-[; ;usart.c: 94: void USART_putc(unsigned char value)
-[v _value `uc ~T0 @X0 1 r1 ]
-"95
-[; ;usart.c: 95: {
-[f ]
 "97
-[; ;usart.c: 97:     unsigned int counter=0;
+[; ;usart.c: 97: void USART_putc(unsigned char value)
+[v _value `uc ~T0 @X0 1 r1 ]
+"98
+[; ;usart.c: 98: {
+[f ]
+"99
+[; ;usart.c: 99:     unsigned int counter=0;
 [v _counter `ui ~T0 @X0 1 a ]
 [e = _counter -> -> 0 `i `ui ]
-"98
-[; ;usart.c: 98:     Delay_Led_Usart=5;
+"100
+[; ;usart.c: 100:     Delay_Led_Usart=5;
 [e = _Delay_Led_Usart -> -> 5 `i `ui ]
-"99
-[; ;usart.c: 99:     while(!PIR1bits.TXIF)
+"101
+[; ;usart.c: 101:     TXREG=value;
+[e = _TXREG _value ]
+"102
+[; ;usart.c: 102:     while(!PIR1bits.TXIF)
 [e $U 296  ]
 [e :U 297 ]
-"100
-[; ;usart.c: 100:          {
-{
-"101
-[; ;usart.c: 101:          counter++;
-[e ++ _counter -> -> 1 `i `ui ]
-"102
-[; ;usart.c: 102:          if(counter>2500)
-[e $ ! > _counter -> -> 2500 `i `ui 299  ]
 "103
-[; ;usart.c: 103:            {
+[; ;usart.c: 103:          {
 {
 "104
-[; ;usart.c: 104:            USART_restart(115200);
-[e ( _USART_restart (1 -> -> 115200 `l `ul ]
+[; ;usart.c: 104:          counter++;
+[e ++ _counter -> -> 1 `i `ui ]
 "105
-[; ;usart.c: 105:            counter=0;
-[e = _counter -> -> 0 `i `ui ]
+[; ;usart.c: 105:          if(counter>2500)
+[e $ ! > _counter -> -> 2500 `i `ui 299  ]
 "106
-[; ;usart.c: 106:            break;
-[e $U 298  ]
+[; ;usart.c: 106:            {
+{
 "107
-[; ;usart.c: 107:            }
+[; ;usart.c: 107:            USART_restart(115200);
+[e ( _USART_restart (1 -> -> 115200 `l `ul ]
+"108
+[; ;usart.c: 108:            counter=0;
+[e = _counter -> -> 0 `i `ui ]
+"109
+[; ;usart.c: 109:            break;
+[e $U 298  ]
+"110
+[; ;usart.c: 110:            }
 }
 [e :U 299 ]
-"108
-[; ;usart.c: 108:          continue;
+"111
+[; ;usart.c: 111:          continue;
 [e $U 296  ]
-"109
-[; ;usart.c: 109:          _delay((unsigned long)((1)*(32000000/4000.0)));
+"112
+[; ;usart.c: 112:          _delay((unsigned long)((1)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"110
-[; ;usart.c: 110:          }
+"113
+[; ;usart.c: 113:          }
 }
 [e :U 296 ]
-"99
-[; ;usart.c: 99:     while(!PIR1bits.TXIF)
+"102
+[; ;usart.c: 102:     while(!PIR1bits.TXIF)
 [e $ ! != -> . . _PIR1bits 0 4 `i -> 0 `i 297  ]
 [e :U 298 ]
-"111
-[; ;usart.c: 111:     TXREG=value;
-[e = _TXREG _value ]
-"112
-[; ;usart.c: 112: }
+"114
+[; ;usart.c: 114: }
 [e :UE 295 ]
 }
-"115
-[; ;usart.c: 115: void USART_putsc(char value)
+"117
+[; ;usart.c: 117: void USART_putsc(char value)
 [v _USART_putsc `(v ~T0 @X0 1 ef1`uc ]
-"116
-[; ;usart.c: 116: {
+"118
+[; ;usart.c: 118: {
 {
 [e :U _USART_putsc ]
-"115
-[; ;usart.c: 115: void USART_putsc(char value)
-[v _value `uc ~T0 @X0 1 r1 ]
-"116
-[; ;usart.c: 116: {
-[f ]
 "117
-[; ;usart.c: 117:     putc(value);
-[e ( _putc -> _value `i ]
+[; ;usart.c: 117: void USART_putsc(char value)
+[v _value `uc ~T0 @X0 1 r1 ]
 "118
-[; ;usart.c: 118: }
+[; ;usart.c: 118: {
+[f ]
+"119
+[; ;usart.c: 119:     putc(value);
+[e ( _putc -> _value `i ]
+"120
+[; ;usart.c: 120: }
 [e :UE 300 ]
 }
-"121
-[; ;usart.c: 121: void USART_put_buffer(char *vetor, char size){
+"123
+[; ;usart.c: 123: void USART_put_buffer(char *vetor, char size){
 [v _USART_put_buffer `(v ~T0 @X0 1 ef2`*uc`uc ]
 {
 [e :U _USART_put_buffer ]
 [v _vetor `*uc ~T0 @X0 1 r1 ]
 [v _size `uc ~T0 @X0 1 r2 ]
 [f ]
-"122
-[; ;usart.c: 122:     char loop=0;
+"124
+[; ;usart.c: 124:     char loop=0;
 [v _loop `uc ~T0 @X0 1 a ]
 [e = _loop -> -> 0 `i `uc ]
-"123
-[; ;usart.c: 123:     char *ptr;
+"125
+[; ;usart.c: 125:     char *ptr;
 [v _ptr `*uc ~T0 @X0 1 a ]
-"124
-[; ;usart.c: 124:     ptr = vetor;
-[e = _ptr _vetor ]
 "126
-[; ;usart.c: 126:     while(loop<size)
+[; ;usart.c: 126:     ptr = vetor;
+[e = _ptr _vetor ]
+"128
+[; ;usart.c: 128:     while(loop<size)
 [e $U 302  ]
 [e :U 303 ]
-"127
-[; ;usart.c: 127:     {
-{
-"128
-[; ;usart.c: 128:         USART_putc(*ptr);
-[e ( _USART_putc (1 -> *U _ptr `uc ]
 "129
-[; ;usart.c: 129:         ptr++;
-[e ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ]
+[; ;usart.c: 129:     {
+{
 "130
-[; ;usart.c: 130:         loop++;
-[e ++ _loop -> -> 1 `i `uc ]
+[; ;usart.c: 130:         USART_putc(*ptr);
+[e ( _USART_putc (1 -> *U _ptr `uc ]
 "131
-[; ;usart.c: 131:     }
+[; ;usart.c: 131:         ptr++;
+[e ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ]
+"132
+[; ;usart.c: 132:         loop++;
+[e ++ _loop -> -> 1 `i `uc ]
+"133
+[; ;usart.c: 133:     }
 }
 [e :U 302 ]
-"126
-[; ;usart.c: 126:     while(loop<size)
+"128
+[; ;usart.c: 128:     while(loop<size)
 [e $ < -> _loop `i -> _size `i 303  ]
 [e :U 304 ]
-"132
-[; ;usart.c: 132: }
+"134
+[; ;usart.c: 134: }
 [e :UE 301 ]
 }
-"136
-[; ;usart.c: 136: unsigned char USART_input_buffer(void){
+"138
+[; ;usart.c: 138: unsigned char USART_input_buffer(void){
 [v _USART_input_buffer `(uc ~T0 @X0 1 ef ]
 {
 [e :U _USART_input_buffer ]
 [f ]
-"137
-[; ;usart.c: 137:     unsigned int time=0;
+"139
+[; ;usart.c: 139:     unsigned int time=0;
 [v _time `ui ~T0 @X0 1 a ]
 [e = _time -> -> 0 `i `ui ]
-"138
-[; ;usart.c: 138:     unsigned char result=0;
+"140
+[; ;usart.c: 140:     unsigned char result=0;
 [v _result `uc ~T0 @X0 1 a ]
 [e = _result -> -> 0 `i `uc ]
-"140
-[; ;usart.c: 140:     while(time<400){
+"142
+[; ;usart.c: 142:     while(time<400){
 [e $U 306  ]
 [e :U 307 ]
 {
-"141
-[; ;usart.c: 141:         if(statusgen.flag_usart_rx==1){
+"143
+[; ;usart.c: 143:         if(statusgen.flag_usart_rx==1){
 [e $ ! == -> . _statusgen 0 `i -> 1 `i 309  ]
 {
-"142
-[; ;usart.c: 142:            statusgen.flag_usart_rx=0;
-[e = . _statusgen 0 -> -> 0 `i `uc ]
-"143
-[; ;usart.c: 143:            result = 1;
-[e = _result -> -> 1 `i `uc ]
 "144
-[; ;usart.c: 144:            break;
-[e $U 308  ]
+[; ;usart.c: 144:            statusgen.flag_usart_rx=0;
+[e = . _statusgen 0 -> -> 0 `i `uc ]
 "145
-[; ;usart.c: 145:            }
+[; ;usart.c: 145:            result = 1;
+[e = _result -> -> 1 `i `uc ]
+"146
+[; ;usart.c: 146:            break;
+[e $U 308  ]
+"147
+[; ;usart.c: 147:            }
 }
 [e :U 309 ]
-"146
-[; ;usart.c: 146:         time++;
-[e ++ _time -> -> 1 `i `ui ]
-"147
-[; ;usart.c: 147:         _delay((unsigned long)((1)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "148
-[; ;usart.c: 148:     }
+[; ;usart.c: 148:         time++;
+[e ++ _time -> -> 1 `i `ui ]
+"149
+[; ;usart.c: 149:         _delay((unsigned long)((1)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"150
+[; ;usart.c: 150:     }
 }
 [e :U 306 ]
-"140
-[; ;usart.c: 140:     while(time<400){
+"142
+[; ;usart.c: 142:     while(time<400){
 [e $ < _time -> -> 400 `i `ui 307  ]
 [e :U 308 ]
-"149
-[; ;usart.c: 149:     return result;
+"151
+[; ;usart.c: 151:     return result;
 [e ) _result ]
 [e $UE 305  ]
-"150
-[; ;usart.c: 150: }
+"152
+[; ;usart.c: 152: }
 [e :UE 305 ]
 }
-"154
-[; ;usart.c: 154: void USART_put_int(unsigned int value){
+"156
+[; ;usart.c: 156: void USART_put_int(unsigned int value){
 [v _USART_put_int `(v ~T0 @X0 1 ef1`ui ]
 {
 [e :U _USART_put_int ]
 [v _value `ui ~T0 @X0 1 r1 ]
 [f ]
-"155
-[; ;usart.c: 155:      USART_putc(value>>8);
-[e ( _USART_putc (1 -> >> _value -> 8 `i `uc ]
-"156
-[; ;usart.c: 156:      USART_putc(value);
-[e ( _USART_putc (1 -> _value `uc ]
 "157
-[; ;usart.c: 157: }
+[; ;usart.c: 157:      USART_putc(value>>8);
+[e ( _USART_putc (1 -> >> _value -> 8 `i `uc ]
+"158
+[; ;usart.c: 158:      USART_putc(value);
+[e ( _USART_putc (1 -> _value `uc ]
+"159
+[; ;usart.c: 159: }
 [e :UE 310 ]
 }
-"161
-[; ;usart.c: 161: void USART_put_sint(int value){
+"163
+[; ;usart.c: 163: void USART_put_sint(int value){
 [v _USART_put_sint `(v ~T0 @X0 1 ef1`i ]
 {
 [e :U _USART_put_sint ]
 [v _value `i ~T0 @X0 1 r1 ]
 [f ]
-"162
-[; ;usart.c: 162:      USART_putsc(value>>8);
-[e ( _USART_putsc (1 -> >> _value -> 8 `i `uc ]
-"163
-[; ;usart.c: 163:      USART_putsc(value);
-[e ( _USART_putsc (1 -> _value `uc ]
 "164
-[; ;usart.c: 164: }
+[; ;usart.c: 164:      USART_putsc(value>>8);
+[e ( _USART_putsc (1 -> >> _value -> 8 `i `uc ]
+"165
+[; ;usart.c: 165:      USART_putsc(value);
+[e ( _USART_putsc (1 -> _value `uc ]
+"166
+[; ;usart.c: 166: }
 [e :UE 311 ]
 }
-"167
-[; ;usart.c: 167: void USART_put_long(unsigned long value){
+"169
+[; ;usart.c: 169: void USART_put_long(unsigned long value){
 [v _USART_put_long `(v ~T0 @X0 1 ef1`ul ]
 {
 [e :U _USART_put_long ]
 [v _value `ul ~T0 @X0 1 r1 ]
 [f ]
-"168
-[; ;usart.c: 168:      USART_putc(value>>24);
-[e ( _USART_putc (1 -> >> _value -> 24 `i `uc ]
-"169
-[; ;usart.c: 169:      USART_putc(value>>16);
-[e ( _USART_putc (1 -> >> _value -> 16 `i `uc ]
 "170
-[; ;usart.c: 170:      USART_putc(value>>8);
-[e ( _USART_putc (1 -> >> _value -> 8 `i `uc ]
+[; ;usart.c: 170:      USART_putc(value>>24);
+[e ( _USART_putc (1 -> >> _value -> 24 `i `uc ]
 "171
-[; ;usart.c: 171:      USART_putc(value);
-[e ( _USART_putc (1 -> _value `uc ]
+[; ;usart.c: 171:      USART_putc(value>>16);
+[e ( _USART_putc (1 -> >> _value -> 16 `i `uc ]
 "172
-[; ;usart.c: 172: }
+[; ;usart.c: 172:      USART_putc(value>>8);
+[e ( _USART_putc (1 -> >> _value -> 8 `i `uc ]
+"173
+[; ;usart.c: 173:      USART_putc(value);
+[e ( _USART_putc (1 -> _value `uc ]
+"174
+[; ;usart.c: 174: }
 [e :UE 312 ]
 }
-"175
-[; ;usart.c: 175: void USART_put_float24(float value){
+"177
+[; ;usart.c: 177: void USART_put_float24(float value){
 [v _USART_put_float24 `(v ~T0 @X0 1 ef1`f ]
 {
 [e :U _USART_put_float24 ]
 [v _value `f ~T0 @X0 1 r1 ]
 [f ]
-"176
-[; ;usart.c: 176:      unsigned char *pt;
-[v _pt `*uc ~T0 @X0 1 a ]
-"177
-[; ;usart.c: 177:      pt=(unsigned char *) &value;
-[e = _pt -> &U _value `*uc ]
 "178
-[; ;usart.c: 178:      USART_putc(*(pt++));
-[e ( _USART_putc (1 *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
+[; ;usart.c: 178:      unsigned char *pt;
+[v _pt `*uc ~T0 @X0 1 a ]
 "179
-[; ;usart.c: 179:      USART_putc(*(pt++));
-[e ( _USART_putc (1 *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
+[; ;usart.c: 179:      pt=(unsigned char *) &value;
+[e = _pt -> &U _value `*uc ]
 "180
 [; ;usart.c: 180:      USART_putc(*(pt++));
 [e ( _USART_putc (1 *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
 "181
-[; ;usart.c: 181: }
+[; ;usart.c: 181:      USART_putc(*(pt++));
+[e ( _USART_putc (1 *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
+"182
+[; ;usart.c: 182:      USART_putc(*(pt++));
+[e ( _USART_putc (1 *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
+"183
+[; ;usart.c: 183: }
 [e :UE 313 ]
 }
-"184
-[; ;usart.c: 184: void USART_put_string(char *vetor)
+"186
+[; ;usart.c: 186: void USART_put_string(char *vetor)
 [v _USART_put_string `(v ~T0 @X0 1 ef1`*uc ]
-"185
-[; ;usart.c: 185: {
+"187
+[; ;usart.c: 187: {
 {
 [e :U _USART_put_string ]
-"184
-[; ;usart.c: 184: void USART_put_string(char *vetor)
-[v _vetor `*uc ~T0 @X0 1 r1 ]
-"185
-[; ;usart.c: 185: {
-[f ]
 "186
-[; ;usart.c: 186:     char *ptr;
-[v _ptr `*uc ~T0 @X0 1 a ]
+[; ;usart.c: 186: void USART_put_string(char *vetor)
+[v _vetor `*uc ~T0 @X0 1 r1 ]
 "187
-[; ;usart.c: 187:     ptr=vetor;
-[e = _ptr _vetor ]
+[; ;usart.c: 187: {
+[f ]
 "188
-[; ;usart.c: 188:     while(*(ptr)){
+[; ;usart.c: 188:     char *ptr;
+[v _ptr `*uc ~T0 @X0 1 a ]
+"189
+[; ;usart.c: 189:     ptr=vetor;
+[e = _ptr _vetor ]
+"190
+[; ;usart.c: 190:     while(*(ptr)){
 [e $U 315  ]
 [e :U 316 ]
 {
-"189
-[; ;usart.c: 189:         USART_putc(*(ptr));
-[e ( _USART_putc (1 -> *U _ptr `uc ]
-"190
-[; ;usart.c: 190:         ptr++;
-[e ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ]
 "191
-[; ;usart.c: 191:     }
+[; ;usart.c: 191:         USART_putc(*(ptr));
+[e ( _USART_putc (1 -> *U _ptr `uc ]
+"192
+[; ;usart.c: 192:         ptr++;
+[e ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ]
+"193
+[; ;usart.c: 193:     }
 }
 [e :U 315 ]
-"188
-[; ;usart.c: 188:     while(*(ptr)){
+"190
+[; ;usart.c: 190:     while(*(ptr)){
 [e $ != -> *U _ptr `i -> 0 `i 316  ]
 [e :U 317 ]
-"192
-[; ;usart.c: 192:     USART_putc(*(ptr));
+"194
+[; ;usart.c: 194:     USART_putc(*(ptr));
 [e ( _USART_putc (1 -> *U _ptr `uc ]
-"193
-[; ;usart.c: 193: }
+"195
+[; ;usart.c: 195: }
 [e :UE 314 ]
 }
 [a 1C 77 111 116 104 101 114 32 66 111 97 114 100 0 ]
