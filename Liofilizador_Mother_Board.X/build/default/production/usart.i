@@ -4538,6 +4538,8 @@ void USART_put_long(unsigned long value);
 void USART_put_string(char *vetor);
 void USART_put_buffer(char *vetor, char size);
 unsigned char USART_input_buffer(void);
+
+void USART_SendGreenCode(unsigned char total);
 # 6 "usart.c" 2
 
 # 1 "./proculus.h" 1
@@ -4739,6 +4741,19 @@ void USART_to_Protocol(t_usart_protocol *usart_protocol){
         usart_protocol->value[i]=(unsigned char) usart_buffer[i+6];
 }
 
+void USART_SendGreenCode(unsigned char total)
+{
+    my_delay_ms_CLRWDT(1500);
+    for(unsigned char i=0;i<total;i++)
+       {
+       PORTBbits.RB5=1;
+       my_delay_ms_CLRWDT(500);
+       PORTBbits.RB5=0;
+       my_delay_ms_CLRWDT(500);
+       }
+    my_delay_ms_CLRWDT(1500);
+}
+
 
 void USART_putc(unsigned char value)
 {
@@ -4747,12 +4762,19 @@ void USART_putc(unsigned char value)
     TXREG=value;
     while(!PIR1bits.TXIF)
          {
-         counter++;
          if(counter>2500)
            {
-           USART_restart(115200);
-           counter=0;
-           break;
+           while(1)
+                {
+                USART_SendGreenCode(2);
+                }
+
+
+
+           }
+         else
+           {
+           counter++;
            }
          continue;
          _delay((unsigned long)((1)*(32000000/4000.0)));

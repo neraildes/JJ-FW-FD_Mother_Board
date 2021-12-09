@@ -1868,8 +1868,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _i `i ~T0 @X0 1 a ]
 "525
 [; ;proculus.c: 525:      static unsigned int retorno=0;
-[v F3879 `ui ~T0 @X0 1 s retorno ]
-[i F3879
+[v F3881 `ui ~T0 @X0 1 s retorno ]
+[i F3881
 -> -> 0 `i `ui
 ]
 "526
@@ -1917,7 +1917,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "546
 [; ;proculus.c: 546:               retorno=(usart_buffer[6]<<8)+usart_buffer[7];
-[e = F3879 -> + << -> *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
+[e = F3881 -> + << -> *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
 "547
 [; ;proculus.c: 547:               break;
 [e $U 363  ]
@@ -1944,7 +1944,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _my_delay_ms (1 -> -> 1 `i `l ]
 "553
 [; ;proculus.c: 553:      return retorno;
-[e ) F3879 ]
+[e ) F3881 ]
 [e $UE 361  ]
 "554
 [; ;proculus.c: 554:      }

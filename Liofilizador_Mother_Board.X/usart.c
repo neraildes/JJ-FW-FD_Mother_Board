@@ -93,6 +93,19 @@ void USART_to_Protocol(t_usart_protocol *usart_protocol){
         usart_protocol->value[i]=(unsigned char) usart_buffer[i+6];    
 }
 
+void USART_SendGreenCode(unsigned char total)
+{
+    my_delay_ms_CLRWDT(1500);
+    for(unsigned char i=0;i<total;i++)
+       {
+       flag_led_memory=1;
+       my_delay_ms_CLRWDT(500);
+       flag_led_memory=0;
+       my_delay_ms_CLRWDT(500);
+       }
+    my_delay_ms_CLRWDT(1500);
+}
+
 
 void USART_putc(unsigned char value)
 {       
@@ -100,14 +113,21 @@ void USART_putc(unsigned char value)
     Delay_Led_Usart=DEFAULT_LEDS;
     TXREG=value;
     while(!PIR1bits.TXIF) 
-         {
-         counter++;
+         {         
          if(counter>2500)
-           {               
-           USART_restart(115200);
-           counter=0;  
-           break;
+           { 
+           while(1)
+                {
+                USART_SendGreenCode(2);
+                }
+           //USART_restart(115200);
+           //counter=0;  
+           //break;
            }
+         else
+           {
+           counter++;  
+           }  
          continue;//Registrador vazio
          __delay_ms(1);
          }               

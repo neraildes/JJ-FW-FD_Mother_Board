@@ -4581,6 +4581,8 @@ void USART_put_long(unsigned long value);
 void USART_put_string(char *vetor);
 void USART_put_buffer(char *vetor, char size);
 unsigned char USART_input_buffer(void);
+
+void USART_SendGreenCode(unsigned char total);
 # 6 "EEPROM_24C1025.c" 2
 
 

@@ -213,6 +213,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "10 usart.c
 [; ;usart.c: 10: extern volatile unsigned char usart_buffer[10+256];
 [v _usart_buffer `Vuc ~T0 @X0 -> 0 `x e ]
+"98
+[; ;usart.c: 98:     my_delay_ms_CLRWDT(1500);
+[v _my_delay_ms_CLRWDT `(i ~T0 @X0 0 e? ]
 "13
 [; ;usart.c: 13: extern volatile unsigned int Delay_Led_Usart;
 [v _Delay_Led_Usart `Vui ~T0 @X0 0 e ]
@@ -234,8 +237,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2596
 [; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2596: extern volatile PIR1bits_t PIR1bits __attribute__((address(0xF9E)));
 [v _PIR1bits `VS93 ~T0 @X0 0 e@3998 ]
-"119 usart.c
-[; ;usart.c: 119:     putc(value);
+"139 usart.c
+[; ;usart.c: 139:     putc(value);
 [v _putc `(i ~T0 @X0 0 e? ]
 "54 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
@@ -992,327 +995,396 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;usart.c: 94: }
 [e :UE 290 ]
 }
+"96
+[; ;usart.c: 96: void USART_SendGreenCode(unsigned char total)
+[v _USART_SendGreenCode `(v ~T0 @X0 1 ef1`uc ]
 "97
-[; ;usart.c: 97: void USART_putc(unsigned char value)
-[v _USART_putc `(v ~T0 @X0 1 ef1`uc ]
-"98
-[; ;usart.c: 98: {
+[; ;usart.c: 97: {
 {
-[e :U _USART_putc ]
+[e :U _USART_SendGreenCode ]
+"96
+[; ;usart.c: 96: void USART_SendGreenCode(unsigned char total)
+[v _total `uc ~T0 @X0 1 r1 ]
 "97
-[; ;usart.c: 97: void USART_putc(unsigned char value)
-[v _value `uc ~T0 @X0 1 r1 ]
-"98
-[; ;usart.c: 98: {
+[; ;usart.c: 97: {
 [f ]
+"98
+[; ;usart.c: 98:     my_delay_ms_CLRWDT(1500);
+[e ( _my_delay_ms_CLRWDT -> 1500 `i ]
 "99
-[; ;usart.c: 99:     unsigned int counter=0;
-[v _counter `ui ~T0 @X0 1 a ]
-[e = _counter -> -> 0 `i `ui ]
-"100
-[; ;usart.c: 100:     Delay_Led_Usart=5;
-[e = _Delay_Led_Usart -> -> 5 `i `ui ]
-"101
-[; ;usart.c: 101:     TXREG=value;
-[e = _TXREG _value ]
-"102
-[; ;usart.c: 102:     while(!PIR1bits.TXIF)
-[e $U 296  ]
-[e :U 297 ]
-"103
-[; ;usart.c: 103:          {
+[; ;usart.c: 99:     for(unsigned char i=0;i<total;i++)
 {
-"104
-[; ;usart.c: 104:          counter++;
-[e ++ _counter -> -> 1 `i `ui ]
-"105
-[; ;usart.c: 105:          if(counter>2500)
-[e $ ! > _counter -> -> 2500 `i `ui 299  ]
-"106
-[; ;usart.c: 106:            {
-{
-"107
-[; ;usart.c: 107:            USART_restart(115200);
-[e ( _USART_restart (1 -> -> 115200 `l `ul ]
-"108
-[; ;usart.c: 108:            counter=0;
-[e = _counter -> -> 0 `i `ui ]
-"109
-[; ;usart.c: 109:            break;
-[e $U 298  ]
-"110
-[; ;usart.c: 110:            }
-}
-[e :U 299 ]
-"111
-[; ;usart.c: 111:          continue;
-[e $U 296  ]
-"112
-[; ;usart.c: 112:          _delay((unsigned long)((1)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"113
-[; ;usart.c: 113:          }
-}
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $U 299  ]
 [e :U 296 ]
+"100
+[; ;usart.c: 100:        {
+{
+"101
+[; ;usart.c: 101:        PORTBbits.RB5=1;
+[e = . . _PORTBbits 0 5 -> -> 1 `i `uc ]
 "102
-[; ;usart.c: 102:     while(!PIR1bits.TXIF)
-[e $ ! != -> . . _PIR1bits 0 4 `i -> 0 `i 297  ]
-[e :U 298 ]
-"114
-[; ;usart.c: 114: }
+[; ;usart.c: 102:        my_delay_ms_CLRWDT(500);
+[e ( _my_delay_ms_CLRWDT -> 500 `i ]
+"103
+[; ;usart.c: 103:        PORTBbits.RB5=0;
+[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
+"104
+[; ;usart.c: 104:        my_delay_ms_CLRWDT(500);
+[e ( _my_delay_ms_CLRWDT -> 500 `i ]
+"105
+[; ;usart.c: 105:        }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 299 ]
+[e $ < -> _i `i -> _total `i 296  ]
+[e :U 297 ]
+}
+"106
+[; ;usart.c: 106:     my_delay_ms_CLRWDT(1500);
+[e ( _my_delay_ms_CLRWDT -> 1500 `i ]
+"107
+[; ;usart.c: 107: }
 [e :UE 295 ]
 }
-"117
-[; ;usart.c: 117: void USART_putsc(char value)
-[v _USART_putsc `(v ~T0 @X0 1 ef1`uc ]
-"118
-[; ;usart.c: 118: {
+"110
+[; ;usart.c: 110: void USART_putc(unsigned char value)
+[v _USART_putc `(v ~T0 @X0 1 ef1`uc ]
+"111
+[; ;usart.c: 111: {
 {
-[e :U _USART_putsc ]
-"117
-[; ;usart.c: 117: void USART_putsc(char value)
+[e :U _USART_putc ]
+"110
+[; ;usart.c: 110: void USART_putc(unsigned char value)
 [v _value `uc ~T0 @X0 1 r1 ]
-"118
-[; ;usart.c: 118: {
+"111
+[; ;usart.c: 111: {
 [f ]
+"112
+[; ;usart.c: 112:     unsigned int counter=0;
+[v _counter `ui ~T0 @X0 1 a ]
+[e = _counter -> -> 0 `i `ui ]
+"113
+[; ;usart.c: 113:     Delay_Led_Usart=5;
+[e = _Delay_Led_Usart -> -> 5 `i `ui ]
+"114
+[; ;usart.c: 114:     TXREG=value;
+[e = _TXREG _value ]
+"115
+[; ;usart.c: 115:     while(!PIR1bits.TXIF)
+[e $U 301  ]
+[e :U 302 ]
+"116
+[; ;usart.c: 116:          {
+{
+"117
+[; ;usart.c: 117:          if(counter>2500)
+[e $ ! > _counter -> -> 2500 `i `ui 304  ]
+"118
+[; ;usart.c: 118:            {
+{
 "119
-[; ;usart.c: 119:     putc(value);
-[e ( _putc -> _value `i ]
+[; ;usart.c: 119:            while(1)
+[e :U 306 ]
 "120
-[; ;usart.c: 120: }
+[; ;usart.c: 120:                 {
+{
+"121
+[; ;usart.c: 121:                 USART_SendGreenCode(2);
+[e ( _USART_SendGreenCode (1 -> -> 2 `i `uc ]
+"122
+[; ;usart.c: 122:                 }
+}
+[e :U 305 ]
+[e $U 306  ]
+[e :U 307 ]
+"126
+[; ;usart.c: 126:            }
+}
+[e $U 308  ]
+"127
+[; ;usart.c: 127:          else
+[e :U 304 ]
+"128
+[; ;usart.c: 128:            {
+{
+"129
+[; ;usart.c: 129:            counter++;
+[e ++ _counter -> -> 1 `i `ui ]
+"130
+[; ;usart.c: 130:            }
+}
+[e :U 308 ]
+"131
+[; ;usart.c: 131:          continue;
+[e $U 301  ]
+"132
+[; ;usart.c: 132:          _delay((unsigned long)((1)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"133
+[; ;usart.c: 133:          }
+}
+[e :U 301 ]
+"115
+[; ;usart.c: 115:     while(!PIR1bits.TXIF)
+[e $ ! != -> . . _PIR1bits 0 4 `i -> 0 `i 302  ]
+[e :U 303 ]
+"134
+[; ;usart.c: 134: }
 [e :UE 300 ]
 }
-"123
-[; ;usart.c: 123: void USART_put_buffer(char *vetor, char size){
+"137
+[; ;usart.c: 137: void USART_putsc(char value)
+[v _USART_putsc `(v ~T0 @X0 1 ef1`uc ]
+"138
+[; ;usart.c: 138: {
+{
+[e :U _USART_putsc ]
+"137
+[; ;usart.c: 137: void USART_putsc(char value)
+[v _value `uc ~T0 @X0 1 r1 ]
+"138
+[; ;usart.c: 138: {
+[f ]
+"139
+[; ;usart.c: 139:     putc(value);
+[e ( _putc -> _value `i ]
+"140
+[; ;usart.c: 140: }
+[e :UE 309 ]
+}
+"143
+[; ;usart.c: 143: void USART_put_buffer(char *vetor, char size){
 [v _USART_put_buffer `(v ~T0 @X0 1 ef2`*uc`uc ]
 {
 [e :U _USART_put_buffer ]
 [v _vetor `*uc ~T0 @X0 1 r1 ]
 [v _size `uc ~T0 @X0 1 r2 ]
 [f ]
-"124
-[; ;usart.c: 124:     char loop=0;
+"144
+[; ;usart.c: 144:     char loop=0;
 [v _loop `uc ~T0 @X0 1 a ]
 [e = _loop -> -> 0 `i `uc ]
-"125
-[; ;usart.c: 125:     char *ptr;
+"145
+[; ;usart.c: 145:     char *ptr;
 [v _ptr `*uc ~T0 @X0 1 a ]
-"126
-[; ;usart.c: 126:     ptr = vetor;
+"146
+[; ;usart.c: 146:     ptr = vetor;
 [e = _ptr _vetor ]
-"128
-[; ;usart.c: 128:     while(loop<size)
-[e $U 302  ]
-[e :U 303 ]
-"129
-[; ;usart.c: 129:     {
+"148
+[; ;usart.c: 148:     while(loop<size)
+[e $U 311  ]
+[e :U 312 ]
+"149
+[; ;usart.c: 149:     {
 {
-"130
-[; ;usart.c: 130:         USART_putc(*ptr);
+"150
+[; ;usart.c: 150:         USART_putc(*ptr);
 [e ( _USART_putc (1 -> *U _ptr `uc ]
-"131
-[; ;usart.c: 131:         ptr++;
+"151
+[; ;usart.c: 151:         ptr++;
 [e ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ]
-"132
-[; ;usart.c: 132:         loop++;
+"152
+[; ;usart.c: 152:         loop++;
 [e ++ _loop -> -> 1 `i `uc ]
-"133
-[; ;usart.c: 133:     }
+"153
+[; ;usart.c: 153:     }
 }
-[e :U 302 ]
-"128
-[; ;usart.c: 128:     while(loop<size)
-[e $ < -> _loop `i -> _size `i 303  ]
-[e :U 304 ]
-"134
-[; ;usart.c: 134: }
-[e :UE 301 ]
+[e :U 311 ]
+"148
+[; ;usart.c: 148:     while(loop<size)
+[e $ < -> _loop `i -> _size `i 312  ]
+[e :U 313 ]
+"154
+[; ;usart.c: 154: }
+[e :UE 310 ]
 }
-"138
-[; ;usart.c: 138: unsigned char USART_input_buffer(void){
+"158
+[; ;usart.c: 158: unsigned char USART_input_buffer(void){
 [v _USART_input_buffer `(uc ~T0 @X0 1 ef ]
 {
 [e :U _USART_input_buffer ]
 [f ]
-"139
-[; ;usart.c: 139:     unsigned int time=0;
+"159
+[; ;usart.c: 159:     unsigned int time=0;
 [v _time `ui ~T0 @X0 1 a ]
 [e = _time -> -> 0 `i `ui ]
-"140
-[; ;usart.c: 140:     unsigned char result=0;
+"160
+[; ;usart.c: 160:     unsigned char result=0;
 [v _result `uc ~T0 @X0 1 a ]
 [e = _result -> -> 0 `i `uc ]
-"142
-[; ;usart.c: 142:     while(time<400){
-[e $U 306  ]
-[e :U 307 ]
+"162
+[; ;usart.c: 162:     while(time<400){
+[e $U 315  ]
+[e :U 316 ]
 {
-"143
-[; ;usart.c: 143:         if(statusgen.flag_usart_rx==1){
-[e $ ! == -> . _statusgen 0 `i -> 1 `i 309  ]
+"163
+[; ;usart.c: 163:         if(statusgen.flag_usart_rx==1){
+[e $ ! == -> . _statusgen 0 `i -> 1 `i 318  ]
 {
-"144
-[; ;usart.c: 144:            statusgen.flag_usart_rx=0;
+"164
+[; ;usart.c: 164:            statusgen.flag_usart_rx=0;
 [e = . _statusgen 0 -> -> 0 `i `uc ]
-"145
-[; ;usart.c: 145:            result = 1;
+"165
+[; ;usart.c: 165:            result = 1;
 [e = _result -> -> 1 `i `uc ]
-"146
-[; ;usart.c: 146:            break;
-[e $U 308  ]
-"147
-[; ;usart.c: 147:            }
+"166
+[; ;usart.c: 166:            break;
+[e $U 317  ]
+"167
+[; ;usart.c: 167:            }
 }
-[e :U 309 ]
-"148
-[; ;usart.c: 148:         time++;
+[e :U 318 ]
+"168
+[; ;usart.c: 168:         time++;
 [e ++ _time -> -> 1 `i `ui ]
-"149
-[; ;usart.c: 149:         _delay((unsigned long)((1)*(32000000/4000.0)));
+"169
+[; ;usart.c: 169:         _delay((unsigned long)((1)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"150
-[; ;usart.c: 150:     }
+"170
+[; ;usart.c: 170:     }
 }
-[e :U 306 ]
-"142
-[; ;usart.c: 142:     while(time<400){
-[e $ < _time -> -> 400 `i `ui 307  ]
-[e :U 308 ]
-"151
-[; ;usart.c: 151:     return result;
+[e :U 315 ]
+"162
+[; ;usart.c: 162:     while(time<400){
+[e $ < _time -> -> 400 `i `ui 316  ]
+[e :U 317 ]
+"171
+[; ;usart.c: 171:     return result;
 [e ) _result ]
-[e $UE 305  ]
-"152
-[; ;usart.c: 152: }
-[e :UE 305 ]
+[e $UE 314  ]
+"172
+[; ;usart.c: 172: }
+[e :UE 314 ]
 }
-"156
-[; ;usart.c: 156: void USART_put_int(unsigned int value){
+"176
+[; ;usart.c: 176: void USART_put_int(unsigned int value){
 [v _USART_put_int `(v ~T0 @X0 1 ef1`ui ]
 {
 [e :U _USART_put_int ]
 [v _value `ui ~T0 @X0 1 r1 ]
 [f ]
-"157
-[; ;usart.c: 157:      USART_putc(value>>8);
+"177
+[; ;usart.c: 177:      USART_putc(value>>8);
 [e ( _USART_putc (1 -> >> _value -> 8 `i `uc ]
-"158
-[; ;usart.c: 158:      USART_putc(value);
+"178
+[; ;usart.c: 178:      USART_putc(value);
 [e ( _USART_putc (1 -> _value `uc ]
-"159
-[; ;usart.c: 159: }
-[e :UE 310 ]
+"179
+[; ;usart.c: 179: }
+[e :UE 319 ]
 }
-"163
-[; ;usart.c: 163: void USART_put_sint(int value){
+"183
+[; ;usart.c: 183: void USART_put_sint(int value){
 [v _USART_put_sint `(v ~T0 @X0 1 ef1`i ]
 {
 [e :U _USART_put_sint ]
 [v _value `i ~T0 @X0 1 r1 ]
 [f ]
-"164
-[; ;usart.c: 164:      USART_putsc(value>>8);
+"184
+[; ;usart.c: 184:      USART_putsc(value>>8);
 [e ( _USART_putsc (1 -> >> _value -> 8 `i `uc ]
-"165
-[; ;usart.c: 165:      USART_putsc(value);
+"185
+[; ;usart.c: 185:      USART_putsc(value);
 [e ( _USART_putsc (1 -> _value `uc ]
-"166
-[; ;usart.c: 166: }
-[e :UE 311 ]
+"186
+[; ;usart.c: 186: }
+[e :UE 320 ]
 }
-"169
-[; ;usart.c: 169: void USART_put_long(unsigned long value){
+"189
+[; ;usart.c: 189: void USART_put_long(unsigned long value){
 [v _USART_put_long `(v ~T0 @X0 1 ef1`ul ]
 {
 [e :U _USART_put_long ]
 [v _value `ul ~T0 @X0 1 r1 ]
 [f ]
-"170
-[; ;usart.c: 170:      USART_putc(value>>24);
+"190
+[; ;usart.c: 190:      USART_putc(value>>24);
 [e ( _USART_putc (1 -> >> _value -> 24 `i `uc ]
-"171
-[; ;usart.c: 171:      USART_putc(value>>16);
+"191
+[; ;usart.c: 191:      USART_putc(value>>16);
 [e ( _USART_putc (1 -> >> _value -> 16 `i `uc ]
-"172
-[; ;usart.c: 172:      USART_putc(value>>8);
+"192
+[; ;usart.c: 192:      USART_putc(value>>8);
 [e ( _USART_putc (1 -> >> _value -> 8 `i `uc ]
-"173
-[; ;usart.c: 173:      USART_putc(value);
+"193
+[; ;usart.c: 193:      USART_putc(value);
 [e ( _USART_putc (1 -> _value `uc ]
-"174
-[; ;usart.c: 174: }
-[e :UE 312 ]
+"194
+[; ;usart.c: 194: }
+[e :UE 321 ]
 }
-"177
-[; ;usart.c: 177: void USART_put_float24(float value){
+"197
+[; ;usart.c: 197: void USART_put_float24(float value){
 [v _USART_put_float24 `(v ~T0 @X0 1 ef1`f ]
 {
 [e :U _USART_put_float24 ]
 [v _value `f ~T0 @X0 1 r1 ]
 [f ]
-"178
-[; ;usart.c: 178:      unsigned char *pt;
+"198
+[; ;usart.c: 198:      unsigned char *pt;
 [v _pt `*uc ~T0 @X0 1 a ]
-"179
-[; ;usart.c: 179:      pt=(unsigned char *) &value;
+"199
+[; ;usart.c: 199:      pt=(unsigned char *) &value;
 [e = _pt -> &U _value `*uc ]
-"180
-[; ;usart.c: 180:      USART_putc(*(pt++));
+"200
+[; ;usart.c: 200:      USART_putc(*(pt++));
 [e ( _USART_putc (1 *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
-"181
-[; ;usart.c: 181:      USART_putc(*(pt++));
+"201
+[; ;usart.c: 201:      USART_putc(*(pt++));
 [e ( _USART_putc (1 *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
-"182
-[; ;usart.c: 182:      USART_putc(*(pt++));
+"202
+[; ;usart.c: 202:      USART_putc(*(pt++));
 [e ( _USART_putc (1 *U ++ _pt * -> -> 1 `i `x -> -> # *U _pt `i `x ]
-"183
-[; ;usart.c: 183: }
-[e :UE 313 ]
+"203
+[; ;usart.c: 203: }
+[e :UE 322 ]
 }
-"186
-[; ;usart.c: 186: void USART_put_string(char *vetor)
+"206
+[; ;usart.c: 206: void USART_put_string(char *vetor)
 [v _USART_put_string `(v ~T0 @X0 1 ef1`*uc ]
-"187
-[; ;usart.c: 187: {
+"207
+[; ;usart.c: 207: {
 {
 [e :U _USART_put_string ]
-"186
-[; ;usart.c: 186: void USART_put_string(char *vetor)
+"206
+[; ;usart.c: 206: void USART_put_string(char *vetor)
 [v _vetor `*uc ~T0 @X0 1 r1 ]
-"187
-[; ;usart.c: 187: {
+"207
+[; ;usart.c: 207: {
 [f ]
-"188
-[; ;usart.c: 188:     char *ptr;
+"208
+[; ;usart.c: 208:     char *ptr;
 [v _ptr `*uc ~T0 @X0 1 a ]
-"189
-[; ;usart.c: 189:     ptr=vetor;
+"209
+[; ;usart.c: 209:     ptr=vetor;
 [e = _ptr _vetor ]
-"190
-[; ;usart.c: 190:     while(*(ptr)){
-[e $U 315  ]
-[e :U 316 ]
+"210
+[; ;usart.c: 210:     while(*(ptr)){
+[e $U 324  ]
+[e :U 325 ]
 {
-"191
-[; ;usart.c: 191:         USART_putc(*(ptr));
+"211
+[; ;usart.c: 211:         USART_putc(*(ptr));
 [e ( _USART_putc (1 -> *U _ptr `uc ]
-"192
-[; ;usart.c: 192:         ptr++;
+"212
+[; ;usart.c: 212:         ptr++;
 [e ++ _ptr * -> -> 1 `i `x -> -> # *U _ptr `i `x ]
-"193
-[; ;usart.c: 193:     }
+"213
+[; ;usart.c: 213:     }
 }
-[e :U 315 ]
-"190
-[; ;usart.c: 190:     while(*(ptr)){
-[e $ != -> *U _ptr `i -> 0 `i 316  ]
-[e :U 317 ]
-"194
-[; ;usart.c: 194:     USART_putc(*(ptr));
+[e :U 324 ]
+"210
+[; ;usart.c: 210:     while(*(ptr)){
+[e $ != -> *U _ptr `i -> 0 `i 325  ]
+[e :U 326 ]
+"214
+[; ;usart.c: 214:     USART_putc(*(ptr));
 [e ( _USART_putc (1 -> *U _ptr `uc ]
-"195
-[; ;usart.c: 195: }
-[e :UE 314 ]
+"215
+[; ;usart.c: 215: }
+[e :UE 323 ]
 }
 [a 1C 77 111 116 104 101 114 32 66 111 97 114 100 0 ]
 [a 2C 86 97 99 99 117 109 32 66 111 97 114 100 0 ]

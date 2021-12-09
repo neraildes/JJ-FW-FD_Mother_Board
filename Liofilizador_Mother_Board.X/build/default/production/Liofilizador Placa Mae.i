@@ -5652,6 +5652,8 @@ void USART_put_long(unsigned long value);
 void USART_put_string(char *vetor);
 void USART_put_buffer(char *vetor, char size);
 unsigned char USART_input_buffer(void);
+
+void USART_SendGreenCode(unsigned char total);
 # 24 "Liofilizador Placa Mae.c" 2
 
 # 1 "./I2C.h" 1
@@ -6723,7 +6725,11 @@ void ShowSensorRealTimeHS(void)
                        }
                      else
                        {
-                       USART_restart(115200);
+                       while(1)
+                            {
+                            USART_SendGreenCode(3);
+                            }
+
                        }
                      }
                      break;
@@ -6766,7 +6772,7 @@ void ShowSensorRealTimeHS(void)
       statusgen1.flag_proculus_hs=0;
 
      }
-# 1128 "Liofilizador Placa Mae.c"
+# 1132 "Liofilizador Placa Mae.c"
 void Carrega_Tupla_Receita(char index, t_receita *receita){
      unsigned int addeeprom;
 
@@ -6815,7 +6821,7 @@ void Exibe_Receita(int index){
      texto[8]=0;
      PROCULUS_VP_Write_String(vp+4,texto);
 }
-# 1194 "Liofilizador Placa Mae.c"
+# 1198 "Liofilizador Placa Mae.c"
 void DataBaseBackupMain(unsigned char tupla)
       {
       unsigned int vp;
@@ -6949,7 +6955,7 @@ void FAT8_Show(){
         }
 
 }
-# 1339 "Liofilizador Placa Mae.c"
+# 1343 "Liofilizador Placa Mae.c"
  void SaveLiofilizadorOnMemory(char index,t_liofilizador *liofilizador)
       {
       char CanalAD;
@@ -6989,7 +6995,7 @@ void FAT8_Show(){
       EEPROM_Read_String(addEEPROM + 6,liofilizador->receita);
       liofilizador->status = EEPROM_Read_Integer(addEEPROM+16);
       }
-# 1392 "Liofilizador Placa Mae.c"
+# 1396 "Liofilizador Placa Mae.c"
  void Set_Receita(unsigned char index, char status)
       {
       int vp;
@@ -7049,7 +7055,7 @@ void FAT8_Show(){
          PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
          }
 }
-# 1459 "Liofilizador Placa Mae.c"
+# 1463 "Liofilizador Placa Mae.c"
 void save_datalog(unsigned long add_datalog){
      char index;
      char bb[4];
@@ -7071,7 +7077,7 @@ void save_datalog(unsigned long add_datalog){
             }
          }
 }
-# 1489 "Liofilizador Placa Mae.c"
+# 1493 "Liofilizador Placa Mae.c"
  void ShowAndSetSlaveParameters(unsigned char tupla)
       {
       unsigned char CanalAD;
@@ -7103,7 +7109,7 @@ void save_datalog(unsigned long add_datalog){
       PROCULUS_VP_Write_UInt16(vp+11,EEPROM_Read_Integer(addEEPROM+16));
 
       }
-# 1529 "Liofilizador Placa Mae.c"
+# 1533 "Liofilizador Placa Mae.c"
 void Send_to_PC(unsigned char size){
 
 
@@ -7112,7 +7118,7 @@ void Send_to_PC(unsigned char size){
      USART_putc(usart_protocol.origem);
      USART_putc(usart_protocol.command);
      USART_putc(size);
-# 1547 "Liofilizador Placa Mae.c"
+# 1551 "Liofilizador Placa Mae.c"
 }
 
 
@@ -7149,7 +7155,7 @@ void Decodify_Command(void){
 
 
     switch(usart_protocol.command){
-# 1614 "Liofilizador Placa Mae.c"
+# 1618 "Liofilizador Placa Mae.c"
         case 0x08:
              EEPROM_Write_Byte((int)usart_protocol.value[0]<<8 |
                                (int)usart_protocol.value[1]<<0,
@@ -7376,7 +7382,7 @@ void Decodify_Command(void){
              PORTDbits.RD5=0;
              break;
              }
-# 1851 "Liofilizador Placa Mae.c"
+# 1855 "Liofilizador Placa Mae.c"
         case 0X24:
              PROCULUS_Buzzer((usart_protocol.value[0]<<8)+
                              (usart_protocol.value[1]));
@@ -8158,7 +8164,7 @@ void pagina_19(void)
 
 
                 flag_upLoadTambem=1;
-# 2640 "Liofilizador Placa Mae.c"
+# 2644 "Liofilizador Placa Mae.c"
             }
          else
             {
@@ -8253,7 +8259,7 @@ void pagina_23(void)
      PROCULUS_NOK();
      }
 }
-# 2742 "Liofilizador Placa Mae.c"
+# 2746 "Liofilizador Placa Mae.c"
 void pagina_25(void)
 {
 
@@ -8408,7 +8414,7 @@ void Check_And_Send_Capture_Datalog(void){
          }
        }
 }
-# 2904 "Liofilizador Placa Mae.c"
+# 2908 "Liofilizador Placa Mae.c"
 void Contagem_Tempo_de_Processo(char value){
     if(value)
       {
@@ -8734,7 +8740,7 @@ void Memo2Graphic(char SlaveBoardAdd, char chipNumber, int add_24C1025, char LCD
 
      PROCULUS_graphic_plot(LCDchannel, value);
 }
-# 3258 "Liofilizador Placa Mae.c"
+# 3262 "Liofilizador Placa Mae.c"
 _Bool memory_test(char board, char chip, int value, int inicialadd, int finaladd)
      {
      char txt[30];
@@ -9444,7 +9450,7 @@ void FAT8_Write_Process_Finalize(){
       strcpy(fat8.processo.fim.time,time);
       fat8.processo.minutes=processo_totalminuto;
       }
-# 3975 "Liofilizador Placa Mae.c"
+# 3979 "Liofilizador Placa Mae.c"
     fat8.processo.add_end=add_datalog;
 
     fat8.processo.flag_running=0;

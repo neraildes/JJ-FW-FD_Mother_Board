@@ -1072,8 +1072,12 @@ void ShowSensorRealTimeHS(void)
                        PROCULUS_VP_Write_UInt16(151, art ); //Vacuometro                          
                        }  
                      else
-                       {  
-                       USART_restart(115200);
+                       { 
+                       while(1)
+                            {
+                            USART_SendGreenCode(3);
+                            }                         
+                       //USART_restart(115200);
                        }                      
                      }
                      break;  

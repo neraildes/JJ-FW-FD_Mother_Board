@@ -4648,6 +4648,8 @@ void USART_put_long(unsigned long value);
 void USART_put_string(char *vetor);
 void USART_put_buffer(char *vetor, char size);
 unsigned char USART_input_buffer(void);
+
+void USART_SendGreenCode(unsigned char total);
 # 5 "proculus.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c99\\string.h" 1 3
