@@ -1057,7 +1057,7 @@ void ShowSensorRealTimeHS(void)
               {
               case 0://PLACA 1 CANAL 0 - VOLTIMETRO
                      Voltimetro=leitura[tupla];
-                     if(Tamanho_Display==81) Voltimetro*=0.92; //Exibe algo em torno de 220V
+                     if(Voltimetro>2800) Voltimetro*=0.92; //Exibe algo em torno de 220V
                      PROCULUS_VP_Write_UInt16(153,Voltimetro);
                                           
                      break;               
@@ -1071,19 +1071,23 @@ void ShowSensorRealTimeHS(void)
                        Vacuometro = art ;
                        PROCULUS_VP_Write_UInt16(151, art ); //Vacuometro                          
                        }  
-                     else
-                       { 
-                       while(1)
-                            {
-                            USART_SendGreenCode(3);
-                            }                         
-                       //USART_restart(115200);
-                       }                      
+//                     else
+//                       { 
+//                       while(1)
+//                            {
+//                            USART_SendGreenCode(3);                            
+//                            }                         
+//                       //USART_restart(115200);
+//                       }                      
                      }
                      break;  
-              case 2://Placa 2 Canal 0 - CONDENSADOR                                                                   
-                    PROCULUS_VP_Write_UInt16(150,leitura[tupla]);  
-                    Condensador=leitura[tupla];
+              case 2://Placa 2 Canal 0 - CONDENSADOR   
+                    if(leitura[tupla]!=-1) //Não considera valor -1 como válido
+                                           //pois pode ser erro de comunicação.
+                      {  
+                      PROCULUS_VP_Write_UInt16(150,leitura[tupla]);  
+                      Condensador=leitura[tupla];
+                      }
                      break; 
               case 3://Placa 2 Canal 1 - RESERVADO (UTILIZA O COMUM NO RELE)
                      //---------------------------------------------------------                          

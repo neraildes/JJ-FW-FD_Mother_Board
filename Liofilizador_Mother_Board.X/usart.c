@@ -5,6 +5,7 @@
 #include "global.h"
 #include "usart.h"
 #include "proculus.h"
+#include "timedate.h"
 
 
 extern volatile unsigned char usart_buffer[USART_BUFFER_SIZE]; 
@@ -136,7 +137,7 @@ void USART_putc(unsigned char value)
 
 void USART_putsc(char value)
 {   
-    putc(value);
+    USART_putc(value);
 }
 
 
