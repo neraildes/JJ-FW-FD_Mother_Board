@@ -31,11 +31,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "203 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
 [v __delay `JF2586 ~T0 @X0 0 e ]
 [p i __delay ]
-"40 ./usart.h
-[; ;./usart.h: 40: void USART_put_int(unsigned int value);
+"39 ./usart.h
+[; ;./usart.h: 39: void USART_put_int(unsigned int value);
 [v _USART_put_int `(v ~T0 @X0 0 ef1`ui ]
-"39
-[; ;./usart.h: 39: void USART_putc(unsigned char value);
+"38
+[; ;./usart.h: 38: void USART_putc(unsigned char value);
 [v _USART_putc `(v ~T0 @X0 0 ef1`uc ]
 "19 ./timedate.h
 [; ;./timedate.h: 19: void my_delay_ms(long time);
@@ -47,8 +47,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./proculus.h: 57: typedef struct {
 [s S8 `ui 1 `uc 1 `uc 1 `ui 1 `uc 1 `ui -> 15 `i `uc 1 `uc 1 `uc 1 ]
 [n S8 . header size function vp length dado page button status ]
-"46 ./usart.h
-[; ;./usart.h: 46: unsigned char USART_input_buffer(void);
+"45 ./usart.h
+[; ;./usart.h: 45: unsigned char USART_input_buffer(void);
 [v _USART_input_buffer `(uc ~T0 @X0 0 ef ]
 "5 ./util.h
 [; ;./util.h: 5: void bcd2str(char valor, char *dado);
@@ -1868,8 +1868,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _i `i ~T0 @X0 1 a ]
 "525
 [; ;proculus.c: 525:      static unsigned int retorno=0;
-[v F3881 `ui ~T0 @X0 1 s retorno ]
-[i F3881
+[v F3877 `ui ~T0 @X0 1 s retorno ]
+[i F3877
 -> -> 0 `i `ui
 ]
 "526
@@ -1917,7 +1917,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "546
 [; ;proculus.c: 546:               retorno=(usart_buffer[6]<<8)+usart_buffer[7];
-[e = F3881 -> + << -> *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
+[e = F3877 -> + << -> *U + &U _usart_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i -> 8 `i -> *U + &U _usart_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _usart_buffer `ui `ux `i `ui ]
 "547
 [; ;proculus.c: 547:               break;
 [e $U 363  ]
@@ -1944,7 +1944,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _my_delay_ms (1 -> -> 1 `i `l ]
 "553
 [; ;proculus.c: 553:      return retorno;
-[e ) F3881 ]
+[e ) F3877 ]
 [e $UE 361  ]
 "554
 [; ;proculus.c: 554:      }

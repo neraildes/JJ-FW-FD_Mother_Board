@@ -4528,7 +4528,6 @@ typedef struct {
 # 35 "./usart.h"
 void USART_to_Protocol(t_usart_protocol *usart_protocol);
 void USART_init(unsigned long baudrate);
-void flashIndcateReset(int flashes);
 void USART_restart(unsigned long baudrate);
 void USART_putc(unsigned char value);
 void USART_put_int(unsigned int value);
@@ -4538,8 +4537,6 @@ void USART_put_long(unsigned long value);
 void USART_put_string(char *vetor);
 void USART_put_buffer(char *vetor, char size);
 unsigned char USART_input_buffer(void);
-
-void USART_SendGreenCode(unsigned char total);
 # 6 "usart.c" 2
 
 # 1 "./proculus.h" 1
@@ -4944,43 +4941,6 @@ void USART_init(unsigned long baudrate)
      for(i=0;i<15;i++) erro=RCREG;
 }
 
-void flashIndcateReset(int flashes){
-     int count;
-     TRISCbits.TRISC6= 0;
-     for(count=0; count<flashes; count++)
-        {
-        PORTBbits.RB6 = 1;
-        PORTBbits.RB5 = 0;
-        PORTCbits.RC6=0;
-        _delay((unsigned long)((10)*(32000000/4000.0)));
-        PORTCbits.RC6=1;
-        _delay((unsigned long)((10)*(32000000/4000.0)));
-        __asm("CLRWDT");
-        PORTBbits.RB6 = 0;
-        PORTBbits.RB5 = 1;
-        PORTCbits.RC6=0;
-        _delay((unsigned long)((10)*(32000000/4000.0)));
-        PORTCbits.RC6=1;
-        _delay((unsigned long)((10)*(32000000/4000.0)));
-        __asm("CLRWDT");
-        }
-     PORTCbits.RC6=1;
-     _delay((unsigned long)((100)*(32000000/4000.0)));
-}
-
-void USART_restart(unsigned long baudrate)
-{
-     ResetSerial++;
-     RCSTAbits.SPEN = 0;
-     RCSTAbits.CREN = 0;
-     flashIndcateReset(60);
-     USART_init(baudrate);
-     Delay_Led_Memory=5;
-     _delay((unsigned long)((1000)*(32000000/4000.0)));
-
-}
-
-
 
 void USART_to_Protocol(t_usart_protocol *usart_protocol){
      int i;
@@ -4993,20 +4953,6 @@ void USART_to_Protocol(t_usart_protocol *usart_protocol){
         usart_protocol->value[i]=(unsigned char) usart_buffer[i+6];
 }
 
-void USART_SendGreenCode(unsigned char total)
-{
-    my_delay_ms_CLRWDT(1500);
-    for(unsigned char i=0;i<total;i++)
-       {
-       PORTBbits.RB5=1;
-       my_delay_ms_CLRWDT(500);
-       PORTBbits.RB5=0;
-       my_delay_ms_CLRWDT(500);
-       }
-    my_delay_ms_CLRWDT(1500);
-}
-
-
 void USART_putc(unsigned char value)
 {
     unsigned int counter=0;
@@ -5014,21 +4960,7 @@ void USART_putc(unsigned char value)
     TXREG=value;
     while(!PIR1bits.TXIF)
          {
-         if(counter>2500)
-           {
-           while(1)
-                {
-                USART_SendGreenCode(2);
-                }
-
-
-
-           }
-         else
-           {
-           counter++;
-           }
-         continue;
+         if(++counter>2500) break;
          _delay((unsigned long)((1)*(32000000/4000.0)));
          }
 }

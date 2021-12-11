@@ -4926,7 +4926,6 @@ typedef struct {
 # 35 "./usart.h"
 void USART_to_Protocol(t_usart_protocol *usart_protocol);
 void USART_init(unsigned long baudrate);
-void flashIndcateReset(int flashes);
 void USART_restart(unsigned long baudrate);
 void USART_putc(unsigned char value);
 void USART_put_int(unsigned int value);
@@ -4936,8 +4935,6 @@ void USART_put_long(unsigned long value);
 void USART_put_string(char *vetor);
 void USART_put_buffer(char *vetor, char size);
 unsigned char USART_input_buffer(void);
-
-void USART_SendGreenCode(unsigned char total);
 # 8 "util.c.c" 2
 
 

@@ -484,31 +484,8 @@ int main(int argc, char** argv)
                 global_condensador();   
                 global_vacuo(); 
                 global_aquecimento();                                
-                
-                
+                                
                 if(PROCULUS_VP_Read_UInt16(100)==1) RelatorioTecnico(); //Exibe relatório técnico
-                
-               
-                
-                
-                //INDICA SE OCORREU TRAVAMENTO DO RX DAS PLACAS
-                if(flag_usart_error==TRUE) Delay_Led_Memory=200;   
-                
-                //--------------------------------------------------------------
-                //Caso não haja comunicação serial por 3 segundos, resetar...
-                /*
-                if(maxTimeWithoutLedTX>=3000)
-                  {  
-                  EEPROM_Write_Byte(17,processo_hora);     //Hora
-                  EEPROM_Write_Byte(18,processo_minuto);   //Minuto    
-                  showScreenReset=0x00;
-                  EEPROM_Write_Byte(33,showScreenReset);                  
-                  asm("RESET");
-                  }
-                */ 
-                //--------------------------------------------------------------
-
-                
                 
                 switch(MSG_Deseja_Encerrar_Processo)
                       {
@@ -846,13 +823,8 @@ int main(int argc, char** argv)
                           break;
                   }//switch pagina          
             
-            //while(1)
-                //{
-                ////PROCULUS_Buzzer(100);
-                ////my_delay_ms_CLRWDT(3000);                
-                ouve_comunicacao(); 
-                //my_delay_ms_CLRWDT(3000);
-                //}
+                //ouve_comunicacao(); 
+
                 
         }
       
@@ -1071,14 +1043,6 @@ void ShowSensorRealTimeHS(void)
                        Vacuometro = art ;
                        PROCULUS_VP_Write_UInt16(151, art ); //Vacuometro                          
                        }  
-//                     else
-//                       { 
-//                       while(1)
-//                            {
-//                            USART_SendGreenCode(3);                            
-//                            }                         
-//                       //USART_restart(115200);
-//                       }                      
                      }
                      break;  
               case 2://Placa 2 Canal 0 - CONDENSADOR   

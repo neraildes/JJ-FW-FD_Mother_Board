@@ -49,8 +49,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "18
 [; ;./I2C.h: 18: unsigned short I2C_Master_Read(unsigned short a);
 [v _I2C_Master_Read `(us ~T0 @X0 0 ef1`us ]
-"39 ./usart.h
-[; ;./usart.h: 39: void USART_putc(unsigned char value);
+"38 ./usart.h
+[; ;./usart.h: 38: void USART_putc(unsigned char value);
 [v _USART_putc `(v ~T0 @X0 0 ef1`uc ]
 "54 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");

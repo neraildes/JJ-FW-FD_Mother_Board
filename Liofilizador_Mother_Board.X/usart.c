@@ -45,43 +45,6 @@ void USART_init(unsigned long baudrate)
      for(i=0;i<15;i++) erro=RCREG;
 }
 
-void flashIndcateReset(int flashes){
-     int count;
-     TRISCbits.TRISC6= 0; //TX
-     for(count=0; count<flashes; count++)
-        { 
-        flag_led_usart  = 1;              
-        flag_led_memory = 0;
-        PORTCbits.RC6=0; //TX
-        __delay_ms(10);
-        PORTCbits.RC6=1; //TX                
-        __delay_ms(10);
-        asm("CLRWDT");
-        flag_led_usart  = 0;              
-        flag_led_memory = 1;
-        PORTCbits.RC6=0; //TX
-        __delay_ms(10);
-        PORTCbits.RC6=1; //TX                       
-        __delay_ms(10);
-        asm("CLRWDT");                 
-        }
-     PORTCbits.RC6=1;  //TX                       
-     __delay_ms(100);          
-}
-
-void USART_restart(unsigned long baudrate)
-{
-     ResetSerial++;
-     RCSTAbits.SPEN = 0;
-     RCSTAbits.CREN = 0;   
-     flashIndcateReset(60);
-     USART_init(baudrate);
-     Delay_Led_Memory=DEFAULT_LEDS;
-     __delay_ms(1000);
-     
-}
-
-
 
 void USART_to_Protocol(t_usart_protocol *usart_protocol){
      int i;
@@ -94,20 +57,6 @@ void USART_to_Protocol(t_usart_protocol *usart_protocol){
         usart_protocol->value[i]=(unsigned char) usart_buffer[i+6];    
 }
 
-void USART_SendGreenCode(unsigned char total)
-{
-    my_delay_ms_CLRWDT(1500);
-    for(unsigned char i=0;i<total;i++)
-       {
-       flag_led_memory=1;
-       my_delay_ms_CLRWDT(500);
-       flag_led_memory=0;
-       my_delay_ms_CLRWDT(500);
-       }
-    my_delay_ms_CLRWDT(1500);
-}
-
-
 void USART_putc(unsigned char value)
 {       
     unsigned int counter=0;    
@@ -115,21 +64,7 @@ void USART_putc(unsigned char value)
     TXREG=value;
     while(!PIR1bits.TXIF) 
          {         
-         if(counter>2500)
-           { 
-           while(1)
-                {
-                USART_SendGreenCode(2);
-                }
-           //USART_restart(115200);
-           //counter=0;  
-           //break;
-           }
-         else
-           {
-           counter++;  
-           }  
-         continue;//Registrador vazio
+         if(++counter>2500) break;             
          __delay_ms(1);
          }               
 }
