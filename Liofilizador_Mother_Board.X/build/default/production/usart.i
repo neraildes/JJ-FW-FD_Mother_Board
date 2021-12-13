@@ -4955,14 +4955,17 @@ void USART_to_Protocol(t_usart_protocol *usart_protocol){
 
 void USART_putc(unsigned char value)
 {
-    unsigned int counter=0;
+    unsigned int counter;
     Delay_Led_Usart=5;
-    TXREG=value;
+    counter=0;
     while(!PIR1bits.TXIF)
          {
-         if(++counter>2500) break;
-         _delay((unsigned long)((1)*(32000000/4000.0)));
+         counter++;
+         if(counter>5000) return;
+
+         continue;
          }
+    TXREG=value;
 }
 
 

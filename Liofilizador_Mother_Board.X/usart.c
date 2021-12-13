@@ -59,14 +59,17 @@ void USART_to_Protocol(t_usart_protocol *usart_protocol){
 
 void USART_putc(unsigned char value)
 {       
-    unsigned int counter=0;    
-    Delay_Led_Usart=DEFAULT_LEDS;
-    TXREG=value;
+    unsigned int counter;    
+    Delay_Led_Usart=DEFAULT_LEDS;    
+    counter=0;
     while(!PIR1bits.TXIF) 
          {         
-         if(++counter>2500) break;             
-         __delay_ms(1);
+         counter++; 
+         if(counter>5000) return;         
+         //__delay_ms(1);
+         continue;
          }               
+    TXREG=value;
 }
 
 
