@@ -1035,29 +1035,10 @@ void ShowSensorRealTimeHS(void)
                      break;               
               case 1://PLACA 1 CANAL 1 - VACUOMETRO
                      {
-                     int art; 
-                     static uint8_t lll=0;
                      if(leitura[tupla]>=10)                          
-                       {                  
-                       art=leitura[tupla]-((20000-leitura[tupla])*0.6);                       
-                       if(art<=2537)
-                         {
-                         switch (lll++)
-                            {
-                             case 0: art=2542;break;
-                             case 1: art=2525;break;
-                             case 2: art=2537;break;
-                             case 3: art=2548;break;
-                             case 4: art=2548;break;                             
-                             case 5: art=2545;break;
-                             default:
-                                     art=2541;
-                                     lll=0; 
-                                     break;
-                            }   
-                         }                       
-                       Vacuometro = art ;
-                       PROCULUS_VP_Write_UInt16(151, art ); //Vacuometro                          
+                       {                      
+                       Vacuometro = leitura[tupla] ;
+                       PROCULUS_VP_Write_UInt16(151, Vacuometro); //Vacuometro                          
                        }  
                      }
                      break;  
