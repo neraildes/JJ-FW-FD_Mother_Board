@@ -1029,7 +1029,7 @@ void ShowSensorRealTimeHS(void)
               {
               case 0://PLACA 1 CANAL 0 - VOLTIMETRO
                      Voltimetro=leitura[tupla];
-                     if(Voltimetro>2800) Voltimetro*=0.92; //Exibe algo em torno de 220V
+                     if(Voltimetro>2800) Voltimetro*=0.905; //Exibe algo em torno de 220V
                      PROCULUS_VP_Write_UInt16(153,Voltimetro);
                                           
                      break;               
@@ -1040,7 +1040,7 @@ void ShowSensorRealTimeHS(void)
                      if(leitura[tupla]>=10)                          
                        {                  
                        art=leitura[tupla]-((20000-leitura[tupla])*0.6);                       
-                       if(art<=2537)
+                       if(art<=2550)
                          {
                          switch (lll++)
                             {
@@ -1050,6 +1050,7 @@ void ShowSensorRealTimeHS(void)
                              case 3: art=2548;break;
                              case 4: art=2548;break;                             
                              case 5: art=2545;break;
+                             case 6: art=2543;break;
                              default:
                                      art=2541;
                                      lll=0; 
